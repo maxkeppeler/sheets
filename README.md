@@ -51,6 +51,8 @@
 
 In order to use any of the following Bottom Sheets, you have to implement the `core` module.
 
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acore/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acore/_latestVersion)
+
 ```gradle
 dependencies {
   ...
@@ -147,6 +149,8 @@ Specific for button text
 
 
 ## Info
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainfo/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainfo/_latestVersion)
+
 The `Info` Bottom Sheet lets you display information or warning.
 
 <img src="art/img_bottom_sheet_info.png" width="80%" alt="Bottom-Sheets InfoSheet">
@@ -174,6 +178,8 @@ InfoSheet().show(context) {
 ```
 
 ## Options
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Aoptions/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Aoptions/_latestVersion)
+
 The `Options` Bottom Sheet lets you display a grid or list of options.
 
 <img src="art/img_bottom_sheet_options_grid.png" width="80%" alt="Bottom-Sheets OptionsSheet Grid">
@@ -220,6 +226,8 @@ Notice: Preselected options automatically increase the current selection while d
 
 
 ## Clock Time
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Atime_clock/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Atime_clock/_latestVersion)
+
 The `Clock Time` Bottom Sheet lets you quickly pick a time.
 
 <img src="art/img_bottom_sheet_clock_time.png" width="80%" alt="Bottom-Sheets ClockTimeSheet">
@@ -246,6 +254,8 @@ Use ```format24Hours()``` to choose between the 24-hours or 12-hours format.
 Use ```currentTime()``` to set the current time in milliseconds.
 
 ## Time
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Atime/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Atime/_latestVersion)
+
 The `Time` Bottom Sheet lets you pick a duration time in a specific format.
 
 <img src="art/img_bottom_sheet_time.png" width="80%" alt="Bottom-Sheets TimeSheet">
@@ -273,8 +283,9 @@ Use ```minTime()``` to set the minimum time.
 Use ```maxTime()``` to set the maximum time.
 
 ## Input
-The `Input` Bottom Sheet lets you display a form consisting of various inputs.
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainput/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainput/_latestVersion)
 
+The `Input` Bottom Sheet lets you display a form consisting of various inputs.
 
 <img src="art/img_bottom_sheet_input.png" width="80%" alt="Bottom-Sheets InputSheet">
 
@@ -357,6 +368,8 @@ Use ```selected()``` to set selected index.
 Use ```options()``` to add text options.
 
 ## Calendar
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acalendar/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acalendar/_latestVersion)
+
 The `Calendar` Bottom Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
 
 <img src="art/img_bottom_sheet_calendar.png" width="80%" alt="Bottom-Sheets OptionsSheet">
@@ -385,6 +398,8 @@ Use ```disable()``` to pass```Calendar``` object to disable various dates for se
 Use ```showButtons()``` to show or hide the buttons view.
 
 ## Color
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acolor/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acolor/_latestVersion)
+
 The `Color` Bottom Sheet lets you pick a color. Display the default material colors or specify which colors can be chosen from. You can allow to chose a custom color as well.
 
 <img src="art/img_bottom_sheet_color.png" width="80%" alt="Bottom-Sheets ColorSheet">
