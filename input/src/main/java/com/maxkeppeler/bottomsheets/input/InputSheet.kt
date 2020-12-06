@@ -177,8 +177,8 @@ class InputSheet : BottomSheet() {
     /** Build and show [InputSheet] directly. */
     fun show(ctx: Context, func: InputSheet.() -> Unit): InputSheet {
         this.windowContext = ctx
-        this.show()
         this.func()
+        this.show()
         return this
     }
 }
