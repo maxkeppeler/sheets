@@ -26,25 +26,26 @@ import com.maxkeppeler.bottomsheets.R
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class BottomSheetValue
 @JvmOverloads constructor(
-    context: Context,
+    ctx: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = android.R.attr.textViewStyle
-) : AppCompatTextView(context, attrs, defStyleAttr) {
+    styleAttr: Int = android.R.attr.textViewStyle
+) : AppCompatTextView(ctx, attrs, styleAttr) {
 
     init {
 
-        val array = context.obtainStyledAttributes(attrs, R.styleable.BottomSheetValue, defStyleAttr, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetValue, styleAttr, 0)
 
-        lineHeight = array.getDimensionPixelSize(R.styleable.BottomSheetValue_bottomSheetValueLineHeight, 0)
+        val height =
+            a.getDimensionPixelSize(R.styleable.BottomSheetValue_bottomSheetValueLineHeight, 0)
+        height.takeIf { it != 0 }?.let { lineHeight = height }
 
-        val fontResId = array.getResourceId(R.styleable.BottomSheetValue_bottomSheetValueFont, 0)
-        if (fontResId != 0) {
-            val font = ResourcesCompat.getFont(context, fontResId)
-            typeface = font
-        }
+        val fontResId = a.getResourceId(R.styleable.BottomSheetValue_bottomSheetValueFont, 0)
+        fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
-        letterSpacing = array.getFloat(R.styleable.BottomSheetValue_bottomSheetValueLetterSpacing, 0f)
+        val spacing =
+            a.getFloat(R.styleable.BottomSheetValue_bottomSheetValueLetterSpacing, 0f)
+        spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
-        array.recycle()
+        a.recycle()
     }
 }
