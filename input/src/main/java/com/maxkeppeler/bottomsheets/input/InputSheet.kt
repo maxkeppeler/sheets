@@ -60,7 +60,7 @@ class InputSheet : BottomSheet() {
      * @param contentRes The String resource id for the content.
      */
     fun content(@StringRes contentRes: Int) {
-        this.contentText = getString(contentRes)
+        this.contentText = windowContext.getString(contentRes)
     }
 
     /**
@@ -71,7 +71,7 @@ class InputSheet : BottomSheet() {
      *                   substitution.
      */
     fun content(@StringRes contentRes: Int, vararg formatArgs: Any?) {
-        this.contentText = getString(contentRes, *formatArgs)
+        this.contentText = windowContext.getString(contentRes, *formatArgs)
     }
 
     /**
