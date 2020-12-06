@@ -26,13 +26,12 @@
 </div>
 
 <br/>
-
 <br/>
 <br/>
 <img src="art/img_showcase.png" alt="Bottom-Sheets Library">
 
 ## Table of Contents
-- [Get started](#get-started)
+-  [Get started](#get-started)
   - [Appearance](#appearance)
   - [Info Bottom Sheet](#info)
   - [Options Bottom Sheet](#options)
@@ -42,8 +41,8 @@
   - [Calendar Sheet](#calendar-sheet)
   - [Color Bottom Sheet](#color)
 - [Other](#other)
-  - [Motivation](#motivation)
-  - [Contributors](#contributors)
+  - [Showcase](#showcase)
+  - [Support this project](#support-this-project)
   - [Credits](#credits)
   - [License](#license)
 
