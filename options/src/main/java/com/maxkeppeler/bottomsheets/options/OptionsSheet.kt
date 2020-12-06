@@ -264,6 +264,11 @@ class OptionsSheet : BottomSheet() {
         with(binding.optionsRecyclerView) {
 
             val columns = if (options.size < GRID_COLUMNS_MAX) options.size else GRID_COLUMNS_MAX
+            val collapsedItems = when(mode) {
+                DisplayMode.GRID_HORIZONTAL -> options.size <= SMALL_GRID_ITEMS_MAX
+                DisplayMode.GRID_VERTICAL -> true
+                DisplayMode.LIST -> false
+            }
 
             optionsAdapter =
                 OptionsAdapter(
@@ -271,7 +276,7 @@ class OptionsSheet : BottomSheet() {
                     options,
                     mode,
                     multipleChoices,
-                    columns,
+                    collapsedItems,
                     adapterListener
                 )
             adapter = optionsAdapter
@@ -280,7 +285,7 @@ class OptionsSheet : BottomSheet() {
 
             layoutManager = when (mode) {
 
-                DisplayMode.GRID_HORIZONTAL -> if (options.size <= SMALL_GRID_ITEMS_MAX) CustomGridLayoutManager(
+                DisplayMode.GRID_HORIZONTAL -> if (collapsedItems) CustomGridLayoutManager(
                     windowContext,
                     columns,
                     false

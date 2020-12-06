@@ -38,11 +38,10 @@ internal class OptionsAdapter(
     private val options: MutableList<Option>,
     private val type: DisplayMode,
     private val multipleChoice: Boolean,
-    columns: Int,
+    private val collapsedItems: Boolean,
     private val listener: OptionsSelectionListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val collapsedItems = columns <= 4
     private val selectedOptions = mutableMapOf<Int, Pair<ImageView, BottomSheetContent>>()
 
     private val colorHighlight = colorOfAttrs(
