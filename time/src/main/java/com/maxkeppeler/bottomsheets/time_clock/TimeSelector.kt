@@ -54,7 +54,7 @@ internal class TimeSelector(
     private val active =
         colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, android.R.attr.colorPrimary)
 
-    private val colorIcons = colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, R.attr.colorOnSurface)
+    private val colorIcons = colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary, R.attr.colorOnSurface)
 
     private val time = StringBuffer()
     private val keys = mutableListOf<TextView>()

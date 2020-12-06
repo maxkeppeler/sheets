@@ -43,7 +43,7 @@ internal class ClockTimeSelector(
     private val colorTextActive =
         colorOfAttrs(ctx, R.attr.bottomSheetValueTextActiveColor, R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary)
     private val colorIcons =
-        colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, R.attr.colorOnSurface)
+        colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary, R.attr.colorOnSurface)
 
     private val hoursBuffer = StringBuilder("00")
     private val minsBuffer = StringBuilder("00")
