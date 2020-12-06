@@ -97,7 +97,7 @@ InfoSheet().show(context) {
 By default, the library switches to either day or night mode depending on the attr textColorPrimary.
 By default it uses the activity's colorPrimary and colorControlHighlight for the primary color and the highlights of the bottom sheets.
 
-<img src="art/img_bottom_sheet_appearance_example_options_grid_compact. png" width="35%" alt="Bottom-Sheets Appearance Example">
+<img src="art/img_bottom_sheet_appearance_example_options_grid_compact.png" width="35%" alt="Bottom-Sheets Appearance Example">
 
 Recommended styles to overwrite:
 ```
