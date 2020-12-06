@@ -1,0 +1,22 @@
+ext.module_group = "com.maxkeppeler"
+ext.module_name = "bottomsheets-sample"
+
+apply from: rootProject.file("gradle/android_application_config.gradle")
+
+dependencies {
+
+    implementation project(':core')
+    implementation project(':info')
+    implementation project(':input')
+    implementation project(':time')
+    implementation project(':color')
+    implementation project(':time-clock')
+    implementation project(':options')
+    implementation project(':calendar')
+
+    implementation deps.kotlin.stdlib8
+
+    implementation deps.androidx.core
+    implementation deps.androidx.recycler_view
+    implementation deps.google_material
+}

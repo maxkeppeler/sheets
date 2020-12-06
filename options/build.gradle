@@ -1,0 +1,12 @@
+ext.module_group = "com.maxkeppeler.bottomsheets"
+ext.module_name = "options"
+
+apply from: rootProject.file("gradle/android_library_config.gradle")
+
+dependencies {
+    api project(':core')
+    compileOnly deps.androidx.annotations
+    implementation deps.androidx.constraint
+    implementation deps.kotlin.stdlib8
+    implementation deps.google_material
+}

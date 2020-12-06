@@ -1,0 +1,128 @@
+<!--
+  ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<resources>
+
+    <!-- Override primary color.   -->
+    <attr name="bottomSheetPrimaryColor" format="color" />
+
+    <!-- Override highlight color. Should match to the primary color.   -->
+    <attr name="bottomSheetHighlightColor" format="color" />
+
+    <!-- Override background color. -->
+    <attr name="bottomSheetBackgroundColor" format="color" />
+
+    <!-- Override color of action icons.  -->
+    <attr name="bottomSheetIconsColor" format="color" />
+
+
+    <!-- Style for an option in OptionsSheet.  -->
+    <declare-styleable name="BottomSheetOption">
+
+        <!-- Override icon color of an option. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetOptionActiveImageColor" format="color" />
+
+        <!-- Override icon color of an option. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetOptionActiveTextColor" format="color" />
+
+    </declare-styleable>
+
+
+    <!--  Style for the title.  -->
+    <declare-styleable name="BottomSheetTitle">
+
+        <!-- Override title color. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetTitleColor" format="color" />
+
+        <!-- Override title font. -->
+        <attr name="bottomSheetTitleFont" format="reference" />
+
+        <attr name="bottomSheetTitleLineHeight" format="dimension" />
+
+        <attr name="bottomSheetTitleLetterSpacing" format="float" />
+
+    </declare-styleable>
+
+
+    <!--  Style for the primary text.  -->
+    <declare-styleable name="BottomSheetContent">
+
+        <!-- Override title color. Default: textColorPrimary -->
+        <attr name="bottomSheetContentColor" format="color" />
+
+        <!-- Override primary text font. -->
+        <attr name="bottomSheetContentFont" format="reference" />
+
+        <!-- Override title line height. -->
+        <attr name="bottomSheetContentLineHeight" format="dimension" />
+
+        <!-- Override title letter spacing. -->
+        <attr name="bottomSheetContentLetterSpacing" format="float" />
+
+    </declare-styleable>
+
+
+    <!--  Style for value text. (Selected date, selected time, ...)  -->
+    <declare-styleable name="BottomSheetValue">
+
+        <!-- Override value text color. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetValueTextActiveColor" format="color" />
+
+        <!-- Override value text font. -->
+        <attr name="bottomSheetValueFont" format="reference" />
+
+        <!-- Override value text line height. -->
+        <attr name="bottomSheetValueLineHeight" format="dimension" />
+
+        <!-- Override value text letter spacing. -->
+        <attr name="bottomSheetValueLetterSpacing" format="float" />
+
+    </declare-styleable>
+
+
+    <!--  Style for the digit keys of the numerical input.  -->
+    <declare-styleable name="BottomSheetDigit">
+
+        <!-- Override digit key color. Default: textColorPrimary -->
+        <attr name="bottomSheetDigitColor" format="color" />
+
+        <!-- Override digit key text font. -->
+        <attr name="bottomSheetDigitFont" format="reference" />
+
+        <!-- Override digit key line height. -->
+        <attr name="bottomSheetDigitLineHeight" format="dimension" />
+
+        <!-- Override digit key letter spacing. -->
+        <attr name="bottomSheetDigitLetterSpacing" format="float" />
+
+    </declare-styleable>
+
+
+    <!--  Style for the buttons.  -->
+    <declare-styleable name="BottomSheetButton">
+
+        <!-- Override button text color. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetButtonTextColor" format="reference" />
+
+        <!-- Override button text font. -->
+        <attr name="bottomSheetButtonTextFont" format="reference" />
+
+        <!-- Override button letter spacing. -->
+        <attr name="bottomSheetButtonTextLetterSpacing" format="float" />
+
+    </declare-styleable>
+
+</resources>

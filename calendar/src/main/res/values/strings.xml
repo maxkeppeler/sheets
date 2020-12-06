@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="date_range_from">From</string>
+    <string name="date_range_to">To</string>
+    <string name="date_range">%s - %s</string>
+</resources>
