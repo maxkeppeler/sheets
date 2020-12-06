@@ -1,28 +1,29 @@
 
 <div>
 
-  <img src="art/ic_library.png" width="128px" height="128px" alt="Bottom-Sheets Library" style="float: left; margin-right: 46px">
+  <img src="art/ic_library.png" width="128px" height="128px" alt="Bottom-Sheets Library" align="left" style="margin-right: 48px;">
 
   # Bottom Sheets
   Offering a range of beautiful bottom sheets for quick use in your project.
-</div>
 
-<div>
-  <a href="https://github.com/maxkeppeler/bottom-sheets">
-    <img src="https://img.shields.io/github/stars/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Star" alt="GitHub stars">
-  </a>
-  <a href="https://github.com/maxkeppeler/bottom-sheets/fork">
-    <img src="https://img.shields.io/github/forks/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Fork" alt="GitHub forks">
-  </a>
-  <a href="https://github.com/maxkeppeler/bottom-sheets">
-    <img src="https://img.shields.io/github/watchers/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Watch" alt="GitHub watchers">
-  </a>
-  <a href="https://github.com/maxkeppeler/">
-    <img src="https://img.shields.io/github/followers/maxkeppeler.svg?style=social&amp;label=Follow" alt="GitHub followers">
-  </a>
-  <a href="https://twitter.com/maxkeppeler">
-    <img src="https://img.shields.io/twitter/follow/maxkeppeler.svg?style=social" alt="Twitter Follow">
-  </a>
+  <div>
+    <a href="https://github.com/maxkeppeler/bottom-sheets">
+      <img src="https://img.shields.io/github/stars/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Star" alt="GitHub stars">
+    </a>
+    <a href="https://github.com/maxkeppeler/bottom-sheets/fork">
+      <img src="https://img.shields.io/github/forks/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Fork" alt="GitHub forks">
+    </a>
+    <a href="https://github.com/maxkeppeler/bottom-sheets">
+      <img src="https://img.shields.io/github/watchers/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Watch" alt="GitHub watchers">
+    </a>
+    <a href="https://github.com/maxkeppeler/">
+      <img src="https://img.shields.io/github/followers/maxkeppeler.svg?style=social&amp;label=Follow" alt="GitHub followers">
+    </a>
+    <a href="https://twitter.com/maxkeppeler">
+      <img src="https://img.shields.io/twitter/follow/maxkeppeler.svg?style=social" alt="Twitter Follow">
+    </a>
+  </div>
+
 </div>
 
 <br/>
