@@ -56,7 +56,7 @@ In order to use any of the following Bottom Sheets, you have to implement the `c
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:core:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:core:1.0.0'
 }
 ```
 
@@ -158,7 +158,7 @@ The `Info` Bottom Sheet lets you display information or warning.
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:info:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:info:1.0.0'
 }
 ```
 
@@ -187,7 +187,7 @@ The `Options` Bottom Sheet lets you display a grid or list of options.
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:options:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:options:1.0.0'
 }
 ```
 
@@ -235,7 +235,7 @@ The `Clock Time` Bottom Sheet lets you quickly pick a time.
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:clock-time:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:time_clock:1.0.0'
 }
 ```
 
@@ -263,7 +263,7 @@ The `Time` Bottom Sheet lets you pick a duration time in a specific format.
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:time:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:time:1.0.0'
 }
 ```
 
@@ -292,7 +292,7 @@ The `Input` Bottom Sheet lets you display a form consisting of various inputs.
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:input:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:input:1.0.0'
 }
 ```
 
@@ -377,7 +377,7 @@ The `Calendar` Bottom Sheet lets you pick a date or date range. This type was bu
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:calendar:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:calendar:1.0.0'
 }
 ```
 
@@ -407,7 +407,7 @@ The `Color` Bottom Sheet lets you pick a color. Display the default material col
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottom-sheets:color:1.0.0'
+  implementation 'com.maxkeppeler.bottomsheets:color:1.0.0'
 }
 ```
 
