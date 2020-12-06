@@ -4,6 +4,9 @@
   <img src="art/ic_library.png" width="128px" height="128px" alt="Bottom-Sheets Library" style="float: left; margin-right: 46px">
 
   # Bottom Sheets
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d98b82d60cf94fccb895bb298272a092)](https://app.codacy.com/gh/MaxKeppeler/bottom-sheets?utm_source=github.com&utm_medium=referral&utm_content=MaxKeppeler/bottom-sheets&utm_campaign=Badge_Grade)
+
   Offering a range of beautiful bottom sheets for quick use in your project.
 </div>
 
