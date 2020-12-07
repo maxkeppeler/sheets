@@ -207,7 +207,7 @@ open class BottomSheet : BottomSheetDialogFragment() {
      * @param negativeListener Listener that is invoked when the negative button is clicked.
      */
     fun onNegative(@StringRes negativeRes: Int, negativeListener: NegativeListener? = null) {
-        this.negativeText = requireContext().getString(negativeRes)
+        this.negativeText = windowContext.getString(negativeRes)
         this.negativeListener = negativeListener
     }
 
