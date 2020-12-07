@@ -90,7 +90,7 @@ class InputSheet : BottomSheet() {
      * @param listener Listener that is invoked with the new input data when the positive button is clicked.
      */
     fun onPositive(@StringRes positiveRes: Int, listener: InputListener? = null) {
-        this.positiveText = getString(positiveRes)
+        this.positiveText = windowContext.getString(positiveRes)
         this.listener = listener
     }
 
