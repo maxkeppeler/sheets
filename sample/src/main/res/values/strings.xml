@@ -16,4 +16,32 @@
 
 <resources>
     <string name="app_name">Bottom Sheets</string>
+    <string name="options_sheet">OptionsSheet</string>
+    <string name="color_sheet">ColorSheet</string>
+    <string name="clock_time_sheet">ClockTimeSheet</string>
+    <string name="time_sheet">TimeSheet</string>
+    <string name="calendar_sheet">CalendarSheet</string>
+    <string name="info_sheet">InfoSheet</string>
+    <string name="input_sheet">InputSheet</string>
+    <string name="custom_sheets">Create your own custom BottomSheets</string>
+    <string name="options_list">List of Options (with and without buttons)</string>
+    <string name="options_grid_horizontal_small">Horizontal grid (small)</string>
+    <string name="options_grid_horizontal_middle">Horizontal grid (middle) with multiple choice</string>
+    <string name="options_grid_horizontal_large">Horizontal grid (large)</string>
+    <string name="options_grid_vertical_small">Vertical grid (small)</string>
+    <string name="options_grid_vertical_middle">Vertical grid (middle) with multiple choice</string>
+    <string name="options_grid_vertical_large">Vertical grid (large)</string>
+    <string name="color_template_custom">Color template options and custom color</string>
+    <string name="color_template">Color templates</string>
+    <string name="color_custom">Custom color</string>
+    <string name="clock_time">Clock time</string>
+    <string name="time">Time in format hh mm ss</string>
+    <string name="calendar_range_month">Calendar date range picker in month view</string>
+    <string name="calendar_week1">Calendar date picker in 1-week view</string>
+    <string name="calendar_week2">Calendar date range picker in 2-week view</string>
+    <string name="calendar_week3">Calendar date range picker in 3-week view</string>
+    <string name="info">Any text info or warning</string>
+    <string name="input_short">A small survey form</string>
+    <string name="input_long">A long survey form</string>
+    <string name="custom_sheet_example_1">Custom Bottom Sheet Example 1</string>
 </resources>
