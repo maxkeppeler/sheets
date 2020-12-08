@@ -25,6 +25,9 @@
     <!-- Override background color. -->
     <attr name="bottomSheetBackgroundColor" format="color" />
 
+    <!-- Override the divider color. -->
+    <attr name="bottomSheetDividerColor" format="color" />
+
     <!-- Override color of action icons.  -->
     <attr name="bottomSheetIconsColor" format="color" />
 
