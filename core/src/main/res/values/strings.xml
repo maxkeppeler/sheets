@@ -26,4 +26,8 @@
     <string name="minute_code" translatable="false">m</string>
     <string name="second_code" translatable="false">s</string>
     <string name="day_code">D</string>
+
+    <string name="am" translatable="true">am</string>
+    <string name="pm" translatable="true">pm</string>
+
 </resources>
