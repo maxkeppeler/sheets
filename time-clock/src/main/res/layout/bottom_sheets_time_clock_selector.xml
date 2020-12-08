@@ -96,7 +96,6 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/bs_ripple_text"
         android:padding="12dp"
-
         android:text="AM"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -104,16 +103,14 @@
         app:layout_constraintEnd_toStartOf="@+id/hoursInput"
         app:layout_constraintTop_toTopOf="@+id/separatorInput" />
 
-    <View
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
         android:id="@+id/divider"
-        tools:ignore="PxUsage"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:background="@color/bottomSheetDividerColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hoursInput" />
+        app:layout_constraintTop_toBottomOf="@+id/hoursInput"/>
 
     <include
         android:id="@+id/input"

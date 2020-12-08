@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,12 +41,12 @@
 
         <com.maxkeppeler.bottomsheets.core.views.BottomSheetTitle
             android:id="@+id/title"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
             android:paddingStart="8dp"
             android:paddingEnd="16dp"
-            android:paddingVertical="12dp"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toStartOf="@+id/btnColorSource"
@@ -68,13 +67,10 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
-        <LinearLayout
+        <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/bottomSheetDividerColor"
-            android:orientation="horizontal"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
