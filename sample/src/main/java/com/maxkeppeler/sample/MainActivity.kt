@@ -20,7 +20,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.maxkeppeler.bottomsheets.calendar.CalendarMode
 import com.maxkeppeler.bottomsheets.calendar.CalendarSheet
 import com.maxkeppeler.bottomsheets.calendar.SelectionMode
@@ -42,7 +43,9 @@ import com.maxkeppeler.bottomsheets.options.OptionsSheet
 import com.maxkeppeler.bottomsheets.time_clock.ClockTimeSheet
 import com.maxkeppeler.bottomsheets.time_clock.TimeFormat
 import com.maxkeppeler.bottomsheets.time_clock.TimeSheet
+import com.maxkeppeler.sample.custom__sheets_example.CustomSheet
 import com.maxkeppeler.sample.databinding.MainActBinding
+import com.maxkeppeler.sample.utils.BottomSheetExample
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
@@ -64,30 +67,109 @@ class MainActivity : AppCompatActivity() {
 //        theme.applyStyle(newTheme, true)
         super.onCreate(saved)
         binding = MainActBinding.inflate(layoutInflater).also { setContentView(it.root) }
-        setSupportActionBar(binding.toolbar)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         setup()
     }
 
     private fun setup() {
 
-        binding.optionsListSheet.setOnClickListener { showOptionsSheetList() }
+        binding.exampleRecyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+        binding.exampleRecyclerView.adapter = BottomSheetExampleAdapter(this, ::showBottomSheet)
+    }
 
-        binding.optionsGridShortSheet.setOnClickListener { showOptionsSheetGridHorizontal() }
+    private fun showBottomSheet(example: BottomSheetExample) {
+        when (example) {
+            BottomSheetExample.OPTIONS_LIST -> showOptionsSheetList()
+            BottomSheetExample.OPTIONS_HORIZONTAL_SMALL -> showOptionsSheetGridSmall(DisplayMode.GRID_HORIZONTAL)
+            BottomSheetExample.OPTIONS_HORIZONTAL_MIDDLE -> showOptionsSheetGridMiddle(DisplayMode.GRID_HORIZONTAL)
+            BottomSheetExample.OPTIONS_HORIZONTAL_LARGE -> showOptionsSheetGridLarge(DisplayMode.GRID_HORIZONTAL)
+            BottomSheetExample.OPTIONS_VERTICAL_SMALL -> showOptionsSheetGridSmall(DisplayMode.GRID_VERTICAL)
+            BottomSheetExample.OPTIONS_VERTICAL_MIDDLE -> showOptionsSheetGridMiddle(DisplayMode.GRID_VERTICAL)
+            BottomSheetExample.OPTIONS_VERTICAL_LARGE -> showOptionsSheetGridLarge(DisplayMode.GRID_VERTICAL)
+            BottomSheetExample.COLOR -> showColorSheet()
+            BottomSheetExample.COLOR_TEMPLATE -> showColorSheetTemplate()
+            BottomSheetExample.COLOR_CUSTOM -> showColorSheetCustom()
+            BottomSheetExample.CLOCK_TIME -> showClockTimeSheet()
+            BottomSheetExample.TIME -> showTimeSheet()
+            BottomSheetExample.CALENDAR_RANGE_MONTH -> showCalendarSheet()
+            BottomSheetExample.CALENDAR_WEEK1 -> showCalendarSheetWeek1()
+            BottomSheetExample.CALENDAR_RANGE_WEEK2 -> showCalendarSheetWeek2()
+            BottomSheetExample.CALENDAR_RANGE_WEEK3 -> showCalendarSheetWeek3()
+            BottomSheetExample.INFO -> showInfoSheet()
+            BottomSheetExample.INPUT_SHORT -> showInputSheetShort()
+            BottomSheetExample.INPUT_LONG -> showInputSheetLong()
+            BottomSheetExample.CUSTOM1 -> showCustomSheet()
+        }
+    }
 
-        binding.optionsGridLongSheet.setOnClickListener { showOptionsSheetGridVertical() }
+    private fun showCalendarSheetWeek1() {
 
-        binding.colorSheet.setOnClickListener { showColorSheet() }
+        CalendarSheet().show(this) { // Build and show
+            title("When do you want to take holidays?") // Set the title of the bottom sheet
+            rangeYears(50)
+            selectionMode(SelectionMode.DATE)
+            calendarMode(CalendarMode.WEEK_1)
+            onPositive { dateStart, dateEnd -> // dateEnd is only not null if the selection is a range
+                dateEnd?.let {
+                    showToastLong(
+                        "CalendarSheet result range",
+                        "${dateStart.timeInMillis.toFormattedDate()} - ${it.timeInMillis.toFormattedDate()}"
+                    )
+                } ?: kotlin.run {
+                    showToastLong(
+                        "CalendarSheet result date",
+                        dateStart.timeInMillis.toFormattedDate()
+                    )
+                }
+            }
+        }
+    }
 
-        binding.clockTimeSheet.setOnClickListener { showClockTimeSheet() }
+    private fun showCalendarSheetWeek2() {
 
-        binding.timeSheet.setOnClickListener { showTimeSheet() }
+        CalendarSheet().show(this) { // Build and show
+            title("When do you want to take holidays?") // Set the title of the bottom sheet
+            selectionMode(SelectionMode.RANGE)
+            calendarMode(CalendarMode.WEEK_2)
+//            disableTimeline(TimeLine.FUTURE)
+            onPositive { dateStart, dateEnd -> // dateEnd is only not null if the selection is a range
+                dateEnd?.let {
+                    showToastLong(
+                        "CalendarSheet result range",
+                        "${dateStart.timeInMillis.toFormattedDate()} - ${it.timeInMillis.toFormattedDate()}"
+                    )
+                } ?: kotlin.run {
+                    showToastLong(
+                        "CalendarSheet result date",
+                        dateStart.timeInMillis.toFormattedDate()
+                    )
+                }
+            }
+        }
+    }
 
-        binding.calendarSheet.setOnClickListener { showCalendarSheet() }
+    private fun showCalendarSheetWeek3() {
 
-        binding.infoSheet.setOnClickListener { showInfoSheet() }
-
-        binding.inputSheet.setOnClickListener { showInputSheet() }
+        CalendarSheet().show(this) { // Build and show
+            title("When do you want to take holidays?") // Set the title of the bottom sheet
+            selectionMode(SelectionMode.RANGE)
+            calendarMode(CalendarMode.WEEK_3)
+//            disableTimeline(TimeLine.PAST)
+            onPositive { dateStart, dateEnd -> // dateEnd is only not null if the selection is a range
+                dateEnd?.let {
+                    showToastLong(
+                        "CalendarSheet result range",
+                        "${dateStart.timeInMillis.toFormattedDate()} - ${it.timeInMillis.toFormattedDate()}"
+                    )
+                } ?: kotlin.run {
+                    showToastLong(
+                        "CalendarSheet result date",
+                        dateStart.timeInMillis.toFormattedDate()
+                    )
+                }
+            }
+        }
     }
 
     private fun showCalendarSheet() {
@@ -96,10 +178,9 @@ class MainActivity : AppCompatActivity() {
             title("When do you want to take holidays?") // Set the title of the bottom sheet
             rangeYears(50)
             selectionMode(SelectionMode.RANGE)
-            calendarMode(CalendarMode.MONTH)
+            calendarMode(CalendarMode.WEEK_2)
 //            hideToolbar()
-            disableTimeline(TimeLine.PAST)
-            showButtons(true)
+//            disableTimeline(TimeLine.PAST)
             disable(
                 Calendar.getInstance(TimeZone.getTimeZone("UTC"))
                     .apply { add(Calendar.DAY_OF_MONTH, 2) })
@@ -145,42 +226,85 @@ class MainActivity : AppCompatActivity() {
         sheet.show() // Show later
     }
 
-    private fun showOptionsSheetGridHorizontal() {
+    private fun showOptionsSheetGridSmall(displayMode: DisplayMode) {
 
         val sheet = OptionsSheet().build(this) { // Build only
+            displayMode(displayMode) // Display mode for list/grid + scroll into height or width
+            title("What's your favorite fruit?")
             displayMode(DisplayMode.GRID_HORIZONTAL) // Display mode for list/grid + scroll into height or width
-            if (Random.nextBoolean()) { // Simulating design of longer options grid, which scrolls horizontal and multiple choices
-                title("What would you like to eat daily?")
-                multipleChoices() // Apply to make it multiple choices
-                minChoices(3) // Set minimum choices
-                maxChoices(4) // Set maximum choices
-                showMultipleChoicesInfo() // Show info view for selection
-                showButtons()
-                with(
-                    Option(R.drawable.ic_apple, "Apple"),
-                    Option(R.drawable.ic_fruit_cherries, "Cherries").disable(), // An option can be disabled
-                    Option(R.drawable.ic_food_pasta, "Pasta"),
-                    Option(R.drawable.ic_fruit_watermelon, "Watermelon"),
-                    Option(R.drawable.ic_fruit_grapes, "Grapes").select(), // An option can be preselected
-                    Option(R.drawable.ic_food_burger, "Burger"),
-                    Option(R.drawable.ic_fruit_pineapple, "Pineapple"),
-                    Option(R.drawable.ic_food_croissant, "Croissant")
-                )
-            } else {
-                title("What's your favorite fruit?")
-                displayMode(DisplayMode.GRID_HORIZONTAL) // Display mode for list/grid + scroll into height or width
-                with( // Add options
-                    Option(R.drawable.ic_fruit_cherries, "Cherries"),
-                    Option(R.drawable.ic_fruit_watermelon, "Watermelon"),
-                    Option(R.drawable.ic_fruit_grapes, "Grapes")
-                )
-            }
-            onPositiveMultiple { selectedIndices: MutableList<Int>, selectedOptions: MutableList<Option> ->
+            with( // Add options
+                Option(R.drawable.ic_fruit_cherries, "Cherries"),
+                Option(R.drawable.ic_fruit_watermelon, "Watermelon"),
+                Option(R.drawable.ic_fruit_grapes, "Grapes")
+            )
+            onPositive { index, option ->
                 // All selected indices / options
             }
         }
 
         sheet.show() // Show later
+    }
+
+    private fun showOptionsSheetGridMiddle(displayMode: DisplayMode) {
+
+        OptionsSheet().show(this) { // Build and show
+            displayMode(displayMode) // Display mode for list/grid + scroll into height or width
+            title("What would you like to eat daily?")
+            multipleChoices() // Apply to make it multiple choices
+            minChoices(3) // Set minimum choices
+            maxChoices(4) // Set maximum choices
+            showMultipleChoicesInfo() // Show info view for selection
+            showButtons()
+            with(
+                Option(R.drawable.ic_apple, "Apple"),
+                Option(
+                    R.drawable.ic_fruit_cherries,
+                    "Cherries"
+                ).disable(), // An option can be disabled
+                Option(R.drawable.ic_food_pasta, "Pasta"),
+                Option(R.drawable.ic_fruit_watermelon, "Watermelon"),
+                Option(
+                    R.drawable.ic_fruit_grapes,
+                    "Grapes"
+                ).select(), // An option can be preselected
+                Option(R.drawable.ic_food_burger, "Burger"),
+                Option(R.drawable.ic_fruit_pineapple, "Pineapple"),
+                Option(R.drawable.ic_food_croissant, "Croissant")
+            )
+            onPositiveMultiple { selectedIndices: MutableList<Int>, selectedOptions: MutableList<Option> ->
+                // All selected indices / options
+            }
+        }
+    }
+
+    private fun showOptionsSheetGridLarge(displayMode: DisplayMode) {
+
+        OptionsSheet().show(this) { // Build and show
+            displayMode(displayMode) // Display mode for list/grid + scroll into height or width
+            title("What would you like to eat daily?")
+            with(
+                Option(R.drawable.ic_food_burger, "Burger"),
+                Option(R.drawable.ic_fruit_pineapple, "Pineapple"),
+                Option(R.drawable.ic_food_croissant, "Croissant"),
+                Option(R.drawable.ic_apple, "Apple"),
+                Option(
+                    R.drawable.ic_fruit_cherries,
+                    "Cherries"
+                ).disable(), // An option can be disabled
+                Option(R.drawable.ic_food_pasta, "Pasta"),
+                Option(R.drawable.ic_fruit_watermelon, "Watermelon"),
+                Option(
+                    R.drawable.ic_fruit_grapes,
+                    "Grapes"
+                ), // An option can be preselected
+                Option(R.drawable.ic_food_burger, "Burger"),
+                Option(R.drawable.ic_fruit_pineapple, "Pineapple"),
+                Option(R.drawable.ic_food_croissant, "Croissant")
+            )
+            onPositive { index, option ->
+                // All selected indices / options
+            }
+        }
     }
 
     private fun showOptionsSheetGridVertical() {
@@ -220,6 +344,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun showColorSheetTemplate() {
+        ColorSheet().show(this) { // Build and show
+            title("Background color")
+            defaultView(ColorView.TEMPLATE) // Set the default view when the bottom sheet is visible
+            disableSwitchColorView()
+            onPositive { color ->
+                // Use Color
+            }
+        }
+    }
+
+    private fun showColorSheetCustom() {
+        ColorSheet().show(this) { // Build and show
+            title("Background color")
+            defaultView(ColorView.CUSTOM) // Set the default view when the bottom sheet is visible
+            disableSwitchColorView()
+            onPositive { color ->
+                // Use Color
+            }
+        }
+    }
+
     private fun showClockTimeSheet() {
 
         ClockTimeSheet().show(this) {
@@ -249,17 +396,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showInfoSheet() {
+    private fun showInputSheetShort() {
 
-        InfoSheet().show(this) {
-            title("Did you read the README on GitHub?")
-            content("It will help you to setup beautiful bottom sheets in your project.")
-            onNegative("Not yet") { /* Set listener when negative button is clicked. */ }
-            onPositive("Yes")
+        InputSheet().show(this) {
+            title("Survey about this library.")
+            content("We would like to ask you some questions about this library. We put a lot of effort into it and hope to make it easy to use.")
+            with(InputRadioButtons("") {
+                required()
+                drawable(R.drawable.ic_telegram)
+                label("How did you find this library?")
+                options(mutableListOf("Google", "GitHub", "Twitter"))
+                selected(0)
+                changeListener { value -> showToast("RadioButton change", value.toString()) }
+                resultListener { value -> showToast("RadioButton result", value.toString()) }
+            })
+            with(InputCheckBox("use") { // Read value later by index or custom key from bundle
+                label("Usage")
+                text("I use this library in my awesome app.")
+                changeListener { value -> showToast("CheckBox change", value.toString()) }
+                resultListener { value -> showToast("CheckBox result", value.toString()) }
+            })
+
+            onNegative { showToast("InputSheet cancelled", "No result") }
+            onPositive { result ->
+                showToastLong("InputSheet result", result.toString())
+                val text = result.getString("0") // Read value of inputs by index
+                val check = result.getBoolean("use") // Read value by passed key
+            }
         }
     }
 
-    private fun showInputSheet() {
+
+    private fun showInputSheetLong() {
 
         InputSheet().show(this) {
             title("Short survey")
@@ -317,6 +485,25 @@ class MainActivity : AppCompatActivity() {
                 val text = result.getString("0") // Read value of inputs by index
                 val check = result.getBoolean("binge_watching") // Read value by passed key
             }
+        }
+    }
+
+    private fun showInfoSheet() {
+
+        InfoSheet().show(this) {
+            title("Did you read the README on GitHub?")
+            content("It will help you to setup beautiful bottom sheets in your project.")
+            onNegative("Not yet") { /* Set listener when negative button is clicked. */ }
+            onPositive("Yes")
+        }
+    }
+
+
+    private fun showCustomSheet() {
+
+        CustomSheet().show(this) {
+            title("Custom Example")
+            onPositive("Cool")
         }
     }
 
