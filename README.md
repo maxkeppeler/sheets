@@ -41,6 +41,7 @@
   - [Input Bottom Sheet](#input)
   - [Calendar Sheet](#calendar-sheet)
   - [Color Bottom Sheet](#color)
+  - [Custom Bottom Sheet](#custom)
 - [Other](#other)
   - [Showcase](#showcase)
   - [Support this project](#support-this-project)
@@ -426,6 +427,36 @@ Use ```disableSwitchColorView()``` to disable switching betwen color views. Defa
 Use ```defaultColor()``` to set default selected color.
 Use ```colors()``` to pass all colors to be displayed in the color templates view.
 Use ```disableAlpha()``` to disable alpha colors for custom colors.
+
+## Custom
+
+With just the 'core' module you are able to create your own bottom sheet based on this library. You can use some components and styles within your own custom bottom sheet automatically. By default the buttons and toolbar view with logic is ready to be used by your own implementation.
+
+```gradle
+dependencies {
+  ...
+  implementation 'com.maxkeppeler.bottomsheets:core:<latest-version>'
+}
+```
+
+### Get started
+
+You can find a custom bottom sheet implementation in the sample module.
+
+**For the default color sheet use it as following:**
+
+1. Step: Create a class and extend from the class ``BottomSheet``.
+```
+class CustomSheet : BottomSheet() {
+```
+2. Step: Implement the method: ``onCreateLayoutView`` and pass your custom layout.
+```
+override fun onCreateLayoutView(): View {
+    return LayoutInflater.from(activity).inflate(R.layout.bottom_sheets_custom, null)
+}
+```
+
+All of the base functionality can be used and on top of that you can extend the logic and behavior as you wish.
 
 # Misc
 
