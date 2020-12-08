@@ -31,6 +31,8 @@
 <br/>
 <img src="art/img_showcase.png" alt="Bottom-Sheets Library">
 
+Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample_bottom_sheets.apk) to see the bottom sheets in real.
+
 ## Table of Contents
 -  [Get started](#get-started)
   - [Appearance](#appearance)
