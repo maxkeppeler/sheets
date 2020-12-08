@@ -199,15 +199,8 @@ class CalendarSheet : BottomSheet() {
         this.listener = positiveListener
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        saved: Bundle?
-    ): View? {
-        if (saved != null) dismiss()
-        return BottomSheetsCalendarBinding.inflate(LayoutInflater.from(activity), container, false)
-            .also { binding = it }.root
-    }
+    override fun onCreateLayoutView(): View =
+        BottomSheetsCalendarBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -362,7 +355,8 @@ class CalendarSheet : BottomSheet() {
 
             CalendarMode.WEEK_1, CalendarMode.WEEK_2, CalendarMode.WEEK_3 ->
                 calendarView.updateMonthConfiguration(
-                    inDateStyle = InDateStyle.FIRST_MONTH,
+                    inDateStyle = InDateStyle.NONE,
+                    outDateStyle = OutDateStyle.NONE,
                     maxRowCount = calendarMode.rows,
                     hasBoundaries = false
                 )

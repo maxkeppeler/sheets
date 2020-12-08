@@ -19,32 +19,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
-        android:id="@+id/content"
-        style="@style/TextAppearance.MaterialComponents.Body2"
-        android:layout_width="0dp"
+    <include
+        android:id="@+id/custom"
+        layout="@layout/bottom_sheets_color_custom"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="16dp"
-        android:lineSpacingMultiplier="1.4"
-        android:visibility="gone"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.maxkeppeler.bottomsheets.core.views.BottomSheetRecyclerView
-        android:id="@+id/inputRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/colorTemplatesView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:fadeScrollbars="false"
-        android:paddingTop="4dp"
-        android:paddingBottom="16dp"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toTopOf="@+id/custom" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

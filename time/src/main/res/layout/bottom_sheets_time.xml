@@ -19,32 +19,55 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/top"
-        layout="@layout/bottom_sheets_view_top"
-        android:layout_width="0dp"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetValue
+        android:id="@+id/timeValue"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bs_ripple_text"
+        android:clickable="true"
+        android:focusable="true"
+        android:textAlignment="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/timeSelector"
-        layout="@layout/bottom_sheets_time_selector"
-        android:layout_width="0dp"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+        android:id="@+id/hintLabel"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top" />
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/timeValue"
+        app:layout_constraintStart_toStartOf="@+id/timeValue"
+        app:layout_constraintTop_toBottomOf="@+id/timeValue" />
 
-    <include
-        android:id="@+id/buttons"
-        layout="@layout/bottom_sheets_view_buttons"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
+        android:id="@+id/divider"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="1dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeSelector" />
+        app:layout_constraintTop_toBottomOf="@+id/hintLabel" />
+
+    <include
+        android:id="@+id/input"
+        layout="@layout/bottom_sheets_numerical_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

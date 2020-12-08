@@ -24,13 +24,11 @@ import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
-import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorPickerBinding
+import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorBinding
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
@@ -48,7 +46,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
 
     override val dialogTag = "ColorSheet"
 
-    private lateinit var binding: BottomSheetsColorPickerBinding
+    private lateinit var binding: BottomSheetsColorBinding
 
     private companion object {
         private const val ARG_MAX_VALUE = 255
@@ -137,22 +135,13 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         this.listener = listener
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        if (savedInstanceState != null) dismiss()
-        return BottomSheetsColorPickerBinding.inflate(
-            LayoutInflater.from(activity),
-            container,
-            false
-        ).also { binding = it }.root
-    }
+    override fun onCreateLayoutView(): View =
+        BottomSheetsColorBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
+        displayToolbarExtraButton(switchColorView)
 
         iconColor = colorOfAttrs(
             requireContext(),
@@ -268,7 +257,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
             btnCopy.setOnClickListener { onCopy() }
             btnPaste.setOnClickListener { onPaste() }
 
-            binding.top.btnColorSource.setOnClickListener {
+            setToolbarExtraButtonListener {
                 colorView = ColorView.TEMPLATE.takeUnless { it == colorView } ?: ColorView.CUSTOM
                 setColorView()
             }
@@ -315,20 +304,8 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         with(binding) {
             colorTemplatesView.visibility = if (templateView) View.VISIBLE else View.GONE
             custom.root.visibility = if (templateView) View.INVISIBLE else View.VISIBLE
-
-            if (switchColorView) {
-                top.btnColorSource.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette
-                    )
-                )
-                top.btnColorSource.visibility = View.VISIBLE
-            } else {
-                top.btnColorSource.visibility = View.GONE
-            }
+            setToolbarExtraButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
         }
-
     }
 
     /** Get hex string from color. */

@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
@@ -123,15 +124,8 @@ class InputSheet : BottomSheet() {
         this.input.add(input)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        saved: Bundle?
-    ): View? {
-        if (saved != null) dismiss()
-        return BottomSheetsInputBinding.inflate(LayoutInflater.from(activity), container, false)
-            .also { binding = it }.root
-    }
+    override fun onCreateLayoutView(): View =
+        BottomSheetsInputBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

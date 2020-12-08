@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,35 +16,113 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/top"
-        layout="@layout/bottom_sheets_view_top"
-        android:layout_width="0dp"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetValue
+        android:id="@+id/hoursInput"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bs_ripple_text"
+        android:clickable="true"
+        android:focusable="true"
+        android:minWidth="24dp"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/separatorInput"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/timeSelector"
-        layout="@layout/bottom_sheets_time_clock_selector"
-        android:layout_width="0dp"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+        android:id="@+id/separatorInput"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text=":"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/hoursInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top" />
+        app:layout_constraintTop_toTopOf="@+id/hoursInput"
+        tools:ignore="HardcodedText" />
+
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+        android:id="@+id/minutesInput"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bs_ripple_text"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/separatorInput"
+        app:layout_constraintTop_toTopOf="@id/hoursInput" />
+
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+        android:id="@+id/pmLabel"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bs_ripple_text"
+        android:minWidth="24dp"
+        android:padding="12dp"
+        android:text="@string/pm"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="@id/minutesInput"
+        app:layout_constraintStart_toEndOf="@+id/minutesInput"
+        app:layout_constraintTop_toTopOf="@+id/separatorInput"
+        tools:ignore="HardcodedText" />
+
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+        android:id="@+id/amLabel"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bs_ripple_text"
+        android:padding="12dp"
+        android:text="@string/am"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="@id/hoursInput"
+        app:layout_constraintEnd_toStartOf="@+id/hoursInput"
+        app:layout_constraintTop_toTopOf="@+id/separatorInput"
+        tools:ignore="HardcodedText" />
+
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hoursInput" />
 
     <include
-        android:id="@+id/buttons"
-        layout="@layout/bottom_sheets_view_buttons"
+        android:id="@+id/input"
+        layout="@layout/bottom_sheets_numerical_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeSelector" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

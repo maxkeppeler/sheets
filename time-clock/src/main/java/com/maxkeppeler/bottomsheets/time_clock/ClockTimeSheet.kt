@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
@@ -81,22 +82,15 @@ class ClockTimeSheet : BottomSheet() {
         this.listener = listener
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        saved: Bundle?
-    ): View? {
-        if (saved != null) dismiss()
-        return BottomSheetsTimeClockBinding.inflate(LayoutInflater.from(activity), container, false)
-            .also { binding = it }.root
-    }
+    override fun onCreateLayoutView(): View =
+        BottomSheetsTimeClockBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
         selector = ClockTimeSelector(
             ctx = requireContext(),
-            bindingSelector = binding.timeSelector,
+            bindingSelector = binding,
             is24HoursView = format24Hours
         )
         selector.setTime(currentTimeInMillis)

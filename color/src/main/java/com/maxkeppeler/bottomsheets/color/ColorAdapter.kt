@@ -24,7 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorPickerTemplatesItemBinding
+import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorTemplatesItemBinding
 import com.maxkeppeler.bottomsheets.core.utils.colorOf
 
 class ColorAdapter(
@@ -37,7 +37,7 @@ class ColorAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorItem =
         ColorItem(
-            BottomSheetsColorPickerTemplatesItemBinding.inflate(
+            BottomSheetsColorTemplatesItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -70,6 +70,6 @@ class ColorAdapter(
 
     override fun getItemCount(): Int = colors.size
 
-    inner class ColorItem(val binding: BottomSheetsColorPickerTemplatesItemBinding) :
+    inner class ColorItem(val binding: BottomSheetsColorTemplatesItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

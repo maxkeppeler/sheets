@@ -20,15 +20,15 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -40,8 +40,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.utils.Theme
-import com.maxkeppeler.bottomsheets.databinding.BottomSheetsViewButtonsBinding
-import com.maxkeppeler.bottomsheets.databinding.BottomSheetsViewTopBinding
+import com.maxkeppeler.bottomsheets.databinding.BottomSheetsBaseBinding
 
 /** Listener which is invoked when the positive button is clicked. */
 typealias PositiveListener = () -> Unit
@@ -53,7 +52,7 @@ typealias NegativeListener = () -> Unit
 typealias DismissListener = () -> Unit
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-open class BottomSheet : BottomSheetDialogFragment() {
+abstract class BottomSheet : BottomSheetDialogFragment() {
 
     open val dialogTag = "BottomSheet"
 
@@ -65,8 +64,9 @@ open class BottomSheet : BottomSheetDialogFragment() {
 
     private var theme = Theme.DAY
 
-    private lateinit var bindingToolbar: BottomSheetsViewTopBinding
-    private lateinit var bindingButtons: BottomSheetsViewButtonsBinding
+    lateinit var bindingBase: BottomSheetsBaseBinding
+//    private lateinit var bindingToolbar: BottomSheetsViewTopBinding
+//    private lateinit var bindingButtons: BottomSheetsViewButtonsBinding
 
     private var hideToolbar: Boolean = false
     private var hideCloseButton: Boolean = false
@@ -245,11 +245,27 @@ open class BottomSheet : BottomSheetDialogFragment() {
         dismissListener?.invoke()
     }
 
+    /** Create view of base bottom sheet. */
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        saved: Bundle?
+    ): View? {
+        if (saved != null) dismiss()
+        return BottomSheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
+             .also { bindingBase = it }.apply {
+                layout.addView(onCreateLayoutView())
+            }.root
+    }
+
+    /** Create custom view to be added to the base bottom sheet. */
+    abstract fun onCreateLayoutView(): View
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBottomSheetBehavior(view)
         setupBottomSheetBackground(view)
-        setupBottomSheet(view)
+        setupBottomSheet()
     }
 
     /** Setup the bottom sheet behavior. */
@@ -312,25 +328,16 @@ open class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Setup the bottom sheet appearance. */
-    private fun setupBottomSheet(view: View) {
-
-        val includeToolbar = view.findViewById<ConstraintLayout>(R.id.top)
-        bindingToolbar = DataBindingUtil.getBinding(includeToolbar)
-            ?: throw IllegalStateException("Bottom sheet needs to have optional toolbar view.")
-
-        val includeButtons = view.findViewById<ConstraintLayout>(R.id.buttons)
-        bindingButtons =
-            DataBindingUtil.getBinding(includeButtons)
-                ?: throw IllegalStateException("Bottom sheet needs to have optional buttons view.")
+    private fun setupBottomSheet() {
 
         if (hideToolbar) {
-            bindingToolbar.root.visibility = View.GONE
+            bindingBase.top.root.visibility = View.GONE
         } else {
-            bindingToolbar.root.visibility = View.VISIBLE
+            bindingBase.top.root.visibility = View.VISIBLE
 
-            if (hideCloseButton) bindingToolbar.btnClose.visibility = View.VISIBLE
-            else bindingToolbar.btnClose.setOnClickListener { dismiss() }
-            titleText?.let { bindingToolbar.title.text = it }
+            if (hideCloseButton) bindingBase.top.btnClose.visibility = View.VISIBLE
+            else bindingBase.top.btnClose.setOnClickListener { dismiss() }
+            titleText?.let { bindingBase.top.title.text = it }
         }
 
         val colorCloseIcon = colorOfAttrs(
@@ -339,15 +346,15 @@ open class BottomSheet : BottomSheetDialogFragment() {
             R.attr.colorOnSurface
         )
 
-        btnCloseIcon?.let { bindingToolbar.btnClose.setImageDrawable(it) }
-        bindingToolbar.btnClose.setColorFilter(colorCloseIcon)
-        bindingToolbar.btnColorSource.setColorFilter(colorCloseIcon)
+        btnCloseIcon?.let { bindingBase.top.btnClose.setImageDrawable(it) }
+        bindingBase.top.btnClose.setColorFilter(colorCloseIcon)
+        bindingBase.top.btnExtra.setColorFilter(colorCloseIcon)
 
-        positiveText?.let { bindingButtons.btnPositive.text = it }
-        bindingButtons.btnPositive.setOnClickListener { positiveListener?.invoke(); dismiss() }
+        positiveText?.let { bindingBase.buttons.btnPositive.text = it }
+        bindingBase.buttons.btnPositive.setOnClickListener { positiveListener?.invoke(); dismiss() }
 
-        negativeText?.let { bindingButtons.btnNegative.text = it }
-        bindingButtons.btnNegative.setOnClickListener { negativeListener?.invoke(); dismiss() }
+        negativeText?.let { bindingBase.buttons.btnNegative.text = it }
+        bindingBase.buttons.btnNegative.setOnClickListener { negativeListener?.invoke(); dismiss() }
     }
 
     /** Display positive button. */
@@ -358,14 +365,14 @@ open class BottomSheet : BottomSheetDialogFragment() {
 
     /** Show positive button */
     private fun showButtonPositive() {
-        bindingButtons.btnPositive.fadeIn()
-        bindingButtons.btnPositive.isClickable = true
+        bindingBase.buttons.btnPositive.fadeIn()
+        bindingBase.buttons.btnPositive.isClickable = true
     }
 
     /** Hide positive button. */
     fun hideButtonPositive() {
-        bindingButtons.btnPositive.fadeOut()
-        bindingButtons.btnPositive.isClickable = false
+        bindingBase.buttons.btnPositive.fadeOut()
+        bindingBase.buttons.btnPositive.isClickable = false
     }
 
     /** Display buttons view. */
@@ -376,17 +383,45 @@ open class BottomSheet : BottomSheetDialogFragment() {
 
     /** Show buttons view. */
     fun showButtonsView() {
-        bindingButtons.root.visibility = View.VISIBLE
+        bindingBase.buttons.root.visibility = View.VISIBLE
     }
 
     /** Hide buttons view. */
     fun hideButtonsView() {
-        bindingButtons.root.visibility = View.GONE
+        bindingBase.buttons.root.visibility = View.GONE
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
     fun setButtonPositiveListener(clickListener: () -> Unit) {
-        bindingButtons.btnPositive.setOnClickListener { clickListener.invoke() }
+        bindingBase.buttons.btnPositive.setOnClickListener { clickListener.invoke() }
+    }
+
+    /** Set a listener which is invoked when the positive button is clicked. */
+    fun setToolbarExtraButtonListener(clickListener: () -> Unit) {
+        bindingBase.top.btnExtra.setOnClickListener { clickListener.invoke() }
+    }
+
+    /** Set a listener which is invoked when the positive button is clicked. */
+    fun setToolbarExtraButtonDrawable(@DrawableRes drawableRes: Int) {
+        bindingBase.top.btnExtra.setImageDrawable(
+            ContextCompat.getDrawable(requireContext(), drawableRes)
+        )
+    }
+
+    /** Display extra button in toolbar. */
+    fun displayToolbarExtraButton(display: Boolean) {
+        if (display) showToolbarExtraButton()
+        else hideToolbarExtraButton()
+    }
+
+    /** Show extra button in toolbar. */
+    fun showToolbarExtraButton() {
+        bindingBase.top.btnExtra.visibility = View.VISIBLE
+    }
+
+    /** Hide extra button in toolbar. */
+    fun hideToolbarExtraButton() {
+        bindingBase.top.btnExtra.visibility = View.GONE
     }
 
     /** Show the bottom sheet. */

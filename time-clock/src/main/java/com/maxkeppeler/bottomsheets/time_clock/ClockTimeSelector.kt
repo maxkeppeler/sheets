@@ -28,13 +28,13 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 import com.maxkeppeler.bottomsheets.core.utils.isAmTime
-import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockSelectorBinding
+import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 internal class ClockTimeSelector(
     private val ctx: Context,
-    private val bindingSelector: BottomSheetsTimeClockSelectorBinding,
+    private val bindingSelector: BottomSheetsTimeClockBinding,
     private val is24HoursView: Boolean = true
 ) : View.OnClickListener {
 

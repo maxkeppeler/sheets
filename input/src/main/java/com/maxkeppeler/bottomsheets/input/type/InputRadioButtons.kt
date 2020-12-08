@@ -43,7 +43,7 @@ class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit)
             field = value
         }
 
-    internal fun selected(selectedIndex: Int) {
+    fun selected(selectedIndex: Int) {
         this.selectedIndex = selectedIndex
     }
 

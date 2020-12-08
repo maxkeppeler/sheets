@@ -26,6 +26,7 @@ import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
@@ -238,28 +239,17 @@ class OptionsSheet : BottomSheet() {
                     || (!maxChoicesStrict && optionsSelected.size < options.size))
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        saved: Bundle?
-    ): View? {
-        if (saved != null) dismiss()
-        return BottomSheetsOptionsBinding.inflate(LayoutInflater.from(activity), container, false)
-            .also { binding = it }.root
-    }
+    override fun onCreateLayoutView(): View =
+        BottomSheetsOptionsBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkSetup()
+        displayButtonsView(multipleChoices || showButtons)
         setButtonPositiveListener(::save)
 
         colorActive =
             colorOfAttrs(requireContext(), R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary)
-
-        if (multipleChoices || showButtons) {
-            hideButtonPositive()
-            showButtonsView()
-        }
 
         with(binding.optionsRecyclerView) {
 

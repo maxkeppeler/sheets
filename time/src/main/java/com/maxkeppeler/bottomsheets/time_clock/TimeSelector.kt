@@ -31,7 +31,7 @@ import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
 import com.maxkeppeler.bottomsheets.time.R
-import com.maxkeppeler.bottomsheets.time.databinding.BottomSheetsTimeSelectorBinding
+import com.maxkeppeler.bottomsheets.time.databinding.BottomSheetsTimeBinding
 import java.util.concurrent.TimeUnit
 
 /** Internal listener which informs about the success of the time validation. */
@@ -39,7 +39,7 @@ internal typealias TimeValidationListener = (valid: Boolean) -> Unit
 
 internal class TimeSelector(
     private val ctx: Context,
-    private val bindingSelector: BottomSheetsTimeSelectorBinding,
+    private val binding: BottomSheetsTimeBinding,
     private val format: TimeFormat = TimeFormat.M_SS,
     private val minTime: Long = Long.MIN_VALUE,
     private val maxTime: Long = Long.MAX_VALUE,
@@ -61,7 +61,7 @@ internal class TimeSelector(
 
     init {
 
-        with(bindingSelector) {
+        with(binding) {
 
             input.btnRightContainer.setOnClickListener { onBackspace() }
             input.btnRightIcon.setImageDrawable(
@@ -109,7 +109,7 @@ internal class TimeSelector(
 
         if (time.length >= format.length) time.deleteCharAt(0)
         time.append(i)
-        bindingSelector.timeValue.text = getFormattedTime()
+        binding.timeValue.text = getFormattedTime()
         validate()
     }
 
@@ -122,8 +122,8 @@ internal class TimeSelector(
 
             when {
                 timeInSeconds < minTime -> {
-                    bindingSelector.hintLabel.visibility = View.VISIBLE
-                    bindingSelector.hintLabel.text =
+                    binding.hintLabel.visibility = View.VISIBLE
+                    binding.hintLabel.text =
                         ctx.getString(
                             R.string.at_least_placeholder,
                             getFormattedHintTime(minTime * 1000)
@@ -131,20 +131,20 @@ internal class TimeSelector(
                     validationListener?.invoke(false)
                 }
                 timeInSeconds > maxTime -> {
-                    bindingSelector.hintLabel.visibility = View.VISIBLE
-                    bindingSelector.hintLabel.text = ctx.getString(
+                    binding.hintLabel.visibility = View.VISIBLE
+                    binding.hintLabel.text = ctx.getString(
                         R.string.at_most_placeholder,
                         getFormattedHintTime(maxTime * 1000)
                     )
                     validationListener?.invoke(false)
                 }
                 else -> {
-                    bindingSelector.hintLabel.visibility = View.GONE
+                    binding.hintLabel.visibility = View.GONE
                     validationListener?.invoke(true)
                 }
             }
         } else {
-            bindingSelector.hintLabel.visibility = View.GONE
+            binding.hintLabel.visibility = View.GONE
             validationListener?.invoke(false)
         }
     }
@@ -183,7 +183,7 @@ internal class TimeSelector(
     /** Removes all digits. */
     private fun onClear() {
         time.setLength(0)
-        bindingSelector.timeValue.setText(getFormattedTime(), TextView.BufferType.SPANNABLE)
+        binding.timeValue.setText(getFormattedTime(), TextView.BufferType.SPANNABLE)
         validate()
     }
 
@@ -192,7 +192,7 @@ internal class TimeSelector(
 
         if (time.isNotEmpty()) time.deleteCharAt(time.lastIndex)
 
-        bindingSelector.timeValue.setText(getFormattedTime(), TextView.BufferType.SPANNABLE)
+        binding.timeValue.setText(getFormattedTime(), TextView.BufferType.SPANNABLE)
         validate()
     }
 
@@ -343,7 +343,7 @@ internal class TimeSelector(
         filledTimeString.reversed().dropLastWhile { it == '0' }.forEach {
             time.insert(0, it)
         }
-        bindingSelector.timeValue.text = getFormattedTime()
+        binding.timeValue.text = getFormattedTime()
         validate()
     }
 
