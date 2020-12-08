@@ -15,7 +15,7 @@ dependencies {
     implementation project(':calendar')
 
     implementation deps.kotlin.stdlib8
-
+    implementation deps.androidx.constraint
     implementation deps.androidx.core
     implementation deps.androidx.recycler_view
     implementation deps.google_material
