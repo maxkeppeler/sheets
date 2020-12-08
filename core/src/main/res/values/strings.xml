@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +15,17 @@
   -->
 
 <resources>
-    <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
+
+    <string name="ok" translatable="true">OK</string>
+    <string name="cancel" translatable="true">Cancel</string>
 
     <string name="at_least_placeholder" translatable="true">At least %1$s</string>
     <string name="at_most_placeholder" translatable="true">At most %1$s</string>
 
-    <string name="hour_code" translatable="false">h</string>
-    <string name="minute_code" translatable="false">m</string>
-    <string name="second_code" translatable="false">s</string>
-    <string name="day_code">D</string>
+    <string name="hour_code" translatable="true">h</string>
+    <string name="minute_code" translatable="true">m</string>
+    <string name="second_code" translatable="true">s</string>
+    <string name="day_code" translatable="true">D</string>
 
     <string name="am" translatable="true">am</string>
     <string name="pm" translatable="true">pm</string>
