@@ -24,7 +24,6 @@ import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class BottomSheetTitle
 @JvmOverloads constructor(
     ctx: Context,

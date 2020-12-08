@@ -23,7 +23,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class BottomSheetValue
 @JvmOverloads constructor(
     ctx: Context,

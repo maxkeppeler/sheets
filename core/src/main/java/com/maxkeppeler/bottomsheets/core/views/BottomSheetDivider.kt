@@ -27,7 +27,6 @@ import com.maxkeppeler.bottomsheets.core.utils.colorOf
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttr
 import com.maxkeppeler.bottomsheets.core.utils.toDp
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class BottomSheetDivider
 @JvmOverloads constructor(
     ctx: Context,

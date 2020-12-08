@@ -24,7 +24,6 @@ import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
  */
 
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class BottomSheetRecyclerView
 @JvmOverloads constructor(
     ctx: Context,
