@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.maxkeppeler.sample.custom__sheets_example
+package com.maxkeppeler.sample.custom_sheets_example
 
 import android.content.Context
 import android.os.Bundle

@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.maxkeppeler.bottomsheets.calendar.CalendarMode
 import com.maxkeppeler.bottomsheets.calendar.CalendarSheet
 import com.maxkeppeler.bottomsheets.calendar.SelectionMode
-import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
@@ -43,7 +42,7 @@ import com.maxkeppeler.bottomsheets.options.OptionsSheet
 import com.maxkeppeler.bottomsheets.time_clock.ClockTimeSheet
 import com.maxkeppeler.bottomsheets.time_clock.TimeFormat
 import com.maxkeppeler.bottomsheets.time_clock.TimeSheet
-import com.maxkeppeler.sample.custom__sheets_example.CustomSheet
+import com.maxkeppeler.sample.custom_sheets_example.CustomSheet
 import com.maxkeppeler.sample.databinding.MainActBinding
 import com.maxkeppeler.sample.utils.BottomSheetExample
 import java.util.*
