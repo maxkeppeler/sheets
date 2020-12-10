@@ -65,19 +65,19 @@ dependencies {
 
 **The following functions can be called from any bottom sheet:**
 
-Use ```cancelableOutside()``` to disable dismissing the bottom sheet when outside ‚
-Use ```state()``` to set the BottomSheetBehavior state.‚
-Use ```peekHeight()``` to set the peek height for the bottom sheet.
-Use ```cornerRadius()``` to set corner radius.
-Use ```cornerFamily()``` to set corner family (cut or rounded).
-Use ```borderWidth()``` to set the width of the border width.
-Use ```borderColor()``` to set the color of the border.
-Use ```hideToolbar()``` to hide the toolbar of the bottom sheet (close icon button, the title and the divider).
-Use ```hideCloseButton()``` to hide the close icon button.
-Use ```title()``` to set the title text.
-Use ```onNegative()``` to set the negative button text and/ or the listener to be invoked when clicked.
-Use ```onDismiss()``` to set a listener to be invoked when the bottom sheet is dismissed.
-Use ```addBottomSheetCallback()``` to add a bottom sheet callback.
+Use ```cancelableOutside()``` to disable dismissing the bottom sheet when outside.<br/>
+Use ```state()``` to set the BottomSheetBehavior state.<br/>
+Use ```peekHeight()``` to set the peek height for the bottom sheet.<br/>
+Use ```cornerRadius()``` to set corner radius.<br/>
+Use ```cornerFamily()``` to set corner family (cut or rounded).<br/>
+Use ```borderWidth()``` to set the width of the border width.<br/>
+Use ```borderColor()``` to set the color of the border.<br/>
+Use ```hideToolbar()``` to hide the toolbar of the bottom sheet (close icon button, the title and the divider).<br/>
+Use ```hideCloseButton()``` to hide the close icon button.<br/>
+Use ```title()``` to set the title text.<br/>
+Use ```onNegative()``` to set the negative button text and/ or the listener to be invoked when clicked.<br/>
+Use ```onDismiss()``` to set a listener to be invoked when the bottom sheet is dismissed.<br/>
+Use ```addBottomSheetCallback()``` to add a bottom sheet callback.<br/>
 Use ```show()``` to show the bottom sheet.<br/>
 
 Each of the bottom sheets have an extension function called ```build``` and ```show``` where the receiver is the used bottom sheet.<br/>
@@ -210,14 +210,14 @@ OptionsSheet().show(context) {
 }
 ```
 
-Use ```multipleChoices()``` to select multiple options.
-Use ```showMultipleChoicesInfo()``` to display min and max amount of choices and current selection.
-Use ```maxChoicesStrictLimit()``` prevents the user to select more choices than allowed.
-Use ```minChoices()``` to set the minimum amount of choices.
-Use ```maxChoices()``` to set the maximum amount of choices.
-Set a listener with ```onPositiveMultiple()``` for multiple choices data.
-Use ```showButtons()``` to show the buttons and require a positive button click. <br/>
-Use ```displayMode()``` to either display it as a list, a vertical or horizontal growing scrollable grid.
+Use ```multipleChoices()``` to select multiple options.<br/>
+Use ```showMultipleChoicesInfo()``` to display min and max amount of choices and current selection.<br/>
+Use ```maxChoicesStrictLimit()``` prevents the user to select more choices than allowed.<br/>
+Use ```minChoices()``` to set the minimum amount of choices.<br/>
+Use ```maxChoices()``` to set the maximum amount of choices.<br/>
+Set a listener with ```onPositiveMultiple()``` for multiple choices data.<br/>
+Use ```showButtons()``` to show the buttons and require a positive button click.<br/>
+Use ```displayMode()``` to either display it as a list, a vertical or horizontal growing scrollable grid.<br/>
 
 <img src="art/img_bottom_sheet_options_list.png" width="80%" alt="Bottom-Sheets OptionsSheet List">
 
@@ -253,8 +253,8 @@ ClockTimeSheet().show(context) {
 }
 ```
 
-Use ```format24Hours()``` to choose between the 24-hours or 12-hours format.
-Use ```currentTime()``` to set the current time in milliseconds.
+Use ```format24Hours()``` to choose between the 24-hours or 12-hours format.<br/>
+Use ```currentTime()``` to set the current time in milliseconds.<br/>
 
 ## Time
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Atime/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Atime/_latestVersion)
@@ -280,10 +280,10 @@ TimeSheet().show(context) {
   }
 }
 ```
-Use ```format()``` to select the time format. (e. g. HH:mm:ss, mm:ss, ...)
-Use ```currentTime()``` to set the current time in seconds.
-Use ```minTime()``` to set the minimum time.
-Use ```maxTime()``` to set the maximum time.
+Use ```format()``` to select the time format. (e. g. HH:mm:ss, mm:ss, ...) <br/>
+Use ```currentTime()``` to set the current time in seconds.<br/>
+Use ```minTime()``` to set the minimum time.<br/>
+Use ```maxTime()``` to set the maximum time.<br/>
 
 ## Input
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainput/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainput/_latestVersion)
@@ -334,41 +334,34 @@ InputSheet()).show(context) {
 **Supported Input options:**
 
 For now you can use ```InputEditText, InputCheckBox, InputRadioButtons, InputSpinner```. <br/>
+
 Use ```content()``` to add a content text (e. g. to explain the form).<br/>
 
-**Common configs are:**
+**Common configs are:**<br/>
+Use ```label()``` to set text of the input label.<br/>
+Use ```drawable()``` to set drawable of the input.<br/>
+Use ```required()``` to enforce that the user inputs value. By default, no input is required.<br/>
+Use ```changeListener()``` to observe a change of the value.<br/>
+Use ```resultListener()``` to receive the final value. (Or use the bundled data result listener.)<br/>
 
-Use ```label()``` to set text of the input label.
-Use ```drawable()``` to set drawable of the input.
-Use ```required()``` to enforce that the user inputs value. By default, no input is required.
-
-
-Use ```changeListener()``` to observe a change of the value.
-Use ```resultListener()``` to receive the final value. (Or use the bundled data result listener.)
-
-**InputEditText**
-
-Use ```hint()``` to set text hint.
-Use ```default()``` to set default text.
-Use ```inputType()``` to set the ```android.text.InputType```'s.
-Use ```inputFilter()``` to set the ```android.text.inputFilter```.
+**InputEditText**<br/>
+Use ```hint()``` to set text hint.<br/>
+Use ```default()``` to set default text.<br/>
+Use ```inputType()``` to set the ```android.text.InputType```'s.<br/>
+Use ```inputFilter()``` to set the ```android.text.inputFilter```.<br/>
 
 **InputCheckBox** <br/>
-
-Use ```text()``` to set the CheckBox text.
+Use ```text()``` to set the CheckBox text.<br/>
 Use ```default()``` to set default value.
 
 **InputRadioButtons** <br/>
-
-Use ```text()``` to set the CheckBox text.
-Use ```selected()``` to set selected index.
-Use ```options()``` to add text options.
+Use ```options()``` to add an amount of RadioButtons.<br/>
+Use ```selected()``` to set selected index.<br/>
 
 **InputSpinner** <br/>
-
-Use ```text()``` to set the CheckBox text.
-Use ```selected()``` to set selected index.
-Use ```options()``` to add text options.
+Use ```text()``` to set the text for the Spinner view, when nothing is selected.<br/>
+Use ```options()``` to add an amount of SpinnerItems.<br/>
+Use ```selected()``` to set selected index.<br/>
 
 ## Calendar
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acalendar/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acalendar/_latestVersion)
@@ -393,17 +386,17 @@ CalendarSheet().show(this) { // Build and show
     // Handle date or range
   }
 ```
-Use ```selectionMode()``` to choose the selection mode (date or range).
-Use ```calendarMode()``` to choose the calendar mode (week with various rows or month-view).
-Use ```disableTimeline()``` to disable either past or future dates.
-Use ```rangeYears()``` to set the range of years into past and future.
-Use ```disable()``` to pass```Calendar``` object to disable various dates for selection.
-Use ```showButtons()``` to show or hide the buttons view.
+Use ```selectionMode()``` to choose the selection mode (date or range).<br/>
+Use ```calendarMode()``` to choose the calendar mode (week with various rows or month-view).<br/>
+Use ```disableTimeline()``` to disable either past or future dates.<br/>
+Use ```rangeYears()``` to set the range of years into past and future.<br/>
+Use ```disable()``` to pass a ```Calendar``` object to disable various dates for selection.<br/>
+Use ```showButtons()``` to show or hide the buttons view.<br/>
 
 ## Color
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acolor/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acolor/_latestVersion)
 
-The `Color` Bottom Sheet lets you pick a color. Display the default material colors or specify which colors can be chosen from. You can allow to chose a custom color as well.
+The `Color` Bottom Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
 
 <img src="art/img_bottom_sheet_color.png" width="80%" alt="Bottom-Sheets ColorSheet">
 
@@ -424,11 +417,11 @@ ColorSheet().show(context) {
   }
 }
 ```
-Use ```defaultView()``` to select the default color view (Colors from templates or custom).
-Use ```disableSwitchColorView()``` to disable switching betwen color views. Default view will only be shown.
-Use ```defaultColor()``` to set default selected color.
-Use ```colors()``` to pass all colors to be displayed in the color templates view.
-Use ```disableAlpha()``` to disable alpha colors for custom colors.
+Use ```defaultView()``` to select the default color view (Colors from templates or custom).<br/>
+Use ```disableSwitchColorView()``` to disable switching between color views. Default view will only be shown.<br/>
+Use ```defaultColor()``` to set default selected color.<br/>
+Use ```colors()``` to pass all colors to be displayed in the color templates view.<br/>
+Use ```disableAlpha()``` to disable alpha colors for custom colors.<br/>
 
 ## Custom
 
