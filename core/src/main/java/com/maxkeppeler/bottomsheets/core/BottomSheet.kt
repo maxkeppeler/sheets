@@ -65,8 +65,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     private var theme = Theme.DAY
 
     lateinit var bindingBase: BottomSheetsBaseBinding
-//    private lateinit var bindingToolbar: BottomSheetsViewTopBinding
-//    private lateinit var bindingButtons: BottomSheetsViewButtonsBinding
 
     private var hideToolbar: Boolean = false
     private var hideCloseButton: Boolean = false
