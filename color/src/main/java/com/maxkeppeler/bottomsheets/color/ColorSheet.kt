@@ -60,8 +60,10 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
     private var colorMapListRes: MutableList<Int> = getDefaultColorPalette().toMutableList()
 
     private var colorView = ColorView.TEMPLATE
-
     private var switchColorView = true
+
+    private val touchCustomColorView
+        get() = switchColorView || colorView == ColorView.CUSTOM
 
     private var defaultColor: Int = Color.BLACK
     private var selectedColor: Int = Color.BLACK
@@ -315,22 +317,25 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
             if (calculate) {
                 selectedColor = Color.argb(a, r, g, b)
             } else {
-                argbSeekBars[0].progress = a
-                argbSeekBars[1].progress = r
-                argbSeekBars[2].progress = g
-                argbSeekBars[3].progress = b
+                if (touchCustomColorView) {
+                    argbSeekBars[0].progress = a
+                    argbSeekBars[1].progress = r
+                    argbSeekBars[2].progress = g
+                    argbSeekBars[3].progress = b
+                }
             }
-            // TODO:
 
-            val background = customColorView.background as RippleDrawable
-            (background.getDrawable(1) as GradientDrawable).setColor(selectedColor)
+            if (touchCustomColorView) {
+                val background = customColorView.background as RippleDrawable
+                (background.getDrawable(1) as GradientDrawable).setColor(selectedColor)
 
-            alphaValue.text = a.toString().padStart(3)
-            redValue.text = r.toString().padStart(3)
-            greenValue.text = g.toString().padStart(3)
-            blueValue.text = b.toString().padStart(3)
+                alphaValue.text = a.toString().padStart(3)
+                redValue.text = r.toString().padStart(3)
+                greenValue.text = g.toString().padStart(3)
+                blueValue.text = b.toString().padStart(3)
 
-            hexValue.text = getHex(selectedColor)
+                hexValue.text = getHex(selectedColor)
+            }
         }
 
         validate()
