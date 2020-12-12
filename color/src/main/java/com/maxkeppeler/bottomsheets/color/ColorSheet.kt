@@ -98,6 +98,10 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
     fun colors(@ColorRes vararg color: Int) {
         this.colorMapListRes.addAll(color.toMutableList())
     }
+
+    /** Set colors. */
+    fun colors(@ColorRes colors: MutableList<Int>) {
+        this.colorMapListRes.addAll(colors)
     }
 
     /** Disable alpha. */
