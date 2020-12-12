@@ -69,7 +69,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     private var hideToolbar: Boolean = false
     private var hideCloseButton: Boolean = false
     private var titleText: String? = null
-    private var btnCloseIcon: Drawable? = null
+    private var btnCloseDrawable: Drawable? = null
 
     protected var positiveText: String? = null
     private var negativeText: String? = null
@@ -146,12 +146,12 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Set the Close Button Drawable. */
-    fun cloeButtonDrawable(closeDrawable: Drawable) {
+    fun closeButtonDrawable(closeDrawable: Drawable) {
         this.btnCloseIcon = closeDrawable
     }
 
     /** Set the Close Button Drawable. */
-    fun cloeButtonDrawable(@DrawableRes drawableRes: Int) {
+    fun closeButtonDrawable(@DrawableRes drawableRes: Int) {
         this.btnCloseIcon = ContextCompat.getDrawable(windowContext, drawableRes)
     }
 
