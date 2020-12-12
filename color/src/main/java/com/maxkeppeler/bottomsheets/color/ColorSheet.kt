@@ -59,7 +59,9 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
 
     private var colorAdapter: ColorAdapter? = null
 
-    private var colorMapListRes: MutableList<Int> = COLORS_PALETTE.toMutableList()
+    @ColorRes
+    private var colorMapListRes: MutableList<Int> = getDefaultColorPalette().toMutableList()
+
     private var colorView = ColorView.TEMPLATE
 
     private var switchColorView = true
@@ -88,20 +90,19 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
     }
 
     /** Set default color. */
-    fun defaultColor(color: Int) {
+    fun defaultColor(@ColorRes color: Int) {
         this.defaultColor = color
     }
 
     /** Set colors. */
-    fun colors(@ColorRes vararg color: Int): ColorSheet {
+    fun colors(@ColorRes vararg color: Int) {
         this.colorMapListRes.addAll(color.toMutableList())
-        return this
+    }
     }
 
     /** Disable alpha. */
-    fun disableAlpha(): ColorSheet {
+    fun disableAlpha() {
         this.disableAlpha = true
-        return this
     }
 
     /**
