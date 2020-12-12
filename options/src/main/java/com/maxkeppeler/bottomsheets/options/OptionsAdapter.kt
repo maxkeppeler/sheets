@@ -18,9 +18,10 @@ package com.maxkeppeler.bottomsheets.options
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.RippleDrawable
-import android.graphics.drawable.StateListDrawable
+import android.graphics.drawable.*
+import android.util.StateSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,11 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.ripple.RippleDrawableCompat
+import com.google.android.material.ripple.RippleUtils
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsGridItemBinding
@@ -171,13 +177,16 @@ internal class OptionsAdapter(
     }
 
     private fun View.applyColorToDrawable() {
-
-        val ripple = (background as RippleDrawable).apply {
+        // Ripple drawable
+        (background as RippleDrawable).apply {
             setColor(ColorStateList.valueOf(highlightColor))
-        }
-
-        (ripple.getDrawable(1) as StateListDrawable).apply {
-            getStateDrawable(1)?.setColorFilter(highlightColor, PorterDuff.Mode.SRC_OVER)
+            // Selector drawable
+            (getDrawable(1) as StateListDrawable).apply {
+                // Selected state drawable
+                (getStateDrawable(1) as GradientDrawable).apply {
+                    color = ColorStateList.valueOf(highlightColor)
+                }
+            }
         }
     }
 

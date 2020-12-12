@@ -18,6 +18,8 @@ package com.maxkeppeler.bottomsheets.time_clock
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.RippleDrawable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
@@ -78,8 +80,13 @@ internal class ClockTimeSelector(
                     input.nine
                 )
             )
-            keys.forEachIndexed { i, v -> v.tag = i; v.setOnClickListener(this@ClockTimeSelector) }
+            keys.forEachIndexed { i, v ->
+                v.changeHighlightColor()
+                v.tag = i;
+                v.setOnClickListener(this@ClockTimeSelector)
+            }
 
+            input.btnRightContainer.changeHighlightColor()
             input.btnRightContainer.setOnClickListener { increaseIndex() }
             input.btnRightIcon.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -113,6 +120,12 @@ internal class ClockTimeSelector(
 
             setAmActive()
             proceedIndex()
+        }
+    }
+
+    private fun View.changeHighlightColor() {
+        (background as RippleDrawable).apply {
+            setColor(ColorStateList.valueOf(highlightColor))
         }
     }
 

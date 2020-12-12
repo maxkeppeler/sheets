@@ -17,6 +17,8 @@
 package com.maxkeppeler.bottomsheets.time_clock
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.RippleDrawable
 import android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.Spannable.SPAN_INCLUSIVE_INCLUSIVE
 import android.text.SpannableString
@@ -59,6 +61,7 @@ internal class TimeSelector(
 
         with(binding) {
 
+            input.btnRightContainer.changeHighlightColor()
             input.btnRightContainer.setOnClickListener { onBackspace() }
             input.btnRightIcon.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -90,10 +93,20 @@ internal class TimeSelector(
                 )
             )
 
-            keys.forEachIndexed { i, v -> v.tag = i; v.setOnClickListener(this@TimeSelector) }
+            keys.forEachIndexed { i, v ->
+                v.changeHighlightColor()
+                v.tag = i;
+                v.setOnClickListener(this@TimeSelector)
+            }
         }
 
         validationListener?.invoke(false)
+    }
+
+    private fun View.changeHighlightColor() {
+        (background as RippleDrawable).apply {
+            setColor(ColorStateList.valueOf(highlightColor))
+        }
     }
 
     /** Inserts digit through numerical input. */
