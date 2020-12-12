@@ -19,10 +19,11 @@ package com.maxkeppeler.bottomsheets.core.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import com.maxkeppeler.bottomsheets.R
+
 
 /** Get a color. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
@@ -46,7 +47,7 @@ fun colorOfAttrs(ctx: Context, @AttrRes vararg attrs: Int): Int {
     val a = ctx.theme.obtainStyledAttributes(attrs.toList().toIntArray())
     attrs.forEachIndexed { index, _ ->
         val color = a.getColor(index, 0)
-        if(color != 0) return color
+        if (color != 0) return color
     }
     return 0
 }
@@ -75,9 +76,105 @@ fun Int.isColorDark(threshold: Double = 0.5): Boolean {
     return darkness >= threshold
 }
 
-/** Get a color by a theme attribute. */
+@ColorInt
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun drawableOfAttr(ctx: Context, @AttrRes attr: Int): Drawable? {
-    val a = ctx.theme.obtainStyledAttributes(intArrayOf(attr))
-    return a.getDrawable(0)
+fun Int.withAlpha(@FloatRange(from = 0.0, to = 1.0) alphaFactor: Float): Int {
+    return Color.argb(
+        alphaFactor.times(255).toInt(),
+        Color.red(this),
+        Color.green(this),
+        Color.blue(this)
+    )
+}
+
+/** Returns the same int value if  */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun Int.takeUnlessNotResolved(): Int? {
+    return if (this != 0) this else null
+}
+
+/** Returns the same int value if  */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun Float.takeUnlessNotResolved(): Float? {
+    return if (this != 0f) this else null
+}
+
+/** Get color for icons. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun getIconColor(ctx: Context): Int = colorOfAttrs(
+    ctx,
+    // 1. Try to resolve custom attr color.
+    R.attr.bottomSheetIconsColor,
+    // 2. Get default theme attr used for icons.
+    R.attr.colorOnSurface
+)
+
+/** Get primary color. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun getPrimaryColor(ctx: Context): Int = colorOfAttrs(
+    ctx,
+    // 1. Try to resolve custom primary attr color.
+    R.attr.bottomSheetPrimaryColor,
+    // 2. Resolve default attr for primary color.
+    R.attr.colorPrimary
+)
+
+/** Get highlight color. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun getHighlightColor(ctx: Context): Int {
+    return colorOfAttrs(
+        ctx,
+        // 1. Try to resolve custom highlight color attr.
+        R.attr.bottomSheetHighlightColor
+    ).takeUnlessNotResolved() ?:
+    /* Create custom highlight color based on primary color. */
+    getPrimaryColor(ctx).withAlpha(0.06f)
+}
+
+/** Get text color. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun getTextColor(ctx: Context): Int = colorOfAttrs(
+    ctx,
+    // 1. Try to resolve primary text color attr.
+    R.attr.bottomSheetContentColor,
+    // 2. Resolve default primary text color attr.
+    android.R.attr.textColorPrimary
+)
+
+/** Get text inverse color. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun getTextInverseColor(ctx: Context): Int = colorOfAttrs(
+    ctx,
+    // 1. Try to resolve primary text inverse color attr.
+    R.attr.bottomSheetContentInverseColor,
+    // 2. Resolve default primary text inverse color attr.
+    android.R.attr.textColorPrimaryInverse
+)
+
+/** Get background color. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun getBottomSheetBackgroundColor(ctx: Context, @StyleRes styleRes: Int): Int {
+    val attr = R.attr.bottomSheetBackgroundColor
+    return colorOfAttrs(ctx, attr).takeUnlessNotResolved()
+        ?: colorOfAttrOfTheme(ctx, attr, styleRes)
+}
+
+/** Get corner radius. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun getCornerRadius(ctx: Context): Float? {
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetCornerRadius))
+    return a.getDimension(0, 0f).takeUnlessNotResolved()
+}
+
+/** Get corner family. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun getCornerFamily(ctx: Context): Int? {
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetCornerFamily))
+    return a.getInt(0, 0).takeUnlessNotResolved()
 }
