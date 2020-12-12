@@ -34,14 +34,14 @@
 Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample_bottom_sheets.apk) to see the bottom sheets in real.
 
 ## Table of Contents
--  [Get started](#get-started)
+- [Get started](#get-started)
   - [Appearance](#appearance)
   - [Info Bottom Sheet](#info)
   - [Options Bottom Sheet](#options)
   - [Clock Time Bottom Sheet](#clock-time)
   - [Time Bottom Sheet](#time)
   - [Input Bottom Sheet](#input)
-  - [Calendar Sheet](#calendar-sheet)
+  - [Calendar Bottom Sheet](#calendar-sheet)
   - [Color Bottom Sheet](#color)
   - [Custom Bottom Sheet](#custom)
 - [Other](#other)
