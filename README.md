@@ -400,6 +400,19 @@ override fun onCreateLayoutView(): View {
 
 All of the base functionality can be used and on top of that you can extend the logic and behavior as you wish.
 
+### Components
+You are free to use the components this library uses for it's bottom sheet types.
+- ```BottomSheetTitle```
+- ```BottomSheetContent```
+- ```BottomSheetDigit```
+- ```BottomSheetNumericalInput```
+- ```BottomSheetDivider```
+- ```BottomSheetButton```
+- ```BottomSheetEdit```
+- ```BottomSheetRecyclerView```
+- ```BottomSheetValue```
+
+More will be added over time.
 
 ## Appearance
 By default, the library switches to either day or night mode depending on the attr ```textColorPrimary```.
