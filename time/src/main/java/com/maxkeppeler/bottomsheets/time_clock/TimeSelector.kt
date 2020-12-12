@@ -29,7 +29,6 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.utils.getHighlightColor
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.core.utils.getTextColor
@@ -48,77 +47,36 @@ internal class TimeSelector(
     private val minTime: Long = Long.MIN_VALUE,
     private val maxTime: Long = Long.MAX_VALUE,
     private val validationListener: TimeValidationListener? = null
-) : View.OnClickListener {
+) {
 
     private val textColor = getTextColor(ctx)
     private val primaryColor = getPrimaryColor(ctx)
-    private val highlightColor = getHighlightColor(ctx)
 
     private val time = StringBuffer()
-    private val keys = mutableListOf<TextView>()
 
     init {
 
         with(binding) {
 
-            input.btnRightContainer.changeHighlightColor()
-            input.btnRightContainer.setOnClickListener { onBackspace() }
-            input.btnRightIcon.setImageDrawable(
-                ContextCompat.getDrawable(
-                    ctx,
-                    R.drawable.bs_ic_backspace
-                )
-            )
-            input.btnRightIcon.setColorFilter(primaryColor)
+            numericalInput.rightImageListener { onBackspace() }
+            numericalInput.setRightImageDrawable(R.drawable.bs_ic_backspace)
 
-            input.btnLeftContainer.changeHighlightColor()
-            input.btnLeftContainer.setOnClickListener { onClear() }
-            input.btnLeftIcon.setImageDrawable(ContextCompat.getDrawable(ctx, R.drawable.bs_ic_clear))
-            input.btnLeftIcon.setColorFilter(primaryColor)
+            numericalInput.leftImageListener { onClear() }
+            numericalInput.setLeftImageDrawable(R.drawable.bs_ic_clear)
+
+            numericalInput.digitListener { onDigit(it) }
 
             timeValue.text = getFormattedTime()
-
-            keys.addAll(
-                mutableListOf(
-                    input.zero,
-                    input.one,
-                    input.two,
-                    input.three,
-                    input.four,
-                    input.five,
-                    input.six,
-                    input.seven,
-                    input.eight,
-                    input.nine
-                )
-            )
-
-            keys.forEachIndexed { i, v ->
-                v.changeHighlightColor()
-                v.tag = i;
-                v.setOnClickListener(this@TimeSelector)
-            }
         }
 
         validationListener?.invoke(false)
     }
 
-    private fun View.changeHighlightColor() {
-        (background as RippleDrawable).apply {
-            setColor(ColorStateList.valueOf(highlightColor))
-        }
-    }
-
-    /** Inserts digit through numerical input. */
-    override fun onClick(v: View?) {
-
-        if (v?.tag == null || v.tag !is Int || !v.isClickable)
-            return
-
-        val i = v.tag as Int
+    /** Process clicked digit. */
+    private fun onDigit(value: Int) {
 
         if (time.length >= format.length) time.deleteCharAt(0)
-        time.append(i)
+        time.append(value)
         binding.timeValue.text = getFormattedTime()
         validate()
     }
@@ -212,7 +170,12 @@ internal class TimeSelector(
         val text = SpannableStringBuilder(SpannableString(time))
         repeat(format.length.minus(time.length)) { text.insert(0, "0") }
 
-        text.setSpan(ForegroundColorSpan(textColor), 0, text.lastIndex.plus(1), SPAN_INCLUSIVE_INCLUSIVE)
+        text.setSpan(
+            ForegroundColorSpan(textColor),
+            0,
+            text.lastIndex.plus(1),
+            SPAN_INCLUSIVE_INCLUSIVE
+        )
         val textSizeSmall = ctx.resources.getDimensionPixelSize(R.dimen.textSizeSubheading)
 
         when (format) {

@@ -26,18 +26,16 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.View
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 internal class ClockTimeSelector(
-    private val ctx: Context,
+    ctx: Context,
     private val bindingSelector: BottomSheetsTimeClockBinding,
     private val is24HoursView: Boolean = true
-) : View.OnClickListener {
+) {
 
     private val colorTextInactive = getTextColor(ctx)
     private val primaryColor = getPrimaryColor(ctx)
@@ -54,8 +52,6 @@ internal class ClockTimeSelector(
 
     private var isAm = true
 
-    private val keys = mutableListOf<TextView>()
-
     init {
 
         with(bindingSelector) {
@@ -66,45 +62,13 @@ internal class ClockTimeSelector(
             minutesInput.setTextColor(colorTextInactive)
             minutesInput.text = getMinutesTime()
 
-            keys.addAll(
-                mutableListOf(
-                    input.zero,
-                    input.one,
-                    input.two,
-                    input.three,
-                    input.four,
-                    input.five,
-                    input.six,
-                    input.seven,
-                    input.eight,
-                    input.nine
-                )
-            )
-            keys.forEachIndexed { i, v ->
-                v.changeHighlightColor()
-                v.tag = i;
-                v.setOnClickListener(this@ClockTimeSelector)
-            }
+            numericalInput.rightImageListener { increaseIndex() }
+            numericalInput.setRightImageDrawable(R.drawable.bs_ic_arrow_right)
 
-            input.btnRightContainer.changeHighlightColor()
-            input.btnRightContainer.setOnClickListener { increaseIndex() }
-            input.btnRightIcon.setImageDrawable(
-                ContextCompat.getDrawable(
-                    ctx,
-                    R.drawable.bs_ic_arrow_right
-                )
-            )
-            input.btnRightIcon.setColorFilter(primaryColor)
+            numericalInput.leftImageListener { reduceIndex() }
+            numericalInput.setLeftImageDrawable(R.drawable.bs_ic_arrow_left)
 
-            input.btnLeftContainer.changeHighlightColor()
-            input.btnLeftContainer.setOnClickListener { reduceIndex() }
-            input.btnLeftIcon.setImageDrawable(
-                ContextCompat.getDrawable(
-                    ctx,
-                    R.drawable.bs_ic_arrow_left
-                )
-            )
-            input.btnLeftIcon.setColorFilter(primaryColor)
+            numericalInput.digitListener { onDigit(it) }
 
             hoursInput.setOnClickListener { focusOnHours() }
             minutesInput.setOnClickListener { focusOnMinutes() }
@@ -129,31 +93,26 @@ internal class ClockTimeSelector(
         }
     }
 
-    /** Inserts digit through numerical input. */
-    override fun onClick(v: View?) {
-
-        if (v?.tag == null || v.tag !is Int || !v.isClickable)
-            return
-
-        val i = v.tag as Int
+    /** Process clicked digit. */
+    private fun onDigit(value: Int) {
 
         if (isPositionOnHours) {
             if (is24HoursView) {
-                if (currentIndex == 0 && i >= 3 && i <= 9) {
+                if (currentIndex == 0 && value >= 3 && value <= 9) {
                     hoursBuffer[currentIndex] = '0'
                     increaseIndex()
-                    hoursBuffer[currentIndex] = i.toString()[0]
-                } else hoursBuffer[currentIndex] = i.toString()[0]
+                    hoursBuffer[currentIndex] = value.toString()[0]
+                } else hoursBuffer[currentIndex] = value.toString()[0]
             } else {
-                if (currentIndex == 0 && i >= 2 && i <= 9) {
+                if (currentIndex == 0 && value >= 2 && value <= 9) {
                     hoursBuffer[currentIndex] = '0'
                     increaseIndex()
-                    hoursBuffer[currentIndex] = i.toString()[0]
-                } else hoursBuffer[currentIndex] = i.toString()[0]
+                    hoursBuffer[currentIndex] = value.toString()[0]
+                } else hoursBuffer[currentIndex] = value.toString()[0]
             }
             bindingSelector.hoursInput.text = getHoursTime()
         } else {
-            minsBuffer[currentIndex] = i.toString()[0]
+            minsBuffer[currentIndex] = value.toString()[0]
             bindingSelector.minutesInput.text = getMinutesTime()
         }
         increaseIndex()
@@ -211,29 +170,31 @@ internal class ClockTimeSelector(
     /** Limit the key of the numerical input depending on index. */
     private fun limitKeyboardOnIndexInput() {
 
-        when {
-            isPositionOnHours && currentIndex == 0 -> enableKeys()
-            isPositionOnHours && currentIndex == 1 -> {
-                enableKeys()
-                if (is24HoursView) {
-                    if (hoursBuffer[0] == '2')
-                        disableKeys(4, 5, 6, 7, 8, 9)
-                } else {
-                    if (hoursBuffer[0] == '1' || hoursBuffer[0] == '2')
-                        disableKeys(3, 4, 5, 6, 7, 8, 9)
-                    else if (hoursBuffer[0] == '0') disableKeys(0)
+        with(bindingSelector.numericalInput) {
+            when {
+                isPositionOnHours && currentIndex == 0 -> enableDigits()
+                isPositionOnHours && currentIndex == 1 -> {
+                    enableDigits()
+                    if (is24HoursView) {
+                        if (hoursBuffer[0] == '2')
+                            disableDigits(4 until 9)
+                    } else {
+                        if (hoursBuffer[0] == '1' || hoursBuffer[0] == '2')
+                            disableDigits(3 until 9)
+                        else if (hoursBuffer[0] == '0') disableDigits()
+                    }
                 }
-            }
 
-            !isPositionOnHours && currentIndex == 0 -> {
-                if (hoursBuffer[0] == '2' && hoursBuffer[1] == '4') {
-                    disableKeys()
-                } else {
-                    enableKeys()
-                    disableKeys(6, 7, 8, 9)
+                !isPositionOnHours && currentIndex == 0 -> {
+                    if (hoursBuffer[0] == '2' && hoursBuffer[1] == '4') {
+                        disableDigits()
+                    } else {
+                        enableDigits()
+                        disableDigits(5 until 9)
+                    }
                 }
+                !isPositionOnHours && currentIndex == 1 -> enableDigits()
             }
-            !isPositionOnHours && currentIndex == 1 -> enableKeys()
         }
     }
 
@@ -344,29 +305,5 @@ internal class ClockTimeSelector(
     /** Set if pm is active. */
     private fun setPmActive() {
         setAmActive(false)
-    }
-
-    /** Enable all passed indices of keys, or if none passed, all keys. */
-    private fun enableKeys(vararg i: Int = intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) {
-        i.toMutableList().forEach { keys[it].enableKey() }
-    }
-
-    /** Enable a key on the numerical input. */
-    private fun TextView.enableKey() {
-        isClickable = true
-        isFocusable = true
-        alpha = 1f
-    }
-
-    /** Disable all passed indices of keys, or if none passed, all keys. */
-    private fun disableKeys(vararg i: Int = intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) {
-        i.toMutableList().forEach { keys[it].disableKey() }
-    }
-
-    /** Disable a key on the numerical input. */
-    private fun TextView.disableKey() {
-        isClickable = false
-        isFocusable = false
-        alpha = 0.3f
     }
 }
