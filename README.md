@@ -35,7 +35,6 @@ Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/samp
 
 ## Table of Contents
 - [Get started](#get-started)
-  - [Appearance](#appearance)
   - [Info Bottom Sheet](#info)
   - [Options Bottom Sheet](#options)
   - [Clock Time Bottom Sheet](#clock-time)
@@ -44,6 +43,7 @@ Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/samp
   - [Calendar Bottom Sheet](#calendar-sheet)
   - [Color Bottom Sheet](#color)
   - [Custom Bottom Sheet](#custom)
+  - [Appearance](#appearance)  
 - [Other](#other)
   - [Showcase](#showcase)
   - [Support this project](#support-this-project)
@@ -97,59 +97,6 @@ InfoSheet().show(context) {
   // build bottom sheet
 } // Show bottom sheet
 ```
-
-## Appearance
-By default, the library switches to either day or night mode depending on the attr textColorPrimary.
-By default it uses the activity's colorPrimary and colorControlHighlight for the primary color and the highlights of the bottom sheets.
-
-<img src="art/img_bottom_sheet_appearance_example_options_grid_compact.png" width="35%" alt="Bottom-Sheets Appearance Example">
-
-Recommended styles to overwrite:
-```
-<item name="bottomSheetPrimaryColor">@color/customPrimaryColor</item>
-<item name="bottomSheetHighlightColor">@color/customHighlightColor</item>
-```
-
-Further things you can change or override:
-```
-<item name="bottomSheetBackgroundColor">@color/customBackgroundColor</item>
-<item name="bottomSheetIconsColor">@color/customIconsColor</item>
-
-Specific for OptionsSheet
-<item name="bottomSheetOptionActiveImageColor">@color/customActiveOptionImageColor</item>
-<item name="bottomSheetOptionActiveTextColor">@color/customActiveOptionTextColor</item>
-
-Specific for title text
-<item name="bottomSheetTitleColor">@color/customTitleTextColor</item>
-<item name="bottomSheetTitleFont">@font/font</item>
-<item name="bottomSheetTitleLineHeight">@dimen/dimen</item>
-<item name="bottomSheetTitleLetterSpacing">value</item>
-
-Specific for content text
-<item name="bottomSheetContentColor">@color/customContentTextColor</item>
-<item name="bottomSheetContentFont">@font/font</item>
-<item name="bottomSheetContentLineHeight">@dimen/dimen</item>
-<item name="bottomSheetContentLetterSpacing">value</item>
-
-Specific for value Text (TimeSheet, ClockTimeSheet, CalendarSheet)
-<item name="bottomSheetValueTextActiveColor">@color/customValueTextColor</item>
-<item name="bottomSheetValueFont">@font/font</item>
-<item name="bottomSheetValueLineHeight">@dimen/dimen</item>
-<item name="bottomSheetValueLetterSpacing">value</item>
-
-Specific for digit text
-<item name="bottomSheetDigitColor">@color/customDigitTextColor</item>
-<item name="bottomSheetDigitFont">@font/font</item>
-<item name="bottomSheetDigitLineHeight">@dimen/dimen</item>
-<item name="bottomSheetDigitLetterSpacing">value</item>
-
-Specific for button text
-<item name="bottomSheetButtonTextColor">@color/customButtonTextColor</item>
-<item name="bottomSheetButtonTextFont">@font/font</item>
-<item name="bottomSheetButtonTextLetterSpacing">value</item>
-
-```
-
 
 ## Info
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainfo/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainfo/_latestVersion)
@@ -452,6 +399,58 @@ override fun onCreateLayoutView(): View {
 ```
 
 All of the base functionality can be used and on top of that you can extend the logic and behavior as you wish.
+
+
+## Appearance
+By default, the library switches to either day or night mode depending on the attr ```textColorPrimary```.
+By default it uses the activity's colorPrimary. The default ```highlightColor``` is generated based on color ```colorPrimary``` and ```bottomSheetPrimaryColor```.
+
+<img src="art/img_bottom_sheet_appearance_example_options_grid_compact.png" width="35%" alt="Bottom-Sheets Appearance Example">
+
+You can override:
+```
+<item name="bottomSheetPrimaryColor">@color/customPrimaryColor</item>
+<item name="bottomSheetHighlightColor">@color/customHighlightColor</item>
+<item name="bottomSheetBackgroundColor">@color/customBackgroundColor</item>
+<item name="bottomSheetDividerColor">@color/customDividerColor</item>
+<item name="bottomSheetIconsColor">@color/customIconsColor</item>
+<item name="bottomSheetCornerRadius">@dimen/customCornerRadius</item>
+<item name="bottomSheetCornerFamily">rounded</item>
+
+Specific for OptionsSheet
+<item name="bottomSheetOptionActiveImageColor">@color/customActiveOptionImageColor</item>
+<item name="bottomSheetOptionActiveTextColor">@color/customActiveOptionTextColor</item>
+
+Specific for title text
+<item name="bottomSheetTitleColor">@color/customTitleTextColor</item>
+<item name="bottomSheetTitleFont">@font/font</item>
+<item name="bottomSheetTitleLineHeight">@dimen/dimen</item>
+<item name="bottomSheetTitleLetterSpacing">value</item>
+
+Specific for content text
+<item name="bottomSheetContentColor">@color/customContentTextColor</item>
+<item name="bottomSheetContentInverseColor">@color/customContentTextInverseColor</item>
+<item name="bottomSheetContentFont">@font/font</item>
+<item name="bottomSheetContentLineHeight">@dimen/dimen</item>
+<item name="bottomSheetContentLetterSpacing">value</item>
+
+Specific for value Text (TimeSheet, ClockTimeSheet, CalendarSheet)
+<item name="bottomSheetValueTextActiveColor">@color/customValueTextColor</item>
+<item name="bottomSheetValueFont">@font/font</item>
+<item name="bottomSheetValueLineHeight">@dimen/dimen</item>
+<item name="bottomSheetValueLetterSpacing">value</item>
+
+Specific for digit text
+<item name="bottomSheetDigitColor">@color/customDigitTextColor</item>
+<item name="bottomSheetDigitFont">@font/font</item>
+<item name="bottomSheetDigitLineHeight">@dimen/dimen</item>
+<item name="bottomSheetDigitLetterSpacing">value</item>
+
+Specific for button text
+<item name="bottomSheetButtonTextColor">@color/customButtonTextColor</item>
+<item name="bottomSheetButtonTextFont">@font/font</item>
+<item name="bottomSheetButtonTextLetterSpacing">value</item>
+```
 
 # Misc
 
