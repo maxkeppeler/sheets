@@ -145,12 +145,12 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     /** Set the Close Button Drawable. */
     fun closeButtonDrawable(closeDrawable: Drawable) {
-        this.btnCloseIcon = closeDrawable
+        this.btnCloseDrawable = closeDrawable
     }
 
     /** Set the Close Button Drawable. */
     fun closeButtonDrawable(@DrawableRes drawableRes: Int) {
-        this.btnCloseIcon = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.btnCloseDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
     }
 
     /** Hide the close icon button */
@@ -336,7 +336,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             R.attr.colorOnSurface
         )
 
-        btnCloseIcon?.let { bindingBase.top.btnClose.setImageDrawable(it) }
+        btnCloseDrawable?.let { bindingBase.top.btnClose.setImageDrawable(it) }
         bindingBase.top.btnClose.setColorFilter(colorCloseIcon)
         bindingBase.top.btnExtra.setColorFilter(colorCloseIcon)
 
