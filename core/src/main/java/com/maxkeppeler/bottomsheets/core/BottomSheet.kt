@@ -78,8 +78,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     protected var positiveListener: PositiveListener? = null
     private var negativeListener: NegativeListener? = null
 
-    private var bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback? = null
-
     private var state = BottomSheetBehavior.STATE_EXPANDED
     private var peekHeight = 0
     private var cornerRadiusDp: Float = DEFAULT_CORNER_RADIUS
@@ -223,12 +221,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     /** Sets a listener that is invoked when the bottom sheet is dismissed. */
     fun onDismiss(dismissListener: DismissListener? = null) {
         this.dismissListener = dismissListener
-    }
-
-
-    /** Add another [BottomSheetBehavior.BottomSheetCallback] listener. */
-    fun addBottomSheetCallback(bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback) {
-        this.bottomSheetCallback = bottomSheetCallback
     }
 
     /** Override theme to allow auto switch between day & night design. */
