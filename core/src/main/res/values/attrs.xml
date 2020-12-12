@@ -31,6 +31,14 @@
     <!-- Override color of action icons.  -->
     <attr name="bottomSheetIconsColor" format="color" />
 
+    <!-- Override default corner radius.  -->
+    <attr name="bottomSheetCornerRadius" format="dimension"/>
+
+    <!-- Override default corner family.  -->
+    <attr name="bottomSheetCornerFamily" format="enum">
+        <enum name="rounded" value="0" />
+        <enum name="cut" value="1" />
+    </attr>
 
     <!-- Style for an option in OptionsSheet.  -->
     <declare-styleable name="BottomSheetOption">
