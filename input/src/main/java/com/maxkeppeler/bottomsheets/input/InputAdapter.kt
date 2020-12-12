@@ -29,8 +29,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
-import com.maxkeppeler.bottomsheets.core.utils.toDp
+import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputCheckBoxItemBinding
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputEditTextItemBinding
@@ -53,15 +52,9 @@ class InputAdapter(
         private const val VIEW_TYPE_SPINNER = 3
     }
 
-    private val iconColor = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetPrimaryColor, android.R.attr.colorPrimary
-    )
-
-    private val textColor = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetContentColor, android.R.attr.textColorPrimary
-    )
+    private val primaryColor = getPrimaryColor(ctx)
+    private val iconsColor = getIconColor(ctx)
+    private val textColor = getTextColor(ctx)
 
     override fun getItemViewType(i: Int): Int = when (input[i]) {
         is InputEditText -> VIEW_TYPE_EDIT_TEXT
@@ -148,7 +141,7 @@ class InputAdapter(
         text.inputType = input.inputType
         input.inputFilter?.let { text.filters = arrayOf(it) }
 
-        icon.setColorFilter(iconColor)
+        icon.setColorFilter(primaryColor)
         text.setTextColor(textColor)
         text.setHintTextColor(textColor)
         text.isVerticalScrollBarEnabled = true
@@ -179,7 +172,7 @@ class InputAdapter(
         val checkBoxText = input.textRes?.let { ctx.getString(it) } ?: input.text
         checkBox.text = checkBoxText
         checkBox.setTextColor(textColor)
-        checkBox.buttonTintList = ColorStateList.valueOf(iconColor)
+        checkBox.buttonTintList = ColorStateList.valueOf(primaryColor)
         checkBox.setOnCheckedChangeListener { _, checked ->
             input.value = checked
             listener.invoke()
@@ -194,7 +187,7 @@ class InputAdapter(
             val button = AppCompatRadioButton(ctx).apply {
                 setTextAppearance(ctx, android.R.style.TextAppearance_Material_Body2)
                 setTextColor(textColor)
-                buttonTintList = ColorStateList.valueOf(iconColor)
+                buttonTintList = ColorStateList.valueOf(primaryColor)
                 layoutParams = RadioGroup.LayoutParams(
                     RadioGroup.LayoutParams.MATCH_PARENT,
                     RadioGroup.LayoutParams.WRAP_CONTENT
@@ -232,7 +225,7 @@ class InputAdapter(
             override fun getCount(): Int =
                 super.getCount().takeIf { it > 0 }?.minus(1) ?: super.getCount()
         }
-        icon.setColorFilter(iconColor)
+        icon.setColorFilter(primaryColor)
         spinner.adapter = adapter
         val selectionIndex = input.selectedIndex ?: input.spinnerOptions?.lastIndex ?: 0
         spinner.setSelection(selectionIndex)
@@ -262,14 +255,8 @@ class InputAdapter(
 
         icon?.let {
             input.drawableRes?.let { res ->
-                val colorIcon =
-                    colorOfAttrs(
-                        ctx,
-                        R.attr.bottomSheetIconsColor,
-                        R.attr.colorOnSurface
-                    )
                 icon.setImageDrawable(ContextCompat.getDrawable(ctx, res))
-                icon.setColorFilter(colorIcon)
+                icon.setColorFilter(iconsColor)
                 icon.visibility = View.VISIBLE
             } ?: kotlin.run { icon.visibility = View.GONE }
         }

@@ -28,7 +28,9 @@ import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
+import com.maxkeppeler.bottomsheets.core.utils.getHighlightColor
+import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
+import com.maxkeppeler.bottomsheets.core.utils.getTextColor
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
 import com.maxkeppeler.bottomsheets.time.R
 import com.maxkeppeler.bottomsheets.time.databinding.BottomSheetsTimeBinding
@@ -46,15 +48,9 @@ internal class TimeSelector(
     private val validationListener: TimeValidationListener? = null
 ) : View.OnClickListener {
 
-    private val inactive = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetContentColor,
-        android.R.attr.textColorPrimary
-    )
-    private val active =
-        colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, android.R.attr.colorPrimary)
-
-    private val colorIcons = colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary, R.attr.colorOnSurface)
+    private val textColor = getTextColor(ctx)
+    private val primaryColor = getPrimaryColor(ctx)
+    private val highlightColor = getHighlightColor(ctx)
 
     private val time = StringBuffer()
     private val keys = mutableListOf<TextView>()
@@ -70,11 +66,12 @@ internal class TimeSelector(
                     R.drawable.bs_ic_backspace
                 )
             )
-            input.btnRightIcon.setColorFilter(colorIcons)
+            input.btnRightIcon.setColorFilter(primaryColor)
 
+            input.btnLeftContainer.changeHighlightColor()
             input.btnLeftContainer.setOnClickListener { onClear() }
             input.btnLeftIcon.setImageDrawable(ContextCompat.getDrawable(ctx, R.drawable.bs_ic_clear))
-            input.btnLeftIcon.setColorFilter(colorIcons)
+            input.btnLeftIcon.setColorFilter(primaryColor)
 
             timeValue.text = getFormattedTime()
 
@@ -202,7 +199,7 @@ internal class TimeSelector(
         val text = SpannableStringBuilder(SpannableString(time))
         repeat(format.length.minus(time.length)) { text.insert(0, "0") }
 
-        text.setSpan(ForegroundColorSpan(inactive), 0, text.lastIndex.plus(1), SPAN_INCLUSIVE_INCLUSIVE)
+        text.setSpan(ForegroundColorSpan(textColor), 0, text.lastIndex.plus(1), SPAN_INCLUSIVE_INCLUSIVE)
         val textSizeSmall = ctx.resources.getDimensionPixelSize(R.dimen.textSizeSubheading)
 
         when (format) {
@@ -216,9 +213,9 @@ internal class TimeSelector(
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 6, 7, SPAN_EXCLUSIVE_EXCLUSIVE)
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 10, 11, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 8, 10, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 8, 10, SPAN_EXCLUSIVE_EXCLUSIVE)
             }
 
             TimeFormat.MM_SS -> {
@@ -227,8 +224,8 @@ internal class TimeSelector(
                 text.insert(3, " ")
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 6, 7, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
             }
 
             TimeFormat.HH_MM -> {
@@ -237,8 +234,8 @@ internal class TimeSelector(
                 text.insert(3, " ")
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 6, 7, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
             }
 
             TimeFormat.M_SS -> {
@@ -247,14 +244,14 @@ internal class TimeSelector(
                 text.insert(2, " ")
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 1, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 5, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
             }
 
             TimeFormat.SS -> {
                 text.insert(2, ctx.getString(R.string.second_code))
                 text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(active), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
+                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
             }
         }
 
@@ -262,7 +259,7 @@ internal class TimeSelector(
         if (index == -1) {
             index = text.lastIndex.minus(1)
         }
-        text.setSpan(ForegroundColorSpan(inactive), 0, index, SPAN_EXCLUSIVE_EXCLUSIVE)
+        text.setSpan(ForegroundColorSpan(textColor), 0, index, SPAN_EXCLUSIVE_EXCLUSIVE)
         text.setSpan(
             UnderlineSpan(),
             text.lastIndex.minus(1),

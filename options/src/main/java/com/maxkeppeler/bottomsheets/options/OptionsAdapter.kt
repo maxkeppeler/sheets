@@ -28,7 +28,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
+import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsGridItemBinding
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsListItemBinding
@@ -44,11 +44,15 @@ internal class OptionsAdapter(
 
     private val selectedOptions = mutableMapOf<Int, Pair<ImageView, BottomSheetContent>>()
 
-    private val colorHighlight = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetHighlightColor,
-        R.attr.colorControlHighlight
-    )
+    private val selectedTextColor =
+        colorOfAttr(ctx, R.attr.bottomSheetOptionActiveTextColor).takeUnlessNotResolved()
+            ?: getPrimaryColor(ctx)
+    private val selectedImageColor =
+        colorOfAttr(ctx, R.attr.bottomSheetOptionActiveImageColor).takeUnlessNotResolved()
+            ?: getPrimaryColor(ctx)
+    private val iconsColor = getIconColor(ctx)
+    private val textColor = getTextColor(ctx)
+    private val highlightColor = getHighlightColor(ctx)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (type) {
@@ -151,57 +155,29 @@ internal class OptionsAdapter(
     }
 
     private fun showSelected(label: BottomSheetContent, icon: ImageView, root: View) {
-        val colorText = colorOfAttrs(
-            ctx,
-            R.attr.bottomSheetOptionActiveTextColor,
-            R.attr.bottomSheetPrimaryColor,
-            R.attr.colorPrimary
-        )
-        label.setTextColor(colorText)
-
-        val colorIcon =
-            colorOfAttrs(
-                ctx, R.attr.bottomSheetOptionActiveImageColor,
-                R.attr.bottomSheetPrimaryColor,
-                R.attr.colorPrimary
-            )
-        icon.setColorFilter(colorIcon)
-
+        label.setTextColor(selectedTextColor)
+        icon.setColorFilter(selectedImageColor)
         if (multipleChoice) {
             root.isSelected = true
+        }
+    }
+
+    private fun showDeselected(label: BottomSheetContent, icon: ImageView, root: View) {
+        label.setTextColor(textColor)
+        icon.setColorFilter(iconsColor)
+        if (multipleChoice) {
+            root.isSelected = false
         }
     }
 
     private fun View.applyColorToDrawable() {
 
         val ripple = (background as RippleDrawable).apply {
-            setColor(ColorStateList.valueOf(colorHighlight))
+            setColor(ColorStateList.valueOf(highlightColor))
         }
 
         (ripple.getDrawable(1) as StateListDrawable).apply {
-            getStateDrawable(1)?.setColorFilter(colorHighlight, PorterDuff.Mode.SRC_OVER)
-        }
-    }
-
-    private fun showDeselected(label: BottomSheetContent, icon: ImageView, root: View) {
-        val colorText =
-            colorOfAttrs(
-                ctx,
-                R.attr.bottomSheetContentColor,
-                android.R.attr.textColorPrimary
-            )
-        label.setTextColor(colorText)
-
-        val colorIcon =
-            colorOfAttrs(
-                ctx,
-                R.attr.bottomSheetIconsColor,
-                R.attr.colorOnSurface
-            )
-        icon.setColorFilter(colorIcon)
-
-        if (multipleChoice) {
-            root.isSelected = false
+            getStateDrawable(1)?.setColorFilter(highlightColor, PorterDuff.Mode.SRC_OVER)
         }
     }
 

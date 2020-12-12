@@ -26,8 +26,7 @@ import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
-import com.maxkeppeler.bottomsheets.core.utils.isAmTime
+import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
@@ -38,12 +37,12 @@ internal class ClockTimeSelector(
     private val is24HoursView: Boolean = true
 ) : View.OnClickListener {
 
-    private val colorTextInactive =
-        colorOfAttrs(ctx, R.attr.bottomSheetContentColor, android.R.attr.textColorPrimary)
-    private val colorTextActive =
-        colorOfAttrs(ctx, R.attr.bottomSheetValueTextActiveColor, R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary)
-    private val colorIcons =
-        colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary, R.attr.colorOnSurface)
+    private val colorTextInactive = getTextColor(ctx)
+    private val primaryColor = getPrimaryColor(ctx)
+    private val textActiveColor =
+        colorOfAttrs(ctx, R.attr.bottomSheetValueTextActiveColor).takeUnlessNotResolved()
+            ?: primaryColor
+    private val highlightColor = getHighlightColor(ctx)
 
     private val hoursBuffer = StringBuilder("00")
     private val minsBuffer = StringBuilder("00")
@@ -88,8 +87,9 @@ internal class ClockTimeSelector(
                     R.drawable.bs_ic_arrow_right
                 )
             )
-            input.btnRightIcon.setColorFilter(colorIcons)
+            input.btnRightIcon.setColorFilter(primaryColor)
 
+            input.btnLeftContainer.changeHighlightColor()
             input.btnLeftContainer.setOnClickListener { reduceIndex() }
             input.btnLeftIcon.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -97,7 +97,7 @@ internal class ClockTimeSelector(
                     R.drawable.bs_ic_arrow_left
                 )
             )
-            input.btnLeftIcon.setColorFilter(colorIcons)
+            input.btnLeftIcon.setColorFilter(primaryColor)
 
             hoursInput.setOnClickListener { focusOnHours() }
             minutesInput.setOnClickListener { focusOnMinutes() }
@@ -105,7 +105,10 @@ internal class ClockTimeSelector(
             amLabel.visibility = if (is24HoursView) View.GONE else View.VISIBLE
             pmLabel.visibility = if (is24HoursView) View.GONE else View.VISIBLE
 
+            amLabel.changeHighlightColor()
             amLabel.setOnClickListener { setAmActive() }
+
+            pmLabel.changeHighlightColor()
             pmLabel.setOnClickListener { setPmActive() }
 
             setAmActive()
@@ -229,7 +232,7 @@ internal class ClockTimeSelector(
             hoursInput.text = bindingSelector.hoursInput.text.toString()
             minutesInput.text = bindingSelector.minutesInput.text.toString()
 
-            val spanColor = ForegroundColorSpan(colorTextActive)
+            val spanColor = ForegroundColorSpan(textActiveColor)
 
             if (isPositionOnHours) {
 
@@ -320,8 +323,8 @@ internal class ClockTimeSelector(
 
     /** Set if am is active. */
     private fun setAmActive(active: Boolean = true) {
-        bindingSelector.amLabel.setTextColor(if (active) colorTextActive else colorTextInactive)
-        bindingSelector.pmLabel.setTextColor(if (active) colorTextInactive else colorTextActive)
+        bindingSelector.amLabel.setTextColor(if (active) textActiveColor else colorTextInactive)
+        bindingSelector.pmLabel.setTextColor(if (active) colorTextInactive else textActiveColor)
         isAm = active
     }
 

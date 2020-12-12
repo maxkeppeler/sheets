@@ -28,7 +28,7 @@ internal enum class Theme(@StyleRes val styleRes: Int) {
 
     companion object {
         fun inferTheme(ctx: Context): Theme {
-            val isPrimaryDark = colorOfAttr(ctx, androidAttr.textColorPrimary).isColorDark()
+            val isPrimaryDark = getTextColor(ctx).isColorDark()
             return if (isPrimaryDark) DAY else NIGHT
         }
     }

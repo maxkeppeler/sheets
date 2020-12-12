@@ -3,10 +3,8 @@ package com.maxkeppeler.bottomsheets.core.views
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.EdgeEffect
-import androidx.annotation.RestrictTo
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.bottomsheets.R
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
+import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 
 /*
  * Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
@@ -30,14 +28,11 @@ class BottomSheetRecyclerView
     attrs: AttributeSet? = null
 ) : RecyclerView(ctx, attrs) {
 
-init {
+    init {
 
-    edgeEffectFactory = object : RecyclerView.EdgeEffectFactory() {
-        override fun createEdgeEffect(view: RecyclerView, direction: Int): EdgeEffect {
-            val edgeColor = colorOfAttrs(ctx, R.attr.bottomSheetHighlightColor, R.attr.colorControlHighlight)
-            return EdgeEffect(view.context).apply { color = edgeColor }
+        edgeEffectFactory = object : RecyclerView.EdgeEffectFactory() {
+            override fun createEdgeEffect(view: RecyclerView, direction: Int): EdgeEffect =
+                EdgeEffect(view.context).apply { color = getPrimaryColor(ctx) }
         }
     }
-}
-
 }

@@ -37,7 +37,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.utils.Theme
 import com.maxkeppeler.bottomsheets.databinding.BottomSheetsBaseBinding
@@ -58,6 +57,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val DEFAULT_CORNER_RADIUS = 16f
+        const val DEFAULT_CORNER_FAMILY = CornerFamily.ROUNDED
     }
 
     open lateinit var windowContext: Context
@@ -80,10 +80,10 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     private var state = BottomSheetBehavior.STATE_EXPANDED
     private var peekHeight = 0
-    private var cornerRadiusDp: Float = DEFAULT_CORNER_RADIUS
+    private var cornerRadiusDp: Float? = null
     private var borderStrokeWidthDp: Float? = null
     private var borderStrokeColor: Int? = null
-    private var cornerFamily: Int = CornerFamily.ROUNDED
+    private var cornerFamily: Int? = null
 
     /** Set if bottom sheet is cancelable outside. */
     fun cancelableOutside(cancelable: Boolean) {
@@ -243,7 +243,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     ): View? {
         if (saved != null) dismiss()
         return BottomSheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
-             .also { bindingBase = it }.apply {
+            .also { bindingBase = it }.apply {
                 layout.addView(onCreateLayoutView())
             }.root
     }
@@ -287,31 +287,23 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     /** Setup the bottom sheet background appearance. */
     private fun setupBottomSheetBackground(view: View) {
 
+        val cornerFamily = cornerFamily?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
+        val cornerRadius = cornerRadiusDp?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS
+
         val model = ShapeAppearanceModel().toBuilder().apply {
-            setTopRightCorner(cornerFamily, cornerRadiusDp.toDp())
-            setTopLeftCorner(cornerFamily, cornerRadiusDp.toDp())
-            setBottomLeftCorner(CornerFamily.ROUNDED, 0f)
-            setBottomRightCorner(CornerFamily.ROUNDED, 0f)
+            setTopRightCorner(cornerFamily, cornerRadius.toDp())
+            setTopLeftCorner(cornerFamily, cornerRadius.toDp())
         }.build()
 
         val shape = MaterialShapeDrawable(model).apply {
 
             borderStrokeWidthDp?.let { width ->
-                setStroke(
-                    width.toDp(),
-                    borderStrokeColor ?: colorOfAttr(requireContext(), R.attr.bottomSheetPrimaryColor)
-                )
+                setStroke(width.toDp(), borderStrokeColor ?: getPrimaryColor(requireContext()))
                 setPadding(width.getDp(), width.getDp(), width.getDp(), width.getDp())
             }
 
-            val color =
-                colorOfAttr(requireContext(), R.attr.bottomSheetBackgroundColor).takeIf { it != 0 }
-                    ?: when (theme) {
-                        Theme.DAY -> colorOf(requireContext(), R.color.bottomSheetDayBackground)
-                        Theme.NIGHT -> colorOf(requireContext(), R.color.bottomSheetNightBackground)
-                    }
-
-            fillColor = ColorStateList.valueOf(color)
+            val backgroundColor = getBottomSheetBackgroundColor(requireContext(), theme.styleRes)
+            fillColor = ColorStateList.valueOf(backgroundColor)
         }
 
         view.background = shape
@@ -330,11 +322,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             titleText?.let { bindingBase.top.title.text = it }
         }
 
-        val colorCloseIcon = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetIconsColor,
-            R.attr.colorOnSurface
-        )
+        val colorCloseIcon = getIconColor(requireContext())
 
         btnCloseDrawable?.let { bindingBase.top.btnClose.setImageDrawable(it) }
         bindingBase.top.btnClose.setColorFilter(colorCloseIcon)

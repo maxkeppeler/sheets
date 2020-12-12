@@ -22,6 +22,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.calendar.databinding.BottomSheetsCalendarYearItemBinding
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
+import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
+import com.maxkeppeler.bottomsheets.core.utils.getTextColor
 import java.time.Year
 import java.time.format.DateTimeFormatter
 
@@ -38,17 +40,8 @@ internal class YearAdapter(
     private var selectedYear = Year.now()
     private var currentYear = Year.now()
 
-    private val colorTextActive = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetPrimaryColor,
-        R.attr.colorPrimary
-    )
-
-    private val colorTextInactive = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetContentColor,
-        android.R.attr.textColorPrimary
-    )
+    private val primaryColor = getPrimaryColor(ctx)
+    private val textColor = getTextColor(ctx)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YearItem =
         YearItem(
@@ -73,22 +66,22 @@ internal class YearAdapter(
         currentYear == yearAtIndex && selectedYear == yearAtIndex -> {
             year.isSelected = true
             year.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Subtitle2)
-            year.setTextColor(colorTextActive)
+            year.setTextColor(primaryColor)
         }
         currentYear == yearAtIndex -> {
             year.isSelected = true
             year.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Body2)
-            year.setTextColor(colorTextActive)
+            year.setTextColor(primaryColor)
         }
         selectedYear == yearAtIndex -> {
             year.isSelected = false
             year.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Subtitle2)
-            year.setTextColor(colorTextActive)
+            year.setTextColor(primaryColor)
         }
         else -> {
             year.isSelected = false
             year.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Body2)
-            year.setTextColor(colorTextInactive)
+            year.setTextColor(textColor)
         }
     }
 

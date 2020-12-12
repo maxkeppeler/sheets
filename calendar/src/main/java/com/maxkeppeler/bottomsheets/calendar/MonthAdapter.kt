@@ -22,6 +22,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.calendar.databinding.BottomSheetsCalendarMonthItemBinding
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
+import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
+import com.maxkeppeler.bottomsheets.core.utils.getTextColor
 import java.time.Month
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -44,18 +46,9 @@ internal class MonthAdapter(
     private var currentYearMonth = YearMonth.now()
     private var currentSelectedYear = YearMonth.now()
 
-    private val colorTextActive = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetPrimaryColor,
-        R.attr.colorPrimary
-    )
-
-    private val colorTextInactive = colorOfAttrs(
-        ctx,
-        R.attr.bottomSheetContentColor,
-        android.R.attr.textColorPrimary
-    )
-
+    private val primaryColor = getPrimaryColor(ctx)
+    private val textColor = getTextColor(ctx)
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthItem =
         MonthItem(
             BottomSheetsCalendarMonthItemBinding.inflate(
@@ -80,37 +73,37 @@ internal class MonthAdapter(
         disablePast && currentSelectedYear.year == currentYearMonth.year && monthAtIndex.value < currentYearMonth.month.value -> {
             month.isSelected = false
             month.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Subtitle2)
-            month.setTextColor(colorTextInactive)
+            month.setTextColor(textColor)
             month.alpha = 0.2f
         }
         disableFuture && currentSelectedYear.year == currentYearMonth.year && monthAtIndex.value > currentYearMonth.month.value -> {
             month.isSelected = false
             month.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Subtitle2)
-            month.setTextColor(colorTextInactive)
+            month.setTextColor(textColor)
             month.alpha = 0.2f
         }
         currentYearMonth.month == monthAtIndex && selectedMonth == monthAtIndex -> {
             month.isSelected = true
             month.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Subtitle2)
-            month.setTextColor(colorTextActive)
+            month.setTextColor(primaryColor)
             month.alpha = 1f
         }
         currentYearMonth.month == monthAtIndex -> {
             month.isSelected = true
             month.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Body2)
-            month.setTextColor(colorTextActive)
+            month.setTextColor(primaryColor)
             month.alpha = 1f
         }
         selectedMonth == monthAtIndex -> {
             month.isSelected = false
             month.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Subtitle2)
-            month.setTextColor(colorTextActive)
+            month.setTextColor(primaryColor)
             month.alpha = 1f
         }
         else -> {
             month.isSelected = false
             month.setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Body2)
-            month.setTextColor(colorTextInactive)
+            month.setTextColor(textColor)
             month.alpha = 1f
         }
     }

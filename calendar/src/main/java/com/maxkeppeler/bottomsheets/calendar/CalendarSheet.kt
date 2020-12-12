@@ -25,7 +25,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EdgeEffect
 import android.widget.LinearLayout
 import androidx.annotation.IntRange
@@ -77,7 +76,7 @@ class CalendarSheet : BottomSheet() {
     private var colorTextActive: Int = 0
     private var colorText: Int = 0
     private var iconColor: Int = 0
-    private var colorTextInverted: Int = 0
+    private var colorTextInverse: Int = 0
     private var highlightColor: Int = 0
 
     private lateinit var selectionShapeStart: InsetDrawable
@@ -200,7 +199,8 @@ class CalendarSheet : BottomSheet() {
     }
 
     override fun onCreateLayoutView(): View =
-        BottomSheetsCalendarBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
+        BottomSheetsCalendarBinding.inflate(LayoutInflater.from(activity))
+            .also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -218,38 +218,11 @@ class CalendarSheet : BottomSheet() {
 
     private fun initResources() {
 
-        colorTextActive = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetPrimaryColor,
-            R.attr.colorPrimary
-        )
-
-        colorText = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetContentColor,
-            android.R.attr.textColorPrimary
-        )
-
-        iconColor = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetIconsColor, R.attr.colorOnSurface
-        )
-
-        if (colorText.isColorDark()) {
-            colorTextInverted = colorOfAttrs(
-                requireContext(),
-                R.attr.bottomSheetContentColor,
-                android.R.attr.textColorPrimaryInverse
-            )
-        } else {
-            colorTextInverted = colorText
-        }
-
-        highlightColor = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetHighlightColor,
-            android.R.attr.colorControlHighlight
-        )
+        colorTextActive = getPrimaryColor(requireContext())
+        iconColor = getIconColor(requireContext())
+        highlightColor = getHighlightColor(requireContext())
+        colorText = getTextColor(requireContext())
+        colorTextInverse = getTextInverseColor(requireContext())
 
         val shapeModelRound = ShapeAppearanceModel().toBuilder().apply {
             setAllCorners(CornerFamily.ROUNDED, 45.getDp())
@@ -301,10 +274,8 @@ class CalendarSheet : BottomSheet() {
         )
 
         binding.calendarView.edgeEffectFactory = object : RecyclerView.EdgeEffectFactory() {
-            override fun createEdgeEffect(view: RecyclerView, direction: Int): EdgeEffect {
-                val edgeColor = colorOfAttrs(requireContext(), R.attr.bottomSheetHighlightColor, R.attr.colorControlHighlight)
-                return EdgeEffect(view.context).apply { color = edgeColor }
-            }
+            override fun createEdgeEffect(view: RecyclerView, direction: Int): EdgeEffect =
+                EdgeEffect(view.context).apply { color = getPrimaryColor(requireContext()) }
         }
     }
 
@@ -498,7 +469,7 @@ class CalendarSheet : BottomSheet() {
                                 requireContext(),
                                 R.style.TextAppearance_MaterialComponents_Subtitle2
                             )
-                            container.binding.day.setTextColor(colorTextInverted)
+                            container.binding.day.setTextColor(colorTextInverse)
                         }
                     }
 
@@ -513,7 +484,7 @@ class CalendarSheet : BottomSheet() {
                                 requireContext(),
                                 R.style.TextAppearance_MaterialComponents_Subtitle2
                             )
-                            container.binding.day.setTextColor(colorTextInverted)
+                            container.binding.day.setTextColor(colorTextInverse)
                         })
                     }
 
@@ -538,7 +509,7 @@ class CalendarSheet : BottomSheet() {
                                 requireContext(),
                                 R.style.TextAppearance_MaterialComponents_Subtitle2
                             )
-                            container.binding.day.setTextColor(colorTextInverted)
+                            container.binding.day.setTextColor(colorTextInverse)
                         }
                     }
 

@@ -34,6 +34,7 @@ import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
+import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsBinding
 
 /** Listener which returns the selected index and the respective option.
@@ -248,8 +249,7 @@ class OptionsSheet : BottomSheet() {
         displayButtonsView(multipleChoices || showButtons)
         setButtonPositiveListener(::save)
 
-        colorActive =
-            colorOfAttrs(requireContext(), R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary)
+        colorActive = getPrimaryColor(requireContext())
 
         with(binding.optionsRecyclerView) {
 

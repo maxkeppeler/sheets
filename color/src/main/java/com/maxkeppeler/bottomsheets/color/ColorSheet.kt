@@ -31,10 +31,7 @@ import androidx.annotation.StringRes
 import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorBinding
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
-import com.maxkeppeler.bottomsheets.core.utils.copyIntoClipboard
-import com.maxkeppeler.bottomsheets.core.utils.pasteFromClipboard
-import com.maxkeppeler.bottomsheets.core.utils.widthByLength
+import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
 
 
@@ -148,22 +145,9 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         setButtonPositiveListener(::save)
         displayToolbarExtraButton(switchColorView)
 
-        iconColor = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetIconsColor, R.attr.colorOnSurface
-        )
-
-        primaryColor = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetPrimaryColor,
-            android.R.attr.colorPrimary
-        )
-
-        highlightColor = colorOfAttrs(
-            requireContext(),
-            R.attr.bottomSheetHighlightColor,
-            android.R.attr.colorControlHighlight
-        )
+        iconColor = getIconColor(requireContext())
+        primaryColor = getPrimaryColor(requireContext())
+        highlightColor = getHighlightColor(requireContext())
 
         when {
             switchColorView -> {
@@ -336,6 +320,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
                 argbSeekBars[2].progress = g
                 argbSeekBars[3].progress = b
             }
+            // TODO:
 
             val background = customColorView.background as RippleDrawable
             (background.getDrawable(1) as GradientDrawable).setColor(selectedColor)
