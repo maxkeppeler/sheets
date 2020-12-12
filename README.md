@@ -77,7 +77,6 @@ Use ```hideCloseButton()``` to hide the close icon button.<br/>
 Use ```title()``` to set the title text.<br/>
 Use ```onNegative()``` to set the negative button text and/ or the listener to be invoked when clicked.<br/>
 Use ```onDismiss()``` to set a listener to be invoked when the bottom sheet is dismissed.<br/>
-Use ```addBottomSheetCallback()``` to add a bottom sheet callback.<br/>
 Use ```show()``` to show the bottom sheet.<br/>
 
 Each of the bottom sheets have an extension function called ```build``` and ```show``` where the receiver is the used bottom sheet.<br/>
