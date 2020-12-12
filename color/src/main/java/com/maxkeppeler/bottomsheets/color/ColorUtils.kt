@@ -16,7 +16,12 @@
 
 package com.maxkeppeler.bottomsheets.color
 
-val COLORS_PALETTE = intArrayOf(
+import androidx.annotation.ColorRes
+import androidx.annotation.RestrictTo
+
+@ColorRes
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+internal fun getDefaultColorPalette(): IntArray = intArrayOf(
 
     R.color.md_teal_50,
     R.color.md_teal_100,
