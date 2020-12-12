@@ -23,12 +23,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorTemplatesItemBinding
 import com.maxkeppeler.bottomsheets.core.utils.colorOf
 
 class ColorAdapter(
     private val ctx: Context,
+    @ColorRes
     private val colors: MutableList<Int>,
     private val callback: ColorListener
 ) : RecyclerView.Adapter<ColorAdapter.ColorItem>() {
