@@ -19,7 +19,7 @@
     <!-- Override primary color.   -->
     <attr name="bottomSheetPrimaryColor" format="color" />
 
-    <!-- Override highlight color. Should match to the primary color.   -->
+    <!-- Override highlight color. Default: Generates color from bottomSheetPrimaryColor or colorPrimary..   -->
     <attr name="bottomSheetHighlightColor" format="color" />
 
     <!-- Override background color. -->
@@ -60,19 +60,22 @@
     </declare-styleable>
 
 
-    <!--  Style for the primary text.  -->
+    <!--  Style for the content text.  -->
     <declare-styleable name="BottomSheetContent">
 
-        <!-- Override title color. Default: textColorPrimary -->
+        <!-- Override content text color. Default: textColorPrimary -->
         <attr name="bottomSheetContentColor" format="color" />
+
+        <!-- Override content text inverse color. Default: textColorPrimaryInverse -->
+        <attr name="bottomSheetContentInverseColor" format="color" />
 
         <!-- Override primary text font. -->
         <attr name="bottomSheetContentFont" format="reference" />
 
-        <!-- Override title line height. -->
+        <!-- Override content text line height. -->
         <attr name="bottomSheetContentLineHeight" format="dimension" />
 
-        <!-- Override title letter spacing. -->
+        <!-- Override content text letter spacing. -->
         <attr name="bottomSheetContentLetterSpacing" format="float" />
 
     </declare-styleable>
