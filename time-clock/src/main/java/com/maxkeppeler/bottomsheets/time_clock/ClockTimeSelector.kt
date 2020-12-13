@@ -177,10 +177,10 @@ internal class ClockTimeSelector(
                     enableDigits()
                     if (is24HoursView) {
                         if (hoursBuffer[0] == '2')
-                            disableDigits(4 until 9)
+                            disableDigits(3 until 9)
                     } else {
                         if (hoursBuffer[0] == '1' || hoursBuffer[0] == '2')
-                            disableDigits(3 until 9)
+                            disableDigits(2 until 9)
                         else if (hoursBuffer[0] == '0') disableDigits()
                     }
                 }
