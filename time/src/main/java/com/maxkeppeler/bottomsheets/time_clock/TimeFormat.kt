@@ -30,6 +30,12 @@ enum class TimeFormat {
     /** m:ss (e.g. 6m 0m) */
     M_SS,
 
+    /** HH (e.g. 8h) */
+    HH,
+
+    /** MM (e.g. 12m) */
+    MM,
+
     /** ss (e.g. 45s) */
     SS;
 
