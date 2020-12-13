@@ -17,8 +17,6 @@
 package com.maxkeppeler.bottomsheets.time_clock
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.drawable.RippleDrawable
 import android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.Spannable.SPAN_INCLUSIVE_INCLUSIVE
 import android.text.SpannableString
@@ -29,7 +27,6 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.TextView
-import com.maxkeppeler.bottomsheets.core.utils.getHighlightColor
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.core.utils.getTextColor
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
@@ -165,85 +162,55 @@ internal class TimeSelector(
     }
 
     /** Generate spannable formatted time String. */
-    private fun getFormattedTime(): SpannableString {
+    private fun getFormattedTime(): SpannableStringBuilder {
 
-        val text = SpannableStringBuilder(SpannableString(time))
-        repeat(format.length.minus(time.length)) { text.insert(0, "0") }
+        val smallTextSize = ctx.resources.getDimensionPixelSize(R.dimen.textSizeSubheading)
 
-        text.setSpan(
-            ForegroundColorSpan(textColor),
-            0,
-            text.lastIndex.plus(1),
-            SPAN_INCLUSIVE_INCLUSIVE
-        )
-        val textSizeSmall = ctx.resources.getDimensionPixelSize(R.dimen.textSizeSubheading)
+        val formattedTime = SpannableStringBuilder(SpannableString(time))
+        repeat(format.length.minus(time.length)) { formattedTime.insert(0, "0") }
 
-        when (format) {
-
-            TimeFormat.HH_MM_SS -> {
-                text.insert(2, ctx.getString(R.string.hour_code))
-                text.insert(5, ctx.getString(R.string.minute_code))
-                text.insert(8, ctx.getString(R.string.second_code))
-                text.insert(3, " ")
-                text.insert(7, " ")
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 6, 7, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 10, 11, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 8, 10, SPAN_EXCLUSIVE_EXCLUSIVE)
+        val formatArray = format.name.split("_")
+        var insertIndex = 0
+        formatArray.forEachIndexed { i, formatTimeUnit ->
+            insertIndex += formatTimeUnit.length
+            val space = if (formatArray.lastIndex != i) " " else ""
+            val span = when {
+                formatTimeUnit.contains("H", ignoreCase = true) ->
+                    SpannableString(ctx.getString(R.string.hour_code).plus(space))
+                formatTimeUnit.contains("M", ignoreCase = true) ->
+                    SpannableString(ctx.getString(R.string.minute_code).plus(space))
+                formatTimeUnit.contains("S", ignoreCase = true) ->
+                    SpannableString(ctx.getString(R.string.second_code).plus(space))
+                else -> SpannableString("")
             }
-
-            TimeFormat.MM_SS -> {
-                text.insert(2, ctx.getString(R.string.minute_code))
-                text.insert(5, ctx.getString(R.string.second_code))
-                text.insert(3, " ")
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 6, 7, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-
-            TimeFormat.HH_MM -> {
-                text.insert(2, ctx.getString(R.string.hour_code))
-                text.insert(5, ctx.getString(R.string.minute_code))
-                text.insert(3, " ")
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 6, 7, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-
-            TimeFormat.M_SS -> {
-                text.insert(1, ctx.getString(R.string.minute_code))
-                text.insert(4, ctx.getString(R.string.second_code))
-                text.insert(2, " ")
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 1, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 5, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 4, 6, SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-
-            TimeFormat.SS -> {
-                text.insert(2, ctx.getString(R.string.second_code))
-                text.setSpan(AbsoluteSizeSpan(textSizeSmall), 2, 3, SPAN_EXCLUSIVE_EXCLUSIVE)
-                text.setSpan(ForegroundColorSpan(primaryColor), 0, 2, SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
+            span.setSpan(
+                AbsoluteSizeSpan(smallTextSize),
+                0, span.lastIndex.plus(1),
+                SPAN_INCLUSIVE_INCLUSIVE
+            )
+            formattedTime.insert(insertIndex, span)
+            formattedTime.setSpan(
+                ForegroundColorSpan(primaryColor),
+                insertIndex.minus(formatTimeUnit.length),
+                insertIndex,
+                SPAN_INCLUSIVE_INCLUSIVE
+            )
+            insertIndex += span.length
         }
 
-        var index = text.indexOfFirst { it.isDigit() && it != '0' }
-        if (index == -1) {
-            index = text.lastIndex.minus(1)
-        }
-        text.setSpan(ForegroundColorSpan(textColor), 0, index, SPAN_EXCLUSIVE_EXCLUSIVE)
-        text.setSpan(
+        var index = formattedTime.indexOfFirst { it.isDigit() && it != '0' }
+        if (index == -1) index = formattedTime.lastIndex.minus(1)
+
+        formattedTime.setSpan(ForegroundColorSpan(textColor), 0, index, SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        formattedTime.setSpan(
             UnderlineSpan(),
-            text.lastIndex.minus(1),
-            text.lastIndex,
+            formattedTime.lastIndex.minus(1),
+            formattedTime.lastIndex,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        return SpannableString(text)
+        return formattedTime
     }
 
     /** Create a formatted spannable time text hint. */
