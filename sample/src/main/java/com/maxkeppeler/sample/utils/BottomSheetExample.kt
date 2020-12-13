@@ -42,7 +42,19 @@ enum class BottomSheetExample(val type: BottomSheetType, @StringRes val textRes:
 
     CLOCK_TIME(BottomSheetType.BOTTOM_SHEET_CLOCK_TIME, R.string.clock_time),
 
-    TIME(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time),
+    TIME_HH_MM_SS(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time_hh_mm_ss),
+
+    TIME_HH_MM(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time_hh_mm),
+
+    TIME_MM_SS(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time_mm_ss),
+
+    TIME_M_SS(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time_m_ss),
+
+    TIME_SS(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time_ss),
+
+    TIME_MM(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time_mm),
+
+    TIME_HH(BottomSheetType.BOTTOM_SHEET_TIME, R.string.time_hh),
 
     CALENDAR_RANGE_MONTH(BottomSheetType.BOTTOM_SHEET_CALENDAR, R.string.calendar_range_month),
 

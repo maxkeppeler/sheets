@@ -35,7 +35,13 @@
     <string name="color_template">Color templates</string>
     <string name="color_custom">Custom color</string>
     <string name="clock_time">Clock time</string>
-    <string name="time">Time in format hh mm ss</string>
+    <string name="time_hh_mm_ss">Time in hh:mm:ss</string>
+    <string name="time_hh_mm">Time in hh:mm</string>
+    <string name="time_mm_ss">Time in mm:ss</string>
+    <string name="time_m_ss">Time in m:ss</string>
+    <string name="time_ss">Time in ss</string>
+    <string name="time_hh">Time in hh</string>
+    <string name="time_mm">Time in mm</string>
     <string name="calendar_range_month">Calendar date range picker in month view</string>
     <string name="calendar_week1">Calendar date picker in 1-week view</string>
     <string name="calendar_week2">Calendar date range picker in 2-week view</string>

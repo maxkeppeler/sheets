@@ -22,6 +22,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.shape.CornerFamily
 import com.maxkeppeler.bottomsheets.calendar.CalendarMode
 import com.maxkeppeler.bottomsheets.calendar.CalendarSheet
 import com.maxkeppeler.bottomsheets.calendar.SelectionMode
@@ -90,7 +91,13 @@ class MainActivity : AppCompatActivity() {
             BottomSheetExample.COLOR_TEMPLATE -> showColorSheetTemplate()
             BottomSheetExample.COLOR_CUSTOM -> showColorSheetCustom()
             BottomSheetExample.CLOCK_TIME -> showClockTimeSheet()
-            BottomSheetExample.TIME -> showTimeSheet()
+            BottomSheetExample.TIME_HH_MM_SS -> showTimeSheet(TimeFormat.HH_MM_SS)
+            BottomSheetExample.TIME_HH_MM -> showTimeSheet(TimeFormat.HH_MM)
+            BottomSheetExample.TIME_MM_SS -> showTimeSheet(TimeFormat.MM_SS)
+            BottomSheetExample.TIME_M_SS -> showTimeSheet(TimeFormat.M_SS)
+            BottomSheetExample.TIME_SS -> showTimeSheet(TimeFormat.SS)
+            BottomSheetExample.TIME_MM -> showTimeSheet(TimeFormat.MM)
+            BottomSheetExample.TIME_HH -> showTimeSheet(TimeFormat.HH)
             BottomSheetExample.CALENDAR_RANGE_MONTH -> showCalendarSheet()
             BottomSheetExample.CALENDAR_WEEK1 -> showCalendarSheetWeek1()
             BottomSheetExample.CALENDAR_RANGE_WEEK2 -> showCalendarSheetWeek2()
@@ -208,6 +215,8 @@ class MainActivity : AppCompatActivity() {
 
         val sheet = OptionsSheet().build(this) { // Build and show
             displayMode(DisplayMode.LIST)
+            cornerFamily(CornerFamily.CUT)
+            cornerRadius(16f)
             title("Note from 27th dec") // Set the title of the bottom sheet
             if (Random.nextBoolean()) {
                 showButtons() // For single choice, no buttons are displayed, except you enforce to display them
@@ -379,14 +388,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showTimeSheet() {
+    private fun showTimeSheet(timeFormat: TimeFormat) {
 
         TimeSheet().show(this) {
             title("Snooze time")
-            format(TimeFormat.HH_MM_SS)
-            currentTime(90) // Set current time in seconds
-            minTime(60) // Set minimum time in seconds
-            maxTime(600) // Set maximum time in seconds
+            format(timeFormat)
+//            currentTime(90) // Set current time in seconds
+//            minTime(60) // Set minimum time in seconds
+//            maxTime(600) // Set maximum time in seconds
             onPositive { timeInSec ->
                 // Use selected time in millis
                 Log.d(TAG, "timeInSec: $timeInSec")
