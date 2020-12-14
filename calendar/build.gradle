@@ -18,5 +18,5 @@ dependencies {
     implementation deps.kotlin.stdlib8
     implementation deps.google_material
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
-    implementation 'com.github.kizitonwose:CalendarView:1.0.0' // TODO:
+    implementation 'com.github.kizitonwose:CalendarView:1.0.0'
 }
