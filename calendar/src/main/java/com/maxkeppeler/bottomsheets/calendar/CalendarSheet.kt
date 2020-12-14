@@ -222,7 +222,7 @@ class CalendarSheet : BottomSheet() {
         iconColor = getIconColor(requireContext())
         highlightColor = getHighlightColor(requireContext())
         colorText = getTextColor(requireContext())
-        colorTextInverse = getTextInverseColor(requireContext())
+        colorTextInverse = getTextInverseColor(requireContext()).takeUnless { it.isColorDark() } ?: colorText
 
         val shapeModelRound = ShapeAppearanceModel().toBuilder().apply {
             setAllCorners(CornerFamily.ROUNDED, 45.getDp())
