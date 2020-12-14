@@ -14,67 +14,63 @@
   ~  limitations under the License.
   -->
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:id="@+id/toolbarContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="56dp"
+    android:visibility="visible">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbarContainer"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/btnClose"
+        app:layout_constraintBottom_toBottomOf="@+id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="56dp"
-        android:visibility="visible">
+        android:background="?selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp"
+        android:src="@drawable/bs_ic_close"
+        tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/btnClose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
-            android:src="@drawable/bs_ic_close"
-            app:layout_constraintBottom_toBottomOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetTitle
+        android:id="@+id/title"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toStartOf="@+id/btnExtra"
+        app:layout_constraintStart_toEndOf="@+id/btnClose"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="16dp"
+        android:visibility="visible" />
 
-        <com.maxkeppeler.bottomsheets.core.views.BottomSheetTitle
-            android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingVertical="12dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="16dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toStartOf="@+id/btnExtra"
-            app:layout_constraintStart_toEndOf="@+id/btnClose"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/btnExtra"
+        app:layout_constraintBottom_toBottomOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="16dp"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/btnExtra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
+        android:id="@+id/divider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="1dp" />
 
-        <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

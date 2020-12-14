@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="36dp"
-        android:paddingBottom="24dp">
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="36dp"
+    android:paddingBottom="24dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/headerTitle"
@@ -34,8 +32,6 @@
             app:layout_goneMarginTop="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
 
 
 
