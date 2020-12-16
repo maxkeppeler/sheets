@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity() {
             title("When do you want to take holidays?") // Set the title of the bottom sheet
             rangeYears(50)
             selectionMode(SelectionMode.RANGE)
-            calendarMode(CalendarMode.WEEK_2)
+            calendarMode(CalendarMode.MONTH)
 //            hideToolbar()
 //            disableTimeline(TimeLine.PAST)
             disable(
