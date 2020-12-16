@@ -26,6 +26,7 @@ import com.google.android.material.shape.CornerFamily
 import com.maxkeppeler.bottomsheets.calendar.CalendarMode
 import com.maxkeppeler.bottomsheets.calendar.CalendarSheet
 import com.maxkeppeler.bottomsheets.calendar.SelectionMode
+import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
@@ -161,7 +162,7 @@ class MainActivity : AppCompatActivity() {
             title("When do you want to take holidays?") // Set the title of the bottom sheet
             selectionMode(SelectionMode.RANGE)
             calendarMode(CalendarMode.WEEK_3)
-//            disableTimeline(TimeLine.PAST)
+            disableTimeline(TimeLine.FUTURE)
             onPositive { dateStart, dateEnd -> // dateEnd is only not null if the selection is a range
                 dateEnd?.let {
                     showToastLong(
