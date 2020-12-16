@@ -326,8 +326,8 @@ class CalendarSheet : BottomSheet() {
 
             CalendarMode.WEEK_1, CalendarMode.WEEK_2, CalendarMode.WEEK_3 ->
                 calendarView.updateMonthConfiguration(
-                    inDateStyle = InDateStyle.NONE,
-                    outDateStyle = OutDateStyle.NONE,
+                    inDateStyle = InDateStyle.ALL_MONTHS,
+                    outDateStyle = OutDateStyle.END_OF_ROW,
                     maxRowCount = calendarMode.rows,
                     hasBoundaries = false
                 )
