@@ -439,14 +439,6 @@ class CalendarSheet : BottomSheet() {
                     return
                 }
 
-                if (disablePast && day.date.isBefore(today)
-                    || disableFuture && day.date.isAfter(today)
-                ) {
-                    container.binding.day.alpha = 0f
-                    container.binding.shape.background = null
-                    return
-                }
-
                 // Disable day view
                 if (isDateDisabled(day)) {
                     container.binding.day.alpha = 0.25f
