@@ -553,10 +553,12 @@ class CalendarSheet : BottomSheet() {
         }
 
     /** Check if date is disabled. */
-    private fun isDateDisabled(day: CalendarDay): Boolean = disabledDates.any {
-        day.date.dayOfMonth == it[Calendar.DAY_OF_MONTH]
-                && day.date.year == it[Calendar.YEAR]
-                && day.date.month.ordinal == it[Calendar.MONTH]
+    private fun isDateDisabled(day: CalendarDay): Boolean {
+        return (disabledDates.any {
+            day.date.dayOfMonth == it[Calendar.DAY_OF_MONTH]
+                    && day.date.year == it[Calendar.YEAR]
+                    && day.date.month.ordinal == it[Calendar.MONTH]
+        } || disablePast && day.date.isBefore(today) || disableFuture && day.date.isAfter(today))
     }
 
     /** Setup months RecyclerView. */
