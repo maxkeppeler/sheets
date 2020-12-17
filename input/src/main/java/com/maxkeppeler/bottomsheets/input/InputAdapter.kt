@@ -37,9 +37,9 @@ import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputRadioButt
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputSpinnerItemBinding
 import com.maxkeppeler.bottomsheets.input.type.*
 
-typealias InputAdapterChangeListener = () -> Unit
+internal typealias InputAdapterChangeListener = () -> Unit
 
-class InputAdapter(
+internal class InputAdapter(
     private val ctx: Context,
     private val input: MutableList<Input>,
     private val listener: InputAdapterChangeListener
@@ -264,15 +264,15 @@ class InputAdapter(
 
     override fun getItemCount(): Int = input.size
 
-    inner class EditTextViewHolder(val binding: BottomSheetsInputEditTextItemBinding) :
+    internal inner class EditTextViewHolder(val binding: BottomSheetsInputEditTextItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    inner class CheckBoxViewHolder(val binding: BottomSheetsInputCheckBoxItemBinding) :
+    internal inner class CheckBoxViewHolder(val binding: BottomSheetsInputCheckBoxItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    inner class RadioButtonsViewHolder(val binding: BottomSheetsInputRadioButtonsItemBinding) :
+    internal inner class RadioButtonsViewHolder(val binding: BottomSheetsInputRadioButtonsItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    inner class SpinnerViewHolder(val binding: BottomSheetsInputSpinnerItemBinding) :
+    internal inner class SpinnerViewHolder(val binding: BottomSheetsInputSpinnerItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
