@@ -23,6 +23,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 
+/** Custom TextView used for the value of some bottom sheets. */
 class BottomSheetValue
 @JvmOverloads constructor(
     ctx: Context,

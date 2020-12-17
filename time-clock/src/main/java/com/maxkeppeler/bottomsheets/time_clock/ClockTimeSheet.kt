@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.time_clock
 
 import android.content.Context
@@ -30,6 +32,9 @@ import java.util.*
 /** Listener which returns the selected clock time in milliseconds. */
 typealias ClockTimeListener = (clockTimeInMillis: Long) -> Unit
 
+/**
+ * The [ClockTimeSheet] lets you quickly pick a clock time.
+ */
 class ClockTimeSheet : BottomSheet() {
 
     override val dialogTag = "ClockTimeSheet"
@@ -96,7 +101,6 @@ class ClockTimeSheet : BottomSheet() {
         selector.setTime(currentTimeInMillis)
     }
 
-    /** Return the clock time and dismiss dialog. */
     private fun save() {
         listener?.invoke(selector.getTimeInMillis())
         dismiss()

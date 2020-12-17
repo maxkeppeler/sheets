@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.color
 
 import android.content.Context
@@ -38,7 +40,9 @@ import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
 /** Listener to be invoked when color is selected. */
 typealias ColorListener = (Int) -> Unit
 
-@Suppress("unused")
+/**
+ * The [ColorSheet] lets you pick a color.
+ */
 class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
 
     override val dialogTag = "ColorSheet"

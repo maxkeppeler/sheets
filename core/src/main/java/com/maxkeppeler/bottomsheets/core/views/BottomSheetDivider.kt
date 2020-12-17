@@ -27,6 +27,7 @@ import com.maxkeppeler.bottomsheets.core.utils.colorOf
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttr
 import com.maxkeppeler.bottomsheets.core.utils.toDp
 
+/** Custom Divider. */
 class BottomSheetDivider
 @JvmOverloads constructor(
     ctx: Context,

@@ -21,6 +21,7 @@ import androidx.annotation.RestrictTo
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+/** Custom implementation of [GridLayoutManager] with more control. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class CustomGridLayoutManager(
     ctx: Context,

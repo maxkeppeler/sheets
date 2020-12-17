@@ -23,6 +23,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 
+/** Custom text button used for the bottom buttons view. */
 class BottomSheetButton
 @JvmOverloads constructor(
     ctx: Context,

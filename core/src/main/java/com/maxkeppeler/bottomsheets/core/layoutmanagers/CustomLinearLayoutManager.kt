@@ -18,9 +18,11 @@ package com.maxkeppeler.bottomsheets.core.layoutmanagers
 
 import android.content.Context
 import androidx.annotation.RestrictTo
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+/** Custom implementation of [LinearLayoutManager] with more control. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class CustomLinearLayoutManager(
     context: Context,

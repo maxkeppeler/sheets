@@ -21,7 +21,7 @@ import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
  * See the License for the specific language governing permissions and
  */
 
-
+/** Custom RecyclerView to apply edge effect automatically. */
 class BottomSheetRecyclerView
 @JvmOverloads constructor(
     ctx: Context,

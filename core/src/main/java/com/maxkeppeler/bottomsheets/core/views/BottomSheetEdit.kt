@@ -24,6 +24,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttr
 
+/** Custom EditTextView used for text input. */
 class BottomSheetEdit
 @JvmOverloads constructor(
     ctx: Context,

@@ -37,6 +37,9 @@ import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 typealias DigitClickListener = (value: Int) -> Unit
 typealias ImageClickListener = () -> Unit
 
+/**
+ * Custom view which creates a numerical digits view with 2 additional icons for actions.
+ */
 class BottomSheetNumericalInput
 @JvmOverloads constructor(
     val ctx: Context,
@@ -101,7 +104,6 @@ class BottomSheetNumericalInput
         }
     }
 
-    /** Create an action container with an imageview. */
     private fun getDrawableView(): Pair<LinearLayout, ImageView> {
 
         val imageView = ImageView(ctx).apply {
@@ -122,7 +124,6 @@ class BottomSheetNumericalInput
         return Pair(view, imageView)
     }
 
-    /** Create a digit view. */
     private fun getDigitView(digitValue: Int): BottomSheetDigit {
 
         val view = BottomSheetDigit(ctx).apply {
@@ -145,13 +146,6 @@ class BottomSheetNumericalInput
         }
         view.changeHighlightColor()
         return view
-    }
-
-    /** Changes the ripple color of the background ripple drawable. */
-    private fun View.changeHighlightColor() {
-        (background as RippleDrawable).apply {
-            setColor(ColorStateList.valueOf(highlightColor))
-        }
     }
 
     /** Set digit listener. */
@@ -186,7 +180,6 @@ class BottomSheetNumericalInput
         range.toMutableList().forEach { digits[it].enableDigit() }
     }
 
-    /** Display digit textView as enabled. */
     private fun TextView.enableDigit() {
         isClickable = true
         isFocusable = true
@@ -198,11 +191,15 @@ class BottomSheetNumericalInput
         range.toMutableList().forEach { digits[it].disableDigit() }
     }
 
-    /** Display digit textView as disabled. */
     private fun TextView.disableDigit() {
         isClickable = false
         isFocusable = false
         alpha = 0.3f
     }
 
+    private fun View.changeHighlightColor() {
+        (background as RippleDrawable).apply {
+            setColor(ColorStateList.valueOf(highlightColor))
+        }
+    }
 }

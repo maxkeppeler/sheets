@@ -20,6 +20,7 @@ import androidx.annotation.RestrictTo
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
+/** Custom implementation of [StaggeredGridLayoutManager] with more control. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 class CustomStaggeredGridLayoutManager(
     columns: Int,

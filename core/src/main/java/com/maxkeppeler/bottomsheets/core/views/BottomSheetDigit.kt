@@ -24,6 +24,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 
+/** Custom TextView used for the digits of the [BottomSheetNumericalInput]. */
 class BottomSheetDigit
 @JvmOverloads constructor(
     ctx: Context,

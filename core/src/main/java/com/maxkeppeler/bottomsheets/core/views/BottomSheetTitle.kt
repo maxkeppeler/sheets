@@ -24,6 +24,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 
+/** Custom TextView used for for the title of a bottom sheet. */
 class BottomSheetTitle
 @JvmOverloads constructor(
     ctx: Context,

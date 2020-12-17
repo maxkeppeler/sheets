@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.calendar
 
 import android.animation.ValueAnimator
@@ -53,9 +55,12 @@ import java.time.temporal.WeekFields
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+/** Listener which returns the selected date or selected start to end date. */
 typealias CalendarDateListener = (dateStart: Calendar, dateEnd: Calendar?) -> Unit
 
-@Suppress("unused")
+/**
+ * The [CalendarSheet] lets you pick a date or date range.
+ */
 class CalendarSheet : BottomSheet() {
 
     override val dialogTag = "CalendarSheet"
@@ -368,7 +373,6 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Setup day binding. */
     private fun BottomSheetsCalendarBinding.setupDayBinding() {
 
         val daySelectionListener = { day: CalendarDay ->
@@ -529,7 +533,6 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Check if any date is disabled within the selected range. */
     private fun containsSelectionDisabledDays(dateStart: LocalDate, dateEnd: LocalDate): Boolean =
         disabledDates.any { disabledDate ->
 
@@ -544,7 +547,6 @@ class CalendarSheet : BottomSheet() {
             afterStart && afterEnd
         }
 
-    /** Check if date is disabled. */
     private fun isDateDisabled(day: CalendarDay): Boolean {
         return (disabledDates.any {
             day.date.dayOfMonth == it[Calendar.DAY_OF_MONTH]
@@ -553,7 +555,6 @@ class CalendarSheet : BottomSheet() {
         } || disablePast && day.date.isBefore(today) || disableFuture && day.date.isAfter(today))
     }
 
-    /** Setup months RecyclerView. */
     private fun BottomSheetsCalendarBinding.setupMonths() {
 
         monthsRecyclerView.setHasFixedSize(false)
@@ -587,7 +588,6 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Setup years RecyclerView. */
     private fun BottomSheetsCalendarBinding.setupYears() {
 
         val years = getYears()
@@ -599,7 +599,6 @@ class CalendarSheet : BottomSheet() {
         yearsRecyclerView.layoutManager = yearLayoutManger
     }
 
-    /** Setup month header binding. */
     private fun setupMonthHeaderBinding() {
 
         class MonthViewContainer(view: View) : ViewContainer(view) {
@@ -633,7 +632,6 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Switch to months view. */
     private fun switchToMonthsView() {
         calendarViewActive = false
         with(binding) {
@@ -651,7 +649,6 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Switch to years view. */
     private fun switchToYearsView() {
         calendarViewActive = false
         with(binding) {
@@ -669,7 +666,6 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Switch to CalendarView. */
     private fun switchToCalendarView() {
         calendarViewActive = true
         with(binding) {
@@ -679,14 +675,12 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Set the text of the current date selection. */
     private fun setCurrentDateText(date: LocalDate?) {
         with(binding) {
             dateSelected.text = date?.let { fullDate.format(date) } ?: "Select date"
         }
     }
 
-    /** Set the text of the current date range selection. */
     private fun setCurrentDateRangeText(dateStart: LocalDate?, dateEnd: LocalDate?) {
         with(binding) {
             val sameMonth = dateStart?.monthValue == dateEnd?.monthValue
@@ -699,23 +693,19 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    /** Update the text of the month and year spinners. */
     private fun updateSpinnerValues() {
         updateMonthSpinner()
         updateYearSpinner()
     }
 
-    /** Update the text of the year spinner. */
     private fun updateYearSpinner() {
         binding.valueSpinnerYear.text = yearFormatter.format(selectedViewDate)
     }
 
-    /** Update the text of the month spinner. */
     private fun updateMonthSpinner() {
         binding.valueSpinnerMonth.text = monthFormatter.format(selectedViewDate)
     }
 
-    /** Select year. Update views. */
     private fun selectYear(year: Year) {
         binding.yearSpinner.isChecked = false
         selectedViewDate = LocalDate.of(year.value, selectedViewDate.month.value, 1)
@@ -725,7 +715,6 @@ class CalendarSheet : BottomSheet() {
         switchToCalendarView()
     }
 
-    /** Select month. Update views. */
     private fun selectMonth(month: Month) {
         binding.monthSpinner.isChecked = false
         selectedViewDate = LocalDate.of(selectedViewDate.year, month.value, 1)
@@ -734,7 +723,7 @@ class CalendarSheet : BottomSheet() {
         switchToCalendarView()
     }
 
-    /** Get days of week. From [https://github.com/kizitonwose/CalendarView/tree/master/sample/src/main/java/com/kizitonwose/calendarviewsample] */
+    // From [https://github.com/kizitonwose/CalendarView/tree/master/sample/src/main/java/com/kizitonwose/calendarviewsample]
     private fun getDaysOfWeek(): Array<DayOfWeek> {
         val firstDay = WeekFields.of(Locale.getDefault()).firstDayOfWeek
         var daysOfWeek = DayOfWeek.values()
@@ -746,7 +735,6 @@ class CalendarSheet : BottomSheet() {
         return daysOfWeek
     }
 
-    /** Get years to populate the year spinner. */
     private fun getYears(): MutableList<Year> {
 
         val years = mutableListOf<Year>()
@@ -762,7 +750,6 @@ class CalendarSheet : BottomSheet() {
         return years
     }
 
-    /** Validate if the current selections fulfils the requirements. */
     private fun validate() {
 
         val maxRangeLengthDays = TimeUnit.DAYS.toSeconds(maxRange.toLong())
@@ -782,7 +769,6 @@ class CalendarSheet : BottomSheet() {
         } else displayButtonPositive(selectionValid)
     }
 
-    /** Return the date or date range and dismiss dialog. */
     private fun save() {
 
         val selectedDateCalendar = selectedDate?.toCalendar()
@@ -798,7 +784,6 @@ class CalendarSheet : BottomSheet() {
         dismiss()
     }
 
-    /** Convert [LocalDate] to [Calendar]. */
     private fun LocalDate.toCalendar(): Calendar = Calendar.getInstance().apply {
         set(year, month.ordinal, dayOfMonth)
     }

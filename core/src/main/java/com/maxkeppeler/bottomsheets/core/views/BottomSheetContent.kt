@@ -24,6 +24,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttr
 
+/** Custom TextView used for most of the text on the bottom sheets. */
 class BottomSheetContent
 @JvmOverloads constructor(
     ctx: Context,

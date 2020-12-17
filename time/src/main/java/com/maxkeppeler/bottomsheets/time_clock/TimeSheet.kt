@@ -14,14 +14,14 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.time_clock
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.time.databinding.BottomSheetsTimeBinding
@@ -29,7 +29,9 @@ import com.maxkeppeler.bottomsheets.time.databinding.BottomSheetsTimeBinding
 /** Listener which returns the selected duration time in milliseconds. */
 typealias DurationTimeListener = (timeInSec: Long) -> Unit
 
-@Suppress("unused")
+/**
+ * The [TimeSheet] lets you pick a duration time in a specific format.
+ */
 class TimeSheet : BottomSheet() {
 
     override val dialogTag = "TimeSheet"
@@ -94,13 +96,11 @@ class TimeSheet : BottomSheet() {
         this.listener = listener
     }
 
-    /** Validate if the current selections fulfils the requirements. */
     private val validationListener: TimeValidationListener = { valid ->
         saveAllowed = valid
         displayButtonPositive(saveAllowed)
     }
 
-    /** Return the time and dismiss dialog. */
     private fun save() {
         listener?.invoke(selector.getTimeInSeconds())
         dismiss()
