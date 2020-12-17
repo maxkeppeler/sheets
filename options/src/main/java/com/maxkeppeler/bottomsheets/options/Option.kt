@@ -19,42 +19,50 @@ package com.maxkeppeler.bottomsheets.options
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
+/**
+ * An option consists of a drawable and a text.
+ */
 class Option(@DrawableRes var drawableRes: Int? = null) {
 
     var text: String? = null
-    @StringRes var textRes: Int? = null
+    @StringRes
+    var textRes: Int? = null
 
     internal var selected: Boolean = false
-            private set
+        private set
 
     internal var disabled: Boolean = false
         private set
 
-    constructor(@DrawableRes drawableRes: Int, text: String): this(drawableRes) {
+    constructor(@DrawableRes drawableRes: Int, text: String) : this(drawableRes) {
         this.drawableRes = drawableRes
         this.text = text
     }
 
-    constructor(@DrawableRes drawableRes: Int, @StringRes textRes: Int): this(drawableRes) {
+    constructor(@DrawableRes drawableRes: Int, @StringRes textRes: Int) : this(drawableRes) {
         this.drawableRes = drawableRes
         this.textRes = textRes
     }
 
+    /** Declare the option as already selected. */
     fun select(): Option {
         this.selected = true
         return this
     }
 
+    /** Declare the option as already selected. */
     fun selected(selected: Boolean): Option {
         this.selected = selected
         return this
     }
 
+    /** Declare the option as disabled. Disabled options are not selectable anymore. */
     fun disable(): Option {
         this.disabled = true
         return this
     }
 
+    /** Declare the option as disabled. Disabled options are not selectable anymore. */
     fun disabled(disabled: Boolean): Option {
         this.disabled = disabled
         return this

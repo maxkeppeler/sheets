@@ -25,15 +25,12 @@ import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsBinding
 
@@ -44,7 +41,9 @@ typealias OptionListener = (index: Int, option: Option) -> Unit
 /** Listener which returns the selected option's index and text. */
 typealias OptionsListener = OptionsSheet.(selectedIndices: MutableList<Int>, selectedOptions: MutableList<Option>) -> Unit
 
-@Suppress("unused")
+/**
+ * The [OptionsSheet] lets you display a grid or list of options.
+ */
 class OptionsSheet : BottomSheet() {
 
     override val dialogTag = "OptionsSheet"
@@ -254,7 +253,7 @@ class OptionsSheet : BottomSheet() {
         with(binding.optionsRecyclerView) {
 
             val columns = if (options.size < GRID_COLUMNS_MAX) options.size else GRID_COLUMNS_MAX
-            val collapsedItems = when(mode) {
+            val collapsedItems = when (mode) {
                 DisplayMode.GRID_HORIZONTAL -> options.size <= SMALL_GRID_ITEMS_MAX
                 DisplayMode.GRID_VERTICAL -> true
                 DisplayMode.LIST -> false
