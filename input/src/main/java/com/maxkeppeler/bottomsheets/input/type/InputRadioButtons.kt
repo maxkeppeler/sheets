@@ -14,14 +14,18 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.input.type
 
 import android.os.Bundle
 
-/** Listener which returns the new text and if it is final. */
+/** Listener which returns the new index. */
 typealias RadioButtonsInputListener = (index: Int) -> Unit
 
-@Suppress("unused")
+/**
+ * Input of the type RadioButton.
+ */
 class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit) : Input(key) {
 
     init {
@@ -43,18 +47,22 @@ class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit)
             field = value
         }
 
+    /** Set the by default selected index. */
     fun selected(selectedIndex: Int) {
         this.selectedIndex = selectedIndex
     }
 
+    /** Set the options to be displays as RadioButtons within a group. */
     fun options(options: MutableList<String>) {
         this.radioButtonOptions = options
     }
-
+    
+    /** Set a listener which returns the new value when it changed. */
     fun changeListener(listener: RadioButtonsInputListener) {
         this.changeListener = listener
     }
-
+    
+    /** Set a listener which returns the final value when the user clicks the positive button. */
     fun resultListener(listener: RadioButtonsInputListener) {
         this.resultListener = listener
     }

@@ -14,13 +14,18 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.input.type
 
 import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
-@Suppress("unused")
+/**
+ * The base class of any input. Every input can have a label and a drawable.
+ * It can be optional or required.
+ */
 abstract class Input(private val key: String? = null) {
 
     internal var required: Boolean = false
@@ -39,25 +44,30 @@ abstract class Input(private val key: String? = null) {
         this.required = required
     }
 
+    /** Set a drawable. */
     fun drawable(@DrawableRes drawableRes: Int) {
         this.drawableRes = drawableRes
     }
 
+    /** Set the label text. */
     fun label(@StringRes labelRes: Int) {
         this.labelRes = labelRes
     }
 
+    /** Set the label text. */
     fun label(label: String) {
         this.label = label
     }
 
     /** Check if the input value is valid. */
-    internal fun getKeyOrIndex(index: Int): String =
-        if (key.isNullOrEmpty()) index.toString() else key
-
     abstract fun valid(): Boolean
 
+    /** Invoke the result listener which returns the input value. */
     abstract fun invokeResultListener(): Unit?
 
+    /** Save the input value into the bundle. Takes the index as an key, if there's no unique input key available. */
     abstract fun putValue(bundle: Bundle, index: Int)
+
+    internal fun getKeyOrIndex(index: Int): String =
+        if (key.isNullOrEmpty()) index.toString() else key
 }

@@ -14,15 +14,19 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.input.type
 
 import android.os.Bundle
 import androidx.annotation.StringRes
 
-/** Listener which returns the new text and if it is final. */
+/** Listener which returns the new value. */
 typealias CheckBoxInputListener = (value: Boolean) -> Unit
 
-@Suppress("unused")
+/**
+ * Input of the type Checkbox.
+ */
 class InputCheckBox(key: String? = null, func: InputCheckBox.() -> Unit) : Input(key) {
 
     init {
@@ -47,23 +51,27 @@ class InputCheckBox(key: String? = null, func: InputCheckBox.() -> Unit) : Input
             field = value
         }
 
-    fun default(default: Boolean) {
+    /** Set the default value. */
     fun defaultValue(defaultValue: Boolean) {
         this.defaultValue = defaultValue
     }
 
+    /** Set the text of the CheckBox. */
     fun text(@StringRes textRes: Int) {
         this.textRes = textRes
     }
 
+    /** Set the text of the CheckBox. */
     fun text(text: String) {
         this.text = text
     }
 
+    /** Set a listener which returns the new value when it changed. */
     fun changeListener(listener: CheckBoxInputListener) {
         this.changeListener = listener
     }
 
+    /** Set a listener which returns the final value when the user clicks the positive button. */
     fun resultListener(listener: CheckBoxInputListener) {
         this.resultListener = listener
     }

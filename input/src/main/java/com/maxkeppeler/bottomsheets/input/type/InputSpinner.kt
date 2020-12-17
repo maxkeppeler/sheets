@@ -14,15 +14,19 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.input.type
 
 import android.os.Bundle
 import androidx.annotation.StringRes
 
-/** Listener which returns the new text and if it is final. */
+/** Listener which returns the new index. */
 typealias InputSpinnerListener = (index: Int) -> Unit
 
-@Suppress("unused")
+/**
+ * Input of the type Spinner.
+ */
 class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(key) {
 
     init {
@@ -50,28 +54,32 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
             field = value
         }
 
+    /** Set the by default selected index. */
     fun selected(selectedIndex: Int) {
         this.selectedIndex = selectedIndex
     }
 
+    /** Set the options to tbe displays within the Spinner. */
     fun options(options: MutableList<String>) {
         this.spinnerOptions = options
     }
 
-    fun text(@StringRes textRes: Int) {
+    /** Set the text when no item is selected. */
     fun noSelectionText(@StringRes textRes: Int) {
         this.textRes = textRes
     }
 
-    fun text(text: String) {
+    /** Set the text when no item is selected. */
     fun noSelectionText(text: String) {
         this.noSelectionText = text
     }
 
+    /** Set a listener which returns the new value when it changed. */
     fun changeListener(listener: InputSpinnerListener) {
         this.changeListener = listener
     }
 
+    /** Set a listener which returns the final value when the user clicks the positive button. */
     fun resultListener(listener: InputSpinnerListener) {
         this.resultListener = listener
     }

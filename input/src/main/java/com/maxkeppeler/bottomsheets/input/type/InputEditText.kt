@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.input.type
 
 import android.os.Bundle
@@ -21,10 +23,12 @@ import android.text.InputFilter
 import android.text.InputType
 import androidx.annotation.StringRes
 
-/** Listener which returns the new text and if it is final. */
+/** Listener which returns the new value. */
 typealias EditTextInputListener = (value: String?) -> Unit
 
-@Suppress("unused")
+/**
+ * Input of the type EditText.
+ */
 class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input(key) {
 
     init {
@@ -58,36 +62,44 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
             field = value
         }
 
-    fun default(@StringRes defaultTextRes: Int) {
+    /** Set the default value. */
+    fun defaultValue(@StringRes defaultTextRes: Int) {
         this.hintRes = defaultTextRes
     }
 
-    fun default(defaultText: String) {
+    /** Set the default value. */
+    fun defaultValue(defaultText: String) {
         this.defaultText = defaultText
     }
 
+    /** Set the hint text. */
     fun hint(@StringRes hintRes: Int) {
         this.hintRes = hintRes
     }
 
+    /** Set the hint text. */
     fun hint(hint: String) {
         this.hint = hint
     }
 
-    fun changeListener(listener: EditTextInputListener) {
-        this.changeListener = listener
-    }
-
-    fun resultListener(listener: EditTextInputListener) {
-        this.resultListener = listener
-    }
-
+    /** Set the [InputType]. */
     fun inputType(inputType: Int) {
         this.inputType = inputType
     }
 
+    /** Set the [InputFilter]. */
     fun inputFilter(inputFilter: InputFilter) {
         this.inputFilter = inputFilter
+    }
+
+    /** Set a listener which returns the new value when it changed. */
+    fun changeListener(listener: EditTextInputListener) {
+        this.changeListener = listener
+    }
+
+    /** Set a listener which returns the final value when the user clicks the positive button. */
+    fun resultListener(listener: EditTextInputListener) {
+        this.resultListener = listener
     }
 
     override fun valid(): Boolean = !defaultText.isNullOrEmpty()
