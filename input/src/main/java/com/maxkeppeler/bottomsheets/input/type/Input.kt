@@ -34,12 +34,7 @@ abstract class Input(private val key: String? = null) {
     internal var drawableRes: Int? = null
         private set
 
-    internal var labelText: String? = null
-        private set
-
-    internal var labelTextRes: Int? = null
-        private set
-
+    /** Require a value before the user can click the positive button. */
     fun required(required: Boolean = true) {
         this.required = required
     }
@@ -56,14 +51,7 @@ abstract class Input(private val key: String? = null) {
         this.label = label
     }
 
-    fun labelText(@StringRes textRes: Int) {
-        this.labelTextRes = textRes
-    }
-
-    fun labelText(text: String) {
-        this.labelText = text
-    }
-
+    /** Check if the input value is valid. */
     internal fun getKeyOrIndex(index: Int): String =
         if (key.isNullOrEmpty()) index.toString() else key
 
