@@ -167,7 +167,7 @@ class InputAdapter(
 
         setupGeneralInputInfo(input, label, icon)
 
-        checkBox.isChecked = input.default
+        checkBox.isChecked = input.defaultValue
 
         val checkBoxText = input.textRes?.let { ctx.getString(it) } ?: input.text
         checkBox.text = checkBoxText

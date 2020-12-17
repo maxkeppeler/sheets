@@ -38,17 +38,18 @@ class InputCheckBox(key: String? = null, func: InputCheckBox.() -> Unit) : Input
     internal var textRes: Int? = null
         private set
 
-    internal var default: Boolean = false
+    internal var defaultValue: Boolean = false
         private set
 
-    var value: Boolean = default
+    var value: Boolean = defaultValue
         internal set(value) {
             changeListener?.invoke(value)
             field = value
         }
 
     fun default(default: Boolean) {
-        this.default = default
+    fun defaultValue(defaultValue: Boolean) {
+        this.defaultValue = defaultValue
     }
 
     fun text(@StringRes textRes: Int) {
