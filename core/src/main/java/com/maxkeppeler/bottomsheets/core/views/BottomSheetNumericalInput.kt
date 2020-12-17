@@ -92,7 +92,7 @@ class BottomSheetNumericalInput
                         val view = getDigitView(digitValue)
                         view.setOnClickListener { digitListener?.invoke(it.tag as Int) }
                         rowLayout.addView(view)
-                        digits.add(view)
+                        digits.add(digitValue.takeIf { it == 0 } ?: digits.size, view)
                     }
                 }
                 digitNumber++
