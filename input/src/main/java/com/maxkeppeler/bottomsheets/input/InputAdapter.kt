@@ -213,7 +213,7 @@ internal class InputAdapter(
         setupGeneralInputInfo(input, label, icon)
 
         if (input.selectedIndex == null) {
-            val spinnerNoSelectionText = input.textRes?.let { ctx.getString(it) } ?: input.text
+            val spinnerNoSelectionText = input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
             input.spinnerOptions?.add(spinnerNoSelectionText ?: ctx.getString(R.string.select))
         }
 

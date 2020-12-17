@@ -38,7 +38,7 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     internal var spinnerOptions: MutableList<String>? = null
         private set
 
-    internal var text: String? = null
+    internal var noSelectionText: String? = null
         private set
 
     internal var textRes: Int? = null
@@ -59,11 +59,13 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     }
 
     fun text(@StringRes textRes: Int) {
+    fun noSelectionText(@StringRes textRes: Int) {
         this.textRes = textRes
     }
 
     fun text(text: String) {
-        this.text = text
+    fun noSelectionText(text: String) {
+        this.noSelectionText = text
     }
 
     fun changeListener(listener: InputSpinnerListener) {
