@@ -182,7 +182,7 @@ class BottomSheetNumericalInput
     }
 
     /** Enable digits within a range. */
-    fun enableDigits(range: IntRange = 0 until 9) {
+    fun enableDigits(range: IntRange = 0..9) {
         range.toMutableList().forEach { digits[it].enableDigit() }
     }
 
@@ -194,7 +194,7 @@ class BottomSheetNumericalInput
     }
 
     /** Disable digits within a range. */
-    fun disableDigits(range: IntRange = 0 until 9) {
+    fun disableDigits(range: IntRange = 0..9) {
         range.toMutableList().forEach { digits[it].disableDigit() }
     }
 

@@ -83,7 +83,7 @@ internal class ClockTimeSelector(
             pmLabel.setOnClickListener { setPmActive() }
 
             setAmActive()
-            proceedIndex()
+            processIndexChange()
         }
     }
 
@@ -97,24 +97,42 @@ internal class ClockTimeSelector(
     private fun onDigit(value: Int) {
 
         if (isPositionOnHours) {
+
             if (is24HoursView) {
                 if (currentIndex == 0 && value >= 3 && value <= 9) {
                     hoursBuffer[currentIndex] = '0'
                     increaseIndex()
                     hoursBuffer[currentIndex] = value.toString()[0]
-                } else hoursBuffer[currentIndex] = value.toString()[0]
+                } else {
+                    if (currentIndex == 0 && value != 0 && Character.getNumericValue(hoursBuffer[1]) > 3) {
+                        hoursBuffer[1] = '0'
+                    }
+                    hoursBuffer[currentIndex] = value.toString()[0]
+                }
+
             } else {
                 if (currentIndex == 0 && value >= 2 && value <= 9) {
                     hoursBuffer[currentIndex] = '0'
                     increaseIndex()
                     hoursBuffer[currentIndex] = value.toString()[0]
-                } else hoursBuffer[currentIndex] = value.toString()[0]
+                } else {
+                    if (currentIndex == 0) {
+                        if (value != 0 && Character.getNumericValue(hoursBuffer[1]) > 2) {
+                            hoursBuffer[1] = '0'
+                        } else if (value == 0 && Character.getNumericValue(hoursBuffer[1]) == 0) {
+                            hoursBuffer[1] = '1'
+                        }
+                    }
+                    hoursBuffer[currentIndex] = value.toString()[0]
+                }
             }
             bindingSelector.hoursInput.text = getHoursTime()
+
         } else {
             minsBuffer[currentIndex] = value.toString()[0]
             bindingSelector.minutesInput.text = getMinutesTime()
         }
+
         increaseIndex()
     }
 
@@ -122,20 +140,14 @@ internal class ClockTimeSelector(
     private fun focusOnHours() {
         currentIndex = 0
         isPositionOnHours = true
-        proceedIndex()
+        processIndexChange()
     }
 
     /** Focus on minutes view and index, when clicked. */
     private fun focusOnMinutes() {
         currentIndex = 0
         isPositionOnHours = false
-        proceedIndex()
-    }
-
-    /** Jump to current index. */
-    private fun proceedIndex() {
-        limitKeyboardOnIndexInput()
-        setUnderlineToIndex()
+        processIndexChange()
     }
 
     /** Reduce current index. */
@@ -148,8 +160,7 @@ internal class ClockTimeSelector(
             }
         }
 
-        setUnderlineToIndex()
-        limitKeyboardOnIndexInput()
+        processIndexChange()
     }
 
     /** Increase current index. */
@@ -163,6 +174,11 @@ internal class ClockTimeSelector(
             }
         }
 
+        processIndexChange()
+    }
+
+    /** Process the index change. */
+    private fun processIndexChange() {
         setUnderlineToIndex()
         limitKeyboardOnIndexInput()
     }
@@ -177,11 +193,12 @@ internal class ClockTimeSelector(
                     enableDigits()
                     if (is24HoursView) {
                         if (hoursBuffer[0] == '2')
-                            disableDigits(3 until 9)
+                            disableDigits(4..9)
                     } else {
                         if (hoursBuffer[0] == '1' || hoursBuffer[0] == '2')
-                            disableDigits(2 until 9)
-                        else if (hoursBuffer[0] == '0') disableDigits()
+                            disableDigits(3..9)
+                        else if (hoursBuffer[0] == '0')
+                            disableDigits(0..0)
                     }
                 }
 
@@ -190,7 +207,7 @@ internal class ClockTimeSelector(
                         disableDigits()
                     } else {
                         enableDigits()
-                        disableDigits(5 until 9)
+                        disableDigits(6..9)
                     }
                 }
                 !isPositionOnHours && currentIndex == 1 -> enableDigits()
