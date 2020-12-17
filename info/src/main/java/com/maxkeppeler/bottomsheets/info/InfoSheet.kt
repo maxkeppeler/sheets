@@ -14,20 +14,22 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.info
 
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.PositiveListener
 import com.maxkeppeler.bottomsheets.info.databinding.BottomSheetsInfoBinding
 
-@Suppress("unused")
+/**
+ * The [InfoSheet] lets you display an information or warning.
+ */
 class InfoSheet : BottomSheet() {
 
     override val dialogTag = "InfoSheet"
