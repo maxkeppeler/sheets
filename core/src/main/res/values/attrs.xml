@@ -43,11 +43,20 @@
     <!-- Style for an option in OptionsSheet.  -->
     <declare-styleable name="BottomSheetOption">
 
-        <!-- Override icon color of an option. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetOptionActiveImageColor" format="color" />
+        <!-- Override icon color of an active option. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetOptionSelectedImageColor" format="color" />
 
-        <!-- Override icon color of an option. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetOptionActiveTextColor" format="color" />
+        <!-- Override text color of an active option. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetOptionSelectedTextColor" format="color" />
+
+        <!-- Override icon color of an disabled option. Default: bottomSheetIconsColor, colorOnSurface -->
+        <attr name="bottomSheetOptionDisabledImageColor" format="color" />
+
+        <!-- Override text color of an disabled option. Default: bottomSheetContentColor, colorTextPrimary -->
+        <attr name="bottomSheetOptionDisabledTextColor" format="color" />
+
+        <!-- Override background color of an disabled option. -->
+        <attr name="bottomSheetOptionDisabledBackgroundColor" format="color" />
 
     </declare-styleable>
 

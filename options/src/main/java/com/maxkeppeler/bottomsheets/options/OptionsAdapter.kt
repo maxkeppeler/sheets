@@ -19,9 +19,9 @@ package com.maxkeppeler.bottomsheets.options
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.drawable.*
-import android.util.StateSet
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,11 +29,6 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.ripple.RippleDrawableCompat
-import com.google.android.material.ripple.RippleUtils
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.shape.ShapeAppearanceModel
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsGridItemBinding
@@ -48,17 +43,37 @@ internal class OptionsAdapter(
     private val listener: OptionsSelectionListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    companion object {
+        private const val TAG_DISABLED_SELECTED = "tag_disabled_selected"
+        private const val SELECTOR_STATE_DISABLED_INDEX = 0
+        private const val SELECTOR_STATE_SELECTED_INDEX = 1
+    }
+
     private val selectedOptions = mutableMapOf<Int, Pair<ImageView, BottomSheetContent>>()
 
-    private val selectedTextColor =
-        colorOfAttr(ctx, R.attr.bottomSheetOptionActiveTextColor).takeUnlessNotResolved()
-            ?: getPrimaryColor(ctx)
-    private val selectedImageColor =
-        colorOfAttr(ctx, R.attr.bottomSheetOptionActiveImageColor).takeUnlessNotResolved()
-            ?: getPrimaryColor(ctx)
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
     private val highlightColor = getHighlightColor(ctx)
+
+    private val selectedTextColor =
+        colorOfAttr(ctx, R.attr.bottomSheetOptionSelectedTextColor).takeUnlessNotResolved()
+            ?: getPrimaryColor(ctx)
+
+    private val selectedIconsColor =
+        colorOfAttr(ctx, R.attr.bottomSheetOptionSelectedImageColor).takeUnlessNotResolved()
+            ?: getPrimaryColor(ctx)
+
+    private val disabledTextColor =
+        colorOfAttr(ctx, R.attr.bottomSheetOptionDisabledTextColor).takeUnlessNotResolved()
+            ?: getTextColor(ctx)
+
+    private val disabledIconsColor =
+        colorOfAttr(ctx, R.attr.bottomSheetOptionDisabledImageColor).takeUnlessNotResolved()
+            ?: getIconColor(ctx)
+
+    private val disabledBackgroundColor =
+        colorOfAttr(ctx, R.attr.bottomSheetOptionDisabledBackgroundColor).takeUnlessNotResolved()
+            ?: colorOf(ctx, R.color.bottomSheetOptionDisabledColor)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (type) {
@@ -92,41 +107,33 @@ internal class OptionsAdapter(
     private fun BottomSheetsOptionsListItemBinding.buildListItem(i: Int) {
 
         val option = options[i]
-        val text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
 
-        optionContainer.applyColorToDrawable()
+        label.text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
 
         option.drawableRes?.let { res ->
             icon.setImageDrawable(ContextCompat.getDrawable(ctx, res))
             icon.visibility = View.VISIBLE
         }
 
-        label.text = text
+        optionContainer.changeRippleAndStateColor()
 
-        if (option.disabled) {
-            if (!option.selected) {
-                optionContainer.isActivated = true
-            }
+        if (option.disabled && !option.selected) {
+            showDisabled(label, icon, optionContainer)
         } else {
-            optionContainer.isActivated = false
-            optionContainer.setOnClickListener {
+
+            if (option.disabled && option.selected) optionContainer.tag = TAG_DISABLED_SELECTED
+            else optionContainer.setOnClickListener {
                 selectOption(i, label, icon, optionContainer)
             }
-        }
 
-        if (option.selected) {
-            selectOption(i, label, icon, optionContainer)
-        } else {
-            showDeselected(label, icon, optionContainer)
+            if (option.selected) selectOption(i, label, icon, optionContainer)
+            else showDeselected(label, icon, optionContainer)
         }
     }
 
     private fun BottomSheetsOptionsGridItemBinding.buildGridItem(i: Int) {
 
         val option = options[i]
-        val text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
-
-        optionContainer.applyColorToDrawable()
 
         if (collapsedItems) {
             root.layoutParams = ConstraintLayout.LayoutParams(
@@ -135,34 +142,48 @@ internal class OptionsAdapter(
             )
         }
 
+        label.text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
+
         option.drawableRes?.let { res ->
             icon.setImageDrawable(ContextCompat.getDrawable(ctx, res))
             icon.visibility = View.VISIBLE
         }
 
-        label.text = text
+        optionContainer.changeRippleAndStateColor()
 
-        if (option.disabled) {
-            if (!option.selected) {
-                optionContainer.isActivated = true
-            }
+        if (option.disabled && !option.selected) {
+            showDisabled(label, icon, optionContainer)
         } else {
-            optionContainer.isActivated = false
-            optionContainer.setOnClickListener {
+
+            if (option.disabled && option.selected) optionContainer.tag = TAG_DISABLED_SELECTED
+            else optionContainer.setOnClickListener {
                 selectOption(i, label, icon, optionContainer)
             }
-        }
 
-        if (option.selected) {
-            selectOption(i, label, icon, optionContainer)
-        } else {
-            showDeselected(label, icon, optionContainer)
+            if (option.selected) selectOption(i, label, icon, optionContainer)
+            else showDeselected(label, icon, optionContainer)
         }
+    }
+
+    private fun showDisabled(label: BottomSheetContent, icon: ImageView, root: View) {
+        label.setTextColor(disabledTextColor)
+        icon.setColorFilter(disabledIconsColor)
+        root.changeRippleAndStateColor(
+            Color.TRANSPARENT,
+            SELECTOR_STATE_DISABLED_INDEX,
+            disabledBackgroundColor
+        )
+        root.isActivated = true
     }
 
     private fun showSelected(label: BottomSheetContent, icon: ImageView, root: View) {
         label.setTextColor(selectedTextColor)
-        icon.setColorFilter(selectedImageColor)
+        icon.setColorFilter(selectedIconsColor)
+
+        if (root.tag == TAG_DISABLED_SELECTED) {
+            root.changeRippleAndStateColor(Color.TRANSPARENT)
+        }
+
         if (multipleChoice) {
             root.isSelected = true
         }
@@ -176,15 +197,19 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun View.applyColorToDrawable() {
+    private fun View.changeRippleAndStateColor(
+        rippleColor: Int = highlightColor,
+        stateIndex: Int = SELECTOR_STATE_SELECTED_INDEX,
+        stateBackgroundColor: Int = highlightColor
+    ) {
         // Ripple drawable
         (background as RippleDrawable).apply {
-            setColor(ColorStateList.valueOf(highlightColor))
+            setColor(ColorStateList.valueOf(rippleColor))
             // Selector drawable
             (getDrawable(1) as StateListDrawable).apply {
                 // Selected state drawable
-                (getStateDrawable(1) as GradientDrawable).apply {
-                    color = ColorStateList.valueOf(highlightColor)
+                (getStateDrawable(stateIndex) as GradientDrawable).apply {
+                    color = ColorStateList.valueOf(stateBackgroundColor)
                 }
             }
         }
