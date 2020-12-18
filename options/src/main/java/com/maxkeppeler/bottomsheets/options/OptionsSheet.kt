@@ -316,7 +316,6 @@ class OptionsSheet : BottomSheet() {
         dismiss()
     }
 
-    /** Check if the OptionsSheet was setup with valid data. */
     private fun checkSetup() {
 
         if (options.isEmpty())
@@ -361,7 +360,6 @@ class OptionsSheet : BottomSheet() {
         }
     }
 
-    /** Update multiple choices info labels. */
     private fun updateMultipleChoicesInfo() {
 
         if (!showMultipleChoicesInfo) {
