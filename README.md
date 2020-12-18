@@ -293,20 +293,20 @@ Use ```resultListener()``` to receive the final value. (Or use the bundled data 
 
 **InputEditText**<br/>
 Use ```hint()``` to set text hint.<br/>
-Use ```default()``` to set default text.<br/>
+Use ```defaultValue()``` to set default text.<br/>
 Use ```inputType()``` to set the ```android.text.InputType```'s.<br/>
 Use ```inputFilter()``` to set the ```android.text.inputFilter```.<br/>
 
 **InputCheckBox** <br/>
 Use ```text()``` to set the CheckBox text.<br/>
-Use ```default()``` to set default value.
+Use ```defaultValue()``` to set default value.
 
 **InputRadioButtons** <br/>
 Use ```options()``` to add an amount of RadioButtons.<br/>
 Use ```selected()``` to set selected index.<br/>
 
 **InputSpinner** <br/>
-Use ```text()``` to set the text for the Spinner view, when nothing is selected.<br/>
+Use ```noSelectionText()``` to set the text for the Spinner view, when nothing is selected.<br/>
 Use ```options()``` to add an amount of SpinnerItems.<br/>
 Use ```selected()``` to set selected index.<br/>
 
