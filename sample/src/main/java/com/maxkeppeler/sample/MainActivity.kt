@@ -30,8 +30,6 @@ import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
-import com.maxkeppeler.bottomsheets.core.utils.toFormattedDate
-import com.maxkeppeler.bottomsheets.core.utils.toFormattedTimeHHMMSS
 import com.maxkeppeler.bottomsheets.info.InfoSheet
 import com.maxkeppeler.bottomsheets.input.InputSheet
 import com.maxkeppeler.bottomsheets.input.type.InputCheckBox
