@@ -78,7 +78,7 @@ fun Int.isColorDark(threshold: Double = 0.5): Boolean {
 
 @ColorInt
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun Int.withAlpha(@FloatRange(from = 0.0, to = 1.0) alphaFactor: Float): Int {
+internal fun Int.withAlpha(@FloatRange(from = 0.0, to = 1.0) alphaFactor: Float): Int {
     return Color.argb(
         alphaFactor.times(255).toInt(),
         Color.red(this),
