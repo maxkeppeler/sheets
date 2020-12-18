@@ -20,13 +20,21 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 /**
- * An option consists of a drawable and a text.
+ * An option is represented with at least a text.
+ * A drawable is optional but makes it easier to understand to the user.
  */
-class Option(@DrawableRes var drawableRes: Int? = null) {
+class Option internal constructor() {
 
-    var text: String? = null
+    @DrawableRes
+    internal var drawableRes: Int? = null
+        private set
+
+    internal var text: String? = null
+        private set
+
     @StringRes
-    var textRes: Int? = null
+    internal var textRes: Int? = null
+        private set
 
     internal var selected: Boolean = false
         private set
@@ -34,12 +42,20 @@ class Option(@DrawableRes var drawableRes: Int? = null) {
     internal var disabled: Boolean = false
         private set
 
-    constructor(@DrawableRes drawableRes: Int, text: String) : this(drawableRes) {
+    constructor(@StringRes textRes: Int) : this() {
+        this.textRes = textRes
+    }
+
+    constructor(text: String) : this() {
+        this.text = text
+    }
+
+    constructor(@DrawableRes drawableRes: Int, text: String) : this() {
         this.drawableRes = drawableRes
         this.text = text
     }
 
-    constructor(@DrawableRes drawableRes: Int, @StringRes textRes: Int) : this(drawableRes) {
+    constructor(@DrawableRes drawableRes: Int, @StringRes textRes: Int) : this() {
         this.drawableRes = drawableRes
         this.textRes = textRes
     }

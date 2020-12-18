@@ -42,6 +42,7 @@
         <ImageView
             android:id="@+id/icon"
             android:layout_width="24dp"
+            android:visibility="gone"
             android:layout_height="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            app:layout_goneMarginTop="0dp"
             android:alpha="0.7"
             android:ellipsize="end"
             android:maxLines="1"
