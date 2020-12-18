@@ -322,13 +322,17 @@ class OptionsSheet : BottomSheet() {
         if (options.isEmpty())
             throw IllegalStateException("No options added.")
 
-        checkMultipleChoicesSetup()
+        checkChoicesSetup()
     }
 
-    /** Check if the OptionsSheet was setup with valid multiple choices data. */
-    private fun checkMultipleChoicesSetup() {
+    private fun checkChoicesSetup() {
 
-        if (!multipleChoices) return
+        if (!multipleChoices) {
+
+            if(options.any { it.selected && it.disabled }) {
+                throw IllegalStateException("An option is already selected and can't be changed because it's disabled. ")
+            }
+        }
 
         if (minChoices != null && maxChoices != null) {
             binding.range.minimumLabel.visibility = View.GONE
