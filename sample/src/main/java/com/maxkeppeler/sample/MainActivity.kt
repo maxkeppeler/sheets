@@ -45,6 +45,8 @@ import com.maxkeppeler.bottomsheets.time_clock.TimeSheet
 import com.maxkeppeler.sample.custom_sheets_example.CustomSheet
 import com.maxkeppeler.sample.databinding.MainActBinding
 import com.maxkeppeler.sample.utils.BottomSheetExample
+import com.maxkeppeler.sample.utils.toFormattedDate
+import com.maxkeppeler.sample.utils.toFormattedTimeHHMMSS
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
