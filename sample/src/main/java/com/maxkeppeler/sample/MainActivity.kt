@@ -379,10 +379,10 @@ class MainActivity : AppCompatActivity() {
         ClockTimeSheet().show(this) {
             title("Wake-up time")
             format24Hours(Random.nextBoolean()) // By default 24-hours format is enabled
-            currentTime(TimeUnit.HOURS.toMillis(5)) // Set current time
-            onPositive { clockTimeInMillis ->
+            currentTime(TimeUnit.HOURS.toMillis(5).plus(TimeUnit.MINUTES.toMillis(30))) // Set current time
+            onPositive { clockTimeInSec ->
                 // Use selected clock time in millis
-                showToastLong("Clock time", clockTimeInMillis.toFormattedTimeHHMMSS())
+                showToastLong("Clock time", clockTimeInSec.toFormattedTimeHHMMSS())
             }
         }
     }
