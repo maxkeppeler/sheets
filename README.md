@@ -31,6 +31,17 @@
 <br/>
 <img src="art/img_showcase.png" alt="Bottom-Sheets Library">
 
+<a href="https://www.codacy.com/gh/MaxKeppeler/bottom-sheets/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MaxKeppeler/bottom-sheets&amp;utm_campaign=Badge_Grade">
+  <img src="https://app.codacy.com/project/badge/Grade/9a3b68b152e149fd82f0873e2fed78d5" alt="Codacy Code Quality">
+</a>
+
+<a href="https://opensource.org/licenses/Apache-2.0">
+  <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License Apache 2.0">
+</a>
+
+<br/>
+<br/>
+
 Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample_bottom_sheets.apk) to see the bottom sheets in real.
 
 ## Table of Contents
