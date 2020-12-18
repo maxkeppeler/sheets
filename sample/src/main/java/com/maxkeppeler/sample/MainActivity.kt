@@ -461,7 +461,7 @@ class MainActivity : AppCompatActivity() {
                 required()
                 drawable(R.drawable.ic_telegram)
                 label("Favorite show in the list")
-                text("Select Show")
+                noSelectionText("Select Show")
                 options(
                     mutableListOf(
                         "Westworld",
