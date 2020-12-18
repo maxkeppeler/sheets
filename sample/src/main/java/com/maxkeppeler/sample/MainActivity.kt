@@ -452,7 +452,7 @@ class MainActivity : AppCompatActivity() {
             with(InputCheckBox("binge_watching") { // Read value later by index or custom key from bundle
                 label("Binge Watching")
                 text("I'm regularly binge watching shows on Netflix.")
-                default(false)
+                defaultValue(false)
                 changeListener { value -> showToast("CheckBox change", value.toString()) }
                 resultListener { value -> showToast("CheckBox result", value.toString()) }
             })
