@@ -431,8 +431,8 @@ You can override:
 <item name="bottomSheetCornerFamily">rounded</item>
 
 Specific for OptionsSheet
-<item name="bottomSheetOptionActiveImageColor">@color/customActiveOptionImageColor</item>
-<item name="bottomSheetOptionActiveTextColor">@color/customActiveOptionTextColor</item>
+<item name="bottomSheetOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
+<item name="bottomSheetOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
 
 Specific for title text
 <item name="bottomSheetTitleColor">@color/customTitleTextColor</item>
