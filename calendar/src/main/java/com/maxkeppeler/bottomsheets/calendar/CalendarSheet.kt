@@ -240,17 +240,17 @@ class CalendarSheet : BottomSheet() {
 
         selectionShapeStart = InsetDrawable(MaterialShapeDrawable(shapeModelRound).apply {
             fillColor = ColorStateList.valueOf(colorTextActive)
-        }, 8.getDp().toInt(), 8.getDp().toInt(), 8.getDp().toInt(), 8.getDp().toInt())
+        }, 8.toDp(), 8.toDp(), 8.toDp(), 8.toDp())
 
         selectionShapeEnd = InsetDrawable(MaterialShapeDrawable(shapeModelRound).apply {
             fillColor = ColorStateList.valueOf(colorTextActive)
-        }, 8.getDp().toInt(), 8.getDp().toInt(), 8.getDp().toInt(), 8.getDp().toInt())
+        }, 8.toDp(), 8.toDp(), 8.toDp(), 8.toDp())
 
         selectionShapeEndBg =
             InsetDrawable(MaterialShapeDrawable(ShapeAppearanceModel().toBuilder().apply {
             }.build()).apply {
                 fillColor = ColorStateList.valueOf(highlightColor)
-            }, -16.getDp().toInt(), 0.getDp().toInt(), 16.getDp().toInt(), 0.getDp().toInt())
+            }, (-16).toDp(), 0.toDp(), 16.toDp(), 0.toDp())
 
         selectionShapeEndLayer =
             LayerDrawable(arrayOf(selectionShapeEnd, selectionShapeEndBg))
@@ -260,22 +260,22 @@ class CalendarSheet : BottomSheet() {
             }.build()).apply {
                 alpha = 90
                 fillColor = ColorStateList.valueOf(highlightColor)
-            }, 16.getDp().toInt(), 0.getDp().toInt(), -8.getDp().toInt(), 0.getDp().toInt())
+            }, 16.toDp(), 0.toDp(), (-8).toDp(), 0.toDp())
 
         selectionShapeMiddle = InsetDrawable(
             MaterialShapeDrawable(ShapeAppearanceModel().toBuilder().build()).apply {
                 fillColor = ColorStateList.valueOf(highlightColor)
-            }, 0.getDp().toInt(), 8.getDp().toInt(), 0.getDp().toInt(), 8.getDp().toInt()
+            }, 0.toDp(), 8.toDp(), 0.toDp(), 8.toDp()
         )
 
         dayTodayDrawable = InsetDrawable(
             MaterialShapeDrawable(shapeModelRound).apply {
                 fillColor = ColorStateList.valueOf(highlightColor)
             },
-            8.getDp().toInt(),
-            8.getDp().toInt(),
-            8.getDp().toInt(),
-            8.getDp().toInt()
+            8.toDp(),
+            8.toDp(),
+            8.toDp(),
+            8.toDp()
         )
 
         binding.calendarView.edgeEffectFactory = object : RecyclerView.EdgeEffectFactory() {

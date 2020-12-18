@@ -191,10 +191,8 @@ internal class InputAdapter(
                 layoutParams = RadioGroup.LayoutParams(
                     RadioGroup.LayoutParams.MATCH_PARENT,
                     RadioGroup.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    setMargins(8.toDp(), 0, 8.toDp(), 0)
-                }
-                setPadding(90.toDp(), 0, 0, 0)
+                )
+                setPadding(16.toDp(), 0, 0, 0)
                 text = radioButtonText
                 id = index
                 isSelected = index == input.selectedIndex

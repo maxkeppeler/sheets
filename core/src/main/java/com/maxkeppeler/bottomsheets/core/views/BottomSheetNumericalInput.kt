@@ -33,6 +33,7 @@ import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.getDp
 import com.maxkeppeler.bottomsheets.core.utils.getHighlightColor
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
+import com.maxkeppeler.bottomsheets.core.utils.toDp
 
 typealias DigitClickListener = (value: Int) -> Unit
 typealias ImageClickListener = () -> Unit
@@ -71,7 +72,7 @@ class BottomSheetNumericalInput
             val rowLayout = LinearLayout(ctx).apply {
                 layoutParams =
                     LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
-                        if (row < 3) setMargins(0, 0, 0, 16.getDp().toInt())
+                        if (row < 3) setMargins(0, 0, 0, 16.toDp())
                     }
                 orientation = HORIZONTAL
             }
@@ -113,7 +114,7 @@ class BottomSheetNumericalInput
         val view = LinearLayout(ctx).apply {
             orientation = VERTICAL
             layoutParams = LayoutParams(0, LayoutParams.MATCH_PARENT, 1f)
-            minimumHeight = 42.getDp().toInt()
+            minimumHeight = 42.toDp()
             background = ContextCompat.getDrawable(ctx, R.drawable.bs_ripple_bg_rounded)
             gravity = Gravity.CENTER
             isClickable = true
@@ -127,15 +128,15 @@ class BottomSheetNumericalInput
     private fun getDigitView(digitValue: Int): BottomSheetDigit {
 
         val view = BottomSheetDigit(ctx).apply {
-            minimumHeight = 42.getDp().toInt()
+            minimumHeight = 42.toDp()
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
             background = ContextCompat.getDrawable(ctx, R.drawable.bs_ripple_bg_rounded)
             setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Headline5)
             setPadding(
-                8.getDp().toInt(),
-                8.getDp().toInt(),
-                8.getDp().toInt(),
-                8.getDp().toInt()
+                8.toDp(),
+                8.toDp(),
+                8.toDp(),
+                8.toDp()
             )
             isClickable = true
             textAlignment = TEXT_ALIGNMENT_CENTER
