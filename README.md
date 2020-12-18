@@ -447,7 +447,7 @@ Specific for OptionsSheet
 
 <item name="bottomSheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>
 <item name="bottomSheetOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
-<item name="bottomSheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgroundColor</item>
+<item name="bottomSheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
 
 Specific for title text
 <item name="bottomSheetTitleColor">@color/customTitleTextColor</item>
