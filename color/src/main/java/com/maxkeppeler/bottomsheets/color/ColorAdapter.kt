@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorTemplatesItemBinding
 import com.maxkeppeler.bottomsheets.core.utils.colorOf
 
-class ColorAdapter(
+internal class ColorAdapter(
     private val ctx: Context,
     @ColorRes
     private val colors: MutableList<Int>,
