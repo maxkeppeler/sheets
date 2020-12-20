@@ -336,69 +336,69 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Display positive button. */
-    fun displayButtonPositive(display: Boolean) {
+    protected fun displayButtonPositive(display: Boolean) {
         if (display) showButtonPositive()
         else hideButtonPositive()
     }
 
     /** Show positive button */
-    private fun showButtonPositive() {
+    protected fun showButtonPositive() {
         bindingBase.buttons.btnPositive.fadeIn()
         bindingBase.buttons.btnPositive.isClickable = true
     }
 
     /** Hide positive button. */
-    fun hideButtonPositive() {
+    protected fun hideButtonPositive() {
         bindingBase.buttons.btnPositive.fadeOut()
         bindingBase.buttons.btnPositive.isClickable = false
     }
 
     /** Display buttons view. */
-    fun displayButtonsView(display: Boolean) {
+    protected fun displayButtonsView(display: Boolean) {
         if (display) showButtonsView()
         else hideButtonsView()
     }
 
     /** Show buttons view. */
-    fun showButtonsView() {
+    protected fun showButtonsView() {
         bindingBase.buttons.root.visibility = View.VISIBLE
     }
 
     /** Hide buttons view. */
-    fun hideButtonsView() {
+    protected fun hideButtonsView() {
         bindingBase.buttons.root.visibility = View.GONE
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
-    fun setButtonPositiveListener(clickListener: () -> Unit) {
+    protected fun setButtonPositiveListener(clickListener: () -> Unit) {
         bindingBase.buttons.btnPositive.setOnClickListener { clickListener.invoke() }
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
-    fun setToolbarExtraButtonListener(clickListener: () -> Unit) {
+    protected fun setToolbarExtraButtonListener(clickListener: () -> Unit) {
         bindingBase.top.btnExtra.setOnClickListener { clickListener.invoke() }
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
-    fun setToolbarExtraButtonDrawable(@DrawableRes drawableRes: Int) {
+    protected fun setToolbarExtraButtonDrawable(@DrawableRes drawableRes: Int) {
         bindingBase.top.btnExtra.setImageDrawable(
             ContextCompat.getDrawable(requireContext(), drawableRes)
         )
     }
 
     /** Display extra button in toolbar. */
-    fun displayToolbarExtraButton(display: Boolean) {
+    protected fun displayToolbarExtraButton(display: Boolean) {
         if (display) showToolbarExtraButton()
         else hideToolbarExtraButton()
     }
 
     /** Show extra button in toolbar. */
-    fun showToolbarExtraButton() {
+    protected fun showToolbarExtraButton() {
         bindingBase.top.btnExtra.visibility = View.VISIBLE
     }
 
     /** Hide extra button in toolbar. */
-    fun hideToolbarExtraButton() {
+    protected fun hideToolbarExtraButton() {
         bindingBase.top.btnExtra.visibility = View.GONE
     }
 
