@@ -15,6 +15,9 @@
 
 package com.maxkeppeler.bottomsheets.calendar
 
+/**
+ * Calendar modes that can be used.
+ */
 enum class CalendarMode(internal val rows: Int) {
 
     /**

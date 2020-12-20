@@ -46,6 +46,7 @@ class TimeSheet : BottomSheet() {
     private var currentTime: Long? = null
     private var saveAllowed = false
 
+    /** Set the time format. */
     fun format(format: TimeFormat) {
         this.format = format
     }

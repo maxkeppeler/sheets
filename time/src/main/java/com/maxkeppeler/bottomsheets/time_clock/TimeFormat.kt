@@ -16,6 +16,9 @@
 
 package com.maxkeppeler.bottomsheets.time_clock
 
+/**
+ * Time formats that can be used.
+ */
 enum class TimeFormat {
 
     /** HH:mm:ss (e. g. 12h 10m 30s) */
