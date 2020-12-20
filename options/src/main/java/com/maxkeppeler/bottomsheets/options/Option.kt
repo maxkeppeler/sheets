@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.options
 
 import androidx.annotation.DrawableRes
