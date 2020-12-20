@@ -38,11 +38,8 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.kizitonwose.calendarview.model.*
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
-import com.kizitonwose.calendarview.ui.ViewContainer
 import com.kizitonwose.calendarview.utils.yearMonth
 import com.maxkeppeler.bottomsheets.calendar.databinding.BottomSheetsCalendarBinding
-import com.maxkeppeler.bottomsheets.calendar.databinding.BottomSheetsCalendarDayItemBinding
-import com.maxkeppeler.bottomsheets.calendar.databinding.BottomSheetsCalendarHeaderItemBinding
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
@@ -227,7 +224,8 @@ class CalendarSheet : BottomSheet() {
         iconColor = getIconColor(requireContext())
         highlightColor = getHighlightColor(requireContext())
         colorText = getTextColor(requireContext())
-        colorTextInverse = getTextInverseColor(requireContext()).takeUnless { it.isColorDark() } ?: colorText
+        colorTextInverse =
+            getTextInverseColor(requireContext()).takeUnless { it.isColorDark() } ?: colorText
 
         val shapeModelRound = ShapeAppearanceModel().toBuilder().apply {
             setAllCorners(CornerFamily.ROUNDED, 45.getDp())
@@ -363,9 +361,9 @@ class CalendarSheet : BottomSheet() {
         setupMonthScrollListener()
     }
 
-    private fun BottomSheetsCalendarBinding.setupMonthScrollListener() {
+    private fun setupMonthScrollListener() {
 
-        calendarView.monthScrollListener = { month ->
+        binding.calendarView.monthScrollListener = { month ->
             val day = month.weekDays.first().first { it.owner == DayOwner.THIS_MONTH }
             selectedViewDate = day.date
             monthAdapter.updateCurrentYearMonth(day.date.yearMonth)
@@ -373,162 +371,158 @@ class CalendarSheet : BottomSheet() {
         }
     }
 
-    private fun BottomSheetsCalendarBinding.setupDayBinding() {
+    private fun setupDayBinding() {
 
-        val daySelectionListener = { day: CalendarDay ->
-
-            when (selectionMode) {
-
-                SelectionMode.DATE -> {
-                    if (!isDateDisabled(day)) {
-                        selectedDate = day.date
-                        selectedViewDate = day.date
-                        setCurrentDateText(day.date)
-                    }
-                }
-
-                SelectionMode.RANGE -> {
-                    if (!isDateDisabled(day)) {
-                        if (selectedDateStart != null) {
-                            if (day.date < selectedDateStart || selectedDateEnd != null) {
-                                selectedDateStart = day.date
-                                selectedViewDate = day.date
-                                selectedDateEnd = null
-                            } else if (day.date != selectedDateStart) {
-                                if (!containsSelectionDisabledDays(selectedDateStart!!, day.date)) {
-                                    selectedDateEnd = day.date
-                                    selectedViewDate = day.date
-                                } else {
-                                    selectedDateStart = day.date
-                                    selectedViewDate = day.date
-                                }
-                            }
-                        } else {
-                            selectedDateStart = day.date
-                            selectedViewDate = day.date
-                        }
-                        setCurrentDateRangeText(selectedDateStart, selectedDateEnd)
-                    }
-                }
-            }
-
-            updateSpinnerValues()
-            validate() // Validate selection
-            calendarView.notifyCalendarChanged() // Update calendar view
-        }
-
-        class DayViewHolder(view: View) : ViewContainer(view) {
-            val binding = BottomSheetsCalendarDayItemBinding.bind(view)
-            lateinit var day: CalendarDay
-
-            init {
-                view.setOnClickListener {
-                    if (day.owner == DayOwner.THIS_MONTH) {
-                        daySelectionListener.invoke(day)
-                    }
-                }
-            }
-        }
-
-        calendarView.dayBinder = object : DayBinder<DayViewHolder> {
-            override fun create(view: View) = DayViewHolder(view)
+        binding.calendarView.dayBinder = object : DayBinder<DayViewHolder> {
+            override fun create(view: View) = DayViewHolder(view, ::onClickDay)
             override fun bind(container: DayViewHolder, day: CalendarDay) {
                 container.day = day
                 container.binding.day.text = day.day.toString()
+                setupDayDesign(container, day)
+            }
+        }
+    }
 
-                // Hide days from another month
-                if (day.owner != DayOwner.THIS_MONTH) {
-                    container.binding.shape.background = null
-                    container.binding.day.alpha = 0f
-                    return
+    private fun onClickDay(day: CalendarDay) {
+
+        if (day.owner != DayOwner.THIS_MONTH) {
+            // We don't want to
+            return
+        }
+
+        when (selectionMode) {
+
+            SelectionMode.DATE -> {
+                if (!isDateDisabled(day)) {
+                    selectedDate = day.date
+                    selectedViewDate = day.date
+                    setCurrentDateText(day.date)
                 }
+            }
 
-                // Disable day view
-                if (isDateDisabled(day)) {
-                    container.binding.day.alpha = 0.25f
-                    container.binding.day.setTextColor(colorText)
-                    return
+            SelectionMode.RANGE -> {
+                if (!isDateDisabled(day)) {
+                    if (selectedDateStart != null) {
+                        if (day.date < selectedDateStart || selectedDateEnd != null) {
+                            selectedDateStart = day.date
+                            selectedViewDate = day.date
+                            selectedDateEnd = null
+                        } else if (day.date != selectedDateStart) {
+                            if (!containsSelectionDisabledDays(selectedDateStart!!, day.date)) {
+                                selectedDateEnd = day.date
+                                selectedViewDate = day.date
+                            } else {
+                                selectedDateStart = day.date
+                                selectedViewDate = day.date
+                            }
+                        }
+                    } else {
+                        selectedDateStart = day.date
+                        selectedViewDate = day.date
+                    }
+                    setCurrentDateRangeText(selectedDateStart, selectedDateEnd)
                 }
+            }
+        }
 
-                container.binding.day.alpha = 1f
+        updateSpinnerValues()
+        validate() // Validate selection
+        binding.calendarView.notifyCalendarChanged() // Update calendar view
+    }
 
-                when {
+    private fun setupDayDesign(container: DayViewHolder, day: CalendarDay) {
 
-                    // Single date or range start day view
-                    selectedDate == day.date || selectedDateStart == day.date && selectedDateEnd == null -> {
-                        if (container.binding.shape.background != selectionShapeStart) {
-                            container.binding.shape.alpha = 0f
-                            container.binding.shape.background =
-                                selectionShapeStart
-                            container.binding.shape.fadeIn()
-                            container.binding.day.setTextAppearance(
-                                requireContext(),
-                                R.style.TextAppearance_MaterialComponents_Subtitle2
-                            )
-                            container.binding.day.setTextColor(colorTextInverse)
-                        }
-                    }
+        // Hide days from another month
+        if (day.owner != DayOwner.THIS_MONTH) {
+            container.binding.shape.background = null
+            container.binding.day.alpha = 0f
+            return
+        }
 
-                    // Range start with bg transition day view
-                    day.date == selectedDateStart -> {
-                        drawableAnimator = animValues(0f, 255f, 300, {
-                            container.binding.shape.background =
-                                getSelectionShapeStartTransitionDrawable(it)
-                        }, {
-                            container.binding.shape.fadeIn()
-                            container.binding.day.setTextAppearance(
-                                requireContext(),
-                                R.style.TextAppearance_MaterialComponents_Subtitle2
-                            )
-                            container.binding.day.setTextColor(colorTextInverse)
-                        })
-                    }
+        // Disable day view
+        if (isDateDisabled(day)) {
+            container.binding.day.alpha = 0.25f
+            container.binding.day.setTextColor(colorText)
+            return
+        }
 
-                    // Range middle day view
-                    selectedDateStart != null && selectedDateEnd != null && (day.date > selectedDateStart && day.date < selectedDateEnd) -> {
-                        if (container.binding.shape.background != selectionShapeMiddle) {
-                            container.binding.shape.alpha = 0f
-                            container.binding.shape.background =
-                                selectionShapeMiddle
-                            container.binding.shape.fadeIn()
-                        }
-                    }
+        container.binding.day.alpha = 1f
 
-                    // Range end day view
-                    day.date == selectedDateEnd -> {
-                        if (container.binding.shape.background != selectionShapeEndLayer) {
-                            container.binding.shape.alpha = 0f
-                            container.binding.shape.background =
-                                selectionShapeEndLayer
-                            container.binding.shape.fadeIn()
-                            container.binding.day.setTextAppearance(
-                                requireContext(),
-                                R.style.TextAppearance_MaterialComponents_Subtitle2
-                            )
-                            container.binding.day.setTextColor(colorTextInverse)
-                        }
-                    }
+        when {
 
-                    // Today day view
-                    day.date == today -> {
-                        container.binding.shape.background = dayTodayDrawable
-                        container.binding.day.setTextAppearance(
-                            requireContext(),
-                            R.style.TextAppearance_MaterialComponents_Subtitle2
-                        )
-                        container.binding.day.setTextColor(colorTextActive)
-                    }
-
-                    // Normal day view
-                    else -> {
-                        container.binding.shape.background = null
-                        container.binding.day.setTextAppearance(
-                            requireContext(),
-                            R.style.TextAppearance_MaterialComponents_Body2
-                        )
-                        container.binding.day.setTextColor(colorText)
-                    }
+            // Single date or range start day view
+            selectedDate == day.date || selectedDateStart == day.date && selectedDateEnd == null -> {
+                if (container.binding.shape.background != selectionShapeStart) {
+                    container.binding.shape.alpha = 0f
+                    container.binding.shape.background =
+                        selectionShapeStart
+                    container.binding.shape.fadeIn()
+                    container.binding.day.setTextAppearance(
+                        requireContext(),
+                        R.style.TextAppearance_MaterialComponents_Subtitle2
+                    )
+                    container.binding.day.setTextColor(colorTextInverse)
                 }
+            }
+
+            // Range start with bg transition day view
+            day.date == selectedDateStart -> {
+                drawableAnimator = animValues(0f, 255f, 300, {
+                    container.binding.shape.background =
+                        getSelectionShapeStartTransitionDrawable(it)
+                }, {
+                    container.binding.shape.fadeIn()
+                    container.binding.day.setTextAppearance(
+                        requireContext(),
+                        R.style.TextAppearance_MaterialComponents_Subtitle2
+                    )
+                    container.binding.day.setTextColor(colorTextInverse)
+                })
+            }
+
+            // Range middle day view
+            selectedDateStart != null && selectedDateEnd != null && (day.date > selectedDateStart && day.date < selectedDateEnd) -> {
+                if (container.binding.shape.background != selectionShapeMiddle) {
+                    container.binding.shape.alpha = 0f
+                    container.binding.shape.background =
+                        selectionShapeMiddle
+                    container.binding.shape.fadeIn()
+                }
+            }
+
+            // Range end day view
+            day.date == selectedDateEnd -> {
+                if (container.binding.shape.background != selectionShapeEndLayer) {
+                    container.binding.shape.alpha = 0f
+                    container.binding.shape.background =
+                        selectionShapeEndLayer
+                    container.binding.shape.fadeIn()
+                    container.binding.day.setTextAppearance(
+                        requireContext(),
+                        R.style.TextAppearance_MaterialComponents_Subtitle2
+                    )
+                    container.binding.day.setTextColor(colorTextInverse)
+                }
+            }
+
+            // Today day view
+            day.date == today -> {
+                container.binding.shape.background = dayTodayDrawable
+                container.binding.day.setTextAppearance(
+                    requireContext(),
+                    R.style.TextAppearance_MaterialComponents_Subtitle2
+                )
+                container.binding.day.setTextColor(colorTextActive)
+            }
+
+            // Normal day view
+            else -> {
+                container.binding.shape.background = null
+                container.binding.day.setTextAppearance(
+                    requireContext(),
+                    R.style.TextAppearance_MaterialComponents_Body2
+                )
+                container.binding.day.setTextColor(colorText)
             }
         }
     }
@@ -601,18 +595,13 @@ class CalendarSheet : BottomSheet() {
 
     private fun setupMonthHeaderBinding() {
 
-        class MonthViewContainer(view: View) : ViewContainer(view) {
-            private val binding = BottomSheetsCalendarHeaderItemBinding.bind(view)
-            val legend = binding.legend
-        }
-
         val daysOfWeek = getDaysOfWeek()
         binding.calendarView.monthHeaderBinder = object :
-            MonthHeaderFooterBinder<MonthViewContainer> {
-            override fun create(view: View) = MonthViewContainer(view)
-            override fun bind(container: MonthViewContainer, month: CalendarMonth) {
-                if (container.legend.tag != null) return
-                container.legend.tag = month.yearMonth
+            MonthHeaderFooterBinder<MonthViewHolder> {
+            override fun create(view: View) = MonthViewHolder(view)
+            override fun bind(holder: MonthViewHolder, month: CalendarMonth) {
+                if (holder.legend.tag != null) return
+                holder.legend.tag = month.yearMonth
                 daysOfWeek.forEach { daysOfWeek ->
                     val textView = BottomSheetContent(requireContext())
                     textView.setTextAppearance(
@@ -626,7 +615,7 @@ class CalendarSheet : BottomSheet() {
                         }
                     textView.setTextColor(colorText)
                     textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                    container.legend.addView(textView)
+                    holder.legend.addView(textView)
                 }
             }
         }
