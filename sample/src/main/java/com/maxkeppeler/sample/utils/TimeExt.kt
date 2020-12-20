@@ -19,21 +19,12 @@ package com.maxkeppeler.sample.utils
 import android.annotation.SuppressLint
 import androidx.annotation.RestrictTo
 import java.text.SimpleDateFormat
+import java.util.*
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 @SuppressLint("SimpleDateFormat")
 fun Long.toFormattedTimeHHMMSS(): String =
     SimpleDateFormat("HH:mm:ss").format(this)
-
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-@SuppressLint("SimpleDateFormat")
-fun Long.toFormattedTimeHHMM(): String =
-    SimpleDateFormat("HH:mm").format(this)
-
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-@SuppressLint("SimpleDateFormat")
-fun Long.toFormattedTimeMMSS(): String =
-    SimpleDateFormat("mm:ss").format(this)
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 @SuppressLint("SimpleDateFormat")
