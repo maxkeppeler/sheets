@@ -504,6 +504,8 @@ class MainActivity : AppCompatActivity() {
             content("It will help you to setup beautiful bottom sheets in your project.")
             onNegative("Not yet") { /* Set listener when negative button is clicked. */ }
             onPositive("Yes")
+            drawable(R.drawable.ic_github)
+            drawableColor(R.color.md_red_500)
         }
     }
 
