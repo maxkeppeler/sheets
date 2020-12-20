@@ -19,12 +19,18 @@
 package com.maxkeppeler.bottomsheets.info
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.PositiveListener
+import com.maxkeppeler.bottomsheets.core.utils.getIconColor
 import com.maxkeppeler.bottomsheets.info.databinding.BottomSheetsInfoBinding
 
 /**
@@ -35,9 +41,12 @@ class InfoSheet : BottomSheet() {
     override val dialogTag = "InfoSheet"
 
     private lateinit var binding: BottomSheetsInfoBinding
-    private var contentText: String? = null
 
-    // TODO: add drawable support
+    private var contentText: String? = null
+    private var showButtons = false
+    private var drawable: Drawable? = null
+    @ColorInt
+    private var drawableColor: Int? = null
 
     /**
      * Set the content of the bottom sheet.
@@ -66,6 +75,21 @@ class InfoSheet : BottomSheet() {
      */
     fun content(@StringRes contentRes: Int, vararg formatArgs: Any?) {
         this.contentText = windowContext.getString(contentRes, *formatArgs)
+    }
+
+    /** Set a drawable left of the text. */
+    fun drawable(drawable: Drawable) {
+        this.drawable = drawable
+    }
+
+    /** Set a drawable left of the text. */
+    fun drawable(@DrawableRes drawableRes: Int) {
+        this.drawable = windowContext.getDrawable(drawableRes)
+    }
+
+    /** Set the color of the drawable. */
+    fun drawableColor(@ColorRes colorRes: Int) {
+        this.drawableColor = ContextCompat.getColor(windowContext, colorRes)
     }
 
     /**
@@ -99,12 +123,25 @@ class InfoSheet : BottomSheet() {
         this.positiveListener = positiveListener
     }
 
+    /** Show buttons and require a positive button click. */
+    fun showButtons(showButtons: Boolean = true) {
+        this.showButtons = showButtons
+    }
+
     override fun onCreateLayoutView(): View =
         BottomSheetsInfoBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        contentText?.let { binding.contentTextView.text = it }
+        displayButtonsView(showButtons)
+        with(binding) {
+            contentText?.let { content.text = it }
+            drawable?.let { drawable ->
+                icon.setImageDrawable(drawable)
+                icon.setColorFilter(drawableColor ?: getIconColor(requireContext()))
+                icon.visibility = View.VISIBLE
+            }
+        }
     }
 
     /** Build [InfoSheet] and show it later. */
