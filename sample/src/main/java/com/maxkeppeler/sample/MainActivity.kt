@@ -382,9 +382,9 @@ class MainActivity : AppCompatActivity() {
             title("Wake-up time")
             format24Hours(Random.nextBoolean()) // By default 24-hours format is enabled
             currentTime(TimeUnit.HOURS.toMillis(5).plus(TimeUnit.MINUTES.toMillis(30))) // Set current time
-            onPositive { clockTimeInSec ->
+            onPositive { clockTimeInMillis ->
                 // Use selected clock time in millis
-                showToastLong("Clock time", clockTimeInSec.toFormattedTimeHHMMSS())
+                showToastLong("Clock time", clockTimeInMillis.toFormattedTimeHHMMSS())
             }
         }
     }
