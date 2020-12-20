@@ -167,18 +167,15 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         setColorView()
     }
 
-    /** Validate selection. */
     private fun validate() {
         displayButtonPositive(saveAllowed)
     }
 
-    /** Return the current selection and dismiss dialog. */
     private fun save() {
         listener?.invoke(selectedColor)
         dismiss()
     }
 
-    /** Setup teamplates colors view. */
     private fun setupTemplatesView() {
         if (colorMapListRes.isNotEmpty()) {
             binding.colorTemplatesView.layoutManager =
@@ -192,7 +189,6 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         }
     }
 
-    /** Setup SeekBar for alpha, red, green and blue values. */
     private fun setupCustomView() {
 
         with(binding.custom) {
@@ -259,13 +255,11 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         }
     }
 
-    /** Copy current color into clipboard. */
     private fun onCopy() {
         val hex = getHex(selectedColor)
         copyIntoClipboard(requireContext(), "color", hex)
     }
 
-    /** Paste color from clipboard. */
     private fun onPaste() {
         val pastedText = pasteFromClipboard(requireContext())
         pastedText?.let {
@@ -291,7 +285,6 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
     }
 
 
-    /** Set color view. */
     private fun setColorView() {
 
         val templateView = colorView == ColorView.TEMPLATE
@@ -303,11 +296,9 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         }
     }
 
-    /** Get hex string from color. */
     private fun getHex(color: Int): String =
         String.format("#%08X", (0xFFFFFFFF and color.toLong()))
 
-    /** Update the view with current selected color or calculate based on values of SeekBars. **/
     private fun updateColor(calculate: Boolean = false) {
 
         with(binding.custom) {

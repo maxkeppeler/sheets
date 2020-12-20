@@ -69,7 +69,6 @@ internal class TimeSelector(
         validationListener?.invoke(false)
     }
 
-    /** Process clicked digit. */
     private fun onDigit(value: Int) {
 
         if (time.length >= format.length) time.deleteCharAt(0)
@@ -78,7 +77,6 @@ internal class TimeSelector(
         validate()
     }
 
-    /** Validates if the current time is above the min and below the max time. */
     private fun validate() {
 
         if (time.isNotEmpty()) {
@@ -145,14 +143,12 @@ internal class TimeSelector(
         return timeInSeconds
     }
 
-    /** Removes all digits. */
     private fun onClear() {
         time.setLength(0)
         binding.timeValue.setText(getFormattedTime(), TextView.BufferType.SPANNABLE)
         validate()
     }
 
-    /** Removes the last digit of the smallest time unit. */
     private fun onBackspace() {
 
         if (time.isNotEmpty()) time.deleteCharAt(time.lastIndex)
@@ -161,7 +157,6 @@ internal class TimeSelector(
         validate()
     }
 
-    /** Generate spannable formatted time String. */
     private fun getFormattedTime(): SpannableStringBuilder {
 
         val smallTextSize = ctx.resources.getDimensionPixelSize(R.dimen.textSizeSubheading)
@@ -213,7 +208,6 @@ internal class TimeSelector(
         return formattedTime
     }
 
-    /** Create a formatted spannable time text hint. */
     private fun getFormattedHintTime(timeInMillis: Long): SpannableString {
 
         val formattedTime = SpannableStringBuilder()

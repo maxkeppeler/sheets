@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.input
 
 import android.content.Context
@@ -32,7 +34,9 @@ import com.maxkeppeler.bottomsheets.input.type.InputRadioButtons
 /** Listener which returns the inputs with the new data. */
 typealias InputListener = (result: Bundle) -> Unit
 
-@Suppress("unused")
+/**
+ * The [InputSheet] lets you display a form consisting of various inputs.
+ */
 class InputSheet : BottomSheet() {
 
     override val dialogTag = "InputSheet"
@@ -140,18 +144,15 @@ class InputSheet : BottomSheet() {
         }
     }
 
-    /** Validates, if all required inputs have data. */
     private fun validate() {
         displayButtonPositive(saveAllowed)
     }
 
-    /** Return the result and dismiss dialog. */
     private fun save() {
         listener?.invoke(getResult())
         dismiss()
     }
 
-    /** Puts the values of each input into a bundle to extract data more easily. */
     private fun getResult(): Bundle {
         val bundle = Bundle()
         input.forEachIndexed { i, input ->

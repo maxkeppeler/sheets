@@ -136,21 +136,18 @@ internal class ClockTimeSelector(
         increaseIndex()
     }
 
-    /** Focus on hours view and index, when clicked. */
     private fun focusOnHours() {
         currentIndex = 0
         isPositionOnHours = true
         processIndexChange()
     }
 
-    /** Focus on minutes view and index, when clicked. */
     private fun focusOnMinutes() {
         currentIndex = 0
         isPositionOnHours = false
         processIndexChange()
     }
 
-    /** Reduce current index. */
     private fun reduceIndex() {
         when {
             currentIndex == 1 -> currentIndex--
@@ -163,7 +160,6 @@ internal class ClockTimeSelector(
         processIndexChange()
     }
 
-    /** Increase current index. */
     private fun increaseIndex() {
 
         when {
@@ -177,13 +173,11 @@ internal class ClockTimeSelector(
         processIndexChange()
     }
 
-    /** Process the index change. */
     private fun processIndexChange() {
         setUnderlineToIndex()
         limitKeyboardOnIndexInput()
     }
 
-    /** Limit the key of the numerical input depending on index. */
     private fun limitKeyboardOnIndexInput() {
 
         with(bindingSelector.numericalInput) {
@@ -215,7 +209,6 @@ internal class ClockTimeSelector(
         }
     }
 
-    /** Display the underline at the current index. */
     private fun setUnderlineToIndex() {
 
         with(bindingSelector) {
@@ -304,22 +297,18 @@ internal class ClockTimeSelector(
         focusOnHours()
     }
 
-    /** Get hours of current input. */
     private fun getHoursTime(): String =
         hoursBuffer.toString().padStart(2, '0')
 
-    /** Get minutes of current input. */
     private fun getMinutesTime(): String =
         minsBuffer.toString().padStart(2, '0')
 
-    /** Set if am is active. */
     private fun setAmActive(active: Boolean = true) {
         bindingSelector.amLabel.setTextColor(if (active) textActiveColor else colorTextInactive)
         bindingSelector.pmLabel.setTextColor(if (active) colorTextInactive else textActiveColor)
         isAm = active
     }
 
-    /** Set if pm is active. */
     private fun setPmActive() {
         setAmActive(false)
     }
