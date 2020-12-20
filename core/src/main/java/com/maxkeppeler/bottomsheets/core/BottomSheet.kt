@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.bottomsheets.core
 
 import android.content.Context
@@ -50,7 +52,11 @@ typealias NegativeListener = () -> Unit
 /** Listener which is invoked when the bottom sheet is dismissed. */
 typealias DismissListener = () -> Unit
 
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+/**
+ * This class is the base of all types of bottom sheets.
+ * You can implement this class in your own and build your
+ * own custom bottom sheet with the already existing features which the base class offers.
+ */
 abstract class BottomSheet : BottomSheetDialogFragment() {
 
     open val dialogTag = "BottomSheet"
