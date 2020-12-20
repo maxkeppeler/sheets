@@ -264,7 +264,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         setupBottomSheet()
     }
 
-    /** Setup the bottom sheet behavior. */
     private fun setupBottomSheetBehavior(view: View) {
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
@@ -290,11 +289,12 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         })
     }
 
-    /** Setup the bottom sheet background appearance. */
     private fun setupBottomSheetBackground(view: View) {
 
-        val cornerFamily = cornerFamily?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
-        val cornerRadius = cornerRadiusDp?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS
+        val cornerFamily =
+            cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
+        val cornerRadius =
+            cornerRadiusDp ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS
 
         val model = ShapeAppearanceModel().toBuilder().apply {
             setTopRightCorner(cornerFamily, cornerRadius.toDp())
@@ -315,7 +315,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         view.background = shape
     }
 
-    /** Setup the bottom sheet appearance. */
     private fun setupBottomSheet() {
 
         if (hideToolbar) {
