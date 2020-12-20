@@ -43,7 +43,7 @@ class InfoSheet : BottomSheet() {
     private lateinit var binding: BottomSheetsInfoBinding
 
     private var contentText: String? = null
-    private var showButtons = false
+    private var showButtons = true
     private var drawable: Drawable? = null
     @ColorInt
     private var drawableColor: Int? = null
