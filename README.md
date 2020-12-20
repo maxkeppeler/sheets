@@ -138,6 +138,10 @@ InfoSheet().show(context) {
 }
 ```
 
+Use ```content()``` to set the content text.<br/>
+Use ```drawable()``` to display a drawable left of the text.<br/>
+Use ```drawableColor()``` to set the color of the drawable.<br/>
+
 ## Options
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Aoptions/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Aoptions/_latestVersion)
 
