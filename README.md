@@ -500,7 +500,7 @@ Feel free to hit me up to include your app here.
 
 - **[Open an issue](https://github.com/MaxKeppeler/bottom-sheets/issues/)** if you see or got any error.
 
-- Leave your thanks in the [guestbook](https://github.com/MaxKeppeler/bottom-sheets/issues/1) or let me know if you use this library.
+- Leave your thanks [here](https://github.com/MaxKeppeler/bottom-sheets/discussions/categories/show-and-tell) and showcase your implementation.
 
 ## Motivation
 I created several bottom sheets for my apps [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) and [Awake](https://play.google.com/store/apps/details?id=com.mk.awake) in the recent months.
