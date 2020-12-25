@@ -479,7 +479,7 @@ Specific for digit text
 <item name="bottomSheetDigitLetterSpacing">value</item>
 
 Specific for button text
-<item name="bottomSheetButtonTextColor">@color/customButtonTextColor</item>
+<item name="bottomSheetButtonColor">@color/customButtonTextColor</item>
 <item name="bottomSheetButtonTextFont">@font/font</item>
 <item name="bottomSheetButtonTextLetterSpacing">value</item>
 ```
