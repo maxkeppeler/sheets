@@ -80,6 +80,9 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     protected var positiveText: String? = null
     private var negativeText: String? = null
 
+    protected var positiveButtonDrawable: Drawable? = null
+    private var negativeButtonDrawable: Drawable? = null
+
     private var dismissListener: DismissListener? = null
     protected var positiveListener: PositiveListener? = null
     private var negativeListener: NegativeListener? = null
@@ -221,6 +224,40 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
      */
     fun onNegative(negativeText: String, negativeListener: NegativeListener? = null) {
         this.negativeText = negativeText
+        this.negativeListener = negativeListener
+    }
+
+    /**
+     * Set the text and drawable of the negative button and optionally a listener.
+     *
+     * @param negativeRes The String resource id for the negative button.
+     * @param negativeListener Listener that is invoked when the negative button is clicked.
+     * @param drawableRes The drawable resource for the button icon.
+     */
+    fun onNegative(
+        @StringRes negativeRes: Int,
+        @DrawableRes drawableRes: Int,
+        negativeListener: NegativeListener? = null
+    ) {
+        this.negativeText = windowContext.getString(negativeRes)
+        this.negativeButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.negativeListener = negativeListener
+    }
+
+    /**
+     * Set the text and drawable of the negative button and optionally a listener.
+     *
+     * @param negativeText The text for the negative button.
+     * @param negativeListener Listener that is invoked when the negative button is clicked.
+     * @param drawableRes The drawable resource for the button icon.
+     */
+    fun onNegative(
+        negativeText: String,
+        @DrawableRes drawableRes: Int,
+        negativeListener: NegativeListener? = null
+    ) {
+        this.negativeText = negativeText
+        this.negativeButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.negativeListener = negativeListener
     }
 
