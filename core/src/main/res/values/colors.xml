@@ -25,7 +25,7 @@
     <color name="bottomSheetDayBackground">#fff</color>
     <color name="bottomSheetNightBackground">#202020</color>
 
-    <color name="bottomSheetDividerColor">#14000000</color>
+    <color name="bottomSheetDividerColor">#1F000000</color>
 
     <color name="bottomSheetOptionDisabledColor">#0F000000</color>
     <color name="bottomSheetOptionActiveImageColor">#2b92e9</color>
