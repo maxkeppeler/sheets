@@ -189,3 +189,44 @@ fun getCornerFamily(ctx: Context): Int? {
     val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetCornerFamily))
     return a.getInt(0, 0).takeUnlessNotResolved()
 }
+
+/** Get corner family. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun getCornerFamily(ctx: Context, @AttrRes attr: Int): Int? {
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(attr))
+    return a.getInt(0, 0).takeUnlessNotResolved()
+}
+
+
+/** Get an Integer value by theme attributes. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun intOfAttrs(ctx: Context, @AttrRes vararg attrs: Int): Int? {
+    val a = ctx.theme.obtainStyledAttributes(attrs.toList().toIntArray())
+    attrs.forEachIndexed { i, _ ->
+        val attrValue = a.getInt(i, -42)
+        if (attrValue != -42) return attrValue
+    }
+    return null
+}
+
+/** Get an Integer value by theme attributes. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun booleanOfAttrs(ctx: Context, @AttrRes vararg attrs: Int): Boolean {
+    val a = ctx.theme.obtainStyledAttributes(attrs.toList().toIntArray())
+    attrs.forEachIndexed { i, _ ->
+        val attrValue = a.getBoolean(i, false)
+        if (attrValue) return attrValue
+    }
+    return false
+}
+
+/** Get an Integer value by theme attributes. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun dimensionOfAttrs(ctx: Context, @AttrRes vararg attrs: Int): Float? {
+    val a = ctx.theme.obtainStyledAttributes(attrs.toList().toIntArray())
+    attrs.forEachIndexed { i, _ ->
+        val attrValue = a.getDimension(i, -1f)
+        if (attrValue != -1f) return attrValue
+    }
+    return null
+}

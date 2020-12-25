@@ -21,7 +21,29 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="bottomSheetHighlightColor">@color/colorControlHighlight</item>
+        <item name="bottomSheetPrimaryColor">@color/bottomSheetColorPrimary</item>
+
+<!--        <item name="bottomSheetDisplayCloseButton">false</item>-->
+
+<!--        <item name="bottomSheetButtonWidth">wrap_content</item>-->
+<!--        <item name="bottomSheetNegativeButtonCornerFamily">rounded</item>-->
+<!--        <item name="bottomSheetNegativeButtonCornerRadius">8dp</item>-->
+
+<!--        <item name="bottomSheetPositiveButtonCornerFamily">rounded</item>-->
+<!--        <item name="bottomSheetPositiveButtonCornerRadius">8dp</item>-->
+
+<!--        <item name="bottomSheetNegativeButtonType">text_button</item>-->
+<!--        <item name="bottomSheetPositiveButtonType">outlined_button</item>-->
+
+<!--        <item name="bottomSheetNegativeButtonBottomLeftCornerFamily">rounded</item>-->
+<!--        <item name="bottomSheetNegativeButtonTopLeftCornerFamily">rounded</item>-->
+<!--        <item name="bottomSheetNegativeButtonTopRightCornerFamily">rounded</item>-->
+<!--        <item name="bottomSheetNegativeButtonBottomRightCornerFamily">rounded</item>-->
+
+<!--        <item name="bottomSheetNegativeButtonTopLeftCornerRadius">8dp</item>-->
+<!--        <item name="bottomSheetNegativeButtonBottomRightCornerRadius">8dp</item>-->
+<!--        <item name="bottomSheetNegativeButtonTopRightCornerRadius">0dp</item>-->
+<!--        <item name="bottomSheetNegativeButtonBottomLeftCornerRadius">0dp</item>-->
     </style>
 
     <style name="BottomSheetSignNightTheme">
@@ -32,7 +54,7 @@
         <item name="bottomSheetBackgroundColor">@color/signNightThemeBackground</item>
         <!--        <item name="bottomSheetTitleColor">?bottomSheetPrimaryColor</item>-->
 <!--        <item name="bottomSheetValueTextActiveColor">?bottomSheetPrimaryColor</item>-->
-<!--        <item name="bottomSheetButtonTextColor">?bottomSheetPrimaryColor</item>-->
+<!--        <item name="bottomSheetButtonColor">?bottomSheetPrimaryColor</item>-->
 <!--        <item name="bottomSheetOptionActiveImageColor">?bottomSheetPrimaryColor</item>-->
 <!--        <item name="bottomSheetOptionActiveTextColor">?bottomSheetPrimaryColor</item>-->
     </style>

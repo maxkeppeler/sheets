@@ -500,9 +500,11 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheet() {
 
         InfoSheet().show(this) {
-            title("Did you read the README on GitHub?")
+            withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
+            withIconButton(IconButton(R.drawable.ic_mail)) { /* Will not automatically dismiss the bottom sheet. */ }
+            title("Release Notes")
             content("It will help you to setup beautiful bottom sheets in your project.")
-            onNegative("Not yet") { /* Set listener when negative button is clicked. */ }
+            onNegative("Not yet", R.drawable.ic_github) { /* Set listener when negative button is clicked. */ }
             onPositive("Yes")
             drawable(R.drawable.ic_github)
             drawableColor(R.color.md_red_500)

@@ -23,10 +23,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.PositiveListener
@@ -44,7 +41,9 @@ class InfoSheet : BottomSheet() {
 
     private var contentText: String? = null
     private var showButtons = true
+
     private var drawable: Drawable? = null
+
     @ColorInt
     private var drawableColor: Int? = null
 
@@ -104,6 +103,17 @@ class InfoSheet : BottomSheet() {
     /**
      * Set the text of the positive button and optionally a listener.
      *
+     * @param positiveText The text for the positive button.
+     * @param positiveListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onPositive(positiveText: String, positiveListener: PositiveListener? = null) {
+        this.positiveText = positiveText
+        this.positiveListener = positiveListener
+    }
+
+    /**
+     * Set the text of the positive button and optionally a listener.
+     *
      * @param positiveRes The String resource id for the positive button.
      * @param positiveListener Listener that is invoked when the positive button is clicked.
      */
@@ -113,13 +123,36 @@ class InfoSheet : BottomSheet() {
     }
 
     /**
-     * Set the text of the positive button and optionally a listener.
+     * Set the text and icon of the positive button and optionally a listener.
      *
      * @param positiveText The text for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
      * @param positiveListener Listener that is invoked when the positive button is clicked.
      */
-    fun onPositive(positiveText: String, positiveListener: PositiveListener? = null) {
+    fun onPositive(
+        positiveText: String,
+        @DrawableRes drawableRes: Int,
+        positiveListener: PositiveListener? = null
+    ) {
         this.positiveText = positiveText
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveListener = positiveListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param positiveListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        @DrawableRes drawableRes: Int,
+        positiveListener: PositiveListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.positiveListener = positiveListener
     }
 

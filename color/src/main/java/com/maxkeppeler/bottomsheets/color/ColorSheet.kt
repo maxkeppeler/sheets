@@ -29,7 +29,9 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorBinding
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
@@ -143,13 +145,47 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         this.listener = listener
     }
 
+    /**
+     * Set the text of the positive button and set the [ColorListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the selected color when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        @DrawableRes drawableRes: Int,
+        listener: ColorListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = listener
+    }
+
+    /**
+     *  Set the text of the positive button and set the [ColorListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the selected color when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        @DrawableRes drawableRes: Int,
+        listener: ColorListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = listener
+    }
+
     override fun onCreateLayoutView(): View =
         BottomSheetsColorBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
-        displayToolbarExtraButton(switchColorView)
+        displayToolbarTypeButton(switchColorView)
 
         iconColor = getIconColor(requireContext())
         primaryColor = getPrimaryColor(requireContext())
@@ -248,7 +284,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
             btnCopy.setOnClickListener { onCopy() }
             btnPaste.setOnClickListener { onPaste() }
 
-            setToolbarExtraButtonListener {
+            setToolbarTypeButtonListener {
                 colorView = ColorView.TEMPLATE.takeUnless { it == colorView } ?: ColorView.CUSTOM
                 setColorView()
             }
@@ -292,7 +328,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         with(binding) {
             colorTemplatesView.visibility = if (templateView) View.VISIBLE else View.GONE
             custom.root.visibility = if (templateView) View.INVISIBLE else View.VISIBLE
-            setToolbarExtraButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
+            setToolbarTypeButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
         }
     }
 
