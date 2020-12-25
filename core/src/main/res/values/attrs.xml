@@ -40,6 +40,8 @@
         <enum name="cut" value="1" />
     </attr>
 
+    <attr name="bottomSheetDisplayCloseButton" format="boolean" />
+
     <!-- Style for an option in OptionsSheet.  -->
     <declare-styleable name="BottomSheetOption">
 
