@@ -18,26 +18,22 @@ package com.maxkeppeler.bottomsheets.core.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.button.MaterialButton
 import com.maxkeppeler.bottomsheets.R
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
+import com.maxkeppeler.bottomsheets.core.utils.toDp
 
 /** Custom text button used for the bottom buttons view. */
 class BottomSheetButton
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,
-    styleAttr: Int = android.R.attr.buttonStyle
-) : AppCompatButton(ctx, attrs, styleAttr) {
+    styleAttrs: Int = android.R.attr.buttonStyle
+) : MaterialButton(ctx, attrs, styleAttrs) {
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetButton, styleAttr, 0)
-
-        val colorDefault = colorOfAttrs(ctx, R.attr.bottomSheetPrimaryColor, R.attr.colorPrimary)
-        val color = a.getColor(R.styleable.BottomSheetButton_bottomSheetButtonTextColor, colorDefault)
-        setTextColor(color)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetButton, styleAttrs, 0)
 
         val fontResId = a.getResourceId(R.styleable.BottomSheetButton_bottomSheetButtonTextFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
