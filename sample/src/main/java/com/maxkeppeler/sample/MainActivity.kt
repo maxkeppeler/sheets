@@ -415,7 +415,7 @@ class MainActivity : AppCompatActivity() {
                 drawable(R.drawable.ic_telegram)
                 label("How did you find this library?")
                 options(mutableListOf("Google", "GitHub", "Twitter"))
-                selected(0)
+                selected(1)
                 changeListener { value -> showToast("RadioButton change", value.toString()) }
                 resultListener { value -> showToast("RadioButton result", value.toString()) }
             })
@@ -483,7 +483,7 @@ class MainActivity : AppCompatActivity() {
                 drawable(R.drawable.ic_telegram)
                 label("Streaming service of your choice")
                 options(mutableListOf("Netflix", "Amazon", "Other"))
-                //  preselectedIndex(0)
+                selected(0)
                 changeListener { value -> showToast("RadioButton change", value.toString()) }
                 resultListener { value -> showToast("RadioButton result", value.toString()) }
             })
