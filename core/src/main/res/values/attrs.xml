@@ -148,6 +148,16 @@
         <!-- Override button letter spacing. -->
         <attr name="bottomSheetButtonTextLetterSpacing" format="float" />
 
+        <!-- Override radius of all corners.  -->
+        <attr name="bottomSheetButtonCornerRadius" format="dimension" />
+
+        <!-- Override family of all corners.  -->
+        <attr name="bottomSheetButtonCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+
     </declare-styleable>
 
 </resources>
