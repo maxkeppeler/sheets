@@ -342,10 +342,21 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         bindingBase.top.btnExtra.setColorFilter(colorCloseIcon)
 
         positiveText?.let { bindingBase.buttons.btnPositive.text = it }
-        bindingBase.buttons.btnPositive.setOnClickListener { positiveListener?.invoke(); dismiss() }
+        setupButtonsView()
 
         negativeText?.let { bindingBase.buttons.btnNegative.text = it }
         bindingBase.buttons.btnNegative.setOnClickListener { negativeListener?.invoke(); dismiss() }
+    private fun setupButtonsView() {
+
+        bindingBase.buttons.btnNegativeContainer.setupNegativeButton(
+            btnText = negativeText ?: getString(R.string.cancel),
+            btnDrawable = negativeButtonDrawable
+        ) { negativeListener?.invoke(); dismiss() }
+
+        bindingBase.buttons.btnPositiveContainer.setupPositiveButton(
+            btnText = positiveText ?: getString(R.string.ok),
+            btnDrawable = positiveButtonDrawable
+        ) { positiveListener?.invoke(); dismiss() }
     }
 
     /** Display positive button. */
@@ -356,14 +367,14 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     /** Show positive button */
     protected fun showButtonPositive() {
-        bindingBase.buttons.btnPositive.fadeIn()
-        bindingBase.buttons.btnPositive.isClickable = true
+        bindingBase.buttons.btnPositiveContainer.fadeIn()
+        bindingBase.buttons.btnPositiveContainer.isClickable = true
     }
 
     /** Hide positive button. */
     protected fun hideButtonPositive() {
-        bindingBase.buttons.btnPositive.fadeOut()
-        bindingBase.buttons.btnPositive.isClickable = false
+        bindingBase.buttons.btnPositiveContainer.fadeOut()
+        bindingBase.buttons.btnPositiveContainer.isClickable = false
     }
 
     /** Display buttons view. */
@@ -383,8 +394,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
-    protected fun setButtonPositiveListener(clickListener: () -> Unit) {
-        bindingBase.buttons.btnPositive.setOnClickListener { clickListener.invoke() }
+    protected fun setButtonPositiveListener(listener: ClickListener) {
+        bindingBase.buttons.btnPositiveContainer.positiveButtonListener(listener)
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
