@@ -30,7 +30,6 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.R
-import com.maxkeppeler.bottomsheets.core.utils.getDp
 import com.maxkeppeler.bottomsheets.core.utils.getHighlightColor
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.core.utils.toDp

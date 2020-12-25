@@ -14,8 +14,7 @@
   ~  limitations under the License.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/buttons"
     android:layout_width="match_parent"
@@ -29,26 +28,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetButton
-        android:id="@+id/btnNegative"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetButtonContainer
+        android:id="@+id/btnNegativeContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPositive"
+        app:layout_constraintEnd_toStartOf="@+id/btnPositiveContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetButton
-        android:id="@+id/btnPositive"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetButtonContainer
+        android:id="@+id/btnPositiveContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/ok"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnNegative"
+        app:layout_constraintStart_toEndOf="@+id/btnNegativeContainer"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
