@@ -195,11 +195,11 @@ internal class InputAdapter(
                 setPadding(16.toDp(), 0, 0, 0)
                 text = radioButtonText
                 id = index
-                isSelected = index == input.selectedIndex
             }
             radioGroup.addView(button)
         }
 
+        input.selectedIndex?.let { radioGroup.check(it) }
         radioGroup.setOnCheckedChangeListener { _, idIndex ->
             input.value = idIndex
             listener.invoke()
