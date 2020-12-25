@@ -61,12 +61,11 @@
         app:layout_constraintStart_toStartOf="@+id/hexLabel"
         app:layout_constraintTop_toBottomOf="@+id/hexLabel" />
 
-    <ImageView
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetIcon
         android:id="@+id/btnCopy"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
@@ -76,12 +75,11 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <ImageView
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetIcon
         android:id="@+id/btnPaste"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="16dp"
-        android:background="?selectableItemBackgroundBorderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
