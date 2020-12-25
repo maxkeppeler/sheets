@@ -185,7 +185,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
-        displayToolbarExtraButton(switchColorView)
+        displayToolbarTypeButton(switchColorView)
 
         iconColor = getIconColor(requireContext())
         primaryColor = getPrimaryColor(requireContext())
@@ -284,7 +284,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
             btnCopy.setOnClickListener { onCopy() }
             btnPaste.setOnClickListener { onPaste() }
 
-            setToolbarExtraButtonListener {
+            setToolbarTypeButtonListener {
                 colorView = ColorView.TEMPLATE.takeUnless { it == colorView } ?: ColorView.CUSTOM
                 setColorView()
             }
@@ -328,7 +328,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         with(binding) {
             colorTemplatesView.visibility = if (templateView) View.VISIBLE else View.GONE
             custom.root.visibility = if (templateView) View.INVISIBLE else View.VISIBLE
-            setToolbarExtraButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
+            setToolbarTypeButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
         }
     }
 

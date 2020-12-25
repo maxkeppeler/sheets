@@ -39,6 +39,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.utils.Theme
 import com.maxkeppeler.bottomsheets.databinding.BottomSheetsBaseBinding
@@ -52,6 +53,9 @@ typealias NegativeListener = () -> Unit
 /** Listener which is invoked when the bottom sheet is dismissed. */
 typealias DismissListener = () -> Unit
 
+/** Listener which is invoked when buttons are clicked. */
+typealias ClickListener = () -> Unit
+
 /**
  * This class is the base of all types of bottom sheets.
  * You can implement this class in your own and build your
@@ -64,6 +68,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     companion object {
         const val DEFAULT_CORNER_RADIUS = 16f
         const val DEFAULT_CORNER_FAMILY = CornerFamily.ROUNDED
+        const val ICON_BUTTONS_AMOUNT_MAX = 3
     }
 
     open lateinit var windowContext: Context
@@ -93,6 +98,20 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     private var borderStrokeWidthDp: Float? = null
     private var borderStrokeColor: Int? = null
     private var cornerFamily: Int? = null
+
+    private var iconButtons: Array<IconButton?> = arrayOfNulls(ICON_BUTTONS_AMOUNT_MAX)
+
+    /**
+     * Add an icon button to the bottom sheet toolbar to the right of the title.
+     * The icon buttons will be aligned from the right in the order you call this method.
+     * You can only add up to 3 icon buttons.
+     * @throws IllegalStateException If you add more than 3 icon buttons.
+     */
+    fun withIconButton(iconButton: IconButton, listener: ClickListener? = null) {
+        val index = this.iconButtons.indexOfFirst { it == null }
+        if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
+        this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
 
     /** Set if bottom sheet is cancelable outside. */
     fun cancelableOutside(cancelable: Boolean) {
@@ -372,17 +391,52 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             titleText?.let { bindingBase.top.title.text = it }
         }
 
-        val colorCloseIcon = getIconColor(requireContext())
+        bindingBase.top.btnType.setColorFilter(iconsColor)
 
-        btnCloseDrawable?.let { bindingBase.top.btnClose.setImageDrawable(it) }
-        bindingBase.top.btnClose.setColorFilter(colorCloseIcon)
-        bindingBase.top.btnExtra.setColorFilter(colorCloseIcon)
+        bindingBase.top.btnExtra1.setColorFilter(iconsColor)
+        bindingBase.top.btnExtra2.setColorFilter(iconsColor)
+        bindingBase.top.btnExtra3.setColorFilter(iconsColor)
 
-        positiveText?.let { bindingBase.buttons.btnPositive.text = it }
+        setupIconButtons()
         setupButtonsView()
+    }
 
-        negativeText?.let { bindingBase.buttons.btnNegative.text = it }
-        bindingBase.buttons.btnNegative.setOnClickListener { negativeListener?.invoke(); dismiss() }
+    private fun setupIconButtons() {
+
+        iconButtons.filterNotNull().forEachIndexed { i, btn ->
+            btn.drawable?.let { drawable -> setToolbarExtraButtonDrawable(i, drawable) }
+            btn.drawableRes?.let { drawableRes -> setToolbarExtraButtonDrawable(i, drawableRes) }
+            btn.listener?.let { listener -> setToolbarExtraButtonListener(i, listener) }
+            displayToolbarExtraButton(i)
+        }
+    }
+
+
+    private fun setToolbarExtraButtonDrawable(i: Int, @DrawableRes drawableRes: Int) {
+        val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
+        setToolbarExtraButtonDrawable(i, drawable)
+    }
+
+    private fun setToolbarExtraButtonDrawable(i: Int, drawable: Drawable?) {
+        with(bindingBase.top) {
+            when (i) {
+                0 -> btnExtra1
+                1 -> btnExtra2
+                else -> btnExtra3
+            }.setImageDrawable(drawable)
+        }
+    }
+
+    private fun displayToolbarExtraButton(i: Int) {
+        with(bindingBase.top) {
+            when (i) {
+                0 -> btnExtra1
+                1 -> btnExtra2
+                else -> btnExtra3
+            }.visibility = View.VISIBLE
+        }
+    }
+
     private fun setupButtonsView() {
 
         bindingBase.buttons.btnNegativeContainer.setupNegativeButton(
@@ -396,10 +450,12 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         ) { positiveListener?.invoke(); dismiss() }
     }
 
-    /** Display positive button. */
+    /** Display the positive button. */
     protected fun displayButtonPositive(display: Boolean) {
-        if (display) showButtonPositive()
-        else hideButtonPositive()
+        bindingBase.buttons.btnPositiveContainer.apply {
+            isClickable = display
+            if (display) fadeIn() else fadeOut()
+        }
     }
 
     /** Show positive button */
@@ -416,18 +472,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     /** Display buttons view. */
     protected fun displayButtonsView(display: Boolean) {
-        if (display) showButtonsView()
-        else hideButtonsView()
-    }
-
-    /** Show buttons view. */
-    protected fun showButtonsView() {
-        bindingBase.buttons.root.visibility = View.VISIBLE
-    }
-
-    /** Hide buttons view. */
-    protected fun hideButtonsView() {
-        bindingBase.buttons.root.visibility = View.GONE
+        bindingBase.buttons.root.visibility = if (display) View.VISIBLE else View.GONE
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
@@ -435,32 +480,31 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         bindingBase.buttons.btnPositiveContainer.positiveButtonListener(listener)
     }
 
-    /** Set a listener which is invoked when the positive button is clicked. */
-    protected fun setToolbarExtraButtonListener(clickListener: () -> Unit) {
-        bindingBase.top.btnExtra.setOnClickListener { clickListener.invoke() }
+    /** Set a listener which is invoked when the type icon button is clicked. */
+    protected fun setToolbarTypeButtonListener(listener: ClickListener) {
+        bindingBase.top.btnType.setOnClickListener { listener.invoke() }
     }
 
-    /** Set a listener which is invoked when the positive button is clicked. */
-    protected fun setToolbarExtraButtonDrawable(@DrawableRes drawableRes: Int) {
-        bindingBase.top.btnExtra.setImageDrawable(
-            ContextCompat.getDrawable(requireContext(), drawableRes)
-        )
+    /** Set a drawable for the type icon button. */
+    protected fun setToolbarTypeButtonDrawable(@DrawableRes drawableRes: Int) {
+        val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
+        bindingBase.top.btnType.setImageDrawable(drawable)
+        bindingBase.top.btnType.visibility = View.VISIBLE
     }
 
-    /** Display extra button in toolbar. */
-    protected fun displayToolbarExtraButton(display: Boolean) {
-        if (display) showToolbarExtraButton()
-        else hideToolbarExtraButton()
+    /** Display the type icon button. */
+    protected fun displayToolbarTypeButton(display: Boolean) {
+        bindingBase.top.btnType.visibility = if (display) View.VISIBLE else View.GONE
     }
 
-    /** Show extra button in toolbar. */
-    protected fun showToolbarExtraButton() {
-        bindingBase.top.btnExtra.visibility = View.VISIBLE
-    }
-
-    /** Hide extra button in toolbar. */
-    protected fun hideToolbarExtraButton() {
-        bindingBase.top.btnExtra.visibility = View.GONE
+    private fun setToolbarExtraButtonListener(i: Int, listener: ClickListener) {
+        with(bindingBase.top) {
+            when (i) {
+                0 -> btnExtra1
+                1 -> btnExtra2
+                else -> btnExtra3
+            }.setOnClickListener { listener.invoke() }
+        }
     }
 
     /** Show the bottom sheet. */
