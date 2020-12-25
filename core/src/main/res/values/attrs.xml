@@ -157,6 +157,11 @@
             <enum name="cut" value="1" />
         </attr>
 
+        <!-- Override button width. Default: wrap_content  -->
+        <attr name="bottomSheetButtonWidth" format="enum">
+            <enum name="wrap_content" value="-2" />
+            <enum name="match_content" value="-1" />
+        </attr>
 
     </declare-styleable>
 
