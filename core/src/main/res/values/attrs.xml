@@ -139,8 +139,8 @@
     <!--  Style for the buttons.  -->
     <declare-styleable name="BottomSheetButton">
 
-        <!-- Override button text color. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetButtonTextColor" format="reference" />
+        <!-- Override button color. Default: bottomSheetPrimary -->
+        <attr name="bottomSheetButtonColor" format="reference" />
 
         <!-- Override button text font. -->
         <attr name="bottomSheetButtonTextFont" format="reference" />
