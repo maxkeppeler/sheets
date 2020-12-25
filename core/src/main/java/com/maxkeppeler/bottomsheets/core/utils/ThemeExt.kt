@@ -131,8 +131,12 @@ fun getHighlightColor(ctx: Context): Int {
         R.attr.bottomSheetHighlightColor
     ).takeUnlessNotResolved() ?:
     /* Create custom highlight color based on primary color. */
-    getPrimaryColor(ctx).withAlpha(0.06f)
+    getPrimaryColor(ctx).withAlpha(HIGHLIGHT_ALPHA)
 }
+
+/** Get the highlight color of any color. */
+fun getHighlightOfColor(@ColorInt color: Int): Int
+        = color.withAlpha(HIGHLIGHT_ALPHA)
 
 /** Get text color. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
