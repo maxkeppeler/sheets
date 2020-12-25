@@ -169,6 +169,13 @@ fun getBottomSheetBackgroundColor(ctx: Context, @StyleRes styleRes: Int): Int {
         ?: colorOfAttrOfTheme(ctx, attr, styleRes)
 }
 
+/** Get visibility status of the close button. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+internal fun isDisplayCloseButton(ctx: Context): Boolean {
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetDisplayCloseButton))
+    return a.getBoolean(0, true)
+}
+
 /** Get corner radius. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun getCornerRadius(ctx: Context): Float? {
