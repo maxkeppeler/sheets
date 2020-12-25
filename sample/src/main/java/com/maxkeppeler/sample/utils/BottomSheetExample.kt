@@ -20,6 +20,8 @@ import com.maxkeppeler.sample.R
 
 enum class BottomSheetExample(val type: BottomSheetType, @StringRes val textRes: Int) {
 
+    INFO(BottomSheetType.BOTTOM_SHEET_INFO, R.string.info),
+
     OPTIONS_LIST(BottomSheetType.BOTTOM_SHEET_OPTIONS, R.string.options_list),
 
     OPTIONS_HORIZONTAL_SMALL(BottomSheetType.BOTTOM_SHEET_OPTIONS, R.string.options_grid_horizontal_small),
@@ -63,8 +65,6 @@ enum class BottomSheetExample(val type: BottomSheetType, @StringRes val textRes:
     CALENDAR_RANGE_WEEK2(BottomSheetType.BOTTOM_SHEET_CALENDAR, R.string.calendar_week2),
 
     CALENDAR_RANGE_WEEK3(BottomSheetType.BOTTOM_SHEET_CALENDAR, R.string.calendar_week3),
-
-    INFO(BottomSheetType.BOTTOM_SHEET_INFO, R.string.info),
 
     INPUT_SHORT(BottomSheetType.BOTTOM_SHEET_INPUT, R.string.input_short),
 
