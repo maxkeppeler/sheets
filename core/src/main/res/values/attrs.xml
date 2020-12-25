@@ -165,4 +165,117 @@
 
     </declare-styleable>
 
+    <!--  Style for the buttons.  -->
+    <declare-styleable name="BottomSheetNegativeButton">
+
+        <attr name="bottomSheetNegativeButtonType" format="enum">
+            <enum name="text_button" value="0" />
+            <enum name="outlined_button" value="1" />
+            <enum name="button" value="2" />
+        </attr>
+
+        <!-- Override radius of all corners.  -->
+        <attr name="bottomSheetNegativeButtonCornerRadius" format="dimension" />
+
+        <!-- Override family of all corners.  -->
+        <attr name="bottomSheetNegativeButtonCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override bottom left corner radius.  -->
+        <attr name="bottomSheetNegativeButtonBottomLeftCornerRadius" format="dimension" />
+
+        <!-- Override bottom left corner family.  -->
+        <attr name="bottomSheetNegativeButtonBottomLeftCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override top left corner radius.  -->
+        <attr name="bottomSheetNegativeButtonTopLeftCornerRadius" format="dimension" />
+
+        <!-- Override top left corner family.  -->
+        <attr name="bottomSheetNegativeButtonTopLeftCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override bottom right corner radius.  -->
+        <attr name="bottomSheetNegativeButtonBottomRightCornerRadius" format="dimension" />
+
+        <!-- Override top bottom corner family.  -->
+        <attr name="bottomSheetNegativeButtonBottomRightCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override top right corner radius.  -->
+        <attr name="bottomSheetNegativeButtonTopRightCornerRadius" format="dimension" />
+
+        <!-- Override top right corner family.  -->
+        <attr name="bottomSheetNegativeButtonTopRightCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+    </declare-styleable>
+
+    <!--  Style for the buttons.  -->
+    <declare-styleable name="BottomSheetPositiveButton">
+
+        <attr name="bottomSheetPositiveButtonType" format="enum">
+            <enum name="text_button" value="0" />
+            <enum name="outlined_button" value="1" />
+            <enum name="button" value="2" />
+        </attr>
+
+        <!-- Override radius of all corners.  -->
+        <attr name="bottomSheetPositiveButtonCornerRadius" format="dimension" />
+
+        <!-- Override family of all corners.  -->
+        <attr name="bottomSheetPositiveButtonCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override bottom left corner radius.  -->
+        <attr name="bottomSheetPositiveButtonBottomLeftCornerRadius" format="dimension" />
+
+        <!-- Override bottom left corner family.  -->
+        <attr name="bottomSheetPositiveButtonBottomLeftCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override top left corner radius.  -->
+        <attr name="bottomSheetPositiveButtonTopLeftCornerRadius" format="dimension" />
+
+        <!-- Override top left corner family.  -->
+        <attr name="bottomSheetPositiveButtonTopLeftCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override bottom right corner radius.  -->
+        <attr name="bottomSheetPositiveButtonBottomRightCornerRadius" format="dimension" />
+
+        <!-- Override top bottom corner family.  -->
+        <attr name="bottomSheetPositiveButtonBottomRightCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <!-- Override top right corner radius.  -->
+        <attr name="bottomSheetPositiveButtonTopRightCornerRadius" format="dimension" />
+
+        <!-- Override top right corner family.  -->
+        <attr name="bottomSheetPositiveButtonTopRightCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+    </declare-styleable>
+
+
 </resources>
