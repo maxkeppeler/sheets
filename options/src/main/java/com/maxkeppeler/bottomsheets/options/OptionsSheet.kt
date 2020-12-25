@@ -25,8 +25,10 @@ import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
@@ -156,6 +158,40 @@ class OptionsSheet : BottomSheet() {
     }
 
     /**
+     * Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        @DrawableRes drawableRes: Int,
+        listener: OptionListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = listener
+    }
+
+    /**
+     *  Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        @DrawableRes drawableRes: Int,
+        listener: OptionListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = listener
+    }
+
+    /**
      * Set the [OptionListener].
      *
      * @param listener Listener that is invoked with the selected options when the positive button is clicked.
@@ -183,6 +219,40 @@ class OptionsSheet : BottomSheet() {
      */
     fun onPositiveMultiple(positiveText: String, listener: OptionsListener? = null) {
         this.positiveText = positiveText
+        this.listenerMultiple = listener
+    }
+
+    /**
+     * Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositiveMultiple(
+        @StringRes positiveRes: Int,
+        @DrawableRes drawableRes: Int,
+        listener: OptionsListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listenerMultiple = listener
+    }
+
+    /**
+     *  Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositiveMultiple(
+        positiveText: String,
+        @DrawableRes drawableRes: Int,
+        listener: OptionsListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listenerMultiple = listener
     }
 
@@ -328,7 +398,7 @@ class OptionsSheet : BottomSheet() {
 
         if (!multipleChoices) {
 
-            if(options.any { it.selected && it.disabled }) {
+            if (options.any { it.selected && it.disabled }) {
                 throw IllegalStateException("An option is already selected and can't be changed because it's disabled. ")
             }
         }

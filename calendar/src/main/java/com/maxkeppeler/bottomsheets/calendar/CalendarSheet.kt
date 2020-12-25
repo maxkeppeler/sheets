@@ -29,8 +29,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.EdgeEffect
 import android.widget.LinearLayout
+import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -197,6 +199,32 @@ class CalendarSheet : BottomSheet() {
      */
     fun onPositive(positiveText: String, positiveListener: CalendarDateListener? = null) {
         this.positiveText = positiveText
+        this.listener = positiveListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param positiveListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onPositive(@StringRes positiveRes: Int, @DrawableRes drawableRes: Int, positiveListener: CalendarDateListener? = null) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = positiveListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param positiveListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onPositive(positiveText: String, @DrawableRes drawableRes: Int, positiveListener: CalendarDateListener? = null) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = positiveListener
     }
 

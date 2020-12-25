@@ -22,9 +22,9 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputBinding
@@ -107,6 +107,41 @@ class InputSheet : BottomSheet() {
      */
     fun onPositive(positiveText: String, listener: InputListener? = null) {
         this.positiveText = positiveText
+        this.listener = listener
+    }
+
+    /**
+     * Set the text and icon of the positive button and set the [InputListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the new input data when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        @DrawableRes drawableRes: Int,
+        listener: InputListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+
+        this.listener = listener
+    }
+
+    /**
+     *  Set the text and icon of the positive button and set the [InputListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param listener Listener that is invoked with the new input data when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        @DrawableRes drawableRes: Int,
+        listener: InputListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = listener
     }
 
