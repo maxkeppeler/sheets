@@ -317,13 +317,21 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     private fun setupBottomSheet() {
 
+        val iconsColor = getIconColor(requireContext())
+
         if (hideToolbar) {
             bindingBase.top.root.visibility = View.GONE
         } else {
             bindingBase.top.root.visibility = View.VISIBLE
-
-            if (hideCloseButton) bindingBase.top.btnClose.visibility = View.VISIBLE
-            else bindingBase.top.btnClose.setOnClickListener { dismiss() }
+            val isCloseButtonVisible = !hideCloseButton && isDisplayCloseButton(requireContext())
+            if (isCloseButtonVisible) {
+                btnCloseDrawable?.let { bindingBase.top.btnClose.setImageDrawable(it) }
+                bindingBase.top.btnClose.setColorFilter(iconsColor)
+                bindingBase.top.btnClose.setOnClickListener { dismiss() }
+                bindingBase.top.btnClose.visibility = View.VISIBLE
+            } else {
+                bindingBase.top.btnClose.visibility = View.GONE
+            }
             titleText?.let { bindingBase.top.title.text = it }
         }
 
