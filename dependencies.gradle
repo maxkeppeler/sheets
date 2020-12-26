@@ -23,6 +23,7 @@ ext.deps = [
             runtime: "androidx.lifecycle:lifecycle-runtime:2.2.0",
             compiler: "androidx.lifecycle:lifecycle-compiler:2.2.0"
         ],
+        preference: "androidx.preference:preference-ktx:1.1.1",
         recycler_view: "androidx.recyclerview:recyclerview:1.1.0"
     ],
 
