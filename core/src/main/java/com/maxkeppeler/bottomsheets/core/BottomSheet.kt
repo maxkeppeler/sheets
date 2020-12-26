@@ -33,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -514,6 +515,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 is FragmentActivity -> show(ctx.supportFragmentManager, dialogTag)
                 is AppCompatActivity -> show(ctx.supportFragmentManager, dialogTag)
                 is Fragment -> show(ctx.childFragmentManager, dialogTag)
+                is PreferenceFragmentCompat -> show(ctx.childFragmentManager, dialogTag)
                 else -> throw IllegalStateException("Context has no window attached.")
             }
         }
