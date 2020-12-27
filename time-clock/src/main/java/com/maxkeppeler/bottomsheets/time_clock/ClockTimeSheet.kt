@@ -30,7 +30,7 @@ import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClock
 import java.util.*
 
 /** Listener which returns the selected clock time in milliseconds. */
-typealias ClockTimeListener = (clockTimeInMillis: Long) -> Unit
+typealias ClockTimeListener = (milliseconds: Long, hours: Int, minutes: Int) -> Unit
 
 /**
  * The [ClockTimeSheet] lets you quickly pick a clock time.
@@ -135,7 +135,8 @@ class ClockTimeSheet : BottomSheet() {
     }
 
     private fun save() {
-        listener?.invoke(selector.getTimeInMillis())
+        val time = selector.getTime()
+        listener?.invoke(time.first, time.second, time.third)
         dismiss()
     }
 

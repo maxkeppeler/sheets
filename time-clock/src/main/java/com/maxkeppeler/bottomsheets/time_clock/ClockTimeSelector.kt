@@ -255,8 +255,8 @@ internal class ClockTimeSelector(
         }
     }
 
-    /** Get current time in milliseconds. */
-    fun getTimeInMillis(): Long {
+    /** Get current time in milliseconds, hourOfDay and minutes. */
+    fun getTime(): Triple<Long, Int, Int> {
 
         var hh = getHoursTime().toInt()
         val mm = getMinutesTime().toInt()
@@ -265,11 +265,13 @@ internal class ClockTimeSelector(
             if (isAm && hh >= 12 && mm > 0) hh -= 12
             else if (!isAm && hh < 12 && mm >= 0) hh += 12
         }
-        
+
         val hhMillis = TimeUnit.HOURS.toMillis(hh.toLong())
         val mmMillis = TimeUnit.MINUTES.toMillis(mm.toLong())
 
-        return hhMillis + mmMillis
+        val millis = hhMillis + mmMillis
+
+        return Triple(millis, hh, mm)
     }
 
     /** Set current time. */

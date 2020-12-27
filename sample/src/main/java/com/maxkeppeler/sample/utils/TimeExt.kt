@@ -23,10 +23,5 @@ import java.util.*
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 @SuppressLint("SimpleDateFormat")
-fun Long.toFormattedTimeHHMMSS(): String =
-    SimpleDateFormat("HH:mm:ss").format(this)
-
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-@SuppressLint("SimpleDateFormat")
 fun Long.toFormattedDate(): String =
     SimpleDateFormat("d MMM yyyy").format(this)
