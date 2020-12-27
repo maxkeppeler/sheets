@@ -265,13 +265,7 @@ internal class ClockTimeSelector(
             if (isAm && hh >= 12 && mm > 0) hh -= 12
             else if (!isAm && hh < 12 && mm >= 0) hh += 12
         }
-
-        hh = hh.minus(1)
-
-        if (hh == -1) {
-            hh = 23
-        }
-
+        
         val hhMillis = TimeUnit.HOURS.toMillis(hh.toLong())
         val mmMillis = TimeUnit.MINUTES.toMillis(mm.toLong())
 
