@@ -42,6 +42,8 @@
 
     <attr name="bottomSheetDisplayCloseButton" format="boolean" />
 
+    <attr name="bottomSheetDisplayHandle" format="boolean" />
+
     <!-- Style for an option in OptionsSheet.  -->
     <declare-styleable name="BottomSheetOption">
 
