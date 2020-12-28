@@ -83,8 +83,9 @@ Use ```cornerRadius()``` to set corner radius.<br/>
 Use ```cornerFamily()``` to set corner family (cut or rounded).<br/>
 Use ```borderWidth()``` to set the width of the border width.<br/>
 Use ```borderColor()``` to set the color of the border.<br/>
-Use ```hideToolbar()``` to hide the toolbar of the bottom sheet (close icon button, the title and the divider).<br/>
-Use ```hideCloseButton()``` to hide the close icon button.<br/>
+Use ```displayToolbar()``` to show or hide the toolbar of the bottom sheet (close icon button, the title, the divider and icon buttons.).<br/>
+Use ```displayCloseButton()``` to show or hide the close icon button.<br/>
+Use ```displayHandle()``` to show or hide the handle.<br/>
 Use ```title()``` to set the title text.<br/>
 Use ```closeButtonDrawable()``` to set a custom drawable for the close button.<br/>
 Use ```onNegative()``` to set the negative button text and/ or the listener to be invoked when clicked.<br/>
