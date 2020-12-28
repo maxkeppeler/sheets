@@ -80,6 +80,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     private var hideToolbar: Boolean = false
     private var hideCloseButton: Boolean = false
+    private var displayHandle: Boolean = false
+
     private var titleText: String? = null
     private var btnCloseDrawable: Drawable? = null
 
@@ -185,6 +187,11 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     /** Hide the close icon button */
     fun hideCloseButton() {
         this.hideCloseButton = true
+    }
+
+    /** Hide the close icon button */
+    fun displayHandle(displayHandle: Boolean = true) {
+        this.displayHandle = displayHandle
     }
 
     /**
@@ -376,9 +383,13 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
         val iconsColor = getIconColor(requireContext())
 
-        if (hideToolbar) {
-            bindingBase.top.root.visibility = View.GONE
-        } else {
+        val isHandleVisible = displayHandle || isDisplayHandle(requireContext())
+
+        bindingBase.handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
+
+        val isToolbarVisible = !hideToolbar && isDisplayToolbar(requireContext())
+
+        if (isToolbarVisible) {
             bindingBase.top.root.visibility = View.VISIBLE
             val isCloseButtonVisible = !hideCloseButton && isDisplayCloseButton(requireContext())
             if (isCloseButtonVisible) {
@@ -390,6 +401,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 bindingBase.top.btnClose.visibility = View.GONE
             }
             titleText?.let { bindingBase.top.title.text = it }
+        } else {
+            bindingBase.top.root.visibility = View.GONE
         }
 
         bindingBase.top.btnType.setColorFilter(iconsColor)

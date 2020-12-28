@@ -176,6 +176,13 @@ internal fun isDisplayCloseButton(ctx: Context): Boolean {
     return a.getBoolean(0, true)
 }
 
+/** Get visibility status of the handle view. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+internal fun isDisplayHandle(ctx: Context): Boolean {
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetDisplayHandle))
+    return a.getBoolean(0, false)
+}
+
 /** Get corner radius. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun getCornerRadius(ctx: Context): Float? {
