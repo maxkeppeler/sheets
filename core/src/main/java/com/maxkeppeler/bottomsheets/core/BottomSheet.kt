@@ -69,6 +69,9 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     companion object {
         const val DEFAULT_CORNER_RADIUS = 16f
         const val DEFAULT_CORNER_FAMILY = CornerFamily.ROUNDED
+        const val DEFAULT_DISPLAY_HANDLE = false
+        const val DEFAULT_DISPLAY_TOOLBAR = true
+        const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
     }
 
