@@ -81,9 +81,9 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     lateinit var bindingBase: BottomSheetsBaseBinding
 
-    private var hideToolbar: Boolean = false
-    private var hideCloseButton: Boolean = false
-    private var displayHandle: Boolean = false
+    private var displayToolbar: Boolean? = null
+    private var displayCloseButton: Boolean? = null
+    private var displayHandle: Boolean? = null
 
     private var titleText: String? = null
     private var btnCloseDrawable: Drawable? = null
@@ -134,17 +134,26 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         this.peekHeight = peekHeight
     }
 
-    /** Set the [CornerFamily]. */
+    /**
+     * Set the [CornerFamily].
+     * Overrides the style default.
+     */
     fun cornerFamily(cornerFamily: Int) {
         this.cornerFamily = cornerFamily
     }
 
-    /** Set the corner radius in dp. */
+    /**
+     * Set the corner radius in dp.
+     * Overrides the style default.
+     */
     fun cornerRadius(cornerRadiusInDp: Float) {
         this.cornerRadiusDp = cornerRadiusInDp
     }
 
-    /** Set the corner radius in dp. */
+    /**
+     * Set the corner radius in dp.
+     * Overrides the style default.
+     */
     fun cornerRadius(@DimenRes cornerRadiusInDpRes: Int) {
         this.cornerRadiusDp = windowContext.resources.getDimension(cornerRadiusInDpRes)
     }
@@ -167,16 +176,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         this.borderStrokeColor = strokeColor
     }
 
-    /**
-     * Hide the toolbar.
-     *
-     * The toolbar consists of the close icon button, the title and the divider.
-     * For some bottom sheet's it may hide more controls.
-     */
-    fun hideToolbar() {
-        this.hideToolbar = true
-    }
-
     /** Set the Close Button Drawable. */
     fun closeButtonDrawable(closeDrawable: Drawable) {
         this.btnCloseDrawable = closeDrawable
@@ -187,12 +186,27 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         this.btnCloseDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
     }
 
-    /** Hide the close icon button */
-    fun hideCloseButton() {
-        this.hideCloseButton = true
+    /**
+     * Display the toolbar. The toolbar consists of the close icon button,
+     * the title, the divider and the optional icon buttons.
+     * Overrides the style default.
+     */
+    fun displayToolbar(displayToolbar: Boolean = true) {
+        this.displayToolbar = displayToolbar
     }
 
-    /** Hide the close icon button */
+    /**
+     * Display the close button left of the title.
+     * Overrides the style default.
+     */
+    fun displayCloseButton(displayCloseButton: Boolean = true) {
+        this.displayCloseButton = displayCloseButton
+    }
+
+    /**
+     * Display the handle.
+     * Overrides the style default.
+     */
     fun displayHandle(displayHandle: Boolean = true) {
         this.displayHandle = displayHandle
     }
@@ -386,33 +400,38 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
         val iconsColor = getIconColor(requireContext())
 
-        val isHandleVisible = displayHandle || isDisplayHandle(requireContext())
+        val isHandleVisible =
+            displayHandle ?: isDisplayHandle(requireContext(), DEFAULT_DISPLAY_HANDLE)
 
-        bindingBase.handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
+        val isToolbarVisible =
+            displayToolbar ?: isDisplayToolbar(requireContext(), DEFAULT_DISPLAY_TOOLBAR)
 
-        val isToolbarVisible = !hideToolbar && isDisplayToolbar(requireContext())
+        val isCloseButtonVisible =
+            displayCloseButton ?: isDisplayCloseButton(
+                requireContext(),
+                DEFAULT_DISPLAY_CLOSE_BUTTON
+            )
 
-        if (isToolbarVisible) {
-            bindingBase.top.root.visibility = View.VISIBLE
-            val isCloseButtonVisible = !hideCloseButton && isDisplayCloseButton(requireContext())
-            if (isCloseButtonVisible) {
-                btnCloseDrawable?.let { bindingBase.top.btnClose.setImageDrawable(it) }
-                bindingBase.top.btnClose.setColorFilter(iconsColor)
-                bindingBase.top.btnClose.setOnClickListener { dismiss() }
-                bindingBase.top.btnClose.visibility = View.VISIBLE
-            } else {
-                bindingBase.top.btnClose.visibility = View.GONE
+        with(bindingBase) {
+            handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
+            top.root.visibility = if (isToolbarVisible) View.VISIBLE else View.GONE
+            top.btnClose.visibility =
+                if (isToolbarVisible && isCloseButtonVisible) View.VISIBLE else View.GONE
+
+            if (isToolbarVisible) {
+                titleText?.let { top.title.text = it }
+                if (isCloseButtonVisible) {
+                    btnCloseDrawable?.let { drawable -> top.btnClose.setImageDrawable(drawable) }
+                    top.btnClose.setColorFilter(iconsColor)
+                    top.btnClose.setOnClickListener { dismiss() }
+                }
             }
-            titleText?.let { bindingBase.top.title.text = it }
-        } else {
-            bindingBase.top.root.visibility = View.GONE
+
+            top.btnType.setColorFilter(iconsColor)
+            top.btnExtra1.setColorFilter(iconsColor)
+            top.btnExtra2.setColorFilter(iconsColor)
+            top.btnExtra3.setColorFilter(iconsColor)
         }
-
-        bindingBase.top.btnType.setColorFilter(iconsColor)
-
-        bindingBase.top.btnExtra1.setColorFilter(iconsColor)
-        bindingBase.top.btnExtra2.setColorFilter(iconsColor)
-        bindingBase.top.btnExtra3.setColorFilter(iconsColor)
 
         setupIconButtons()
         setupButtonsView()
