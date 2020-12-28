@@ -171,23 +171,23 @@ fun getBottomSheetBackgroundColor(ctx: Context, @StyleRes styleRes: Int): Int {
 
 /** Get visibility status of the toolbar. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-internal fun isDisplayToolbar(ctx: Context): Boolean {
+internal fun isDisplayToolbar(ctx: Context, defaultValue: Boolean): Boolean {
     val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetDisplayToolbar))
-    return a.getBoolean(0, true)
+    return a.getBoolean(0, defaultValue)
 }
 
 /** Get visibility status of the close button. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-internal fun isDisplayCloseButton(ctx: Context): Boolean {
+internal fun isDisplayCloseButton(ctx: Context, defaultValue: Boolean): Boolean {
     val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetDisplayCloseButton))
-    return a.getBoolean(0, true)
+    return a.getBoolean(0, defaultValue)
 }
 
 /** Get visibility status of the handle view. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-internal fun isDisplayHandle(ctx: Context): Boolean {
+internal fun isDisplayHandle(ctx: Context, defaultValue: Boolean): Boolean {
     val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetDisplayHandle))
-    return a.getBoolean(0, false)
+    return a.getBoolean(0, defaultValue)
 }
 
 /** Get corner radius. */
