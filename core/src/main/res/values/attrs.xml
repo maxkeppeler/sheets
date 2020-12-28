@@ -277,5 +277,33 @@
 
     </declare-styleable>
 
+    <!--  Style for the handle.  -->
+    <declare-styleable name="BottomSheetHandle">
+
+        <!-- Override handle width.  -->
+        <attr name="bottomSheetHandleWidth" format="dimension" />
+
+        <!-- Override handle height.  -->
+        <attr name="bottomSheetHandleHeight" format="dimension" />
+
+        <!-- Override handle fill color. -->
+        <attr name="bottomSheetHandleFillColor" format="reference|color" />
+
+        <!-- Override handle border color. -->
+        <attr name="bottomSheetHandleBorderColor" format="reference" />
+
+        <!-- Override handle border width.  -->
+        <attr name="bottomSheetHandleBorderWidth" format="dimension" />
+
+        <!-- Override handle corner radius.  -->
+        <attr name="bottomSheetHandleCornerRadius" format="dimension" />
+
+        <!-- Override handle corner family.  -->
+        <attr name="bottomSheetHandleCornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+    </declare-styleable>
 
 </resources>
