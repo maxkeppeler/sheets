@@ -169,6 +169,13 @@ fun getBottomSheetBackgroundColor(ctx: Context, @StyleRes styleRes: Int): Int {
         ?: colorOfAttrOfTheme(ctx, attr, styleRes)
 }
 
+/** Get visibility status of the toolbar. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+internal fun isDisplayToolbar(ctx: Context): Boolean {
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.bottomSheetDisplayToolbar))
+    return a.getBoolean(0, true)
+}
+
 /** Get visibility status of the close button. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun isDisplayCloseButton(ctx: Context): Boolean {
