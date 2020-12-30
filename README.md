@@ -42,7 +42,7 @@
 <br/>
 <br/>
 
-Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample_bottom_sheets.apk) to see the bottom sheets in real.
+Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample.apk) to see the bottom sheets in real.
 
 ## Table of Contents
 - [Get started](#get-started)
@@ -181,7 +181,7 @@ Use ```maxChoices()``` to set the maximum amount of choices.<br/>
 Set a listener with ```onPositiveMultiple()``` for multiple choices data.<br/>
 Use ```showButtons()``` to show the buttons and require a positive button click.<br/>
 Use ```displayMode()``` to either display it as a list, a vertical or horizontal growing scrollable grid.<br/>
-
+-.
 <img src="art/img_bottom_sheet_options_list.png" width="80%" alt="Bottom-Sheets OptionsSheet List">
 
 **Option Object**
@@ -272,7 +272,8 @@ InputSheet()).show(context) {
     required())
     label("Your favorite TV-Show")
     hint("The Mandalorian, ...")
-    changeListener { value -> } // Input value changes
+    validationListener { value -> } // Add custom validation logic
+    changeListener { value -> } // Input value changed
     resultListener { value -> } // Input value changed when form finished
   })
   with(InputCheckBox("binge_watching") { // Read value later by index or custom key from bundle
@@ -312,6 +313,11 @@ Use ```hint()``` to set text hint.<br/>
 Use ```defaultValue()``` to set default text.<br/>
 Use ```inputType()``` to set the ```android.text.InputType```'s.<br/>
 Use ```inputFilter()``` to set the ```android.text.inputFilter```.<br/>
+Use ```maxLines()``` to set the max amount of lines.<br/>
+Use ```endIconMode()``` to set TextInputLayout.EndIconMode.<br/>
+Use ```endIconActivated()``` to set the EndIcon activated.<br/>
+Use ```passwordVisible()``` to initially make the password visible or invisible.<br/>
+Use ```validationListener()``` to validate the text input with your own logic.<br/>
 
 **InputCheckBox** <br/>
 Use ```text()``` to set the CheckBox text.<br/>
@@ -323,7 +329,7 @@ Use ```selected()``` to set selected index.<br/>
 
 **InputSpinner** <br/>
 Use ```noSelectionText()``` to set the text for the Spinner view, when nothing is selected.<br/>
-Use ```options()``` to add an amount of SpinnerItems.<br/>
+Use ```options()``` to add an amount of SpinnevalidatrItems.<br/>
 Use ```selected()``` to set selected index.<br/>
 
 ## Calendar
@@ -432,57 +438,139 @@ More will be added over time.
 
 ## Appearance
 By default, the library switches to either day or night mode depending on the attr ```textColorPrimary```.
-By default it uses the activity's colorPrimary. The default ```highlightColor``` is generated based on color ```colorPrimary``` and ```bottomSheetPrimaryColor```.
+By default it uses the activity's colorPrimary. The default ```highlightColor``` is generated based on the color ```bottomSheetPrimaryColor```, or if not available ```colorPrimary```.
 
 <img src="art/img_bottom_sheet_appearance_example_options_grid_compact.png" width="35%" alt="Bottom-Sheets Appearance Example">
 
-You can override:
+### Base
+You want a different bottom sheet background shape?
+Then just override the corner family and radius.
+```
+<item name="bottomSheetCornerRadius">12dp</item>
+<item name="bottomSheetCornerFamily">cut</item>
+```
+Just overwrite the base colors, if you want to achieve a different look of the bottom sheets than your app.
 ```
 <item name="bottomSheetPrimaryColor">@color/customPrimaryColor</item>
 <item name="bottomSheetHighlightColor">@color/customHighlightColor</item>
 <item name="bottomSheetBackgroundColor">@color/customBackgroundColor</item>
 <item name="bottomSheetDividerColor">@color/customDividerColor</item>
 <item name="bottomSheetIconsColor">@color/customIconsColor</item>
-<item name="bottomSheetCornerRadius">@dimen/customCornerRadius</item>
-<item name="bottomSheetCornerFamily">rounded</item>
 
-Specific for OptionsSheet
-<item name="bottomSheetOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
-<item name="bottomSheetOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
-
-<item name="bottomSheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>
-<item name="bottomSheetOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
-<item name="bottomSheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
-
-Specific for title text
+```
+You can override the basic style of a bottom sheet. Instead of displaying the toolbar, you can just hide it and display the typical handle.
+```
+<item name="bottomSheetDisplayHandle">true</item>
+<item name="bottomSheetDisplayToolbar">false</item>
+<item name="bottomSheetDisplayCloseButton">false</item>
+```
+Change the appearance of the title.
+```
 <item name="bottomSheetTitleColor">@color/customTitleTextColor</item>
 <item name="bottomSheetTitleFont">@font/font</item>
 <item name="bottomSheetTitleLineHeight">@dimen/dimen</item>
 <item name="bottomSheetTitleLetterSpacing">value</item>
-
-Specific for content text
+```
+Change the appearance of the content text.
+```
 <item name="bottomSheetContentColor">@color/customContentTextColor</item>
 <item name="bottomSheetContentInverseColor">@color/customContentTextInverseColor</item>
 <item name="bottomSheetContentFont">@font/font</item>
 <item name="bottomSheetContentLineHeight">@dimen/dimen</item>
 <item name="bottomSheetContentLetterSpacing">value</item>
-
-Specific for value Text (TimeSheet, ClockTimeSheet, CalendarSheet)
+```
+Change the appearance of the value texts. (e.g. the time in the TimeSheet &amp; ClockTimeSheet or the selected date &amp; period in the Calendarsheet.)
+```
 <item name="bottomSheetValueTextActiveColor">@color/customValueTextColor</item>
 <item name="bottomSheetValueFont">@font/font</item>
 <item name="bottomSheetValueLineHeight">@dimen/dimen</item>
 <item name="bottomSheetValueLetterSpacing">value</item>
-
-Specific for digit text
+```
+Change the appearance of the digit keys on the numerical input.
+```
 <item name="bottomSheetDigitColor">@color/customDigitTextColor</item>
 <item name="bottomSheetDigitFont">@font/font</item>
 <item name="bottomSheetDigitLineHeight">@dimen/dimen</item>
 <item name="bottomSheetDigitLetterSpacing">value</item>
-
-Specific for button text
-<item name="bottomSheetButtonColor">@color/customButtonTextColor</item>
+```
+### Buttons
+Override the appearance of the button text.
+```
 <item name="bottomSheetButtonTextFont">@font/font</item>
 <item name="bottomSheetButtonTextLetterSpacing">value</item>
+```
+Override the general appearance of the buttons (negative and positive button).
+```
+<item name="bottomSheetButtonColor">@color/customButtonColor<item>
+<item name="bottomSheetButtonTextFont">@font/font<item>
+<item name="bottomSheetButtonTextLetterSpacing">value<item>
+<item name="bottomSheetButtonCornerRadius">12dp<item>
+<item name="bottomSheetButtonCornerFamily">cut<item>
+<item name="bottomSheetButtonWidth">match_content/wrap_content<item>
+```
+Override the appearance of the negative button.
+
+```
+<item name="bottomSheetNegativeButtonType">text_button/outlined_button/button<item>
+<item name="bottomSheetNegativeButtonCornerRadius">12dp<item>
+<item name="bottomSheetNegativeButtonCornerFamily">cut<item>
+```
+Override the appearance of the positive button.
+```
+<item name="bottomSheetPositiveButtonType">text_button/outlined_button/button<item>
+<item name="bottomSheetPositiveButtonCornerRadius">12dp<item>
+<item name="bottomSheetPositiveButtonCornerFamily">cut<item>
+```
+The corner family and radius is applied to the button shape or in the case of a outlined or text button, to the ripple background shape.
+
+**Fine control**
+You can even define the corner family and radius of the negative and positive button for each corner.
+```
+<item name="bottomSheetNegativeButtonBottomLeftCornerRadius">4dp<item>
+<item name="bottomSheetNegativeButtonBottomLeftCornerFamily">cut<item>
+...
+<item name="bottomSheetPositiveButtonBottomRightCornerRadius">8dp<item>
+<item name="bottomSheetPositiveButtonBottomRightCornerFamily">rounded<item>
+```
+
+### Handle
+The size and the appearance of the handle can be changed like this:
+```
+<item name="bottomSheetHandleCornerRadius">8dp</item>
+<item name="bottomSheetHandleCornerFamily">rounded</item>
+<item name="bottomSheetHandleFillColor">?bottomSheetPrimaryColor</item>
+<item name="bottomSheetHandleBorderColor">?bottomSheetPrimaryColor</item>
+<item name="bottomSheetHandleBorderWidth">1dp</item>
+<item name="bottomSheetHandleWidth">42dp</item>
+<item name="bottomSheetHandleHeight">4dp</item>
+```
+
+### OptionsSheet
+Override appearance of selected options.
+```
+<item name="bottomSheetOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
+<item name="bottomSheetOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
+```
+Override appearance of disabled options.
+```
+<item name="bottomSheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>
+<item name="bottomSheetOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
+<item name="bottomSheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
+```
+
+### InputSheet
+
+Override the appearance of the TextInputLayout (used for the InputEditText).
+```
+<item name="bottomSheetTextInputLayoutCornerRadius">12dp</item>
+<item name="bottomSheetTextInputLayoutBottomLeftCornerRadius">12dp</item>
+... and for all other corners
+<item name="bottomSheetTextInputLayoutEndIconColor">@color/customEndIconColor</item>
+<item name="bottomSheetTextInputLayoutHelperTextColor">@color/customHelperTextColor</item>
+<item name="bottomSheetTextInputLayoutBoxStrokeColor">@color/customBoxStrokeColor</item>
+<item name="bottomSheetTextInputLayoutHintTextColor">@color/customHintTextColor</item>
+<item name="bottomSheetTextInputLayoutBoxStrokeErrorColor">@color/customBoxStrokeErrorColor</item>
+<item name="bottomSheetTextInputLayoutErrorTextColor">@color/customErrorTextColor</item>
 ```
 
 # Misc
