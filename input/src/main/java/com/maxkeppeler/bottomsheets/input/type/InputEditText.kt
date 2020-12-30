@@ -28,6 +28,9 @@ typealias EditTextInputListener = (value: String?) -> Unit
 
 /** Listener that is invoked when the value changes and to which a custom validation logic can be executed. */
 typealias EditTextInputValidationListener = (value: String /* Non-nullable, text entered can not be null. */) -> ValidationResult
+
+/** Listener that is invoked after a custom validation. */
+internal typealias EditTextInputValidationResultListener = (validationResult: ValidationResult) -> Unit
 /**
  * Input of the type EditText.
  */
