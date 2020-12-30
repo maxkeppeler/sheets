@@ -17,12 +17,14 @@
 package com.maxkeppeler.sample
 
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.shape.CornerFamily
+import com.google.android.material.textfield.TextInputLayout
 import com.maxkeppeler.bottomsheets.calendar.CalendarMode
 import com.maxkeppeler.bottomsheets.calendar.CalendarSheet
 import com.maxkeppeler.bottomsheets.calendar.SelectionMode
@@ -33,6 +35,7 @@ import com.maxkeppeler.bottomsheets.core.IconButton
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
 import com.maxkeppeler.bottomsheets.info.InfoSheet
 import com.maxkeppeler.bottomsheets.input.InputSheet
+import com.maxkeppeler.bottomsheets.input.Validation
 import com.maxkeppeler.bottomsheets.input.type.InputCheckBox
 import com.maxkeppeler.bottomsheets.input.type.InputEditText
 import com.maxkeppeler.bottomsheets.input.type.InputRadioButtons
@@ -49,6 +52,7 @@ import com.maxkeppeler.sample.utils.BottomSheetExample
 import com.maxkeppeler.sample.utils.toFormattedDate
 import java.util.*
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
 import kotlin.random.Random
 
 /**
@@ -106,6 +110,7 @@ class MainActivity : AppCompatActivity() {
             BottomSheetExample.INFO -> showInfoSheet()
             BottomSheetExample.INPUT_SHORT -> showInputSheetShort()
             BottomSheetExample.INPUT_LONG -> showInputSheetLong()
+            BottomSheetExample.INPUT_PASSWORD -> showInputSheetPassword()
             BottomSheetExample.CUSTOM1 -> showCustomSheet()
         }
     }
@@ -448,6 +453,7 @@ class MainActivity : AppCompatActivity() {
                 drawable(R.drawable.ic_mail)
                 label("Your favorite TV-Show")
                 hint("The Mandalorian, ...")
+                inputType(InputType.TYPE_CLASS_TEXT)
                 changeListener { value -> showToast("Text change", value) }
                 resultListener { value -> showToast("Text result", value) }
             })
@@ -489,12 +495,61 @@ class MainActivity : AppCompatActivity() {
                 changeListener { value -> showToast("RadioButton change", value.toString()) }
                 resultListener { value -> showToast("RadioButton result", value.toString()) }
             })
-
             onNegative { showToast("InputSheet cancelled", "No result") }
             onPositive { result ->
                 showToastLong("InputSheet result", result.toString())
                 val text = result.getString("0") // Read value of inputs by index
                 val check = result.getBoolean("binge_watching") // Read value by passed key
+            }
+        }
+    }
+
+    private fun showInputSheetPassword() {
+
+        var password1: String? = "1"
+        var password2: String?
+        val regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+        val errorText =
+            "Must contain at least one digit, lower case letter, upper case letter, special character, no whitespace and at least 8 characters."
+
+        InputSheet().show(this) {
+            title("Choose a password")
+            content("Make sure the password is safe enough and is not used for any other account.")
+            withIconButton(IconButton(R.drawable.ic_help)) { showToast("IconButton", "Help clicked...") }
+            with(InputEditText {
+                required()
+                hint("Password")
+                drawable(R.drawable.ic_lock)
+                endIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                passwordVisible(false /* Don't display password in clear text. */)
+                validationListener { value ->
+                    password1 = value
+                    val pattern = Pattern.compile(regex)
+                    val matcher = pattern.matcher(value)
+                    val valid = matcher.find()
+                    if (valid) Validation.success()
+                    else Validation.failed(errorText)
+                }
+                changeListener { value -> showToast("Text change", value) }
+                resultListener { value -> showToast("Text result", value) }
+            })
+            with(InputEditText {
+                required()
+                drawable(R.drawable.ic_lock)
+                hint("Repeat password")
+                endIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                passwordVisible(false)
+                validationListener { value ->
+                    password2 = value
+                    if (password1 != password2) {
+                        Validation.failed("Passwords don't match.")
+                    } else Validation.success()
+                }
+                resultListener { value -> showToast("Text result", value) }
+            })
+            onNegative("cancel") { showToast("InputSheet cancelled", "No result") }
+            onPositive("register") {
+                showToastLong("InputSheet result", "Passwords matched.")
             }
         }
     }
@@ -506,7 +561,10 @@ class MainActivity : AppCompatActivity() {
             withIconButton(IconButton(R.drawable.ic_mail)) { /* Will not automatically dismiss the bottom sheet. */ }
             title("Release Notes")
             content("It will help you to setup beautiful bottom sheets in your project.")
-            onNegative("Not yet", R.drawable.ic_github) { /* Set listener when negative button is clicked. */ }
+            onNegative(
+                "Not yet",
+                R.drawable.ic_github
+            ) { /* Set listener when negative button is clicked. */ }
             onPositive("Yes")
             drawable(R.drawable.ic_github)
             drawableColor(R.color.md_red_500)
