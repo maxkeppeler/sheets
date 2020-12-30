@@ -26,6 +26,8 @@ import androidx.annotation.StringRes
 /** Listener which returns the new value. */
 typealias EditTextInputListener = (value: String?) -> Unit
 
+/** Listener that is invoked when the value changes and to which a custom validation logic can be executed. */
+typealias EditTextInputValidationListener = (value: String /* Non-nullable, text entered can not be null. */) -> ValidationResult
 /**
  * Input of the type EditText.
  */
