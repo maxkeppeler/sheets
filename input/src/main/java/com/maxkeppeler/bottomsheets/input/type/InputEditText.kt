@@ -22,8 +22,10 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
 import androidx.annotation.StringRes
+import com.google.android.material.textfield.TextInputLayout
+import com.maxkeppeler.bottomsheets.input.ValidationResult
 
-/** Listener which returns the new value. */
+/** Listener that returns the new value. */
 typealias EditTextInputListener = (value: String?) -> Unit
 
 /** Listener that is invoked when the value changes and to which a custom validation logic can be executed. */
@@ -31,6 +33,7 @@ typealias EditTextInputValidationListener = (value: String /* Non-nullable, text
 
 /** Listener that is invoked after a custom validation. */
 internal typealias EditTextInputValidationResultListener = (validationResult: ValidationResult) -> Unit
+
 /**
  * Input of the type EditText.
  */
@@ -61,6 +64,18 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
         private set
 
     internal var defaultTextRes: Int? = null
+        private set
+
+    internal var maxLines: Int? = null
+        private set
+
+    internal var endIconMode: Int? = null
+        private set
+
+    internal var isPasswordVisible: Boolean? = null
+        private set
+
+    internal var isEndIconActivated: Boolean? = null
         private set
 
     var value: String? = null
@@ -106,6 +121,26 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     /** Set the [InputFilter]. */
     fun inputFilter(inputFilter: InputFilter) {
         this.inputFilter = inputFilter
+    }
+
+    /** Set the max lines. */
+    fun maxLines(maxLines: Int) {
+        this.maxLines = maxLines
+    }
+
+    /** Set the end icon mode. */
+    fun endIconMode(@TextInputLayout.EndIconMode endIconMode: Int) {
+        this.endIconMode = endIconMode
+    }
+
+    /** Activate the end icon. */
+    fun endIconActivated(isEndIconActivated: Boolean) {
+        this.isEndIconActivated = isEndIconActivated
+    }
+
+    /** Set the initial visibility of the password. This overrides the transformationMethod for the EditText. */
+    fun passwordVisible(isPasswordVisible: Boolean) {
+        this.isPasswordVisible = isPasswordVisible
     }
 
     /** Set a listener that is invoked when the value needs to be validated. */
