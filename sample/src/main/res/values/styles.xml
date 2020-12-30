@@ -21,6 +21,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
         <item name="bottomSheetPrimaryColor">@color/bottomSheetColorPrimary</item>
 
 <!--        <item name="bottomSheetDisplayCloseButton">false</item>-->
@@ -29,11 +30,13 @@
 
 <!--        <item name="bottomSheetHandleWidth">42dp</item>-->
 <!--        <item name="bottomSheetHandleHeight">4dp</item>-->
-
 <!--        <item name="bottomSheetHandleFillColor">?bottomSheetPrimaryColor</item>-->
 <!--        <item name="bottomSheetHandleBorderColor">?bottomSheetPrimaryColor</item>-->
 <!--        <item name="bottomSheetHandleBorderWidth">1dp</item>-->
 <!--        <item name="bottomSheetDisplayCloseButton">false</item>-->
+<!---->
+<!--        <item name="bottomSheetTextInputLayoutCornerRadius">8dp</item>-->
+<!--        <item name="bottomSheetTextInputLayoutTopLeftCornerRadius">0dp</item>-->
 
 <!--        <item name="bottomSheetButtonWidth">wrap_content</item>-->
 <!--        <item name="bottomSheetNegativeButtonCornerFamily">rounded</item>-->
