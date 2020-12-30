@@ -51,7 +51,7 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     internal var hintRes: Int? = null
         private set
 
-    internal var inputType: Int = InputType.TYPE_CLASS_TEXT
+    internal var inputType: Int? = null
         private set
 
     internal var inputFilter: InputFilter? = null
