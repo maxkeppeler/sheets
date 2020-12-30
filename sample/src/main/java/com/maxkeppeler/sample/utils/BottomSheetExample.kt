@@ -70,6 +70,8 @@ enum class BottomSheetExample(val type: BottomSheetType, @StringRes val textRes:
 
     INPUT_LONG(BottomSheetType.BOTTOM_SHEET_INPUT, R.string.input_long),
 
+    INPUT_PASSWORD(BottomSheetType.BOTTOM_SHEET_INPUT, R.string.input_password),
+
     CUSTOM1(BottomSheetType.BOTTOM_SHEET_CUSTOM, R.string.custom_sheet_example_1)
 
 }
