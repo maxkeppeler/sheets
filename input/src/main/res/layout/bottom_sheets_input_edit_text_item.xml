@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,36 +45,41 @@
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/text"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetEdit
-        android:id="@+id/text"
-        style="@style/TextAppearance.MaterialComponents.Body2"
+    <com.maxkeppeler.bottomsheets.core.views.BottomSheetTextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/bs_ripple_input_edit_text"
-        android:fadeScrollbars="false"
-        android:inputType="textMultiLine"
-        android:maxLines="12"
-        android:gravity="center_vertical"
-        android:minHeight="42dp"
-        android:overScrollMode="always"
-        android:lineSpacingMultiplier="1.2"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="4dp"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="vertical"
-        android:textIsSelectable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/label"
-        app:layout_goneMarginTop="8dp" />
+        app:layout_goneMarginTop="8dp">
+
+        <com.maxkeppeler.bottomsheets.core.views.BottomSheetInputEditText
+            android:id="@+id/textInput"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:fadeScrollbars="true"
+            android:fadingEdgeLength="4dp"
+            android:gravity="top|left"
+            android:maxLines="8"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="vertical"
+            android:scrollbarFadeDuration="@android:integer/config_mediumAnimTime"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            android:singleLine="true" />
+
+    </com.maxkeppeler.bottomsheets.core.views.BottomSheetTextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
