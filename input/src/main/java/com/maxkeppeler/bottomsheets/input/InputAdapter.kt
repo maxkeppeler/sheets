@@ -19,7 +19,8 @@ package com.maxkeppeler.bottomsheets.input
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.text.method.ScrollingMovementMethod
+import android.graphics.Color
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -29,7 +30,10 @@ import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.bottomsheets.core.utils.*
+import com.maxkeppeler.bottomsheets.core.utils.getIconColor
+import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
+import com.maxkeppeler.bottomsheets.core.utils.getTextColor
+import com.maxkeppeler.bottomsheets.core.utils.toDp
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputCheckBoxItemBinding
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputEditTextItemBinding
@@ -130,36 +134,54 @@ internal class InputAdapter(
     @SuppressLint("ClickableViewAccessibility")
     private fun BottomSheetsInputEditTextItemBinding.buildEditText(input: InputEditText) {
 
-        setupGeneralInputInfo(input, label, icon)
+        setupGeneralInputInfo(input)
 
-        val hintText = input.hintRes?.let { ctx.getString(it) } ?: input.hint
-        hintText?.let { text.hint = it }
+        with(textInput) {
 
-        val valueText = input.defaultTextRes?.let { ctx.getString(it) } ?: input.defaultText
-        valueText?.let { text.setText(it) }
+            val valueText = input.defaultTextRes?.let { ctx.getString(it) } ?: input.defaultText
+            valueText?.let { setText(it) }
 
-        text.inputType = input.inputType
-        input.inputFilter?.let { text.filters = arrayOf(it) }
-
-        icon.setColorFilter(primaryColor)
-        text.setTextColor(textColor)
-        text.setHintTextColor(textColor)
-        text.isVerticalScrollBarEnabled = true
-        text.overScrollMode = View.OVER_SCROLL_ALWAYS
-        text.scrollBarStyle = View.SCROLLBARS_INSIDE_INSET
-        text.movementMethod = ScrollingMovementMethod.getInstance()
-
-        text.setOnTouchListener { view, motionEvent ->
-            view.parent.requestDisallowInterceptTouchEvent(true)
-            if (motionEvent.action and MotionEvent.ACTION_UP != 0 && motionEvent.actionMasked and MotionEvent.ACTION_UP != 0) {
-                view.parent.requestDisallowInterceptTouchEvent(false)
+            input.isPasswordVisible?.let {
+                transformationMethod = if (it) null else PasswordTransformationMethod()
             }
-            false
+
+            input.inputType?.let { inputType = it }
+            input.maxLines?.let { maxLines = it }
+            input.inputFilter?.let { filters = arrayOf(it) }
+
+            isVerticalScrollBarEnabled = true
+
+            setOnTouchListener { view, motionEvent ->
+                if (motionEvent.action != 0 && MotionEvent.ACTION_UP != 0 || MotionEvent.ACTION_DOWN != 0) {
+                    view.parent.requestDisallowInterceptTouchEvent(true)
+                    false
+                } else false
+            }
+
+            addTextWatcher { text ->
+                input.value = text
+                listener.invoke()
+            }
         }
 
-        text.addTextWatcher { text ->
-            input.value = text
-            listener.invoke()
+        with(textInputLayout) {
+
+            val hintText = input.hintRes?.let { ctx.getString(it) } ?: input.hint
+            hintText?.let { hint = it }
+
+            input.endIconMode?.let { endIconMode = it }
+            input.isEndIconActivated?.let { setEndIconActivated(it) }
+            input.drawableRes?.let { setStartIconDrawable(it) }
+
+            input.validationResultListener { result ->
+                if (!result.valid) {
+                    error = result.errorText
+                    setErrorIconDrawable(R.drawable.bs_ic_close)
+                    setErrorTextColor(ColorStateList.valueOf(Color.RED))
+                    setErrorIconTintList(ColorStateList.valueOf(Color.RED))
+                }
+                isErrorEnabled = !result.valid
+            }
         }
     }
 
@@ -211,7 +233,8 @@ internal class InputAdapter(
         setupGeneralInputInfo(input, label, icon)
 
         if (input.selectedIndex == null) {
-            val spinnerNoSelectionText = input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
+            val spinnerNoSelectionText =
+                input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
             input.spinnerOptions?.add(spinnerNoSelectionText ?: ctx.getString(R.string.select))
         }
 
@@ -241,14 +264,16 @@ internal class InputAdapter(
 
     private fun setupGeneralInputInfo(
         input: Input,
-        label: BottomSheetContent,
+        label: BottomSheetContent? = null,
         icon: ImageView? = null
     ) {
 
-        val labelText = input.labelRes?.let { ctx.getString(it) } ?: input.label
-        labelText?.let {
-            label.text = it.takeUnless { input.required } ?: it.plus(" *")
-            label.visibility = View.VISIBLE
+        label?.let {
+            val labelText = input.labelRes?.let { ctx.getString(it) } ?: input.label
+            labelText?.let {
+                label.text = it.takeUnless { input.required } ?: it.plus(" *")
+                label.visibility = View.VISIBLE
+            }
         }
 
         icon?.let {
