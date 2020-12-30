@@ -18,25 +18,23 @@ package com.maxkeppeler.bottomsheets.core.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.annotation.RestrictTo
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.textfield.TextInputEditText
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttr
 
 /** Custom EditTextView used for text input. */
-class BottomSheetEdit
+class BottomSheetInputEditText
 @JvmOverloads constructor(
     ctx: Context,
-    attrs: AttributeSet? = null,
-    styleAttr: Int = android.R.attr.textViewStyle
-) : AppCompatEditText(ctx, attrs, styleAttr) {
+    attrs: AttributeSet? = null
+) : TextInputEditText(ctx, attrs) {
 
     init {
 
         // Ignore that this custom view uses the same styleable as BottomSheetContent, as it is supposed to look the same
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetContent, styleAttr, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetContent, 0, 0)
 
         val colorDefault = colorOfAttr(ctx, android.R.attr.textColorPrimary)
         val color = a.getColor(R.styleable.BottomSheetContent_bottomSheetContentColor, colorDefault)
