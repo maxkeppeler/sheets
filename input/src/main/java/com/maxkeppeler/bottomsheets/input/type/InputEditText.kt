@@ -40,6 +40,8 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
         func()
     }
 
+    private var validationResultListener: EditTextInputValidationResultListener? = null
+    private var validationListener: EditTextInputValidationListener? = null
     private var changeListener: EditTextInputListener? = null
     private var resultListener: EditTextInputListener? = null
 
@@ -63,9 +65,18 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
 
     var value: String? = null
         internal set(value) {
-            changeListener?.invoke(value)
+            invokeListeners(value)
             field = value
         }
+
+    private fun invokeListeners(value: String?) {
+        changeListener?.invoke(value)
+        value?.let { textValue ->
+            validationListener?.invoke(textValue)?.let { result ->
+                validationResultListener?.invoke(result)
+            }
+        }
+    }
 
     /** Set the default value. */
     fun defaultValue(@StringRes defaultTextRes: Int) {
@@ -97,6 +108,15 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
         this.inputFilter = inputFilter
     }
 
+    /** Set a listener that is invoked when the value needs to be validated. */
+    fun validationListener(listener: EditTextInputValidationListener) {
+        this.validationListener = listener
+    }
+
+    internal fun validationResultListener(listener: EditTextInputValidationResultListener) {
+        this.validationResultListener = listener
+    }
+
     /** Set a listener which returns the new value when it changed. */
     fun changeListener(listener: EditTextInputListener) {
         this.changeListener = listener
@@ -107,8 +127,12 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
         this.resultListener = listener
     }
 
-    override fun valid(): Boolean = !defaultText.isNullOrEmpty()
-            || !value.isNullOrEmpty()
+    override fun valid(): Boolean {
+        val customValidationOk = value?.let { validationListener?.invoke(it)?.valid } ?: true
+        val requiredValid =
+            (required && !defaultText.isNullOrEmpty() || !value.isNullOrEmpty() || !required)
+        return customValidationOk && requiredValid
+    }
 
     override fun invokeResultListener() =
         resultListener?.invoke(value)
