@@ -32,7 +32,7 @@
     <attr name="bottomSheetIconsColor" format="color" />
 
     <!-- Override default corner radius.  -->
-    <attr name="bottomSheetCornerRadius" format="dimension"/>
+    <attr name="bottomSheetCornerRadius" format="dimension" />
 
     <!-- Override default corner family.  -->
     <attr name="bottomSheetCornerFamily" format="enum">
@@ -307,6 +307,44 @@
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
+
+    </declare-styleable>
+
+    <!--  Style for the handle.  -->
+    <declare-styleable name="BottomSheetTextInputLayout">
+
+        <!-- Override handle corner radius.  -->
+        <attr name="bottomSheetTextInputLayoutCornerRadius" format="dimension" />
+
+        <!-- Override bottom left corner radius.  -->
+        <attr name="bottomSheetTextInputLayoutBottomLeftCornerRadius" format="dimension" />
+
+        <!-- Override top left corner radius.  -->
+        <attr name="bottomSheetTextInputLayoutTopLeftCornerRadius" format="dimension" />
+
+        <!-- Override bottom right corner radius.  -->
+        <attr name="bottomSheetTextInputLayoutBottomRightCornerRadius" format="dimension" />
+
+        <!-- Override top right corner radius.  -->
+        <attr name="bottomSheetTextInputLayoutTopRightCornerRadius" format="dimension" />
+
+        <!-- Override end icon color. Default: bottomSheetPrimaryColor, colorPrimary  -->
+        <attr name="bottomSheetTextInputLayoutEndIconColor" format="color" />
+
+        <!-- Override helper text color. Default: bottomSheetPrimaryColor, colorPrimary  -->
+        <attr name="bottomSheetTextInputLayoutHelperTextColor" format="color" />
+
+        <!-- Override box stroke color. Default: bottomSheetPrimaryColor, colorPrimary  -->
+        <attr name="bottomSheetTextInputLayoutBoxStrokeColor" format="color" />
+
+        <!-- Override hint text color. Default: bottomSheetPrimaryColor, colorPrimary  -->
+        <attr name="bottomSheetTextInputLayoutHintTextColor" format="color" />
+
+        <!-- Override box stroke error color.  -->
+        <attr name="bottomSheetTextInputLayoutBoxStrokeErrorColor" format="color" />
+
+        <!-- Override error text color.  -->
+        <attr name="bottomSheetTextInputLayoutErrorTextColor" format="color" />
 
     </declare-styleable>
 
