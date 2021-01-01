@@ -196,11 +196,22 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
                 setupCustomView()
                 setupTemplatesView()
             }
-            colorView == ColorView.CUSTOM -> setupCustomView()
-            colorView == ColorView.TEMPLATE -> setupTemplatesView()
+            colorView == ColorView.CUSTOM -> {
+                setupCustomView()
+            }
+            colorView == ColorView.TEMPLATE -> {
+                setupTemplatesView()
+            }
         }
 
         setColorView()
+
+        if (switchColorView) {
+            setToolbarTypeButtonListener {
+                colorView = ColorView.TEMPLATE.takeUnless { it == colorView } ?: ColorView.CUSTOM
+                setColorView()
+            }
+        }
     }
 
     private fun validate() {
@@ -283,11 +294,6 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
 
             btnCopy.setOnClickListener { onCopy() }
             btnPaste.setOnClickListener { onPaste() }
-
-            setToolbarTypeButtonListener {
-                colorView = ColorView.TEMPLATE.takeUnless { it == colorView } ?: ColorView.CUSTOM
-                setColorView()
-            }
         }
     }
 
@@ -328,7 +334,9 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         with(binding) {
             colorTemplatesView.visibility = if (templateView) View.VISIBLE else View.GONE
             custom.root.visibility = if (templateView) View.INVISIBLE else View.VISIBLE
-            setToolbarTypeButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
+            if (switchColorView) {
+                setToolbarTypeButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
+            }
         }
     }
 
