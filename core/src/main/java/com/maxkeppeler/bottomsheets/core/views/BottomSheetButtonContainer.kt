@@ -275,6 +275,11 @@ class BottomSheetButtonContainer
         createButton(btnText, btnDrawable, btnListener, false, shapeModel)
     }
 
+    /** Make positive button clickable. */
+    fun positiveButtonClickable(isClickable: Boolean) {
+        this.positiveBtn?.isClickable = isClickable
+    }
+
     /** Set positive button listener. */
     fun negativeButtonListener(btnListener: ButtonClickListener) {
         this.negativeBtn?.setOnClickListener { btnListener.invoke() }

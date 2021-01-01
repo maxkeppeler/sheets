@@ -489,7 +489,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     /** Display the positive button. */
     protected fun displayButtonPositive(display: Boolean) {
         bindingBase.buttons.btnPositiveContainer.apply {
-            isClickable = display
+            positiveButtonClickable(display)
             if (display) fadeIn() else fadeOut()
         }
     }
