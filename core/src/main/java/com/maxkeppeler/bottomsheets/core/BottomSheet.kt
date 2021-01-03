@@ -130,8 +130,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Set the [BottomSheetBehavior] state. */
-    fun state(state: Int) {
-        this.state = state
+    fun behavior(behavior: Int) {
+        this.behavior = behavior
     }
 
     /** Set the peek height. */
@@ -352,10 +352,10 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val dialog = dialog as BottomSheetDialog? ?: return
-                val behavior = dialog.behavior
-                behavior.state = state
-                behavior.peekHeight = peekHeight
-                behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                val dialogBehavior = dialog.behavior
+                dialogBehavior.state = behavior
+                dialogBehavior.peekHeight = peekHeight
+                dialogBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onSlide(bottomSheet: View, dY: Float) {
                         // TODO: Make button layout stick to the bottom through translationY property.
                     }
