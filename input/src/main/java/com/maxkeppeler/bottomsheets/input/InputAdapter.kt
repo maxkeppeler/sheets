@@ -171,6 +171,7 @@ internal class InputAdapter(
             input.endIconMode?.let { endIconMode = it }
             input.isEndIconActivated?.let { setEndIconActivated(it) }
             input.drawableRes?.let { setStartIconDrawable(it) }
+            setStartIconTintList(ColorStateList.valueOf(primaryColor))
 
             input.validationResultListener { result ->
                 if (!result.valid) {
