@@ -358,6 +358,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onRestoreBaseViewInstanceState(savedInstanceState)
+        onRestoreCustomViewInstanceState(savedInstanceState)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -390,10 +391,12 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    abstract fun onRestoreCustomViewInstanceState(savedState: Bundle?)
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         onSaveBaseViewInstanceState(outState)
+        onSaveCustomViewInstanceState(outState)
     }
 
     private fun onSaveBaseViewInstanceState(outState: Bundle) {
@@ -422,6 +425,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    abstract fun onSaveCustomViewInstanceState(outState: Bundle)
 
     /** Create custom view to be added to the base bottom sheet. */
     abstract fun onCreateLayoutView(): View
