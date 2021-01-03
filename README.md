@@ -77,7 +77,7 @@ dependencies {
 **The following functions can be called from any bottom sheet:**
 
 Use ```cancelableOutside()``` to disable dismissing the bottom sheet when outside.<br/>
-Use ```state()``` to set the BottomSheetBehavior state.<br/>
+Use ```behavior()``` to set the BottomSheetBehavior.<br/>
 Use ```peekHeight()``` to set the peek height for the bottom sheet.<br/>
 Use ```cornerRadius()``` to set corner radius.<br/>
 Use ```cornerFamily()``` to set corner family (cut or rounded).<br/>
