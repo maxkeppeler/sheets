@@ -60,12 +60,6 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     internal var inputFilter: InputFilter? = null
         private set
 
-    internal var defaultText: String? = null
-        private set
-
-    internal var defaultTextRes: Int? = null
-        private set
-
     internal var maxLines: Int? = null
         private set
 
@@ -100,7 +94,7 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
 
     /** Set the default value. */
     fun defaultValue(defaultText: String) {
-        this.defaultText = defaultText
+        this.value = defaultText
     }
 
     /** Set the hint text. */
@@ -165,7 +159,7 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     override fun valid(): Boolean {
         val customValidationOk = value?.let { validationListener?.invoke(it)?.valid } ?: true
         val requiredValid =
-            (required && !defaultText.isNullOrEmpty() || !value.isNullOrEmpty() || !required)
+            (required && !value.isNullOrEmpty() || !required)
         return customValidationOk && requiredValid
     }
 

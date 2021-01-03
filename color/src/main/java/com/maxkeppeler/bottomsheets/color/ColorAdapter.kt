@@ -23,6 +23,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorTemplatesItemBinding
@@ -32,6 +33,8 @@ internal class ColorAdapter(
     private val ctx: Context,
     @ColorRes
     private val colors: MutableList<Int>,
+    @ColorInt
+    private val selectedColor: Int,
     private val callback: ColorListener
 ) : RecyclerView.Adapter<ColorAdapter.ColorItem>() {
 
@@ -49,12 +52,17 @@ internal class ColorAdapter(
     override fun onBindViewHolder(holder: ColorItem, i: Int) {
         val color = colorOf(ctx, colors[i])
         with(holder.binding) {
+
             val background = colorView.background as RippleDrawable
             (background.getDrawable(1) as GradientDrawable).setColor(color)
+
             root.setOnClickListener {
                 select(colorActive)
                 callback.invoke(color)
             }
+
+            if (selectedColor == color)
+                root.callOnClick()
         }
     }
 

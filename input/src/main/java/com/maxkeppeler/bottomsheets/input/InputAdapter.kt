@@ -138,8 +138,7 @@ internal class InputAdapter(
 
         with(textInput) {
 
-            val valueText = input.defaultTextRes?.let { ctx.getString(it) } ?: input.defaultText
-            valueText?.let { setText(it) }
+            setText(input.value)
 
             input.isPasswordVisible?.let {
                 transformationMethod = if (it) null else PasswordTransformationMethod()
@@ -189,7 +188,7 @@ internal class InputAdapter(
 
         setupGeneralInputInfo(input, label, icon)
 
-        checkBox.isChecked = input.defaultValue
+        checkBox.isChecked = input.value
 
         val checkBoxText = input.textRes?.let { ctx.getString(it) } ?: input.text
         checkBox.text = checkBoxText
@@ -221,7 +220,7 @@ internal class InputAdapter(
             radioGroup.addView(button)
         }
 
-        input.selectedIndex?.let { radioGroup.check(it) }
+        radioGroup.check(input.value)
         radioGroup.setOnCheckedChangeListener { _, idIndex ->
             input.value = idIndex
             listener.invoke()
@@ -232,23 +231,24 @@ internal class InputAdapter(
 
         setupGeneralInputInfo(input, label, icon)
 
-        if (input.selectedIndex == null) {
+        val spinnerOptions = input.spinnerOptions
+
+        if (input.value == null) {
             val spinnerNoSelectionText =
                 input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
-            input.spinnerOptions?.add(spinnerNoSelectionText ?: ctx.getString(R.string.select))
+            spinnerOptions?.add(spinnerNoSelectionText ?: ctx.getString(R.string.select))
         }
-
 
         val adapter: ArrayAdapter<String> = object : ArrayAdapter<String>(
             ctx,
-            android.R.layout.simple_spinner_dropdown_item, input.spinnerOptions ?: mutableListOf()
+            android.R.layout.simple_spinner_dropdown_item, spinnerOptions ?: mutableListOf()
         ) {
             override fun getCount(): Int =
                 super.getCount().takeIf { it > 0 }?.minus(1) ?: super.getCount()
         }
         icon.setColorFilter(primaryColor)
         spinner.adapter = adapter
-        val selectionIndex = input.selectedIndex ?: input.spinnerOptions?.lastIndex ?: 0
+        val selectionIndex = input.value ?: spinnerOptions?.lastIndex ?: 0
         spinner.setSelection(selectionIndex)
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(aV: AdapterView<*>?, v: View, i: Int, id: Long) {

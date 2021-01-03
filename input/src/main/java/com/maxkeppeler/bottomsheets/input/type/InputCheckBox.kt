@@ -42,10 +42,7 @@ class InputCheckBox(key: String? = null, func: InputCheckBox.() -> Unit) : Input
     internal var textRes: Int? = null
         private set
 
-    internal var defaultValue: Boolean = false
-        private set
-
-    var value: Boolean = defaultValue
+    var value: Boolean = false
         internal set(value) {
             changeListener?.invoke(value)
             field = value
@@ -53,7 +50,7 @@ class InputCheckBox(key: String? = null, func: InputCheckBox.() -> Unit) : Input
 
     /** Set the default value. */
     fun defaultValue(defaultValue: Boolean) {
-        this.defaultValue = defaultValue
+        this.value = defaultValue
     }
 
     /** Set the text of the CheckBox. */
@@ -77,12 +74,13 @@ class InputCheckBox(key: String? = null, func: InputCheckBox.() -> Unit) : Input
     }
 
     override fun invokeResultListener() =
-        resultListener?.invoke(value)
+        resultListener?.invoke(value ?: false)
 
-    override fun valid(): Boolean = value
+    override fun valid(): Boolean = value ?: false
+
 
     override fun putValue(bundle: Bundle, index: Int) {
-        bundle.putBoolean(getKeyOrIndex(index), value)
+        bundle.putBoolean(getKeyOrIndex(index), value ?: false)
     }
 
 }
