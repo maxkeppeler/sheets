@@ -44,6 +44,7 @@ import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.utils.Theme
 import com.maxkeppeler.bottomsheets.databinding.BottomSheetsBaseBinding
+import java.io.Serializable
 
 /** Listener which is invoked when the positive button is clicked. */
 typealias PositiveListener = () -> Unit
@@ -73,6 +74,25 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
+        private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
+        private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
+        private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
+        private const val STATE_BASE_TITLE_TEXT = "state_base_title_text"
+        private const val STATE_BASE_CLOSE_BUTTON_DRAWABLE = "state_base_close_button_drawable"
+        private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
+        private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
+        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE = "state_base_positive_button_drawable"
+        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE = "state_base_negative_button_drawable"
+        private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
+        private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
+        private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
+        private const val STATE_BASE_BEHAVIOR = "state_base_behavior"
+        private const val STATE_BASE_PEEK_HEIGHT = "state_base_peek_height"
+        private const val STATE_BASE_BORDER_WIDTH = "state_base_border_width"
+        private const val STATE_BASE_BORDER_COLOR = "state_base_border_color"
+        private const val STATE_BASE_CORNER_RADIUS = "state_base_corner_radius"
+        private const val STATE_BASE_CORNER_FAMILY = "state_base_corner_family"
+        private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
 
     open lateinit var windowContext: Context
@@ -334,6 +354,74 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 layout.addView(onCreateLayoutView())
             }.root
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onRestoreBaseViewInstanceState(savedInstanceState)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun onRestoreBaseViewInstanceState(savedState: Bundle?) {
+        savedState?.let { saved ->
+            titleText = saved.getString(STATE_BASE_TITLE_TEXT)
+            positiveText = saved.getString(STATE_BASE_POSITIVE_TEXT)
+            negativeText = saved.getString(STATE_BASE_NEGATIVE_TEXT)
+            displayToolbar = saved.get(STATE_BASE_DISPLAY_TOOLBAR) as Boolean?
+            displayCloseButton = saved.get(STATE_BASE_DISPLAY_CLOSE_BUTTON) as Boolean?
+            displayHandle = saved.get(STATE_BASE_DISPLAY_HANDLE) as Boolean?
+            negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
+            positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
+            closeButtonDrawableRes = saved.get(STATE_BASE_CLOSE_BUTTON_DRAWABLE) as Int?
+            dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
+            negativeListener = saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
+            positiveListener = saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
+            cornerFamily = saved.get(STATE_BASE_CORNER_FAMILY) as Int?
+            borderStrokeColor = saved.get(STATE_BASE_BORDER_COLOR) as Int?
+            behavior = saved.getInt(STATE_BASE_BEHAVIOR)
+            peekHeight = saved.getInt(STATE_BASE_PEEK_HEIGHT)
+            cornerRadiusDp = saved.get(STATE_BASE_CORNER_RADIUS) as Float?
+            borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
+            val icons = mutableListOf<IconButton>()
+            repeat(ICON_BUTTONS_AMOUNT_MAX) {
+                val iconButton = saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
+                iconButton?.let { btn -> icons.add(btn) }
+            }
+            iconButtons = icons.toTypedArray()
+        }
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        onSaveBaseViewInstanceState(outState)
+    }
+
+    private fun onSaveBaseViewInstanceState(outState: Bundle) {
+        with(outState) {
+            putString(STATE_BASE_TITLE_TEXT, titleText)
+            putString(STATE_BASE_POSITIVE_TEXT, positiveText)
+            putString(STATE_BASE_NEGATIVE_TEXT, negativeText)
+            displayToolbar?.let { putBoolean(STATE_BASE_DISPLAY_TOOLBAR, it) }
+            displayCloseButton?.let { putBoolean(STATE_BASE_DISPLAY_CLOSE_BUTTON, it) }
+            displayHandle?.let { putBoolean(STATE_BASE_DISPLAY_HANDLE, it) }
+            closeButtonDrawableRes?.let { putInt(STATE_BASE_CLOSE_BUTTON_DRAWABLE, it) }
+            negativeButtonDrawableRes?.let { putInt(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE, it) }
+            positiveButtonDrawableRes?.let { putInt(STATE_BASE_POSITIVE_BUTTON_DRAWABLE, it) }
+            cornerFamily?.let { putInt(STATE_BASE_CORNER_FAMILY, it) }
+            borderStrokeColor?.let { putInt(STATE_BASE_BORDER_COLOR, it) }
+            putInt(STATE_BASE_BEHAVIOR, behavior)
+            putInt(STATE_BASE_PEEK_HEIGHT, peekHeight)
+            borderStrokeWidthDp?.let { putFloat(STATE_BASE_BORDER_WIDTH, it) }
+            cornerRadiusDp?.let { putFloat(STATE_BASE_CORNER_RADIUS, it) }
+            iconButtons.forEachIndexed { i, btn ->
+                putSerializable(STATE_BASE_ICON_BUTTONS.plus(i), btn)
+            }
+            putSerializable(STATE_BASE_DISMISS_LISTENER, dismissListener as Serializable?)
+            putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
+            putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
+        }
+    }
+
 
     /** Create custom view to be added to the base bottom sheet. */
     abstract fun onCreateLayoutView(): View
