@@ -31,12 +31,12 @@ import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorBinding
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+import java.io.Serializable
 
 
 /** Listener to be invoked when color is selected. */
@@ -49,11 +49,18 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
 
     override val dialogTag = "ColorSheet"
 
-    private lateinit var binding: BottomSheetsColorBinding
-
     private companion object {
         private const val ARG_MAX_VALUE = 255
+        private const val STATE_LISTENER = "state_listener"
+        private const val STATE_DISABLE_ALPHA = "state_disable_alpha"
+        private const val STATE_DEFAULT_COLOR = "state_default_color"
+        private const val STATE_SELECTED_COLOR = "state_selected_color"
+        private const val STATE_SWITCH_COLOR_VIEW = "state_switch_color"
+        private const val STATE_COLORS = "state_colors"
+        private const val STATE_COLOR_VIEW = "state_color_view"
     }
+
+    private lateinit var binding: BottomSheetsColorBinding
 
     private val argbSeekBars = mutableListOf<SeekBar>()
     private val argbLabelTexts = mutableListOf<String>()
@@ -71,7 +78,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
     private val touchCustomColorView
         get() = switchColorView || colorView == ColorView.CUSTOM
 
-    private var defaultColor: Int = Color.BLACK
+    private var defaultColor: Int? = null
     private var selectedColor: Int = Color.BLACK
 
     private var iconColor = 0
@@ -227,7 +234,7 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
         if (colorMapListRes.isNotEmpty()) {
             binding.colorTemplatesView.layoutManager =
                 CustomGridLayoutManager(requireContext(), 6, true)
-            colorAdapter = ColorAdapter(requireContext(), colorMapListRes) { color ->
+            colorAdapter = ColorAdapter(requireContext(), colorMapListRes, selectedColor) { color ->
                 selectedColor = color
                 updateColor()
                 validate()
@@ -285,11 +292,11 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
                 argbValues.first().visibility = View.GONE
             }
 
-            val maxLength: Int = argbLabelTexts.minBy { it.length }!!.length
+            val maxLength: Int = argbLabelTexts.minByOrNull { it.length }!!.length
             argbLabels.forEach { it.widthByLength(maxLength) }
             argbLabelTexts.forEachIndexed { i, s -> argbLabels[i].text = s }
 
-            hexValue.text = getHex(defaultColor)
+            hexValue.text = getHex(defaultColor ?: selectedColor)
             updateColor()
 
             btnCopy.setOnClickListener { onCopy() }
@@ -390,6 +397,31 @@ class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
     override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
+        savedState?.let { saved ->
+            listener = saved.getSerializable(STATE_LISTENER) as ColorListener?
+            colorView = saved.getSerializable(STATE_COLOR_VIEW) as ColorView
+            saved.getIntArray(STATE_COLORS)?.let { colorMapListRes = it.toMutableList() }
+            disableAlpha = saved.getBoolean(STATE_DISABLE_ALPHA)
+            switchColorView = saved.getBoolean(STATE_SWITCH_COLOR_VIEW)
+            defaultColor = saved.getInt(STATE_DEFAULT_COLOR)
+            selectedColor = saved.getInt(STATE_SELECTED_COLOR)
+        }
+    }
+
+    override fun onSaveCustomViewInstanceState(outState: Bundle) {
+        with(outState) {
+            putSerializable(STATE_LISTENER, listener as Serializable?)
+            putSerializable(STATE_COLOR_VIEW, colorView as Serializable)
+            putIntArray(STATE_COLORS, colorMapListRes.toIntArray())
+            putBoolean(STATE_DISABLE_ALPHA, disableAlpha)
+            putBoolean(STATE_SWITCH_COLOR_VIEW, switchColorView)
+            defaultColor?.let { putInt(STATE_DEFAULT_COLOR, it) }
+            putInt(STATE_SELECTED_COLOR, selectedColor)
+        }
+    }
 
     /** Build [ColorSheet] and show it later. */
     fun build(ctx: Context, func: ColorSheet.() -> Unit): ColorSheet {
