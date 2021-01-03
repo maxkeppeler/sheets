@@ -328,7 +328,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         saved: Bundle?
     ): View? {
-        if (saved != null) dismiss()
+        if (saved?.isEmpty == true) dismiss()
         return BottomSheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
             .also { bindingBase = it }.apply {
                 layout.addView(onCreateLayoutView())
