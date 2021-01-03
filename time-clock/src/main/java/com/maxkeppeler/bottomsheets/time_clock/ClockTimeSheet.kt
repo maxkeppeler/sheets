@@ -26,6 +26,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
+import java.io.Serializable
 import java.util.*
 
 /** Listener which returns the selected clock time in milliseconds. */
@@ -37,6 +38,12 @@ typealias ClockTimeListener = (milliseconds: Long, hours: Int, minutes: Int) -> 
 class ClockTimeSheet : BottomSheet() {
 
     override val dialogTag = "ClockTimeSheet"
+
+    companion object {
+        private const val STATE_LISTENER = "state_listener"
+        private const val STATE_CURRENT_TIME = "state_current_time"
+        private const val STATE_FORMAT_24_HOURS = "state_format_24_hours"
+    }
 
     private lateinit var binding: BottomSheetsTimeClockBinding
     private lateinit var selector: ClockTimeSelector
@@ -137,6 +144,23 @@ class ClockTimeSheet : BottomSheet() {
         val time = selector.getTime()
         listener?.invoke(time.first, time.second, time.third)
         dismiss()
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
+        savedState?.let { saved ->
+            listener = saved.getSerializable(STATE_LISTENER) as ClockTimeListener?
+            currentTimeInMillis = saved.getLong(STATE_CURRENT_TIME)
+            format24Hours = saved.getBoolean(STATE_FORMAT_24_HOURS)
+        }
+    }
+
+    override fun onSaveCustomViewInstanceState(outState: Bundle) {
+        with(outState) {
+            putSerializable(STATE_LISTENER, listener as Serializable?)
+            putLong(STATE_CURRENT_TIME, selector.getTime().first)
+            putBoolean(STATE_FORMAT_24_HOURS, format24Hours)
+        }
     }
 
     /** Build [ClockTimeSheet] and show it later. */
