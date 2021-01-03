@@ -39,6 +39,13 @@ class InfoSheet : BottomSheet() {
 
     override val dialogTag = "InfoSheet"
 
+    companion object {
+        private const val STATE_CONTENT_TEXT = "state_content_text"
+        private const val STATE_DISPLAY_BUTTONS = "state_display_buttons"
+        private const val STATE_DRAWABLE = "state_drawable"
+        private const val STATE_DRAWABLE_COLOR = "state_drawable_color"
+    }
+
     private lateinit var binding: BottomSheetsInfoBinding
 
     private var contentText: String? = null
@@ -173,6 +180,22 @@ class InfoSheet : BottomSheet() {
                 icon.setColorFilter(drawableColor ?: getIconColor(requireContext()))
                 icon.visibility = View.VISIBLE
             }
+        }
+    }
+
+    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
+        savedState?.let { saved ->
+            contentText = saved.getString(STATE_CONTENT_TEXT)
+            drawableColor = saved.get(STATE_DRAWABLE_COLOR) as Int?
+            drawableRes = saved.get(STATE_DRAWABLE) as Int?
+        }
+    }
+
+    override fun onSaveCustomViewInstanceState(outState: Bundle) {
+        with(outState) {
+            drawableColor?.let { outState.putInt(STATE_DRAWABLE_COLOR, it) }
+            drawableRes?.let { putInt(STATE_DRAWABLE, it) }
+            putString(STATE_CONTENT_TEXT, contentText)
         }
     }
 
