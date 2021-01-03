@@ -211,7 +211,7 @@ class CalendarSheet : BottomSheet() {
      */
     fun onPositive(@StringRes positiveRes: Int, @DrawableRes drawableRes: Int, positiveListener: CalendarDateListener? = null) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = positiveListener
     }
 
@@ -224,7 +224,7 @@ class CalendarSheet : BottomSheet() {
      */
     fun onPositive(positiveText: String, @DrawableRes drawableRes: Int, positiveListener: CalendarDateListener? = null) {
         this.positiveText = positiveText
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = positiveListener
     }
 

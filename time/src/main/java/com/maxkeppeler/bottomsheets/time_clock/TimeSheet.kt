@@ -112,7 +112,7 @@ class TimeSheet : BottomSheet() {
         listener: DurationTimeListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = listener
     }
 
@@ -129,7 +129,7 @@ class TimeSheet : BottomSheet() {
         listener: DurationTimeListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = listener
     }
 

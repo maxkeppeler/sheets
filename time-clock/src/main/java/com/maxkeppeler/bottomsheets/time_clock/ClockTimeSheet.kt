@@ -24,7 +24,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
 import java.util.*
@@ -99,7 +98,7 @@ class ClockTimeSheet : BottomSheet() {
         listener: ClockTimeListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = listener
     }
 
@@ -115,7 +114,7 @@ class ClockTimeSheet : BottomSheet() {
         listener: ClockTimeListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = listener
     }
 

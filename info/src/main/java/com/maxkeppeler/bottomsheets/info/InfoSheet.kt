@@ -19,11 +19,13 @@
 package com.maxkeppeler.bottomsheets.info
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.*
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.PositiveListener
@@ -42,7 +44,8 @@ class InfoSheet : BottomSheet() {
     private var contentText: String? = null
     private var showButtons = true
 
-    private var drawable: Drawable? = null
+    @DrawableRes
+    private var drawableRes: Int? = null
 
     @ColorInt
     private var drawableColor: Int? = null
@@ -77,13 +80,8 @@ class InfoSheet : BottomSheet() {
     }
 
     /** Set a drawable left of the text. */
-    fun drawable(drawable: Drawable) {
-        this.drawable = drawable
-    }
-
-    /** Set a drawable left of the text. */
     fun drawable(@DrawableRes drawableRes: Int) {
-        this.drawable = windowContext.getDrawable(drawableRes)
+        this.drawableRes = drawableRes
     }
 
     /** Set the color of the drawable. */
@@ -135,7 +133,7 @@ class InfoSheet : BottomSheet() {
         positiveListener: PositiveListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.positiveListener = positiveListener
     }
 
@@ -152,7 +150,7 @@ class InfoSheet : BottomSheet() {
         positiveListener: PositiveListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.positiveListener = positiveListener
     }
 
@@ -169,7 +167,8 @@ class InfoSheet : BottomSheet() {
         displayButtonsView(showButtons)
         with(binding) {
             contentText?.let { content.text = it }
-            drawable?.let { drawable ->
+            drawableRes?.let { res ->
+                val drawable = ContextCompat.getDrawable(requireContext(), res)
                 icon.setImageDrawable(drawable)
                 icon.setColorFilter(drawableColor ?: getIconColor(requireContext()))
                 icon.visibility = View.VISIBLE

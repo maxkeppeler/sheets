@@ -86,19 +86,24 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     private var displayHandle: Boolean? = null
 
     private var titleText: String? = null
-    private var btnCloseDrawable: Drawable? = null
+
+    @DrawableRes
+    private var closeButtonDrawableRes: Int? = null
 
     protected var positiveText: String? = null
     private var negativeText: String? = null
 
-    protected var positiveButtonDrawable: Drawable? = null
-    private var negativeButtonDrawable: Drawable? = null
+    @DrawableRes
+    protected var positiveButtonDrawableRes: Int? = null
+
+    @DrawableRes
+    private var negativeButtonDrawableRes: Int? = null
 
     private var dismissListener: DismissListener? = null
     protected var positiveListener: PositiveListener? = null
     private var negativeListener: NegativeListener? = null
 
-    private var state = BottomSheetBehavior.STATE_EXPANDED
+    private var behavior = BottomSheetBehavior.STATE_EXPANDED
     private var peekHeight = 0
     private var cornerRadiusDp: Float? = null
     private var borderStrokeWidthDp: Float? = null
@@ -177,13 +182,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Set the Close Button Drawable. */
-    fun closeButtonDrawable(closeDrawable: Drawable) {
-        this.btnCloseDrawable = closeDrawable
-    }
-
-    /** Set the Close Button Drawable. */
     fun closeButtonDrawable(@DrawableRes drawableRes: Int) {
-        this.btnCloseDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.closeButtonDrawableRes = drawableRes
     }
 
     /**
@@ -284,7 +284,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         negativeListener: NegativeListener? = null
     ) {
         this.negativeText = windowContext.getString(negativeRes)
-        this.negativeButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.negativeButtonDrawableRes = drawableRes
         this.negativeListener = negativeListener
     }
 
@@ -301,7 +301,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         negativeListener: NegativeListener? = null
     ) {
         this.negativeText = negativeText
-        this.negativeButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.negativeButtonDrawableRes = drawableRes
         this.negativeListener = negativeListener
     }
 
@@ -421,7 +421,10 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             if (isToolbarVisible) {
                 titleText?.let { top.title.text = it }
                 if (isCloseButtonVisible) {
-                    btnCloseDrawable?.let { drawable -> top.btnClose.setImageDrawable(drawable) }
+                    closeButtonDrawableRes?.let { drawableRes ->
+                        val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
+                        top.btnClose.setImageDrawable(drawable)
+                    }
                     top.btnClose.setColorFilter(iconsColor)
                     top.btnClose.setOnClickListener { dismiss() }
                 }
@@ -477,12 +480,12 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
         bindingBase.buttons.btnNegativeContainer.setupNegativeButton(
             btnText = negativeText ?: getString(R.string.cancel),
-            btnDrawable = negativeButtonDrawable
+            btnDrawable = negativeButtonDrawableRes
         ) { negativeListener?.invoke(); dismiss() }
 
         bindingBase.buttons.btnPositiveContainer.setupPositiveButton(
             btnText = positiveText ?: getString(R.string.ok),
-            btnDrawable = positiveButtonDrawable
+            btnDrawable = positiveButtonDrawableRes
         ) { positiveListener?.invoke(); dismiss() }
     }
 
