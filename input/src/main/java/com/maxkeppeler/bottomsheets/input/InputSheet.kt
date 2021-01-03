@@ -24,12 +24,12 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputBinding
 import com.maxkeppeler.bottomsheets.input.type.Input
 import com.maxkeppeler.bottomsheets.input.type.InputRadioButtons
+import java.io.Serializable
 
 /** Listener which returns the inputs with the new data. */
 typealias InputListener = (result: Bundle) -> Unit
@@ -40,6 +40,13 @@ typealias InputListener = (result: Bundle) -> Unit
 class InputSheet : BottomSheet() {
 
     override val dialogTag = "InputSheet"
+
+    companion object {
+        private const val STATE_LISTENER = "state_listener"
+        private const val STATE_CONTENT_TEXT = "state_content_text"
+        private const val STATE_INPUT = "state_input"
+        private const val STATE_INPUT_AMOUNT = "state_input_amount"
+    }
 
     private lateinit var binding: BottomSheetsInputBinding
 
@@ -123,7 +130,7 @@ class InputSheet : BottomSheet() {
         listener: InputListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
 
         this.listener = listener
     }
@@ -141,7 +148,7 @@ class InputSheet : BottomSheet() {
         listener: InputListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = listener
     }
 
@@ -195,6 +202,29 @@ class InputSheet : BottomSheet() {
             input.putValue(bundle, i)
         }
         return bundle
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
+        savedState?.let { saved ->
+            listener = saved.getSerializable(STATE_LISTENER) as InputListener?
+            contentText = saved.getString(STATE_CONTENT_TEXT)
+            repeat(saved.getInt(STATE_INPUT_AMOUNT)) {
+                val inputItem = saved.getSerializable(STATE_INPUT.plus(it)) as Input
+                input.add(inputItem)
+            }
+        }
+    }
+
+    override fun onSaveCustomViewInstanceState(outState: Bundle) {
+        with(outState) {
+            putSerializable(STATE_LISTENER, listener as Serializable?)
+            putString(STATE_CONTENT_TEXT, contentText)
+            putInt(STATE_INPUT_AMOUNT, input.size)
+            input.forEachIndexed { i, input ->
+                putSerializable(STATE_INPUT.plus(i), input)
+            }
+        }
     }
 
     /** Build [InputSheet] and show it later. */

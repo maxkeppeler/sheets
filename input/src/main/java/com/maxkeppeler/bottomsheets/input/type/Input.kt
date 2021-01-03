@@ -21,12 +21,13 @@ package com.maxkeppeler.bottomsheets.input.type
 import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import java.io.Serializable
 
 /**
  * The base class of any input. Every input can have a label and a drawable.
  * It can be optional or required.
  */
-abstract class Input(private val key: String? = null) {
+abstract class Input(private val key: String? = null): Serializable {
 
     internal var required: Boolean = false
 

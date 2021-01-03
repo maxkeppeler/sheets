@@ -117,16 +117,18 @@ internal class OptionsAdapter(
 
         optionContainer.changeRippleAndStateColor()
 
-        if (option.disabled && !option.selected) {
+        val selected = option.selected || listener.isSelected(i)
+
+        if (option.disabled && !selected) {
             showDisabled(label, icon, optionContainer)
         } else {
 
-            if (option.disabled && option.selected) optionContainer.tag = TAG_DISABLED_SELECTED
+            if (option.disabled && selected) optionContainer.tag = TAG_DISABLED_SELECTED
             else optionContainer.setOnClickListener {
                 selectOption(i, label, icon, optionContainer)
             }
 
-            if (option.selected) selectOption(i, label, icon, optionContainer)
+            if (selected) selectOption(i, label, icon, optionContainer)
             else showDeselected(label, icon, optionContainer)
         }
     }
@@ -151,16 +153,18 @@ internal class OptionsAdapter(
 
         optionContainer.changeRippleAndStateColor()
 
-        if (option.disabled && !option.selected) {
+        val selected = option.selected || listener.isSelected(i)
+
+        if (option.disabled && !selected) {
             showDisabled(label, icon, optionContainer)
         } else {
 
-            if (option.disabled && option.selected) optionContainer.tag = TAG_DISABLED_SELECTED
+            if (option.disabled && selected) optionContainer.tag = TAG_DISABLED_SELECTED
             else optionContainer.setOnClickListener {
                 selectOption(i, label, icon, optionContainer)
             }
 
-            if (option.selected) selectOption(i, label, icon, optionContainer)
+            if (selected) selectOption(i, label, icon, optionContainer)
             else showDeselected(label, icon, optionContainer)
         }
     }

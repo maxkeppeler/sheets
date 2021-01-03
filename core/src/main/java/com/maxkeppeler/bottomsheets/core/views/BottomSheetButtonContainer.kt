@@ -24,7 +24,9 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -57,7 +59,7 @@ class BottomSheetButtonContainer
 
     private fun createButton(
         btnText: String,
-        btnDrawable: Drawable?,
+        @DrawableRes btnDrawable: Int?,
         btnListener: ButtonClickListener,
         negative: Boolean,
         shapeModel: ShapeAppearanceModel.Builder
@@ -88,7 +90,7 @@ class BottomSheetButtonContainer
                 ViewGroup.LayoutParams(btnWidthLayoutParam, ViewGroup.LayoutParams.WRAP_CONTENT)
 
             text = btnText
-            icon = btnDrawable
+            btnDrawable?.let { icon = ContextCompat.getDrawable(context, it) }
             iconGravity = MaterialButton.ICON_GRAVITY_TEXT_START
             iconPadding = BUTTON_ICON_PADDING.toDp()
             iconTint = ColorStateList.valueOf(primaryColor)
@@ -120,7 +122,7 @@ class BottomSheetButtonContainer
     /** Setup a negative button. */
     fun setupNegativeButton(
         btnText: String,
-        btnDrawable: Drawable?,
+        @DrawableRes btnDrawable: Int?,
         btnListener: ButtonClickListener
     ) {
 
@@ -199,7 +201,7 @@ class BottomSheetButtonContainer
     /** Setup a positive button. */
     fun setupPositiveButton(
         btnText: String,
-        btnDrawable: Drawable?,
+        @DrawableRes btnDrawable: Int?,
         btnListener: ButtonClickListener
     ) {
 

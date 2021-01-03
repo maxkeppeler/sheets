@@ -35,13 +35,10 @@ class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit)
     private var changeListener: RadioButtonsInputListener? = null
     private var resultListener: RadioButtonsInputListener? = null
 
-    internal var selectedIndex: Int? = null
-        private set
-
     internal var radioButtonOptions: MutableList<String>? = null
         private set
 
-    var value: Int = selectedIndex ?: -1
+    var value: Int = -1
         internal set(value) {
             changeListener?.invoke(value)
             field = value
@@ -49,7 +46,7 @@ class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit)
 
     /** Set the by default selected index. */
     fun selected(selectedIndex: Int) {
-        this.selectedIndex = selectedIndex
+        this.value = selectedIndex
     }
 
     /** Set the options to be displays as RadioButtons within a group. */

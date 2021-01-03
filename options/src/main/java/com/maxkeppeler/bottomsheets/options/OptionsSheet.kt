@@ -28,13 +28,13 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.core.BottomSheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsBinding
+import java.io.Serializable
 
 /** Listener which returns the selected index and the respective option.
  * If multiple choices is enabled, this listener will return nothing. Use the [OptionsListener]. */
@@ -53,6 +53,18 @@ class OptionsSheet : BottomSheet() {
     companion object {
         private const val SMALL_GRID_ITEMS_MAX = 8
         private const val GRID_COLUMNS_MAX = 4
+        private const val STATE_LISTENER = "state_listener"
+        private const val STATE_LISTENER_MULTIPLE = "state_listener_multiple"
+        private const val STATE_OPTIONS_AMOUNT = "state_options_amount"
+        private const val STATE_OPTIONS = "state_options"
+        private const val STATE_OPTIONS_SELECTED = "state_options_selected"
+        private const val STATE_MODE = "state_mode"
+        private const val STATE_MULTIPLE_CHOICES_INFO = "state_multiple_choices"
+        private const val STATE_MULTIPLE_CHOICES = "state_multiple_choices_info"
+        private const val STATE_MIN_CHOICES = "state_min_choices"
+        private const val STATE_MAX_CHOICES = "state_max_choices"
+        private const val STATE_MAX_CHOICES_STRICT = "state_max_choices_strict"
+        private const val STATE_DISPLAY_BUTTONS = "state_display_buttons"
     }
 
     private lateinit var binding: BottomSheetsOptionsBinding
@@ -170,7 +182,7 @@ class OptionsSheet : BottomSheet() {
         listener: OptionListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = listener
     }
 
@@ -187,7 +199,7 @@ class OptionsSheet : BottomSheet() {
         listener: OptionListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listener = listener
     }
 
@@ -235,7 +247,7 @@ class OptionsSheet : BottomSheet() {
         listener: OptionsListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listenerMultiple = listener
     }
 
@@ -252,7 +264,7 @@ class OptionsSheet : BottomSheet() {
         listener: OptionsListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveButtonDrawableRes = drawableRes
         this.listenerMultiple = listener
     }
 
@@ -294,8 +306,10 @@ class OptionsSheet : BottomSheet() {
             optionsSelected.contains(index)
 
         override fun selectMultipleChoice(index: Int) {
-            optionsSelected.add(index)
-            validate()
+            if (!optionsSelected.contains(index)) {
+                optionsSelected.add(index)
+                validate()
+            }
         }
 
         override fun deselectMultipleChoice(index: Int) {
@@ -345,15 +359,19 @@ class OptionsSheet : BottomSheet() {
             layoutManager = when (mode) {
 
                 DisplayMode.GRID_HORIZONTAL -> if (collapsedItems) CustomGridLayoutManager(
-                    windowContext,
+                    requireContext(),
                     columns,
                     false
                 )
-                else CustomLinearLayoutManager(windowContext, true, RecyclerView.HORIZONTAL)
+                else CustomLinearLayoutManager(requireContext(), true, RecyclerView.HORIZONTAL)
 
-                DisplayMode.GRID_VERTICAL -> CustomGridLayoutManager(windowContext, columns, true)
+                DisplayMode.GRID_VERTICAL -> CustomGridLayoutManager(
+                    requireContext(),
+                    columns,
+                    true
+                )
 
-                DisplayMode.LIST -> CustomLinearLayoutManager(windowContext, true)
+                DisplayMode.LIST -> CustomLinearLayoutManager(requireContext(), true)
             }
         }
 
@@ -473,6 +491,47 @@ class OptionsSheet : BottomSheet() {
             }
 
         binding.range.selectionStatus.text = textSpan
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
+
+        savedState?.let { saved ->
+            listener = saved.getSerializable(STATE_LISTENER) as OptionListener?
+            listenerMultiple = saved.getSerializable(STATE_LISTENER_MULTIPLE) as OptionsListener?
+            repeat(saved.getInt(STATE_OPTIONS_AMOUNT)) {
+                options.add(saved.getSerializable(STATE_OPTIONS.plus(it)) as Option)
+            }
+            saved.getIntArray(STATE_OPTIONS_SELECTED)?.toMutableList()?.let {
+                optionsSelected = it
+            }
+            mode = saved.getSerializable(STATE_MODE) as DisplayMode
+            multipleChoices = saved.getBoolean(STATE_MULTIPLE_CHOICES)
+            showMultipleChoicesInfo = saved.getBoolean(STATE_MULTIPLE_CHOICES_INFO)
+            maxChoicesStrict = saved.getBoolean(STATE_MAX_CHOICES_STRICT)
+            showButtons = saved.getBoolean(STATE_DISPLAY_BUTTONS)
+            minChoices = saved.get(STATE_MIN_CHOICES) as Int?
+            maxChoices = saved.get(STATE_MAX_CHOICES) as Int?
+        }
+    }
+
+    override fun onSaveCustomViewInstanceState(outState: Bundle) {
+        with(outState) {
+            putSerializable(STATE_LISTENER, listener as Serializable?)
+            putSerializable(STATE_LISTENER_MULTIPLE, listenerMultiple as Serializable?)
+            putInt(STATE_OPTIONS_AMOUNT, options.size)
+            options.forEachIndexed { i, option ->
+                putSerializable(STATE_OPTIONS.plus(i), option)
+            }
+            putIntArray(STATE_OPTIONS_SELECTED, optionsSelected.toIntArray())
+            putSerializable(STATE_MODE, mode)
+            putBoolean(STATE_MULTIPLE_CHOICES, multipleChoices)
+            putBoolean(STATE_MULTIPLE_CHOICES_INFO, showMultipleChoicesInfo)
+            putBoolean(STATE_MAX_CHOICES_STRICT, maxChoicesStrict)
+            putBoolean(STATE_DISPLAY_BUTTONS, showButtons)
+            minChoices?.let { putInt(STATE_MIN_CHOICES, it) }
+            maxChoices?.let { putInt(STATE_MAX_CHOICES, it) }
+        }
     }
 
     /** Build [OptionsSheet] and show it later. */

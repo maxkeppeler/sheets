@@ -66,6 +66,21 @@ class CustomSheet : BottomSheet() {
 //        hideToolbar() Hide the toolbar of the bottom sheet, the title and the icon
     }
 
+    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
+        savedState?.let { saved ->
+            // Restore data after configuration change and before view is build
+            val active = saved.getBoolean("active")
+        }
+    }
+
+    override fun onSaveCustomViewInstanceState(outState: Bundle) {
+        with(outState) {
+            // Save data before configuration change
+            putBoolean("active", true)
+        }
+    }
+
+
     /** Build [CustomSheet] and show it later. */
     fun build(ctx: Context, func: CustomSheet.() -> Unit): CustomSheet {
         this.windowContext = ctx

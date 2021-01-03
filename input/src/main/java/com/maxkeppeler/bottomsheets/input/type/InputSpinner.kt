@@ -36,9 +36,6 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     private var changeListener: InputSpinnerListener? = null
     private var resultListener: InputSpinnerListener? = null
 
-    internal var selectedIndex: Int? = null
-        private set
-
     internal var spinnerOptions: MutableList<String>? = null
         private set
 
@@ -48,15 +45,15 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     internal var textRes: Int? = null
         private set
 
-    var value: Int = selectedIndex ?: -1
+    var value: Int? = null
         internal set(value) {
-            changeListener?.invoke(value)
+            value?.let { changeListener?.invoke(it) }
             field = value
         }
 
     /** Set the by default selected index. */
     fun selected(selectedIndex: Int) {
-        this.selectedIndex = selectedIndex
+        this.value = selectedIndex
     }
 
     /** Set the options to tbe displays within the Spinner. */
@@ -85,11 +82,11 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     }
 
     override fun invokeResultListener() =
-        resultListener?.invoke(value)
+        value?.let { resultListener?.invoke(it) }
 
     override fun valid(): Boolean = value != -1
 
     override fun putValue(bundle: Bundle, index: Int) {
-        bundle.putInt(getKeyOrIndex(index), value)
+        value?.let { bundle.putInt(getKeyOrIndex(index), it) }
     }
 }

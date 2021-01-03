@@ -20,12 +20,13 @@ package com.maxkeppeler.bottomsheets.options
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import java.io.Serializable
 
 /**
  * An option is represented with at least a text.
  * A drawable is optional but makes it easier to understand to the user.
  */
-class Option internal constructor() {
+class Option internal constructor(): Serializable {
 
     @DrawableRes
     internal var drawableRes: Int? = null
