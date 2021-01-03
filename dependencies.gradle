@@ -10,15 +10,15 @@ ext.deps = [
 
     gradle_plugins: [
         android: "com.android.tools.build:gradle:4.1.0",
-        kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61",
+        kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20",
         versions: "com.github.ben-manes:gradle-versions-plugin:0.27.0",
         bintray_release: "com.github.panpf.bintray-publish:bintray-publish:1.0.0",
     ],
 
     androidx: [
-        constraint: "androidx.constraintlayout:constraintlayout:2.0.0-rc1",
+        constraint: "androidx.constraintlayout:constraintlayout:2.0.4",
         annotations: "androidx.annotation:annotation:1.1.0",
-        core: "androidx.appcompat:appcompat:1.1.0",
+        core: "androidx.appcompat:appcompat:1.2.0",
         lifecycle: [
             runtime: "androidx.lifecycle:lifecycle-runtime:2.2.0",
             compiler: "androidx.lifecycle:lifecycle-compiler:2.2.0"
