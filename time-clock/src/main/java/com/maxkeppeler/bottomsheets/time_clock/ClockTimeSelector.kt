@@ -29,6 +29,7 @@ import android.view.View
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 internal class ClockTimeSelector(
@@ -278,8 +279,17 @@ internal class ClockTimeSelector(
     @SuppressLint("SimpleDateFormat")
     fun setTime(timeInMillis: Long) {
 
-        val hours = SimpleDateFormat(if (is24HoursView) "HH" else "hh").format(timeInMillis)
-        val minutes = SimpleDateFormat("mm").format(timeInMillis)
+        val formatHours = if (is24HoursView) "HH" else "hh"
+        val formatMinutes = "mm"
+        val timeZoneUTC = TimeZone.getTimeZone("etc/UTC")
+
+        val hours = SimpleDateFormat(formatHours).apply {
+            timeZone = timeZoneUTC
+        }.format(timeInMillis)
+
+        val minutes = SimpleDateFormat(formatMinutes).apply {
+            timeZone = timeZoneUTC
+        }.format(timeInMillis)
 
         if (isAmTime(timeInMillis)) setAmActive()
         else setPmActive()
