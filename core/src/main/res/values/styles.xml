@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -54,6 +53,56 @@
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+
+        <item name="android:colorEdgeEffect">?bottomSheetHighlightColor</item>
+        <item name="android:colorControlHighlight">?bottomSheetHighlightColor</item>
+
+        <item name="bottomSheetBackgroundColor">@color/bottomSheetNightBackground</item>
+        <item name="bottomSheetPrimaryColor">?colorPrimary</item>
+        <item name="android:colorPrimary">?bottomSheetPrimaryColor</item>
+        <item name="android:colorPrimaryDark">?bottomSheetPrimaryColor</item>
+        <item name="android:colorAccent">?bottomSheetPrimaryColor</item>
+        <item name="android:navigationBarColor">?bottomSheetBackgroundColor</item>
+    </style>
+
+    <style name="BottomSheet.Sheet.Base.Light" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+
+        <item name="android:colorEdgeEffect">?bottomSheetHighlightColor</item>
+        <item name="android:colorControlHighlight">?bottomSheetHighlightColor</item>
+        <item name="bottomSheetBackgroundColor">@color/bottomSheetDayBackground</item>
+        <item name="bottomSheetPrimaryColor">?bottomSheetPrimaryColor</item>
+        <item name="android:colorActivatedHighlight">?bottomSheetPrimaryColor</item>
+        <item name="android:colorPressedHighlight">?bottomSheetPrimaryColor</item>
+        <item name="android:colorLongPressedHighlight">?bottomSheetPrimaryColor</item>
+        <item name="android:colorFocusedHighlight">?bottomSheetPrimaryColor</item>
+
+        <item name="android:colorPrimary">?bottomSheetPrimaryColor</item>
+        <item name="android:colorPrimaryDark">?bottomSheetPrimaryColor</item>
+        <item name="android:colorAccent">?bottomSheetPrimaryColor</item>
+        <item name="android:navigationBarColor">?bottomSheetBackgroundColor</item>
+    </style>
+
+    <style name="BottomSheet.Sheet.Base.Dark" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowIsFloating">true</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
 
         <item name="android:colorEdgeEffect">?bottomSheetHighlightColor</item>
