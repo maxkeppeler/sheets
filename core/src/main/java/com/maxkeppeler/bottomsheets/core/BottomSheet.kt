@@ -93,9 +93,10 @@ abstract class BottomSheet : DialogFragment() {
         private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
 
-    open lateinit var windowContext: Context
+    private var sheetStyle: SheetStyle = SheetStyle.BOTTOM_SHEET
+    private var sheetTheme = Theme.BOTTOM_SHEET_DAY
 
-    private var theme = Theme.DAY
+    open lateinit var windowContext: Context
 
     lateinit var bindingBase: BottomSheetsBaseBinding
 
@@ -140,6 +141,11 @@ abstract class BottomSheet : DialogFragment() {
         val index = this.iconButtons.indexOfFirst { it == null }
         if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
         this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
+    
+    /** Set sheet style. */
+    fun style(style: SheetStyle) {
+        this.sheetStyle = style
     }
 
     /** Set if bottom sheet is cancelable outside. */
