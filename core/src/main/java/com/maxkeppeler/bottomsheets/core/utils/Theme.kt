@@ -19,17 +19,23 @@ package com.maxkeppeler.bottomsheets.core.utils
 import android.content.Context
 import androidx.annotation.StyleRes
 import com.maxkeppeler.bottomsheets.R
-import android.R.attr as androidAttr
+import com.maxkeppeler.bottomsheets.core.SheetStyle
 
 internal enum class Theme(@StyleRes val styleRes: Int) {
 
-    DAY(R.style.BottomSheet_Base_Light),
-    NIGHT(R.style.BottomSheet_Base_Dark);
+    BOTTOM_SHEET_DAY(R.style.BottomSheet_Base_Light),
+    BOTTOM_SHEET_NIGHT(R.style.BottomSheet_Base_Dark),
+    DIALOG_SHEET_DAY(R.style.BottomSheet_Sheet_Base_Light),
+    DIALOG_SHEET_NIGHT(R.style.BottomSheet_Sheet_Base_Dark);
 
     companion object {
-        fun inferTheme(ctx: Context): Theme {
+        fun inferTheme(ctx: Context, sheetStyle: SheetStyle): Theme {
             val isPrimaryDark = getTextColor(ctx).isColorDark()
-            return if (isPrimaryDark) DAY else NIGHT
+            val isBottomSheet = sheetStyle == SheetStyle.BOTTOM_SHEET
+            return when {
+                isPrimaryDark -> if (isBottomSheet) BOTTOM_SHEET_DAY else DIALOG_SHEET_DAY
+                else -> if (isBottomSheet) BOTTOM_SHEET_NIGHT else DIALOG_SHEET_NIGHT
+            }
         }
     }
 }
