@@ -334,10 +334,16 @@ abstract class BottomSheet : DialogFragment() {
         this.dismissListener = dismissListener
     }
 
+    /** Override style to switch between bottom sheet & dialog style. */
+    override fun setStyle(style: Int, theme: Int) {
+        sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
+        super.setStyle(style, sheetTheme.styleRes)
+    }
+
     /** Override theme to allow auto switch between day & night design. */
     override fun getTheme(): Int {
-        theme = Theme.inferTheme(requireContext())
-        return theme.styleRes
+        sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
+        return sheetTheme.styleRes
     }
 
     /** Override dismiss to trigger custom dismiss listener. */
@@ -441,17 +447,65 @@ abstract class BottomSheet : DialogFragment() {
         setupBottomSheet()
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return when (sheetStyle) {
+            SheetStyle.BOTTOM_SHEET -> BottomSheetDialog(requireContext(), theme)
+            else -> Dialog(requireContext(), theme)
+        }
+    }
+
+    override fun setupDialog(dialog: Dialog, style: Int) {
+        when (sheetStyle) {
+
+            SheetStyle.BOTTOM_SHEET -> {
+
+                // If the dialog is an AppCompatDialog, we'll handle it
+                val acd = dialog as AppCompatDialog
+                when (style) {
+                    STYLE_NO_INPUT -> {
+                        dialog.getWindow()?.addFlags(
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                        )
+                        acd.supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+                    }
+                    STYLE_NO_FRAME, STYLE_NO_TITLE -> acd.supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+                }
+            }
+
+            else -> {
+                when (style) {
+                    STYLE_NO_INPUT -> {
+                        val window = dialog.window
+                        window?.addFlags(
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                    or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                        )
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    }
+                    STYLE_NO_FRAME, STYLE_NO_TITLE -> dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                }
+            }
+        }
+    }
+
     private fun setupBottomSheetBehavior(view: View) {
+
+        if (sheetStyle == SheetStyle.DIALOG) {
+            // We don't need a behavior for the dialog
+            return
+        }
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                val dialog = dialog as BottomSheetDialog? ?: return
+                val dialog = dialog as? BottomSheetDialog? ?: return
                 val dialogBehavior = dialog.behavior
                 dialogBehavior.state = behavior
                 dialogBehavior.peekHeight = peekHeight
-                dialogBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                dialogBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
                     override fun onSlide(bottomSheet: View, dY: Float) {
                         // TODO: Make button layout stick to the bottom through translationY property.
                     }
@@ -474,8 +528,13 @@ abstract class BottomSheet : DialogFragment() {
             cornerRadiusDp ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS
 
         val model = ShapeAppearanceModel().toBuilder().apply {
-            setTopRightCorner(cornerFamily, cornerRadius.toDp())
-            setTopLeftCorner(cornerFamily, cornerRadius.toDp())
+            when (sheetStyle) {
+                SheetStyle.BOTTOM_SHEET -> {
+                    setTopRightCorner(cornerFamily, cornerRadius.toDp())
+                    setTopLeftCorner(cornerFamily, cornerRadius.toDp())
+                }
+                else -> setAllCorners(cornerFamily, cornerRadius.toDp())
+            }
         }.build()
 
         val shape = MaterialShapeDrawable(model).apply {
@@ -485,7 +544,7 @@ abstract class BottomSheet : DialogFragment() {
                 setPadding(width.getDp(), width.getDp(), width.getDp(), width.getDp())
             }
 
-            val backgroundColor = getBottomSheetBackgroundColor(requireContext(), theme.styleRes)
+            val backgroundColor = getBottomSheetBackgroundColor(requireContext(), sheetTheme.styleRes)
             fillColor = ColorStateList.valueOf(backgroundColor)
         }
 
@@ -502,7 +561,7 @@ abstract class BottomSheet : DialogFragment() {
         val isToolbarVisible =
             displayToolbar ?: isDisplayToolbar(requireContext(), DEFAULT_DISPLAY_TOOLBAR)
 
-        val isCloseButtonVisible =
+        val isCloseButtonVisible = sheetStyle == SheetStyle.BOTTOM_SHEET &&
             displayCloseButton ?: isDisplayCloseButton(
                 requireContext(),
                 DEFAULT_DISPLAY_CLOSE_BUTTON
@@ -642,8 +701,21 @@ abstract class BottomSheet : DialogFragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (sheetStyle == SheetStyle.DIALOG) {
+            dialog?.window?.apply {
+                setLayout(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            }
+        }
+    }
+
     /** Show the bottom sheet. */
     fun show() {
+
         windowContext.let { ctx ->
             when (ctx) {
                 is FragmentActivity -> show(ctx.supportFragmentManager, dialogTag)
