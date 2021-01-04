@@ -18,6 +18,7 @@
 
 package com.maxkeppeler.bottomsheets.core
 
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -72,6 +73,7 @@ abstract class BottomSheet : DialogFragment() {
         const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
+        private const val STATE_BASE_SHEET_STYLE = "state_base_sheet_style"
         private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
         private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
         private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
@@ -79,8 +81,10 @@ abstract class BottomSheet : DialogFragment() {
         private const val STATE_BASE_CLOSE_BUTTON_DRAWABLE = "state_base_close_button_drawable"
         private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
         private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
-        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE = "state_base_positive_button_drawable"
-        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE = "state_base_negative_button_drawable"
+        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE =
+            "state_base_positive_button_drawable"
+        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE =
+            "state_base_negative_button_drawable"
         private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
         private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
         private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
@@ -383,9 +387,12 @@ abstract class BottomSheet : DialogFragment() {
             negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
             closeButtonDrawableRes = saved.get(STATE_BASE_CLOSE_BUTTON_DRAWABLE) as Int?
+            sheetStyle = saved.getSerializable(STATE_BASE_SHEET_STYLE) as SheetStyle
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
-            negativeListener = saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
-            positiveListener = saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
+            negativeListener =
+                saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
+            positiveListener =
+                saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
             cornerFamily = saved.get(STATE_BASE_CORNER_FAMILY) as Int?
             borderStrokeColor = saved.get(STATE_BASE_BORDER_COLOR) as Int?
             behavior = saved.getInt(STATE_BASE_BEHAVIOR)
@@ -394,7 +401,8 @@ abstract class BottomSheet : DialogFragment() {
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
-                val iconButton = saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
+                val iconButton =
+                    saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
                 iconButton?.let { btn -> icons.add(btn) }
             }
             iconButtons = icons.toTypedArray()
@@ -432,6 +440,7 @@ abstract class BottomSheet : DialogFragment() {
             putSerializable(STATE_BASE_DISMISS_LISTENER, dismissListener as Serializable?)
             putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
             putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
+            putSerializable(STATE_BASE_SHEET_STYLE, sheetStyle)
         }
     }
 
