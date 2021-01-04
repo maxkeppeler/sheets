@@ -32,6 +32,7 @@ import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
 import com.maxkeppeler.bottomsheets.core.IconButton
+import com.maxkeppeler.bottomsheets.core.SheetStyle
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
 import com.maxkeppeler.bottomsheets.info.InfoSheet
 import com.maxkeppeler.bottomsheets.input.InputSheet
@@ -557,6 +558,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheet() {
 
         InfoSheet().show(this) {
+            style(SheetStyle.DIALOG)
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
             withIconButton(IconButton(R.drawable.ic_mail)) { /* Will not automatically dismiss the bottom sheet. */ }
             title("Release Notes")
