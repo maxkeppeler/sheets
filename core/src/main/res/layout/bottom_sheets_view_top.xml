@@ -45,6 +45,7 @@
         android:paddingVertical="12dp"
         android:paddingStart="8dp"
         android:paddingEnd="16dp"
+        android:textAlignment="viewStart"
         app:layout_goneMarginStart="16dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/divider"

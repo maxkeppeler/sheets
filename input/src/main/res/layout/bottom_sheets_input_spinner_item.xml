@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="8dp"
+        android:textAlignment="viewStart"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,16 +54,18 @@
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner"
-        android:minHeight="42dp"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
-        app:layout_constraintHeight_min="42dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="8dp"
         android:minWidth="200dp"
-        android:layout_height="wrap_content"
+        android:minHeight="42dp"
+        android:textAlignment="viewStart"
+        android:gravity="start"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_min="42dp"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/label"
         app:layout_goneMarginStart="20dp" />

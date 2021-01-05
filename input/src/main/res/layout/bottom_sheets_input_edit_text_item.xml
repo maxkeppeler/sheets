@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="8dp"
+        android:textAlignment="viewStart"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="12dp"
+        android:gravity="start"
+        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/label"
@@ -71,14 +74,15 @@
             android:ellipsize="none"
             android:fadeScrollbars="true"
             android:fadingEdgeLength="4dp"
-            android:gravity="top|left"
+            android:gravity="start"
             android:maxLines="8"
             android:overScrollMode="never"
             android:requiresFadingEdge="vertical"
             android:scrollbarFadeDuration="@android:integer/config_mediumAnimTime"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textAlignment="viewStart" />
 
     </com.maxkeppeler.bottomsheets.core.views.BottomSheetTextInputLayout>
 

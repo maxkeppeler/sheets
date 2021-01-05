@@ -66,6 +66,8 @@ class BottomSheetNumericalInput
 
     init {
         orientation = VERTICAL
+        layoutDirection = View.LAYOUT_DIRECTION_LTR
+
         var digitNumber = 1
         repeat(ROWS) { row ->
             val rowLayout = LinearLayout(ctx).apply {
@@ -131,7 +133,7 @@ class BottomSheetNumericalInput
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
             background = ContextCompat.getDrawable(ctx, R.drawable.bs_ripple_bg_rounded)
             setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Headline5)
-            setPadding(
+            setPaddingRelative(
                 8.toDp(),
                 8.toDp(),
                 8.toDp(),

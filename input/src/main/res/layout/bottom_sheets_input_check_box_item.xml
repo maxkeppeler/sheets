@@ -27,6 +27,7 @@
 
     <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
         android:id="@+id/label"
+        android:textAlignment="viewStart"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -56,11 +57,12 @@
         android:id="@+id/checkBox"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
+        android:textAlignment="viewStart"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="8dp"
-        android:paddingLeft="18dp"
+        android:paddingStart="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/label"

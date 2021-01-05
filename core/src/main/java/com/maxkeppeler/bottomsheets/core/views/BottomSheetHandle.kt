@@ -45,7 +45,7 @@ internal class BottomSheetHandle
 
     init {
         orientation = VERTICAL
-        setPadding(8.toDp(), 8.toDp(), 8.toDp(), 8.toDp())
+        setPaddingRelative(8.toDp(), 8.toDp(), 8.toDp(), 8.toDp())
 
         val cornerFamily = intOfAttrs(
             ctx,

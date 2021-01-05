@@ -21,13 +21,13 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.text.method.PasswordTransformationMethod
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.util.LayoutDirection
+import android.view.*
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.AdapterView.TEXT_ALIGNMENT_VIEW_START
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.core.utils.getIconColor
@@ -214,7 +214,8 @@ internal class InputAdapter(
                     RadioGroup.LayoutParams.MATCH_PARENT,
                     RadioGroup.LayoutParams.WRAP_CONTENT
                 )
-                setPadding(16.toDp(), 0, 0, 0)
+                setPaddingRelative(16.toDp(), 0, 0, 0)
+                textAlignment = TEXT_ALIGNMENT_VIEW_START
                 text = radioButtonText
                 id = index
             }

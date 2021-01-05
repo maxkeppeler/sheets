@@ -27,6 +27,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="16dp"
         android:lineSpacingMultiplier="1.4"
+        android:textAlignment="viewStart"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
