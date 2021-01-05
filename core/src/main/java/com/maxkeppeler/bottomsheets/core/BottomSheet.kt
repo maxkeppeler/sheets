@@ -22,6 +22,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.LayoutDirection
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,8 +82,10 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         private const val STATE_BASE_CLOSE_BUTTON_DRAWABLE = "state_base_close_button_drawable"
         private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
         private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
-        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE = "state_base_positive_button_drawable"
-        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE = "state_base_negative_button_drawable"
+        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE =
+            "state_base_positive_button_drawable"
+        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE =
+            "state_base_negative_button_drawable"
         private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
         private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
         private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
@@ -96,7 +99,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     open lateinit var windowContext: Context
-
+    private var layoutDirection: Int? = null
     private var theme = Theme.DAY
 
     lateinit var bindingBase: BottomSheetsBaseBinding
@@ -129,7 +132,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     private var borderStrokeWidthDp: Float? = null
     private var borderStrokeColor: Int? = null
     private var cornerFamily: Int? = null
-
     private var iconButtons: Array<IconButton?> = arrayOfNulls(ICON_BUTTONS_AMOUNT_MAX)
 
     /**
@@ -142,6 +144,11 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         val index = this.iconButtons.indexOfFirst { it == null }
         if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
         this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
+
+    /** Set the layout direction. (e. g. to enforce rtl.) */
+    fun layoutDirection(layoutDirection: Int) {
+        this.layoutDirection = layoutDirection
     }
 
     /** Set if bottom sheet is cancelable outside. */
@@ -349,6 +356,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         saved: Bundle?
     ): View? {
         if (saved?.isEmpty == true) dismiss()
+        layoutDirection?.let { dialog?.window?.decorView?.layoutDirection = it }
         return BottomSheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
             .also { bindingBase = it }.apply {
                 layout.addView(onCreateLayoutView())
@@ -374,8 +382,10 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
             closeButtonDrawableRes = saved.get(STATE_BASE_CLOSE_BUTTON_DRAWABLE) as Int?
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
-            negativeListener = saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
-            positiveListener = saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
+            negativeListener =
+                saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
+            positiveListener =
+                saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
             cornerFamily = saved.get(STATE_BASE_CORNER_FAMILY) as Int?
             borderStrokeColor = saved.get(STATE_BASE_BORDER_COLOR) as Int?
             behavior = saved.getInt(STATE_BASE_BEHAVIOR)
@@ -384,7 +394,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
-                val iconButton = saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
+                val iconButton =
+                    saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
                 iconButton?.let { btn -> icons.add(btn) }
             }
             iconButtons = icons.toTypedArray()
@@ -447,7 +458,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 val dialogBehavior = dialog.behavior
                 dialogBehavior.state = behavior
                 dialogBehavior.peekHeight = peekHeight
-                dialogBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                dialogBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
                     override fun onSlide(bottomSheet: View, dY: Float) {
                         // TODO: Make button layout stick to the bottom through translationY property.
                     }
