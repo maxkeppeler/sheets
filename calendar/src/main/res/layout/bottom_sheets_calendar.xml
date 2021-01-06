@@ -134,6 +134,7 @@
         android:id="@+id/calendarView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
         android:paddingBottom="8dp"
         app:cv_dayViewResource="@layout/bottom_sheets_calendar_day_item"
         app:cv_inDateStyle="allMonths"
