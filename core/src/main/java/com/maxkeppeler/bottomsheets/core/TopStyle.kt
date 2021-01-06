@@ -24,17 +24,17 @@ enum class TopStyle {
     /**
      * All components are above a cover image.
      */
-    ICONS_TITLE_TOP, COVER_BOTTOM,
+    SEPARATED_TOP,
 
 
     /**
      * Close and additional icon buttons are within the cover image aligned to the top while the title is out of the image view below
      */
-    ICONS_TOP_COVER_MIDDLE_TITLE_BOTTOM,
+    MIXED,
 
 
     /**
      * All components are below a cover image.
      */
-    COVER_TOP_ICONS_TITLE_BOTTOM
+    SEPARATED_BOTTOM
 }
