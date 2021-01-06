@@ -2,8 +2,8 @@
 <resources>
     <string name="cancel">Abbrechen</string>
     <string name="ok">Ok</string>
-    <string name="am">Vormittag</string>
-    <string name="pm">Nachmittag</string>
+    <string name="am">vm.</string>
+    <string name="pm">nm.</string>
     <string name="at_least_placeholder">Mindesten</string>
     <string name="at_most_placeholder">Höchstens %1$s</string>
     <string name="hour_code">h</string>
