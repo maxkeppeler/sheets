@@ -30,6 +30,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -81,8 +82,10 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         private const val STATE_BASE_CLOSE_BUTTON_DRAWABLE = "state_base_close_button_drawable"
         private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
         private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
-        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE = "state_base_positive_button_drawable"
-        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE = "state_base_negative_button_drawable"
+        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE =
+            "state_base_positive_button_drawable"
+        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE =
+            "state_base_negative_button_drawable"
         private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
         private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
         private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
@@ -98,6 +101,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     open lateinit var windowContext: Context
 
     private var theme = Theme.DAY
+    private var topStyle = TopStyle.SEPARATED_TOP
 
     lateinit var bindingBase: BottomSheetsBaseBinding
 
@@ -142,6 +146,11 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         val index = this.iconButtons.indexOfFirst { it == null }
         if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
         this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
+
+    /** Set the top style. */
+    fun topStyle(topStyle: TopStyle) {
+        this.topStyle = topStyle
     }
 
     /** Set if bottom sheet is cancelable outside. */
@@ -374,8 +383,10 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
             closeButtonDrawableRes = saved.get(STATE_BASE_CLOSE_BUTTON_DRAWABLE) as Int?
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
-            negativeListener = saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
-            positiveListener = saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
+            negativeListener =
+                saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
+            positiveListener =
+                saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
             cornerFamily = saved.get(STATE_BASE_CORNER_FAMILY) as Int?
             borderStrokeColor = saved.get(STATE_BASE_BORDER_COLOR) as Int?
             behavior = saved.getInt(STATE_BASE_BEHAVIOR)
@@ -384,7 +395,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
-                val iconButton = saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
+                val iconButton =
+                    saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
                 iconButton?.let { btn -> icons.add(btn) }
             }
             iconButtons = icons.toTypedArray()
@@ -447,7 +459,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 val dialogBehavior = dialog.behavior
                 dialogBehavior.state = behavior
                 dialogBehavior.peekHeight = peekHeight
-                dialogBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                dialogBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
                     override fun onSlide(bottomSheet: View, dY: Float) {
                         // TODO: Make button layout stick to the bottom through translationY property.
                     }
@@ -503,6 +516,67 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 requireContext(),
                 DEFAULT_DISPLAY_CLOSE_BUTTON
             )
+
+        if (topStyle != TopStyle.SEPARATED_TOP) {
+
+            val cornerFamily =
+                cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
+
+            val cornerRadius =
+                cornerRadiusDp ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS
+
+            bindingBase.top.cover.shapeAppearanceModel =
+                ShapeAppearanceModel().toBuilder().apply {
+                    setTopRightCorner(cornerFamily, cornerRadius.toDp())
+                    setTopLeftCorner(cornerFamily, cornerRadius.toDp())
+                }.build()
+        }
+
+        when (topStyle) {
+
+            TopStyle.SEPARATED_TOP -> {
+                /* Standard */
+            }
+
+            TopStyle.MIXED -> {
+
+                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                    bottomToTop = bindingBase.top.title.id
+                }
+
+                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
+                    startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                    endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                    setMargins(16.toDp(), 0, 0, 0)
+                }
+
+                (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                }
+            }
+
+            TopStyle.SEPARATED_BOTTOM -> {
+
+                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                    bottomToTop = bindingBase.top.title.id
+                }
+
+                (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
+                    topToTop = ConstraintLayout.LayoutParams.UNSET
+                }
+
+                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
+                }
+            }
+
+        }
 
         with(bindingBase) {
             handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
