@@ -10,6 +10,7 @@ dependencies {
     implementation deps.androidx.constraint
     implementation deps.androidx.preference
     implementation deps.google_material
+    implementation deps.coil
 }
 
 task androidJavadocs(type: Javadoc) {
