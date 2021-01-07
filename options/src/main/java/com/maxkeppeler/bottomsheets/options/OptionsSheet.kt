@@ -278,6 +278,15 @@ class OptionsSheet : BottomSheet() {
     }
 
     /**
+     * Add multiple options as a MutableList
+     *
+     * @param options The [Option] arguments to be added.
+     */
+    fun with(options: MutableList<Option>) {
+        this.options.addAll(options)
+    }
+
+    /**
      * Add an option.
      *
      * @param option Instance of [Option].
