@@ -564,10 +564,10 @@ abstract class BottomSheet : DialogFragment() {
         val model = ShapeAppearanceModel().toBuilder().apply {
             when (sheetStyle) {
                 SheetStyle.BOTTOM_SHEET -> {
-                    setTopRightCorner(cornerFamily, cornerRadius.toDp())
-                    setTopLeftCorner(cornerFamily, cornerRadius.toDp())
+                    setTopRightCorner(cornerFamily, cornerRadius)
+                    setTopLeftCorner(cornerFamily, cornerRadius)
                 }
-                else -> setAllCorners(cornerFamily, cornerRadius.toDp())
+                else -> setAllCorners(cornerFamily, cornerRadius)
             }
         }.build()
 
