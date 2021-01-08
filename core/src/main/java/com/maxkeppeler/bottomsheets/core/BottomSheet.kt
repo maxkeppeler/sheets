@@ -570,15 +570,22 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 }
             }
 
-            TopStyle.SEPARATED_BOTTOM -> {
+            TopStyle.BELOW_COVER -> {
 
                 (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                     bottomToTop = bindingBase.top.title.id
                 }
 
+                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToBottom = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
+                    topToTop = ConstraintLayout.LayoutParams.UNSET
+                }
+
                 (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
                     bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
                     topToTop = ConstraintLayout.LayoutParams.UNSET
                 }
 
