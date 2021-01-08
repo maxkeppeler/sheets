@@ -47,6 +47,9 @@
     <string name="calendar_week2">Calendar date range picker in 2-week view</string>
     <string name="calendar_week3">Calendar date range picker in 3-week view</string>
     <string name="info">Any text info or warning</string>
+    <string name="info_cover_image_1">Cover image below the toolbar bar.</string>
+    <string name="info_cover_image_2">Cover image at the top, hidden close button, additional icon button.</string>
+    <string name="info_cover_image_3">Overlapping cover image, hidden buttons, additional icon button.</string>
     <string name="input_short">A small survey form</string>
     <string name="input_long">A long survey form</string>
     <string name="custom_sheet_example_1">Custom Bottom Sheet Example 1</string>

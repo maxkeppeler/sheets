@@ -32,6 +32,8 @@ import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
 import com.maxkeppeler.bottomsheets.core.IconButton
+import com.maxkeppeler.bottomsheets.core.Image
+import com.maxkeppeler.bottomsheets.core.TopStyle
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
 import com.maxkeppeler.bottomsheets.info.InfoSheet
 import com.maxkeppeler.bottomsheets.input.InputSheet
@@ -108,6 +110,9 @@ class MainActivity : AppCompatActivity() {
             BottomSheetExample.CALENDAR_RANGE_WEEK2 -> showCalendarSheetWeek2()
             BottomSheetExample.CALENDAR_RANGE_WEEK3 -> showCalendarSheetWeek3()
             BottomSheetExample.INFO -> showInfoSheet()
+            BottomSheetExample.INFO_COVER_IMAGE_1 -> showInfoSheetTopStyleTop()
+            BottomSheetExample.INFO_COVER_IMAGE_2 -> showInfoSheetTopStyleBottom()
+            BottomSheetExample.INFO_COVER_IMAGE_3 -> showInfoSheetTopStyleMixed()
             BottomSheetExample.INPUT_SHORT -> showInputSheetShort()
             BottomSheetExample.INPUT_LONG -> showInputSheetLong()
             BottomSheetExample.INPUT_PASSWORD -> showInputSheetPassword()
@@ -515,7 +520,12 @@ class MainActivity : AppCompatActivity() {
         InputSheet().show(this) {
             title("Choose a password")
             content("Make sure the password is safe enough and is not used for any other account.")
-            withIconButton(IconButton(R.drawable.ic_help)) { showToast("IconButton", "Help clicked...") }
+            withIconButton(IconButton(R.drawable.ic_help)) {
+                showToast(
+                    "IconButton",
+                    "Help clicked..."
+                )
+            }
             with(InputEditText {
                 required()
                 hint("Password")
@@ -558,8 +568,7 @@ class MainActivity : AppCompatActivity() {
 
         InfoSheet().show(this) {
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
-            withIconButton(IconButton(R.drawable.ic_mail)) { /* Will not automatically dismiss the bottom sheet. */ }
-            title("Release Notes")
+            title("Did you read the README?")
             content("It will help you to setup beautiful bottom sheets in your project.")
             onNegative(
                 "Not yet",
@@ -571,6 +580,52 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showInfoSheetTopStyleTop() {
+
+        InfoSheet().show(this) {
+            cornerFamily(CornerFamily.CUT)
+            topStyle(TopStyle.ABOVE_COVER)
+            withCoverImage(Image("https://images.hdqwalls.com/download/interstellar-gargantua-u4-1440x900.jpg"))
+            withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
+            withIconButton(IconButton(R.drawable.ic_mail)) { /* Will not automatically dismiss the bottom sheet. */ }
+            title("Interstellar")
+            content("“We used to look up at the sky and wonder at our place in the stars, now we just look down and worry about our place in the dirt.” — Cooper")
+            onNegative("")
+            onPositive("Ok")
+        }
+    }
+
+    private fun showInfoSheetTopStyleBottom() {
+
+        InfoSheet().show(this) {
+            displayCloseButton(false)
+            cornerFamily(CornerFamily.CUT)
+            cornerRadius(24f)
+            topStyle(TopStyle.BELOW_COVER)
+            withCoverImage(Image(uri = "https://img4.goodfon.com/wallpaper/nbig/7/47/westworld-anthony-hopkins-robert-ford-actor-show-faces.jpg"))
+            withIconButton(IconButton(R.drawable.ic_help)) {  }
+            title("Dr. Robert Ford")
+            content("\"Dreams mean everything. They’re the stories we tell ourselves of what could be, who we could become.\"")
+            onNegative("Disagree")
+            onPositive("Agree")
+        }
+    }
+
+    private fun showInfoSheetTopStyleMixed() {
+
+        InfoSheet().show(this) {
+            showButtons(false)
+            cornerFamily(CornerFamily.CUT)
+            topStyle(TopStyle.MIXED)
+            withCoverImage(Image("https://cdn.wallpapersafari.com/11/17/LjhbqX.jpg") {
+                // For placeholder, error, fallback drawable and other image loading configs
+                crossfade(300)
+            })
+            withIconButton(IconButton(R.drawable.ic_help)) { /* Will not automatically dismiss the bottom sheet. */ }
+            title("Attack on Titan")
+            content("It is set in a world where humanity lives inside cities surrounded by enormous walls that protect them from gigantic man-eating humanoids referred to as Titans; the story follows Eren Yeager, who vows to exterminate the Titans after a Titan brings about the destruction of his hometown and the death of his mother.")
+        }
+    }
 
     private fun showCustomSheet() {
 
