@@ -102,6 +102,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     private var theme = Theme.DAY
     private var topStyle = TopStyle.SEPARATED_TOP
+    private var coverImage: Image? = null
 
     lateinit var bindingBase: BottomSheetsBaseBinding
 
@@ -146,6 +147,11 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         val index = this.iconButtons.indexOfFirst { it == null }
         if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
         this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
+
+    /** Set a cover image. */
+    fun withCoverImage(image: Image) {
+        this.coverImage = image
     }
 
     /** Set the top style. */
