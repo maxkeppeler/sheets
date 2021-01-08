@@ -101,7 +101,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     open lateinit var windowContext: Context
 
     private var theme = Theme.DAY
-    private var topStyle = TopStyle.SEPARATED_TOP
+    private var topStyle = TopStyle.ABOVE_COVER
     private var coverImage: Image? = null
 
     lateinit var bindingBase: BottomSheetsBaseBinding
