@@ -82,7 +82,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
         private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
         private const val STATE_BASE_TITLE_TEXT = "state_base_title_text"
-        private const val STATE_BASE_CLOSE_BUTTON_DRAWABLE = "state_base_close_button_drawable"
+        private const val STATE_BASE_CLOSE_ICON_BUTTON = "state_base_close_icon_button"
         private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
         private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
         private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE =
@@ -115,8 +115,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
 
     private var titleText: String? = null
 
-    @DrawableRes
-    private var closeButtonDrawableRes: Int? = null
+    private var closeIconButton: IconButton? = null
 
     protected var positiveText: String? = null
     private var negativeText: String? = null
@@ -220,8 +219,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Set the Close Button Drawable. */
-    fun closeButtonDrawable(@DrawableRes drawableRes: Int) {
-        this.closeButtonDrawableRes = drawableRes
+    fun closeIconButton(iconButton: IconButton) {
+        this.closeIconButton = iconButton
     }
 
     /**
@@ -390,7 +389,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             displayHandle = saved.get(STATE_BASE_DISPLAY_HANDLE) as Boolean?
             negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
-            closeButtonDrawableRes = saved.get(STATE_BASE_CLOSE_BUTTON_DRAWABLE) as Int?
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
             negativeListener =
                 saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
@@ -404,6 +402,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
             coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image
+            closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
                 val iconButton =
@@ -430,7 +429,6 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             displayToolbar?.let { putBoolean(STATE_BASE_DISPLAY_TOOLBAR, it) }
             displayCloseButton?.let { putBoolean(STATE_BASE_DISPLAY_CLOSE_BUTTON, it) }
             displayHandle?.let { putBoolean(STATE_BASE_DISPLAY_HANDLE, it) }
-            closeButtonDrawableRes?.let { putInt(STATE_BASE_CLOSE_BUTTON_DRAWABLE, it) }
             negativeButtonDrawableRes?.let { putInt(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE, it) }
             positiveButtonDrawableRes?.let { putInt(STATE_BASE_POSITIVE_BUTTON_DRAWABLE, it) }
             cornerFamily?.let { putInt(STATE_BASE_CORNER_FAMILY, it) }
@@ -441,6 +439,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             cornerRadiusDp?.let { putFloat(STATE_BASE_CORNER_RADIUS, it) }
             putSerializable(STATE_BASE_TOP_STYLE, topStyle)
             putSerializable(STATE_BASE_COVER_IMAGE, coverImage)
+            putSerializable(STATE_BASE_CLOSE_ICON_BUTTON, closeIconButton)
             iconButtons.forEachIndexed { i, btn ->
                 putSerializable(STATE_BASE_ICON_BUTTONS.plus(i), btn)
             }
