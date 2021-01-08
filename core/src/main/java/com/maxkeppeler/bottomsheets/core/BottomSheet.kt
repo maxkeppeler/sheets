@@ -168,7 +168,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     }
 
     /** Set the [BottomSheetBehavior] state. */
-    fun behavior(behavior: Int) {
+    fun behavior(@BottomSheetBehavior.State behavior: Int) {
         this.behavior = behavior
     }
 
@@ -181,7 +181,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
      * Set the [CornerFamily].
      * Overrides the style default.
      */
-    fun cornerFamily(cornerFamily: Int) {
+    fun cornerFamily(@CornerFamily cornerFamily: Int) {
         this.cornerFamily = cornerFamily
     }
 
