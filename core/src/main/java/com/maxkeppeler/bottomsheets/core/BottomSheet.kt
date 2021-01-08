@@ -26,6 +26,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -492,11 +493,12 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         val cornerFamily =
             cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
         val cornerRadius =
-            cornerRadiusDp ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS
+            cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext())
+            ?: DEFAULT_CORNER_RADIUS.toDp()
 
         val model = ShapeAppearanceModel().toBuilder().apply {
-            setTopRightCorner(cornerFamily, cornerRadius.toDp())
-            setTopLeftCorner(cornerFamily, cornerRadius.toDp())
+            setTopRightCorner(cornerFamily, cornerRadius)
+            setTopLeftCorner(cornerFamily, cornerRadius)
         }.build()
 
         val shape = MaterialShapeDrawable(model).apply {
