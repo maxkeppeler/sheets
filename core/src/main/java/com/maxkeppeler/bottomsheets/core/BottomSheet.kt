@@ -23,10 +23,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.ViewTreeObserver
+import android.view.*
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
@@ -688,6 +685,12 @@ abstract class BottomSheet : DialogFragment() {
                     startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                     endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
                     setMargins(16.toDp(), 0, 0, 0)
+                }
+
+                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                    bottomToTop = ConstraintLayout.LayoutParams.UNSET
+                    bottomToBottom = bindingBase.top.guideline.id
                 }
 
                 (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
