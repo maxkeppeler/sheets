@@ -22,19 +22,18 @@ package com.maxkeppeler.bottomsheets.core
 enum class TopStyle {
 
     /**
-     * All components are above a cover image.
+     * Components are displayed above the cover.
      */
-    SEPARATED_TOP,
-
+    ABOVE_COVER,
 
     /**
-     * Close and additional icon buttons are within the cover image aligned to the top while the title is out of the image view below
+     * Close and additional icon buttons are within the cover image aligned to the top
+     * while the title is positioned below the image cover.
      */
     MIXED,
 
-
     /**
-     * All components are below a cover image.
+     * Components are displayed below the cover.
      */
-    SEPARATED_BOTTOM
+    BELOW_COVER
 }
