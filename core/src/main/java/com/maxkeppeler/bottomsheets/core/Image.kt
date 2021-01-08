@@ -46,7 +46,10 @@ class Image private constructor() : Serializable {
     internal var ratio: Ratio? = null
         private set
 
-    private var imageBuilder: ImageBuilder? = null
+    private var imageBuilder: ImageBuilder = {
+        // Use by default always crossfade
+        crossfade(true)
+    }
 
     internal val coilRequestBuilder: CoiImageRequestBuilder
         get() = {
