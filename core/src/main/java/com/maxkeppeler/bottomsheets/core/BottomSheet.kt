@@ -76,6 +76,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
         private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
+        private const val STATE_BASE_TOP_STYLE = "state_top_style"
+        private const val STATE_BASE_COVER_IMAGE = "state_cover_image"
         private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
         private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
         private const val STATE_BASE_TITLE_TEXT = "state_base_title_text"
@@ -399,6 +401,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             peekHeight = saved.getInt(STATE_BASE_PEEK_HEIGHT)
             cornerRadiusDp = saved.get(STATE_BASE_CORNER_RADIUS) as Float?
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
+            topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
+            coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
                 val iconButton =
@@ -434,6 +438,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             putInt(STATE_BASE_PEEK_HEIGHT, peekHeight)
             borderStrokeWidthDp?.let { putFloat(STATE_BASE_BORDER_WIDTH, it) }
             cornerRadiusDp?.let { putFloat(STATE_BASE_CORNER_RADIUS, it) }
+            putSerializable(STATE_BASE_TOP_STYLE, topStyle)
+            putSerializable(STATE_BASE_COVER_IMAGE, coverImage)
             iconButtons.forEachIndexed { i, btn ->
                 putSerializable(STATE_BASE_ICON_BUTTONS.plus(i), btn)
             }
