@@ -110,7 +110,6 @@ abstract class BottomSheet : DialogFragment() {
 
     open lateinit var windowContext: Context
 
-    private var theme = Theme.DAY
     private var topStyle = TopStyle.ABOVE_COVER
     private var coverImage: Image? = null
 
