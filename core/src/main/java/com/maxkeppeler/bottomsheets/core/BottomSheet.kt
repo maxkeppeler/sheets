@@ -18,6 +18,7 @@
 
 package com.maxkeppeler.bottomsheets.core
 
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -32,14 +33,15 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatDialog
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceFragmentCompat
 import coil.loadAny
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -66,7 +68,7 @@ typealias ClickListener = () -> Unit
  * You can implement this class in your own and build your
  * own custom bottom sheet with the already existing features which the base class offers.
  */
-abstract class BottomSheet : BottomSheetDialogFragment() {
+abstract class BottomSheet : DialogFragment() {
 
     open val dialogTag = "BottomSheet"
 
@@ -77,6 +79,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
+        private const val STATE_BASE_SHEET_STYLE = "state_base_sheet_style"
         private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
         private const val STATE_BASE_TOP_STYLE = "state_top_style"
         private const val STATE_BASE_COVER_IMAGE = "state_cover_image"
@@ -101,6 +104,9 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         private const val STATE_BASE_CORNER_FAMILY = "state_base_corner_family"
         private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
+
+    private var sheetStyle: SheetStyle = SheetStyle.BOTTOM_SHEET
+    private var sheetTheme = Theme.BOTTOM_SHEET_DAY
 
     open lateinit var windowContext: Context
 
@@ -150,6 +156,11 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         val index = this.iconButtons.indexOfFirst { it == null }
         if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
         this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
+    
+    /** Set sheet style. */
+    fun style(style: SheetStyle) {
+        this.sheetStyle = style
     }
 
     /** Set a cover image. */
@@ -348,10 +359,16 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         this.dismissListener = dismissListener
     }
 
+    /** Override style to switch between bottom sheet & dialog style. */
+    override fun setStyle(style: Int, theme: Int) {
+        sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
+        super.setStyle(style, sheetTheme.styleRes)
+    }
+
     /** Override theme to allow auto switch between day & night design. */
     override fun getTheme(): Int {
-        theme = Theme.inferTheme(requireContext())
-        return theme.styleRes
+        sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
+        return sheetTheme.styleRes
     }
 
     /** Override dismiss to trigger custom dismiss listener. */
@@ -390,6 +407,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             displayHandle = saved.get(STATE_BASE_DISPLAY_HANDLE) as Boolean?
             negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
+            sheetStyle = saved.getSerializable(STATE_BASE_SHEET_STYLE) as SheetStyle
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
             negativeListener =
                 saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
@@ -447,6 +465,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             putSerializable(STATE_BASE_DISMISS_LISTENER, dismissListener as Serializable?)
             putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
             putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
+            putSerializable(STATE_BASE_SHEET_STYLE, sheetStyle)
         }
     }
 
@@ -462,13 +481,60 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         setupBottomSheet()
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return when (sheetStyle) {
+            SheetStyle.BOTTOM_SHEET -> BottomSheetDialog(requireContext(), theme)
+            else -> Dialog(requireContext(), theme)
+        }
+    }
+
+    override fun setupDialog(dialog: Dialog, style: Int) {
+        when (sheetStyle) {
+
+            SheetStyle.BOTTOM_SHEET -> {
+
+                // If the dialog is an AppCompatDialog, we'll handle it
+                val acd = dialog as AppCompatDialog
+                when (style) {
+                    STYLE_NO_INPUT -> {
+                        dialog.getWindow()?.addFlags(
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                        )
+                        acd.supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+                    }
+                    STYLE_NO_FRAME, STYLE_NO_TITLE -> acd.supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
+                }
+            }
+
+            else -> {
+                when (style) {
+                    STYLE_NO_INPUT -> {
+                        val window = dialog.window
+                        window?.addFlags(
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                    or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+                        )
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    }
+                    STYLE_NO_FRAME, STYLE_NO_TITLE -> dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                }
+            }
+        }
+    }
+
     private fun setupBottomSheetBehavior(view: View) {
+
+        if (sheetStyle == SheetStyle.DIALOG) {
+            // We don't need a behavior for the dialog
+            return
+        }
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                val dialog = dialog as BottomSheetDialog? ?: return
+                val dialog = dialog as? BottomSheetDialog? ?: return
                 val dialogBehavior = dialog.behavior
                 dialogBehavior.state = behavior
                 dialogBehavior.peekHeight = peekHeight
@@ -497,8 +563,13 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             ?: DEFAULT_CORNER_RADIUS.toDp()
 
         val model = ShapeAppearanceModel().toBuilder().apply {
-            setTopRightCorner(cornerFamily, cornerRadius)
-            setTopLeftCorner(cornerFamily, cornerRadius)
+            when (sheetStyle) {
+                SheetStyle.BOTTOM_SHEET -> {
+                    setTopRightCorner(cornerFamily, cornerRadius.toDp())
+                    setTopLeftCorner(cornerFamily, cornerRadius.toDp())
+                }
+                else -> setAllCorners(cornerFamily, cornerRadius.toDp())
+            }
         }.build()
 
         val shape = MaterialShapeDrawable(model).apply {
@@ -508,7 +579,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 setPadding(width.getDp(), width.getDp(), width.getDp(), width.getDp())
             }
 
-            val backgroundColor = getBottomSheetBackgroundColor(requireContext(), theme.styleRes)
+            val backgroundColor = getBottomSheetBackgroundColor(requireContext(), sheetTheme.styleRes)
             fillColor = ColorStateList.valueOf(backgroundColor)
         }
 
@@ -525,7 +596,7 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         val isToolbarVisible =
             displayToolbar ?: isDisplayToolbar(requireContext(), DEFAULT_DISPLAY_TOOLBAR)
 
-        val isCloseButtonVisible =
+        val isCloseButtonVisible = sheetStyle == SheetStyle.BOTTOM_SHEET &&
             displayCloseButton ?: isDisplayCloseButton(
                 requireContext(),
                 DEFAULT_DISPLAY_CLOSE_BUTTON
@@ -768,8 +839,21 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (sheetStyle == SheetStyle.DIALOG) {
+            dialog?.window?.apply {
+                setLayout(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            }
+        }
+    }
+
     /** Show the bottom sheet. */
     fun show() {
+
         windowContext.let { ctx ->
             when (ctx) {
                 is FragmentActivity -> show(ctx.supportFragmentManager, dialogTag)

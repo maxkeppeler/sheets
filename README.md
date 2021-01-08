@@ -3,8 +3,8 @@
 
   <img src="art/ic_library.png" width="128px" height="128px" alt="Bottom-Sheets Library" align="left" style="margin-right: 48px;">
 
-  # Bottom Sheets
-  Offering a range of beautiful bottom sheets for quick use in your project.
+  # Sheets
+  Offers a range of beautiful sheets (dialogs & bottom sheets) for quick use in your project.
 
   <div>
     <a href="https://github.com/maxkeppeler/bottom-sheets">
@@ -42,18 +42,18 @@
 <br/>
 <br/>
 
-Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample.apk) to see the bottom sheets in real.
+Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample.apk) to see the all sheets in real.
 
 ## Table of Contents
 - [Get started](#get-started)
-  - [Info Bottom Sheet](#info)
-  - [Options Bottom Sheet](#options)
-  - [Clock Time Bottom Sheet](#clock-time)
-  - [Time Bottom Sheet](#time)
-  - [Input Bottom Sheet](#input)
-  - [Calendar Bottom Sheet](#calendar)
-  - [Color Bottom Sheet](#color)
-  - [Custom Bottom Sheet](#custom)
+  - [Info Sheet](#info)
+  - [Options Sheet](#options)
+  - [Clock Time Sheet](#clock-time)
+  - [Time Sheet](#time)
+  - [Input Sheet](#input)
+  - [Calendar Sheet](#calendar)
+  - [Color Sheet](#color)
+  - [Custom Sheet](#custom)
   - [Appearance](#appearance)  
 - [Misc](#misc)
   - [Showcase](#showcase)
@@ -63,7 +63,7 @@ Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/samp
 
 # Get started
 
-In order to use any of the following Bottom Sheets, you have to implement the `core` module.
+In order to use any of the following Sheets, you have to implement the `core` module.
 
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acore/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acore/_latestVersion)
 
@@ -74,46 +74,46 @@ dependencies {
 }
 ```
 
-**The following functions can be called from any bottom sheet:**
+**The following functions can be called from any sheet:**
 
-Use ```cancelableOutside()``` to disable dismissing the bottom sheet when outside.<br/>
+Use ```cancelableOutside()``` to disable dismissing the sheet when outside.<br/>
 Use ```behavior()``` to set the BottomSheetBehavior.<br/>
 Use ```peekHeight()``` to set the peek height for the bottom sheet.<br/>
 Use ```cornerRadius()``` to set corner radius.<br/>
 Use ```cornerFamily()``` to set corner family (cut or rounded).<br/>
 Use ```borderWidth()``` to set the width of the border width.<br/>
 Use ```borderColor()``` to set the color of the border.<br/>
-Use ```displayToolbar()``` to show or hide the toolbar of the bottom sheet (close icon button, the title, the divider and icon buttons.).<br/>
+Use ```displayToolbar()``` to show or hide the toolbar of the sheet (close icon button, the title, the divider and icon buttons.).<br/>
 Use ```displayCloseButton()``` to show or hide the close icon button.<br/>
 Use ```displayHandle()``` to show or hide the handle.<br/>
 Use ```title()``` to set the title text.<br/>
 Use ```closeButtonDrawable()``` to set a custom drawable for the close button.<br/>
 Use ```onNegative()``` to set the negative button text and/ or the listener to be invoked when clicked.<br/>
-Use ```onDismiss()``` to set a listener to be invoked when the bottom sheet is dismissed.<br/>
-Use ```show()``` to show the bottom sheet.<br/>
+Use ```onDismiss()``` to set a listener to be invoked when the sheet is dismissed.<br/>
+Use ```show()``` to show the sheet.<br/>
 
-Each of the bottom sheets have an extension function called ```build``` and ```show``` where the receiver is the used bottom sheet.<br/>
+Each of the sheets have an extension function called ```build``` and ```show``` where the receiver is the used sheet.<br/>
 
-Use ```build``` to build a bottom sheet and display it later.
+Use ```build``` to build a sheet and display it later.
 
 ```
 val sheet = InfoSheet().build(context) {
-  // build bottom sheet
+  // build sheet
 }
 
-sheet.show() // Show bottom sheet when ready
+sheet.show() // Show sheet when ready
 ```
 Use ```show``` if you want to build and then immediately display it.
 ```
 InfoSheet().show(context) {
-  // build bottom sheet
-} // Show bottom sheet
+  // build sheet
+} // Show sheet
 ```
 
 ## Info
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainfo/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainfo/_latestVersion)
 
-The `Info` Bottom Sheet lets you display information or warning.
+The `Info` Sheet lets you display information or warning.
 
 <img src="art/img_bottom_sheet_info.png" width="80%" alt="Bottom-Sheets InfoSheet">
 
@@ -146,7 +146,7 @@ Use ```drawableColor()``` to set the color of the drawable.<br/>
 ## Options
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Aoptions/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Aoptions/_latestVersion)
 
-The `Options` Bottom Sheet lets you display a grid or list of options.
+The `Options` Sheet lets you display a grid or list of options.
 
 <img src="art/img_bottom_sheet_options_grid.png" width="80%" alt="Bottom-Sheets OptionsSheet Grid">
 
@@ -194,7 +194,7 @@ Notice: Preselected options automatically increase the current selection while d
 ## Clock Time
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Atime_clock/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Atime_clock/_latestVersion)
 
-The `Clock Time` Bottom Sheet lets you quickly pick a time.
+The `Clock Time` Sheet lets you quickly pick a time.
 
 <img src="art/img_bottom_sheet_clock_time.png" width="80%" alt="Bottom-Sheets ClockTimeSheet">
 
@@ -222,7 +222,7 @@ Use ```currentTime()``` to set the current time in milliseconds.<br/>
 ## Time
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Atime/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Atime/_latestVersion)
 
-The `Time` Bottom Sheet lets you pick a duration time in a specific format.
+The `Time` Sheet lets you pick a duration time in a specific format.
 
 <img src="art/img_bottom_sheet_time.png" width="80%" alt="Bottom-Sheets TimeSheet">
 
@@ -251,7 +251,7 @@ Use ```maxTime()``` to set the maximum time.<br/>
 ## Input
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainput/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainput/_latestVersion)
 
-The `Input` Bottom Sheet lets you display a form consisting of various inputs.
+The `Input` Sheet lets you display a form consisting of various inputs.
 
 <img src="art/img_bottom_sheet_input.png" width="80%" alt="Bottom-Sheets InputSheet">
 
@@ -335,7 +335,7 @@ Use ```selected()``` to set selected index.<br/>
 ## Calendar
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acalendar/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acalendar/_latestVersion)
 
-The `Calendar` Bottom Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
+The `Calendar` Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
 
 <img src="art/img_bottom_sheet_calendar.png" width="80%" alt="Bottom-Sheets OptionsSheet">
 
@@ -365,7 +365,7 @@ Use ```showButtons()``` to show or hide the buttons view.<br/>
 ## Color
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acolor/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acolor/_latestVersion)
 
-The `Color` Bottom Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
+The `Color` Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
 
 <img src="art/img_bottom_sheet_color.png" width="80%" alt="Bottom-Sheets ColorSheet">
 

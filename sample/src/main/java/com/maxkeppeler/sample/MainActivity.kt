@@ -32,6 +32,7 @@ import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
 import com.maxkeppeler.bottomsheets.core.IconButton
+import com.maxkeppeler.bottomsheets.core.SheetStyle
 import com.maxkeppeler.bottomsheets.core.Image
 import com.maxkeppeler.bottomsheets.core.TopStyle
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
@@ -567,6 +568,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheet() {
 
         InfoSheet().show(this) {
+            style(SheetStyle.DIALOG)
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
             title("Did you read the README?")
             content("It will help you to setup beautiful bottom sheets in your project.")
