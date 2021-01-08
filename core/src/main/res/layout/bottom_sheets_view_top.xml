@@ -27,9 +27,10 @@
         android:id="@+id/cover"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/design_default_color_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="w,3:2"
+        app:layout_constraintDimensionRatio="2:1"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
