@@ -529,24 +529,77 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 DEFAULT_DISPLAY_CLOSE_BUTTON
             )
 
-        if (topStyle != TopStyle.SEPARATED_TOP) {
+        with(bindingBase) {
+            handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
+            top.root.visibility = if (isToolbarVisible) View.VISIBLE else View.GONE
+            top.btnClose.visibility =
+                if (isToolbarVisible && isCloseButtonVisible) View.VISIBLE else View.GONE
+            if (isToolbarVisible) {
+                setupTopBar()
+                titleText?.let { top.title.text = it }
+                if (isCloseButtonVisible) {
+                    closeIconButton?.let { btn ->
+                        val drawable =
+                            btn.drawableRes?.let { ContextCompat.getDrawable(requireContext(), it) }
+                                ?: btn.drawable
+                        top.btnClose.setImageDrawable(drawable)
+                        top.btnClose.setColorFilter(btn.drawableColor?.let {
+                            ContextCompat.getColor(
+                                requireContext(),
+                                it
+                            )
+                        } ?: iconsColor)
+                    }
+                    top.btnClose.setOnClickListener { dismiss() }
+                }
+            }
+
+            top.btnType.setColorFilter(iconsColor)
+            top.btnExtra1.setColorFilter(iconsColor)
+            top.btnExtra2.setColorFilter(iconsColor)
+            top.btnExtra3.setColorFilter(iconsColor)
+        }
+
+        setupIconButtons()
+        setupButtonsView()
+    }
+
+    private fun setupTopBar() {
+        coverImage?.let { img ->
+            setupTopStyle()
+            img.ratio?.dimensionRatio?.let { ratio ->
+                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    dimensionRatio = ratio
+                }
+            }
+            img.scaleType?.let { bindingBase.top.cover.scaleType = it }
+            bindingBase.top.cover.visibility = View.VISIBLE
+            bindingBase.top.cover.loadAny(img.any) {
+                img.coilRequestBuilder.invoke(this)
+            }
+        }
+    }
+
+    private fun setupTopStyle() {
+
+        if (topStyle != TopStyle.ABOVE_COVER) {
 
             val cornerFamily =
                 cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
 
             val cornerRadius =
-                cornerRadiusDp ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS
+                cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS.toDp()
 
             bindingBase.top.cover.shapeAppearanceModel =
                 ShapeAppearanceModel().toBuilder().apply {
-                    setTopRightCorner(cornerFamily, cornerRadius.toDp())
-                    setTopLeftCorner(cornerFamily, cornerRadius.toDp())
+                    setTopRightCorner(cornerFamily, cornerRadius)
+                    setTopLeftCorner(cornerFamily, cornerRadius)
                 }.build()
         }
 
         when (topStyle) {
 
-            TopStyle.SEPARATED_TOP -> {
+            TopStyle.ABOVE_COVER -> {
                 /* Standard */
             }
 
@@ -594,51 +647,33 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                     topToBottom = bindingBase.top.cover.id
                 }
             }
-
         }
-
-        with(bindingBase) {
-            handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
-            top.root.visibility = if (isToolbarVisible) View.VISIBLE else View.GONE
-            top.btnClose.visibility =
-                if (isToolbarVisible && isCloseButtonVisible) View.VISIBLE else View.GONE
-
-            if (isToolbarVisible) {
-                titleText?.let { top.title.text = it }
-                if (isCloseButtonVisible) {
-                    closeButtonDrawableRes?.let { drawableRes ->
-                        val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
-                        top.btnClose.setImageDrawable(drawable)
-                    }
-                    top.btnClose.setColorFilter(iconsColor)
-                    top.btnClose.setOnClickListener { dismiss() }
-                }
-            }
-
-            top.btnType.setColorFilter(iconsColor)
-            top.btnExtra1.setColorFilter(iconsColor)
-            top.btnExtra2.setColorFilter(iconsColor)
-            top.btnExtra3.setColorFilter(iconsColor)
-        }
-
-        setupIconButtons()
-        setupButtonsView()
     }
 
     private fun setupIconButtons() {
 
         iconButtons.filterNotNull().forEachIndexed { i, btn ->
-            btn.drawable?.let { drawable -> setToolbarExtraButtonDrawable(i, drawable) }
-            btn.drawableRes?.let { drawableRes -> setToolbarExtraButtonDrawable(i, drawableRes) }
+            btn.drawable?.let { setToolbarExtraButtonDrawable(i, it) }
+            btn.drawableRes?.let { setToolbarExtraButtonDrawable(i, it) }
+            btn.drawableColor?.let { setToolbarExtraButtonColor(i, it) }
             btn.listener?.let { listener -> setToolbarExtraButtonListener(i, listener) }
             displayToolbarExtraButton(i)
         }
     }
 
-
     private fun setToolbarExtraButtonDrawable(i: Int, @DrawableRes drawableRes: Int) {
         val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
         setToolbarExtraButtonDrawable(i, drawable)
+    }
+
+    private fun setToolbarExtraButtonColor(i: Int, @ColorRes color: Int) {
+        with(bindingBase.top) {
+            when (i) {
+                0 -> btnExtra1
+                1 -> btnExtra2
+                else -> btnExtra3
+            }.setColorFilter(ContextCompat.getColor(requireContext(), color))
+        }
     }
 
     private fun setToolbarExtraButtonDrawable(i: Int, drawable: Drawable?) {
