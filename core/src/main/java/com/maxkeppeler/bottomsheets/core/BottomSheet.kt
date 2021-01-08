@@ -30,10 +30,12 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceFragmentCompat
+import coil.loadAny
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -75,14 +77,18 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
         private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
+        private const val STATE_BASE_TOP_STYLE = "state_top_style"
+        private const val STATE_BASE_COVER_IMAGE = "state_cover_image"
         private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
         private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
         private const val STATE_BASE_TITLE_TEXT = "state_base_title_text"
         private const val STATE_BASE_CLOSE_BUTTON_DRAWABLE = "state_base_close_button_drawable"
         private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
         private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
-        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE = "state_base_positive_button_drawable"
-        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE = "state_base_negative_button_drawable"
+        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE =
+            "state_base_positive_button_drawable"
+        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE =
+            "state_base_negative_button_drawable"
         private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
         private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
         private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
@@ -98,6 +104,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
     open lateinit var windowContext: Context
 
     private var theme = Theme.DAY
+    private var topStyle = TopStyle.ABOVE_COVER
+    private var coverImage: Image? = null
 
     lateinit var bindingBase: BottomSheetsBaseBinding
 
@@ -142,6 +150,16 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         val index = this.iconButtons.indexOfFirst { it == null }
         if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
         this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
+
+    /** Set a cover image. */
+    fun withCoverImage(image: Image) {
+        this.coverImage = image
+    }
+
+    /** Set the top style. */
+    fun topStyle(topStyle: TopStyle) {
+        this.topStyle = topStyle
     }
 
     /** Set if bottom sheet is cancelable outside. */
@@ -374,17 +392,22 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
             closeButtonDrawableRes = saved.get(STATE_BASE_CLOSE_BUTTON_DRAWABLE) as Int?
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
-            negativeListener = saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
-            positiveListener = saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
+            negativeListener =
+                saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
+            positiveListener =
+                saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
             cornerFamily = saved.get(STATE_BASE_CORNER_FAMILY) as Int?
             borderStrokeColor = saved.get(STATE_BASE_BORDER_COLOR) as Int?
             behavior = saved.getInt(STATE_BASE_BEHAVIOR)
             peekHeight = saved.getInt(STATE_BASE_PEEK_HEIGHT)
             cornerRadiusDp = saved.get(STATE_BASE_CORNER_RADIUS) as Float?
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
+            topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
+            coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
-                val iconButton = saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
+                val iconButton =
+                    saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
                 iconButton?.let { btn -> icons.add(btn) }
             }
             iconButtons = icons.toTypedArray()
@@ -416,6 +439,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             putInt(STATE_BASE_PEEK_HEIGHT, peekHeight)
             borderStrokeWidthDp?.let { putFloat(STATE_BASE_BORDER_WIDTH, it) }
             cornerRadiusDp?.let { putFloat(STATE_BASE_CORNER_RADIUS, it) }
+            putSerializable(STATE_BASE_TOP_STYLE, topStyle)
+            putSerializable(STATE_BASE_COVER_IMAGE, coverImage)
             iconButtons.forEachIndexed { i, btn ->
                 putSerializable(STATE_BASE_ICON_BUTTONS.plus(i), btn)
             }
@@ -447,7 +472,8 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
                 val dialogBehavior = dialog.behavior
                 dialogBehavior.state = behavior
                 dialogBehavior.peekHeight = peekHeight
-                dialogBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                dialogBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
                     override fun onSlide(bottomSheet: View, dY: Float) {
                         // TODO: Make button layout stick to the bottom through translationY property.
                     }
@@ -509,15 +535,22 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
             top.root.visibility = if (isToolbarVisible) View.VISIBLE else View.GONE
             top.btnClose.visibility =
                 if (isToolbarVisible && isCloseButtonVisible) View.VISIBLE else View.GONE
-
             if (isToolbarVisible) {
+                setupTopBar()
                 titleText?.let { top.title.text = it }
                 if (isCloseButtonVisible) {
-                    closeButtonDrawableRes?.let { drawableRes ->
-                        val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
+                    closeIconButton?.let { btn ->
+                        val drawable =
+                            btn.drawableRes?.let { ContextCompat.getDrawable(requireContext(), it) }
+                                ?: btn.drawable
                         top.btnClose.setImageDrawable(drawable)
+                        top.btnClose.setColorFilter(btn.drawableColor?.let {
+                            ContextCompat.getColor(
+                                requireContext(),
+                                it
+                            )
+                        } ?: iconsColor)
                     }
-                    top.btnClose.setColorFilter(iconsColor)
                     top.btnClose.setOnClickListener { dismiss() }
                 }
             }
@@ -532,20 +565,116 @@ abstract class BottomSheet : BottomSheetDialogFragment() {
         setupButtonsView()
     }
 
+    private fun setupTopBar() {
+        coverImage?.let { img ->
+            setupTopStyle()
+            img.ratio?.dimensionRatio?.let { ratio ->
+                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    dimensionRatio = ratio
+                }
+            }
+            img.scaleType?.let { bindingBase.top.cover.scaleType = it }
+            bindingBase.top.cover.visibility = View.VISIBLE
+            bindingBase.top.cover.loadAny(img.any) {
+                img.coilRequestBuilder.invoke(this)
+            }
+        }
+    }
+
+    private fun setupTopStyle() {
+
+        if (topStyle != TopStyle.ABOVE_COVER) {
+
+            val cornerFamily =
+                cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
+
+            val cornerRadius =
+                cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS.toDp()
+
+            bindingBase.top.cover.shapeAppearanceModel =
+                ShapeAppearanceModel().toBuilder().apply {
+                    setTopRightCorner(cornerFamily, cornerRadius)
+                    setTopLeftCorner(cornerFamily, cornerRadius)
+                }.build()
+        }
+
+        when (topStyle) {
+
+            TopStyle.ABOVE_COVER -> {
+                /* Standard */
+            }
+
+            TopStyle.MIXED -> {
+
+                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                    bottomToTop = bindingBase.top.title.id
+                }
+
+                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
+                    startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                    endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                    setMargins(16.toDp(), 0, 0, 0)
+                }
+
+                (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                }
+            }
+
+            TopStyle.BELOW_COVER -> {
+
+                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+                    bottomToTop = bindingBase.top.title.id
+                }
+
+                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToBottom = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
+                    topToTop = ConstraintLayout.LayoutParams.UNSET
+                }
+
+                (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
+                    topToTop = ConstraintLayout.LayoutParams.UNSET
+                }
+
+                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
+                }
+            }
+        }
+    }
+
     private fun setupIconButtons() {
 
         iconButtons.filterNotNull().forEachIndexed { i, btn ->
-            btn.drawable?.let { drawable -> setToolbarExtraButtonDrawable(i, drawable) }
-            btn.drawableRes?.let { drawableRes -> setToolbarExtraButtonDrawable(i, drawableRes) }
+            btn.drawable?.let { setToolbarExtraButtonDrawable(i, it) }
+            btn.drawableRes?.let { setToolbarExtraButtonDrawable(i, it) }
+            btn.drawableColor?.let { setToolbarExtraButtonColor(i, it) }
             btn.listener?.let { listener -> setToolbarExtraButtonListener(i, listener) }
             displayToolbarExtraButton(i)
         }
     }
 
-
     private fun setToolbarExtraButtonDrawable(i: Int, @DrawableRes drawableRes: Int) {
         val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
         setToolbarExtraButtonDrawable(i, drawable)
+    }
+
+    private fun setToolbarExtraButtonColor(i: Int, @ColorRes color: Int) {
+        with(bindingBase.top) {
+            when (i) {
+                0 -> btnExtra1
+                1 -> btnExtra2
+                else -> btnExtra3
+            }.setColorFilter(ContextCompat.getColor(requireContext(), color))
+        }
     }
 
     private fun setToolbarExtraButtonDrawable(i: Int, drawable: Drawable?) {
