@@ -76,6 +76,7 @@ dependencies {
 
 **The following functions can be called from any sheet:**
 
+Use ```style()``` to display the sheet as either a bottom sheet or dialog.<br/>
 Use ```cancelableOutside()``` to disable dismissing the sheet when outside.<br/>
 Use ```behavior()``` to set the BottomSheetBehavior.<br/>
 Use ```peekHeight()``` to set the peek height for the bottom sheet.<br/>
