@@ -390,6 +390,34 @@ abstract class BottomSheet : DialogFragment() {
         dismissListener?.invoke()
     }
 
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun useCover(useCover: Boolean = true) {
+        this.useCover = useCover
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun getCoverView(): View = bindingBase.top.cover
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun addOnCreateViewListener(onCreateViewListeners: OnViewCreatedListener) {
+        this.onCreateViewListeners.add(onCreateViewListeners)
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun removeOnCreateViewListener(onCreateViewListener: OnViewCreatedListener) {
+        this.onCreateViewListeners.remove(onCreateViewListener)
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun addAddOnComponent(addOnComponent: AddOnComponent) {
+        this.addOnComponents.add(addOnComponent)
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun removeAddOnComponent(addOnComponent: AddOnComponent) {
+        this.addOnComponents.remove(addOnComponent)
+    }
+
     /** Create view of base bottom sheet. */
     override fun onCreateView(
         inflater: LayoutInflater,
