@@ -1,4 +1,4 @@
-ext.module_group = "com.maxkeppeler.bottomsheets"
+ext.module_group = "com.maxkeppeler.sheets"
 ext.module_name = "lottie"
 
 apply from: rootProject.file("gradle/android_library_config.gradle")

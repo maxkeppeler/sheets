@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Bottom Sheets</string>
+    <string name="app_name">Sheets</string>
     <string name="options_sheet">OptionsSheet</string>
     <string name="color_sheet">ColorSheet</string>
     <string name="clock_time_sheet">ClockTimeSheet</string>
@@ -24,7 +24,7 @@
     <string name="info_sheet">InfoSheet</string>
     <string name="lottie">Lottie Animations</string>
     <string name="input_sheet">InputSheet</string>
-    <string name="custom_sheets">Create your own custom BottomSheets</string>
+    <string name="custom_sheets">Create your own custom Sheet</string>
     <string name="options_list">List of Options (with and without buttons)</string>
     <string name="options_grid_horizontal_small">Horizontal grid (small)</string>
     <string name="options_grid_horizontal_middle">Horizontal grid (middle) with multiple choice</string>
@@ -53,7 +53,7 @@
     <string name="info_cover_image_3">Overlapping cover image, hidden buttons, additional icon button.</string>
     <string name="input_short">A small survey form</string>
     <string name="input_long">A long survey form</string>
-    <string name="custom_sheet_example_1">Custom Bottom Sheet Example 1</string>
+    <string name="custom_sheet_example_1">Custom Sheet Example 1</string>
     <string name="input_password">Password with custom validation</string>
     <string name="info_lottie">InfoSheet with Lottie Animation</string>
 </resources>

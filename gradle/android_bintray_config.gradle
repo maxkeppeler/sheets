@@ -40,10 +40,10 @@ publish {
   bintrayKey = key
   userOrg = "maximilian-keppeler"
   groupId = module_group
-  uploadName = "bottom-sheets:$module_name"
+  uploadName = "sheets:$module_name"
   artifactId = module_name
   publishVersion = versions.release_version
-  desc = "A range of beautiful bottom sheets for quick use in your project."
-  website = "https://github.com/maxkeppeler/bottom-sheets"
+  desc = "Offers a range of beautiful sheets (dialogs & bottom sheets) for quick use in your project."
+  website = "https://github.com/maxkeppeler/sheets"
   dryRun = false
 }

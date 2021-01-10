@@ -22,54 +22,54 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="bottomSheetPrimaryColor">@color/bottomSheetColorPrimary</item>
+        <item name="sheetPrimaryColor">@color/sheetColorPrimary</item>
 
-<!--        <item name="bottomSheetDisplayCloseButton">false</item>-->
-<!--        <item name="bottomSheetDisplayHandle">true</item>-->
-<!--        <item name="bottomSheetDisplayToolbar">false</item>-->
+<!--        <item name="sheetDisplayCloseButton">false</item>-->
+<!--        <item name="sheetDisplayHandle">true</item>-->
+<!--        <item name="sheetDisplayToolbar">false</item>-->
 
-<!--        <item name="bottomSheetHandleWidth">42dp</item>-->
-<!--        <item name="bottomSheetHandleHeight">4dp</item>-->
-<!--        <item name="bottomSheetHandleFillColor">?bottomSheetPrimaryColor</item>-->
-<!--        <item name="bottomSheetHandleBorderColor">?bottomSheetPrimaryColor</item>-->
-<!--        <item name="bottomSheetHandleBorderWidth">1dp</item>-->
-<!--        <item name="bottomSheetDisplayCloseButton">false</item>-->
+<!--        <item name="sheetHandleWidth">42dp</item>-->
+<!--        <item name="sheetHandleHeight">4dp</item>-->
+<!--        <item name="sheetHandleFillColor">?sheetPrimaryColor</item>-->
+<!--        <item name="sheetHandleBorderColor">?sheetPrimaryColor</item>-->
+<!--        <item name="sheetHandleBorderWidth">1dp</item>-->
+<!--        <item name="sheetDisplayCloseButton">false</item>-->
 <!---->
-<!--        <item name="bottomSheetTextInputLayoutCornerRadius">8dp</item>-->
-<!--        <item name="bottomSheetTextInputLayoutTopLeftCornerRadius">0dp</item>-->
+<!--        <item name="sheetTextInputLayoutCornerRadius">8dp</item>-->
+<!--        <item name="sheetTextInputLayoutTopLeftCornerRadius">0dp</item>-->
 
-<!--        <item name="bottomSheetButtonWidth">wrap_content</item>-->
-<!--        <item name="bottomSheetNegativeButtonCornerFamily">rounded</item>-->
-<!--        <item name="bottomSheetNegativeButtonCornerRadius">8dp</item>-->
+<!--        <item name="sheetButtonWidth">wrap_content</item>-->
+<!--        <item name="sheetNegativeButtonCornerFamily">rounded</item>-->
+<!--        <item name="sheetNegativeButtonCornerRadius">8dp</item>-->
 
-<!--        <item name="bottomSheetPositiveButtonCornerFamily">rounded</item>-->
-<!--        <item name="bottomSheetPositiveButtonCornerRadius">8dp</item>-->
+<!--        <item name="sheetPositiveButtonCornerFamily">rounded</item>-->
+<!--        <item name="sheetPositiveButtonCornerRadius">8dp</item>-->
 
-<!--        <item name="bottomSheetNegativeButtonType">text_button</item>-->
-<!--        <item name="bottomSheetPositiveButtonType">outlined_button</item>-->
+<!--        <item name="sheetNegativeButtonType">text_button</item>-->
+<!--        <item name="sheetPositiveButtonType">outlined_button</item>-->
 
-<!--        <item name="bottomSheetNegativeButtonBottomLeftCornerFamily">rounded</item>-->
-<!--        <item name="bottomSheetNegativeButtonTopLeftCornerFamily">rounded</item>-->
-<!--        <item name="bottomSheetNegativeButtonTopRightCornerFamily">rounded</item>-->
-<!--        <item name="bottomSheetNegativeButtonBottomRightCornerFamily">rounded</item>-->
+<!--        <item name="sheetNegativeButtonBottomLeftCornerFamily">rounded</item>-->
+<!--        <item name="sheetNegativeButtonTopLeftCornerFamily">rounded</item>-->
+<!--        <item name="sheetNegativeButtonTopRightCornerFamily">rounded</item>-->
+<!--        <item name="sheetNegativeButtonBottomRightCornerFamily">rounded</item>-->
 
-<!--        <item name="bottomSheetNegativeButtonTopLeftCornerRadius">8dp</item>-->
-<!--        <item name="bottomSheetNegativeButtonBottomRightCornerRadius">8dp</item>-->
-<!--        <item name="bottomSheetNegativeButtonTopRightCornerRadius">0dp</item>-->
-<!--        <item name="bottomSheetNegativeButtonBottomLeftCornerRadius">0dp</item>-->
+<!--        <item name="sheetNegativeButtonTopLeftCornerRadius">8dp</item>-->
+<!--        <item name="sheetNegativeButtonBottomRightCornerRadius">8dp</item>-->
+<!--        <item name="sheetNegativeButtonTopRightCornerRadius">0dp</item>-->
+<!--        <item name="sheetNegativeButtonBottomLeftCornerRadius">0dp</item>-->
     </style>
 
     <style name="BottomSheetSignNightTheme">
-        <item name="bottomSheetHighlightColor">@color/signThemeHighlightColor</item>
-        <item name="bottomSheetPrimaryColor">@color/signThemeColorPrimary</item>-->
-        <item name="bottomSheetContentColor">@color/lightText</item>
-        <item name="bottomSheetIconsColor">@color/lightText</item>
-        <item name="bottomSheetBackgroundColor">@color/signNightThemeBackground</item>
-        <!--        <item name="bottomSheetTitleColor">?bottomSheetPrimaryColor</item>-->
-<!--        <item name="bottomSheetValueTextActiveColor">?bottomSheetPrimaryColor</item>-->
-<!--        <item name="bottomSheetButtonColor">?bottomSheetPrimaryColor</item>-->
-<!--        <item name="bottomSheetOptionActiveImageColor">?bottomSheetPrimaryColor</item>-->
-<!--        <item name="bottomSheetOptionActiveTextColor">?bottomSheetPrimaryColor</item>-->
+        <item name="sheetHighlightColor">@color/signThemeHighlightColor</item>
+        <item name="sheetPrimaryColor">@color/signThemeColorPrimary</item>-->
+        <item name="sheetContentColor">@color/lightText</item>
+        <item name="sheetIconsColor">@color/lightText</item>
+        <item name="sheetBackgroundColor">@color/signNightThemeBackground</item>
+        <!--        <item name="sheetTitleColor">?sheetPrimaryColor</item>-->
+<!--        <item name="sheetValueTextActiveColor">?sheetPrimaryColor</item>-->
+<!--        <item name="sheetButtonColor">?sheetPrimaryColor</item>-->
+<!--        <item name="sheetOptionActiveImageColor">?sheetPrimaryColor</item>-->
+<!--        <item name="sheetOptionActiveTextColor">?sheetPrimaryColor</item>-->
     </style>
 
 
