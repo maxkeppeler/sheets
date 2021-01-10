@@ -17,6 +17,8 @@
 
 package com.maxkeppeler.bottomsheets.lottie
 
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.maxkeppeler.bottomsheets.core.AddOnComponent
@@ -30,16 +32,16 @@ fun BottomSheet.withCoverLottieAnimation(lottieAnimation: LottieAnimation) {
         useCover() /* Indicate to setup the top bar style. */
         addOnCreateViewListener { binding ->
             setupCoverSource(lottieAnimation)
-            val topView = binding.top.root
-            val coverImage = binding.top.cover
-            val coverParams = coverImage.layoutParams as ConstraintLayout.LayoutParams
+            val coverContainer = binding.top.cover
+            val coverImage = binding.top.coverImage
+            val coverParams = coverImage.layoutParams as ViewGroup.LayoutParams
             val coverAnimation = LottieAnimationView(requireContext()).apply {
                 layoutParams =
                     coverParams /* Apply cover image params, to keep constraints working. */
                 lottieAnimation.lottieAnimationViewBuilder.invoke(this)
             }
-            topView.removeView(coverImage)
-            topView.addView(coverAnimation)
+            coverContainer.removeView(coverImage)
+            coverContainer.addView(coverAnimation)
             setCoverAnimationView(coverAnimation)
             coverAnimation.playAnimation()
         }

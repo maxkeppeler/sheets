@@ -708,7 +708,7 @@ abstract class BottomSheet : DialogFragment() {
 
         coverImage?.let { source ->
             setupCoverSource(source)
-            bindingBase.top.cover.loadAny(coverImage?.any) {
+            bindingBase.top.coverImage.loadAny(coverImage?.any) {
                 source.coilRequestBuilder.invoke(this)
             }
         }
@@ -727,7 +727,7 @@ abstract class BottomSheet : DialogFragment() {
         }
 
         imageSource.scaleType?.let {
-            bindingBase.top.cover.scaleType = it
+            bindingBase.top.coverImage.scaleType = it
         }
 
         bindingBase.top.cover.visibility = View.VISIBLE
@@ -743,7 +743,7 @@ abstract class BottomSheet : DialogFragment() {
             val cornerRadius =
                 cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS.toDp()
 
-            bindingBase.top.cover.shapeAppearanceModel =
+            bindingBase.top.coverImage.shapeAppearanceModel =
                 ShapeAppearanceModel().toBuilder().apply {
                     setTopRightCorner(cornerFamily, cornerRadius)
                     setTopLeftCorner(cornerFamily, cornerRadius)
@@ -789,21 +789,22 @@ abstract class BottomSheet : DialogFragment() {
                     bottomToTop = bindingBase.top.title.id
                 }
 
-                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomToBottom = bindingBase.top.divider.id
+                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
                     topToBottom = bindingBase.top.cover.id
+                }
+
+                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.UNSET
+                    bottomToBottom = ConstraintLayout.LayoutParams.UNSET
+                    bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
                 }
 
                 (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
                     bottomToTop = bindingBase.top.divider.id
                     topToBottom = bindingBase.top.cover.id
                     topToTop = ConstraintLayout.LayoutParams.UNSET
-                }
-
-                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomToTop = bindingBase.top.divider.id
-                    topToBottom = bindingBase.top.cover.id
                 }
             }
         }
