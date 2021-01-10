@@ -60,6 +60,12 @@ typealias DismissListener = () -> Unit
 /** Listener which is invoked when buttons are clicked. */
 typealias ClickListener = () -> Unit
 
+/**
+ * Bundle a block of BottomSheet functions for the use case of add-on-components.
+ * AddOnComponents maintain their state.
+ */
+typealias AddOnComponent = BottomSheet.() -> Unit
+
 /** Listener that is invoked when the view was created. */
 typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
 
