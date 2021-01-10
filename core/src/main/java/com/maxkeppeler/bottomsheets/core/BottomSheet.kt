@@ -119,7 +119,7 @@ abstract class BottomSheet : DialogFragment() {
     private var topStyle = TopStyle.ABOVE_COVER
     private var coverImage: Image? = null
 
-    lateinit var bindingBase: BottomSheetsBaseBinding
+    private lateinit var bindingBase: BottomSheetsBaseBinding
 
     private var displayToolbar: Boolean? = null
     private var displayCloseButton: Boolean? = null
