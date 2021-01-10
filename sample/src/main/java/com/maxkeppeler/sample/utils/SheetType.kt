@@ -20,21 +20,21 @@ import com.maxkeppeler.sample.R
 
 enum class SheetType(@StringRes val titleRes: Int) {
 
-    BOTTOM_SHEET_OPTIONS(R.string.options_sheet),
+    OPTIONS(R.string.options_sheet),
 
-    BOTTOM_SHEET_COLOR(R.string.color_sheet),
+    COLOR(R.string.color_sheet),
 
-    BOTTOM_SHEET_CLOCK_TIME(R.string.clock_time_sheet),
+    CLOCK_TIME(R.string.clock_time_sheet),
 
-    BOTTOM_SHEET_TIME(R.string.time_sheet),
+    TIME(R.string.time_sheet),
 
-    BOTTOM_SHEET_CALENDAR(R.string.calendar_sheet),
+    CALENDAR(R.string.calendar_sheet),
 
-    BOTTOM_SHEET_INFO(R.string.info_sheet),
+    INFO(R.string.info_sheet),
 
-    BOTTOM_SHEET_LOTTIE(R.string.lottie),
+    LOTTIE(R.string.lottie),
 
-    BOTTOM_SHEET_INPUT(R.string.input_sheet),
+    INPUT(R.string.input_sheet),
 
-    BOTTOM_SHEET_CUSTOM(R.string.custom_sheets),
+    CUSTOM(R.string.custom_sheets),
 }
