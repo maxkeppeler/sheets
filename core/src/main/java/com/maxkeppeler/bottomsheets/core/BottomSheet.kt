@@ -434,6 +434,15 @@ abstract class BottomSheet : DialogFragment() {
                 iconButton?.let { btn -> icons.add(btn) }
             }
             iconButtons = icons.toTypedArray()
+            val addOnReceiversAmount = saved.getInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT)
+            repeat(addOnReceiversAmount) {
+                val receiver =
+                    saved.getSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(it)) as AddOnComponent?
+                receiver?.let { rec ->
+                    addOnComponents.add(rec)
+                    rec.invoke(this)
+                }
+            }
         }
     }
 
@@ -471,6 +480,10 @@ abstract class BottomSheet : DialogFragment() {
             putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
             putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
             putSerializable(STATE_BASE_SHEET_STYLE, sheetStyle)
+            putInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT, addOnComponents.size)
+            addOnComponents.forEachIndexed { i, function ->
+                putSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(i), function as Serializable?)
+            }
         }
     }
 
