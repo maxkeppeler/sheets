@@ -60,6 +60,9 @@ typealias DismissListener = () -> Unit
 /** Listener which is invoked when buttons are clicked. */
 typealias ClickListener = () -> Unit
 
+/** Listener that is invoked when the view was created. */
+typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
+
 /**
  * This class is the base of all types of bottom sheets.
  * You can implement this class in your own and build your
