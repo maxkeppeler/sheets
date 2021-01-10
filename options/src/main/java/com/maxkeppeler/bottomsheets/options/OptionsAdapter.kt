@@ -30,7 +30,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.bottomsheets.core.utils.*
-import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+import com.maxkeppeler.bottomsheets.core.views.SheetContent
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsGridItemBinding
 import com.maxkeppeler.bottomsheets.options.databinding.BottomSheetsOptionsListItemBinding
 
@@ -49,7 +49,7 @@ internal class OptionsAdapter(
         private const val SELECTOR_STATE_SELECTED_INDEX = 1
     }
 
-    private val selectedOptions = mutableMapOf<Int, Pair<ImageView, BottomSheetContent>>()
+    private val selectedOptions = mutableMapOf<Int, Pair<ImageView, SheetContent>>()
 
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
@@ -169,7 +169,7 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun showDisabled(label: BottomSheetContent, icon: ImageView, root: View) {
+    private fun showDisabled(label: SheetContent, icon: ImageView, root: View) {
         label.setTextColor(disabledTextColor)
         icon.setColorFilter(disabledIconsColor)
         root.changeRippleAndStateColor(
@@ -180,7 +180,7 @@ internal class OptionsAdapter(
         root.isActivated = true
     }
 
-    private fun showSelected(label: BottomSheetContent, icon: ImageView, root: View) {
+    private fun showSelected(label: SheetContent, icon: ImageView, root: View) {
         label.setTextColor(selectedTextColor)
         icon.setColorFilter(selectedIconsColor)
 
@@ -193,7 +193,7 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun showDeselected(label: BottomSheetContent, icon: ImageView, root: View) {
+    private fun showDeselected(label: SheetContent, icon: ImageView, root: View) {
         label.setTextColor(textColor)
         icon.setColorFilter(iconsColor)
         if (multipleChoice) {
@@ -219,7 +219,7 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun selectOption(index: Int, label: BottomSheetContent, icon: ImageView, root: View) {
+    private fun selectOption(index: Int, label: SheetContent, icon: ImageView, root: View) {
         if (multipleChoice) {
             if (!listener.isMultipleChoiceSelectionAllowed(index)) return
             if (selectedOptions.contains(index)) {

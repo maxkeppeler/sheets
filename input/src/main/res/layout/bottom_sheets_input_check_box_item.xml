@@ -25,7 +25,7 @@
     android:paddingTop="6dp"
     android:paddingBottom="6dp">
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/label"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"

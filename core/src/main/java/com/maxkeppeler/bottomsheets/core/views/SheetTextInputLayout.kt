@@ -25,7 +25,7 @@ import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.core.utils.toDp
 
 /** Custom TextInputLayout. */
-class BottomSheetTextInputLayout
+class SheetTextInputLayout
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:minHeight="96dp">
 
-        <com.maxkeppeler.bottomsheets.core.views.BottomSheetTitle
+        <com.maxkeppeler.bottomsheets.core.views.SheetTitle
             android:id="@+id/title"
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="0dp"

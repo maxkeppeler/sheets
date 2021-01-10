@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="@+id/label"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

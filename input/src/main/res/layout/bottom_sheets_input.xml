@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/content"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetRecyclerView
+    <com.maxkeppeler.bottomsheets.core.views.SheetRecyclerView
         android:id="@+id/inputRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/day"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"

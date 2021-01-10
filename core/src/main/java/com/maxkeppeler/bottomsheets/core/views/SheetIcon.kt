@@ -28,7 +28,7 @@ import com.maxkeppeler.bottomsheets.core.utils.getDp
 import com.maxkeppeler.bottomsheets.core.utils.getHighlightColor
 
 /** Custom ImageView used for icon buttons on the bottom sheets. */
-class BottomSheetIcon
+class SheetIcon
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,

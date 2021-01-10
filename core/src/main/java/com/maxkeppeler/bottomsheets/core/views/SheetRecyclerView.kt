@@ -22,7 +22,7 @@ import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
  */
 
 /** Custom RecyclerView to apply edge effect automatically. */
-class BottomSheetRecyclerView
+class SheetRecyclerView
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null

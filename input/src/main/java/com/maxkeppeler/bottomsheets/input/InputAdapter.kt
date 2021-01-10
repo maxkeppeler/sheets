@@ -34,7 +34,7 @@ import com.maxkeppeler.bottomsheets.core.utils.getIconColor
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
 import com.maxkeppeler.bottomsheets.core.utils.getTextColor
 import com.maxkeppeler.bottomsheets.core.utils.toDp
-import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+import com.maxkeppeler.bottomsheets.core.views.SheetContent
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputCheckBoxItemBinding
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputEditTextItemBinding
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputRadioButtonsItemBinding
@@ -265,7 +265,7 @@ internal class InputAdapter(
 
     private fun setupGeneralInputInfo(
         input: Input,
-        label: BottomSheetContent? = null,
+        label: SheetContent? = null,
         icon: ImageView? = null
     ) {
 

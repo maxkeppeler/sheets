@@ -40,7 +40,7 @@ typealias ImageClickListener = () -> Unit
 /**
  * Custom view which creates a numerical digits view with 2 additional icons for actions.
  */
-class BottomSheetNumericalInput
+class SheetNumericalInput
 @JvmOverloads constructor(
     val ctx: Context,
     attrs: AttributeSet? = null,
@@ -57,7 +57,7 @@ class BottomSheetNumericalInput
     private val primaryColor = getPrimaryColor(ctx)
     private val highlightColor = getHighlightColor(ctx)
 
-    private val digits = mutableListOf<BottomSheetDigit>()
+    private val digits = mutableListOf<SheetDigit>()
     private lateinit var leftImage: ImageView
     private lateinit var rightImage: ImageView
     private var digitListener: DigitClickListener? = null
@@ -124,9 +124,9 @@ class BottomSheetNumericalInput
         return Pair(view, imageView)
     }
 
-    private fun getDigitView(digitValue: Int): BottomSheetDigit {
+    private fun getDigitView(digitValue: Int): SheetDigit {
 
-        val view = BottomSheetDigit(ctx).apply {
+        val view = SheetDigit(ctx).apply {
             minimumHeight = 42.toDp()
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
             background = ContextCompat.getDrawable(ctx, R.drawable.bs_ripple_bg_rounded)

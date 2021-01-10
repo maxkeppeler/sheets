@@ -45,7 +45,7 @@ import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.*
-import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+import com.maxkeppeler.bottomsheets.core.views.SheetContent
 import java.io.Serializable
 import java.time.*
 import java.time.format.DateTimeFormatter
@@ -646,7 +646,7 @@ class CalendarSheet : Sheet() {
                 if (holder.legend.tag != null) return
                 holder.legend.tag = month.yearMonth
                 daysOfWeek.forEach { daysOfWeek ->
-                    val textView = BottomSheetContent(requireContext())
+                    val textView = SheetContent(requireContext())
                     textView.setTextAppearance(
                         requireContext(),
                         R.style.TextAppearance_MaterialComponents_Subtitle2

@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetValue
+    <com.maxkeppeler.bottomsheets.core.views.SheetValue
         android:id="@+id/timeValue"
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/hintLabel"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="@+id/timeValue"
         app:layout_constraintTop_toBottomOf="@+id/timeValue" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
+    <com.maxkeppeler.bottomsheets.core.views.SheetDivider
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hintLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetNumericalInput
+    <com.maxkeppeler.bottomsheets.core.views.SheetNumericalInput
         android:id="@+id/numericalInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

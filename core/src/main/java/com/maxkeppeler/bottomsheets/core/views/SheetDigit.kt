@@ -18,14 +18,13 @@ package com.maxkeppeler.bottomsheets.core.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.annotation.RestrictTo
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.colorOfAttrs
 
-/** Custom TextView used for the digits of the [BottomSheetNumericalInput]. */
-class BottomSheetDigit
+/** Custom TextView used for the digits of the [SheetNumericalInput]. */
+class SheetDigit
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,

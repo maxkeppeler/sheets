@@ -22,10 +22,9 @@ import androidx.annotation.RestrictTo
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.bottomsheets.R
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttr
 
-/** Custom TextView used for most of the text on the bottom sheets. */
-class BottomSheetContent
+/** Custom TextView used for the value of some bottom sheets. */
+class SheetValue
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,
@@ -34,20 +33,17 @@ class BottomSheetContent
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetContent, styleAttr, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetValue, styleAttr, 0)
 
-        val colorDefault = colorOfAttr(ctx, android.R.attr.textColorPrimary)
-        val color = a.getColor(R.styleable.BottomSheetContent_bottomSheetContentColor, colorDefault)
-        setTextColor(color)
-
-        val height = a.getDimensionPixelSize(R.styleable.BottomSheetContent_bottomSheetContentLineHeight, 0)
+        val height =
+            a.getDimensionPixelSize(R.styleable.BottomSheetValue_bottomSheetValueLineHeight, 0)
         height.takeIf { it != 0 }?.let { lineHeight = height }
 
-        val fontResId = a.getResourceId(R.styleable.BottomSheetContent_bottomSheetContentFont, 0)
+        val fontResId = a.getResourceId(R.styleable.BottomSheetValue_bottomSheetValueFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.BottomSheetContent_bottomSheetContentLetterSpacing, 0f)
+            a.getFloat(R.styleable.BottomSheetValue_bottomSheetValueLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()

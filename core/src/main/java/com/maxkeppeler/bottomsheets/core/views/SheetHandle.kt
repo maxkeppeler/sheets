@@ -32,7 +32,7 @@ import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.*
 
 /** Container with a handle drawable. */
-internal class BottomSheetHandle
+internal class SheetHandle
 @JvmOverloads constructor(
     val ctx: Context,
     attrs: AttributeSet? = null

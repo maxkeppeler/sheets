@@ -18,27 +18,30 @@ package com.maxkeppeler.bottomsheets.core.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
-import androidx.annotation.RestrictTo
+import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.button.MaterialButton
 import com.maxkeppeler.bottomsheets.R
-import com.maxkeppeler.bottomsheets.core.utils.colorOf
-import com.maxkeppeler.bottomsheets.core.utils.colorOfAttr
 import com.maxkeppeler.bottomsheets.core.utils.toDp
 
-/** Custom Divider. */
-class BottomSheetDivider
+/** Custom text button used for the bottom buttons view. */
+class SheetButton
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,
-    styleAttrs: Int = 0,
-    styleRes: Int = 0
-) : View(ctx, attrs, styleAttrs, styleRes) {
+    styleAttrs: Int = android.R.attr.buttonStyle
+) : MaterialButton(ctx, attrs, styleAttrs) {
 
     init {
-        val dividerColorDefault = colorOf(ctx, R.color.bottomSheetDividerColor)
-        val dividerColor = colorOfAttr(ctx, R.attr.bottomSheetDividerColor)
-        setBackgroundColor(dividerColor.takeIf { it != 0 } ?: dividerColorDefault)
+
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.BottomSheetButton, styleAttrs, 0)
+
+        val fontResId = a.getResourceId(R.styleable.BottomSheetButton_bottomSheetButtonTextFont, 0)
+        fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
+
+        val spacing =
+            a.getFloat(R.styleable.BottomSheetButton_bottomSheetButtonTextLetterSpacing, 0f)
+        spacing.takeIf { it != 0f }?.let { letterSpacing = it }
+
+        a.recycle()
     }
 }

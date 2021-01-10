@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetRecyclerView
+    <com.maxkeppeler.bottomsheets.core.views.SheetRecyclerView
         android:id="@+id/optionsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

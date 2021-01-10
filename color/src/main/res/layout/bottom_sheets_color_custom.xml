@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/hexLabel"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toEndOf="@+id/customColorView"
         app:layout_constraintTop_toTopOf="@+id/customColorView" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/hexValue"
         style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="0dp"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="@+id/hexLabel"
         app:layout_constraintTop_toBottomOf="@+id/hexLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetIcon
+    <com.maxkeppeler.bottomsheets.core.views.SheetIcon
         android:id="@+id/btnCopy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetIcon
+    <com.maxkeppeler.bottomsheets.core.views.SheetIcon
         android:id="@+id/btnPaste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="67dp" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetDivider
+    <com.maxkeppeler.bottomsheets.core.views.SheetDivider
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -104,7 +104,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/alphaLabel"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
         app:layout_constraintStart_toEndOf="@+id/alphaLabel"
         app:layout_constraintTop_toTopOf="@+id/alphaLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/alphaValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/alphaLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/redLabel"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
@@ -155,7 +155,7 @@
         app:layout_constraintStart_toEndOf="@+id/redLabel"
         app:layout_constraintTop_toTopOf="@+id/redLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/redValue"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
@@ -165,7 +165,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/redLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/greenLabel"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
@@ -184,7 +184,7 @@
         app:layout_constraintStart_toEndOf="@+id/greenLabel"
         app:layout_constraintTop_toTopOf="@+id/greenLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/greenValue"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
@@ -194,7 +194,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/greenLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/blueLabel"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
@@ -215,7 +215,7 @@
         app:layout_constraintStart_toEndOf="@+id/blueLabel"
         app:layout_constraintTop_toTopOf="@+id/blueLabel" />
 
-    <com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+    <com.maxkeppeler.bottomsheets.core.views.SheetContent
         android:id="@+id/blueValue"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"

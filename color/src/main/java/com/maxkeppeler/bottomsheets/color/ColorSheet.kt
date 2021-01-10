@@ -35,7 +35,7 @@ import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorBinding
 import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.*
-import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
+import com.maxkeppeler.bottomsheets.core.views.SheetContent
 import java.io.Serializable
 
 
@@ -64,8 +64,8 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
 
     private val argbSeekBars = mutableListOf<SeekBar>()
     private val argbLabelTexts = mutableListOf<String>()
-    private val argbLabels = mutableListOf<BottomSheetContent>()
-    private val argbValues = mutableListOf<BottomSheetContent>()
+    private val argbLabels = mutableListOf<SheetContent>()
+    private val argbValues = mutableListOf<SheetContent>()
 
     private var colorAdapter: ColorAdapter? = null
 

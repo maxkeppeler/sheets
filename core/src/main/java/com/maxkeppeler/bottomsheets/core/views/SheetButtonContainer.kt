@@ -20,7 +20,6 @@ package com.maxkeppeler.bottomsheets.core.views
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ import com.maxkeppeler.bottomsheets.core.utils.*
 internal typealias ButtonClickListener = () -> Unit
 
 /** Container that contains a button. */
-class BottomSheetButtonContainer
+class SheetButtonContainer
 @JvmOverloads constructor(
     val ctx: Context,
     attrs: AttributeSet? = null
@@ -84,7 +83,7 @@ class BottomSheetButtonContainer
 
         gravity = Gravity.CENTER
 
-        addView(BottomSheetButton(ctx, null, buttonStyle.styleRes).apply {
+        addView(SheetButton(ctx, null, buttonStyle.styleRes).apply {
 
             layoutParams =
                 ViewGroup.LayoutParams(btnWidthLayoutParam, ViewGroup.LayoutParams.WRAP_CONTENT)
