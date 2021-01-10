@@ -85,6 +85,8 @@ abstract class BottomSheet : DialogFragment() {
         const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
+        private const val STATE_BASE_ADD_ON_RECEIVER = "state_base_add_on_receiver"
+        private const val STATE_BASE_ADD_ON_RECEIVER_AMOUNT = "state_base_add_on_receiver_amount"
         private const val STATE_BASE_SHEET_STYLE = "state_base_sheet_style"
         private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
         private const val STATE_BASE_TOP_STYLE = "state_top_style"
