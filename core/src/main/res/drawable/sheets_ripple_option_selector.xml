@@ -16,7 +16,7 @@
   -->
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="?bottomSheetHighlightColor">
+    android:color="?attr/sheetHighlightColor">
 
     <item android:id="@android:id/mask">
         <shape>

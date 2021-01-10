@@ -1,5 +1,5 @@
 ext.module_group = "com.maxkeppeler"
-ext.module_name = "bottomsheets-sample"
+ext.module_name = "sheets-sample"
 
 apply from: rootProject.file("gradle/android_application_config.gradle")
 

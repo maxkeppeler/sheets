@@ -21,8 +21,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StringRes
-import com.maxkeppeler.bottomsheets.core.Sheet
-import com.maxkeppeler.bottomsheets.core.PositiveListener
+import com.maxkeppeler.sheets.core.Sheet
+import com.maxkeppeler.sheets.core.PositiveListener
 import com.maxkeppeler.sample.databinding.BottomSheetsCustomBinding
 
 @Suppress("unused")
@@ -47,7 +47,7 @@ class CustomSheet : Sheet() {
     }
 
     /**
-     * Implement this method and add your own layout, which will be appended to the default bottom sheet with toolbar and buttons.
+     * Implement this method and add your own layout, which will be appended to the default sheet with toolbar and buttons.
      */
     override fun onCreateLayoutView(): View {
 
@@ -63,7 +63,7 @@ class CustomSheet : Sheet() {
 //        setButtonPositiveListener {  } If you want to override the default positive click listener
 //        displayButtonsView() If you want to change the visibility of the buttons view
 //        displayButtonPositive() Hiding the positive button will prevent clicks
-//        hideToolbar() Hide the toolbar of the bottom sheet, the title and the icon
+//        hideToolbar() Hide the toolbar of the sheet, the title and the icon
     }
 
     override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {

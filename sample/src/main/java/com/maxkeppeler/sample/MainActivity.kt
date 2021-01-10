@@ -25,30 +25,30 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.textfield.TextInputLayout
-import com.maxkeppeler.bottomsheets.calendar.CalendarMode
-import com.maxkeppeler.bottomsheets.calendar.CalendarSheet
-import com.maxkeppeler.bottomsheets.calendar.SelectionMode
-import com.maxkeppeler.bottomsheets.calendar.TimeLine
-import com.maxkeppeler.bottomsheets.color.ColorSheet
-import com.maxkeppeler.bottomsheets.color.ColorView
-import com.maxkeppeler.bottomsheets.core.*
-import com.maxkeppeler.bottomsheets.core.utils.splitTime
-import com.maxkeppeler.bottomsheets.info.InfoSheet
-import com.maxkeppeler.bottomsheets.input.InputSheet
-import com.maxkeppeler.bottomsheets.input.Validation
-import com.maxkeppeler.bottomsheets.input.type.InputCheckBox
-import com.maxkeppeler.bottomsheets.input.type.InputEditText
-import com.maxkeppeler.bottomsheets.input.type.InputRadioButtons
-import com.maxkeppeler.bottomsheets.input.type.InputSpinner
-import com.maxkeppeler.bottomsheets.lottie.LottieAnimation
-import com.maxkeppeler.bottomsheets.lottie.cancelCoverAnimation
-import com.maxkeppeler.bottomsheets.lottie.withCoverLottieAnimation
-import com.maxkeppeler.bottomsheets.options.DisplayMode
-import com.maxkeppeler.bottomsheets.options.Option
-import com.maxkeppeler.bottomsheets.options.OptionsSheet
-import com.maxkeppeler.bottomsheets.time_clock.ClockTimeSheet
-import com.maxkeppeler.bottomsheets.time_clock.TimeFormat
-import com.maxkeppeler.bottomsheets.time_clock.TimeSheet
+import com.maxkeppeler.sheets.calendar.CalendarMode
+import com.maxkeppeler.sheets.calendar.CalendarSheet
+import com.maxkeppeler.sheets.calendar.SelectionMode
+import com.maxkeppeler.sheets.calendar.TimeLine
+import com.maxkeppeler.sheets.color.ColorSheet
+import com.maxkeppeler.sheets.color.ColorView
+import com.maxkeppeler.sheets.core.*
+import com.maxkeppeler.sheets.core.utils.splitTime
+import com.maxkeppeler.sheets.info.InfoSheet
+import com.maxkeppeler.sheets.input.InputSheet
+import com.maxkeppeler.sheets.input.Validation
+import com.maxkeppeler.sheets.input.type.InputCheckBox
+import com.maxkeppeler.sheets.input.type.InputEditText
+import com.maxkeppeler.sheets.input.type.InputRadioButtons
+import com.maxkeppeler.sheets.input.type.InputSpinner
+import com.maxkeppeler.sheets.lottie.LottieAnimation
+import com.maxkeppeler.sheets.lottie.cancelCoverAnimation
+import com.maxkeppeler.sheets.lottie.withCoverLottieAnimation
+import com.maxkeppeler.sheets.options.DisplayMode
+import com.maxkeppeler.sheets.options.Option
+import com.maxkeppeler.sheets.options.OptionsSheet
+import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
+import com.maxkeppeler.sheets.time_clock.TimeFormat
+import com.maxkeppeler.sheets.time_clock.TimeSheet
 import com.maxkeppeler.sample.custom_sheets_example.CustomSheet
 import com.maxkeppeler.sample.databinding.MainActBinding
 import com.maxkeppeler.sample.utils.SheetExample
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheetWeek1() {
 
         CalendarSheet().show(this) { // Build and show
-            title("When do you want to take holidays?") // Set the title of the bottom sheet
+            title("When do you want to take holidays?") // Set the title of the sheet
             rangeYears(50)
             selectionMode(SelectionMode.DATE)
             calendarMode(CalendarMode.WEEK_1)
@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheetWeek2() {
 
         CalendarSheet().show(this) { // Build and show
-            title("When do you want to take holidays?") // Set the title of the bottom sheet
+            title("When do you want to take holidays?") // Set the title of the sheet
             selectionMode(SelectionMode.RANGE)
             calendarMode(CalendarMode.WEEK_2)
 //            disableTimeline(TimeLine.FUTURE)
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheetWeek3() {
 
         CalendarSheet().show(this) { // Build and show
-            title("When do you want to take holidays?") // Set the title of the bottom sheet
+            title("When do you want to take holidays?") // Set the title of the sheet
             selectionMode(SelectionMode.RANGE)
             calendarMode(CalendarMode.WEEK_3)
             disableTimeline(TimeLine.FUTURE)
@@ -194,7 +194,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheet() {
 
         CalendarSheet().show(this) { // Build and show
-            title("When do you want to take holidays?") // Set the title of the bottom sheet
+            title("When do you want to take holidays?") // Set the title of the sheet
             rangeYears(50)
             selectionMode(SelectionMode.RANGE)
             calendarMode(CalendarMode.MONTH)
@@ -230,7 +230,7 @@ class MainActivity : AppCompatActivity() {
             displayMode(DisplayMode.LIST)
             cornerFamily(CornerFamily.CUT)
             cornerRadius(16f)
-            title("Note from 27th dec") // Set the title of the bottom sheet
+            title("Note from 27th dec") // Set the title of the sheet
             if (Random.nextBoolean()) {
                 showButtons() // For single choice, no buttons are displayed, except you enforce to display them
             }
@@ -357,7 +357,7 @@ class MainActivity : AppCompatActivity() {
     private fun showColorSheet() {
         ColorSheet().show(this) { // Build and show
             title("Background color")
-            defaultView(ColorView.TEMPLATE) // Set the default view when the bottom sheet is visible
+            defaultView(ColorView.TEMPLATE) // Set the default view when the sheet is visible
             // disableSwitchColorView() Disable switching between template and custom color view
             onPositive { color ->
                 // Use Color
@@ -369,7 +369,7 @@ class MainActivity : AppCompatActivity() {
     private fun showColorSheetTemplate() {
         ColorSheet().show(this) { // Build and show
             title("Background color")
-            defaultView(ColorView.TEMPLATE) // Set the default view when the bottom sheet is visible
+            defaultView(ColorView.TEMPLATE) // Set the default view when the sheet is visible
             disableSwitchColorView()
             onPositive { color ->
                 // Use Color
@@ -380,7 +380,7 @@ class MainActivity : AppCompatActivity() {
     private fun showColorSheetCustom() {
         ColorSheet().show(this) { // Build and show
             title("Background color")
-            defaultView(ColorView.CUSTOM) // Set the default view when the bottom sheet is visible
+            defaultView(ColorView.CUSTOM) // Set the default view when the sheet is visible
             disableSwitchColorView()
             onPositive { color ->
                 // Use Color
@@ -572,7 +572,7 @@ class MainActivity : AppCompatActivity() {
             style(SheetStyle.values().random())
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
             title("Did you read the README?")
-            content("It will help you to setup beautiful bottom sheets in your project.")
+            content("It will help you to setup beautiful sheets in your project.")
             onNegative(
                 "Not yet",
                 R.drawable.ic_github
@@ -591,7 +591,7 @@ class MainActivity : AppCompatActivity() {
             topStyle(TopStyle.ABOVE_COVER)
             withCoverImage(Image("https://images.hdqwalls.com/download/interstellar-gargantua-u4-1440x900.jpg"))
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
-            withIconButton(IconButton(R.drawable.ic_mail)) { /* Will not automatically dismiss the bottom sheet. */ }
+            withIconButton(IconButton(R.drawable.ic_mail)) { /* Will not automatically dismiss the sheet. */ }
             title("Interstellar")
             content("“We used to look up at the sky and wonder at our place in the stars, now we just look down and worry about our place in the dirt.” — Cooper")
             onNegative("")
@@ -646,7 +646,7 @@ class MainActivity : AppCompatActivity() {
                 // For placeholder, error, fallback drawable and other image loading configs
                 crossfade(300)
             })
-            withIconButton(IconButton(R.drawable.ic_help)) { /* Will not automatically dismiss the bottom sheet. */ }
+            withIconButton(IconButton(R.drawable.ic_help)) { /* Will not automatically dismiss the sheet. */ }
             title("Attack on Titan")
             content("It is set in a world where humanity lives inside cities surrounded by enormous walls that protect them from gigantic man-eating humanoids referred to as Titans; the story follows Eren Yeager, who vows to exterminate the Titans after a Titan brings about the destruction of his hometown and the death of his mother.")
         }

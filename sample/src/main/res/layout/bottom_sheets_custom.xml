@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.maxkeppeler.bottomsheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetContent
         android:id="@+id/contentTextView"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
@@ -28,7 +28,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:lineSpacingMultiplier="1.4"
-        android:text="Custom Bottom Sheet with access to buttons, toolbar etc view of the other bottom sheets."
+        android:text="Custom Bottom Sheet with access to buttons, toolbar etc view of the other heets."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,5 +1,5 @@
-ext.module_group = "com.maxkeppeler.bottomsheets"
-ext.module_name = "time_clock"
+ext.module_group = "com.maxkeppeler.sheets"
+ext.module_name = "time-clock"
 
 apply from: rootProject.file("gradle/android_library_config.gradle")
 

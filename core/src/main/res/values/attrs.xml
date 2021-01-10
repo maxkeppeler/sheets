@@ -17,152 +17,152 @@
 <resources>
 
     <!-- Override primary color.   -->
-    <attr name="bottomSheetPrimaryColor" format="color" />
+    <attr name="sheetPrimaryColor" format="color" />
 
-    <!-- Override highlight color. Default: Generates color from bottomSheetPrimaryColor or colorPrimary..   -->
-    <attr name="bottomSheetHighlightColor" format="color" />
+    <!-- Override highlight color. Default: Generates color from sheetPrimaryColor or colorPrimary..   -->
+    <attr name="sheetHighlightColor" format="color" />
 
     <!-- Override background color. -->
-    <attr name="bottomSheetBackgroundColor" format="color" />
+    <attr name="sheetBackgroundColor" format="color" />
 
     <!-- Override the divider color. -->
-    <attr name="bottomSheetDividerColor" format="color" />
+    <attr name="sheetDividerColor" format="color" />
 
     <!-- Override color of action icons.  -->
-    <attr name="bottomSheetIconsColor" format="color" />
+    <attr name="sheetIconsColor" format="color" />
 
     <!-- Override default corner radius.  -->
-    <attr name="bottomSheetCornerRadius" format="dimension" />
+    <attr name="sheetCornerRadius" format="dimension" />
 
     <!-- Override default corner family.  -->
-    <attr name="bottomSheetCornerFamily" format="enum">
+    <attr name="sheetCornerFamily" format="enum">
         <enum name="rounded" value="0" />
         <enum name="cut" value="1" />
     </attr>
 
-    <attr name="bottomSheetDisplayCloseButton" format="boolean" />
+    <attr name="sheetDisplayCloseButton" format="boolean" />
 
-    <attr name="bottomSheetDisplayHandle" format="boolean" />
+    <attr name="sheetDisplayHandle" format="boolean" />
 
-    <attr name="bottomSheetDisplayToolbar" format="boolean" />
+    <attr name="sheetDisplayToolbar" format="boolean" />
 
     <!-- Style for an option in OptionsSheet.  -->
-    <declare-styleable name="BottomSheetOption">
+    <declare-styleable name="SheetOption">
 
-        <!-- Override icon color of an active option. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetOptionSelectedImageColor" format="color" />
+        <!-- Override icon color of an active option. Default: sheetPrimaryColor -->
+        <attr name="sheetOptionSelectedImageColor" format="color" />
 
-        <!-- Override text color of an active option. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetOptionSelectedTextColor" format="color" />
+        <!-- Override text color of an active option. Default: sheetPrimaryColor -->
+        <attr name="sheetOptionSelectedTextColor" format="color" />
 
-        <!-- Override icon color of an disabled option. Default: bottomSheetIconsColor, colorOnSurface -->
-        <attr name="bottomSheetOptionDisabledImageColor" format="color" />
+        <!-- Override icon color of an disabled option. Default: sheetIconsColor, colorOnSurface -->
+        <attr name="sheetOptionDisabledImageColor" format="color" />
 
-        <!-- Override text color of an disabled option. Default: bottomSheetContentColor, colorTextPrimary -->
-        <attr name="bottomSheetOptionDisabledTextColor" format="color" />
+        <!-- Override text color of an disabled option. Default: sheetContentColor, colorTextPrimary -->
+        <attr name="sheetOptionDisabledTextColor" format="color" />
 
         <!-- Override background color of an disabled option. -->
-        <attr name="bottomSheetOptionDisabledBackgroundColor" format="color" />
+        <attr name="sheetOptionDisabledBackgroundColor" format="color" />
 
     </declare-styleable>
 
 
     <!--  Style for the title.  -->
-    <declare-styleable name="BottomSheetTitle">
+    <declare-styleable name="SheetTitle">
 
-        <!-- Override title color. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetTitleColor" format="color" />
+        <!-- Override title color. Default: sheetPrimaryColor -->
+        <attr name="sheetTitleColor" format="color" />
 
         <!-- Override title font. -->
-        <attr name="bottomSheetTitleFont" format="reference" />
+        <attr name="sheetTitleFont" format="reference" />
 
-        <attr name="bottomSheetTitleLineHeight" format="dimension" />
+        <attr name="sheetTitleLineHeight" format="dimension" />
 
-        <attr name="bottomSheetTitleLetterSpacing" format="float" />
+        <attr name="sheetTitleLetterSpacing" format="float" />
 
     </declare-styleable>
 
 
     <!--  Style for the content text.  -->
-    <declare-styleable name="BottomSheetContent">
+    <declare-styleable name="SheetContent">
 
         <!-- Override content text color. Default: textColorPrimary -->
-        <attr name="bottomSheetContentColor" format="color" />
+        <attr name="sheetContentColor" format="color" />
 
         <!-- Override content text inverse color. Default: textColorPrimaryInverse -->
-        <attr name="bottomSheetContentInverseColor" format="color" />
+        <attr name="sheetContentInverseColor" format="color" />
 
         <!-- Override primary text font. -->
-        <attr name="bottomSheetContentFont" format="reference" />
+        <attr name="sheetContentFont" format="reference" />
 
         <!-- Override content text line height. -->
-        <attr name="bottomSheetContentLineHeight" format="dimension" />
+        <attr name="sheetContentLineHeight" format="dimension" />
 
         <!-- Override content text letter spacing. -->
-        <attr name="bottomSheetContentLetterSpacing" format="float" />
+        <attr name="sheetContentLetterSpacing" format="float" />
 
     </declare-styleable>
 
 
     <!--  Style for value text. (Selected date, selected time, ...)  -->
-    <declare-styleable name="BottomSheetValue">
+    <declare-styleable name="SheetValue">
 
-        <!-- Override value text color. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetValueTextActiveColor" format="color" />
+        <!-- Override value text color. Default: sheetPrimaryColor -->
+        <attr name="sheetValueTextActiveColor" format="color" />
 
         <!-- Override value text font. -->
-        <attr name="bottomSheetValueFont" format="reference" />
+        <attr name="sheetValueFont" format="reference" />
 
         <!-- Override value text line height. -->
-        <attr name="bottomSheetValueLineHeight" format="dimension" />
+        <attr name="sheetValueLineHeight" format="dimension" />
 
         <!-- Override value text letter spacing. -->
-        <attr name="bottomSheetValueLetterSpacing" format="float" />
+        <attr name="sheetValueLetterSpacing" format="float" />
 
     </declare-styleable>
 
 
     <!--  Style for the digit keys of the numerical input.  -->
-    <declare-styleable name="BottomSheetDigit">
+    <declare-styleable name="SheetDigit">
 
         <!-- Override digit key color. Default: textColorPrimary -->
-        <attr name="bottomSheetDigitColor" format="color" />
+        <attr name="sheetDigitColor" format="color" />
 
         <!-- Override digit key text font. -->
-        <attr name="bottomSheetDigitFont" format="reference" />
+        <attr name="sheetDigitFont" format="reference" />
 
         <!-- Override digit key line height. -->
-        <attr name="bottomSheetDigitLineHeight" format="dimension" />
+        <attr name="sheetDigitLineHeight" format="dimension" />
 
         <!-- Override digit key letter spacing. -->
-        <attr name="bottomSheetDigitLetterSpacing" format="float" />
+        <attr name="sheetDigitLetterSpacing" format="float" />
 
     </declare-styleable>
 
 
     <!--  Style for the buttons.  -->
-    <declare-styleable name="BottomSheetButton">
+    <declare-styleable name="SheetButton">
 
-        <!-- Override button color. Default: bottomSheetPrimary -->
-        <attr name="bottomSheetButtonColor" format="reference" />
+        <!-- Override button color. Default: sheetPrimaryColor -->
+        <attr name="sheetButtonColor" format="reference" />
 
         <!-- Override button text font. -->
-        <attr name="bottomSheetButtonTextFont" format="reference" />
+        <attr name="sheetButtonTextFont" format="reference" />
 
         <!-- Override button letter spacing. -->
-        <attr name="bottomSheetButtonTextLetterSpacing" format="float" />
+        <attr name="sheetButtonTextLetterSpacing" format="float" />
 
         <!-- Override radius of all corners.  -->
-        <attr name="bottomSheetButtonCornerRadius" format="dimension" />
+        <attr name="sheetButtonCornerRadius" format="dimension" />
 
         <!-- Override family of all corners.  -->
-        <attr name="bottomSheetButtonCornerFamily" format="enum">
+        <attr name="sheetButtonCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override button width. Default: wrap_content  -->
-        <attr name="bottomSheetButtonWidth" format="enum">
+        <attr name="sheetButtonWidth" format="enum">
             <enum name="wrap_content" value="-2" />
             <enum name="match_content" value="-1" />
         </attr>
@@ -170,55 +170,55 @@
     </declare-styleable>
 
     <!--  Style for the buttons.  -->
-    <declare-styleable name="BottomSheetNegativeButton">
+    <declare-styleable name="SheetNegativeButton">
 
-        <attr name="bottomSheetNegativeButtonType" format="enum">
+        <attr name="sheetNegativeButtonType" format="enum">
             <enum name="text_button" value="0" />
             <enum name="outlined_button" value="1" />
             <enum name="button" value="2" />
         </attr>
 
         <!-- Override radius of all corners.  -->
-        <attr name="bottomSheetNegativeButtonCornerRadius" format="dimension" />
+        <attr name="sheetNegativeButtonCornerRadius" format="dimension" />
 
         <!-- Override family of all corners.  -->
-        <attr name="bottomSheetNegativeButtonCornerFamily" format="enum">
+        <attr name="sheetNegativeButtonCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override bottom left corner radius.  -->
-        <attr name="bottomSheetNegativeButtonBottomLeftCornerRadius" format="dimension" />
+        <attr name="sheetNegativeButtonBottomLeftCornerRadius" format="dimension" />
 
         <!-- Override bottom left corner family.  -->
-        <attr name="bottomSheetNegativeButtonBottomLeftCornerFamily" format="enum">
+        <attr name="sheetNegativeButtonBottomLeftCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override top left corner radius.  -->
-        <attr name="bottomSheetNegativeButtonTopLeftCornerRadius" format="dimension" />
+        <attr name="sheetNegativeButtonTopLeftCornerRadius" format="dimension" />
 
         <!-- Override top left corner family.  -->
-        <attr name="bottomSheetNegativeButtonTopLeftCornerFamily" format="enum">
+        <attr name="sheetNegativeButtonTopLeftCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override bottom right corner radius.  -->
-        <attr name="bottomSheetNegativeButtonBottomRightCornerRadius" format="dimension" />
+        <attr name="sheetNegativeButtonBottomRightCornerRadius" format="dimension" />
 
         <!-- Override top bottom corner family.  -->
-        <attr name="bottomSheetNegativeButtonBottomRightCornerFamily" format="enum">
+        <attr name="sheetNegativeButtonBottomRightCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override top right corner radius.  -->
-        <attr name="bottomSheetNegativeButtonTopRightCornerRadius" format="dimension" />
+        <attr name="sheetNegativeButtonTopRightCornerRadius" format="dimension" />
 
         <!-- Override top right corner family.  -->
-        <attr name="bottomSheetNegativeButtonTopRightCornerFamily" format="enum">
+        <attr name="sheetNegativeButtonTopRightCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
@@ -226,55 +226,55 @@
     </declare-styleable>
 
     <!--  Style for the buttons.  -->
-    <declare-styleable name="BottomSheetPositiveButton">
+    <declare-styleable name="SheetPositiveButton">
 
-        <attr name="bottomSheetPositiveButtonType" format="enum">
+        <attr name="sheetPositiveButtonType" format="enum">
             <enum name="text_button" value="0" />
             <enum name="outlined_button" value="1" />
             <enum name="button" value="2" />
         </attr>
 
         <!-- Override radius of all corners.  -->
-        <attr name="bottomSheetPositiveButtonCornerRadius" format="dimension" />
+        <attr name="sheetPositiveButtonCornerRadius" format="dimension" />
 
         <!-- Override family of all corners.  -->
-        <attr name="bottomSheetPositiveButtonCornerFamily" format="enum">
+        <attr name="sheetPositiveButtonCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override bottom left corner radius.  -->
-        <attr name="bottomSheetPositiveButtonBottomLeftCornerRadius" format="dimension" />
+        <attr name="sheetPositiveButtonBottomLeftCornerRadius" format="dimension" />
 
         <!-- Override bottom left corner family.  -->
-        <attr name="bottomSheetPositiveButtonBottomLeftCornerFamily" format="enum">
+        <attr name="sheetPositiveButtonBottomLeftCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override top left corner radius.  -->
-        <attr name="bottomSheetPositiveButtonTopLeftCornerRadius" format="dimension" />
+        <attr name="sheetPositiveButtonTopLeftCornerRadius" format="dimension" />
 
         <!-- Override top left corner family.  -->
-        <attr name="bottomSheetPositiveButtonTopLeftCornerFamily" format="enum">
+        <attr name="sheetPositiveButtonTopLeftCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override bottom right corner radius.  -->
-        <attr name="bottomSheetPositiveButtonBottomRightCornerRadius" format="dimension" />
+        <attr name="sheetPositiveButtonBottomRightCornerRadius" format="dimension" />
 
         <!-- Override top bottom corner family.  -->
-        <attr name="bottomSheetPositiveButtonBottomRightCornerFamily" format="enum">
+        <attr name="sheetPositiveButtonBottomRightCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
 
         <!-- Override top right corner radius.  -->
-        <attr name="bottomSheetPositiveButtonTopRightCornerRadius" format="dimension" />
+        <attr name="sheetPositiveButtonTopRightCornerRadius" format="dimension" />
 
         <!-- Override top right corner family.  -->
-        <attr name="bottomSheetPositiveButtonTopRightCornerFamily" format="enum">
+        <attr name="sheetPositiveButtonTopRightCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
@@ -282,28 +282,28 @@
     </declare-styleable>
 
     <!--  Style for the handle.  -->
-    <declare-styleable name="BottomSheetHandle">
+    <declare-styleable name="SheetHandle">
 
         <!-- Override handle width.  -->
-        <attr name="bottomSheetHandleWidth" format="dimension" />
+        <attr name="sheetHandleWidth" format="dimension" />
 
         <!-- Override handle height.  -->
-        <attr name="bottomSheetHandleHeight" format="dimension" />
+        <attr name="sheetHandleHeight" format="dimension" />
 
         <!-- Override handle fill color. -->
-        <attr name="bottomSheetHandleFillColor" format="reference|color" />
+        <attr name="sheetHandleFillColor" format="reference|color" />
 
         <!-- Override handle border color. -->
-        <attr name="bottomSheetHandleBorderColor" format="reference" />
+        <attr name="sheetHandleBorderColor" format="reference" />
 
         <!-- Override handle border width.  -->
-        <attr name="bottomSheetHandleBorderWidth" format="dimension" />
+        <attr name="sheetHandleBorderWidth" format="dimension" />
 
         <!-- Override handle corner radius.  -->
-        <attr name="bottomSheetHandleCornerRadius" format="dimension" />
+        <attr name="sheetHandleCornerRadius" format="dimension" />
 
         <!-- Override handle corner family.  -->
-        <attr name="bottomSheetHandleCornerFamily" format="enum">
+        <attr name="sheetHandleCornerFamily" format="enum">
             <enum name="rounded" value="0" />
             <enum name="cut" value="1" />
         </attr>
@@ -311,40 +311,40 @@
     </declare-styleable>
 
     <!--  Style for the handle.  -->
-    <declare-styleable name="BottomSheetTextInputLayout">
+    <declare-styleable name="SheetTextInputLayout">
 
         <!-- Override handle corner radius.  -->
-        <attr name="bottomSheetTextInputLayoutCornerRadius" format="dimension" />
+        <attr name="sheetTextInputLayoutCornerRadius" format="dimension" />
 
         <!-- Override bottom left corner radius.  -->
-        <attr name="bottomSheetTextInputLayoutBottomLeftCornerRadius" format="dimension" />
+        <attr name="sheetTextInputLayoutBottomLeftCornerRadius" format="dimension" />
 
         <!-- Override top left corner radius.  -->
-        <attr name="bottomSheetTextInputLayoutTopLeftCornerRadius" format="dimension" />
+        <attr name="sheetTextInputLayoutTopLeftCornerRadius" format="dimension" />
 
         <!-- Override bottom right corner radius.  -->
-        <attr name="bottomSheetTextInputLayoutBottomRightCornerRadius" format="dimension" />
+        <attr name="sheetTextInputLayoutBottomRightCornerRadius" format="dimension" />
 
         <!-- Override top right corner radius.  -->
-        <attr name="bottomSheetTextInputLayoutTopRightCornerRadius" format="dimension" />
+        <attr name="sheetTextInputLayoutTopRightCornerRadius" format="dimension" />
 
-        <!-- Override end icon color. Default: bottomSheetPrimaryColor, colorPrimary  -->
-        <attr name="bottomSheetTextInputLayoutEndIconColor" format="color" />
+        <!-- Override end icon color. Default: sheetPrimaryColor, colorPrimary  -->
+        <attr name="sheetTextInputLayoutEndIconColor" format="color" />
 
-        <!-- Override helper text color. Default: bottomSheetPrimaryColor, colorPrimary  -->
-        <attr name="bottomSheetTextInputLayoutHelperTextColor" format="color" />
+        <!-- Override helper text color. Default: sheetPrimaryColor, colorPrimary  -->
+        <attr name="sheetTextInputLayoutHelperTextColor" format="color" />
 
-        <!-- Override box stroke color. Default: bottomSheetPrimaryColor, colorPrimary  -->
-        <attr name="bottomSheetTextInputLayoutBoxStrokeColor" format="color" />
+        <!-- Override box stroke color. Default: sheetPrimaryColor, colorPrimary  -->
+        <attr name="sheetTextInputLayoutBoxStrokeColor" format="color" />
 
-        <!-- Override hint text color. Default: bottomSheetPrimaryColor, colorPrimary  -->
-        <attr name="bottomSheetTextInputLayoutHintTextColor" format="color" />
+        <!-- Override hint text color. Default: sheetPrimaryColor, colorPrimary  -->
+        <attr name="sheetTextInputLayoutHintTextColor" format="color" />
 
         <!-- Override box stroke error color.  -->
-        <attr name="bottomSheetTextInputLayoutBoxStrokeErrorColor" format="color" />
+        <attr name="sheetTextInputLayoutBoxStrokeErrorColor" format="color" />
 
         <!-- Override error text color.  -->
-        <attr name="bottomSheetTextInputLayoutErrorTextColor" format="color" />
+        <attr name="sheetTextInputLayoutErrorTextColor" format="color" />
 
     </declare-styleable>
 

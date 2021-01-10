@@ -16,7 +16,7 @@
   -->
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/bottomSheetDividerColor">
+    android:color="@color/sheetDividerColor">
 
     <item
         android:bottom="1dp"
@@ -35,7 +35,7 @@
 
             <stroke
                 android:width=".5dp"
-                android:color="@color/bottomSheetDividerColor" />
+                android:color="@color/sheetDividerColor" />
 
             <solid android:color="#FFFFFF" />
 
