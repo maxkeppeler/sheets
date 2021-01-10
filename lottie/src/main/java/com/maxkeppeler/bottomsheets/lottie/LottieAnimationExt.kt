@@ -22,12 +22,12 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.maxkeppeler.bottomsheets.core.AddOnComponent
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 
 private const val EXCEPTION_MESSAGE_NOT_SETUP = "AnimationView was not setup yet."
 
 /** Set a cover lottie animation. */
-fun BottomSheet.withCoverLottieAnimation(lottieAnimation: LottieAnimation) {
+fun Sheet.withCoverLottieAnimation(lottieAnimation: LottieAnimation) {
     val componentLottie: AddOnComponent = {
         useCover() /* Indicate to setup the top bar style. */
         addOnCreateViewListener { binding ->
@@ -54,7 +54,7 @@ fun BottomSheet.withCoverLottieAnimation(lottieAnimation: LottieAnimation) {
  * Play the cover animation.
  * @throws IllegalStateException If animation view was not setup yet.
  */
-fun BottomSheet.playCoverAnimation() {
+fun Sheet.playCoverAnimation() {
     getCoverLottieAnimationView().playAnimation()
 }
 
@@ -62,7 +62,7 @@ fun BottomSheet.playCoverAnimation() {
  * Resume the cover animation.
  * @throws IllegalStateException If animation view was not setup yet.
  */
-fun BottomSheet.resumeCoverAnimation() {
+fun Sheet.resumeCoverAnimation() {
     getCoverLottieAnimationView().playAnimation()
 }
 
@@ -70,7 +70,7 @@ fun BottomSheet.resumeCoverAnimation() {
  * Pause the cover animation.
  * @throws IllegalStateException If animation view was not setup yet.
  */
-fun BottomSheet.pauseCoverAnimation() {
+fun Sheet.pauseCoverAnimation() {
     getCoverLottieAnimationView().pauseAnimation()
 }
 
@@ -78,11 +78,11 @@ fun BottomSheet.pauseCoverAnimation() {
  * Cancel the cover animation.
  * @throws IllegalStateException If animation view was not setup yet.
  */
-fun BottomSheet.cancelCoverAnimation() {
+fun Sheet.cancelCoverAnimation() {
     getCoverLottieAnimationView().cancelAnimation()
 }
 
-private fun BottomSheet.getCoverLottieAnimationView(): LottieAnimationView {
+private fun Sheet.getCoverLottieAnimationView(): LottieAnimationView {
    return getCoverAnimationView<LottieAnimationView>()
         ?: throw IllegalStateException(EXCEPTION_MESSAGE_NOT_SETUP)
 }

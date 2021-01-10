@@ -32,7 +32,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.maxkeppeler.bottomsheets.color.databinding.BottomSheetsColorBinding
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.*
 import com.maxkeppeler.bottomsheets.core.views.BottomSheetContent
@@ -45,7 +45,7 @@ typealias ColorListener = (Int) -> Unit
 /**
  * The [ColorSheet] lets you pick a color.
  */
-class ColorSheet : BottomSheet(), SeekBar.OnSeekBarChangeListener {
+class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
 
     override val dialogTag = "ColorSheet"
 

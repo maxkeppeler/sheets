@@ -29,7 +29,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.getPrimaryColor
@@ -46,7 +46,7 @@ typealias OptionsListener = OptionsSheet.(selectedIndices: MutableList<Int>, sel
 /**
  * The [OptionsSheet] lets you display a grid or list of options.
  */
-class OptionsSheet : BottomSheet() {
+class OptionsSheet : Sheet() {
 
     override val dialogTag = "OptionsSheet"
 

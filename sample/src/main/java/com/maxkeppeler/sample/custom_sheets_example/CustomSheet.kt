@@ -21,12 +21,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StringRes
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.PositiveListener
 import com.maxkeppeler.sample.databinding.BottomSheetsCustomBinding
 
 @Suppress("unused")
-class CustomSheet : BottomSheet() {
+class CustomSheet : Sheet() {
 
     override val dialogTag = "CustomSheet"
 

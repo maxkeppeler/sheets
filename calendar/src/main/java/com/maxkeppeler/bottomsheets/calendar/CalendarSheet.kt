@@ -42,7 +42,7 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.utils.yearMonth
 import com.maxkeppeler.bottomsheets.calendar.databinding.BottomSheetsCalendarBinding
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.core.utils.*
@@ -61,7 +61,7 @@ typealias CalendarDateListener = (dateStart: Calendar, dateEnd: Calendar?) -> Un
 /**
  * The [CalendarSheet] lets you pick a date or date range.
  */
-class CalendarSheet : BottomSheet() {
+class CalendarSheet : Sheet() {
 
     override val dialogTag = "CalendarSheet"
 

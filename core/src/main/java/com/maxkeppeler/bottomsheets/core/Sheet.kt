@@ -53,7 +53,7 @@ typealias ClickListener = () -> Unit
  * Bundle a block of BottomSheet functions for the use case of add-on-components.
  * AddOnComponents maintain their state.
  */
-typealias AddOnComponent = BottomSheet.() -> Unit
+typealias AddOnComponent = Sheet.() -> Unit
 
 /** Listener that is invoked when the view was created. */
 typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
@@ -63,7 +63,7 @@ typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
  * You can implement this class in your own and build your
  * own custom bottom sheet with the already existing features which the base class offers.
  */
-abstract class BottomSheet : SheetFragment() {
+abstract class Sheet : SheetFragment() {
 
     override val dialogTag = "BottomSheet"
 

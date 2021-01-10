@@ -24,7 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.time_clock.databinding.BottomSheetsTimeClockBinding
 import java.io.Serializable
 import java.util.*
@@ -35,7 +35,7 @@ typealias ClockTimeListener = (milliseconds: Long, hours: Int, minutes: Int) -> 
 /**
  * The [ClockTimeSheet] lets you quickly pick a clock time.
  */
-class ClockTimeSheet : BottomSheet() {
+class ClockTimeSheet : Sheet() {
 
     override val dialogTag = "ClockTimeSheet"
 

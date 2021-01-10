@@ -27,7 +27,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.PositiveListener
 import com.maxkeppeler.bottomsheets.core.utils.getIconColor
 import com.maxkeppeler.bottomsheets.info.databinding.BottomSheetsInfoBinding
@@ -35,7 +35,7 @@ import com.maxkeppeler.bottomsheets.info.databinding.BottomSheetsInfoBinding
 /**
  * The [InfoSheet] lets you display an information or warning.
  */
-class InfoSheet : BottomSheet() {
+class InfoSheet : Sheet() {
 
     override val dialogTag = "InfoSheet"
 

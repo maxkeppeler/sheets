@@ -24,7 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.bottomsheets.input.databinding.BottomSheetsInputBinding
 import com.maxkeppeler.bottomsheets.input.type.Input
@@ -37,7 +37,7 @@ typealias InputListener = (result: Bundle) -> Unit
 /**
  * The [InputSheet] lets you display a form consisting of various inputs.
  */
-class InputSheet : BottomSheet() {
+class InputSheet : Sheet() {
 
     override val dialogTag = "InputSheet"
 

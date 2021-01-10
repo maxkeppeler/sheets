@@ -25,7 +25,7 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import com.maxkeppeler.bottomsheets.core.BottomSheet
+import com.maxkeppeler.bottomsheets.core.Sheet
 import com.maxkeppeler.bottomsheets.time.databinding.BottomSheetsTimeBinding
 import java.io.Serializable
 
@@ -35,7 +35,7 @@ typealias DurationTimeListener = (timeInSec: Long) -> Unit
 /**
  * The [TimeSheet] lets you pick a duration time in a specific format.
  */
-class TimeSheet : BottomSheet() {
+class TimeSheet : Sheet() {
 
     override val dialogTag = "TimeSheet"
 
