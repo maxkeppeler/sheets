@@ -122,7 +122,9 @@ abstract class BottomSheet : DialogFragment() {
     open lateinit var windowContext: Context
 
     private var topStyle = TopStyle.ABOVE_COVER
+
     private var coverImage: Image? = null
+    private var useCover: Boolean = false
 
     private lateinit var bindingBase: BottomSheetsBaseBinding
 
@@ -176,6 +178,7 @@ abstract class BottomSheet : DialogFragment() {
     /** Set a cover image. */
     fun withCoverImage(image: Image) {
         this.coverImage = image
+        this.useCover = true
     }
 
     /** Set the top style. */
