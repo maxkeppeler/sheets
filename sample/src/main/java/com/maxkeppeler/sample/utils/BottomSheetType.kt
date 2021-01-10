@@ -32,6 +32,8 @@ enum class BottomSheetType(@StringRes val titleRes: Int) {
 
     BOTTOM_SHEET_INFO(R.string.info_sheet),
 
+    BOTTOM_SHEET_LOTTIE(R.string.lottie),
+
     BOTTOM_SHEET_INPUT(R.string.input_sheet),
 
     BOTTOM_SHEET_CUSTOM(R.string.custom_sheets),
