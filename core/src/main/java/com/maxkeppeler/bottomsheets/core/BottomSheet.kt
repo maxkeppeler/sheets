@@ -113,6 +113,9 @@ abstract class BottomSheet : DialogFragment() {
         private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
 
+    private var addOnComponents = mutableListOf<AddOnComponent>()
+    private var onCreateViewListeners = mutableListOf<OnViewCreatedListener>()
+
     private var sheetStyle: SheetStyle = SheetStyle.BOTTOM_SHEET
     private var sheetTheme = Theme.BOTTOM_SHEET_DAY
 
