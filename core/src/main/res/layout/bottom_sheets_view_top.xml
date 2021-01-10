@@ -31,17 +31,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <LinearLayout
         android:id="@+id/cover"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="2:1"
-        android:scaleType="centerCrop"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="2:1"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/coverImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </LinearLayout>
 
     <com.maxkeppeler.bottomsheets.core.views.BottomSheetTitle
         android:id="@+id/title"
@@ -79,6 +87,7 @@
         android:focusable="true"
         android:padding="8dp"
         android:visibility="gone"
+        android:layout_marginVertical="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnExtra2"
         app:layout_constraintEnd_toStartOf="@+id/btnExtra2"
         app:layout_constraintTop_toTopOf="@+id/btnExtra2"
@@ -93,6 +102,7 @@
         android:focusable="true"
         android:padding="8dp"
         android:visibility="gone"
+        android:layout_marginVertical="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnExtra1"
         app:layout_constraintEnd_toStartOf="@+id/btnExtra1"
         app:layout_constraintTop_toTopOf="@+id/btnExtra1"
@@ -106,6 +116,7 @@
         android:focusable="true"
         android:padding="8dp"
         android:visibility="gone"
+        android:layout_marginVertical="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnType"
         app:layout_constraintEnd_toStartOf="@+id/btnType"

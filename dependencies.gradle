@@ -36,6 +36,9 @@ ext.deps = [
         ]
     ],
 
-    coil: "io.coil-kt:coil:1.1.0"
+    coil: "io.coil-kt:coil:1.1.0",
+    airbnb:[
+        lottie: "com.airbnb.android:lottie:3.6.0"
+    ]
 
 ]

@@ -21,16 +21,14 @@ package com.maxkeppeler.bottomsheets.core
 import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.appcompat.app.AppCompatDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -61,6 +59,15 @@ typealias DismissListener = () -> Unit
 typealias ClickListener = () -> Unit
 
 /**
+ * Bundle a block of BottomSheet functions for the use case of add-on-components.
+ * AddOnComponents maintain their state.
+ */
+typealias AddOnComponent = BottomSheet.() -> Unit
+
+/** Listener that is invoked when the view was created. */
+typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
+
+/**
  * This class is the base of all types of bottom sheets.
  * You can implement this class in your own and build your
  * own custom bottom sheet with the already existing features which the base class offers.
@@ -76,6 +83,8 @@ abstract class BottomSheet : DialogFragment() {
         const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
+        private const val STATE_BASE_ADD_ON_RECEIVER = "state_base_add_on_receiver"
+        private const val STATE_BASE_ADD_ON_RECEIVER_AMOUNT = "state_base_add_on_receiver_amount"
         private const val STATE_BASE_SHEET_STYLE = "state_base_sheet_style"
         private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
         private const val STATE_BASE_TOP_STYLE = "state_top_style"
@@ -102,15 +111,21 @@ abstract class BottomSheet : DialogFragment() {
         private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
 
+    private var addOnComponents = mutableListOf<AddOnComponent>()
+    private var onCreateViewListeners = mutableListOf<OnViewCreatedListener>()
+
     private var sheetStyle: SheetStyle = SheetStyle.BOTTOM_SHEET
     private var sheetTheme = Theme.BOTTOM_SHEET_DAY
 
     open lateinit var windowContext: Context
 
     private var topStyle = TopStyle.ABOVE_COVER
-    private var coverImage: Image? = null
 
-    lateinit var bindingBase: BottomSheetsBaseBinding
+    private var useCover: Boolean = false
+    private var coverImage: Image? = null
+    private var coverAnimationView: Any? = null
+
+    private lateinit var bindingBase: BottomSheetsBaseBinding
 
     private var displayToolbar: Boolean? = null
     private var displayCloseButton: Boolean? = null
@@ -162,6 +177,7 @@ abstract class BottomSheet : DialogFragment() {
     /** Set a cover image. */
     fun withCoverImage(image: Image) {
         this.coverImage = image
+        this.useCover = true
     }
 
     /** Set the top style. */
@@ -373,6 +389,42 @@ abstract class BottomSheet : DialogFragment() {
         dismissListener?.invoke()
     }
 
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun useCover(useCover: Boolean = true) {
+        this.useCover = useCover
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun <T> getCoverAnimationView(): T? {
+        return coverAnimationView as T?
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun setCoverAnimationView(coverAnimationView: Any) {
+        this.coverAnimationView = coverAnimationView
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun addOnCreateViewListener(onCreateViewListeners: OnViewCreatedListener) {
+        this.onCreateViewListeners.add(onCreateViewListeners)
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun removeOnCreateViewListener(onCreateViewListener: OnViewCreatedListener) {
+        this.onCreateViewListeners.remove(onCreateViewListener)
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun addAddOnComponent(addOnComponent: AddOnComponent) {
+        this.addOnComponents.add(addOnComponent)
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun removeAddOnComponent(addOnComponent: AddOnComponent) {
+        this.addOnComponents.remove(addOnComponent)
+    }
+
     /** Create view of base bottom sheet. */
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -416,8 +468,8 @@ abstract class BottomSheet : DialogFragment() {
             cornerRadiusDp = saved.get(STATE_BASE_CORNER_RADIUS) as Float?
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
-            coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image
-            closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton
+            coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
+            closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
                 val iconButton =
@@ -425,6 +477,15 @@ abstract class BottomSheet : DialogFragment() {
                 iconButton?.let { btn -> icons.add(btn) }
             }
             iconButtons = icons.toTypedArray()
+            val addOnReceiversAmount = saved.getInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT)
+            repeat(addOnReceiversAmount) {
+                val receiver =
+                    saved.getSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(it)) as AddOnComponent?
+                receiver?.let { rec ->
+                    addOnComponents.add(rec)
+                    rec.invoke(this)
+                }
+            }
         }
     }
 
@@ -462,6 +523,10 @@ abstract class BottomSheet : DialogFragment() {
             putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
             putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
             putSerializable(STATE_BASE_SHEET_STYLE, sheetStyle)
+            putInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT, addOnComponents.size)
+            addOnComponents.forEachIndexed { i, function ->
+                putSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(i), function as Serializable?)
+            }
         }
     }
 
@@ -631,22 +696,41 @@ abstract class BottomSheet : DialogFragment() {
 
         setupIconButtons()
         setupButtonsView()
+
+        onCreateViewListeners.forEach { listener -> listener(bindingBase) }
     }
 
     private fun setupTopBar() {
-        coverImage?.let { img ->
+
+        if (useCover && resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE) {
             setupTopStyle()
-            img.ratio?.dimensionRatio?.let { ratio ->
-                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    dimensionRatio = ratio
-                }
-            }
-            img.scaleType?.let { bindingBase.top.cover.scaleType = it }
-            bindingBase.top.cover.visibility = View.VISIBLE
-            bindingBase.top.cover.loadAny(img.any) {
-                img.coilRequestBuilder.invoke(this)
+        }
+
+        coverImage?.let { source ->
+            setupCoverSource(source)
+            bindingBase.top.coverImage.loadAny(coverImage?.any) {
+                source.coilRequestBuilder.invoke(this)
             }
         }
+    }
+
+    /**
+     * Setup an image source for the cover view.
+     */
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun setupCoverSource(imageSource: ImageSource) {
+
+        imageSource.ratio?.dimensionRatio?.let {
+            (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                dimensionRatio = it
+            }
+        }
+
+        imageSource.scaleType?.let {
+            bindingBase.top.coverImage.scaleType = it
+        }
+
+        bindingBase.top.cover.visibility = View.VISIBLE
     }
 
     private fun setupTopStyle() {
@@ -659,7 +743,7 @@ abstract class BottomSheet : DialogFragment() {
             val cornerRadius =
                 cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS.toDp()
 
-            bindingBase.top.cover.shapeAppearanceModel =
+            bindingBase.top.coverImage.shapeAppearanceModel =
                 ShapeAppearanceModel().toBuilder().apply {
                     setTopRightCorner(cornerFamily, cornerRadius)
                     setTopLeftCorner(cornerFamily, cornerRadius)
@@ -705,21 +789,22 @@ abstract class BottomSheet : DialogFragment() {
                     bottomToTop = bindingBase.top.title.id
                 }
 
-                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomToBottom = bindingBase.top.divider.id
+                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = bindingBase.top.divider.id
                     topToBottom = bindingBase.top.cover.id
+                }
+
+                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.UNSET
+                    bottomToBottom = ConstraintLayout.LayoutParams.UNSET
+                    bottomToTop = bindingBase.top.divider.id
+                    topToBottom = bindingBase.top.cover.id
                 }
 
                 (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
                     bottomToTop = bindingBase.top.divider.id
                     topToBottom = bindingBase.top.cover.id
                     topToTop = ConstraintLayout.LayoutParams.UNSET
-                }
-
-                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomToTop = bindingBase.top.divider.id
-                    topToBottom = bindingBase.top.cover.id
                 }
             }
         }

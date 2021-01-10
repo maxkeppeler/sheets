@@ -1,8 +1,3 @@
-package com.maxkeppeler.sample.utils
-
-import androidx.annotation.StringRes
-import com.maxkeppeler.sample.R
-
 /*
  * Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
  *
@@ -18,21 +13,28 @@ import com.maxkeppeler.sample.R
  * See the License for the specific language governing permissions and
  */
 
-enum class BottomSheetType(@StringRes val titleRes: Int) {
+@file:Suppress("unused")
 
-    BOTTOM_SHEET_OPTIONS(R.string.options_sheet),
+package com.maxkeppeler.bottomsheets.core
 
-    BOTTOM_SHEET_COLOR(R.string.color_sheet),
+import android.widget.ImageView
+import java.io.Serializable
 
-    BOTTOM_SHEET_CLOCK_TIME(R.string.clock_time_sheet),
+/**
+ * A class that holds general image view settings.
+ */
+abstract class ImageSource : Serializable {
 
-    BOTTOM_SHEET_TIME(R.string.time_sheet),
+    var scaleType: ImageView.ScaleType? = null
+        internal set
 
-    BOTTOM_SHEET_CALENDAR(R.string.calendar_sheet),
+    var ratio: Ratio? = null
+        internal set
 
-    BOTTOM_SHEET_INFO(R.string.info_sheet),
-
-    BOTTOM_SHEET_INPUT(R.string.input_sheet),
-
-    BOTTOM_SHEET_CUSTOM(R.string.custom_sheets),
+    /**
+     * A class used to receive an aspect ratio.
+     */
+    data class Ratio(val width: Int, val height: Int) : Serializable {
+        val dimensionRatio: String = "$width:$height"
+    }
 }

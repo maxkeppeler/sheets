@@ -13,6 +13,7 @@ dependencies {
     implementation project(':time-clock')
     implementation project(':options')
     implementation project(':calendar')
+    implementation project(':lottie')
 
     implementation deps.kotlin.stdlib8
     implementation deps.androidx.constraint
