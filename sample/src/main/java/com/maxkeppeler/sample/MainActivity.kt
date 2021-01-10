@@ -618,6 +618,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showInfoSheetLottie() {
+
+        InfoSheet().show(this) {
+            style(SheetStyle.values().random())
+            displayCloseButton(false)
+            cornerFamily(CornerFamily.CUT)
+            cornerRadius(16f)
+            topStyle(TopStyle.values().random())
+            withCoverLottieAnimation(LottieAnimation {
+                setAnimation(R.raw.anim_lottie_business_team)
+            })
+            withIconButton(IconButton(R.drawable.ic_help)) { cancelCoverAnimation() }
+            title("Team Collaboration")
+            content("In the world of software projects, it is inevitable that we will find ourselves working in a team to deliver a project.")
+            onNegative("Learn how") { }
+            onPositive("Great")
+        }
+    }
+
     private fun showInfoSheetTopStyleMixed() {
 
         InfoSheet().show(this) {
