@@ -417,7 +417,7 @@ class CustomSheet : Sheet() {
 2. Step: Implement the method: ``onCreateLayoutView`` and pass your custom layout.
 ```
 override fun onCreateLayoutView(): View {
-    return LayoutInflater.from(activity).inflate(R.layout.bottom_sheets_custom, null)
+    return LayoutInflater.from(activity).inflate(R.layout.sheets_custom, null)
 }
 ```
 

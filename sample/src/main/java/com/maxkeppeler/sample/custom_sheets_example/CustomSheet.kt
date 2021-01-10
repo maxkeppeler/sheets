@@ -55,7 +55,7 @@ class CustomSheet : Sheet() {
         return BottomSheetsCustomBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
 //        Or without binding
-//        return LayoutInflater.from(activity).inflate(R.layout.bottom_sheets_custom, null)
+//        return LayoutInflater.from(activity).inflate(R.layout.sheets_custom, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
