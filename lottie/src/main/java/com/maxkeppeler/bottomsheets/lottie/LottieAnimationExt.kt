@@ -18,8 +18,6 @@
 package com.maxkeppeler.bottomsheets.lottie
 
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.maxkeppeler.bottomsheets.core.AddOnComponent
 import com.maxkeppeler.bottomsheets.core.Sheet

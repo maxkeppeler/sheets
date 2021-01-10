@@ -34,7 +34,7 @@ import coil.loadAny
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.*
-import com.maxkeppeler.bottomsheets.databinding.BottomSheetsBaseBinding
+import com.maxkeppeler.bottomsheets.databinding.SheetsBaseBinding
 import java.io.Serializable
 
 /** Listener which is invoked when the positive button is clicked. */
@@ -56,7 +56,7 @@ typealias ClickListener = () -> Unit
 typealias AddOnComponent = Sheet.() -> Unit
 
 /** Listener that is invoked when the view was created. */
-typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
+typealias OnViewCreatedListener = (SheetsBaseBinding) -> Unit
 
 /**
  * This class is the base of all types of bottom sheets.
@@ -65,7 +65,7 @@ typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
  */
 abstract class Sheet : SheetFragment() {
 
-    override val dialogTag = "BottomSheet"
+    override val dialogTag = "Sheet"
 
     companion object {
         const val DEFAULT_DISPLAY_HANDLE = false
@@ -103,7 +103,7 @@ abstract class Sheet : SheetFragment() {
     private var coverImage: Image? = null
     private var coverAnimationView: Any? = null
 
-    private lateinit var bindingBase: BottomSheetsBaseBinding
+    private lateinit var bindingBase: SheetsBaseBinding
 
     private var displayToolbar: Boolean? = null
     private var displayCloseButton: Boolean? = null
@@ -334,7 +334,7 @@ abstract class Sheet : SheetFragment() {
         saved: Bundle?
     ): View? {
         if (saved?.isEmpty == true) dismiss()
-        return BottomSheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
+        return SheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
             .also { bindingBase = it }.apply {
                 layout.addView(onCreateLayoutView())
             }.root

@@ -30,7 +30,7 @@
 
     <include
         android:id="@+id/top"
-        layout="@layout/bottom_sheets_view_top"
+        layout="@layout/sheets_view_top"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
 
     <include
         android:id="@+id/buttons"
-        layout="@layout/bottom_sheets_view_buttons"
+        layout="@layout/sheets_view_buttons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
