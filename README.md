@@ -1,20 +1,20 @@
-
+sheets
 <div>
 
-  <img src="art/ic_library.png" width="128px" height="128px" alt="Bottom-Sheets Library" align="left" style="margin-right: 48px;">
+  <img src="art/ic_library.png" width="128px" height="128px" alt="Sheets Library" align="left" style="margin-right: 48px;">
 
   # Sheets
   Offers a range of beautiful sheets (dialogs & bottom sheets) for quick use in your project.
 
   <div>
-    <a href="https://github.com/maxkeppeler/bottom-sheets">
-      <img src="https://img.shields.io/github/stars/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Star" alt="GitHub stars">
+    <a href="https://github.com/maxkeppeler/sheets">
+      <img src="https://img.shields.io/github/stars/maxkeppeler/sheets.svg?style=social&amp;label=Star" alt="GitHub stars">
     </a>
-    <a href="https://github.com/maxkeppeler/bottom-sheets/fork">
-      <img src="https://img.shields.io/github/forks/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Fork" alt="GitHub forks">
+    <a href="https://github.com/maxkeppeler/sheets/fork">
+      <img src="https://img.shields.io/github/forks/maxkeppeler/sheets.svg?style=social&amp;label=Fork" alt="GitHub forks">
     </a>
-    <a href="https://github.com/maxkeppeler/bottom-sheets">
-      <img src="https://img.shields.io/github/watchers/maxkeppeler/bottom-sheets.svg?style=social&amp;label=Watch" alt="GitHub watchers">
+    <a href="https://github.com/maxkeppeler/sheets">
+      <img src="https://img.shields.io/github/watchers/maxkeppeler/sheets.svg?style=social&amp;label=Watch" alt="GitHub watchers">
     </a>
     <a href="https://github.com/maxkeppeler/">
       <img src="https://img.shields.io/github/followers/maxkeppeler.svg?style=social&amp;label=Follow" alt="GitHub followers">
@@ -29,9 +29,9 @@
 <br/>
 <br/>
 <br/>
-<img src="art/img_showcase.png" alt="Bottom-Sheets Library">
+<img src="art/img_showcase.png" alt="sheets Library">
 
-<a href="https://www.codacy.com/gh/MaxKeppeler/bottom-sheets/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MaxKeppeler/bottom-sheets&amp;utm_campaign=Badge_Grade">
+<a href="https://www.codacy.com/gh/MaxKeppeler/sheets/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MaxKeppeler/sheets&amp;utm_campaign=Badge_Grade">
   <img src="https://app.codacy.com/project/badge/Grade/9a3b68b152e149fd82f0873e2fed78d5" alt="Codacy Code Quality">
 </a>
 
@@ -42,7 +42,7 @@
 <br/>
 <br/>
 
-Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/sample/sample.apk) to see the all sheets in real.
+Get the [sample apk](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk) to see the all sheets in real.
 
 ## Table of Contents
 - [Get started](#get-started)
@@ -65,21 +65,21 @@ Get the [sample apk](https://github.com/MaxKeppeler/bottom-sheets/blob/main/samp
 
 In order to use any of the following Sheets, you have to implement the `core` module.
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acore/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acore/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Acore/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Acore/_latestVersion)
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:core:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:core:<latest-version>'
 }
 ```
 
 **The following functions can be called from any sheet:**
 
-Use ```style()``` to display the sheet as either a bottom sheet or dialog.<br/>
+Use ```style()``` to display the sheet as either a BottomSheet or dialog.<br/>
 Use ```cancelableOutside()``` to disable dismissing the sheet when outside.<br/>
 Use ```behavior()``` to set the BottomSheetBehavior.<br/>
-Use ```peekHeight()``` to set the peek height for the bottom sheet.<br/>
+Use ```peekHeight()``` to set the peek height for the BottomSheet.<br/>
 Use ```cornerRadius()``` to set corner radius.<br/>
 Use ```cornerFamily()``` to set corner family (cut or rounded).<br/>
 Use ```borderWidth()``` to set the width of the border width.<br/>
@@ -112,16 +112,16 @@ InfoSheet().show(context) {
 ```
 
 ## Info
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainfo/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainfo/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Ainfo/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Ainfo/_latestVersion)
 
 The `Info` Sheet lets you display information or warning.
 
-<img src="art/img_bottom_sheet_info.png" width="80%" alt="Bottom-Sheets InfoSheet">
+<img src="art/img_bottom_sheet_info.png" width="80%" alt="Sheets InfoSheet">
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:info:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:info:<latest-version>'
 }
 ```
 
@@ -145,16 +145,16 @@ Use ```drawable()``` to display a drawable left of the text.<br/>
 Use ```drawableColor()``` to set the color of the drawable.<br/>
 
 ## Options
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Aoptions/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Aoptions/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Aoptions/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Aoptions/_latestVersion)
 
 The `Options` Sheet lets you display a grid or list of options.
 
-<img src="art/img_bottom_sheet_options_grid.png" width="80%" alt="Bottom-Sheets OptionsSheet Grid">
+<img src="art/img_bottom_sheet_options_grid.png" width="80%" alt="Sheets OptionsSheet Grid">
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:options:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:options:<latest-version>'
 }
 ```
 
@@ -183,7 +183,7 @@ Set a listener with ```onPositiveMultiple()``` for multiple choices data.<br/>
 Use ```showButtons()``` to show the buttons and require a positive button click.<br/>
 Use ```displayMode()``` to either display it as a list, a vertical or horizontal growing scrollable grid.<br/>
 -.
-<img src="art/img_bottom_sheet_options_list.png" width="80%" alt="Bottom-Sheets OptionsSheet List">
+<img src="art/img_bottom_sheet_options_list.png" width="80%" alt="Sheets OptionsSheet List">
 
 **Option Object**
 Use ```selected()``` to preselect an option.
@@ -193,16 +193,16 @@ Notice: Preselected options automatically increase the current selection while d
 
 
 ## Clock Time
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Atime_clock/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Atime_clock/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Atime-clock/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Atime-clock/_latestVersion)
 
 The `Clock Time` Sheet lets you quickly pick a time.
 
-<img src="art/img_bottom_sheet_clock_time.png" width="80%" alt="Bottom-Sheets ClockTimeSheet">
+<img src="art/img_bottom_sheet_clock_time.png" width="80%" alt="Sheets ClockTimeSheet">
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:time_clock:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:time-clock:<latest-version>'
 }
 ```
 
@@ -221,16 +221,16 @@ Use ```format24Hours()``` to choose between the 24-hours or 12-hours format.<br/
 Use ```currentTime()``` to set the current time in milliseconds.<br/>
 
 ## Time
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Atime/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Atime/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Atime/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Atime/_latestVersion)
 
 The `Time` Sheet lets you pick a duration time in a specific format.
 
-<img src="art/img_bottom_sheet_time.png" width="80%" alt="Bottom-Sheets TimeSheet">
+<img src="art/img_bottom_sheet_time.png" width="80%" alt="Sheets TimeSheet">
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:time:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:time:<latest-version>'
 }
 ```
 
@@ -250,16 +250,16 @@ Use ```minTime()``` to set the minimum time.<br/>
 Use ```maxTime()``` to set the maximum time.<br/>
 
 ## Input
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Ainput/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Ainput/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Ainput/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Ainput/_latestVersion)
 
 The `Input` Sheet lets you display a form consisting of various inputs.
 
-<img src="art/img_bottom_sheet_input.png" width="80%" alt="Bottom-Sheets InputSheet">
+<img src="art/img_bottom_sheet_input.png" width="80%" alt="Sheets InputSheet">
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:input:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:input:<latest-version>'
 }
 ```
 
@@ -334,16 +334,16 @@ Use ```options()``` to add an amount of SpinnevalidatrItems.<br/>
 Use ```selected()``` to set selected index.<br/>
 
 ## Calendar
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acalendar/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acalendar/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Acalendar/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Acalendar/_latestVersion)
 
 The `Calendar` Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
 
-<img src="art/img_bottom_sheet_calendar.png" width="80%" alt="Bottom-Sheets OptionsSheet">
+<img src="art/img_bottom_sheet_calendar.png" width="80%" alt="Sheets OptionsSheet">
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:calendar:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:calendar:<latest-version>'
 }
 ```
 
@@ -351,7 +351,7 @@ dependencies {
 For the default time sheet use it as following:
 ```
 CalendarSheet().show(this) { // Build and show
-  title("What's your date of birth?") // Set the title of the bottom sheet
+  title("What's your date of birth?") // Set the title of the sheet
   onPositive { dateStart, dateEnd ->
     // Handle date or range
   }
@@ -364,16 +364,16 @@ Use ```disable()``` to pass a ```Calendar``` object to disable various dates for
 Use ```showButtons()``` to show or hide the buttons view.<br/>
 
 ## Color
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/bottom-sheets%3Acolor/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/bottom-sheets%3Acolor/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Acolor/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Acolor/_latestVersion)
 
 The `Color` Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
 
-<img src="art/img_bottom_sheet_color.png" width="80%" alt="Bottom-Sheets ColorSheet">
+<img src="art/img_bottom_sheet_color.png" width="80%" alt="Sheets ColorSheet">
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:color:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:color:<latest-version>'
 }
 ```
 
@@ -395,24 +395,24 @@ Use ```disableAlpha()``` to disable alpha colors for custom colors.<br/>
 
 ## Custom
 
-With just the 'core' module you are able to create your own bottom sheet based on this library. You can use some components and styles within your own custom bottom sheet automatically. By default the buttons and toolbar view with logic is ready to be used by your own implementation.
+With just the 'core' module you are able to create your own sheet based on this library. You can use some components and styles within your own custom sheet automatically. By default the buttons and toolbar view with logic is ready to be used by your own implementation.
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.bottomsheets:core:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:core:<latest-version>'
 }
 ```
 
 ### Get started
 
-You can find a custom bottom sheet implementation in the sample module.
+You can find a custom sheet implementation in the sample module.
 
 **For the default color sheet use it as following:**
 
-1. Step: Create a class and extend from the class ``BottomSheet``.
+1. Step: Create a class and extend from the class ``Sheet``.
 ```
-class CustomSheet : BottomSheet() {
+class CustomSheet : Sheet() {
 ```
 2. Step: Implement the method: ``onCreateLayoutView`` and pass your custom layout.
 ```
@@ -424,154 +424,154 @@ override fun onCreateLayoutView(): View {
 All of the base functionality can be used and on top of that you can extend the logic and behavior as you wish.
 
 ### Components
-You are free to use the components this library uses for it's bottom sheet types.
-- ```BottomSheetTitle```
-- ```BottomSheetContent```
-- ```BottomSheetDigit```
-- ```BottomSheetNumericalInput```
-- ```BottomSheetDivider```
-- ```BottomSheetButton```
-- ```BottomSheetEdit```
-- ```BottomSheetRecyclerView```
-- ```BottomSheetValue```
+You are free to use the components this library uses for it's sheet types.
+- ```SheetTitle```
+- ```SheetContent```
+- ```SheetDigit```
+- ```SheetNumericalInput```
+- ```SheetDivider```
+- ```SheetButton```
+- ```SheetEdit```
+- ```SheetRecyclerView```
+- ```SheetValue```
 
 More will be added over time.
 
 ## Appearance
 By default, the library switches to either day or night mode depending on the attr ```textColorPrimary```.
-By default it uses the activity's colorPrimary. The default ```highlightColor``` is generated based on the color ```bottomSheetPrimaryColor```, or if not available ```colorPrimary```.
+By default it uses the activity's colorPrimary. The default ```highlightColor``` is generated based on the color ```sheetPrimaryColor```, or if not available ```colorPrimary```.
 
-<img src="art/img_bottom_sheet_appearance_example_options_grid_compact.png" width="35%" alt="Bottom-Sheets Appearance Example">
+<img src="art/img_bottom_sheet_appearance_example_options_grid_compact.png" width="35%" alt="Sheets Appearance Example">
 
 ### Base
-You want a different bottom sheet background shape?
+You want a different sheet background shape?
 Then just override the corner family and radius.
 ```
-<item name="bottomSheetCornerRadius">12dp</item>
-<item name="bottomSheetCornerFamily">cut</item>
+<item name="sheetCornerRadius">12dp</item>
+<item name="sheetCornerFamily">cut</item>
 ```
-Just overwrite the base colors, if you want to achieve a different look of the bottom sheets than your app.
+Just overwrite the base colors, if you want to achieve a different look of the sheets than your app.
 ```
-<item name="bottomSheetPrimaryColor">@color/customPrimaryColor</item>
-<item name="bottomSheetHighlightColor">@color/customHighlightColor</item>
-<item name="bottomSheetBackgroundColor">@color/customBackgroundColor</item>
-<item name="bottomSheetDividerColor">@color/customDividerColor</item>
-<item name="bottomSheetIconsColor">@color/customIconsColor</item>
+<item name="sheetPrimaryColor">@color/customPrimaryColor</item>
+<item name="sheetHighlightColor">@color/customHighlightColor</item>
+<item name="sheetBackgroundColor">@color/customBackgroundColor</item>
+<item name="sheetDividerColor">@color/customDividerColor</item>
+<item name="sheetIconsColor">@color/customIconsColor</item>
 
 ```
-You can override the basic style of a bottom sheet. Instead of displaying the toolbar, you can just hide it and display the typical handle.
+You can override the basic style of a sheet. Instead of displaying the toolbar, you can just hide it and display the typical handle.
 ```
-<item name="bottomSheetDisplayHandle">true</item>
-<item name="bottomSheetDisplayToolbar">false</item>
-<item name="bottomSheetDisplayCloseButton">false</item>
+<item name="sheetDisplayHandle">true</item>
+<item name="sheetDisplayToolbar">false</item>
+<item name="sheetDisplayCloseButton">false</item>
 ```
 Change the appearance of the title.
 ```
-<item name="bottomSheetTitleColor">@color/customTitleTextColor</item>
-<item name="bottomSheetTitleFont">@font/font</item>
-<item name="bottomSheetTitleLineHeight">@dimen/dimen</item>
-<item name="bottomSheetTitleLetterSpacing">value</item>
+<item name="sheetTitleColor">@color/customTitleTextColor</item>
+<item name="sheetTitleFont">@font/font</item>
+<item name="sheetTitleLineHeight">@dimen/dimen</item>
+<item name="sheetTitleLetterSpacing">value</item>
 ```
 Change the appearance of the content text.
 ```
-<item name="bottomSheetContentColor">@color/customContentTextColor</item>
-<item name="bottomSheetContentInverseColor">@color/customContentTextInverseColor</item>
-<item name="bottomSheetContentFont">@font/font</item>
-<item name="bottomSheetContentLineHeight">@dimen/dimen</item>
-<item name="bottomSheetContentLetterSpacing">value</item>
+<item name="sheetContentColor">@color/customContentTextColor</item>
+<item name="sheetContentInverseColor">@color/customContentTextInverseColor</item>
+<item name="sheetContentFont">@font/font</item>
+<item name="sheetContentLineHeight">@dimen/dimen</item>
+<item name="sheetContentLetterSpacing">value</item>
 ```
 Change the appearance of the value texts. (e.g. the time in the TimeSheet &amp; ClockTimeSheet or the selected date &amp; period in the Calendarsheet.)
 ```
-<item name="bottomSheetValueTextActiveColor">@color/customValueTextColor</item>
-<item name="bottomSheetValueFont">@font/font</item>
-<item name="bottomSheetValueLineHeight">@dimen/dimen</item>
-<item name="bottomSheetValueLetterSpacing">value</item>
+<item name="sheetValueTextActiveColor">@color/customValueTextColor</item>
+<item name="sheetValueFont">@font/font</item>
+<item name="sheetValueLineHeight">@dimen/dimen</item>
+<item name="sheetValueLetterSpacing">value</item>
 ```
 Change the appearance of the digit keys on the numerical input.
 ```
-<item name="bottomSheetDigitColor">@color/customDigitTextColor</item>
-<item name="bottomSheetDigitFont">@font/font</item>
-<item name="bottomSheetDigitLineHeight">@dimen/dimen</item>
-<item name="bottomSheetDigitLetterSpacing">value</item>
+<item name="sheetDigitColor">@color/customDigitTextColor</item>
+<item name="sheetDigitFont">@font/font</item>
+<item name="sheetDigitLineHeight">@dimen/dimen</item>
+<item name="sheetDigitLetterSpacing">value</item>
 ```
 ### Buttons
 Override the appearance of the button text.
 ```
-<item name="bottomSheetButtonTextFont">@font/font</item>
-<item name="bottomSheetButtonTextLetterSpacing">value</item>
+<item name="sheetButtonTextFont">@font/font</item>
+<item name="sheetButtonTextLetterSpacing">value</item>
 ```
 Override the general appearance of the buttons (negative and positive button).
 ```
-<item name="bottomSheetButtonColor">@color/customButtonColor<item>
-<item name="bottomSheetButtonTextFont">@font/font<item>
-<item name="bottomSheetButtonTextLetterSpacing">value<item>
-<item name="bottomSheetButtonCornerRadius">12dp<item>
-<item name="bottomSheetButtonCornerFamily">cut<item>
-<item name="bottomSheetButtonWidth">match_content/wrap_content<item>
+<item name="sheetButtonColor">@color/customButtonColor<item>
+<item name="sheetButtonTextFont">@font/font<item>
+<item name="sheetButtonTextLetterSpacing">value<item>
+<item name="sheetButtonCornerRadius">12dp<item>
+<item name="sheetButtonCornerFamily">cut<item>
+<item name="sheetButtonWidth">match_content/wrap_content<item>
 ```
 Override the appearance of the negative button.
 
 ```
-<item name="bottomSheetNegativeButtonType">text_button/outlined_button/button<item>
-<item name="bottomSheetNegativeButtonCornerRadius">12dp<item>
-<item name="bottomSheetNegativeButtonCornerFamily">cut<item>
+<item name="sheetNegativeButtonType">text_button/outlined_button/button<item>
+<item name="sheetNegativeButtonCornerRadius">12dp<item>
+<item name="sheetNegativeButtonCornerFamily">cut<item>
 ```
 Override the appearance of the positive button.
 ```
-<item name="bottomSheetPositiveButtonType">text_button/outlined_button/button<item>
-<item name="bottomSheetPositiveButtonCornerRadius">12dp<item>
-<item name="bottomSheetPositiveButtonCornerFamily">cut<item>
+<item name="sheetPositiveButtonType">text_button/outlined_button/button<item>
+<item name="sheetPositiveButtonCornerRadius">12dp<item>
+<item name="sheetPositiveButtonCornerFamily">cut<item>
 ```
 The corner family and radius is applied to the button shape or in the case of a outlined or text button, to the ripple background shape.
 
 **Fine control**
 You can even define the corner family and radius of the negative and positive button for each corner.
 ```
-<item name="bottomSheetNegativeButtonBottomLeftCornerRadius">4dp<item>
-<item name="bottomSheetNegativeButtonBottomLeftCornerFamily">cut<item>
+<item name="sheetNegativeButtonBottomLeftCornerRadius">4dp<item>
+<item name="sheetNegativeButtonBottomLeftCornerFamily">cut<item>
 ...
-<item name="bottomSheetPositiveButtonBottomRightCornerRadius">8dp<item>
-<item name="bottomSheetPositiveButtonBottomRightCornerFamily">rounded<item>
+<item name="sheetPositiveButtonBottomRightCornerRadius">8dp<item>
+<item name="sheetPositiveButtonBottomRightCornerFamily">rounded<item>
 ```
 
 ### Handle
 The size and the appearance of the handle can be changed like this:
 ```
-<item name="bottomSheetHandleCornerRadius">8dp</item>
-<item name="bottomSheetHandleCornerFamily">rounded</item>
-<item name="bottomSheetHandleFillColor">?bottomSheetPrimaryColor</item>
-<item name="bottomSheetHandleBorderColor">?bottomSheetPrimaryColor</item>
-<item name="bottomSheetHandleBorderWidth">1dp</item>
-<item name="bottomSheetHandleWidth">42dp</item>
-<item name="bottomSheetHandleHeight">4dp</item>
+<item name="sheetHandleCornerRadius">8dp</item>
+<item name="sheetHandleCornerFamily">rounded</item>
+<item name="sheetHandleFillColor">?sheetPrimaryColor</item>
+<item name="sheetHandleBorderColor">?sheetPrimaryColor</item>
+<item name="sheetHandleBorderWidth">1dp</item>
+<item name="sheetHandleWidth">42dp</item>
+<item name="sheetHandleHeight">4dp</item>
 ```
 
 ### OptionsSheet
 Override appearance of selected options.
 ```
-<item name="bottomSheetOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
-<item name="bottomSheetOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
+<item name="sheetOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
+<item name="sheetOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
 ```
 Override appearance of disabled options.
 ```
-<item name="bottomSheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>
-<item name="bottomSheetOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
-<item name="bottomSheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
+<item name="sheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>
+<item name="sheetOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
+<item name="sheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
 ```
 
 ### InputSheet
 
 Override the appearance of the TextInputLayout (used for the InputEditText).
 ```
-<item name="bottomSheetTextInputLayoutCornerRadius">12dp</item>
-<item name="bottomSheetTextInputLayoutBottomLeftCornerRadius">12dp</item>
+<item name="sheetTextInputLayoutCornerRadius">12dp</item>
+<item name="sheetTextInputLayoutBottomLeftCornerRadius">12dp</item>
 ... and for all other corners
-<item name="bottomSheetTextInputLayoutEndIconColor">@color/customEndIconColor</item>
-<item name="bottomSheetTextInputLayoutHelperTextColor">@color/customHelperTextColor</item>
-<item name="bottomSheetTextInputLayoutBoxStrokeColor">@color/customBoxStrokeColor</item>
-<item name="bottomSheetTextInputLayoutHintTextColor">@color/customHintTextColor</item>
-<item name="bottomSheetTextInputLayoutBoxStrokeErrorColor">@color/customBoxStrokeErrorColor</item>
-<item name="bottomSheetTextInputLayoutErrorTextColor">@color/customErrorTextColor</item>
+<item name="sheetTextInputLayoutEndIconColor">@color/customEndIconColor</item>
+<item name="sheetTextInputLayoutHelperTextColor">@color/customHelperTextColor</item>
+<item name="sheetTextInputLayoutBoxStrokeColor">@color/customBoxStrokeColor</item>
+<item name="sheetTextInputLayoutHintTextColor">@color/customHintTextColor</item>
+<item name="sheetTextInputLayoutBoxStrokeErrorColor">@color/customBoxStrokeErrorColor</item>
+<item name="sheetTextInputLayoutErrorTextColor">@color/customErrorTextColor</item>
 ```
 
 # Misc
@@ -588,18 +588,18 @@ Feel free to hit me up to include your app here.
 
 - **Watch** for updates and improvements.
 
-- **[Open an issue](https://github.com/MaxKeppeler/bottom-sheets/issues/)** if you see or got any error.
+- **[Open an issue](https://github.com/MaxKeppeler/sheets/issues/)** if you see or got any error.
 
-- Leave your thanks [here](https://github.com/MaxKeppeler/bottom-sheets/discussions/categories/show-and-tell) and showcase your implementation.
+- Leave your thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and showcase your implementation.
 
 ## Motivation
-I created several bottom sheets for my apps [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) and [Awake](https://play.google.com/store/apps/details?id=com.mk.awake) in the recent months.
-I especially wanted to have a 'writable' clock time and duration time picker in form of a bottom sheet
+I created several sheets for my apps [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) and [Awake](https://play.google.com/store/apps/details?id=com.mk.awake) in the recent months.
+I especially wanted to have a 'writable' clock time and duration time picker in form of a sheet
 This is my first library - I'm happy about any feedback, tips etc. I hope you like it and can make use of it. :)
 
 ## Credits
-- Thanks to [Sasikanth](https://github.com/msasikanth). I got some inspiration for the bottom sheet appearance through his [Color Sheet](https://github.com/msasikanth/ColorSheet) library, as well as his note taking app [Memoire](https://play.google.com/store/apps/details?id=com.primudesigns.stories).
-- Thanks to [Aidan Follestad](https://github.com/afollestad) and his [material-dialogs](https://github.com/afollestad/material-dialogs) library. I originally wanted to offer all bottom sheets through one library. I got inspired of his project to split the different bottom sheets into different modules/ libraries.
+- Thanks to [Sasikanth](https://github.com/msasikanth). I got some inspiration for the sheet appearance through his [Color Sheet](https://github.com/msasikanth/ColorSheet) library, as well as his note taking app [Memoire](https://play.google.com/store/apps/details?id=com.primudesigns.stories).
+- Thanks to [Aidan Follestad](https://github.com/afollestad) and his [material-dialogs](https://github.com/afollestad/material-dialogs) library. I originally wanted to offer all sheets through one library. I got inspired of his project to split the different sheets into different modules/ libraries.
 
 ## License
 ```
