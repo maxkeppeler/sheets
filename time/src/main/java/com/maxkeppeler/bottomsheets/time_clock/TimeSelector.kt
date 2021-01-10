@@ -79,7 +79,7 @@ internal class TimeSelector(
 
     private fun validate() {
 
-        if (time.isNotEmpty()) {
+        if (time.isNotEmpty() && time.toString().toInt() != 0) {
 
             val timeInSeconds = getTimeInSeconds()
 
