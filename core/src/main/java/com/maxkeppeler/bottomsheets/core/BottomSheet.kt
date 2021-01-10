@@ -689,6 +689,8 @@ abstract class BottomSheet : DialogFragment() {
 
         setupIconButtons()
         setupButtonsView()
+
+        onCreateViewListeners.forEach { listener -> listener(bindingBase) }
     }
 
     private fun setupTopBar() {
