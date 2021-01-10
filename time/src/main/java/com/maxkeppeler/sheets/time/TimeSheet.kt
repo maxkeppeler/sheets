@@ -16,7 +16,7 @@
 
 @file:Suppress("unused")
 
-package com.maxkeppeler.sheets.time_clock
+package com.maxkeppeler.sheets.time
 
 import android.content.Context
 import android.os.Bundle

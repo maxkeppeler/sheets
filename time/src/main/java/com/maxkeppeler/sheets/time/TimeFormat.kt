@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.maxkeppeler.sheets.time_clock
+package com.maxkeppeler.sheets.time
 
 /**
  * Time formats that can be used.

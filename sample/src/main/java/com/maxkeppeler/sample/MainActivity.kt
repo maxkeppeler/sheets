@@ -47,8 +47,8 @@ import com.maxkeppeler.sheets.options.DisplayMode
 import com.maxkeppeler.sheets.options.Option
 import com.maxkeppeler.sheets.options.OptionsSheet
 import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
-import com.maxkeppeler.sheets.time_clock.TimeFormat
-import com.maxkeppeler.sheets.time_clock.TimeSheet
+import com.maxkeppeler.sheets.time.TimeFormat
+import com.maxkeppeler.sheets.time.TimeSheet
 import com.maxkeppeler.sample.custom_sheets_example.CustomSheet
 import com.maxkeppeler.sample.databinding.MainActBinding
 import com.maxkeppeler.sample.utils.SheetExample

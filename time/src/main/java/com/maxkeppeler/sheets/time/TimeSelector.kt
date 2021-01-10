@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.maxkeppeler.sheets.time_clock
+package com.maxkeppeler.sheets.time
 
 import android.content.Context
 import android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -30,7 +30,6 @@ import android.widget.TextView
 import com.maxkeppeler.sheets.core.utils.getPrimaryColor
 import com.maxkeppeler.sheets.core.utils.getTextColor
 import com.maxkeppeler.sheets.core.utils.splitTime
-import com.maxkeppeler.sheets.time.R
 import com.maxkeppeler.sheets.time.databinding.SheetsTimeBinding
 import java.util.concurrent.TimeUnit
 
