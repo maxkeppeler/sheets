@@ -18,31 +18,22 @@
 
 package com.maxkeppeler.bottomsheets.core
 
-import android.app.Dialog
-import android.content.Context
-import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.*
-import androidx.annotation.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDialog
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.RestrictTo
+import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.preference.PreferenceFragmentCompat
 import coil.loadAny
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.utils.*
-import com.maxkeppeler.bottomsheets.core.utils.Theme
 import com.maxkeppeler.bottomsheets.databinding.BottomSheetsBaseBinding
 import java.io.Serializable
 
@@ -72,13 +63,11 @@ typealias OnViewCreatedListener = (BottomSheetsBaseBinding) -> Unit
  * You can implement this class in your own and build your
  * own custom bottom sheet with the already existing features which the base class offers.
  */
-abstract class BottomSheet : DialogFragment() {
+abstract class BottomSheet : SheetFragment() {
 
-    open val dialogTag = "BottomSheet"
+    override val dialogTag = "BottomSheet"
 
     companion object {
-        const val DEFAULT_CORNER_RADIUS = 16f
-        const val DEFAULT_CORNER_FAMILY = CornerFamily.ROUNDED
         const val DEFAULT_DISPLAY_HANDLE = false
         const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
@@ -102,22 +91,11 @@ abstract class BottomSheet : DialogFragment() {
         private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
         private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
         private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
-        private const val STATE_BASE_BEHAVIOR = "state_base_behavior"
-        private const val STATE_BASE_PEEK_HEIGHT = "state_base_peek_height"
-        private const val STATE_BASE_BORDER_WIDTH = "state_base_border_width"
-        private const val STATE_BASE_BORDER_COLOR = "state_base_border_color"
-        private const val STATE_BASE_CORNER_RADIUS = "state_base_corner_radius"
-        private const val STATE_BASE_CORNER_FAMILY = "state_base_corner_family"
         private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
 
     private var addOnComponents = mutableListOf<AddOnComponent>()
     private var onCreateViewListeners = mutableListOf<OnViewCreatedListener>()
-
-    private var sheetStyle: SheetStyle = SheetStyle.BOTTOM_SHEET
-    private var sheetTheme = Theme.BOTTOM_SHEET_DAY
-
-    open lateinit var windowContext: Context
 
     private var topStyle = TopStyle.ABOVE_COVER
 
@@ -148,13 +126,6 @@ abstract class BottomSheet : DialogFragment() {
     protected var positiveListener: PositiveListener? = null
     private var negativeListener: NegativeListener? = null
 
-    private var behavior = BottomSheetBehavior.STATE_EXPANDED
-    private var peekHeight = 0
-    private var cornerRadiusDp: Float? = null
-    private var borderStrokeWidthDp: Float? = null
-    private var borderStrokeColor: Int? = null
-    private var cornerFamily: Int? = null
-
     private var iconButtons: Array<IconButton?> = arrayOfNulls(ICON_BUTTONS_AMOUNT_MAX)
 
     /**
@@ -167,11 +138,6 @@ abstract class BottomSheet : DialogFragment() {
         val index = this.iconButtons.indexOfFirst { it == null }
         if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
         this.iconButtons[index] = iconButton.apply { listener(listener) }
-    }
-    
-    /** Set sheet style. */
-    fun style(style: SheetStyle) {
-        this.sheetStyle = style
     }
 
     /** Set a cover image. */
@@ -188,58 +154,6 @@ abstract class BottomSheet : DialogFragment() {
     /** Set if bottom sheet is cancelable outside. */
     fun cancelableOutside(cancelable: Boolean) {
         this.isCancelable = cancelable
-    }
-
-    /** Set the [BottomSheetBehavior] state. */
-    fun behavior(@BottomSheetBehavior.State behavior: Int) {
-        this.behavior = behavior
-    }
-
-    /** Set the peek height. */
-    fun peekHeight(peekHeight: Int) {
-        this.peekHeight = peekHeight
-    }
-
-    /**
-     * Set the [CornerFamily].
-     * Overrides the style default.
-     */
-    fun cornerFamily(@CornerFamily cornerFamily: Int) {
-        this.cornerFamily = cornerFamily
-    }
-
-    /**
-     * Set the corner radius in dp.
-     * Overrides the style default.
-     */
-    fun cornerRadius(cornerRadiusInDp: Float) {
-        this.cornerRadiusDp = cornerRadiusInDp
-    }
-
-    /**
-     * Set the corner radius in dp.
-     * Overrides the style default.
-     */
-    fun cornerRadius(@DimenRes cornerRadiusInDpRes: Int) {
-        this.cornerRadiusDp = windowContext.resources.getDimension(cornerRadiusInDpRes)
-    }
-
-    /** Set the border stroke width */
-    fun borderWidth(strokeWidthDp: Float) {
-        this.borderStrokeWidthDp = strokeWidthDp
-    }
-
-    /** Set the border stroke width */
-    fun borderWidth(@DimenRes strokeWidthDpRes: Int) {
-        this.borderStrokeWidthDp = windowContext.resources.getDimension(strokeWidthDpRes)
-    }
-
-    /**
-     * Set the border stroke color around the bottom sheet.
-     * If no color is set, the primary color is used.
-     */
-    fun borderColor(strokeColor: Int) {
-        this.borderStrokeColor = strokeColor
     }
 
     /** Set the Close Button Drawable. */
@@ -371,18 +285,6 @@ abstract class BottomSheet : DialogFragment() {
         this.dismissListener = dismissListener
     }
 
-    /** Override style to switch between bottom sheet & dialog style. */
-    override fun setStyle(style: Int, theme: Int) {
-        sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
-        super.setStyle(style, sheetTheme.styleRes)
-    }
-
-    /** Override theme to allow auto switch between day & night design. */
-    override fun getTheme(): Int {
-        sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
-        return sheetTheme.styleRes
-    }
-
     /** Override dismiss to trigger custom dismiss listener. */
     override fun dismiss() {
         super.dismiss()
@@ -455,19 +357,12 @@ abstract class BottomSheet : DialogFragment() {
             displayHandle = saved.get(STATE_BASE_DISPLAY_HANDLE) as Boolean?
             negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
-            sheetStyle = saved.getSerializable(STATE_BASE_SHEET_STYLE) as SheetStyle
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
             negativeListener =
                 saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
             positiveListener =
                 saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
-            cornerFamily = saved.get(STATE_BASE_CORNER_FAMILY) as Int?
-            borderStrokeColor = saved.get(STATE_BASE_BORDER_COLOR) as Int?
-            behavior = saved.getInt(STATE_BASE_BEHAVIOR)
-            peekHeight = saved.getInt(STATE_BASE_PEEK_HEIGHT)
-            cornerRadiusDp = saved.get(STATE_BASE_CORNER_RADIUS) as Float?
-            borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
-            topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
+             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
             coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
             closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
             val icons = mutableListOf<IconButton>()
@@ -507,13 +402,7 @@ abstract class BottomSheet : DialogFragment() {
             displayHandle?.let { putBoolean(STATE_BASE_DISPLAY_HANDLE, it) }
             negativeButtonDrawableRes?.let { putInt(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE, it) }
             positiveButtonDrawableRes?.let { putInt(STATE_BASE_POSITIVE_BUTTON_DRAWABLE, it) }
-            cornerFamily?.let { putInt(STATE_BASE_CORNER_FAMILY, it) }
-            borderStrokeColor?.let { putInt(STATE_BASE_BORDER_COLOR, it) }
-            putInt(STATE_BASE_BEHAVIOR, behavior)
-            putInt(STATE_BASE_PEEK_HEIGHT, peekHeight)
-            borderStrokeWidthDp?.let { putFloat(STATE_BASE_BORDER_WIDTH, it) }
-            cornerRadiusDp?.let { putFloat(STATE_BASE_CORNER_RADIUS, it) }
-            putSerializable(STATE_BASE_TOP_STYLE, topStyle)
+              putSerializable(STATE_BASE_TOP_STYLE, topStyle)
             putSerializable(STATE_BASE_COVER_IMAGE, coverImage)
             putSerializable(STATE_BASE_CLOSE_ICON_BUTTON, closeIconButton)
             iconButtons.forEachIndexed { i, btn ->
@@ -522,7 +411,6 @@ abstract class BottomSheet : DialogFragment() {
             putSerializable(STATE_BASE_DISMISS_LISTENER, dismissListener as Serializable?)
             putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
             putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
-            putSerializable(STATE_BASE_SHEET_STYLE, sheetStyle)
             putInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT, addOnComponents.size)
             addOnComponents.forEachIndexed { i, function ->
                 putSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(i), function as Serializable?)
@@ -537,114 +425,7 @@ abstract class BottomSheet : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupBottomSheetBehavior(view)
-        setupBottomSheetBackground(view)
         setupBottomSheet()
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return when (sheetStyle) {
-            SheetStyle.BOTTOM_SHEET -> BottomSheetDialog(requireContext(), theme)
-            else -> Dialog(requireContext(), theme)
-        }
-    }
-
-    override fun setupDialog(dialog: Dialog, style: Int) {
-        when (sheetStyle) {
-
-            SheetStyle.BOTTOM_SHEET -> {
-
-                // If the dialog is an AppCompatDialog, we'll handle it
-                val acd = dialog as AppCompatDialog
-                when (style) {
-                    STYLE_NO_INPUT -> {
-                        dialog.getWindow()?.addFlags(
-                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-                        )
-                        acd.supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
-                    }
-                    STYLE_NO_FRAME, STYLE_NO_TITLE -> acd.supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
-                }
-            }
-
-            else -> {
-                when (style) {
-                    STYLE_NO_INPUT -> {
-                        val window = dialog.window
-                        window?.addFlags(
-                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                                    or WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-                        )
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                    }
-                    STYLE_NO_FRAME, STYLE_NO_TITLE -> dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                }
-            }
-        }
-    }
-
-    private fun setupBottomSheetBehavior(view: View) {
-
-        if (sheetStyle == SheetStyle.DIALOG) {
-            // We don't need a behavior for the dialog
-            return
-        }
-
-        view.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                val dialog = dialog as? BottomSheetDialog? ?: return
-                val dialogBehavior = dialog.behavior
-                dialogBehavior.state = behavior
-                dialogBehavior.peekHeight = peekHeight
-                dialogBehavior.addBottomSheetCallback(object :
-                    BottomSheetBehavior.BottomSheetCallback() {
-                    override fun onSlide(bottomSheet: View, dY: Float) {
-                        // TODO: Make button layout stick to the bottom through translationY property.
-                    }
-
-                    override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                            dismiss()
-                        }
-                    }
-                })
-            }
-        })
-    }
-
-    private fun setupBottomSheetBackground(view: View) {
-
-        val cornerFamily =
-            cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
-        val cornerRadius =
-            cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext())
-            ?: DEFAULT_CORNER_RADIUS.toDp()
-
-        val model = ShapeAppearanceModel().toBuilder().apply {
-            when (sheetStyle) {
-                SheetStyle.BOTTOM_SHEET -> {
-                    setTopRightCorner(cornerFamily, cornerRadius)
-                    setTopLeftCorner(cornerFamily, cornerRadius)
-                }
-                else -> setAllCorners(cornerFamily, cornerRadius)
-            }
-        }.build()
-
-        val shape = MaterialShapeDrawable(model).apply {
-
-            borderStrokeWidthDp?.let { width ->
-                setStroke(width.toDp(), borderStrokeColor ?: getPrimaryColor(requireContext()))
-                setPadding(width.getDp(), width.getDp(), width.getDp(), width.getDp())
-            }
-
-            val backgroundColor = getBottomSheetBackgroundColor(requireContext(), sheetTheme.styleRes)
-            fillColor = ColorStateList.valueOf(backgroundColor)
-        }
-
-        view.background = shape
     }
 
     private fun setupBottomSheet() {
@@ -923,32 +704,6 @@ abstract class BottomSheet : DialogFragment() {
                 1 -> btnExtra2
                 else -> btnExtra3
             }.setOnClickListener { listener.invoke() }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (sheetStyle == SheetStyle.DIALOG) {
-            dialog?.window?.apply {
-                setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            }
-        }
-    }
-
-    /** Show the bottom sheet. */
-    fun show() {
-
-        windowContext.let { ctx ->
-            when (ctx) {
-                is FragmentActivity -> show(ctx.supportFragmentManager, dialogTag)
-                is AppCompatActivity -> show(ctx.supportFragmentManager, dialogTag)
-                is Fragment -> show(ctx.childFragmentManager, dialogTag)
-                is PreferenceFragmentCompat -> show(ctx.childFragmentManager, dialogTag)
-                else -> throw IllegalStateException("Context has no window attached.")
-            }
         }
     }
 }
