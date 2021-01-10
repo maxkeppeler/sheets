@@ -54,6 +54,7 @@ Get the [sample apk](https://github.com/MaxKeppeler/sheets/blob/main/sample/samp
   - [Calendar Sheet](#calendar)
   - [Color Sheet](#color)
   - [Custom Sheet](#custom)
+  - [Lottie](#lottie)
   - [Appearance](#appearance)  
 - [Misc](#misc)
   - [Showcase](#showcase)
@@ -439,6 +440,38 @@ You are free to use the components this library uses for it's sheet types.
 - ```SheetValue```
 
 More will be added over time.
+
+## Lottie
+[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Alottie/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Alottie/_latestVersion)
+
+The `Lottie` modules gives you the ability to use a [Lottie animations](https://airbnb.design/lottie/) as cover view.
+
+```gradle
+dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:lottie:<latest-version>'
+}
+```
+
+### Usage
+You can use the Lottie animation as a cover for any type of sheet.
+```
+InfoSheet().show(this) {
+  title("Team Collaboration")
+  content("In the world of software projects, it is inevitable...")
+  ...
+  withCoverLottieAnimation(LottieAnimation {
+    setAnimation(R.raw.anim_lottie_business_team)
+    ... Setup Lottie animation
+  })
+  ...
+}
+```
+
+Use ```playCoverAnimation()``` to play the animation.<br/>
+Use ```resumeCoverAnimation()``` to resume the animation.<br/>
+Use ```pauseCoverAnimation()``` to pause the animation.<br/>
+Use ```cancelCoverAnimation()``` to cancel the animation.<br/>
 
 ## Appearance
 By default, the library switches to either day or night mode depending on the attr ```textColorPrimary```.
