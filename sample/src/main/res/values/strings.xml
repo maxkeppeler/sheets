@@ -22,6 +22,7 @@
     <string name="time_sheet">TimeSheet</string>
     <string name="calendar_sheet">CalendarSheet</string>
     <string name="info_sheet">InfoSheet</string>
+    <string name="lottie">Lottie Animations</string>
     <string name="input_sheet">InputSheet</string>
     <string name="custom_sheets">Create your own custom BottomSheets</string>
     <string name="options_list">List of Options (with and without buttons)</string>
@@ -54,4 +55,5 @@
     <string name="input_long">A long survey form</string>
     <string name="custom_sheet_example_1">Custom Bottom Sheet Example 1</string>
     <string name="input_password">Password with custom validation</string>
+    <string name="info_lottie">InfoSheet with Lottie Animation</string>
 </resources>
