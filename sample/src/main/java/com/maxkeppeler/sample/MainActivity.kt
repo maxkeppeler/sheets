@@ -31,10 +31,8 @@ import com.maxkeppeler.bottomsheets.calendar.SelectionMode
 import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
-import com.maxkeppeler.bottomsheets.core.IconButton
-import com.maxkeppeler.bottomsheets.core.SheetStyle
-import com.maxkeppeler.bottomsheets.core.Image
-import com.maxkeppeler.bottomsheets.core.TopStyle
+import com.maxkeppeler.bottomsheets.core.*
+import com.maxkeppeler.bottomsheets.core.ImageSource.Ratio
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
 import com.maxkeppeler.bottomsheets.info.InfoSheet
 import com.maxkeppeler.bottomsheets.input.InputSheet
@@ -43,6 +41,10 @@ import com.maxkeppeler.bottomsheets.input.type.InputCheckBox
 import com.maxkeppeler.bottomsheets.input.type.InputEditText
 import com.maxkeppeler.bottomsheets.input.type.InputRadioButtons
 import com.maxkeppeler.bottomsheets.input.type.InputSpinner
+import com.maxkeppeler.bottomsheets.lottie.LottieAnimation
+import com.maxkeppeler.bottomsheets.lottie.cancelCoverAnimation
+import com.maxkeppeler.bottomsheets.lottie.pauseCoverAnimation
+import com.maxkeppeler.bottomsheets.lottie.withCoverLottieAnimation
 import com.maxkeppeler.bottomsheets.options.DisplayMode
 import com.maxkeppeler.bottomsheets.options.Option
 import com.maxkeppeler.bottomsheets.options.OptionsSheet
@@ -114,6 +116,7 @@ class MainActivity : AppCompatActivity() {
             BottomSheetExample.INFO_COVER_IMAGE_1 -> showInfoSheetTopStyleTop()
             BottomSheetExample.INFO_COVER_IMAGE_2 -> showInfoSheetTopStyleBottom()
             BottomSheetExample.INFO_COVER_IMAGE_3 -> showInfoSheetTopStyleMixed()
+            BottomSheetExample.INFO_LOTTIE -> showInfoSheetLottie()
             BottomSheetExample.INPUT_SHORT -> showInputSheetShort()
             BottomSheetExample.INPUT_LONG -> showInputSheetLong()
             BottomSheetExample.INPUT_PASSWORD -> showInputSheetPassword()
@@ -568,7 +571,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheet() {
 
         InfoSheet().show(this) {
-            style(SheetStyle.DIALOG)
+            style(SheetStyle.values().random())
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
             title("Did you read the README?")
             content("It will help you to setup beautiful bottom sheets in your project.")
@@ -585,6 +588,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheetTopStyleTop() {
 
         InfoSheet().show(this) {
+            style(SheetStyle.values().random())
             cornerFamily(CornerFamily.CUT)
             topStyle(TopStyle.ABOVE_COVER)
             withCoverImage(Image("https://images.hdqwalls.com/download/interstellar-gargantua-u4-1440x900.jpg"))
@@ -600,6 +604,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheetTopStyleBottom() {
 
         InfoSheet().show(this) {
+            style(SheetStyle.values().random())
             displayCloseButton(false)
             cornerFamily(CornerFamily.CUT)
             cornerRadius(24f)
@@ -607,7 +612,7 @@ class MainActivity : AppCompatActivity() {
             withCoverImage(Image(uri = "https://img4.goodfon.com/wallpaper/nbig/7/47/westworld-anthony-hopkins-robert-ford-actor-show-faces.jpg"))
             withIconButton(IconButton(R.drawable.ic_help)) {  }
             title("Dr. Robert Ford")
-            content("\"Dreams mean everything. They’re the stories we tell ourselves of what could be, who we could become.\"")
+            content("Dreams mean everything. They’re the stories we tell ourselves of what could be, who we could become.\"")
             onNegative("Disagree")
             onPositive("Agree")
         }
@@ -617,6 +622,7 @@ class MainActivity : AppCompatActivity() {
 
         InfoSheet().show(this) {
             showButtons(false)
+            style(SheetStyle.values().random())
             cornerFamily(CornerFamily.CUT)
             topStyle(TopStyle.MIXED)
             withCoverImage(Image("https://cdn.wallpapersafari.com/11/17/LjhbqX.jpg") {
