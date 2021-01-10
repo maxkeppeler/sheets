@@ -40,6 +40,7 @@ fun BottomSheet.withCoverLottieAnimation(lottieAnimation: LottieAnimation) {
             }
             topView.removeView(coverImage)
             topView.addView(coverAnimation)
+            setCoverAnimationView(coverAnimation)
             coverAnimation.playAnimation()
         }
     }
@@ -80,6 +81,6 @@ fun BottomSheet.cancelCoverAnimation() {
 }
 
 private fun BottomSheet.getCoverLottieAnimationView(): LottieAnimationView {
-    return (getCoverView() as? LottieAnimationView)
+   return getCoverAnimationView<LottieAnimationView>()
         ?: throw IllegalStateException(EXCEPTION_MESSAGE_NOT_SETUP)
 }

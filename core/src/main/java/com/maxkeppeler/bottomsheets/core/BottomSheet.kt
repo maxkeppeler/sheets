@@ -121,8 +121,9 @@ abstract class BottomSheet : DialogFragment() {
 
     private var topStyle = TopStyle.ABOVE_COVER
 
-    private var coverImage: Image? = null
     private var useCover: Boolean = false
+    private var coverImage: Image? = null
+    private var coverAnimationView: Any? = null
 
     private lateinit var bindingBase: BottomSheetsBaseBinding
 
@@ -393,8 +394,16 @@ abstract class BottomSheet : DialogFragment() {
         this.useCover = useCover
     }
 
+    @Suppress("UNCHECKED_CAST")
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun getCoverView(): View = bindingBase.top.cover
+    fun <T> getCoverAnimationView(): T? {
+        return coverAnimationView as T?
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun setCoverAnimationView(coverAnimationView: Any) {
+        this.coverAnimationView = coverAnimationView
+    }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     fun addOnCreateViewListener(onCreateViewListeners: OnViewCreatedListener) {
