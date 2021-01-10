@@ -17,11 +17,13 @@
 package com.maxkeppeler.bottomsheets.core.utils
 
 import android.content.Context
+import androidx.annotation.RestrictTo
 import androidx.annotation.StyleRes
 import com.maxkeppeler.bottomsheets.R
 import com.maxkeppeler.bottomsheets.core.SheetStyle
 
-internal enum class Theme(@StyleRes val styleRes: Int) {
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+enum class Theme(@StyleRes val styleRes: Int) {
 
     BOTTOM_SHEET_DAY(R.style.BottomSheet_Base_Light),
     BOTTOM_SHEET_NIGHT(R.style.BottomSheet_Base_Dark),
