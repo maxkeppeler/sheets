@@ -35,15 +35,9 @@ private typealias CoiImageRequestBuilder = coil.request.ImageRequest.Builder.() 
 /**
  * A class that holds the image data and some preferences for the image view and image loading.
  */
-class Image private constructor() : Serializable {
+class Image private constructor() : ImageSource(), Serializable {
 
     internal lateinit var any: Any
-        private set
-
-    internal var scaleType: ImageView.ScaleType? = null
-        private set
-
-    internal var ratio: Ratio? = null
         private set
 
     private var imageBuilder: ImageBuilder = {
@@ -144,12 +138,5 @@ class Image private constructor() : Serializable {
         this.ratio = ratio
         this.scaleType = scaleType
         builder?.let { this.imageBuilder = it }
-    }
-
-    /**
-     * A class used to receive an aspect ratio.
-     */
-    data class Ratio(val width: Int, val height: Int) : Serializable {
-        val dimensionRatio: String = "$width:$height"
     }
 }
