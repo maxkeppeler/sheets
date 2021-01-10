@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.maxkeppeler.sample.databinding.LayoutHeaderBottomSheetBinding
 import com.maxkeppeler.sample.databinding.LayoutItemBottomSheetBinding
-import com.maxkeppeler.sample.utils.BottomSheetExample
-import com.maxkeppeler.sample.utils.BottomSheetType
+import com.maxkeppeler.sample.utils.SheetExample
+import com.maxkeppeler.sample.utils.SheetType
 
-internal typealias ExampleClickListener = (type: BottomSheetExample) -> Any
+internal typealias ExampleClickListener = (type: SheetExample) -> Any
 
 internal class BottomSheetExampleAdapter(
     private val ctx: Context,
@@ -18,14 +18,14 @@ internal class BottomSheetExampleAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val examples = mutableListOf<Any>().apply {
-        BottomSheetExample.values().groupBy { it.type }.forEach {
+        SheetExample.values().groupBy { it.type }.forEach {
             add(it.key)
             addAll(it.value)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (examples[position] is BottomSheetType) 0 else 1
+        return if (examples[position] is SheetType) 0 else 1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
@@ -60,12 +60,12 @@ internal class BottomSheetExampleAdapter(
         (root.layoutParams as StaggeredGridLayoutManager.LayoutParams).apply {
             isFullSpan = true
         }
-        val type = examples[i] as BottomSheetType
+        val type = examples[i] as SheetType
         headerTitle.text = ctx.getString(type.titleRes)
     }
 
     private fun LayoutItemBottomSheetBinding.buildExample(i: Int) {
-        val example = examples[i]  as BottomSheetExample
+        val example = examples[i]  as SheetExample
         title.text = ctx.getString(example.textRes)
         root.setOnClickListener { listener.invoke(example) }
     }

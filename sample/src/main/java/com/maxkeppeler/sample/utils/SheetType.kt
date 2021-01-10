@@ -18,7 +18,7 @@ import com.maxkeppeler.sample.R
  * See the License for the specific language governing permissions and
  */
 
-enum class BottomSheetType(@StringRes val titleRes: Int) {
+enum class SheetType(@StringRes val titleRes: Int) {
 
     BOTTOM_SHEET_OPTIONS(R.string.options_sheet),
 

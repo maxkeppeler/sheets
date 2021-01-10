@@ -32,7 +32,6 @@ import com.maxkeppeler.bottomsheets.calendar.TimeLine
 import com.maxkeppeler.bottomsheets.color.ColorSheet
 import com.maxkeppeler.bottomsheets.color.ColorView
 import com.maxkeppeler.bottomsheets.core.*
-import com.maxkeppeler.bottomsheets.core.ImageSource.Ratio
 import com.maxkeppeler.bottomsheets.core.utils.splitTime
 import com.maxkeppeler.bottomsheets.info.InfoSheet
 import com.maxkeppeler.bottomsheets.input.InputSheet
@@ -43,7 +42,6 @@ import com.maxkeppeler.bottomsheets.input.type.InputRadioButtons
 import com.maxkeppeler.bottomsheets.input.type.InputSpinner
 import com.maxkeppeler.bottomsheets.lottie.LottieAnimation
 import com.maxkeppeler.bottomsheets.lottie.cancelCoverAnimation
-import com.maxkeppeler.bottomsheets.lottie.pauseCoverAnimation
 import com.maxkeppeler.bottomsheets.lottie.withCoverLottieAnimation
 import com.maxkeppeler.bottomsheets.options.DisplayMode
 import com.maxkeppeler.bottomsheets.options.Option
@@ -53,7 +51,7 @@ import com.maxkeppeler.bottomsheets.time_clock.TimeFormat
 import com.maxkeppeler.bottomsheets.time_clock.TimeSheet
 import com.maxkeppeler.sample.custom_sheets_example.CustomSheet
 import com.maxkeppeler.sample.databinding.MainActBinding
-import com.maxkeppeler.sample.utils.BottomSheetExample
+import com.maxkeppeler.sample.utils.SheetExample
 import com.maxkeppeler.sample.utils.toFormattedDate
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -88,39 +86,39 @@ class MainActivity : AppCompatActivity() {
         binding.exampleRecyclerView.adapter = BottomSheetExampleAdapter(this, ::showBottomSheet)
     }
 
-    private fun showBottomSheet(example: BottomSheetExample) {
+    private fun showBottomSheet(example: SheetExample) {
         when (example) {
-            BottomSheetExample.OPTIONS_LIST -> showOptionsSheetList()
-            BottomSheetExample.OPTIONS_HORIZONTAL_SMALL -> showOptionsSheetGridSmall(DisplayMode.GRID_HORIZONTAL)
-            BottomSheetExample.OPTIONS_HORIZONTAL_MIDDLE -> showOptionsSheetGridMiddle(DisplayMode.GRID_HORIZONTAL)
-            BottomSheetExample.OPTIONS_HORIZONTAL_LARGE -> showOptionsSheetGridLarge(DisplayMode.GRID_HORIZONTAL)
-            BottomSheetExample.OPTIONS_VERTICAL_SMALL -> showOptionsSheetGridSmall(DisplayMode.GRID_VERTICAL)
-            BottomSheetExample.OPTIONS_VERTICAL_MIDDLE -> showOptionsSheetGridMiddle(DisplayMode.GRID_VERTICAL)
-            BottomSheetExample.OPTIONS_VERTICAL_LARGE -> showOptionsSheetGridLarge(DisplayMode.GRID_VERTICAL)
-            BottomSheetExample.COLOR -> showColorSheet()
-            BottomSheetExample.COLOR_TEMPLATE -> showColorSheetTemplate()
-            BottomSheetExample.COLOR_CUSTOM -> showColorSheetCustom()
-            BottomSheetExample.CLOCK_TIME -> showClockTimeSheet()
-            BottomSheetExample.TIME_HH_MM_SS -> showTimeSheet(TimeFormat.HH_MM_SS)
-            BottomSheetExample.TIME_HH_MM -> showTimeSheet(TimeFormat.HH_MM)
-            BottomSheetExample.TIME_MM_SS -> showTimeSheet(TimeFormat.MM_SS)
-            BottomSheetExample.TIME_M_SS -> showTimeSheet(TimeFormat.M_SS)
-            BottomSheetExample.TIME_SS -> showTimeSheet(TimeFormat.SS)
-            BottomSheetExample.TIME_MM -> showTimeSheet(TimeFormat.MM)
-            BottomSheetExample.TIME_HH -> showTimeSheet(TimeFormat.HH)
-            BottomSheetExample.CALENDAR_RANGE_MONTH -> showCalendarSheet()
-            BottomSheetExample.CALENDAR_WEEK1 -> showCalendarSheetWeek1()
-            BottomSheetExample.CALENDAR_RANGE_WEEK2 -> showCalendarSheetWeek2()
-            BottomSheetExample.CALENDAR_RANGE_WEEK3 -> showCalendarSheetWeek3()
-            BottomSheetExample.INFO -> showInfoSheet()
-            BottomSheetExample.INFO_COVER_IMAGE_1 -> showInfoSheetTopStyleTop()
-            BottomSheetExample.INFO_COVER_IMAGE_2 -> showInfoSheetTopStyleBottom()
-            BottomSheetExample.INFO_COVER_IMAGE_3 -> showInfoSheetTopStyleMixed()
-            BottomSheetExample.INFO_LOTTIE -> showInfoSheetLottie()
-            BottomSheetExample.INPUT_SHORT -> showInputSheetShort()
-            BottomSheetExample.INPUT_LONG -> showInputSheetLong()
-            BottomSheetExample.INPUT_PASSWORD -> showInputSheetPassword()
-            BottomSheetExample.CUSTOM1 -> showCustomSheet()
+            SheetExample.OPTIONS_LIST -> showOptionsSheetList()
+            SheetExample.OPTIONS_HORIZONTAL_SMALL -> showOptionsSheetGridSmall(DisplayMode.GRID_HORIZONTAL)
+            SheetExample.OPTIONS_HORIZONTAL_MIDDLE -> showOptionsSheetGridMiddle(DisplayMode.GRID_HORIZONTAL)
+            SheetExample.OPTIONS_HORIZONTAL_LARGE -> showOptionsSheetGridLarge(DisplayMode.GRID_HORIZONTAL)
+            SheetExample.OPTIONS_VERTICAL_SMALL -> showOptionsSheetGridSmall(DisplayMode.GRID_VERTICAL)
+            SheetExample.OPTIONS_VERTICAL_MIDDLE -> showOptionsSheetGridMiddle(DisplayMode.GRID_VERTICAL)
+            SheetExample.OPTIONS_VERTICAL_LARGE -> showOptionsSheetGridLarge(DisplayMode.GRID_VERTICAL)
+            SheetExample.COLOR -> showColorSheet()
+            SheetExample.COLOR_TEMPLATE -> showColorSheetTemplate()
+            SheetExample.COLOR_CUSTOM -> showColorSheetCustom()
+            SheetExample.CLOCK_TIME -> showClockTimeSheet()
+            SheetExample.TIME_HH_MM_SS -> showTimeSheet(TimeFormat.HH_MM_SS)
+            SheetExample.TIME_HH_MM -> showTimeSheet(TimeFormat.HH_MM)
+            SheetExample.TIME_MM_SS -> showTimeSheet(TimeFormat.MM_SS)
+            SheetExample.TIME_M_SS -> showTimeSheet(TimeFormat.M_SS)
+            SheetExample.TIME_SS -> showTimeSheet(TimeFormat.SS)
+            SheetExample.TIME_MM -> showTimeSheet(TimeFormat.MM)
+            SheetExample.TIME_HH -> showTimeSheet(TimeFormat.HH)
+            SheetExample.CALENDAR_RANGE_MONTH -> showCalendarSheet()
+            SheetExample.CALENDAR_WEEK1 -> showCalendarSheetWeek1()
+            SheetExample.CALENDAR_RANGE_WEEK2 -> showCalendarSheetWeek2()
+            SheetExample.CALENDAR_RANGE_WEEK3 -> showCalendarSheetWeek3()
+            SheetExample.INFO -> showInfoSheet()
+            SheetExample.INFO_COVER_IMAGE_1 -> showInfoSheetTopStyleTop()
+            SheetExample.INFO_COVER_IMAGE_2 -> showInfoSheetTopStyleBottom()
+            SheetExample.INFO_COVER_IMAGE_3 -> showInfoSheetTopStyleMixed()
+            SheetExample.INFO_LOTTIE -> showInfoSheetLottie()
+            SheetExample.INPUT_SHORT -> showInputSheetShort()
+            SheetExample.INPUT_LONG -> showInputSheetLong()
+            SheetExample.INPUT_PASSWORD -> showInputSheetPassword()
+            SheetExample.CUSTOM1 -> showCustomSheet()
         }
     }
 
