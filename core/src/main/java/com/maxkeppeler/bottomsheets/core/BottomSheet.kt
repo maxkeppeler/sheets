@@ -433,8 +433,8 @@ abstract class BottomSheet : DialogFragment() {
             cornerRadiusDp = saved.get(STATE_BASE_CORNER_RADIUS) as Float?
             borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
-            coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image
-            closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton
+            coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
+            closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
             val icons = mutableListOf<IconButton>()
             repeat(ICON_BUTTONS_AMOUNT_MAX) {
                 val iconButton =
