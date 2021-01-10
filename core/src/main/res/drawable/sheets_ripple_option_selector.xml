@@ -34,10 +34,10 @@
 
         <selector>
             <item
-                android:drawable="@drawable/bs_shape_option_selector_disabled"
+                android:drawable="@drawable/sheets_shape_option_selector_disabled"
                 android:state_activated="true" />
             <item
-                android:drawable="@drawable/bs_shape_option_selector_pressed"
+                android:drawable="@drawable/sheets_shape_option_selector_pressed"
                 android:state_selected="true" />
         </selector>
     </item>

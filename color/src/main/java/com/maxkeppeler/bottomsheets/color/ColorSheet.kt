@@ -342,7 +342,7 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
             colorTemplatesView.visibility = if (templateView) View.VISIBLE else View.GONE
             custom.root.visibility = if (templateView) View.INVISIBLE else View.VISIBLE
             if (switchColorView) {
-                setToolbarTypeButtonDrawable(if (templateView) R.drawable.bs_ic_color_picker else R.drawable.bs_ic_color_palette)
+                setToolbarTypeButtonDrawable(if (templateView) R.drawable.sheets_ic_color_picker else R.drawable.sheets_ic_color_palette)
             }
         }
     }

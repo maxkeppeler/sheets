@@ -338,14 +338,14 @@ class MainActivity : AppCompatActivity() {
             }
             with( // Add options
                 Option(
-                    R.drawable.bs_ic_color_picker,
+                    R.drawable.sheets_ic_color_picker,
                     "Edit"
                 ).disable(), // An option can be disabled
                 Option(
-                    R.drawable.bs_ic_color_picker,
+                    R.drawable.sheets_ic_color_picker,
                     "Cancel"
                 ), // An option can be preselected
-                Option(R.drawable.bs_ic_color_picker, "Duplicate")
+                Option(R.drawable.sheets_ic_color_picker, "Duplicate")
             )
             onDismiss {
             }

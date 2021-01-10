@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:layout_weight="1"
-        android:background="@drawable/bs_ripple_option_selector"
+        android:background="@drawable/sheets_ripple_option_selector"
         android:clickable="true"
         android:focusable="true"
         android:minHeight="96dp"

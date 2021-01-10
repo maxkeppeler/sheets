@@ -64,10 +64,10 @@ internal class ClockTimeSelector(
             minutesInput.text = getMinutesTime()
 
             numericalInput.rightImageListener { increaseIndex() }
-            numericalInput.setRightImageDrawable(R.drawable.bs_ic_arrow_right)
+            numericalInput.setRightImageDrawable(R.drawable.sheets_ic_arrow_right)
 
             numericalInput.leftImageListener { reduceIndex() }
-            numericalInput.setLeftImageDrawable(R.drawable.bs_ic_arrow_left)
+            numericalInput.setLeftImageDrawable(R.drawable.sheets_ic_arrow_left)
 
             numericalInput.digitListener { onDigit(it) }
 

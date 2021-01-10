@@ -22,7 +22,7 @@
     android:layout_width="match_parent"
     android:minHeight="56dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/bs_ripple_option_selector"
+    android:background="@drawable/sheets_ripple_option_selector"
     android:clickable="true"
     android:layout_margin="4dp"
     android:focusable="true">

@@ -176,7 +176,7 @@ internal class InputAdapter(
             input.validationResultListener { result ->
                 if (!result.valid) {
                     error = result.errorText
-                    setErrorIconDrawable(R.drawable.bs_ic_close)
+                    setErrorIconDrawable(R.drawable.sheets_ic_close)
                     setErrorTextColor(ColorStateList.valueOf(Color.RED))
                     setErrorIconTintList(ColorStateList.valueOf(Color.RED))
                 }

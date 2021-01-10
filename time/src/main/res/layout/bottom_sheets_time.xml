@@ -27,7 +27,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/bs_ripple_bg_rounded"
+        android:background="@drawable/sheets_ripple_bg_rounded"
         android:clickable="true"
         android:focusable="true"
         android:textAlignment="center"

@@ -56,10 +56,10 @@ internal class TimeSelector(
         with(binding) {
 
             numericalInput.rightImageListener { onBackspace() }
-            numericalInput.setRightImageDrawable(R.drawable.bs_ic_backspace)
+            numericalInput.setRightImageDrawable(R.drawable.sheets_ic_backspace)
 
             numericalInput.leftImageListener { onClear() }
-            numericalInput.setLeftImageDrawable(R.drawable.bs_ic_clear)
+            numericalInput.setLeftImageDrawable(R.drawable.sheets_ic_clear)
 
             numericalInput.digitListener { onDigit(it) }
 

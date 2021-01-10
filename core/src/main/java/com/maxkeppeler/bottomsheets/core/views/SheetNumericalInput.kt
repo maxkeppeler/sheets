@@ -114,7 +114,7 @@ class SheetNumericalInput
             orientation = VERTICAL
             layoutParams = LayoutParams(0, LayoutParams.MATCH_PARENT, 1f)
             minimumHeight = 42.toDp()
-            background = ContextCompat.getDrawable(ctx, R.drawable.bs_ripple_bg_rounded)
+            background = ContextCompat.getDrawable(ctx, R.drawable.sheets_ripple_bg_rounded)
             gravity = Gravity.CENTER
             isClickable = true
             isFocusable = true
@@ -129,7 +129,7 @@ class SheetNumericalInput
         val view = SheetDigit(ctx).apply {
             minimumHeight = 42.toDp()
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
-            background = ContextCompat.getDrawable(ctx, R.drawable.bs_ripple_bg_rounded)
+            background = ContextCompat.getDrawable(ctx, R.drawable.sheets_ripple_bg_rounded)
             setTextAppearance(ctx, R.style.TextAppearance_MaterialComponents_Headline5)
             setPadding(
                 8.toDp(),
