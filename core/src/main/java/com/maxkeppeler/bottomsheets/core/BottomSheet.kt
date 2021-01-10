@@ -694,19 +694,36 @@ abstract class BottomSheet : DialogFragment() {
     }
 
     private fun setupTopBar() {
-        coverImage?.let { img ->
+
+        if (useCover && resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE) {
             setupTopStyle()
-            img.ratio?.dimensionRatio?.let { ratio ->
-                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    dimensionRatio = ratio
-                }
-            }
-            img.scaleType?.let { bindingBase.top.cover.scaleType = it }
-            bindingBase.top.cover.visibility = View.VISIBLE
-            bindingBase.top.cover.loadAny(img.any) {
-                img.coilRequestBuilder.invoke(this)
+        }
+
+        coverImage?.let { source ->
+            setupCoverSource(source)
+            bindingBase.top.cover.loadAny(coverImage?.any) {
+                source.coilRequestBuilder.invoke(this)
             }
         }
+    }
+
+    /**
+     * Setup an image source for the cover view.
+     */
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun setupCoverSource(imageSource: ImageSource) {
+
+        imageSource.ratio?.dimensionRatio?.let {
+            (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                dimensionRatio = it
+            }
+        }
+
+        imageSource.scaleType?.let {
+            bindingBase.top.cover.scaleType = it
+        }
+
+        bindingBase.top.cover.visibility = View.VISIBLE
     }
 
     private fun setupTopStyle() {
