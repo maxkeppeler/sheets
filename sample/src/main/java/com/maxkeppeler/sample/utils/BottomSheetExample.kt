@@ -28,6 +28,8 @@ enum class BottomSheetExample(val type: BottomSheetType, @StringRes val textRes:
 
     INFO_COVER_IMAGE_3(BottomSheetType.BOTTOM_SHEET_INFO, R.string.info_cover_image_3),
 
+    INFO_LOTTIE(BottomSheetType.BOTTOM_SHEET_LOTTIE, R.string.info_lottie),
+
     OPTIONS_LIST(BottomSheetType.BOTTOM_SHEET_OPTIONS, R.string.options_list),
 
     OPTIONS_HORIZONTAL_SMALL(BottomSheetType.BOTTOM_SHEET_OPTIONS, R.string.options_grid_horizontal_small),
