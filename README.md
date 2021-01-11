@@ -794,6 +794,8 @@ Feel free to hit me up to include your app here.
 
 - [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist and control widgets for Spotify on your home screen. (Uses: ```Info```, ```Options```, ```Input```, ```Color```)
 
+- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - A collaborative project to create a Free and Open Source Buddha Quotes app for Android with a focus on privacy. (Uses: ```Options```, ```Input```, ```Color```, ```Time```)
+
 ## Support this project
 
 - Leave a **Star** and tell other devs about it.
