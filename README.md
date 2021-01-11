@@ -125,10 +125,10 @@ The `Info` Sheet lets you display information or warning.
 <br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/infosheet dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="art/infosheet dialog cover topstyle top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="art/infosheet dialog cover topstyle bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="art/infosheet dialog cover topstyle mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="art/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="art/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="art/InfoSheet Dialog Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="art/InfoSheet Dialog Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
 </details>
 </br>
 
@@ -137,10 +137,10 @@ The `Info` Sheet lets you display information or warning.
 
 <br/>
 <br/>
-<img src="art/infosheet bottomsheet.png" width="80%" alt="Sheets InfoSheet"><br/>
-<img src="art/infosheet bottomsheet cover topstyle top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
-<img src="art/infosheet bottomsheet cover topstyle bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
-<img src="art/infosheet bottomsheet cover topstyle mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="art/InfoSheet BottomSheet.png" width="80%" alt="Sheets InfoSheet"><br/>
+<img src="art/InfoSheet BottomSheet Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="art/InfoSheet BottomSheet Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="art/InfoSheet BottomSheet Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
 </details>
 
 ```gradle
