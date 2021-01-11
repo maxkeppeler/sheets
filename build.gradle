@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath deps.gradle_plugins.android
+        classpath 'com.android.tools.build:gradle:4.1.1'
         classpath deps.gradle_plugins.bintray_release
         classpath deps.gradle_plugins.kotlin
         classpath deps.gradle_plugins.versions

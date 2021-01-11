@@ -47,7 +47,7 @@ class Image private constructor() : ImageSource(), Serializable {
 
     internal val coilRequestBuilder: CoiImageRequestBuilder
         get() = {
-            val request = ImageRequest().apply { imageBuilder?.invoke(this) }
+            val request = ImageRequest().apply { imageBuilder.invoke(this) }
             request.scale?.let { scale(it) }
             request.size?.let { size(it) }
             request.placeholderResId?.let { placeholder(it) }

@@ -16,6 +16,8 @@
 
 package com.maxkeppeler.sample
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -77,12 +79,20 @@ class MainActivity : AppCompatActivity() {
         binding = MainActBinding.inflate(layoutInflater).also { setContentView(it.root) }
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         setup()
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.github ->{
+                    startActivity( Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/MaxKeppeler/sheets")))
+                }
+            }
+            false
+        }
     }
 
     private fun setup() {
 
-        binding.exampleRecyclerView.layoutManager =
-            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+        binding.exampleRecyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         binding.exampleRecyclerView.adapter = BottomSheetExampleAdapter(this, ::showBottomSheet)
     }
 
@@ -656,7 +666,19 @@ class MainActivity : AppCompatActivity() {
 
         CustomSheet().show(this) {
             title("Custom Example")
-            onPositive("Cool")
+            style(SheetStyle.values().random())
+            onPositive(
+                    "Cool",
+                    R.drawable.ic_apple) { }
+            onNegative(
+                    "Cancel",
+                    R.drawable.ic_clear) { }
+            withCoverImage(Image("https://cdn.wallpapersafari.com/11/17/LjhbqX.jpg") {
+                // For placeholder, error, fallback drawable and other image loading configs
+                crossfade(300)
+            })
+            content("It is set in a world where humanity lives inside cities surrounded by enormous walls that protect them from gigantic man-eating humanoids referred to as Titans; the story follows Eren Yeager, who vows to exterminate the Titans after a Titan brings about the destruction of his hometown and the death of his mother.")
+            withIconButton(IconButton(R.drawable.ic_send)) { /* Will not automatically dismiss the sheet. */ }
         }
     }
 
