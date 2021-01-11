@@ -120,7 +120,28 @@ InfoSheet().show(context) {
 
 The `Info` Sheet lets you display information or warning.
 
-<img src="art/img_bottom_sheet_info.png" width="80%" alt="Sheets InfoSheet">
+<details open>
+<br/>
+<br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/infosheet dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="art/infosheet dialog cover topstyle top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="art/infosheet dialog cover topstyle bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="art/infosheet dialog cover topstyle mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+</details>
+</br>
+
+<details>
+<summary>Showcase as BottomSheet</summary>
+
+<br/>
+<br/>
+<img src="art/infosheet bottomsheet.png" width="80%" alt="Sheets InfoSheet"><br/>
+<img src="art/infosheet bottomsheet cover topstyle top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="art/infosheet bottomsheet cover topstyle bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="art/infosheet bottomsheet cover topstyle mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+</details>
 
 ```gradle
 dependencies {
@@ -153,7 +174,47 @@ Use ```drawableColor()``` to set the color of the drawable.<br/>
 
 The `Options` Sheet lets you display a grid or list of options.
 
-<img src="art/img_bottom_sheet_options_grid.png" width="80%" alt="Sheets OptionsSheet Grid">
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
+</details>
+</br>
+
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+</details>
+
+<br/>
+<details>
+<br/><br/>
+<summary>Showcase some variants as Dialogs</summary>
+
+<img src="art/OptionsSheet Dialog List.png" width="80%" alt="Sheets OptionsSheet Dialog"><br/>
+<img src="art/OptionsSheet Dialog Grid Small.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+<img src="art/OptionsSheet Dialog Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+</details>
+</br>
+
+<details>
+<br/><br/>
+<summary>Showcase some variants as BottomSheets</summary>
+
+<img src="art/OptionsSheet BottomSheet List.png" width="80%" alt="Sheets OptionsSheet BottomSheet"><br/>
+<img src="art/OptionsSheet BottomSheet Grid Small.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+<img src="art/OptionsSheet BottomSheet Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+</details>
+
+```gradle
+dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:info:<latest-version>'
+}
+```
 
 ```gradle
 dependencies {
@@ -186,8 +247,6 @@ Use ```maxChoices()``` to set the maximum amount of choices.<br/>
 Set a listener with ```onPositiveMultiple()``` for multiple choices data.<br/>
 Use ```showButtons()``` to show the buttons and require a positive button click.<br/>
 Use ```displayMode()``` to either display it as a list, a vertical or horizontal growing scrollable grid.<br/>
--.
-<img src="art/img_bottom_sheet_options_list.png" width="80%" alt="Sheets OptionsSheet List">
 
 **Option Object**
 Use ```selected()``` to preselect an option.
@@ -201,7 +260,20 @@ Notice: Preselected options automatically increase the current selection while d
 
 The `Clock Time` Sheet lets you quickly pick a time.
 
-<img src="art/img_bottom_sheet_clock_time.png" width="80%" alt="Sheets ClockTimeSheet">
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
+</details>
+</br>
+
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+</details>
 
 ```gradle
 dependencies {
@@ -229,7 +301,20 @@ Use ```currentTime()``` to set the current time in milliseconds.<br/>
 
 The `Time` Sheet lets you pick a duration time in a specific format.
 
-<img src="art/img_bottom_sheet_time.png" width="80%" alt="Sheets TimeSheet">
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
+</details>
+</br>
+
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
+</details>
 
 ```gradle
 dependencies {
@@ -258,7 +343,36 @@ Use ```maxTime()``` to set the maximum time.<br/>
 
 The `Input` Sheet lets you display a form consisting of various inputs.
 
-<img src="art/img_bottom_sheet_input.png" width="80%" alt="Sheets InputSheet">
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
+</details>
+</br>
+
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
+</details>
+
+<br/>
+<details>
+<br/><br/>
+<summary>Showcase some variants as Dialogs</summary>
+
+<img src="art/InputSheet Dialog Long.png" width="80%" alt="Sheets InputSheet Dialog"><br/>
+</details>
+</br>
+
+<details>
+<br/><br/>
+<summary>Showcase some variants as BottomSheets</summary>
+
+<img src="art/InputSheet BottomSheet Long.png" width="80%" alt="Sheets InputSheet BottomSheet">
+</details>
 
 ```gradle
 dependencies {
@@ -342,7 +456,21 @@ Use ```selected()``` to set selected index.<br/>
 
 The `Calendar` Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
 
-<img src="art/img_bottom_sheet_calendar.png" width="80%" alt="Sheets OptionsSheet">
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
+</details>
+</br>
+
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
+</details>
+
 
 ```gradle
 dependencies {
@@ -372,7 +500,22 @@ Use ```showButtons()``` to show or hide the buttons view.<br/>
 
 The `Color` Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
 
-<img src="art/img_bottom_sheet_color.png" width="80%" alt="Sheets ColorSheet">
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
+<img src="art/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
+</details>
+</br>
+
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
+<img src="art/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
+</details>
 
 ```gradle
 dependencies {
@@ -400,6 +543,22 @@ Use ```disableAlpha()``` to disable alpha colors for custom colors.<br/>
 ## Custom
 
 With just the 'core' module you are able to create your own sheet based on this library. You can use some components and styles within your own custom sheet automatically. By default the buttons and toolbar view with logic is ready to be used by your own implementation.
+
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
+</details>
+</br>
+
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
+</details>
+
 
 ```gradle
 dependencies {
@@ -445,6 +604,23 @@ More will be added over time.
 [ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Alottie/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Alottie/_latestVersion)
 
 The `Lottie` modules gives you the ability to use a [Lottie animations](https://airbnb.design/lottie/) as cover view.
+
+<details open>
+<br/>
+<br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+</details>
+</br>
+
+<details>
+<summary>Showcase as BottomSheet</summary>
+
+<br/>
+<br/>
+<img src="art/InfoSheet BottomSheet Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+</details>
 
 ```gradle
 dependencies {
