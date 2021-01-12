@@ -79,6 +79,8 @@ dependencies {
 
 Use ```style()``` to display the sheet as either a BottomSheet or dialog.<br/>
 Use ```title()``` to set the title text.<br/>
+Use ```titleColor()``` to set the title text color.<br/>
+Use ```titleColorRes()``` to set the title text color with a color res.<br/>
 Use ```topStyle()``` to display a cover image.<br/>
 Use ```withCoverImage()``` to display a cover image.<br/>
 Use ```withIconButton()``` to display up to 3 icon buttons.<br/>
