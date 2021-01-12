@@ -24,10 +24,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.RestrictTo
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import coil.loadAny
@@ -81,6 +78,7 @@ abstract class Sheet : SheetFragment() {
         private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
         private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
         private const val STATE_BASE_TITLE_TEXT = "state_base_title_text"
+        private const val STATE_BASE_TITLE_COLOR = "state_base_title_color"
         private const val STATE_BASE_CLOSE_ICON_BUTTON = "state_base_close_icon_button"
         private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
         private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
@@ -110,6 +108,8 @@ abstract class Sheet : SheetFragment() {
     private var displayHandle: Boolean? = null
 
     private var titleText: String? = null
+    @ColorInt
+    private var titleColor: Int? = null
 
     private var closeIconButton: IconButton? = null
 
@@ -213,6 +213,24 @@ abstract class Sheet : SheetFragment() {
      */
     fun title(@StringRes titleRes: Int, vararg formatArgs: Any?) {
         this.titleText = windowContext.getString(titleRes, *formatArgs)
+    }
+
+    /**
+     * Set the title color of the sheet.
+     *
+     * @param titleColorRes Color res for the title.
+     */
+    fun titleColorRes(@ColorRes titleColorRes: Int) {
+        this.titleColor = ContextCompat.getColor(windowContext, titleColorRes)
+    }
+
+    /**
+     * Set the title color of the sheet.
+     *
+     * @param titleColor Color for the title.
+     */
+    fun titleColor(@ColorInt titleColor: Int) {
+        this.titleColor = titleColor
     }
 
     /**
@@ -350,6 +368,7 @@ abstract class Sheet : SheetFragment() {
     private fun onRestoreBaseViewInstanceState(savedState: Bundle?) {
         savedState?.let { saved ->
             titleText = saved.getString(STATE_BASE_TITLE_TEXT)
+            titleColor = saved.get(STATE_BASE_TITLE_COLOR) as Int?
             positiveText = saved.getString(STATE_BASE_POSITIVE_TEXT)
             negativeText = saved.getString(STATE_BASE_NEGATIVE_TEXT)
             displayToolbar = saved.get(STATE_BASE_DISPLAY_TOOLBAR) as Boolean?
@@ -395,6 +414,7 @@ abstract class Sheet : SheetFragment() {
     private fun onSaveBaseViewInstanceState(outState: Bundle) {
         with(outState) {
             putString(STATE_BASE_TITLE_TEXT, titleText)
+            titleColor?.let { putInt(STATE_BASE_TITLE_COLOR, it) }
             putString(STATE_BASE_POSITIVE_TEXT, positiveText)
             putString(STATE_BASE_NEGATIVE_TEXT, negativeText)
             displayToolbar?.let { putBoolean(STATE_BASE_DISPLAY_TOOLBAR, it) }
@@ -452,6 +472,7 @@ abstract class Sheet : SheetFragment() {
             if (isToolbarVisible) {
                 setupTopBar()
                 titleText?.let { top.title.text = it }
+                titleColor?.let { top.title.setTextColor(it) }
                 if (isCloseButtonVisible) {
                     closeIconButton?.let { btn ->
                         val drawable =
