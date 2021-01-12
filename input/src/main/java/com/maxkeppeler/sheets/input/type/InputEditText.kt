@@ -21,6 +21,7 @@ package com.maxkeppeler.sheets.input.type
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.textfield.TextInputLayout
 import com.maxkeppeler.sheets.input.ValidationResult
@@ -65,6 +66,12 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
 
     internal var endIconMode: Int? = null
         private set
+
+    @DrawableRes
+    internal var startIconDrawableRes: Int? = null
+
+    @DrawableRes
+    internal var errorIconDrawableRes: Int? = null
 
     internal var isPasswordVisible: Boolean? = null
         private set
@@ -120,6 +127,16 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     /** Set the max lines. */
     fun maxLines(maxLines: Int) {
         this.maxLines = maxLines
+    }
+
+    /** Set a start drawable. */
+    fun startIconDrawable(@DrawableRes drawableRes: Int) {
+        this.startIconDrawableRes = drawableRes
+    }
+
+    /** Set a error drawable. */
+    fun errorIconDrawable(@DrawableRes drawableRes: Int) {
+        this.errorIconDrawableRes = drawableRes
     }
 
     /** Set the end icon mode. */

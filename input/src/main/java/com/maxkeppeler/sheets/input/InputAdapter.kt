@@ -19,7 +19,6 @@ package com.maxkeppeler.sheets.input
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -134,7 +133,7 @@ internal class InputAdapter(
     @SuppressLint("ClickableViewAccessibility")
     private fun SheetsInputEditTextItemBinding.buildEditText(input: InputEditText) {
 
-        setupGeneralInputInfo(input)
+        setupGeneralInputInfo(input, label, icon)
 
         with(textInput) {
 
@@ -170,15 +169,14 @@ internal class InputAdapter(
 
             input.endIconMode?.let { endIconMode = it }
             input.isEndIconActivated?.let { setEndIconActivated(it) }
-            input.drawableRes?.let { setStartIconDrawable(it) }
+            input.startIconDrawableRes?.let { setStartIconDrawable(it) }
+            input.errorIconDrawableRes?.let { setErrorIconDrawable(it) }
+            input.isEndIconActivated?.let { setEndIconActivated(it) }
             setStartIconTintList(ColorStateList.valueOf(primaryColor))
 
             input.validationResultListener { result ->
                 if (!result.valid) {
                     error = result.errorText
-                    setErrorIconDrawable(R.drawable.sheets_ic_close)
-                    setErrorTextColor(ColorStateList.valueOf(Color.RED))
-                    setErrorIconTintList(ColorStateList.valueOf(Color.RED))
                 }
                 isErrorEnabled = !result.valid
             }
