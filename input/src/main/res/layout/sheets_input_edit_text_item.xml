@@ -71,6 +71,7 @@
             android:ellipsize="none"
             android:fadeScrollbars="true"
             android:fadingEdgeLength="4dp"
+            android:cursorVisible="true"
             android:gravity="top|left"
             android:maxLines="8"
             android:overScrollMode="never"
