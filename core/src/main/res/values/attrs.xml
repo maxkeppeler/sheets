@@ -346,6 +346,9 @@
         <!-- Override error text color.  -->
         <attr name="sheetTextInputLayoutErrorTextColor" format="color" />
 
+        <!-- Override error drawable color.  -->
+        <attr name="sheetTextInputLayoutErrorDrawableColor" format="color" />
+
     </declare-styleable>
 
 </resources>

@@ -18,18 +18,22 @@ package com.maxkeppeler.sheets.core.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputLayout
 import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.utils.colorOfAttrs
 import com.maxkeppeler.sheets.core.utils.getPrimaryColor
 import com.maxkeppeler.sheets.core.utils.toDp
+
 
 /** Custom TextInputLayout. */
 class SheetTextInputLayout
 @JvmOverloads constructor(
     ctx: Context,
-    attrs: AttributeSet? = null
-) : TextInputLayout(ctx, attrs) {
+    attrs: AttributeSet? = null,
+    styleAttrs: Int = R.attr.textInputStyle,
+) : TextInputLayout(ctx, attrs, styleAttrs) {
 
     companion object {
         private const val DEFAULT_CORNER_RADIUS = 8f
@@ -85,17 +89,20 @@ class SheetTextInputLayout
         )
         setHelperTextColor(ColorStateList.valueOf(helperTextColor))
 
-        val boxStrokeColor = a.getColor(
+        val boxFocusedStrokeColor = a.getColor(
             R.styleable.SheetTextInputLayout_sheetTextInputLayoutBoxStrokeColor,
             primaryColor
         )
-        setBoxStrokeColorStateList(ColorStateList.valueOf(boxStrokeColor))
+
+        val states = arrayOf(intArrayOf(android.R.attr.state_enabled))
+        val colors = intArrayOf(boxFocusedStrokeColor)
+        setBoxStrokeColorStateList(ColorStateList(states, colors))
 
         val hintColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutBoxStrokeColor,
+            R.styleable.SheetTextInputLayout_sheetTextInputLayoutHintTextColor,
             primaryColor
         )
-        hintTextColor = ColorStateList.valueOf(hintColor)
+        defaultHintTextColor = ColorStateList.valueOf(hintColor)
 
         val boxStrokeErrorColor = a.getColor(
             R.styleable.SheetTextInputLayout_sheetTextInputLayoutBoxStrokeErrorColor,
@@ -107,8 +114,19 @@ class SheetTextInputLayout
             R.styleable.SheetTextInputLayout_sheetTextInputLayoutErrorTextColor,
             0
         )
-        errorTextColor.takeIf { it != 0 }?.let { setErrorTextColor(ColorStateList.valueOf(it)) }
-        
+        errorTextColor.takeIf { it != 0 }?.let {
+            setErrorTextColor(ColorStateList.valueOf(it))
+        }
+
+        val errorDrawableColor = a.getColor(
+            R.styleable.SheetTextInputLayout_sheetTextInputLayoutErrorDrawableColor,
+            0
+        )
+        errorDrawableColor.takeIf { it != 0 }?.let {
+            setErrorIconTintList(ColorStateList.valueOf(it))
+        }
+
+
         a.recycle()
     }
 }
