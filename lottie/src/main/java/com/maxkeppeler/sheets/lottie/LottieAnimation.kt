@@ -17,17 +17,19 @@
 
 package com.maxkeppeler.sheets.lottie
 
-import android.widget.ImageView
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.maxkeppeler.sheets.core.ImageSource
 import java.io.Serializable
 
-/** Used to apply image request settings. */
-typealias AnimationBuilder = LottieAnimationRequest.() -> Unit
+/** Convenience alias for this class. */
+private typealias LottieAnimationBuilder = LottieAnimation.() -> Unit
 
 /** Convenience alias for lottie's animation view config builder. */
 private typealias LottieAnimationViewBuilder = LottieAnimationView.() -> Unit
+
+/** Used to apply image request settings. */
+typealias AnimationBuilder = LottieAnimationRequest.() -> Unit
 
 /**
  * A class that holds the animation configurations.
@@ -61,18 +63,13 @@ class LottieAnimation private constructor() : ImageSource(), Serializable {
             request.repeatCount?.let { repeatCount = it }
         }
 
-    constructor(
-        ratio: Ratio? = null,
-        scaleType: ImageView.ScaleType? = null,
-        builder: AnimationBuilder,
-    ) : this() {
-        this.ratio = ratio
-        this.scaleType = scaleType
-        this.builder = builder
+    constructor(builder: LottieAnimationBuilder) : this() {
+        builder()
     }
 
-    constructor(builder: AnimationBuilder) : this() {
-        this.builder = builder
+    /** Setup the LottieAnimationView */
+    fun setupAnimation(animationBuilder: AnimationBuilder) {
+        this.builder = animationBuilder
     }
 
 }

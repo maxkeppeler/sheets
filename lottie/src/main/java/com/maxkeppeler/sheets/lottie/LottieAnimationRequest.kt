@@ -20,10 +20,7 @@ package com.maxkeppeler.sheets.lottie
 import android.animation.ValueAnimator
 import android.view.animation.Animation.RESTART
 import android.view.animation.Animation.REVERSE
-import androidx.annotation.DrawableRes
-import androidx.annotation.FloatRange
-import androidx.annotation.IntDef
-import androidx.annotation.RawRes
+import androidx.annotation.*
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.io.Serializable
@@ -77,7 +74,6 @@ class LottieAnimationRequest internal constructor() : Serializable {
     internal var minMaxFrameName: String? = null
     internal var minMaxFrame: Pair<Int, Int>? = null
     internal var speed: Float? = null
-
     internal var repeatMode: Int? = null
     internal var repeatCount: Int? = null
 

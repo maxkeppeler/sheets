@@ -21,6 +21,8 @@ import android.view.ViewGroup
 import com.airbnb.lottie.LottieAnimationView
 import com.maxkeppeler.sheets.core.AddOnComponent
 import com.maxkeppeler.sheets.core.Sheet
+import com.maxkeppeler.sheets.core.TopStyle
+import com.maxkeppeler.sheets.core.utils.clipTopCorners
 
 private const val EXCEPTION_MESSAGE_NOT_SETUP = "AnimationView was not setup yet."
 
@@ -29,14 +31,16 @@ fun Sheet.withCoverLottieAnimation(lottieAnimation: LottieAnimation) {
     val componentLottie: AddOnComponent = {
         useCover() /* Indicate to setup the top bar style. */
         addOnCreateViewListener { binding ->
-            setupCoverSource(lottieAnimation)
             val coverContainer = binding.top.cover
             val coverImage = binding.top.coverImage
             val coverParams = coverImage.layoutParams as ViewGroup.LayoutParams
             val coverAnimation = LottieAnimationView(requireContext()).apply {
-                layoutParams =
-                    coverParams /* Apply cover image params, to keep constraints working. */
+                setupCoverSource(lottieAnimation,  this)
+                layoutParams = coverParams
                 lottieAnimation.lottieAnimationViewBuilder.invoke(this)
+                if (getTopStyle() != TopStyle.ABOVE_COVER) {
+                    clipTopCorners(getActualCornerFamily(), getActualCornerRadius())
+                }
             }
             coverContainer.removeView(coverImage)
             coverContainer.addView(coverAnimation)

@@ -20,17 +20,19 @@ package com.maxkeppeler.sheets.core
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import okhttp3.HttpUrl
 import java.io.File
 import java.io.Serializable
 
-/** Used to apply image request settings. */
-typealias ImageBuilder = ImageRequest.() -> Unit
+/** Convenience alias for this class. */
+private typealias ImageBuilder = Image.() -> Unit
 
 /** Convenience alias for coil's image request builder. */
 private typealias CoiImageRequestBuilder = coil.request.ImageRequest.Builder.() -> Unit
+
+/** Used to apply image request settings. */
+typealias ImageRequestBuilder = ImageRequest.() -> Unit
 
 /**
  * A class that holds the image data and some preferences for the image view and image loading.
@@ -40,14 +42,14 @@ class Image private constructor() : ImageSource(), Serializable {
     internal lateinit var any: Any
         private set
 
-    private var imageBuilder: ImageBuilder = {
+    private var imageRequestBuilder: ImageRequestBuilder = {
         // Use by default always crossfade
         crossfade(true)
     }
 
     internal val coilRequestBuilder: CoiImageRequestBuilder
         get() = {
-            val request = ImageRequest().apply { imageBuilder?.invoke(this) }
+            val request = ImageRequest().apply { imageRequestBuilder.invoke(this) }
             request.scale?.let { scale(it) }
             request.size?.let { size(it) }
             request.placeholderResId?.let { placeholder(it) }
@@ -60,83 +62,44 @@ class Image private constructor() : ImageSource(), Serializable {
             request.bitmapConfig?.let { bitmapConfig(it) }
         }
 
-    constructor(
-        uri: String,
-        ratio: Ratio? = null,
-        scaleType: ImageView.ScaleType? = null,
-        builder: ImageBuilder? = null
-    ) : this() {
+    constructor(uri: String, builder: ImageBuilder? = null) : this() {
         this.any = uri
-        this.ratio = ratio
-        this.scaleType = scaleType
-        builder?.let { this.imageBuilder = it }
+        builder?.invoke(this)
     }
 
-    constructor(
-        url: HttpUrl,
-        ratio: Ratio? = null,
-        scaleType: ImageView.ScaleType? = null,
-        builder: ImageBuilder? = null
-    ) : this() {
+    constructor(url: HttpUrl, builder: ImageBuilder? = null) : this() {
         this.any = url
-        this.ratio = ratio
-        this.scaleType = scaleType
-        builder?.let { this.imageBuilder = it }
+        builder?.invoke(this)
     }
 
-    constructor(
-        uri: Uri,
-        ratio: Ratio? = null,
-        scaleType: ImageView.ScaleType? = null,
-        builder: ImageBuilder? = null
-    ) : this() {
+    constructor(uri: Uri, builder: ImageBuilder? = null) : this() {
         this.any = uri
-        this.ratio = ratio
-        this.scaleType = scaleType
-        builder?.let { this.imageBuilder = it }
+        builder?.invoke(this)
     }
 
-    constructor(
-        file: File,
-        ratio: Ratio? = null,
-        scaleType: ImageView.ScaleType? = null,
-        builder: ImageBuilder? = null
-    ) : this() {
+    constructor(file: File, builder: ImageBuilder? = null) : this() {
         this.any = file
-        this.ratio = ratio
-        this.scaleType = scaleType
-        builder?.let { this.imageBuilder = it }
+        builder?.invoke(this)
     }
 
-    constructor(
-        @DrawableRes drawableResId: Int,
-        builder: ImageBuilder? = null
-    ) : this() {
-        this.any = drawableResId
-        builder?.let { this.imageBuilder = it }
+    constructor(@DrawableRes drawableRes: Int, builder: ImageBuilder? = null) : this() {
+        this.any = drawableRes
+        builder?.invoke(this)
     }
 
-    constructor(
-        drawable: Drawable,
-        ratio: Ratio? = null,
-        scaleType: ImageView.ScaleType? = null,
-        builder: ImageBuilder? = null
-    ) : this() {
+    constructor(drawable: Drawable, builder: ImageBuilder? = null) : this() {
         this.any = drawable
-        this.ratio = ratio
-        this.scaleType = scaleType
-        builder?.let { this.imageBuilder = it }
+        builder?.invoke(this)
     }
 
-    constructor(
-        bitmap: Bitmap,
-        ratio: Ratio? = null,
-        scaleType: ImageView.ScaleType? = null,
-        builder: ImageBuilder? = null
-    ) : this() {
+    constructor(bitmap: Bitmap, builder: ImageBuilder? = null) : this() {
         this.any = bitmap
-        this.ratio = ratio
-        this.scaleType = scaleType
-        builder?.let { this.imageBuilder = it }
+        builder?.invoke(this)
     }
+
+    /** Setup the image loading request. */
+    fun setupRequest(builder: ImageRequestBuilder) {
+        this.imageRequestBuilder = builder
+    }
+
 }

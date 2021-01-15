@@ -310,6 +310,11 @@ abstract class Sheet : SheetFragment() {
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    fun getTopStyle(): TopStyle {
+        return topStyle
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     fun useCover(useCover: Boolean = true) {
         this.useCover = useCover
     }
@@ -505,11 +510,13 @@ abstract class Sheet : SheetFragment() {
     private fun setupTopBar() {
 
         if (useCover && resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE) {
+
+        if (useCover) {
             setupTopStyle()
         }
 
         coverImage?.let { source ->
-            setupCoverSource(source)
+            setupCoverSource(source, bindingBase.top.coverImage)
             bindingBase.top.coverImage.loadAny(coverImage?.any) {
                 source.coilRequestBuilder.invoke(this)
             }
@@ -520,7 +527,7 @@ abstract class Sheet : SheetFragment() {
      * Setup an image source for the cover view.
      */
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun setupCoverSource(imageSource: ImageSource) {
+    fun setupCoverSource(imageSource: ImageSource, imageView: AppCompatImageView) {
 
         imageSource.ratio?.dimensionRatio?.let {
             (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
@@ -528,10 +535,7 @@ abstract class Sheet : SheetFragment() {
             }
         }
 
-        imageSource.scaleType?.let {
-            bindingBase.top.coverImage.scaleType = it
-        }
-
+        imageSource.imageViewBuilder?.invoke(imageView)
         bindingBase.top.cover.visibility = View.VISIBLE
     }
 

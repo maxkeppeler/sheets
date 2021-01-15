@@ -17,24 +17,26 @@
 
 package com.maxkeppeler.sheets.core
 
-import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import java.io.Serializable
+
+typealias ImageViewBuilder = AppCompatImageView.() -> Unit
 
 /**
  * A class that holds general image view settings.
  */
 abstract class ImageSource : Serializable {
 
-    var scaleType: ImageView.ScaleType? = null
-        internal set
+    internal var imageViewBuilder: ImageViewBuilder? = null
+    internal var ratio: Ratio? = null
 
-    var ratio: Ratio? = null
-        internal set
+    /** Setup ImageView. */
+    fun setupImageView(imageViewBuilder: ImageViewBuilder) {
+        this.imageViewBuilder = imageViewBuilder
+    }
 
-    /**
-     * A class used to receive an aspect ratio.
-     */
-    data class Ratio(val width: Int, val height: Int) : Serializable {
-        val dimensionRatio: String = "$width:$height"
+    /** Set the ratio of the container view that contains the ImageView. */
+    fun ratio(ratio: Ratio) {
+        this.ratio = ratio
     }
 }
