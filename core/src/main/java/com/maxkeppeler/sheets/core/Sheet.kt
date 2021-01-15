@@ -21,8 +21,6 @@ package com.maxkeppeler.sheets.core
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,8 +93,13 @@ abstract class Sheet : SheetFragment() {
         private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
 
+    private lateinit var base: SheetsBaseBinding
+
     private var addOnComponents = mutableListOf<AddOnComponent>()
     private var onCreateViewListeners = mutableListOf<OnViewCreatedListener>()
+    protected var positiveListener: PositiveListener? = null
+    private var negativeListener: NegativeListener? = null
+    private var dismissListener: DismissListener? = null
 
     private var topStyle = TopStyle.ABOVE_COVER
 
@@ -104,54 +107,34 @@ abstract class Sheet : SheetFragment() {
     private var coverImage: Image? = null
     private var coverAnimationView: Any? = null
 
-    private lateinit var bindingBase: SheetsBaseBinding
-
     private var displayToolbar: Boolean? = null
     private var displayCloseButton: Boolean? = null
     private var displayHandle: Boolean? = null
 
+    private var closeIconButton: IconButton? = null
+    private var iconButtons: Array<IconButton?> = arrayOfNulls(ICON_BUTTONS_AMOUNT_MAX)
+
     private var titleText: String? = null
     @ColorInt
     private var titleColor: Int? = null
-
-    private var closeIconButton: IconButton? = null
 
     protected var positiveText: String? = null
     private var negativeText: String? = null
 
     @DrawableRes
     protected var positiveButtonDrawableRes: Int? = null
-
     @DrawableRes
     private var negativeButtonDrawableRes: Int? = null
 
-    private var dismissListener: DismissListener? = null
-    protected var positiveListener: PositiveListener? = null
-    private var negativeListener: NegativeListener? = null
-
-    private var iconButtons: Array<IconButton?> = arrayOfNulls(ICON_BUTTONS_AMOUNT_MAX)
-
-    /**
-     * Add an icon button to the sheet toolbar to the right of the title.
-     * The icon buttons will be aligned from the right in the order you call this method.
-     * You can only add up to 3 icon buttons.
-     * @throws IllegalStateException If you add more than 3 icon buttons.
-     */
-    fun withIconButton(iconButton: IconButton, listener: ClickListener? = null) {
-        val index = this.iconButtons.indexOfFirst { it == null }
-        if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
-        this.iconButtons[index] = iconButton.apply { listener(listener) }
+    /** Set the top style. */
+    fun topStyle(topStyle: TopStyle) {
+        this.topStyle = topStyle
     }
 
     /** Set a cover image. */
     fun withCoverImage(image: Image) {
         this.coverImage = image
         this.useCover = true
-    }
-
-    /** Set the top style. */
-    fun topStyle(topStyle: TopStyle) {
-        this.topStyle = topStyle
     }
 
     /** Set if sheet is cancelable outside. */
@@ -312,6 +295,19 @@ abstract class Sheet : SheetFragment() {
         dismissListener?.invoke()
     }
 
+    /**
+     * Add an icon button to the sheet toolbar to the right of the title.
+     * The icon buttons will be aligned from the right in the order you call this method.
+     * You can only add up to 3 icon buttons.
+     * @throws IllegalStateException If you add more than 3 icon buttons.
+     */
+    fun withIconButton(iconButton: IconButton, listener: ClickListener? = null) {
+        val index = this.iconButtons.indexOfFirst { it == null }
+        if (index == -1) throw IllegalStateException("You can only add 3 icon buttons.")
+        this.iconButtons[index] = iconButton.apply { listener(listener) }
+    }
+
+
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     fun getTopStyle(): TopStyle {
         return topStyle
@@ -365,7 +361,7 @@ abstract class Sheet : SheetFragment() {
     ): View? {
         if (saved?.isEmpty == true) dismiss()
         return SheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
-            .also { bindingBase = it }.apply {
+            .also { base = it }.apply {
                 layout.addView(onCreateLayoutView())
             }.root
     }
@@ -476,7 +472,7 @@ abstract class Sheet : SheetFragment() {
             DEFAULT_DISPLAY_CLOSE_BUTTON
         )
 
-        with(bindingBase) {
+        with(base) {
             handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
             top.root.visibility = if (isToolbarVisible) View.VISIBLE else View.GONE
             top.btnClose.visibility =
@@ -511,7 +507,7 @@ abstract class Sheet : SheetFragment() {
         setupIconButtons()
         setupButtonsView()
 
-        onCreateViewListeners.forEach { listener -> listener(bindingBase) }
+        onCreateViewListeners.forEach { listener -> listener(base) }
     }
 
     private fun setupTopBar() {
@@ -527,8 +523,8 @@ abstract class Sheet : SheetFragment() {
         }
 
         coverImage?.let { source ->
-            setupCoverSource(source, bindingBase.top.coverImage)
-            bindingBase.top.coverImage.loadAny(coverImage?.any) {
+            setupCoverSource(source, base.top.coverImage)
+            base.top.coverImage.loadAny(coverImage?.any) {
                 source.coilRequestBuilder.invoke(this)
             }
         }
@@ -546,13 +542,13 @@ abstract class Sheet : SheetFragment() {
         }
 
         imageSource.ratio?.dimensionRatio?.let {
-            (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+            (base.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
                 dimensionRatio = it
             }
         }
 
         imageSource.imageViewBuilder?.invoke(imageView)
-        bindingBase.top.cover.visibility = View.VISIBLE
+        base.top.cover.visibility = View.VISIBLE
     }
 
     private fun setupTopStyle() {
@@ -566,7 +562,7 @@ abstract class Sheet : SheetFragment() {
                 cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext())
                 ?: DEFAULT_CORNER_RADIUS.toDp()
 
-            bindingBase.top.coverImage.shapeAppearanceModel =
+            base.top.coverImage.shapeAppearanceModel =
                 ShapeAppearanceModel().toBuilder().apply {
                     setTopRightCorner(cornerFamily, cornerRadius)
                     setTopLeftCorner(cornerFamily, cornerRadius)
@@ -581,52 +577,52 @@ abstract class Sheet : SheetFragment() {
 
             TopStyle.MIXED -> {
 
-                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                (base.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-                    bottomToTop = bindingBase.top.title.id
+                    bottomToTop = base.top.title.id
                 }
 
-                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomToTop = bindingBase.top.divider.id
-                    topToBottom = bindingBase.top.cover.id
+                (base.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = base.top.divider.id
+                    topToBottom = base.top.cover.id
                     startToStart = ConstraintLayout.LayoutParams.PARENT_ID
                     endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
                     setMargins(16.toDp(), 0, 0, 0)
                 }
 
-                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
+                (base.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                     bottomToTop = ConstraintLayout.LayoutParams.UNSET
-                    bottomToBottom = bindingBase.top.guideline.id
+                    bottomToBottom = base.top.guideline.id
                 }
 
-                (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
+                (base.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.PARENT_ID
                 }
             }
 
             TopStyle.BELOW_COVER -> {
 
-                (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
+                (base.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.PARENT_ID
-                    bottomToTop = bindingBase.top.title.id
+                    bottomToTop = base.top.title.id
                 }
 
-                (bindingBase.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomToTop = bindingBase.top.divider.id
-                    topToBottom = bindingBase.top.cover.id
+                (base.top.title.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = base.top.divider.id
+                    topToBottom = base.top.cover.id
                 }
 
-                (bindingBase.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
+                (base.top.btnType.layoutParams as ConstraintLayout.LayoutParams).apply {
                     topToTop = ConstraintLayout.LayoutParams.UNSET
                     bottomToBottom = ConstraintLayout.LayoutParams.UNSET
-                    bottomToTop = bindingBase.top.divider.id
-                    topToBottom = bindingBase.top.cover.id
+                    bottomToTop = base.top.divider.id
+                    topToBottom = base.top.cover.id
                 }
 
-                (bindingBase.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
-                    bottomToTop = bindingBase.top.divider.id
-                    topToBottom = bindingBase.top.cover.id
+                (base.top.btnClose.layoutParams as ConstraintLayout.LayoutParams).apply {
+                    bottomToTop = base.top.divider.id
+                    topToBottom = base.top.cover.id
                     topToTop = ConstraintLayout.LayoutParams.UNSET
                 }
             }
@@ -650,7 +646,7 @@ abstract class Sheet : SheetFragment() {
     }
 
     private fun setToolbarExtraButtonColor(i: Int, @ColorRes color: Int) {
-        with(bindingBase.top) {
+        with(base.top) {
             when (i) {
                 0 -> btnExtra1
                 1 -> btnExtra2
@@ -660,7 +656,7 @@ abstract class Sheet : SheetFragment() {
     }
 
     private fun setToolbarExtraButtonDrawable(i: Int, drawable: Drawable?) {
-        with(bindingBase.top) {
+        with(base.top) {
             when (i) {
                 0 -> btnExtra1
                 1 -> btnExtra2
@@ -670,7 +666,7 @@ abstract class Sheet : SheetFragment() {
     }
 
     private fun displayToolbarExtraButton(i: Int) {
-        with(bindingBase.top) {
+        with(base.top) {
             when (i) {
                 0 -> btnExtra1
                 1 -> btnExtra2
@@ -681,12 +677,12 @@ abstract class Sheet : SheetFragment() {
 
     private fun setupButtonsView() {
 
-        bindingBase.buttons.btnNegativeContainer.setupNegativeButton(
+        base.buttons.btnNegativeContainer.setupNegativeButton(
             btnText = negativeText ?: getString(R.string.cancel),
             btnDrawable = negativeButtonDrawableRes
         ) { negativeListener?.invoke(); dismiss() }
 
-        bindingBase.buttons.btnPositiveContainer.setupPositiveButton(
+        base.buttons.btnPositiveContainer.setupPositiveButton(
             btnText = positiveText ?: getString(R.string.ok),
             btnDrawable = positiveButtonDrawableRes
         ) { positiveListener?.invoke(); dismiss() }
@@ -694,7 +690,7 @@ abstract class Sheet : SheetFragment() {
 
     /** Display the positive button. */
     protected fun displayButtonPositive(display: Boolean) {
-        bindingBase.buttons.btnPositiveContainer.apply {
+        base.buttons.btnPositiveContainer.apply {
             positiveButtonClickable(display)
             if (display) fadeIn() else fadeOut()
         }
@@ -702,45 +698,45 @@ abstract class Sheet : SheetFragment() {
 
     /** Show positive button */
     protected fun showButtonPositive() {
-        bindingBase.buttons.btnPositiveContainer.fadeIn()
-        bindingBase.buttons.btnPositiveContainer.isClickable = true
+        base.buttons.btnPositiveContainer.fadeIn()
+        base.buttons.btnPositiveContainer.isClickable = true
     }
 
     /** Hide positive button. */
     protected fun hideButtonPositive() {
-        bindingBase.buttons.btnPositiveContainer.fadeOut()
-        bindingBase.buttons.btnPositiveContainer.isClickable = false
+        base.buttons.btnPositiveContainer.fadeOut()
+        base.buttons.btnPositiveContainer.isClickable = false
     }
 
     /** Display buttons view. */
     protected fun displayButtonsView(display: Boolean) {
-        bindingBase.buttons.root.visibility = if (display) View.VISIBLE else View.GONE
+        base.buttons.root.visibility = if (display) View.VISIBLE else View.GONE
     }
 
     /** Set a listener which is invoked when the positive button is clicked. */
     protected fun setButtonPositiveListener(listener: ClickListener) {
-        bindingBase.buttons.btnPositiveContainer.positiveButtonListener(listener)
+        base.buttons.btnPositiveContainer.positiveButtonListener(listener)
     }
 
     /** Set a listener which is invoked when the type icon button is clicked. */
     protected fun setToolbarTypeButtonListener(listener: ClickListener) {
-        bindingBase.top.btnType.setOnClickListener { listener.invoke() }
+        base.top.btnType.setOnClickListener { listener.invoke() }
     }
 
     /** Set a drawable for the type icon button. */
     protected fun setToolbarTypeButtonDrawable(@DrawableRes drawableRes: Int) {
         val drawable = ContextCompat.getDrawable(requireContext(), drawableRes)
-        bindingBase.top.btnType.setImageDrawable(drawable)
-        bindingBase.top.btnType.visibility = View.VISIBLE
+        base.top.btnType.setImageDrawable(drawable)
+        base.top.btnType.visibility = View.VISIBLE
     }
 
     /** Display the type icon button. */
     protected fun displayToolbarTypeButton(display: Boolean) {
-        bindingBase.top.btnType.visibility = if (display) View.VISIBLE else View.GONE
+        base.top.btnType.visibility = if (display) View.VISIBLE else View.GONE
     }
 
     private fun setToolbarExtraButtonListener(i: Int, listener: ClickListener) {
-        with(bindingBase.top) {
+        with(base.top) {
             when (i) {
                 0 -> btnExtra1
                 1 -> btnExtra2
