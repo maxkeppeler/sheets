@@ -399,6 +399,9 @@ abstract class Sheet : SheetFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupBottomSheet()
+        Handler(Looper.getMainLooper()).postDelayed({
+            Capture.sheet(requireContext(), dialog, dialogTag, )
+        }, 2000)
     }
 
     private fun setupBottomSheet() {
