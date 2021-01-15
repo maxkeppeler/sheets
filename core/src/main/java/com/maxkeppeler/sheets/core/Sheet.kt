@@ -21,10 +21,13 @@ package com.maxkeppeler.sheets.core
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.*
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import coil.loadAny
@@ -350,6 +353,10 @@ abstract class Sheet : SheetFragment() {
         this.addOnComponents.remove(addOnComponent)
     }
 
+    private fun isLandscapeMode(): Boolean {
+        return this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    }
+
     /** Create view of base sheet. */
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -386,7 +393,7 @@ abstract class Sheet : SheetFragment() {
                 saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
             positiveListener =
                 saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
-             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
+            topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
             coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
             closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
             val icons = mutableListOf<IconButton>()
@@ -427,7 +434,7 @@ abstract class Sheet : SheetFragment() {
             displayHandle?.let { putBoolean(STATE_BASE_DISPLAY_HANDLE, it) }
             negativeButtonDrawableRes?.let { putInt(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE, it) }
             positiveButtonDrawableRes?.let { putInt(STATE_BASE_POSITIVE_BUTTON_DRAWABLE, it) }
-              putSerializable(STATE_BASE_TOP_STYLE, topStyle)
+            putSerializable(STATE_BASE_TOP_STYLE, topStyle)
             putSerializable(STATE_BASE_COVER_IMAGE, coverImage)
             putSerializable(STATE_BASE_CLOSE_ICON_BUTTON, closeIconButton)
             iconButtons.forEachIndexed { i, btn ->
@@ -464,10 +471,10 @@ abstract class Sheet : SheetFragment() {
             displayToolbar ?: isDisplayToolbar(requireContext(), DEFAULT_DISPLAY_TOOLBAR)
 
         val isCloseButtonVisible = sheetStyle == SheetStyle.BOTTOM_SHEET &&
-            displayCloseButton ?: isDisplayCloseButton(
-                requireContext(),
-                DEFAULT_DISPLAY_CLOSE_BUTTON
-            )
+                displayCloseButton ?: isDisplayCloseButton(
+            requireContext(),
+            DEFAULT_DISPLAY_CLOSE_BUTTON
+        )
 
         with(bindingBase) {
             handle.visibility = if (isHandleVisible) View.VISIBLE else View.GONE
@@ -509,7 +516,11 @@ abstract class Sheet : SheetFragment() {
 
     private fun setupTopBar() {
 
-        if (useCover && resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE) {
+        // Do not display a cover, and therefore also no special TopStyle,
+        // in landscape mode, due the limited height.
+        if (isLandscapeMode()) {
+            return
+        }
 
         if (useCover) {
             setupTopStyle()
@@ -529,6 +540,11 @@ abstract class Sheet : SheetFragment() {
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     fun setupCoverSource(imageSource: ImageSource, imageView: AppCompatImageView) {
 
+        // Do not display a cover in landscape mode, due the limited height.
+        if (isLandscapeMode()) {
+            return
+        }
+
         imageSource.ratio?.dimensionRatio?.let {
             (bindingBase.top.cover.layoutParams as ConstraintLayout.LayoutParams).apply {
                 dimensionRatio = it
@@ -547,7 +563,8 @@ abstract class Sheet : SheetFragment() {
                 cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
 
             val cornerRadius =
-                cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext()) ?: DEFAULT_CORNER_RADIUS.toDp()
+                cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext())
+                ?: DEFAULT_CORNER_RADIUS.toDp()
 
             bindingBase.top.coverImage.shapeAppearanceModel =
                 ShapeAppearanceModel().toBuilder().apply {
