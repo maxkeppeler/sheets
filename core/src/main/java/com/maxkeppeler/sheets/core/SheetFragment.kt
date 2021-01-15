@@ -37,6 +37,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.maxkeppeler.sheets.core.utils.*
 
+
 /**
  * This class is the base of all types of sheets.
  * You can implement this class in your own and build your
@@ -207,13 +208,21 @@ abstract class SheetFragment : DialogFragment() {
         })
     }
 
+    @CornerFamily
+    fun getActualCornerFamily(): Int =
+        this.cornerFamily
+            ?: getCornerFamily(requireContext())
+            ?: DEFAULT_CORNER_FAMILY
+
+    fun getActualCornerRadius(): Float =
+        this.cornerRadiusDp?.toDp()
+            ?: getCornerRadius(requireContext())
+            ?: DEFAULT_CORNER_RADIUS.toDp()
+
     private fun setupBottomSheetBackground(view: View) {
 
-        val cornerFamily =
-            cornerFamily ?: getCornerFamily(requireContext()) ?: DEFAULT_CORNER_FAMILY
-        val cornerRadius =
-            cornerRadiusDp?.toDp() ?: getCornerRadius(requireContext())
-            ?: DEFAULT_CORNER_RADIUS.toDp()
+        val cornerFamily = getActualCornerFamily()
+        val cornerRadius = getActualCornerRadius()
 
         val model = ShapeAppearanceModel().toBuilder().apply {
             when (sheetStyle) {
@@ -232,7 +241,8 @@ abstract class SheetFragment : DialogFragment() {
                 setPadding(width.getDp(), width.getDp(), width.getDp(), width.getDp())
             }
 
-            val backgroundColor = getBottomSheetBackgroundColor(requireContext(), sheetTheme.styleRes)
+            val backgroundColor = getBottomSheetBackgroundColor(requireContext(),
+                sheetTheme.styleRes)
             fillColor = ColorStateList.valueOf(backgroundColor)
         }
 
