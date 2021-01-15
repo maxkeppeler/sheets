@@ -167,6 +167,13 @@
             <enum name="match_content" value="-1" />
         </attr>
 
+
+        <!-- Override outlined button border color. -->
+        <attr name="sheetButtonOutlinedButtonBorderColor" format="reference" />
+
+        <!-- Override outlined button border width.  -->
+        <attr name="sheetButtonOutlinedButtonBorderWidth" format="dimension" />
+
     </declare-styleable>
 
     <!--  Style for the buttons.  -->
@@ -177,6 +184,12 @@
             <enum name="outlined_button" value="1" />
             <enum name="button" value="2" />
         </attr>
+
+        <!-- Override outlined button border color. -->
+        <attr name="sheetNegativeButtonOutlinedButtonBorderColor" format="reference" />
+
+        <!-- Override outlined button border width.  -->
+        <attr name="sheetNegativeButtonOutlinedButtonBorderWidth" format="dimension" />
 
         <!-- Override radius of all corners.  -->
         <attr name="sheetNegativeButtonCornerRadius" format="dimension" />
@@ -233,6 +246,12 @@
             <enum name="outlined_button" value="1" />
             <enum name="button" value="2" />
         </attr>
+
+        <!-- Override outlined button border color. -->
+        <attr name="sheetPositiveButtonOutlinedButtonBorderColor" format="reference" />
+
+        <!-- Override outlined button border width.  -->
+        <attr name="sheetPositiveButtonOutlinedButtonBorderWidth" format="dimension" />
 
         <!-- Override radius of all corners.  -->
         <attr name="sheetPositiveButtonCornerRadius" format="dimension" />

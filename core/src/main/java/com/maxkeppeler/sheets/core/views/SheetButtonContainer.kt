@@ -20,6 +20,7 @@ package com.maxkeppeler.sheets.core.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -83,6 +84,16 @@ class SheetButtonContainer
 
         gravity = Gravity.CENTER
 
+        val outlinedButtonBorderWidth = dimensionOfAttrs(ctx,
+            if (negative) R.attr.sheetNegativeButtonOutlinedButtonBorderWidth else R.attr.sheetPositiveButtonOutlinedButtonBorderWidth,
+            R.attr.sheetButtonOutlinedButtonBorderWidth
+        )
+
+        val outlinedButtonBorderColor = colorOfAttrs(ctx,
+            if (negative) R.attr.sheetNegativeButtonOutlinedButtonBorderColor else R.attr.sheetPositiveButtonOutlinedButtonBorderColor,
+            R.attr.sheetButtonOutlinedButtonBorderColor
+        )
+
         addView(SheetButton(ctx, null, buttonStyle.styleRes).apply {
 
             layoutParams =
@@ -109,9 +120,16 @@ class SheetButtonContainer
             }
 
             shapeAppearanceModel = shapeModel.apply {
-                if (buttonStyle == ButtonStyle.TEXT) {
-                    strokeWidth =
-                        0 /* Set border stroke width to zero to remove the border and simulate a normal TextButton. */
+                when (buttonStyle) {
+                    ButtonStyle.TEXT -> {
+                        strokeWidth =
+                            0 /* Set border stroke width to zero to remove the border and simulate a normal TextButton. */
+                    }
+                    ButtonStyle.OUTLINED -> {
+                        outlinedButtonBorderColor.takeUnlessNotResolved()?.let { strokeColor = ColorStateList.valueOf(it) }
+                        outlinedButtonBorderWidth?.let { strokeWidth = it.toInt() }
+                    }
+                    else -> {}
                 }
             }.build()
 
