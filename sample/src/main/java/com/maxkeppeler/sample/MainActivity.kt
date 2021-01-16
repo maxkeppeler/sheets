@@ -232,7 +232,7 @@ class MainActivity : AppCompatActivity() {
             cornerRadius(16f)
             title("Note from 27th dec") // Set the title of the sheet
             if (Random.nextBoolean()) {
-                showButtons() // For single choice, no buttons are displayed, except you enforce to display them
+                displayButtons() // For single choice, no buttons are displayed, except you enforce to display them
             }
             with( // Add options
                 Option(R.drawable.ic_send, "Send"),
@@ -638,7 +638,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheetTopStyleMixed() {
 
         InfoSheet().show(this) {
-            showButtons(false)
+            displayButtons(false)
             style(SheetStyle.values().random())
             cornerFamily(CornerFamily.CUT)
             topStyle(TopStyle.MIXED)

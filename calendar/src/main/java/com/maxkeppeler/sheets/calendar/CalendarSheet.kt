@@ -136,7 +136,7 @@ class CalendarSheet : Sheet() {
     private var selectedDate: LocalDate? = null
     private var selectedDateStart: LocalDate? = null
     private var selectedDateEnd: LocalDate? = null
-    private var showButtons = true
+    private var displayButtons = true
 
     /** Disable timeline into past or future. */
     fun disableTimeline(timeLine: TimeLine) {
@@ -181,9 +181,9 @@ class CalendarSheet : Sheet() {
         this.disabledDates.add(disabledDate)
     }
 
-    /** Show buttons and require a positive button click. */
-    fun showButtons(showButtons: Boolean = true) {
-        this.showButtons = showButtons
+    /** Display buttons and require a positive button click. */
+    fun displayButtons(displayButtons: Boolean = true) {
+        this.displayButtons = displayButtons
     }
 
     /**
@@ -250,7 +250,7 @@ class CalendarSheet : Sheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
-        displayButtonsView(showButtons)
+        displayButtonsView(displayButtons)
         validate()
         initResources()
         with(binding) {
@@ -794,7 +794,7 @@ class CalendarSheet : Sheet() {
         val selectionValid = selectionMode == SelectionMode.RANGE && selectionInRange
                 || selectionMode == SelectionMode.DATE && selectedDate != null
 
-        if (!showButtons && selectionValid) {
+        if (!displayButtons && selectionValid) {
             Handler(Looper.getMainLooper()).postDelayed({
                 save()
             }, 600)
@@ -830,7 +830,7 @@ class CalendarSheet : Sheet() {
             calendarMode = saved.getSerializable(STATE_CALENDAR_MODE) as CalendarMode
             maxRange = saved.getInt(STATE_MAX_RANGE)
             rangeYears = saved.getInt(STATE_RANGE_YEARS)
-            showButtons = saved.getBoolean(STATE_DISPLAY_BUTTONS)
+            displayButtons = saved.getBoolean(STATE_DISPLAY_BUTTONS)
             repeat(saved.getInt(STATE_DISABLE_DATE)) {
                 val inputItem = saved.getSerializable(STATE_DISABLE_DATE.plus(it)) as Calendar
                 disabledDates.add(inputItem)
@@ -850,7 +850,7 @@ class CalendarSheet : Sheet() {
             putSerializable(STATE_CALENDAR_MODE, calendarMode as Serializable?)
             putInt(STATE_MAX_RANGE, maxRange)
             putInt(STATE_RANGE_YEARS, rangeYears)
-            putBoolean(STATE_DISPLAY_BUTTONS, showButtons)
+            putBoolean(STATE_DISPLAY_BUTTONS, displayButtons)
             disabledDates.forEachIndexed { i, date ->
                 putSerializable(STATE_DISABLE_DATE.plus(i), date)
             }

@@ -49,7 +49,7 @@ class InfoSheet : Sheet() {
     private lateinit var binding: SheetsInfoBinding
 
     private var contentText: String? = null
-    private var showButtons = true
+    private var displayButtons = true
 
     @DrawableRes
     private var drawableRes: Int? = null
@@ -161,9 +161,9 @@ class InfoSheet : Sheet() {
         this.positiveListener = positiveListener
     }
 
-    /** Show buttons and require a positive button click. */
-    fun showButtons(showButtons: Boolean = true) {
-        this.showButtons = showButtons
+    /** Display buttons and require a positive button click. */
+    fun displayButtons(displayButtons: Boolean = true) {
+        this.displayButtons = displayButtons
     }
 
     override fun onCreateLayoutView(): View =
@@ -171,7 +171,7 @@ class InfoSheet : Sheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayButtonsView(showButtons)
+        displayButtonsView(displayButtons)
         with(binding) {
             contentText?.let { content.text = it }
             drawableRes?.let { res ->

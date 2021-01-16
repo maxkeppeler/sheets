@@ -83,7 +83,7 @@ class OptionsSheet : Sheet() {
     private var minChoices: Int? = null
     private var maxChoices: Int? = null
     private var maxChoicesStrict = true
-    private var showButtons = false
+    private var displayButtons = false
 
     private val saveAllowed: Boolean
         get() {
@@ -128,9 +128,9 @@ class OptionsSheet : Sheet() {
         this.maxChoices = maxChoices
     }
 
-    /** Show buttons and require a positive button click. */
-    fun showButtons(showButtons: Boolean = true) {
-        this.showButtons = showButtons
+    /** Display buttons and require a positive button click. */
+    fun displayButtons(displayButtons: Boolean = true) {
+        this.displayButtons = displayButtons
     }
 
     /** Set display mode. */
@@ -298,7 +298,7 @@ class OptionsSheet : Sheet() {
     private val adapterListener = object : OptionsSelectionListener {
 
         override fun select(index: Int) {
-            if (showButtons) {
+            if (displayButtons) {
                 optionsSelected.clear()
                 optionsSelected.add(index)
                 validate()
@@ -338,7 +338,7 @@ class OptionsSheet : Sheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkSetup()
-        displayButtonsView(multipleChoices || showButtons)
+        displayButtonsView(multipleChoices || displayButtons)
         setButtonPositiveListener(::save)
 
         colorActive = getPrimaryColor(requireContext())
@@ -518,7 +518,7 @@ class OptionsSheet : Sheet() {
             multipleChoices = saved.getBoolean(STATE_MULTIPLE_CHOICES)
             displayMultipleChoicesInfo = saved.getBoolean(STATE_MULTIPLE_CHOICES_INFO)
             maxChoicesStrict = saved.getBoolean(STATE_MAX_CHOICES_STRICT)
-            showButtons = saved.getBoolean(STATE_DISPLAY_BUTTONS)
+            displayButtons = saved.getBoolean(STATE_DISPLAY_BUTTONS)
             minChoices = saved.get(STATE_MIN_CHOICES) as Int?
             maxChoices = saved.get(STATE_MAX_CHOICES) as Int?
         }
@@ -537,7 +537,7 @@ class OptionsSheet : Sheet() {
             putBoolean(STATE_MULTIPLE_CHOICES, multipleChoices)
             putBoolean(STATE_MULTIPLE_CHOICES_INFO, displayMultipleChoicesInfo)
             putBoolean(STATE_MAX_CHOICES_STRICT, maxChoicesStrict)
-            putBoolean(STATE_DISPLAY_BUTTONS, showButtons)
+            putBoolean(STATE_DISPLAY_BUTTONS, displayButtons)
             minChoices?.let { putInt(STATE_MIN_CHOICES, it) }
             maxChoices?.let { putInt(STATE_MAX_CHOICES, it) }
         }
