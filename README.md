@@ -264,7 +264,7 @@ For the default options sheet use it as following:
 | `minChoices()`                 | Set the minimum amount of choices.                                                     |
 | `maxChoices()`                 | Set the maximum amount of choices.                                                     |
 | `onPositiveMultiple()`         | Set listener for multiple choices.                                                     |
-| `showButtons()`                | Display buttons and require a positive button click for selection.                     |
+| `displayButtons()`                | Display buttons and require a positive button click for selection.                     |
 | `displayMode()`                | Display options in a list or a vertical/ horizontal growing scrollable grid.           |
 
 **Option**
@@ -548,7 +548,7 @@ For the default time sheet use it as following:
 | `disableTimeline()` |  Disable either past or future dates.                            |
 | `rangeYears()`      | Set the range of years into past and future.                     |
 | `disable()`         | Pass a `Calendar` object to disable various dates for selection. |
-| `showButtons()`     | Show or hide the buttons view.                                   |
+| `displayButtons()`     | Show or hide the buttons view.                                   |
 
 ## Color
 
