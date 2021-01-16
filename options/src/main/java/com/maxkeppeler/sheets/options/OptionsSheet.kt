@@ -79,7 +79,7 @@ class OptionsSheet : Sheet() {
 
     private var mode = DisplayMode.GRID_HORIZONTAL
     private var multipleChoices = false
-    private var showMultipleChoicesInfo = false
+    private var displayMultipleChoicesInfo = false
     private var minChoices: Int? = null
     private var maxChoices: Int? = null
     private var maxChoicesStrict = true
@@ -101,8 +101,8 @@ class OptionsSheet : Sheet() {
     }
 
     /** Display the hints for allowed minimum and maximum amount of choices and the amount of selected options. */
-    fun showMultipleChoicesInfo(showMultipleChoicesInfo: Boolean = true) {
-        this.showMultipleChoicesInfo = showMultipleChoicesInfo
+    fun displayMultipleChoicesInfo(displayMultipleChoicesInfo: Boolean = true) {
+        this.displayMultipleChoicesInfo = displayMultipleChoicesInfo
     }
 
     /** A strict limit for the maximum amount of choices will prevent the user to select more than allowed.  */
@@ -459,7 +459,7 @@ class OptionsSheet : Sheet() {
 
     private fun updateMultipleChoicesInfo() {
 
-        if (!showMultipleChoicesInfo) {
+        if (!displayMultipleChoicesInfo) {
             binding.range.root.visibility = View.GONE
             return
         }
@@ -516,7 +516,7 @@ class OptionsSheet : Sheet() {
             }
             mode = saved.getSerializable(STATE_MODE) as DisplayMode
             multipleChoices = saved.getBoolean(STATE_MULTIPLE_CHOICES)
-            showMultipleChoicesInfo = saved.getBoolean(STATE_MULTIPLE_CHOICES_INFO)
+            displayMultipleChoicesInfo = saved.getBoolean(STATE_MULTIPLE_CHOICES_INFO)
             maxChoicesStrict = saved.getBoolean(STATE_MAX_CHOICES_STRICT)
             showButtons = saved.getBoolean(STATE_DISPLAY_BUTTONS)
             minChoices = saved.get(STATE_MIN_CHOICES) as Int?
@@ -535,7 +535,7 @@ class OptionsSheet : Sheet() {
             putIntArray(STATE_OPTIONS_SELECTED, optionsSelected.toIntArray())
             putSerializable(STATE_MODE, mode)
             putBoolean(STATE_MULTIPLE_CHOICES, multipleChoices)
-            putBoolean(STATE_MULTIPLE_CHOICES_INFO, showMultipleChoicesInfo)
+            putBoolean(STATE_MULTIPLE_CHOICES_INFO, displayMultipleChoicesInfo)
             putBoolean(STATE_MAX_CHOICES_STRICT, maxChoicesStrict)
             putBoolean(STATE_DISPLAY_BUTTONS, showButtons)
             minChoices?.let { putInt(STATE_MIN_CHOICES, it) }
