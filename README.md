@@ -1,38 +1,55 @@
 # Sheets
 
-Offers a range of beautiful sheets (dialogs & bottom sheets) for quick use in your project.
+<p>
 
-<div>
+  <img src="art/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
 
-  <img src="art/ic_library.png" width="72px" height="72px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
+  <p>
 
-  <div>
+   Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the available sheets or build custom  sheets on top of the existing functionality.
 
-   <img alt="Version of Sheets library" src="https://img.shields.io/bintray/v/maximilian-keppeler/maven/sheets:core?color=%23&label=Version">
+   <a href="https://github.com/maxkeppeler/sheets">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/bintray/v/maximilian-keppeler/maven/sheets:core?color=%23&label=">
+   </a>
 
-  <img alt="Codacy code quality of Sheets library" src="https://img.shields.io/codacy/grade/9a3b68b152e149fd82f0873e2fed78d5?label=Code%20Quality">
+   <a href="https://github.com/maxkeppeler/sheets">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://img.shields.io/codacy/grade/9a3b68b152e149fd82f0873e2fed78d5?label=Code%20Quality">
+   </a>
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/maxkeppeler/sheets?color=%23007EC6&label=License">
+   <a href="https://www.apache.org/licenses/LICENSE-2.0">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="GitHub" src="https://img.shields.io/github/license/maxkeppeler/sheets?color=%23007EC6&label=">
+   </a>
 
-  <br />
-  <br />
-
-  <img alt="Give this library a start" src="https://img.shields.io/github/stars/maxkeppeler/sheets?style=social">
-
-  <img alt="Fork this library" src="https://img.shields.io/github/forks/maxkeppeler/sheets?style=social">
-
-  <img alt="Follow me on GitHub" src="https://img.shields.io/github/followers/maxkeppeler?style=social&label=Follow">
-
-  <img alt="Share this library on Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmaxkeppeler%2Fsheets&label=Share">
-
-  <img alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/maxkeppeler?label=Follow&style=social">
-
-  </div>
-</div>
+  </p>
+</p>
 
 <img src="art/img_showcase.png" alt="sheets Library">
+<a href="https://github.com/maxkeppeler/sheets">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Give this library a star" src="https://img.shields.io/github/stars/maxkeppeler/sheets?style=social">
+</a>
+
+<a href="https://github.com/maxkeppeler/sheets/fork">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Fork this library" src="https://img.shields.io/github/forks/maxkeppeler/sheets?style=social">
+</a>
+
+<a href="https://github.com/maxkeppeler/sheets">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Watch this library" src="https://img.shields.io/github/watchers/maxkeppeler/sheets.svg?style=social&amp;label=Watch">
+</a>
+
+<a href="https://github.com/maxkeppeler/">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow me on GitHub" src="https://img.shields.io/github/followers/maxkeppeler?style=social&label=Follow">
+</a>
+
+<a href="https://twitter.com/intent/tweet?text=Checkout%20this%20beautiful%20library!%20%23android%20%23androiddev%20%23library%20%40maxkeppeler%20%0A%0Ahttps%3A%2F%2Fgithub.com%2Fmaxkeppeler%2Fsheets">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Share this library on Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmaxkeppeler%2Fsheets&label=Share">
+</a>
+
+<a href="https://twitter.com/maxkeppeler">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/maxkeppeler?label=Follow&style=social">
+</a>
 
 ## Table of Contents
+
 -   [Get started](#get-started)
     -   [Info Sheet](#info)
     -   [Options Sheet](#options)
@@ -69,28 +86,28 @@ dependencies {
 **Base functions** <br/>
 Following functions can be called from any type and style of sheet as well as any custom sheet you build.
 
-Function | Action
---- | ---
-`style()` | Display as dialog or bottom-sheet.
-`title()` | Set the title text.
-`titleColor()` | Set the title text color.
-`titleColorRes()` | Set the title text color by a resource.
-`withCoverImage()` | Add a cover image.
-`topStyle()` | Specify the style of the cover image and top bar.
-`withIconButton()` | Add up to 3 icon buttons to the top bar.
-`closeIconButton()` | Set a custom close icon button.
-`displayHandle()` | Display the handle.
-`displayCloseButton()` | Display close icon button.
-`displayToolbar()` | Display toolbar. (Close icon button, title, divider and icon buttons)
-`peekHeight()` | Set the peek height. (Only bottom-sheet)
-`cornerRadius()` | Set corner radius.
-`cornerFamily()` | Set corner family. (Cut or rounded)
-`borderWidth()` | Set the border width.
-`borderColor()` | Set the border color.
-`cancelableOutside()` | Make sheet cancelable outside of the dialog view.
-`onNegative()` | Set the negative button text and listener.
-`onDismiss()` | Set a listener that is invoked when the sheet is dismissed.
-`show()` | show the sheet.
+| Function               | Action                                                                |
+| ---------------------- | --------------------------------------------------------------------- |
+| `style()`              | Display as dialog or bottom-sheet.                                    |
+| `title()`              | Set the title text.                                                   |
+| `titleColor()`         | Set the title text color.                                             |
+| `titleColorRes()`      | Set the title text color by a resource.                               |
+| `withCoverImage()`     | Add a cover image.                                                    |
+| `topStyle()`           | Specify the style of the cover image and top bar.                     |
+| `withIconButton()`     | Add up to 3 icon buttons to the top bar.                              |
+| `closeIconButton()`    | Set a custom close icon button.                                       |
+| `displayHandle()`      | Display the handle.                                                   |
+| `displayCloseButton()` | Display close icon button.                                            |
+| `displayToolbar()`     | Display toolbar. (Close icon button, title, divider and icon buttons) |
+| `peekHeight()`         | Set the peek height. (Only bottom-sheet)                              |
+| `cornerRadius()`       | Set corner radius.                                                    |
+| `cornerFamily()`       | Set corner family. (Cut or rounded)                                   |
+| `borderWidth()`        | Set the border width.                                                 |
+| `borderColor()`        | Set the border color.                                                 |
+| `cancelableOutside()`  | Make sheet cancelable outside of the dialog view.                     |
+| `onNegative()`         | Set the negative button text and listener.                            |
+| `onDismiss()`          | Set a listener that is invoked when the sheet is dismissed.           |
+| `show()`               | show the sheet.                                                       |
 
 Each of the sheets have an extension function called `build` and `show` where the receiver is the used sheet.<br/>
 
@@ -160,11 +177,11 @@ For the default info sheet use it as following:
       }
     }
 
-Function | Action
---- | ---
-`content()` | Set content text.
-`drawable()` | Set drawable.
-`drawableColor()` | Set drawable color.
+| Function          | Action              |
+| ----------------- | ------------------- |
+| `content()`       | Set content text.   |
+| `drawable()`      | Set drawable.       |
+| `drawableColor()` | Set drawable color. |
 
 ## Options
 
@@ -239,23 +256,23 @@ For the default options sheet use it as following:
       }
     }
 
-Function | Action
---- | ---
-`multipleChoices()` | Allow multiple choices content.
-`displayMultipleChoicesInfo()` | Display info of the multiple choices.
-`maxChoicesStrictLimit()` | Specify that the max choices is strict and more choices can't be selected temporarily.
-`minChoices()` | Set the minimum amount of choices.
-`maxChoices()` | Set the maximum amount of choices.
-`onPositiveMultiple()` | Set listener for multiple choices.
-`showButtons()` | Display buttons and require a positive button click for selection.
-`displayMode()` | Display options in a list or a vertical/ horizontal growing scrollable grid.
+| Function                       | Action                                                                                 |
+| ------------------------------ | -------------------------------------------------------------------------------------- |
+| `multipleChoices()`            | Allow multiple choices content.                                                        |
+| `displayMultipleChoicesInfo()` | Display info of the multiple choices.                                                  |
+| `maxChoicesStrictLimit()`      | Specify that the max choices is strict and more choices can't be selected temporarily. |
+| `minChoices()`                 | Set the minimum amount of choices.                                                     |
+| `maxChoices()`                 | Set the maximum amount of choices.                                                     |
+| `onPositiveMultiple()`         | Set listener for multiple choices.                                                     |
+| `showButtons()`                | Display buttons and require a positive button click for selection.                     |
+| `displayMode()`                | Display options in a list or a vertical/ horizontal growing scrollable grid.           |
 
 **Option**
 
-Function | Action
---- | ---
-`selected()` | Preselect an option.
-`disable()` | Disable an option.
+| Function     | Action               |
+| ------------ | -------------------- |
+| `selected()` | Preselect an option. |
+| `disable()`  | Disable an option.   |
 
 **Note**: Preselected options automatically increase the current selection while disabled options decrease the maximum amount of choices.
 
@@ -298,10 +315,10 @@ For the default clock time sheet, in 24-hours format, use it as following:
       }
     }
 
-Function | Action
---- | ---
-`format24Hours()` | Use 24-hours or 12-hours format.
-`currentTime()` | Set the current time in milliseconds.
+| Function          | Action                                |
+| ----------------- | ------------------------------------- |
+| `format24Hours()` | Use 24-hours or 12-hours format.      |
+| `currentTime()`   | Set the current time in milliseconds. |
 
 ## Time
 
@@ -342,12 +359,12 @@ For the default time sheet use it as following:
       }
     }
 
-Function | Action
---- | ---
-`format()` | Sselect the time format. (hh:mm:ss, mm:ss, ...)
-`currentTime()` | Set the current time in seconds.
-`minTime()` | Set the minimum time.
-`maxTime()` | Set the maximum time.
+| Function        | Action                                          |
+| --------------- | ----------------------------------------------- |
+| `format()`      | Sselect the time format. (hh:mm:ss, mm:ss, ...) |
+| `currentTime()` | Set the current time in seconds.                |
+| `minTime()`     | Set the minimum time.                           |
+| `maxTime()`     |  Set the maximum time.                          |
 
 ## Input
 
@@ -428,63 +445,63 @@ For the default input sheet use it as following:
       }
     }
 
-Function | Action
---- | ---
-`with()` | Add an input. (see input options)
-`content()` | Set content text. (e. g. to explain a survey)
+| Function    | Action                                        |
+| ----------- | --------------------------------------------- |
+| `with()`    | Add an input. (see input options)             |
+| `content()` | Set content text. (e. g. to explain a survey) |
 
 **Input options:**
 
-- `InputEditText`
-- `InputCheckBox`
-- `InputRadioButtons`
-- `InputSpinner`
+-   `InputEditText`
+-   `InputCheckBox`
+-   `InputRadioButtons`
+-   `InputSpinner`
 
 **Input**<br/>
 
-Function | Action
---- | ---
-`label()` | Set the label text.
-`drawable()` | Set the drawable.
-`required()` | Mark input as required.
-`changeListener()` | Set listener to observe changes.
-`resultListener()` | Set listener for final value.
+| Function           | Action                           |
+| ------------------ | -------------------------------- |
+| `label()`          | Set the label text.              |
+| `drawable()`       | Set the drawable.                |
+| `required()`       | Mark input as required.          |
+| `changeListener()` | Set listener to observe changes. |
+| `resultListener()` | Set listener for final value.    |
 
 **InputEditText**<br/>
 
-Function | Action
---- | ---
-`hint()` | Set the hint text.
-`defaultValue()` | Set default text.
-`inputType()` | Set the `android.text.InputType`'s.
-`inputFilter()` | Set the `android.text.inputFilter`
-`maxLines()` | Set the max amount of lines.
-`endIconMode()` | Set TextInputLayout.EndIconMode.
-`endIconActivated()` | Set the EndIcon activated.
-`passwordVisible()` | Make the password initially visible or invisible.
-`validationListener()` | Validate the text input with your own logic.
+| Function               | Action                                            |
+| ---------------------- | ------------------------------------------------- |
+| `hint()`               | Set the hint text.                                |
+| `defaultValue()`       | Set default text.                                 |
+| `inputType()`          | Set the `android.text.InputType`'s.               |
+| `inputFilter()`        | Set the `android.text.inputFilter`                |
+| `maxLines()`           | Set the max amount of lines.                      |
+| `endIconMode()`        | Set TextInputLayout.EndIconMode.                  |
+| `endIconActivated()`   | Set the EndIcon activated.                        |
+| `passwordVisible()`    | Make the password initially visible or invisible. |
+| `validationListener()` | Validate the text input with your own logic.      |
 
 **InputCheckBox** <br/>
 
-Function | Action
---- | ---
-`text()` | Set the text.
-`defaultValue()` | Set default value.
+| Function         | Action             |
+| ---------------- | ------------------ |
+| `text()`         | Set the text.      |
+| `defaultValue()` | Set default value. |
 
 **InputRadioButtons** <br/>
 
-Function | Action
---- | ---
-`options()` | Set a list of RadioButton options.
-`selected()` | Set a selected index.
+| Function     | Action                             |
+| ------------ | ---------------------------------- |
+| `options()`  | Set a list of RadioButton options. |
+| `selected()` | Set a selected index.              |
 
 **InputSpinner** <br/>
 
-Function | Action
---- | ---
-`noSelectionText()` | Set the text that is displayed, when nothing is selected.
-`options()` | Set a list of options.
-`selected()` | Set a selected index.
+| Function            | Action                                                    |
+| ------------------- | --------------------------------------------------------- |
+| `noSelectionText()` | Set the text that is displayed, when nothing is selected. |
+| `options()`         | Set a list of options.                                    |
+| `selected()`        | Set a selected index.                                     |
 
 ## Calendar
 
@@ -524,15 +541,14 @@ For the default time sheet use it as following:
         // Handle date or range
       }
 
-
-Function | Action
---- | ---
-`selectionMode()` | Choose the selection mode (date or range).
-`calendarMode()` | Choose the calendar mode (week with various rows or month-view).
-`disableTimeline()` | Disable either past or future dates.
-`rangeYears()` | Set the range of years into past and future.
-`disable()` | Pass a `Calendar` object to disable various dates for selection.
-`showButtons()` | Show or hide the buttons view.
+| Function            | Action                                                           |
+| ------------------- | ---------------------------------------------------------------- |
+| `selectionMode()`   | Choose the selection mode (date or range).                       |
+| `calendarMode()`    | Choose the calendar mode (week with various rows or month-view). |
+| `disableTimeline()` |  Disable either past or future dates.                            |
+| `rangeYears()`      | Set the range of years into past and future.                     |
+| `disable()`         | Pass a `Calendar` object to disable various dates for selection. |
+| `showButtons()`     | Show or hide the buttons view.                                   |
 
 ## Color
 
@@ -577,13 +593,13 @@ For the default color sheet use it as following:
       }
     }
 
-Function | Action
---- | ---
-`defaultView()` | Select the default color view (Colors from templates or custom).
-`disableSwitchColorView()` | Disable to switch between color views.
-`defaultColor()` | Set default selected color.
-`colors()` | Pass all colors to be displayed in the color templates view.
-`disableAlpha()` | Disable alpha colors for custom colors.
+| Function                   | Action                                                           |
+| -------------------------- | ---------------------------------------------------------------- |
+| `defaultView()`            | Select the default color view (Colors from templates or custom). |
+| `disableSwitchColorView()` | Disable to switch between color views.                           |
+| `defaultColor()`           | Set default selected color.                                      |
+| `colors()`                 | Pass all colors to be displayed in the color templates view.     |
+| `disableAlpha()`           | Disable alpha colors for custom colors.                          |
 
 ## Custom
 
@@ -635,15 +651,15 @@ All of the base functionality can be used and on top of that you can extend the 
 
 You are free to use the components this library uses for it's sheet types.
 
-- `SheetTitle`
-- `SheetContent`
-- `SheetDigit`
-- `SheetNumericalInput`
-- `SheetDivider`
-- `SheetButton`
-- `SheetEdit`
-- `SheetRecyclerView`
-- `SheetValue`
+-   `SheetTitle`
+-   `SheetContent`
+-   `SheetDigit`
+-   `SheetNumericalInput`
+-   `SheetDivider`
+-   `SheetButton`
+-   `SheetEdit`
+-   `SheetRecyclerView`
+-   `SheetValue`
 
 ## Lottie
 
@@ -690,12 +706,12 @@ You can use the Lottie animation as a cover for any type of sheet.
       ...
     }
 
-Function | Action
---- | ---
-`playCoverAnimation()` | Play the animation.
-`resumeCoverAnimation()` | Resume the animation.
-`pauseCoverAnimation()` | Pause the animation.
-`cancelCoverAnimation()` | Cancel the animation.
+| Function                 | Action                |
+| ------------------------ | --------------------- |
+| `playCoverAnimation()`   | Play the animation.   |
+| `resumeCoverAnimation()` | Resume the animation. |
+| `pauseCoverAnimation()`  | Pause the animation.  |
+| `cancelCoverAnimation()` | Cancel the animation. |
 
 ## Appearance
 
