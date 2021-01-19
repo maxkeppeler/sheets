@@ -799,6 +799,11 @@ Override the appearance of the positive button.
     <item name="sheetPositiveButtonCornerRadius">12dp<item>
     <item name="sheetPositiveButtonCornerFamily">cut<item>
 
+Override the border appearance of the outlined button.
+
+    <item name="sheetButtonOutlinedButtonBorderColor">@color/borderColor<item>
+    <item name="sheetButtonOutlinedButtonBorderWidth">1dp<item>
+
 The corner family and radius is applied to the button shape or in the case of a outlined or text button, to the ripple background shape.
 
 **Fine control**
