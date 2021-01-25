@@ -22,6 +22,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -200,15 +201,17 @@ class InfoSheet : Sheet() {
     }
 
     /** Build [InfoSheet] and show it later. */
-    fun build(ctx: Context, func: InfoSheet.() -> Unit): InfoSheet {
+    fun build(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: InfoSheet.() -> Unit): InfoSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         return this
     }
 
     /** Build and show [InfoSheet] directly. */
-    fun show(ctx: Context, func: InfoSheet.() -> Unit): InfoSheet {
+    fun show(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: InfoSheet.() -> Unit): InfoSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         this.show()
         return this

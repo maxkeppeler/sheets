@@ -22,6 +22,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.maxkeppeler.sheets.core.Sheet
@@ -228,15 +229,17 @@ class InputSheet : Sheet() {
     }
 
     /** Build [InputSheet] and show it later. */
-    fun build(ctx: Context, func: InputSheet.() -> Unit): InputSheet {
+    fun build(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: InputSheet.() -> Unit): InputSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         return this
     }
 
     /** Build and show [InputSheet] directly. */
-    fun show(ctx: Context, func: InputSheet.() -> Unit): InputSheet {
+    fun show(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: InputSheet.() -> Unit): InputSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         this.show()
         return this

@@ -69,6 +69,7 @@ abstract class SheetFragment : DialogFragment() {
     protected var cornerRadiusDp: Float? = null
     private var borderStrokeWidthDp: Float? = null
     private var borderStrokeColor: Int? = null
+    var viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT
 
     /** Set sheet style. */
     fun style(style: SheetStyle) {
@@ -293,13 +294,17 @@ abstract class SheetFragment : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        if (sheetStyle == SheetStyle.DIALOG) {
-            dialog?.window?.apply {
-                setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            }
+//        if (sheetStyle == SheetStyle.DIALOG) {
+//
+//            dialog?.window?.apply {
+//
+//                setLayout(viewWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
+//            }
+//        }
+
+        dialog?.window?.apply {
+
+            setLayout(viewWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
 

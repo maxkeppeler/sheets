@@ -26,6 +26,7 @@ import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -424,15 +425,17 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
     }
 
     /** Build [ColorSheet] and show it later. */
-    fun build(ctx: Context, func: ColorSheet.() -> Unit): ColorSheet {
+    fun build(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: ColorSheet.() -> Unit): ColorSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         return this
     }
 
     /** Build and show [ColorSheet] directly. */
-    fun show(ctx: Context, func: ColorSheet.() -> Unit): ColorSheet {
+    fun show(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: ColorSheet.() -> Unit): ColorSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         this.show()
         return this

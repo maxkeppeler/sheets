@@ -27,6 +27,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EdgeEffect
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
@@ -862,15 +863,17 @@ class CalendarSheet : Sheet() {
     }
 
     /** Build [CalendarSheet] and show it later. */
-    fun build(ctx: Context, func: CalendarSheet.() -> Unit): CalendarSheet {
+    fun build(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: CalendarSheet.() -> Unit): CalendarSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         return this
     }
 
     /** Build and show [CalendarSheet] directly. */
-    fun show(ctx: Context, func: CalendarSheet.() -> Unit): CalendarSheet {
+    fun show(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: CalendarSheet.() -> Unit): CalendarSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         this.show()
         return this

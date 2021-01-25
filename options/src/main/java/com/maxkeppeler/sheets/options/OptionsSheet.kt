@@ -25,6 +25,7 @@ import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
@@ -553,6 +554,23 @@ class OptionsSheet : Sheet() {
     /** Build and show [OptionsSheet] directly. */
     fun show(ctx: Context, func: OptionsSheet.() -> Unit): OptionsSheet {
         this.windowContext = ctx
+        this.func()
+        this.show()
+        return this
+    }
+
+    /** Build [OptionsSheet] and show it later. */
+    fun build(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: OptionsSheet.() -> Unit): OptionsSheet {
+        this.windowContext = ctx
+        this.viewWidth = viewWidth
+        this.func()
+        return this
+    }
+
+    /** Build and show [OptionsSheet] directly. */
+    fun show(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: OptionsSheet.() -> Unit): OptionsSheet {
+        this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         this.show()
         return this

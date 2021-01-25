@@ -22,6 +22,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.maxkeppeler.sheets.core.Sheet
@@ -190,15 +191,17 @@ class TimeSheet : Sheet() {
     }
 
     /** Build [TimeSheet] and show it later. */
-    fun build(ctx: Context, func: TimeSheet.() -> Unit): TimeSheet {
+    fun build(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: TimeSheet.() -> Unit): TimeSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         return this
     }
 
     /** Build and show [TimeSheet] directly. */
-    fun show(ctx: Context, func: TimeSheet.() -> Unit): TimeSheet {
+    fun show(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: TimeSheet.() -> Unit): TimeSheet {
         this.windowContext = ctx
+        this.viewWidth = viewWidth
         this.func()
         this.show()
         return this
