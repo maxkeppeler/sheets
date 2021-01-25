@@ -545,21 +545,6 @@ class OptionsSheet : Sheet() {
     }
 
     /** Build [OptionsSheet] and show it later. */
-    fun build(ctx: Context, func: OptionsSheet.() -> Unit): OptionsSheet {
-        this.windowContext = ctx
-        this.func()
-        return this
-    }
-
-    /** Build and show [OptionsSheet] directly. */
-    fun show(ctx: Context, func: OptionsSheet.() -> Unit): OptionsSheet {
-        this.windowContext = ctx
-        this.func()
-        this.show()
-        return this
-    }
-
-    /** Build [OptionsSheet] and show it later. */
     fun build(ctx: Context, viewWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT, func: OptionsSheet.() -> Unit): OptionsSheet {
         this.windowContext = ctx
         this.viewWidth = viewWidth
