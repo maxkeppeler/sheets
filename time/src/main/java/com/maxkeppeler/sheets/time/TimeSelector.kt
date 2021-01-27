@@ -48,7 +48,7 @@ internal class TimeSelector(
     private val textColor = getTextColor(ctx)
     private val primaryColor = getPrimaryColor(ctx)
 
-    private val time = StringBuffer()
+    private val time = StringBuffer("0")
 
     init {
 
@@ -78,7 +78,7 @@ internal class TimeSelector(
 
     private fun validate() {
 
-        if (time.isNotEmpty() && time.toString().toInt() != 0) {
+        if (time.isNotEmpty()) {
 
             val timeInSeconds = getTimeInSeconds()
 
