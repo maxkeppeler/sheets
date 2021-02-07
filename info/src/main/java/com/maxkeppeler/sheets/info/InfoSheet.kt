@@ -19,6 +19,10 @@
 package com.maxkeppeler.sheets.info
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,10 +31,13 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.PositiveListener
+import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.utils.getIconColor
+import com.maxkeppeler.sheets.core.utils.toBitmap
 import com.maxkeppeler.sheets.info.databinding.SheetsInfoBinding
+import java.io.ByteArrayOutputStream
+
 
 /**
  * The [InfoSheet] lets you display an information or warning.
@@ -42,6 +49,7 @@ class InfoSheet : Sheet() {
     companion object {
         private const val STATE_CONTENT_TEXT = "state_content_text"
         private const val STATE_DISPLAY_BUTTONS = "state_display_buttons"
+        private const val STATE_DRAWABLE_RES = "state_drawable_res"
         private const val STATE_DRAWABLE = "state_drawable"
         private const val STATE_DRAWABLE_COLOR = "state_drawable_color"
     }
@@ -50,6 +58,8 @@ class InfoSheet : Sheet() {
 
     private var contentText: String? = null
     private var displayButtons = true
+
+    private var drawable: Drawable? = null
 
     @DrawableRes
     private var drawableRes: Int? = null
@@ -89,6 +99,13 @@ class InfoSheet : Sheet() {
     /** Set a drawable left of the text. */
     fun drawable(@DrawableRes drawableRes: Int) {
         this.drawableRes = drawableRes
+        this.drawable = null
+    }
+
+    /** Set a drawable left of the text. */
+    fun drawable(drawable: Drawable) {
+        this.drawable = drawable
+        this.drawableRes = null
     }
 
     /** Set the color of the drawable. */
@@ -137,7 +154,7 @@ class InfoSheet : Sheet() {
     fun onPositive(
         positiveText: String,
         @DrawableRes drawableRes: Int,
-        positiveListener: PositiveListener? = null
+        positiveListener: PositiveListener? = null,
     ) {
         this.positiveText = positiveText
         this.positiveButtonDrawableRes = drawableRes
@@ -154,7 +171,7 @@ class InfoSheet : Sheet() {
     fun onPositive(
         @StringRes positiveRes: Int,
         @DrawableRes drawableRes: Int,
-        positiveListener: PositiveListener? = null
+        positiveListener: PositiveListener? = null,
     ) {
         this.positiveText = windowContext.getString(positiveRes)
         this.positiveButtonDrawableRes = drawableRes
@@ -174,9 +191,13 @@ class InfoSheet : Sheet() {
         displayButtonsView(displayButtons)
         with(binding) {
             contentText?.let { content.text = it }
-            drawableRes?.let { res ->
-                val drawable = ContextCompat.getDrawable(requireContext(), res)
-                icon.setImageDrawable(drawable)
+            if (drawableRes != null || drawable != null) {
+                val infoIconDrawable = drawable ?: drawableRes?.let {
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        it)
+                }
+                icon.setImageDrawable(infoIconDrawable)
                 icon.setColorFilter(drawableColor ?: getIconColor(requireContext()))
                 icon.visibility = View.VISIBLE
             }
@@ -187,14 +208,25 @@ class InfoSheet : Sheet() {
         savedState?.let { saved ->
             contentText = saved.getString(STATE_CONTENT_TEXT)
             drawableColor = saved.get(STATE_DRAWABLE_COLOR) as Int?
-            drawableRes = saved.get(STATE_DRAWABLE) as Int?
+            drawableRes = saved.get(STATE_DRAWABLE_RES) as Int?
+            (saved.get(STATE_DRAWABLE) as ByteArray?)?.let {
+                drawable = BitmapDrawable(requireContext().resources,
+                    BitmapFactory.decodeByteArray(it, 0, it.size))
+            }
         }
     }
 
     override fun onSaveCustomViewInstanceState(outState: Bundle) {
         with(outState) {
             drawableColor?.let { outState.putInt(STATE_DRAWABLE_COLOR, it) }
-            drawableRes?.let { putInt(STATE_DRAWABLE, it) }
+            drawableRes?.let { putInt(STATE_DRAWABLE_RES, it) }
+            drawable?.let {
+                val bitmap =  it.toBitmap()
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                val drawableByteArray = stream.toByteArray()
+                putByteArray(STATE_DRAWABLE, drawableByteArray)
+            }
             putString(STATE_CONTENT_TEXT, contentText)
         }
     }
