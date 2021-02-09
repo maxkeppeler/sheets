@@ -721,8 +721,6 @@ You can use the Lottie animation as a cover for any type of sheet.
 By default, the library switches to either day or night mode depending on the attr `textColorPrimary`.
 By default it uses the activity's colorPrimary. The default `highlightColor` is generated based on the color `sheetPrimaryColor`, or if not available `colorPrimary`.
 
-<img src="art/img_bottom_sheet_appearance_example_options_grid_compact.png" width="35%" alt="Sheets Appearance Example">
-
 ### Base
 
 You want a different sheet background shape?
