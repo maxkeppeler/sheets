@@ -18,6 +18,7 @@
 
 package com.maxkeppeler.sheets.core
 
+import android.content.DialogInterface
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -35,16 +36,22 @@ import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.databinding.SheetsBaseBinding
 import java.io.Serializable
 
-/** Listener which is invoked when the positive button is clicked. */
+/** Listener that is invoked when the positive button is clicked. */
 typealias PositiveListener = () -> Unit
 
-/** Listener which is invoked when the negative button is clicked. */
+/** Listener that is invoked when the negative button is clicked. */
 typealias NegativeListener = () -> Unit
 
-/** Listener which is invoked when the sheet is dismissed. */
+/** Listener that is invoked when the sheet is dismissed through a positive or negative action. */
 typealias DismissListener = () -> Unit
 
-/** Listener which is invoked when buttons are clicked. */
+/** Listener that is invoked when the sheet is cancelled. Works only if sheet is cancelable. */
+typealias CancelListener = () -> Unit
+
+/** Listener that is invoked when the sheet is closed. */
+typealias CloseListener = () -> Unit
+
+/** Listener that is invoked when buttons are clicked. */
 typealias ClickListener = () -> Unit
 
 /**
@@ -88,6 +95,8 @@ abstract class Sheet : SheetFragment() {
         private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE =
             "state_base_negative_button_drawable"
         private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
+        private const val STATE_BASE_CANCEL_LISTENER = "state_base_cancel_listener"
+        private const val STATE_BASE_CLOSE_LISTENER = "state_base_close_listener"
         private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
         private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
         private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
@@ -100,6 +109,8 @@ abstract class Sheet : SheetFragment() {
     protected var positiveListener: PositiveListener? = null
     private var negativeListener: NegativeListener? = null
     private var dismissListener: DismissListener? = null
+    private var cancelListener: CancelListener? = null
+    private var closeListener: CloseListener? = null
 
     private var topStyle = TopStyle.ABOVE_COVER
 
@@ -284,15 +295,31 @@ abstract class Sheet : SheetFragment() {
         this.negativeListener = negativeListener
     }
 
-    /** Sets a listener that is invoked when the sheet is dismissed. */
-    fun onDismiss(dismissListener: DismissListener? = null) {
+    /** Sets a listener that is invoked when the sheet is dismissed (after negative or positive button click). */
+    fun onDismiss(dismissListener: DismissListener) {
         this.dismissListener = dismissListener
     }
 
-    /** Override dismiss to trigger custom dismiss listener. */
+    /** Sets a listener that is invoked when the sheet is cancelled. */
+    fun onCancel(cancelListener: CancelListener) {
+        this.cancelListener = cancelListener
+    }
+
+    /** Sets a listener that is invoked when the sheet is closed. */
+    fun onClose(closeListener: CloseListener) {
+        this.closeListener = closeListener
+    }
+
     override fun dismiss() {
         super.dismiss()
-        dismissListener?.invoke()
+        this.dismissListener?.invoke()
+        this.closeListener?.invoke()
+    }
+
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        this.cancelListener?.invoke()
+        this.closeListener?.invoke()
     }
 
     /**
@@ -384,11 +411,11 @@ abstract class Sheet : SheetFragment() {
             displayHandle = saved.get(STATE_BASE_DISPLAY_HANDLE) as Boolean?
             negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
+            negativeListener = saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
+            positiveListener = saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
-            negativeListener =
-                saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
-            positiveListener =
-                saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
+            cancelListener = saved.getSerializable(STATE_BASE_CANCEL_LISTENER) as CancelListener?
+            closeListener = saved.getSerializable(STATE_BASE_CLOSE_LISTENER) as CloseListener?
             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
             coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
             closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
@@ -436,9 +463,11 @@ abstract class Sheet : SheetFragment() {
             iconButtons.forEachIndexed { i, btn ->
                 putSerializable(STATE_BASE_ICON_BUTTONS.plus(i), btn)
             }
-            putSerializable(STATE_BASE_DISMISS_LISTENER, dismissListener as Serializable?)
             putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
             putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
+            putSerializable(STATE_BASE_DISMISS_LISTENER, dismissListener as Serializable?)
+            putSerializable(STATE_BASE_CANCEL_LISTENER, cancelListener as Serializable?)
+            putSerializable(STATE_BASE_CLOSE_LISTENER, closeListener as Serializable?)
             putInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT, addOnComponents.size)
             addOnComponents.forEachIndexed { i, function ->
                 putSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(i), function as Serializable?)
