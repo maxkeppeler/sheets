@@ -82,6 +82,8 @@ abstract class Sheet : SheetFragment() {
         private const val STATE_BASE_SHEET_STYLE = "state_base_sheet_style"
         private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
         private const val STATE_BASE_TOP_STYLE = "state_top_style"
+        private const val STATE_BASE_NEGATIVE_BUTTON_STYLE = "state_negative_button_style"
+        private const val STATE_BASE_POSITIVE_BUTTON_STYLE = "state_positive_button_style"
         private const val STATE_BASE_COVER_IMAGE = "state_cover_image"
         private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
         private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
@@ -113,6 +115,8 @@ abstract class Sheet : SheetFragment() {
     private var closeListener: CloseListener? = null
 
     private var topStyle = TopStyle.ABOVE_COVER
+    private var negativeButtonStyle: ButtonStyle? = null
+    private var positiveButtonStyle: ButtonStyle? = null
 
     private var useCover: Boolean = false
     private var coverImage: Image? = null
@@ -126,6 +130,7 @@ abstract class Sheet : SheetFragment() {
     private var iconButtons: Array<IconButton?> = arrayOfNulls(ICON_BUTTONS_AMOUNT_MAX)
 
     private var titleText: String? = null
+
     @ColorInt
     private var titleColor: Int? = null
 
@@ -134,12 +139,23 @@ abstract class Sheet : SheetFragment() {
 
     @DrawableRes
     protected var positiveButtonDrawableRes: Int? = null
+
     @DrawableRes
     private var negativeButtonDrawableRes: Int? = null
 
     /** Set the top style. */
     fun topStyle(topStyle: TopStyle) {
         this.topStyle = topStyle
+    }
+
+    /** Set the negative button style. */
+    fun negativeButtonStyle(negativeButtonStyle: ButtonStyle) {
+        this.negativeButtonStyle = negativeButtonStyle
+    }
+
+    /** Set the positive button style. */
+    fun positiveButtonStyle(positiveButtonStyle: ButtonStyle) {
+        this.positiveButtonStyle = positiveButtonStyle
     }
 
     /** Set a cover image. */
@@ -411,12 +427,16 @@ abstract class Sheet : SheetFragment() {
             displayHandle = saved.get(STATE_BASE_DISPLAY_HANDLE) as Boolean?
             negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
             positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
-            negativeListener = saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
-            positiveListener = saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
+            negativeListener =
+                saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
+            positiveListener =
+                saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
             dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
             cancelListener = saved.getSerializable(STATE_BASE_CANCEL_LISTENER) as CancelListener?
             closeListener = saved.getSerializable(STATE_BASE_CLOSE_LISTENER) as CloseListener?
             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
+            negativeButtonStyle = saved.getSerializable(STATE_BASE_NEGATIVE_BUTTON_STYLE) as ButtonStyle?
+            positiveButtonStyle = saved.getSerializable(STATE_BASE_POSITIVE_BUTTON_STYLE) as ButtonStyle?
             coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
             closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
             val icons = mutableListOf<IconButton>()
@@ -458,6 +478,8 @@ abstract class Sheet : SheetFragment() {
             negativeButtonDrawableRes?.let { putInt(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE, it) }
             positiveButtonDrawableRes?.let { putInt(STATE_BASE_POSITIVE_BUTTON_DRAWABLE, it) }
             putSerializable(STATE_BASE_TOP_STYLE, topStyle)
+            putSerializable(STATE_BASE_NEGATIVE_BUTTON_STYLE, negativeButtonStyle)
+            putSerializable(STATE_BASE_POSITIVE_BUTTON_STYLE, positiveButtonStyle)
             putSerializable(STATE_BASE_COVER_IMAGE, coverImage)
             putSerializable(STATE_BASE_CLOSE_ICON_BUTTON, closeIconButton)
             iconButtons.forEachIndexed { i, btn ->
@@ -707,11 +729,13 @@ abstract class Sheet : SheetFragment() {
     private fun setupButtonsView() {
 
         base.buttons.btnNegativeContainer.setupNegativeButton(
+            buttonStyle = negativeButtonStyle,
             btnText = negativeText ?: getString(R.string.cancel),
             btnDrawable = negativeButtonDrawableRes
         ) { negativeListener?.invoke(); dismiss() }
 
         base.buttons.btnPositiveContainer.setupPositiveButton(
+            buttonStyle = positiveButtonStyle,
             btnText = positiveText ?: getString(R.string.ok),
             btnDrawable = positiveButtonDrawableRes
         ) { positiveListener?.invoke(); dismiss() }
