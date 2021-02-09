@@ -20,7 +20,6 @@ package com.maxkeppeler.sheets.core.views
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -40,7 +39,7 @@ internal typealias ButtonClickListener = () -> Unit
 class SheetButtonContainer
 @JvmOverloads constructor(
     val ctx: Context,
-    attrs: AttributeSet? = null
+    attrs: AttributeSet? = null,
 ) : LinearLayoutCompat(ctx, attrs) {
 
     companion object {
@@ -58,18 +57,19 @@ class SheetButtonContainer
     }
 
     private fun createButton(
+        style: ButtonStyle? = null,
         btnText: String,
         @DrawableRes btnDrawable: Int?,
         btnListener: ButtonClickListener,
         negative: Boolean,
-        shapeModel: ShapeAppearanceModel.Builder
+        shapeModel: ShapeAppearanceModel.Builder,
     ) {
 
         val buttonStyleAttr = if (negative) R.attr.sheetNegativeButtonType
         else R.attr.sheetPositiveButtonType
 
         val buttonStyleValue = intOfAttrs(ctx, buttonStyleAttr) ?: ButtonStyle.TEXT.ordinal
-        val buttonStyle = ButtonStyle.values()[buttonStyleValue]
+        val buttonStyle = style ?: ButtonStyle.values()[buttonStyleValue]
 
         val primaryColor = colorOfAttrs(
             ctx,
@@ -126,10 +126,12 @@ class SheetButtonContainer
                             0 /* Set border stroke width to zero to remove the border and simulate a normal TextButton. */
                     }
                     ButtonStyle.OUTLINED -> {
-                        outlinedButtonBorderColor.takeUnlessNotResolved()?.let { strokeColor = ColorStateList.valueOf(it) }
+                        outlinedButtonBorderColor.takeUnlessNotResolved()
+                            ?.let { strokeColor = ColorStateList.valueOf(it) }
                         outlinedButtonBorderWidth?.let { strokeWidth = it.toInt() }
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             }.build()
 
@@ -138,9 +140,10 @@ class SheetButtonContainer
 
     /** Setup a negative button. */
     fun setupNegativeButton(
+        buttonStyle: ButtonStyle?,
         btnText: String,
         @DrawableRes btnDrawable: Int?,
-        btnListener: ButtonClickListener
+        btnListener: ButtonClickListener,
     ) {
 
         val parentFamily = R.attr.sheetButtonCornerFamily
@@ -212,14 +215,15 @@ class SheetButtonContainer
             setTopRightCorner(negBtnTopRightFamily, negBtnTopRightRadius.toDp())
         }
 
-        createButton(btnText, btnDrawable, btnListener, true, shapeModel)
+        createButton(buttonStyle, btnText, btnDrawable, btnListener, true, shapeModel)
     }
 
     /** Setup a positive button. */
     fun setupPositiveButton(
+        buttonStyle: ButtonStyle?,
         btnText: String,
         @DrawableRes btnDrawable: Int?,
-        btnListener: ButtonClickListener
+        btnListener: ButtonClickListener,
     ) {
 
         val parentFamily = R.attr.sheetButtonCornerFamily
@@ -291,7 +295,7 @@ class SheetButtonContainer
             setTopRightCorner(posBtnTopRightFamily, posBtnTopRightRadius.toDp())
         }
 
-        createButton(btnText, btnDrawable, btnListener, false, shapeModel)
+        createButton(buttonStyle, btnText, btnDrawable, btnListener, false, shapeModel)
     }
 
     /** Make positive button clickable. */
