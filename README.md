@@ -23,7 +23,7 @@ Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the ava
   </p>
 </p>
 
-<img src="art/img_showcase.png" alt="sheets Library">
+<img src="art/showcase.png" alt="sheets Library">
 <a href="https://github.com/maxkeppeler/sheets">
   <img style="margin-right: 4px; margin-bottom: 8px" alt="Give this library a star" src="https://img.shields.io/github/stars/maxkeppeler/sheets?style=social">
 </a>
