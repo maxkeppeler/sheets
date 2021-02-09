@@ -182,11 +182,11 @@ For the default info sheet use it as following:
       }
     }
 
-| Function          | Action              |
-| ----------------- | ------------------- |
-| `content()`       | Set content text.   |
-| `drawable()`      | Set drawable.       |
-| `drawableColor()` | Set drawable color. |
+| Function        | Action              |
+| --------------- | ------------------- |
+| content()       | Set content text.   |
+| drawable()      | Set drawable.       |
+| drawableColor() | Set drawable color. |
 
 ## Options
 
