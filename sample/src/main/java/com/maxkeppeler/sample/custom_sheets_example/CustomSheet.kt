@@ -22,8 +22,9 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StringRes
 import com.maxkeppeler.sheets.core.Sheet
-import com.maxkeppeler.sheets.core.PositiveListener
 import com.maxkeppeler.sample.databinding.BottomSheetsCustomBinding
+
+private typealias PositiveListener = () -> Unit
 
 @Suppress("unused")
 class CustomSheet : Sheet() {
