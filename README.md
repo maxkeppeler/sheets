@@ -8,8 +8,8 @@
 
 Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the available sheets or build custom sheets on top of the existing functionality.
 
-   <a href="https://github.com/maxkeppeler/sheets">
-     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/bintray/v/maximilian-keppeler/maven/sheets:core?color=%23&label=">
+   <a href="https://search.maven.org/search?q=g:%22com.maxkeppeler.sheets%22">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central">
    </a>
 
    <a href="https://github.com/maxkeppeler/sheets">
@@ -20,10 +20,6 @@ Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the ava
      <img style="margin-right: 4px; margin-bottom: 8px;" alt="GitHub" src="https://img.shields.io/github/license/maxkeppeler/sheets?color=%23007EC6&label=">
    </a>
 
-  </p>
-</p>
-
-<img src="art/showcase.png" alt="sheets Library">
 <a href="https://github.com/maxkeppeler/sheets">
   <img style="margin-right: 4px; margin-bottom: 8px" alt="Give this library a star" src="https://img.shields.io/github/stars/maxkeppeler/sheets?style=social">
 </a>
@@ -48,6 +44,13 @@ Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the ava
   <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/maxkeppeler?label=Follow&style=social">
 </a>
 
+  </p>
+</p>
+
+Read in [Deutsch](README.de_DE.md) or [简体中文](README.zh_CN.md).
+
+<img src="art/showcase.png" alt="sheets Library">
+
 ## Table of Contents
 
 - [Get started](#get-started)
@@ -70,11 +73,22 @@ Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the ava
 # Get started
 
 A sheet can dynamically be displayed as either a dialog or as a bottom-sheet.
-See all the sheets by installing the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
+Check out the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
 
 You have to use the `core` module as it is the foundation of any sheet.
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Acore/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Acore/_latestVersion)
+In your top-level `build.gradle` file:
+
+```gradle
+repositories {
+  ...
+  mavenCentral()
+}
+```
+
+In your app `build.gradle` file:
+
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
 ```gradle
 dependencies {
@@ -84,7 +98,7 @@ dependencies {
 ```
 
 **Base functions** <br/>
-Following functions can be called from any type and style of sheet as well as any custom sheet you build.
+Following functions can be called from any type of sheet.
 
 | Function              | Action                                                                           |
 | --------------------- | -------------------------------------------------------------------------------- |
@@ -114,7 +128,7 @@ Following functions can be called from any type and style of sheet as well as an
 | onClose()             | Set a listener that is invoked when the sheet is closed.                         |
 | show()                | show the sheet.                                                                  |
 
-Each of the sheets have an extension function called `build` and `show` where the receiver is the used sheet.<br/>
+Each sheet has an extension function called `build` and `show`.<br/>
 
 Use `build` to build a sheet and display it later.
 
@@ -132,7 +146,7 @@ Use `show` if you want to build and then immediately display it.
 
 ## Info
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Ainfo/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Ainfo/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/info.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
 The `Info` Sheet lets you display information or warning.
 
@@ -190,7 +204,7 @@ For the default info sheet use it as following:
 
 ## Options
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Aoptions/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Aoptions/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/options.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/options)
 
 The `Options` Sheet lets you display a grid or list of options.
 
@@ -283,7 +297,7 @@ For the default options sheet use it as following:
 
 ## Clock Time
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Atime-clock/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Atime-clock/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time-clock.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time-clock)
 
 The `Clock Time` Sheet lets you quickly pick a time.
 
@@ -327,7 +341,7 @@ For the default clock time sheet, in 24-hours format, use it as following:
 
 ## Time
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Atime/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Atime/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time)
 
 The `Time` Sheet lets you pick a duration time in a specific format.
 
@@ -366,14 +380,14 @@ For the default time sheet use it as following:
 
 | Function      | Action                                          |
 | ------------- | ----------------------------------------------- |
-| format()      | Sselect the time format. (hh:mm:ss, mm:ss, ...) |
+| format()      | Select the time format. (hh:mm:ss, mm:ss, ...) |
 | currentTime() | Set the current time in seconds.                |
 | minTime()     | Set the minimum time.                           |
-| maxTime()`    |  Set the maximum time.                          |
+| maxTime()`    | Set the maximum time.                          |
 
 ## Input
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Ainput/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Ainput/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/input.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/input)
 
 The `Input` Sheet lets you display a form consisting of various inputs.
 
@@ -510,7 +524,7 @@ For the default input sheet use it as following:
 
 ## Calendar
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Acalendar/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Acalendar/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/calendar.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.calendar/core)
 
 The `Calendar` Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
 
@@ -557,7 +571,7 @@ For the default time sheet use it as following:
 
 ## Color
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Acolor/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Acolor/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/color.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/color)
 
 The `Color` Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
 
@@ -636,8 +650,6 @@ dependencies {
 
 You can find a custom sheet implementation in the sample module.
 
-**For the default color sheet use it as following:**
-
 1.  Step: Create a class and extend from the class `Sheet`.
 
     class CustomSheet : Sheet() {
@@ -666,7 +678,7 @@ You are free to use the components this library uses for it's sheet types.
 
 ## Lottie
 
-[ ![Download](https://api.bintray.com/packages/maximilian-keppeler/maven/sheets%3Alottie/images/download.svg) ](https://bintray.com/maximilian-keppeler/maven/sheets%3Alottie/_latestVersion)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/lottie.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/lottie)
 
 The `Lottie` modules gives you the ability to use a [Lottie animations](https://airbnb.design/lottie/) as cover view.
 
@@ -837,7 +849,7 @@ Override appearance of selected options.
 
 Override appearance of disabled options.
 
-    <item name="sheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>
+    <item name="sheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>s
     <item name="sheetOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
     <item name="sheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
 
