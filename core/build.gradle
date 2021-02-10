@@ -12,9 +12,3 @@ dependencies {
     implementation deps.google_material
     implementation deps.coil
 }
-
-task androidJavadocs(type: Javadoc) {
-    failOnError false // add this line
-//    source = android.sourceSets.main.allJava
-//    source = android.sourceSets.main.java.getSrcDirs()
-}

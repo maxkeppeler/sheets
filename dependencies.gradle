@@ -11,8 +11,7 @@ ext.deps = [
     gradle_plugins: [
         android: "com.android.tools.build:gradle:4.1.0",
         kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20",
-        versions: "com.github.ben-manes:gradle-versions-plugin:0.27.0",
-        bintray_release: "com.github.panpf.bintray-publish:bintray-publish:1.0.0",
+        versions: "com.github.ben-manes:gradle-versions-plugin:0.27.0"
     ],
 
     androidx: [

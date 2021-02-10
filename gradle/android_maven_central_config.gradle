@@ -1,0 +1,146 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+File localPropsFile = project.rootProject.file('local.properties')
+if (localPropsFile.exists()) {
+    Properties p = new Properties()
+    p.load(new FileInputStream(localPropsFile))
+    p.each { name, value ->
+        ext[name] = value
+    }
+} else {
+    throw new IllegalStateException("OSSRH and signing info is missing.")
+}
+
+if (versions == null || versions.release_version == null) {
+    throw new IllegalStateException("Unable to reference release_version!")
+} else if (module_group == null || module_name == null) {
+    throw new IllegalStateException("Must provide module_group and module_name!")
+}
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "source"
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    destinationDir = file("../javadoc/")
+    failOnError false
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from tasks.javadoc.destinationDir
+}
+//Creating sources with comments
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    setArchiveName()
+    from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+    archives javadocJar
+    archives androidSourcesJar
+}
+
+signing {
+    sign publishing.publications
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release"
+            release(MavenPublication) {
+
+                // Set coordinates of each library
+                groupId module_group
+                artifactId module_name
+                version versions.release_version
+
+                // Two artifacts, the `aar` and the sources
+                artifact(bundleReleaseAar)
+
+                // Metadata
+                pom {
+                    name = module_name
+                    description = 'Offers a range of beautiful sheets (dialogs & bottom sheets) for quick use in your project.'
+                    url = 'https://github.com/maxkeppeler/sheets'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'maxkeppeler'
+                            name = 'Maximilian Keppeler'
+                            email = 'maximilian.keppeler@gmail.com'
+                        }
+                    }
+                    // VCS info
+                    scm {
+                        connection = 'scm:git:github.com/maxkeppeler/sheets.git'
+                        developerConnection = 'scm:git:ssh://github.com/maxkeppeler/sheets.git'
+                        url = 'https://github.com/maxkeppeler/sheets/tree/main'
+                    }
+
+                    // Hack to fix that POM includes any transitive dependencies
+                    withXml {
+                        def dependenciesNode = asNode().appendNode('dependencies')
+
+                        println("allDependencies")
+                        project.configurations.implementation.allDependencies.each {
+                            println("Dependency: $it.group.$it.name.$it.version")
+                        }
+
+                        println("dependencies")
+                        project.configurations.implementation.dependencies.each {
+                            println("Dependency: $it.group.$it.name.$it.version")
+                        }
+
+                        println("transfer dependencies")
+                        project.configurations.implementation.allDependencies.each {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            if (it.name == "core") {
+                                dependencyNode.appendNode('groupId', "com.maxkeppeler.sheets")
+                                dependencyNode.appendNode('artifactId', "core")
+                                dependencyNode.appendNode('version', versions.release_version)
+                            } else {
+                                dependencyNode.appendNode('groupId', it.group)
+                                dependencyNode.appendNode('artifactId', it.name)
+                                dependencyNode.appendNode('version', it.version)
+                            }
+                            println("Dependency node: $dependencyNode")
+                        }
+                    }
+                }
+            }
+        }
+
+        repositories {
+
+            maven {
+                // This is an arbitrary name, you may also use "mavencentral" or
+                // any other name that's descriptive for you
+                name = "sonatype"
+
+                def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+                // You only need this if you want to publish snapshots, otherwise just set the URL
+                // to the release repo directly
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+                // OSSRH username and password
+                credentials {
+                    username ossrhUsername
+                    password ossrhPassword
+                }
+            }
+        }
+    }
+}
+
+
