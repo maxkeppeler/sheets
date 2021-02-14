@@ -25,6 +25,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EdgeEffect
@@ -658,6 +659,7 @@ class CalendarSheet : Sheet() {
                         }
                     textView.setTextColor(colorText)
                     textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                    textView.gravity = Gravity.CENTER
                     holder.legend.addView(textView)
                 }
             }

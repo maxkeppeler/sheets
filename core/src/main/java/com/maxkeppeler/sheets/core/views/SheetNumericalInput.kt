@@ -139,6 +139,7 @@ class SheetNumericalInput
             )
             isClickable = true
             textAlignment = TEXT_ALIGNMENT_CENTER
+            gravity = Gravity.CENTER
             setTypeface(this.typeface, Typeface.BOLD)
             isFocusable = true
             tag = digitValue
