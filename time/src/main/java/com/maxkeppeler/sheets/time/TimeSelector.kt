@@ -268,14 +268,41 @@ internal class TimeSelector(
 
         // No support for days yet
         val filledTimeString = StringBuilder().apply {
-            append(hours.toString().padStart(2, '0'))
-            append(minutes.toString().padStart(2, '0'))
-            append(seconds.toString().padStart(2, '0'))
+            when(format) {
+                TimeFormat.HH_MM_SS -> {
+                    append(hours.toString().padStart(2, '0'))
+                    append(minutes.toString().padStart(2, '0'))
+                    append(seconds.toString().padStart(2, '0'))
+                }
+                TimeFormat.HH_MM -> {
+                    append(hours.toString().padStart(2, '0'))
+                    append(minutes.toString().padStart(2, '0'))
+                }
+                TimeFormat.MM_SS -> {
+                    append(minutes.toString().padStart(2, '0'))
+                    append(seconds.toString().padStart(2, '0'))
+                }
+                TimeFormat.M_SS -> {
+                    append(minutes.toString().substring(0, minutes.toString().length.coerceAtMost(1)))
+                    append(seconds.toString().padStart(2, '0'))
+                }
+                TimeFormat.HH -> {
+                    append(hours.toString().padStart(2, '0'))
+                }
+                TimeFormat.MM -> {
+                    append(minutes.toString().padStart(2, '0'))
+                }
+                TimeFormat.SS -> {
+                    append(seconds.toString().padStart(2, '0'))
+                }
+            }
         }
 
-        filledTimeString.reversed().dropLastWhile { it == '0' }.forEach {
+        time.setLength(0)
+        filledTimeString.reversed().forEach {
             time.insert(0, it)
         }
+
         binding.timeValue.text = getFormattedTime()
         validate()
     }
