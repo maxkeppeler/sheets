@@ -252,7 +252,7 @@ class CalendarSheet : Sheet() {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
         displayButtonsView(displayButtons)
-        validate()
+        validate(true)
         initResources()
         with(binding) {
             setupSwitchViews()
@@ -784,7 +784,7 @@ class CalendarSheet : Sheet() {
         return years
     }
 
-    private fun validate() {
+    private fun validate(init: Boolean = false) {
 
         val maxRangeLengthDays = TimeUnit.DAYS.toSeconds(maxRange.toLong())
 
@@ -800,7 +800,7 @@ class CalendarSheet : Sheet() {
             Handler(Looper.getMainLooper()).postDelayed({
                 save()
             }, 600)
-        } else displayButtonPositive(selectionValid)
+        } else displayButtonPositive(selectionValid, !init)
     }
 
     private fun save() {

@@ -221,8 +221,8 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
         }
     }
 
-    private fun validate() {
-        displayButtonPositive(saveAllowed)
+    private fun validate(init: Boolean = false) {
+        displayButtonPositive(saveAllowed, !init)
     }
 
     private fun save() {
@@ -384,7 +384,7 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
             }
         }
 
-        validate()
+        validate(true)
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {

@@ -24,6 +24,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
@@ -400,13 +401,13 @@ class OptionsSheet : Sheet() {
             }
         }
 
-        validate()
+        validate(true)
     }
 
     /** Validate if the current selections fulfils the requirements. */
-    private fun validate() {
+    private fun validate(init: Boolean = false) {
 
-        displayButtonPositive(saveAllowed)
+        displayButtonPositive(saveAllowed, !init)
 
         if (multipleChoices) {
             updateMultipleChoicesInfo()

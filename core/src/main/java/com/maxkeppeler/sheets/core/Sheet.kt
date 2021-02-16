@@ -435,8 +435,10 @@ abstract class Sheet : SheetFragment() {
             cancelListener = saved.getSerializable(STATE_BASE_CANCEL_LISTENER) as CancelListener?
             closeListener = saved.getSerializable(STATE_BASE_CLOSE_LISTENER) as CloseListener?
             topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
-            negativeButtonStyle = saved.getSerializable(STATE_BASE_NEGATIVE_BUTTON_STYLE) as ButtonStyle?
-            positiveButtonStyle = saved.getSerializable(STATE_BASE_POSITIVE_BUTTON_STYLE) as ButtonStyle?
+            negativeButtonStyle =
+                saved.getSerializable(STATE_BASE_NEGATIVE_BUTTON_STYLE) as ButtonStyle?
+            positiveButtonStyle =
+                saved.getSerializable(STATE_BASE_POSITIVE_BUTTON_STYLE) as ButtonStyle?
             coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
             closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
             val icons = mutableListOf<IconButton>()
@@ -742,22 +744,22 @@ abstract class Sheet : SheetFragment() {
     }
 
     /** Display the positive button. */
-    protected fun displayButtonPositive(display: Boolean) {
+    protected fun displayButtonPositive(display: Boolean, fade: Boolean = true) {
         base.buttons.btnPositiveContainer.apply {
             positiveButtonClickable(display)
-            if (display) fadeIn() else fadeOut()
+            if (display) showButtonPositive(fade) else hideButtonPositive(fade)
         }
     }
 
     /** Show positive button */
-    protected fun showButtonPositive() {
-        base.buttons.btnPositiveContainer.fadeIn()
+    private fun showButtonPositive(fade: Boolean) {
+        base.buttons.btnPositiveContainer.run { if (fade) fadeIn() else fadeIn(duration = 0) }
         base.buttons.btnPositiveContainer.isClickable = true
     }
 
     /** Hide positive button. */
-    protected fun hideButtonPositive() {
-        base.buttons.btnPositiveContainer.fadeOut()
+    private fun hideButtonPositive(fade: Boolean) {
+        base.buttons.btnPositiveContainer.run { if (fade) fadeOut() else fadeOut(duration = 0) }
         base.buttons.btnPositiveContainer.isClickable = false
     }
 

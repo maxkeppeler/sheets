@@ -176,18 +176,16 @@ class InputSheet : Sheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
-
+        validate(true)
         contentText?.let { binding.content.text = it; binding.content.visibility = View.VISIBLE }
-
-        validate()
         with(binding.inputRecyclerView) {
             layoutManager = CustomLinearLayoutManager(requireContext(), true)
             adapter = InputAdapter(requireContext(), input, ::validate)
         }
     }
 
-    private fun validate() {
-        displayButtonPositive(saveAllowed)
+    private fun validate(init: Boolean = false) {
+        displayButtonPositive(saveAllowed, !init)
     }
 
     private fun save() {
