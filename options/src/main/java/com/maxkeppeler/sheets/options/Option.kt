@@ -18,6 +18,7 @@
 
 package com.maxkeppeler.sheets.options
 
+import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import java.io.Serializable
@@ -27,6 +28,9 @@ import java.io.Serializable
  * A drawable is optional but makes it easier to understand to the user.
  */
 class Option internal constructor(): Serializable {
+
+    internal var drawable: Drawable? = null
+        private set
 
     @DrawableRes
     internal var drawableRes: Int? = null
@@ -55,6 +59,16 @@ class Option internal constructor(): Serializable {
 
     constructor(@DrawableRes drawableRes: Int, text: String) : this() {
         this.drawableRes = drawableRes
+        this.text = text
+    }
+
+    constructor(drawable: Drawable, @StringRes textRes: Int) : this() {
+        this.drawable = drawable
+        this.textRes = textRes
+    }
+
+    constructor(drawable: Drawable, text: String) : this() {
+        this.drawable = drawable
         this.text = text
     }
 

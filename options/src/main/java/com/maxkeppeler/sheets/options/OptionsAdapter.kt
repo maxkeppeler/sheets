@@ -110,6 +110,11 @@ internal class OptionsAdapter(
 
         label.text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
 
+        option.drawable?.let {
+            icon.setImageDrawable(it)
+            icon.visibility = View.VISIBLE
+        }
+
         option.drawableRes?.let { res ->
             icon.setImageDrawable(ContextCompat.getDrawable(ctx, res))
             icon.visibility = View.VISIBLE
@@ -145,6 +150,11 @@ internal class OptionsAdapter(
         }
 
         label.text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
+
+        option.drawable?.let {
+            icon.setImageDrawable(it)
+            icon.visibility = View.VISIBLE
+        }
 
         option.drawableRes?.let { res ->
             icon.setImageDrawable(ContextCompat.getDrawable(ctx, res))
