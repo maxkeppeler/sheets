@@ -16,15 +16,28 @@
 
 package com.maxkeppeler.sample
 
+import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager.getDefaultSharedPreferences
 import android.text.InputType
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.textfield.TextInputLayout
+import com.maxkeppeler.sample.custom_sheets_example.CustomSheet
+import com.maxkeppeler.sample.databinding.MainActBinding
+import com.maxkeppeler.sample.utils.SheetExample
+import com.maxkeppeler.sample.utils.toFormattedDate
 import com.maxkeppeler.sheets.calendar.CalendarMode
 import com.maxkeppeler.sheets.calendar.CalendarSheet
 import com.maxkeppeler.sheets.calendar.SelectionMode
@@ -32,7 +45,7 @@ import com.maxkeppeler.sheets.calendar.TimeLine
 import com.maxkeppeler.sheets.color.ColorSheet
 import com.maxkeppeler.sheets.color.ColorView
 import com.maxkeppeler.sheets.core.*
-import com.maxkeppeler.sheets.core.utils.splitTime
+import com.maxkeppeler.sheets.core.layoutmanagers.CustomStaggeredGridLayoutManager
 import com.maxkeppeler.sheets.info.InfoSheet
 import com.maxkeppeler.sheets.input.InputSheet
 import com.maxkeppeler.sheets.input.Validation
@@ -46,13 +59,9 @@ import com.maxkeppeler.sheets.lottie.withCoverLottieAnimation
 import com.maxkeppeler.sheets.options.DisplayMode
 import com.maxkeppeler.sheets.options.Option
 import com.maxkeppeler.sheets.options.OptionsSheet
-import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
 import com.maxkeppeler.sheets.time.TimeFormat
 import com.maxkeppeler.sheets.time.TimeSheet
-import com.maxkeppeler.sample.custom_sheets_example.CustomSheet
-import com.maxkeppeler.sample.databinding.MainActBinding
-import com.maxkeppeler.sample.utils.SheetExample
-import com.maxkeppeler.sample.utils.toFormattedDate
+import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
@@ -69,24 +78,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: MainActBinding
+    private var sheetStyle: SheetStyle? = null
+    private var themeMode: ThemeMode? = null
 
-    override fun onCreate(saved: Bundle?) {
-//        val newTheme = R.style.BottomSheetSignNightTheme
-//        theme.applyStyle(newTheme, true)
-        super.onCreate(saved)
-        binding = MainActBinding.inflate(layoutInflater).also { setContentView(it.root) }
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        setup()
-    }
-
-    private fun setup() {
-
-        binding.exampleRecyclerView.layoutManager =
-            StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
-        binding.exampleRecyclerView.adapter = BottomSheetExampleAdapter(this, ::showBottomSheet)
-    }
+    private fun getSheetStyle(): SheetStyle = sheetStyle ?: SheetStyle.values().random()
 
     private fun showBottomSheet(example: SheetExample) {
+
         when (example) {
             SheetExample.OPTIONS_LIST -> showOptionsSheetList()
             SheetExample.OPTIONS_HORIZONTAL_SMALL -> showOptionsSheetGridSmall(DisplayMode.GRID_HORIZONTAL)
@@ -125,6 +123,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheetWeek1() {
 
         CalendarSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("When do you want to take holidays?") // Set the title of the sheet
             rangeYears(50)
             selectionMode(SelectionMode.DATE)
@@ -148,6 +147,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheetWeek2() {
 
         CalendarSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("When do you want to take holidays?") // Set the title of the sheet
             selectionMode(SelectionMode.RANGE)
             calendarMode(CalendarMode.WEEK_2)
@@ -171,6 +171,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheetWeek3() {
 
         CalendarSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("When do you want to take holidays?") // Set the title of the sheet
             selectionMode(SelectionMode.RANGE)
             calendarMode(CalendarMode.WEEK_3)
@@ -194,6 +195,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCalendarSheet() {
 
         CalendarSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("When do you want to take holidays?") // Set the title of the sheet
             rangeYears(50)
             selectionMode(SelectionMode.RANGE)
@@ -227,8 +229,10 @@ class MainActivity : AppCompatActivity() {
     private fun showOptionsSheetList() {
 
         val sheet = OptionsSheet().build(this) { // Build and show
+            style(getSheetStyle())
             displayMode(DisplayMode.LIST)
             cornerFamily(CornerFamily.CUT)
+            titleColor(Color.YELLOW)
             cornerRadius(16f)
             title("Note from 27th dec") // Set the title of the sheet
             if (Random.nextBoolean()) {
@@ -242,6 +246,9 @@ class MainActivity : AppCompatActivity() {
             onPositive { index, option ->
                 // Selected index / option
             }
+            onDismiss {
+                binding.exampleRecyclerView.visibility = View.VISIBLE
+            }
         }
 
         sheet.show() // Show later
@@ -250,6 +257,7 @@ class MainActivity : AppCompatActivity() {
     private fun showOptionsSheetGridSmall(displayMode: DisplayMode) {
 
         val sheet = OptionsSheet().build(this) { // Build only
+            style(getSheetStyle())
             displayMode(displayMode) // Display mode for list/grid + scroll into height or width
             title("What's your favorite fruit?")
             displayMode(DisplayMode.GRID_HORIZONTAL) // Display mode for list/grid + scroll into height or width
@@ -269,13 +277,14 @@ class MainActivity : AppCompatActivity() {
     private fun showOptionsSheetGridMiddle(displayMode: DisplayMode) {
 
         OptionsSheet().show(this) { // Build and show
+            style(getSheetStyle())
             displayMode(displayMode) // Display mode for list/grid + scroll into height or width
             title("What would you like to eat daily?")
             multipleChoices() // Apply to make it multiple choices
             minChoices(3) // Set minimum choices
             maxChoices(4) // Set maximum choices
-            showMultipleChoicesInfo() // Show info view for selection
-            showButtons()
+            displayMultipleChoicesInfo() // Show info view for selection
+            displayButtons()
             with(
                 Option(R.drawable.ic_apple, "Apple"),
                 Option(
@@ -301,6 +310,7 @@ class MainActivity : AppCompatActivity() {
     private fun showOptionsSheetGridLarge(displayMode: DisplayMode) {
 
         OptionsSheet().show(this) { // Build and show
+            style(getSheetStyle())
             displayMode(displayMode) // Display mode for list/grid + scroll into height or width
             title("What would you like to eat daily?")
             with(
@@ -331,10 +341,11 @@ class MainActivity : AppCompatActivity() {
     private fun showOptionsSheetGridVertical() {
 
         OptionsSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("Alarm at 5 am")
             displayMode(DisplayMode.GRID_VERTICAL) // Display mode for list/grid + scroll into height or width
             if (Random.nextBoolean()) {
-                showButtons() // For single choice, no buttons are displayed, except you enforce to display them
+                displayButtons() // For single choice, no buttons are displayed, except you enforce to display them
             }
             with( // Add options
                 Option(
@@ -356,6 +367,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showColorSheet() {
         ColorSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("Background color")
             defaultView(ColorView.TEMPLATE) // Set the default view when the sheet is visible
             // disableSwitchColorView() Disable switching between template and custom color view
@@ -368,6 +380,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showColorSheetTemplate() {
         ColorSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("Background color")
             defaultView(ColorView.TEMPLATE) // Set the default view when the sheet is visible
             disableSwitchColorView()
@@ -379,6 +392,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showColorSheetCustom() {
         ColorSheet().show(this) { // Build and show
+            style(getSheetStyle())
             title("Background color")
             defaultView(ColorView.CUSTOM) // Set the default view when the sheet is visible
             disableSwitchColorView()
@@ -391,6 +405,7 @@ class MainActivity : AppCompatActivity() {
     private fun showClockTimeSheet() {
 
         ClockTimeSheet().show(this) {
+            style(getSheetStyle())
             title("Wake-up time")
             format24Hours(Random.nextBoolean()) // By default 24-hours format is enabled
             currentTime(
@@ -406,15 +421,18 @@ class MainActivity : AppCompatActivity() {
     private fun showTimeSheet(timeFormat: TimeFormat) {
 
         TimeSheet().show(this) {
+            style(getSheetStyle())
             title("Snooze time")
             format(timeFormat)
-//            currentTime(90) // Set current time in seconds
-//            minTime(60) // Set minimum time in seconds
+            currentTime(TimeUnit.HOURS.toSeconds(0)
+                .plus(TimeUnit.MINUTES.toSeconds(50).plus(TimeUnit.SECONDS.toSeconds(12))))
+//            currentTime(0) // Set current time in seconds
+//            minTime(1) // Set minimum time in seconds
 //            maxTime(600) // Set maximum time in seconds
             onPositive { timeInSec ->
                 // Use selected time in millis
                 Log.d(TAG, "timeInSec: $timeInSec")
-                showToastLong("Time", splitTime(timeInSec).toString())
+                showToastLong("Time", "Seconds: $timeInSec")
             }
         }
     }
@@ -422,6 +440,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInputSheetShort() {
 
         InputSheet().show(this) {
+            style(getSheetStyle())
             title("Survey about this library.")
             content("We would like to ask you some questions about this library. We put a lot of effort into it and hope to make it easy to use.")
             with(InputRadioButtons("") {
@@ -453,11 +472,12 @@ class MainActivity : AppCompatActivity() {
     private fun showInputSheetLong() {
 
         InputSheet().show(this) {
+            style(getSheetStyle())
             title("Short survey")
             content("We would like to ask you some questions reading your streaming platform usage.")
             with(InputEditText {
                 required()
-                drawable(R.drawable.ic_mail)
+                startIconDrawable(R.drawable.ic_mail)
                 label("Your favorite TV-Show")
                 hint("The Mandalorian, ...")
                 inputType(InputType.TYPE_CLASS_TEXT)
@@ -520,6 +540,7 @@ class MainActivity : AppCompatActivity() {
             "Must contain at least one digit, lower case letter, upper case letter, special character, no whitespace and at least 8 characters."
 
         InputSheet().show(this) {
+            style(getSheetStyle())
             title("Choose a password")
             content("Make sure the password is safe enough and is not used for any other account.")
             withIconButton(IconButton(R.drawable.ic_help)) {
@@ -531,7 +552,7 @@ class MainActivity : AppCompatActivity() {
             with(InputEditText {
                 required()
                 hint("Password")
-                drawable(R.drawable.ic_lock)
+                startIconDrawable(R.drawable.ic_lock)
                 endIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
                 passwordVisible(false /* Don't display password in clear text. */)
                 validationListener { value ->
@@ -547,7 +568,7 @@ class MainActivity : AppCompatActivity() {
             })
             with(InputEditText {
                 required()
-                drawable(R.drawable.ic_lock)
+                startIconDrawable(R.drawable.ic_lock)
                 hint("Repeat password")
                 endIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
                 passwordVisible(false)
@@ -569,15 +590,21 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheet() {
 
         InfoSheet().show(this) {
-            style(SheetStyle.values().random())
+            style(getSheetStyle())
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
             title("Did you read the README?")
             content("It will help you to setup beautiful sheets in your project.")
             onNegative(
                 "Not yet",
                 R.drawable.ic_github
-            ) { /* Set listener when negative button is clicked. */ }
-            onPositive("Yes")
+            ) { /* Set listener when negative button is clicked. */
+                showToast("onNegative", "")
+            }
+            onPositive("Yes") {
+                showToast("onPositive", "")
+            }
+            positiveButtonStyle(ButtonStyle.NORMAL)
+            negativeButtonStyle(ButtonStyle.OUTLINED)
             drawable(R.drawable.ic_github)
             drawableColor(R.color.md_red_500)
         }
@@ -586,7 +613,7 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheetTopStyleTop() {
 
         InfoSheet().show(this) {
-            style(SheetStyle.values().random())
+            style(getSheetStyle())
             cornerFamily(CornerFamily.CUT)
             topStyle(TopStyle.ABOVE_COVER)
             withCoverImage(Image("https://images.hdqwalls.com/download/interstellar-gargantua-u4-1440x900.jpg"))
@@ -602,13 +629,22 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheetTopStyleBottom() {
 
         InfoSheet().show(this) {
-            style(SheetStyle.values().random())
+            style(getSheetStyle())
             displayCloseButton(false)
             cornerFamily(CornerFamily.CUT)
             cornerRadius(24f)
             topStyle(TopStyle.BELOW_COVER)
-            withCoverImage(Image(uri = "https://img4.goodfon.com/wallpaper/nbig/7/47/westworld-anthony-hopkins-robert-ford-actor-show-faces.jpg"))
-            withIconButton(IconButton(R.drawable.ic_help)) {  }
+            withCoverImage(Image("https://img4.goodfon.com/wallpaper/nbig/7/47/westworld-anthony-hopkins-robert-ford-actor-show-faces.jpg") {
+                setupRequest {
+                    // Image request / loading setup
+                    // fallback(R.drawable.ic_help)
+                }
+                setupImageView {
+                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    // Manipulate ImageView
+                }
+            })
+            withIconButton(IconButton(R.drawable.ic_help)) { }
             title("Dr. Robert Ford")
             content("Dreams mean everything. They’re the stories we tell ourselves of what could be, who we could become.\"")
             onNegative("Disagree")
@@ -619,13 +655,22 @@ class MainActivity : AppCompatActivity() {
     private fun showInfoSheetLottie() {
 
         InfoSheet().show(this) {
-            style(SheetStyle.values().random())
+            style(getSheetStyle())
             displayCloseButton(false)
             cornerFamily(CornerFamily.CUT)
             cornerRadius(16f)
             topStyle(TopStyle.values().random())
             withCoverLottieAnimation(LottieAnimation {
-                setAnimation(R.raw.anim_lottie_business_team)
+                ratio(Ratio(3, 2))
+                setupAnimation {
+                    // Lottie animation setup
+                    setAnimation(R.raw.anim_lottie_business_team)
+                    // .. more settings
+                }
+                setupImageView {
+                    // Manipulate ImageView
+//                    setBackgroundColor(ContextCompat.getColor(context, R.color.sheetDividerColor))
+                }
             })
             withIconButton(IconButton(R.drawable.ic_help)) { cancelCoverAnimation() }
             title("Team Collaboration")
@@ -639,12 +684,17 @@ class MainActivity : AppCompatActivity() {
 
         InfoSheet().show(this) {
             displayButtons(false)
-            style(SheetStyle.values().random())
+            style(getSheetStyle())
             cornerFamily(CornerFamily.CUT)
             topStyle(TopStyle.MIXED)
             withCoverImage(Image("https://cdn.wallpapersafari.com/11/17/LjhbqX.jpg") {
-                // For placeholder, error, fallback drawable and other image loading configs
-                crossfade(300)
+                setupRequest {
+                    // For placeholder, error, fallback drawable and other image loading configs
+                    crossfade(300)
+                }
+                setupImageView {
+                    // Setup ImageView
+                }
             })
             withIconButton(IconButton(R.drawable.ic_help)) { /* Will not automatically dismiss the sheet. */ }
             title("Attack on Titan")
@@ -655,6 +705,7 @@ class MainActivity : AppCompatActivity() {
     private fun showCustomSheet() {
 
         CustomSheet().show(this) {
+            style(getSheetStyle())
             title("Custom Example")
             onPositive("Cool")
         }
@@ -675,4 +726,133 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         ).apply { show() }
     }
+
+
+    override fun onCreate(saved: Bundle?) {
+        loadPreferences()
+        applyThemeMode()
+//        val newTheme = R.style.BottomSheetSignNightTheme
+//        theme.applyStyle(newTheme, true)
+        super.onCreate(saved)
+        binding = MainActBinding.inflate(layoutInflater).also { setContentView(it.root) }
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        setup()
+    }
+
+    private fun setup() {
+
+        setSupportActionBar(binding.toolbar)
+
+        binding.exampleRecyclerView.layoutManager =
+            CustomStaggeredGridLayoutManager(2, RecyclerView.VERTICAL, false)
+        binding.exampleRecyclerView.adapter = BottomSheetExampleAdapter(this, ::showBottomSheet)
+
+        binding.sheetStyleButtonGroup.check(when (sheetStyle) {
+            SheetStyle.BOTTOM_SHEET -> R.id.bottomSheet
+            SheetStyle.DIALOG -> R.id.dialog
+            null -> R.id.random
+        })
+
+        binding.sheetStyleButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                sheetStyle = when (checkedId) {
+                    R.id.bottomSheet -> SheetStyle.BOTTOM_SHEET
+                    R.id.dialog -> SheetStyle.DIALOG
+                    else -> null
+                }
+                setPrefString(Preference.SHEET_STYLE, sheetStyle?.name)
+            }
+        }
+
+        binding.themeButtonGroup.check(when (themeMode) {
+            ThemeMode.NIGHT_MODE -> R.id.nightMode
+            ThemeMode.DAY_MODE -> R.id.dayMode
+            else -> R.id.auto
+        })
+
+        binding.themeButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                themeMode = when (checkedId) {
+                    R.id.dayMode -> ThemeMode.DAY_MODE
+                    R.id.nightMode -> ThemeMode.NIGHT_MODE
+                    else -> ThemeMode.AUTO
+                }
+                setPrefString(Preference.THEME_MODE, themeMode?.name)
+                applyThemeMode()
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.github -> open()
+            R.id.share -> share()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun open() {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/maxkeppeler/sheets"))
+        startActivity(intent)
+    }
+
+    private fun share() {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT,
+                "Check out this library! https://github.com/maxkeppeler/sheets")
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
+
+    private fun loadPreferences() {
+        Log.d("MainActivity", "name: ")
+        val sheetStyleName = getPrefString(Preference.SHEET_STYLE)
+        Log.d("MainActivity", "name: $sheetStyleName")
+        sheetStyle =
+            sheetStyleName?.takeIf { SheetStyle.values().any { it.name == sheetStyleName } }
+                ?.let { SheetStyle.valueOf(it) }
+
+        val themeModeName = getPrefString(Preference.THEME_MODE)
+
+        themeMode =
+            themeModeName?.takeIf { ThemeMode.values().any { it.name == themeModeName } }
+                ?.let { ThemeMode.valueOf(it) }
+    }
+
+    private fun applyThemeMode() {
+        when (themeMode) {
+            ThemeMode.NIGHT_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            ThemeMode.DAY_MODE -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        }
+    }
+
+    private val prefs: SharedPreferences
+        get() = getDefaultSharedPreferences(applicationContext)
+
+    enum class ThemeMode {
+        AUTO,
+        NIGHT_MODE,
+        DAY_MODE
+    }
+
+    enum class Preference(val key: String) {
+        THEME_MODE("pref_theme_mode"),
+        SHEET_STYLE("pref_sheet_style"),
+    }
+
+    private fun setPrefString(pref: Preference, value: String?) =
+        prefs.edit().putString(pref.key, value).apply()
+
+    private fun getPrefString(preference: Preference): String? =
+        prefs.getString(preference.key, null)
+
 }

@@ -22,7 +22,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="sheetPrimaryColor">@color/sheetColorPrimary</item>
+        <item name="android:statusBarColor">?colorPrimaryDark</item>
+
+<!--        <item name="sheetPrimaryColor">@color/sheetColorPrimary</item>-->
 
 <!--        <item name="sheetDisplayCloseButton">false</item>-->
 <!--        <item name="sheetDisplayHandle">true</item>-->
@@ -72,5 +74,14 @@
 <!--        <item name="sheetOptionActiveTextColor">?sheetPrimaryColor</item>-->
     </style>
 
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+<!--        <item name="colorControlNormal">@color/white</item>-->
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+
+    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

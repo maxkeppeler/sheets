@@ -21,8 +21,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StringRes
+import com.maxkeppeler.sample.databinding.CustomSheetBinding
 import com.maxkeppeler.sheets.core.Sheet
-import com.maxkeppeler.sample.databinding.BottomSheetsCustomBinding
 
 private typealias PositiveListener = () -> Unit
 
@@ -31,7 +31,7 @@ class CustomSheet : Sheet() {
 
     override val dialogTag = "CustomSheet"
 
-    private lateinit var binding: BottomSheetsCustomBinding
+    private lateinit var binding: CustomSheetBinding
 
     fun onPositive(positiveListener: PositiveListener) {
         this.positiveListener = positiveListener
@@ -53,7 +53,7 @@ class CustomSheet : Sheet() {
     override fun onCreateLayoutView(): View {
 
         // Inflate layout through binding class and return the root view
-        return BottomSheetsCustomBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
+        return CustomSheetBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
 //        Or without binding
 //        return LayoutInflater.from(activity).inflate(R.layout.sheets_custom, null)

@@ -17,14 +17,23 @@
 <resources>
     <string name="app_name">Sheets</string>
     <string name="options_sheet">OptionsSheet</string>
+    <string name="options_sheet_desc">Show a grid or list of options, select only one or allow multiple-choices.</string>
     <string name="color_sheet">ColorSheet</string>
+    <string name="color_sheet_desc">Show colors to choose from or let the user create and select a custom color.</string>
     <string name="clock_time_sheet">ClockTimeSheet</string>
+    <string name="clock_time_sheet_desc">Show a quick to use text-styled clock time selector.</string>
     <string name="time_sheet">TimeSheet</string>
+    <string name="time_sheet_desc">Show a quick to use text-styled time selector.</string>
     <string name="calendar_sheet">CalendarSheet</string>
+    <string name="calendar_sheet_desc">Show a dynamic sized calendar view and select either dates or a time period.</string>
     <string name="info_sheet">InfoSheet</string>
+    <string name="info_sheet_desc">Show information or a warning.</string>
     <string name="lottie">Lottie Animations</string>
+    <string name="lottie_desc">Spice up your sheets with beautiful animations.</string>
     <string name="input_sheet">InputSheet</string>
-    <string name="custom_sheets">Create your own custom Sheet</string>
+    <string name="input_sheet_desc">Show a form / survey for various use-cases.</string>
+    <string name="custom_sheets">Custom Sheets</string>
+    <string name="custom_sheets_desc">Create your own custom sheet that is build on top of existing functionality.</string>
     <string name="options_list">List of Options (with and without buttons)</string>
     <string name="options_grid_horizontal_small">Horizontal grid (small)</string>
     <string name="options_grid_horizontal_middle">Horizontal grid (middle) with multiple choice</string>
@@ -53,7 +62,14 @@
     <string name="info_cover_image_3">Overlapping cover image, hidden buttons, additional icon button.</string>
     <string name="input_short">A small survey form</string>
     <string name="input_long">A long survey form</string>
-    <string name="custom_sheet_example_1">Custom Sheet Example 1</string>
+    <string name="custom_sheet_example_1">Text with a switch</string>
     <string name="input_password">Password with custom validation</string>
     <string name="info_lottie">InfoSheet with Lottie Animation</string>
+    <string name="auto">Auto</string>
+    <string name="night_mode">Night mode</string>
+    <string name="day_mode">Day mode</string>
+    <string name="appearance_sample_title">General Appearance for the samples</string>
+    <string name="dialog">Dialog</string>
+    <string name="bottom_sheet">BottomSheet</string>
+    <string name="random">Random</string>
 </resources>
