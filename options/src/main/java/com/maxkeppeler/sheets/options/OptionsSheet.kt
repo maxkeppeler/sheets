@@ -295,6 +295,22 @@ class OptionsSheet : Sheet() {
         this.options.add(option)
     }
 
+    /**
+     * Add MenuItems from a Menu as options.
+     *
+     * @param menu Instance of [Menu].
+     */
+    fun with(menu: Menu) {
+        val menuItemOptions = mutableListOf<Option>()
+        var i = 0
+        while (i < menu.size()) {
+            val menuItem = menu.getItem(i)
+            menuItemOptions.add(Option(menuItem.icon, menuItem.title.toString()))
+            i++
+        }
+        this.options.addAll(menuItemOptions)
+    }
+
     private val adapterListener = object : OptionsSelectionListener {
 
         override fun select(index: Int) {
