@@ -219,7 +219,7 @@ internal class InputAdapter(
             radioGroup.addView(button)
         }
 
-        radioGroup.check(input.value)
+        input.value?.let { radioGroup.check(it) }
         radioGroup.setOnCheckedChangeListener { _, idIndex ->
             input.value = idIndex
             listener.invoke()

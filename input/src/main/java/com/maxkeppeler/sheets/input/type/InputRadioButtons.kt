@@ -38,9 +38,9 @@ class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit)
     internal var radioButtonOptions: MutableList<String>? = null
         private set
 
-    var value: Int = -1
+    var value: Int? = null
         internal set(value) {
-            changeListener?.invoke(value)
+            value?.let { changeListener?.invoke(it) }
             field = value
         }
 
@@ -65,11 +65,11 @@ class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit)
     }
 
     override fun invokeResultListener() =
-        resultListener?.invoke(value)
+        resultListener?.invoke(value ?: -1)
 
     override fun valid(): Boolean = value != -1
 
     override fun putValue(bundle: Bundle, index: Int) {
-       bundle.putInt(getKeyOrIndex(index), value)
+        value?.let { bundle.putInt(getKeyOrIndex(index), it) }
     }
 }
