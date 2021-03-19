@@ -220,6 +220,10 @@ abstract class SheetFragment : DialogFragment() {
             ?: DEFAULT_CORNER_RADIUS.toDp()
 
     private fun setupBottomSheetBackground(view: View) {
+        // Remove dialog background
+        if (sheetStyle == SheetStyle.DIALOG) {
+            dialog?.window?.decorView?.setBackgroundColor(Color.TRANSPARENT)
+        }
 
         val cornerFamily = getActualCornerFamily()
         val cornerRadius = getActualCornerRadius()
