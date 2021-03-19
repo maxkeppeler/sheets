@@ -173,11 +173,11 @@ abstract class SheetFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupBottomSheetBehavior(view)
-        setupBottomSheetBackground(view)
+        setupSheetBehavior(view)
+        setupSheetBackground(view)
     }
 
-    private fun setupBottomSheetBehavior(view: View) {
+    private fun setupSheetBehavior(view: View) {
 
         if (sheetStyle == SheetStyle.DIALOG) {
             // We don't need a behavior for the dialog
@@ -219,7 +219,8 @@ abstract class SheetFragment : DialogFragment() {
             ?: getCornerRadius(requireContext())
             ?: DEFAULT_CORNER_RADIUS.toDp()
 
-    private fun setupBottomSheetBackground(view: View) {
+    private fun setupSheetBackground(view: View) {
+
         // Remove dialog background
         if (sheetStyle == SheetStyle.DIALOG) {
             dialog?.window?.decorView?.setBackgroundColor(Color.TRANSPARENT)
