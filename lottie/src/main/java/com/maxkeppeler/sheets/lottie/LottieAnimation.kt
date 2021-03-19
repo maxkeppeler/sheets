@@ -20,7 +20,6 @@ package com.maxkeppeler.sheets.lottie
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.maxkeppeler.sheets.core.ImageSource
-import java.io.Serializable
 
 /** Convenience alias for this class. */
 private typealias LottieAnimationBuilder = LottieAnimation.() -> Unit
@@ -34,7 +33,7 @@ typealias AnimationBuilder = LottieAnimationRequest.() -> Unit
 /**
  * A class that holds the animation configurations.
  */
-class LottieAnimation private constructor() : ImageSource(), Serializable {
+class LottieAnimation private constructor() : ImageSource() {
 
     private var builder: AnimationBuilder? = null
 

@@ -34,7 +34,6 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.maxkeppeler.sheets.R
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.databinding.SheetsBaseBinding
-import java.io.Serializable
 
 /** Listener that is invoked when the positive button is clicked. */
 typealias PositiveListener = () -> Unit
@@ -77,31 +76,6 @@ abstract class Sheet : SheetFragment() {
         const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
-        private const val STATE_BASE_ADD_ON_RECEIVER = "state_base_add_on_receiver"
-        private const val STATE_BASE_ADD_ON_RECEIVER_AMOUNT = "state_base_add_on_receiver_amount"
-        private const val STATE_BASE_SHEET_STYLE = "state_base_sheet_style"
-        private const val STATE_BASE_DISPLAY_TOOLBAR = "state_base_display_toolbar"
-        private const val STATE_BASE_TOP_STYLE = "state_top_style"
-        private const val STATE_BASE_NEGATIVE_BUTTON_STYLE = "state_negative_button_style"
-        private const val STATE_BASE_POSITIVE_BUTTON_STYLE = "state_positive_button_style"
-        private const val STATE_BASE_COVER_IMAGE = "state_cover_image"
-        private const val STATE_BASE_DISPLAY_CLOSE_BUTTON = "state_base_display_close_button"
-        private const val STATE_BASE_DISPLAY_HANDLE = "state_base_display_handle"
-        private const val STATE_BASE_TITLE_TEXT = "state_base_title_text"
-        private const val STATE_BASE_TITLE_COLOR = "state_base_title_color"
-        private const val STATE_BASE_CLOSE_ICON_BUTTON = "state_base_close_icon_button"
-        private const val STATE_BASE_POSITIVE_TEXT = "state_base_positive_text"
-        private const val STATE_BASE_NEGATIVE_TEXT = "state_base_negative_text"
-        private const val STATE_BASE_POSITIVE_BUTTON_DRAWABLE =
-            "state_base_positive_button_drawable"
-        private const val STATE_BASE_NEGATIVE_BUTTON_DRAWABLE =
-            "state_base_negative_button_drawable"
-        private const val STATE_BASE_DISMISS_LISTENER = "state_base_dismiss_listener"
-        private const val STATE_BASE_CANCEL_LISTENER = "state_base_cancel_listener"
-        private const val STATE_BASE_CLOSE_LISTENER = "state_base_close_listener"
-        private const val STATE_BASE_POSITIVE_LISTENER = "state_base_positive_listener"
-        private const val STATE_BASE_NEGATIVE_LISTENER = "state_base_negative_listener"
-        private const val STATE_BASE_ICON_BUTTONS = "state_base_icon_buttons"
     }
 
     private lateinit var base: SheetsBaseBinding
@@ -402,104 +376,15 @@ abstract class Sheet : SheetFragment() {
         container: ViewGroup?,
         saved: Bundle?
     ): View? {
-        if (saved?.isEmpty == true) dismiss()
+        if (saved != null) {
+            dismiss()
+            return null
+        }
         return SheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
             .also { base = it }.apply {
                 layout.addView(onCreateLayoutView())
             }.root
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        onRestoreBaseViewInstanceState(savedInstanceState)
-        onRestoreCustomViewInstanceState(savedInstanceState)
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private fun onRestoreBaseViewInstanceState(savedState: Bundle?) {
-        savedState?.let { saved ->
-            titleText = saved.getString(STATE_BASE_TITLE_TEXT)
-            titleColor = saved.get(STATE_BASE_TITLE_COLOR) as Int?
-            positiveText = saved.getString(STATE_BASE_POSITIVE_TEXT)
-            negativeText = saved.getString(STATE_BASE_NEGATIVE_TEXT)
-            displayToolbar = saved.get(STATE_BASE_DISPLAY_TOOLBAR) as Boolean?
-            displayCloseButton = saved.get(STATE_BASE_DISPLAY_CLOSE_BUTTON) as Boolean?
-            displayHandle = saved.get(STATE_BASE_DISPLAY_HANDLE) as Boolean?
-            negativeButtonDrawableRes = saved.get(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE) as Int?
-            positiveButtonDrawableRes = saved.get(STATE_BASE_POSITIVE_BUTTON_DRAWABLE) as Int?
-            negativeListener =
-                saved.getSerializable(STATE_BASE_NEGATIVE_LISTENER) as NegativeListener?
-            positiveListener =
-                saved.getSerializable(STATE_BASE_POSITIVE_LISTENER) as PositiveListener?
-            dismissListener = saved.getSerializable(STATE_BASE_DISMISS_LISTENER) as DismissListener?
-            cancelListener = saved.getSerializable(STATE_BASE_CANCEL_LISTENER) as CancelListener?
-            closeListener = saved.getSerializable(STATE_BASE_CLOSE_LISTENER) as CloseListener?
-            topStyle = saved.getSerializable(STATE_BASE_TOP_STYLE) as TopStyle
-            negativeButtonStyle =
-                saved.getSerializable(STATE_BASE_NEGATIVE_BUTTON_STYLE) as ButtonStyle?
-            positiveButtonStyle =
-                saved.getSerializable(STATE_BASE_POSITIVE_BUTTON_STYLE) as ButtonStyle?
-            coverImage = saved.getSerializable(STATE_BASE_COVER_IMAGE) as Image?
-            closeIconButton = saved.getSerializable(STATE_BASE_CLOSE_ICON_BUTTON) as IconButton?
-            val icons = mutableListOf<IconButton>()
-            repeat(ICON_BUTTONS_AMOUNT_MAX) {
-                val iconButton =
-                    saved.getSerializable(STATE_BASE_ICON_BUTTONS.plus(it)) as IconButton?
-                iconButton?.let { btn -> icons.add(btn) }
-            }
-            iconButtons = icons.toTypedArray()
-            val addOnReceiversAmount = saved.getInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT)
-            repeat(addOnReceiversAmount) {
-                val receiver =
-                    saved.getSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(it)) as AddOnComponent?
-                receiver?.let { rec ->
-                    addOnComponents.add(rec)
-                    rec.invoke(this)
-                }
-            }
-        }
-    }
-
-    abstract fun onRestoreCustomViewInstanceState(savedState: Bundle?)
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        onSaveBaseViewInstanceState(outState)
-        onSaveCustomViewInstanceState(outState)
-    }
-
-    private fun onSaveBaseViewInstanceState(outState: Bundle) {
-        with(outState) {
-            putString(STATE_BASE_TITLE_TEXT, titleText)
-            titleColor?.let { putInt(STATE_BASE_TITLE_COLOR, it) }
-            putString(STATE_BASE_POSITIVE_TEXT, positiveText)
-            putString(STATE_BASE_NEGATIVE_TEXT, negativeText)
-            displayToolbar?.let { putBoolean(STATE_BASE_DISPLAY_TOOLBAR, it) }
-            displayCloseButton?.let { putBoolean(STATE_BASE_DISPLAY_CLOSE_BUTTON, it) }
-            displayHandle?.let { putBoolean(STATE_BASE_DISPLAY_HANDLE, it) }
-            negativeButtonDrawableRes?.let { putInt(STATE_BASE_NEGATIVE_BUTTON_DRAWABLE, it) }
-            positiveButtonDrawableRes?.let { putInt(STATE_BASE_POSITIVE_BUTTON_DRAWABLE, it) }
-            putSerializable(STATE_BASE_TOP_STYLE, topStyle)
-            putSerializable(STATE_BASE_NEGATIVE_BUTTON_STYLE, negativeButtonStyle)
-            putSerializable(STATE_BASE_POSITIVE_BUTTON_STYLE, positiveButtonStyle)
-            putSerializable(STATE_BASE_COVER_IMAGE, coverImage)
-            putSerializable(STATE_BASE_CLOSE_ICON_BUTTON, closeIconButton)
-            iconButtons.forEachIndexed { i, btn ->
-                putSerializable(STATE_BASE_ICON_BUTTONS.plus(i), btn)
-            }
-            putSerializable(STATE_BASE_NEGATIVE_LISTENER, negativeListener as Serializable?)
-            putSerializable(STATE_BASE_POSITIVE_LISTENER, positiveListener as Serializable?)
-            putSerializable(STATE_BASE_DISMISS_LISTENER, dismissListener as Serializable?)
-            putSerializable(STATE_BASE_CANCEL_LISTENER, cancelListener as Serializable?)
-            putSerializable(STATE_BASE_CLOSE_LISTENER, closeListener as Serializable?)
-            putInt(STATE_BASE_ADD_ON_RECEIVER_AMOUNT, addOnComponents.size)
-            addOnComponents.forEachIndexed { i, function ->
-                putSerializable(STATE_BASE_ADD_ON_RECEIVER.plus(i), function as Serializable?)
-            }
-        }
-    }
-
-    abstract fun onSaveCustomViewInstanceState(outState: Bundle)
 
     /** Create custom view to be added to the base sheet. */
     abstract fun onCreateLayoutView(): View

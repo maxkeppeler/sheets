@@ -47,7 +47,6 @@ import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetContent
-import java.io.Serializable
 import java.time.*
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -64,21 +63,6 @@ typealias CalendarDateListener = (dateStart: Calendar, dateEnd: Calendar?) -> Un
 class CalendarSheet : Sheet() {
 
     override val dialogTag = "CalendarSheet"
-
-    companion object {
-        private const val STATE_LISTENER = "state_listener"
-        private const val STATE_DISABLE_TIMELINE = "state_disable_timeline"
-        private const val STATE_SELECTION_MODE = "state_selection"
-        private const val STATE_CALENDAR_MODE = "state_calendar_mode"
-        private const val STATE_MAX_RANGE = "state_max_range"
-        private const val STATE_RANGE_YEARS = "state_range_years"
-        private const val STATE_DISABLE_DATE = "state_disable_date"
-        private const val STATE_DISPLAY_BUTTONS = "state_display_buttons"
-        private const val STATE_SELECTED_VIEW_DATE = "state_selected_view_date"
-        private const val STATE_SELECTED_DATE = "state_selected_date"
-        private const val STATE_SELECTED_DATE_START = "state_selected_date_start"
-        private const val STATE_SELECTED_DATE_END = "state_selected_date_end"
-    }
 
     private lateinit var binding: SheetsCalendarBinding
     private lateinit var monthAdapter: MonthAdapter
@@ -820,47 +804,6 @@ class CalendarSheet : Sheet() {
 
     private fun LocalDate.toCalendar(): Calendar = Calendar.getInstance().apply {
         set(year, month.ordinal, dayOfMonth)
-    }
-
-
-    @Suppress("UNCHECKED_CAST")
-    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
-        savedState?.let { saved ->
-            listener = saved.getSerializable(STATE_LISTENER) as CalendarDateListener?
-            disableTimeLine = saved.getSerializable(STATE_DISABLE_TIMELINE) as TimeLine?
-            selectionMode = saved.getSerializable(STATE_SELECTION_MODE) as SelectionMode
-            calendarMode = saved.getSerializable(STATE_CALENDAR_MODE) as CalendarMode
-            maxRange = saved.getInt(STATE_MAX_RANGE)
-            rangeYears = saved.getInt(STATE_RANGE_YEARS)
-            displayButtons = saved.getBoolean(STATE_DISPLAY_BUTTONS)
-            repeat(saved.getInt(STATE_DISABLE_DATE)) {
-                val inputItem = saved.getSerializable(STATE_DISABLE_DATE.plus(it)) as Calendar
-                disabledDates.add(inputItem)
-            }
-            selectedViewDate = saved.getSerializable(STATE_SELECTED_VIEW_DATE) as LocalDate
-            selectedDate = saved.getSerializable(STATE_SELECTED_DATE) as LocalDate?
-            selectedDateStart = saved.getSerializable(STATE_SELECTED_DATE_START) as LocalDate
-            selectedDateEnd = saved.getSerializable(STATE_SELECTED_DATE_END) as LocalDate?
-        }
-    }
-
-    override fun onSaveCustomViewInstanceState(outState: Bundle) {
-        with(outState) {
-            putSerializable(STATE_LISTENER, listener as Serializable?)
-            putSerializable(STATE_DISABLE_TIMELINE, disableTimeLine as Serializable?)
-            putSerializable(STATE_SELECTION_MODE, selectionMode as Serializable?)
-            putSerializable(STATE_CALENDAR_MODE, calendarMode as Serializable?)
-            putInt(STATE_MAX_RANGE, maxRange)
-            putInt(STATE_RANGE_YEARS, rangeYears)
-            putBoolean(STATE_DISPLAY_BUTTONS, displayButtons)
-            disabledDates.forEachIndexed { i, date ->
-                putSerializable(STATE_DISABLE_DATE.plus(i), date)
-            }
-            putSerializable(STATE_SELECTED_VIEW_DATE, selectedViewDate)
-            putSerializable(STATE_SELECTED_DATE, selectedDate)
-            putSerializable(STATE_SELECTED_DATE_START, selectedDateStart)
-            putSerializable(STATE_SELECTED_DATE_END, selectedDateEnd)
-        }
     }
 
     /** Build [CalendarSheet] and show it later. */

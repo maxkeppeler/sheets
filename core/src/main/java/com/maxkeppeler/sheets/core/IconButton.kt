@@ -20,13 +20,12 @@ package com.maxkeppeler.sheets.core
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import java.io.Serializable
 
 /**
  * Represents an icon acting as a button
  * giving additional possibilities for actions.
  */
-class IconButton internal constructor() : Serializable {
+class IconButton internal constructor() {
 
     internal var listener: ClickListener? = null
 

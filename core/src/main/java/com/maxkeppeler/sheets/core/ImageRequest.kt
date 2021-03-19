@@ -20,8 +20,6 @@ package com.maxkeppeler.sheets.core
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import coil.ImageLoader
@@ -32,12 +30,11 @@ import coil.size.Size
 import coil.size.SizeResolver
 import coil.transition.CrossfadeTransition
 import coil.transition.Transition
-import java.io.Serializable
 
 /**
  * Wrapper class of the ImageRequest class of coil to offer basic functionality to the image loading.
  */
-class ImageRequest internal constructor() : Serializable {
+class ImageRequest internal constructor() {
 
     internal var scale: Scale? = null
     internal var size: SizeResolver? = null

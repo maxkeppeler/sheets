@@ -21,6 +21,7 @@ package com.maxkeppeler.sheets.core
 import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.DimenRes
@@ -50,13 +51,6 @@ abstract class SheetFragment : DialogFragment() {
     companion object {
         const val DEFAULT_CORNER_RADIUS = 16f
         const val DEFAULT_CORNER_FAMILY = CornerFamily.ROUNDED
-        private const val STATE_SHEET_STYLE = "state_sheet_style"
-        private const val STATE_SHEET_BEHAVIOR = "state_sheet_behavior"
-        private const val STATE_SHEET_PEEK_HEIGHT = "state_sheet_peek_height"
-        private const val STATE_BASE_BORDER_WIDTH = "state_base_border_width"
-        private const val STATE_BASE_BORDER_COLOR = "state_base_border_color"
-        private const val STATE_BASE_CORNER_RADIUS = "state_base_corner_radius"
-        private const val STATE_BASE_CORNER_FAMILY = "state_base_corner_family"
     }
 
     open lateinit var windowContext: Context
@@ -90,7 +84,6 @@ abstract class SheetFragment : DialogFragment() {
     fun peekHeight(peekHeight: Int) {
         this.peekHeight = peekHeight
     }
-
 
     /**
      * Set the [CornerFamily].
@@ -138,37 +131,6 @@ abstract class SheetFragment : DialogFragment() {
     override fun getTheme(): Int {
         sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
         return sheetTheme.styleRes
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        onRestoreSheetInstanceState(savedInstanceState)
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private fun onRestoreSheetInstanceState(savedState: Bundle?) {
-        savedState?.let { saved ->
-            sheetStyle = saved.getSerializable(STATE_SHEET_STYLE) as SheetStyle
-            cornerFamily = saved.get(STATE_BASE_CORNER_FAMILY) as Int?
-            borderStrokeColor = saved.get(STATE_BASE_BORDER_COLOR) as Int?
-            cornerRadiusDp = saved.get(STATE_BASE_CORNER_RADIUS) as Float?
-            borderStrokeWidthDp = saved.get(STATE_BASE_BORDER_WIDTH) as Float?
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        onSaveSheetInstanceState(outState)
-    }
-
-    private fun onSaveSheetInstanceState(outState: Bundle) {
-        with(outState) {
-            putSerializable(STATE_SHEET_STYLE, sheetStyle)
-            cornerFamily?.let { putInt(STATE_BASE_CORNER_FAMILY, it) }
-            borderStrokeColor?.let { putInt(STATE_BASE_BORDER_COLOR, it) }
-            borderStrokeWidthDp?.let { putFloat(STATE_BASE_BORDER_WIDTH, it) }
-            cornerRadiusDp?.let { putFloat(STATE_BASE_CORNER_RADIUS, it) }
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

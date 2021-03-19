@@ -26,7 +26,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.time.databinding.SheetsTimeBinding
-import java.io.Serializable
 
 /** Listener which returns the selected duration time in milliseconds. */
 typealias DurationTimeListener = (timeInSec: Long) -> Unit
@@ -37,14 +36,6 @@ typealias DurationTimeListener = (timeInSec: Long) -> Unit
 class TimeSheet : Sheet() {
 
     override val dialogTag = "TimeSheet"
-
-    companion object {
-        private const val STATE_LISTENER = "state_listener"
-        private const val STATE_FORMAT = "state_format"
-        private const val STATE_MIN_TIME = "state_min_time"
-        private const val STATE_MAX_TIME = "state_max_time"
-        private const val STATE_CURRENT_TIME = "state_current_time"
-    }
 
     private lateinit var binding: SheetsTimeBinding
     private lateinit var selector: TimeSelector
@@ -166,27 +157,6 @@ class TimeSheet : Sheet() {
             validationListener = validationListener
         )
         currentTime?.let { selector.setTime(it) }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
-        savedState?.let { saved ->
-            listener = saved.getSerializable(STATE_LISTENER) as DurationTimeListener?
-            format = saved.getSerializable(STATE_FORMAT) as TimeFormat
-            minTime = saved.getLong(STATE_MIN_TIME)
-            maxTime = saved.getLong(STATE_MAX_TIME)
-            currentTime = saved.get(STATE_CURRENT_TIME) as Long?
-        }
-    }
-
-    override fun onSaveCustomViewInstanceState(outState: Bundle) {
-        with(outState) {
-            putSerializable(STATE_LISTENER, listener as Serializable?)
-            putSerializable(STATE_FORMAT, format)
-            putLong(STATE_MIN_TIME, minTime)
-            putLong(STATE_MAX_TIME, maxTime)
-            putLong(STATE_CURRENT_TIME, selector.getTimeInSeconds())
-        }
     }
 
     /** Build [TimeSheet] and show it later. */

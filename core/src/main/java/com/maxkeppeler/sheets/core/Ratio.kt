@@ -17,12 +17,10 @@
 
 package com.maxkeppeler.sheets.core
 
-import java.io.Serializable
-
 /**
  * A class that represent an aspect ratio.
  */
-data class Ratio(val width: Int, val height: Int) : Serializable {
+data class Ratio(val width: Int, val height: Int) {
     // Dimension ratio for ConstraintLayout
     val dimensionRatio: String = "$width:$height"
 }

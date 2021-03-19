@@ -18,14 +18,13 @@
 package com.maxkeppeler.sheets.core
 
 import androidx.appcompat.widget.AppCompatImageView
-import java.io.Serializable
 
 typealias ImageViewBuilder = AppCompatImageView.() -> Unit
 
 /**
  * A class that holds general image view settings.
  */
-abstract class ImageSource : Serializable {
+abstract class ImageSource {
 
     internal var imageViewBuilder: ImageViewBuilder? = null
     internal var ratio: Ratio? = null

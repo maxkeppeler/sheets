@@ -46,14 +46,6 @@ class InfoSheet : Sheet() {
 
     override val dialogTag = "InfoSheet"
 
-    companion object {
-        private const val STATE_CONTENT_TEXT = "state_content_text"
-        private const val STATE_DISPLAY_BUTTONS = "state_display_buttons"
-        private const val STATE_DRAWABLE_RES = "state_drawable_res"
-        private const val STATE_DRAWABLE = "state_drawable"
-        private const val STATE_DRAWABLE_COLOR = "state_drawable_color"
-    }
-
     private lateinit var binding: SheetsInfoBinding
 
     private var contentText: String? = null
@@ -201,33 +193,6 @@ class InfoSheet : Sheet() {
                 icon.setColorFilter(drawableColor ?: getIconColor(requireContext()))
                 icon.visibility = View.VISIBLE
             }
-        }
-    }
-
-    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
-        savedState?.let { saved ->
-            contentText = saved.getString(STATE_CONTENT_TEXT)
-            drawableColor = saved.get(STATE_DRAWABLE_COLOR) as Int?
-            drawableRes = saved.get(STATE_DRAWABLE_RES) as Int?
-            (saved.get(STATE_DRAWABLE) as ByteArray?)?.let {
-                drawable = BitmapDrawable(requireContext().resources,
-                    BitmapFactory.decodeByteArray(it, 0, it.size))
-            }
-        }
-    }
-
-    override fun onSaveCustomViewInstanceState(outState: Bundle) {
-        with(outState) {
-            drawableColor?.let { outState.putInt(STATE_DRAWABLE_COLOR, it) }
-            drawableRes?.let { putInt(STATE_DRAWABLE_RES, it) }
-            drawable?.let {
-                val bitmap =  it.toBitmap()
-                val stream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                val drawableByteArray = stream.toByteArray()
-                putByteArray(STATE_DRAWABLE, drawableByteArray)
-            }
-            putString(STATE_CONTENT_TEXT, contentText)
         }
     }
 

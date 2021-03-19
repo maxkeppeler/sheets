@@ -36,7 +36,6 @@ import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetContent
-import java.io.Serializable
 
 
 /** Listener to be invoked when color is selected. */
@@ -51,13 +50,6 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
 
     private companion object {
         private const val ARG_MAX_VALUE = 255
-        private const val STATE_LISTENER = "state_listener"
-        private const val STATE_DISABLE_ALPHA = "state_disable_alpha"
-        private const val STATE_DEFAULT_COLOR = "state_default_color"
-        private const val STATE_SELECTED_COLOR = "state_selected_color"
-        private const val STATE_SWITCH_COLOR_VIEW = "state_switch_color"
-        private const val STATE_COLORS = "state_colors"
-        private const val STATE_COLOR_VIEW = "state_color_view"
     }
 
     private lateinit var binding: SheetsColorBinding
@@ -397,31 +389,6 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
     override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
-
-    @Suppress("UNCHECKED_CAST")
-    override fun onRestoreCustomViewInstanceState(savedState: Bundle?) {
-        savedState?.let { saved ->
-            listener = saved.getSerializable(STATE_LISTENER) as ColorListener?
-            colorView = saved.getSerializable(STATE_COLOR_VIEW) as ColorView
-            saved.getIntArray(STATE_COLORS)?.let { colorMapListRes = it.toMutableList() }
-            disableAlpha = saved.getBoolean(STATE_DISABLE_ALPHA)
-            switchColorView = saved.getBoolean(STATE_SWITCH_COLOR_VIEW)
-            defaultColor = saved.getInt(STATE_DEFAULT_COLOR)
-            selectedColor = saved.getInt(STATE_SELECTED_COLOR)
-        }
-    }
-
-    override fun onSaveCustomViewInstanceState(outState: Bundle) {
-        with(outState) {
-            putSerializable(STATE_LISTENER, listener as Serializable?)
-            putSerializable(STATE_COLOR_VIEW, colorView as Serializable)
-            putIntArray(STATE_COLORS, colorMapListRes.toIntArray())
-            putBoolean(STATE_DISABLE_ALPHA, disableAlpha)
-            putBoolean(STATE_SWITCH_COLOR_VIEW, switchColorView)
-            defaultColor?.let { putInt(STATE_DEFAULT_COLOR, it) }
-            putInt(STATE_SELECTED_COLOR, selectedColor)
-        }
-    }
 
     /** Build [ColorSheet] and show it later. */
     fun build(ctx: Context, func: ColorSheet.() -> Unit): ColorSheet {

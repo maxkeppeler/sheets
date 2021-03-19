@@ -23,7 +23,6 @@ import android.net.Uri
 import androidx.annotation.DrawableRes
 import okhttp3.HttpUrl
 import java.io.File
-import java.io.Serializable
 
 /** Convenience alias for this class. */
 private typealias ImageBuilder = Image.() -> Unit
@@ -37,7 +36,7 @@ typealias ImageRequestBuilder = ImageRequest.() -> Unit
 /**
  * A class that holds the image data and some preferences for the image view and image loading.
  */
-class Image private constructor() : ImageSource(), Serializable {
+class Image private constructor() : ImageSource() {
 
     internal lateinit var any: Any
         private set

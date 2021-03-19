@@ -23,13 +23,12 @@ import android.view.animation.Animation.REVERSE
 import androidx.annotation.*
 import java.io.ByteArrayInputStream
 import java.io.InputStream
-import java.io.Serializable
 
 /**
  * Wrapper class of the LottieAnimationView class methods to offer basic functionality.
  * @see <a href="https://github.com/airbnb/lottie-android">Lottie</a>
  */
-class LottieAnimationRequest internal constructor() : Serializable {
+class LottieAnimationRequest internal constructor() {
 
     companion object {
 

@@ -21,13 +21,12 @@ package com.maxkeppeler.sheets.options
 import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import java.io.Serializable
 
 /**
  * An option is represented with at least a text.
  * A drawable is optional but makes it easier to understand to the user.
  */
-class Option internal constructor(): Serializable {
+class Option internal constructor() {
 
     internal var drawable: Drawable? = null
         private set
