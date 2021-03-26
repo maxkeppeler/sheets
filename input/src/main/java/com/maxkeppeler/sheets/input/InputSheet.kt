@@ -195,15 +195,17 @@ class InputSheet : Sheet() {
     }
 
     /** Build [InputSheet] and show it later. */
-    fun build(ctx: Context, func: InputSheet.() -> Unit): InputSheet {
+    fun build(ctx: Context, width: Int? = null, func: InputSheet.() -> Unit): InputSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [InputSheet] directly. */
-    fun show(ctx: Context, func: InputSheet.() -> Unit): InputSheet {
+    fun show(ctx: Context, width: Int? = null, func: InputSheet.() -> Unit): InputSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this

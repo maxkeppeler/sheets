@@ -807,15 +807,17 @@ class CalendarSheet : Sheet() {
     }
 
     /** Build [CalendarSheet] and show it later. */
-    fun build(ctx: Context, func: CalendarSheet.() -> Unit): CalendarSheet {
+    fun build(ctx: Context, width: Int? = null, func: CalendarSheet.() -> Unit): CalendarSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [CalendarSheet] directly. */
-    fun show(ctx: Context, func: CalendarSheet.() -> Unit): CalendarSheet {
+    fun show(ctx: Context, width: Int? = null, func: CalendarSheet.() -> Unit): CalendarSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this

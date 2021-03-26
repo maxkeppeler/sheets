@@ -140,15 +140,17 @@ class ClockTimeSheet : Sheet() {
     }
 
     /** Build [ClockTimeSheet] and show it later. */
-    fun build(ctx: Context, func: ClockTimeSheet.() -> Unit): ClockTimeSheet {
+    fun build(ctx: Context, width: Int? = null, func: ClockTimeSheet.() -> Unit): ClockTimeSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [ClockTimeSheet] directly. */
-    fun show(ctx: Context, func: ClockTimeSheet.() -> Unit): ClockTimeSheet {
+    fun show(ctx: Context, width: Int? = null, func: ClockTimeSheet.() -> Unit): ClockTimeSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this

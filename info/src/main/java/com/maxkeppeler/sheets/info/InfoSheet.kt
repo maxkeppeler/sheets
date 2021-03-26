@@ -197,15 +197,17 @@ class InfoSheet : Sheet() {
     }
 
     /** Build [InfoSheet] and show it later. */
-    fun build(ctx: Context, func: InfoSheet.() -> Unit): InfoSheet {
+    fun build(ctx: Context, width: Int? = null, func: InfoSheet.() -> Unit): InfoSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [InfoSheet] directly. */
-    fun show(ctx: Context, func: InfoSheet.() -> Unit): InfoSheet {
+    fun show(ctx: Context, width: Int? = null, func: InfoSheet.() -> Unit): InfoSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this

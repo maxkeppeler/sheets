@@ -507,15 +507,17 @@ class OptionsSheet : Sheet() {
     }
 
     /** Build [OptionsSheet] and show it later. */
-    fun build(ctx: Context, func: OptionsSheet.() -> Unit): OptionsSheet {
+    fun build(ctx: Context, width: Int? = null, func: OptionsSheet.() -> Unit): OptionsSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [OptionsSheet] directly. */
-    fun show(ctx: Context, func: OptionsSheet.() -> Unit): OptionsSheet {
+    fun show(ctx: Context, width: Int? = null, func: OptionsSheet.() -> Unit): OptionsSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this

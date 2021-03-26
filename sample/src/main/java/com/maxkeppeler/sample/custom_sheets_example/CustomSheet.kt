@@ -68,15 +68,17 @@ class CustomSheet : Sheet() {
     }
 
     /** Build [CustomSheet] and show it later. */
-    fun build(ctx: Context, func: CustomSheet.() -> Unit): CustomSheet {
+    fun build(ctx: Context, width: Int? = null, func: CustomSheet.() -> Unit): CustomSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [CustomSheet] directly. */
-    fun show(ctx: Context, func: CustomSheet.() -> Unit): CustomSheet {
+    fun show(ctx: Context, width: Int? = null, func: CustomSheet.() -> Unit): CustomSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this

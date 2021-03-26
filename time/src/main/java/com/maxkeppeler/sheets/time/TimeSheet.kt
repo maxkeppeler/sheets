@@ -160,15 +160,17 @@ class TimeSheet : Sheet() {
     }
 
     /** Build [TimeSheet] and show it later. */
-    fun build(ctx: Context, func: TimeSheet.() -> Unit): TimeSheet {
+    fun build(ctx: Context, width: Int? = null, func: TimeSheet.() -> Unit): TimeSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [TimeSheet] directly. */
-    fun show(ctx: Context, func: TimeSheet.() -> Unit): TimeSheet {
+    fun show(ctx: Context, width: Int? = null, func: TimeSheet.() -> Unit): TimeSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this

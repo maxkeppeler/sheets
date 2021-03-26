@@ -391,15 +391,17 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
     override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
 
     /** Build [ColorSheet] and show it later. */
-    fun build(ctx: Context, func: ColorSheet.() -> Unit): ColorSheet {
+    fun build(ctx: Context, width: Int? = null, func: ColorSheet.() -> Unit): ColorSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         return this
     }
 
     /** Build and show [ColorSheet] directly. */
-    fun show(ctx: Context, func: ColorSheet.() -> Unit): ColorSheet {
+    fun show(ctx: Context, width: Int? = null, func: ColorSheet.() -> Unit): ColorSheet {
         this.windowContext = ctx
+        this.width = width
         this.func()
         this.show()
         return this
