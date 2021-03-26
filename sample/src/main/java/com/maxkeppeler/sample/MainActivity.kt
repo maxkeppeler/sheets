@@ -589,7 +589,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showInfoSheet() {
 
-        InfoSheet().show(this) {
+        InfoSheet().show(this, width = null /* Use custom view width (e.g. for landscape mode or tablet). */ ) {
             style(getSheetStyle())
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
             title("Did you read the README?")
