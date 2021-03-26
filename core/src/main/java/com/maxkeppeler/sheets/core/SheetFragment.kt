@@ -59,6 +59,7 @@ abstract class SheetFragment : DialogFragment() {
     private var sheetTheme = Theme.BOTTOM_SHEET_DAY
     private var behavior = BottomSheetBehavior.STATE_EXPANDED
     private var peekHeight = 0
+    protected var width: Int? = null
     protected var cornerFamily: Int? = null
     protected var cornerRadiusDp: Float? = null
     private var borderStrokeWidthDp: Float? = null
@@ -261,11 +262,14 @@ abstract class SheetFragment : DialogFragment() {
     override fun onResume() {
         super.onResume()
         if (sheetStyle == SheetStyle.DIALOG) {
-            dialog?.window?.apply {
-                setLayout(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
+            dialog?.window?.setLayout(
+                width ?: ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        } else {
+            width?.let { width ->
+                dialog?.window?.setLayout(width,
+                    ViewGroup.LayoutParams.MATCH_PARENT)
             }
         }
     }
