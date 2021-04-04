@@ -36,5 +36,7 @@ enum class SheetType(@StringRes val titleRes: Int, @StringRes val descRes: Int) 
 
     INPUT(R.string.input_sheet, R.string.input_sheet_desc),
 
+    STORAGE(R.string.storage_sheet, R.string.custom_sheets_desc),
+
     CUSTOM(R.string.custom_sheets, R.string.custom_sheets_desc),
 }

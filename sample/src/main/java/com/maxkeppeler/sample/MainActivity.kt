@@ -59,9 +59,13 @@ import com.maxkeppeler.sheets.lottie.withCoverLottieAnimation
 import com.maxkeppeler.sheets.options.DisplayMode
 import com.maxkeppeler.sheets.options.Option
 import com.maxkeppeler.sheets.options.OptionsSheet
+import com.maxkeppeler.sheets.storage.FileDisplayMode
+import com.maxkeppeler.sheets.storage.StorageSelectionMode
+import com.maxkeppeler.sheets.storage.StorageSheet
 import com.maxkeppeler.sheets.time.TimeFormat
 import com.maxkeppeler.sheets.time.TimeSheet
 import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
+import java.io.FileFilter
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
@@ -117,6 +121,10 @@ class MainActivity : AppCompatActivity() {
             SheetExample.INPUT_LONG -> showInputSheetLong()
             SheetExample.INPUT_PASSWORD -> showInputSheetPassword()
             SheetExample.CUSTOM1 -> showCustomSheet()
+            SheetExample.STORAGE_LIST -> showStorageSheetList()
+            SheetExample.STORAGE_LIST_FILTER -> showStorageSheetListFilter()
+            SheetExample.STORAGE_LIST_COLUMNS -> showStorageSheetListColumns()
+            SheetExample.STORAGE_GRID -> showStorageSheetGridColumns()
         }
     }
 
@@ -607,6 +615,70 @@ class MainActivity : AppCompatActivity() {
             negativeButtonStyle(ButtonStyle.OUTLINED)
             drawable(R.drawable.ic_github)
             drawableColor(R.color.md_red_500)
+        }
+    }
+
+    private fun showStorageSheetList() {
+
+        StorageSheet().show(this) {
+            style(getSheetStyle())
+            fileDisplayMode(FileDisplayMode.GRID)
+            fileColumns(2)
+            multipleChoices(true)
+            maxChoices(8)
+            minChoices(3)
+            displayMultipleChoicesInfo(true)
+            selectionMode(StorageSelectionMode.FILE)
+            emptyViewImage(Image(R.drawable.ic_help))
+            emptyViewText(R.string.app_name)
+//            title("Pick your profile images")
+//            displayToolbar(false)
+            onPositive { files -> showToastLong("onPositive", "Files: $files") }
+        }
+    }
+
+    private fun showStorageSheetListFilter() {
+
+        val fileFilter = FileFilter { file -> !file.path.endsWith(".jpg") }
+
+        StorageSheet().show(this) {
+            style(getSheetStyle())
+            fileDisplayMode(FileDisplayMode.LIST)
+            fileColumns(1)
+            filter(fileFilter)
+            selectionMode(StorageSelectionMode.FILE)
+            emptyViewImage(Image(R.drawable.ic_help))
+            emptyViewText(R.string.app_name)
+            displayToolbar(false)
+            onPositive { files -> showToastLong("onPositive", "Files: $files") }
+        }
+    }
+
+    private fun showStorageSheetListColumns() {
+
+        StorageSheet().show(this) {
+            style(getSheetStyle())
+            fileDisplayMode(FileDisplayMode.LIST)
+            fileColumns(2)
+            selectionMode(StorageSelectionMode.FILE)
+            emptyViewImage(Image(R.drawable.ic_help))
+            emptyViewText(R.string.app_name)
+            displayToolbar(false)
+            onPositive { files -> showToastLong("onPositive", "Files: $files") }
+        }
+    }
+
+    private fun showStorageSheetGridColumns() {
+
+        StorageSheet().show(this) {
+            style(getSheetStyle())
+            fileDisplayMode(FileDisplayMode.GRID)
+            fileColumns(3)
+            selectionMode(StorageSelectionMode.FILE)
+            emptyViewImage(Image(R.drawable.ic_help))
+            emptyViewText(R.string.app_name)
+            displayToolbar(false)
+            onPositive { files -> showToastLong("onPositive", "Files: $files") }
         }
     }
 

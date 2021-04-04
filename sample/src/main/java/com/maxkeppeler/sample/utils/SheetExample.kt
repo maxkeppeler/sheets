@@ -20,6 +20,14 @@ import com.maxkeppeler.sample.R
 
 enum class SheetExample(val type: SheetType, @StringRes val textRes: Int) {
 
+    STORAGE_LIST(SheetType.STORAGE, R.string.storage_list),
+
+    STORAGE_LIST_FILTER(SheetType.STORAGE, R.string.storage_list_filter),
+
+    STORAGE_LIST_COLUMNS(SheetType.STORAGE, R.string.storage_list_columns),
+
+    STORAGE_GRID(SheetType.STORAGE, R.string.storage_grid_columns),
+
     INFO(SheetType.INFO, R.string.info),
 
     INFO_COVER_IMAGE_1(SheetType.INFO, R.string.info_cover_image_1),
