@@ -28,9 +28,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import com.maxkeppeler.sheets.color.databinding.SheetsColorBinding
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
@@ -61,8 +63,8 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
 
     private var colorAdapter: ColorAdapter? = null
 
-    @ColorRes
-    private var colorMapListRes: MutableList<Int> = getDefaultColorPalette().toMutableList()
+    @ColorInt
+    private var colors: MutableList<Int> = mutableListOf()
 
     private var colorView = ColorView.TEMPLATE
     private var switchColorView = true
@@ -70,12 +72,15 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
     private val touchCustomColorView
         get() = switchColorView || colorView == ColorView.CUSTOM
 
+    @ColorInt
     private var defaultColor: Int? = null
+
+    @ColorInt
     private var selectedColor: Int = Color.BLACK
 
-    private var iconColor = 0
-    private var primaryColor = 0
-    private var highlightColor = 0
+    private val iconColor by lazy { getIconColor(requireContext()) }
+    private val primaryColor by lazy { getPrimaryColor(requireContext()) }
+    private val highlightColor by lazy { getHighlightColor(requireContext()) }
 
     private var listener: ColorListener? = null
     private var disableAlpha: Boolean = false
@@ -94,18 +99,48 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
     }
 
     /** Set default color. */
-    fun defaultColor(@ColorRes color: Int) {
+    fun defaultColorRes(@ColorRes color: Int) {
+        this.defaultColor = ContextCompat.getColor(windowContext, color)
+    }
+
+    /** Set colors. */
+    fun colorsRes(@ColorRes vararg color: Int) {
+        this.colors = color.map { ContextCompat.getColor(windowContext, it) }.toMutableList()
+    }
+
+    /** Set colors. */
+    fun colorsRes(@ColorRes colors: List<Int>) {
+        this.colors = colors.map { ContextCompat.getColor(windowContext, it) }.toMutableList()
+    }
+
+    /** Set default color. */
+    fun defaultColorInt(@ColorInt color: Int) {
         this.defaultColor = color
     }
 
     /** Set colors. */
-    fun colors(@ColorRes vararg color: Int) {
-        this.colorMapListRes = color.toMutableList()
+    fun colorsInt(@ColorInt vararg color: Int) {
+        this.colors = color.toMutableList()
     }
 
     /** Set colors. */
-    fun colors(@ColorRes colors: MutableList<Int>) {
-        this.colorMapListRes = colors
+    fun colorsInt(@ColorInt colors: List<Int>) {
+        this.colors = colors.toMutableList()
+    }
+
+    /** Set default color. */
+    fun defaultColorString(color: String) {
+        this.defaultColor = Color.parseColor(color)
+    }
+
+    /** Set colors. */
+    fun colorsString(vararg color: String) {
+        this.colors = color.map { Color.parseColor(it) }.toMutableList()
+    }
+
+    /** Set colors. */
+    fun colorsString(colors: List<String>) {
+        this.colors = colors.map { Color.parseColor(it) }.toMutableList()
     }
 
     /** Disable alpha. */
@@ -186,9 +221,11 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
         setButtonPositiveListener(::save)
         displayToolbarTypeButton(switchColorView)
 
-        iconColor = getIconColor(requireContext())
-        primaryColor = getPrimaryColor(requireContext())
-        highlightColor = getHighlightColor(requireContext())
+        if (colors.isEmpty()) {
+            this.colors = getDefaultColorPalette().map {
+                ContextCompat.getColor(requireContext(), it)
+            }.toMutableList()
+        }
 
         when {
             switchColorView -> {
@@ -223,10 +260,10 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
     }
 
     private fun setupTemplatesView() {
-        if (colorMapListRes.isNotEmpty()) {
+        if (colors.isNotEmpty()) {
             binding.colorTemplatesView.layoutManager =
                 CustomGridLayoutManager(requireContext(), 6, true)
-            colorAdapter = ColorAdapter(requireContext(), colorMapListRes, selectedColor) { color ->
+            colorAdapter = ColorAdapter(colors, selectedColor) { color ->
                 selectedColor = color
                 updateColor()
                 validate()

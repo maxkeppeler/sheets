@@ -16,7 +16,6 @@
 
 package com.maxkeppeler.sheets.color
 
-import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.view.LayoutInflater
@@ -24,14 +23,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.color.databinding.SheetsColorTemplatesItemBinding
-import com.maxkeppeler.sheets.core.utils.colorOf
 
 internal class ColorAdapter(
-    private val ctx: Context,
-    @ColorRes
+    @ColorInt
     private val colors: MutableList<Int>,
     @ColorInt
     private val selectedColor: Int,
@@ -50,7 +46,7 @@ internal class ColorAdapter(
         )
 
     override fun onBindViewHolder(holder: ColorItem, i: Int) {
-        val color = colorOf(ctx, colors[i])
+        val color = colors[i]
         with(holder.binding) {
 
             val background = colorView.background as RippleDrawable
