@@ -117,6 +117,8 @@ abstract class Sheet : SheetFragment() {
     @DrawableRes
     private var negativeButtonDrawableRes: Int? = null
 
+    private var customLayoutHeight: Int? = null
+
     /** Set the top style. */
     fun topStyle(topStyle: TopStyle) {
         this.topStyle = topStyle
@@ -285,19 +287,24 @@ abstract class Sheet : SheetFragment() {
         this.negativeListener = negativeListener
     }
 
-    /** Sets a listener that is invoked when the sheet is dismissed (after negative or positive button click). */
+    /** Set a listener that is invoked when the sheet is dismissed (after negative or positive button click). */
     fun onDismiss(dismissListener: DismissListener) {
         this.dismissListener = dismissListener
     }
 
-    /** Sets a listener that is invoked when the sheet is cancelled. */
+    /** Set a listener that is invoked when the sheet is cancelled. */
     fun onCancel(cancelListener: CancelListener) {
         this.cancelListener = cancelListener
     }
 
-    /** Sets a listener that is invoked when the sheet is closed. */
+    /** Set a listener that is invoked when the sheet is closed. */
     fun onClose(closeListener: CloseListener) {
         this.closeListener = closeListener
+    }
+
+    /** Set the height of the custom sheet layout. */
+    fun customLayoutHeight(customLayoutHeight: Int) {
+        this.customLayoutHeight = customLayoutHeight
     }
 
     override fun dismiss() {
@@ -374,16 +381,17 @@ abstract class Sheet : SheetFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        saved: Bundle?
+        saved: Bundle?,
     ): View? {
         if (saved != null) {
             dismiss()
             return null
         }
-        return SheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
-            .also { base = it }.apply {
-                layout.addView(onCreateLayoutView())
-            }.root
+        base = SheetsBaseBinding.inflate(LayoutInflater.from(activity), container, false)
+        val layout = onCreateLayoutView()
+        customLayoutHeight?.let { base.layout.layoutParams.apply { height = it } }
+        base.layout.addView(layout)
+        return base.root
     }
 
     /** Create custom view to be added to the base sheet. */
