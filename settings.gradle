@@ -1,1 +1,1 @@
-include ':core', ':info', ':progress', ':storage', ':options', ':input', ':color', ':calendar', ':time', ':time-clock', ":lottie", ':sample'
+include ':core', ':info', ':storage', ':options', ':input', ':color', ':calendar', ':time', ':time-clock', ":lottie", ':sample'
