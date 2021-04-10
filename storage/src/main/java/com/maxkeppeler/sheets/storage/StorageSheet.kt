@@ -80,7 +80,8 @@ class StorageSheet : Sheet() {
             val validMultipleChoice =
                 multipleChoices && selectedFiles.size >= minChoices ?: 1
                         && selectedFiles.size <= maxChoices ?: Int.MAX_VALUE
-            val validSingleChoice = !multipleChoices && selectedFiles.isNotEmpty()
+            val validSingleChoice =
+                !multipleChoices && (selectedFiles.isNotEmpty() || selectionMode == StorageSelectionMode.FOLDER)
             return validMultipleChoice || validSingleChoice
         }
 
