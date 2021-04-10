@@ -16,8 +16,10 @@
 
 package com.maxkeppeler.sample
 
+import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -31,6 +33,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.textfield.TextInputLayout
@@ -46,6 +50,7 @@ import com.maxkeppeler.sheets.color.ColorSheet
 import com.maxkeppeler.sheets.color.ColorView
 import com.maxkeppeler.sheets.core.*
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomStaggeredGridLayoutManager
+import com.maxkeppeler.sheets.core.utils.toDp
 import com.maxkeppeler.sheets.info.InfoSheet
 import com.maxkeppeler.sheets.input.InputSheet
 import com.maxkeppeler.sheets.input.Validation
@@ -65,6 +70,7 @@ import com.maxkeppeler.sheets.storage.StorageSheet
 import com.maxkeppeler.sheets.time.TimeFormat
 import com.maxkeppeler.sheets.time.TimeSheet
 import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
+import java.io.File
 import java.io.FileFilter
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -121,10 +127,12 @@ class MainActivity : AppCompatActivity() {
             SheetExample.INPUT_LONG -> showInputSheetLong()
             SheetExample.INPUT_PASSWORD -> showInputSheetPassword()
             SheetExample.CUSTOM1 -> showCustomSheet()
-            SheetExample.STORAGE_LIST -> showStorageSheetList()
-            SheetExample.STORAGE_LIST_FILTER -> showStorageSheetListFilter()
-            SheetExample.STORAGE_LIST_COLUMNS -> showStorageSheetListColumns()
-            SheetExample.STORAGE_GRID -> showStorageSheetGridColumns()
+            SheetExample.STORAGE_LIST -> withStoragePermissions { showStorageSheetList() }
+            SheetExample.STORAGE_LIST_FILTER -> withStoragePermissions { showStorageSheetListFilter() }
+            SheetExample.STORAGE_LIST_COLUMNS -> withStoragePermissions { showStorageSheetListColumns() }
+            SheetExample.STORAGE_GRID -> withStoragePermissions { showStorageSheetGridColumns() }
+            SheetExample.STORAGE_LIST_FOLDER -> withStoragePermissions { showStorageSheetListFolder() }
+            SheetExample.STORAGE_LIST_FOLDER_MULTI -> withStoragePermissions { showStorageSheetListFolders() }
         }
     }
 
@@ -618,12 +626,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private var storageSheet: StorageSheet? = null
+
     private fun showStorageSheetList() {
 
-        StorageSheet().show(this) {
+        storageSheet = StorageSheet().show(this) {
             style(getSheetStyle())
-            fileDisplayMode(FileDisplayMode.GRID)
-            fileColumns(2)
+            fileDisplayMode(FileDisplayMode.HORIZONTAL)
+            fileColumns(1)
             multipleChoices(true)
             maxChoices(8)
             minChoices(3)
@@ -631,9 +641,28 @@ class MainActivity : AppCompatActivity() {
             selectionMode(StorageSelectionMode.FILE)
             emptyViewImage(Image(R.drawable.ic_help))
             emptyViewText(R.string.app_name)
-//            title("Pick your profile images")
-//            displayToolbar(false)
+            onCreateFolder { file, listener -> showInputStorageFolderNameSheet(file, listener) }
             onPositive { files -> showToastLong("onPositive", "Files: $files") }
+        }
+    }
+
+    private fun showInputStorageFolderNameSheet(file: File, listener: (name: String) -> Unit) {
+
+        storageSheet?.dismiss()
+
+        InputSheet().show(this) {
+            style(getSheetStyle())
+            with(InputEditText {
+            })
+            onPositive { data ->
+                val name = data.getString("0", "New Folder")
+                listener.invoke(name)
+            }
+            onClose {
+//                storageSheet?.currentLocation(file)
+                storageSheet?.homeLocation(file)
+                storageSheet?.show()
+            }
         }
     }
 
@@ -643,7 +672,7 @@ class MainActivity : AppCompatActivity() {
 
         StorageSheet().show(this) {
             style(getSheetStyle())
-            fileDisplayMode(FileDisplayMode.LIST)
+            fileDisplayMode(FileDisplayMode.HORIZONTAL)
             fileColumns(1)
             filter(fileFilter)
             selectionMode(StorageSelectionMode.FILE)
@@ -658,7 +687,7 @@ class MainActivity : AppCompatActivity() {
 
         StorageSheet().show(this) {
             style(getSheetStyle())
-            fileDisplayMode(FileDisplayMode.LIST)
+            fileDisplayMode(FileDisplayMode.HORIZONTAL)
             fileColumns(2)
             selectionMode(StorageSelectionMode.FILE)
             emptyViewImage(Image(R.drawable.ic_help))
@@ -672,13 +701,34 @@ class MainActivity : AppCompatActivity() {
 
         StorageSheet().show(this) {
             style(getSheetStyle())
-            fileDisplayMode(FileDisplayMode.GRID)
+            fileDisplayMode(FileDisplayMode.VERTICAL)
             fileColumns(3)
             selectionMode(StorageSelectionMode.FILE)
             emptyViewImage(Image(R.drawable.ic_help))
             emptyViewText(R.string.app_name)
             displayToolbar(false)
             onPositive { files -> showToastLong("onPositive", "Files: $files") }
+        }
+    }
+
+    private fun showStorageSheetListFolder() {
+
+        StorageSheet().show(this) {
+            style(getSheetStyle())
+            fileDisplayMode(FileDisplayMode.HORIZONTAL)
+            selectionMode(StorageSelectionMode.FOLDER)
+            onPositive { files -> showToastLong("onPositive", "Folder: $files") }
+        }
+    }
+
+    private fun showStorageSheetListFolders() {
+
+        StorageSheet().show(this) {
+            style(getSheetStyle())
+            fileDisplayMode(FileDisplayMode.HORIZONTAL)
+            selectionMode(StorageSelectionMode.FOLDER)
+            multipleChoices(true)
+            onPositive { files -> showToastLong("onPositive", "Folders: $files") }
         }
     }
 
@@ -855,6 +905,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun withStoragePermissions(withPermissionListener: () -> Unit) {
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE), 10)
+
+        } else withPermissionListener.invoke()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -885,9 +948,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadPreferences() {
-        Log.d("MainActivity", "name: ")
         val sheetStyleName = getPrefString(Preference.SHEET_STYLE)
-        Log.d("MainActivity", "name: $sheetStyleName")
         sheetStyle =
             sheetStyleName?.takeIf { SheetStyle.values().any { it.name == sheetStyleName } }
                 ?.let { SheetStyle.valueOf(it) }

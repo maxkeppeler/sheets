@@ -37,7 +37,9 @@
     <string name="custom_sheets">Custom Sheets</string>
     <string name="custom_sheets_desc">Create your own custom sheet that is build on top of existing functionality.</string>
     <string name="options_list">List of Options (with and without buttons)</string>
-    <string name="storage_list">Display files on device in a list</string>
+    <string name="storage_list">Display files on device in a list. Multiple files can be selected.</string>
+    <string name="storage_list_folder">Display list of folders.</string>
+    <string name="storage_list_folder_multiple">Display list of folders. Multiple folders can be selected.</string>
     <string name="storage_list_filter">Display files on device in a list with the filter that only jpeg files should be displayed.</string>
     <string name="storage_list_columns">Display files on device in a list with multiple columns</string>
     <string name="storage_grid_columns">Display files on device in a grid with multiple columns</string>

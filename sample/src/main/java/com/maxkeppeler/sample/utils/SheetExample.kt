@@ -28,6 +28,10 @@ enum class SheetExample(val type: SheetType, @StringRes val textRes: Int) {
 
     STORAGE_GRID(SheetType.STORAGE, R.string.storage_grid_columns),
 
+    STORAGE_LIST_FOLDER(SheetType.STORAGE, R.string.storage_list_folder),
+
+    STORAGE_LIST_FOLDER_MULTI(SheetType.STORAGE, R.string.storage_list_folder_multiple),
+
     INFO(SheetType.INFO, R.string.info),
 
     INFO_COVER_IMAGE_1(SheetType.INFO, R.string.info_cover_image_1),
