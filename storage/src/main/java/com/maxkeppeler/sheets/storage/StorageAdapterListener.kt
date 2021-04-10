@@ -18,11 +18,26 @@ package com.maxkeppeler.sheets.storage
 
 import java.io.File
 
+/**
+ * Defines interactions between the Sheet or user and the adapter.
+ */
 internal interface StorageAdapterListener {
+
+    /** Select file. */
     fun select(file: File)
+
+    /** Select file in multiple choice mode. */
     fun selectMultipleChoice(file: File)
+
+    /** Deselect file in multiple choice mode. */
     fun deselectMultipleChoice(file: File)
+
+    /** Check if file is selected. */
     fun isSelected(file: File): Boolean
+
+    /** Check if multiple choice is allowed. */
     fun isMultipleChoiceSelectionAllowed(file: File): Boolean
+
+    /** Create a folder based within the file's path. */
     fun createFolder(file: File)
 }
