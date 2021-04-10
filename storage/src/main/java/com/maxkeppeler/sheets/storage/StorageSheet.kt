@@ -31,6 +31,7 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maxkeppeler.sheets.core.Image
 import com.maxkeppeler.sheets.core.Sheet
@@ -284,6 +285,7 @@ class StorageSheet : Sheet() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkSetup()
         displayButtonsView(multipleChoices || displayButtons)
         setButtonPositiveListener(::save)
 
@@ -323,6 +325,16 @@ class StorageSheet : Sheet() {
         validate(true)
     }
 
+    private fun checkSetup() {
+
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        ) throw IllegalStateException("Permission READ_EXTERNAL_STORAGE is required.")
+
+        if (createFolderListener != null && ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        ) throw IllegalStateException("Permission WRITE_EXTERNAL_STORAGE is required to allow user to create folders.")
+    }
     /** Validate if the current selections fulfils the requirements. */
     private fun validate(init: Boolean = false) {
 
