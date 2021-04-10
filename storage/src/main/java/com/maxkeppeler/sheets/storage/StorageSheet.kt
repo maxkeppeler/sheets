@@ -335,6 +335,19 @@ class StorageSheet : Sheet() {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
         ) throw IllegalStateException("Permission WRITE_EXTERNAL_STORAGE is required to allow user to create folders.")
     }
+
+    private fun save() {
+
+        val files = mutableListOf<File>()
+        when {
+            !multipleChoices && selectionMode == StorageSelectionMode.FOLDER ->
+                files.add(storageAdapter.getCurrentFile())
+            else -> files.addAll(selectedFiles)
+        }
+        listener?.invoke(files)
+        dismiss()
+    }
+
     /** Validate if the current selections fulfils the requirements. */
     private fun validate(init: Boolean = false) {
 
