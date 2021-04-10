@@ -311,7 +311,8 @@ class StorageSheet : Sheet() {
             layoutManager = CustomGridLayoutManager(requireContext(), fileColumns, true).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int =
-                        if (position == 0) fileColumns else 1
+                        if (position == 0 || storageAdapter.getCurrentFiles().isEmpty())
+                            fileColumns else 1
                 }
             }
         }
