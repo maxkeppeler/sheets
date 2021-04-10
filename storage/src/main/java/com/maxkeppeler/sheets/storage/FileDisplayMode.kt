@@ -18,17 +18,17 @@ package com.maxkeppeler.sheets.storage
 
 /**
  *  The display modes for files that can be used.
- *  [LIST], [GRID]
+ *  [HORIZONTAL], [VERTICAL]
  */
 enum class FileDisplayMode {
 
     /**
-     * Displays a vertical grid item.
+     * Displays the file's icon and name vertically.
      */
-    GRID,
+    VERTICAL,
 
     /**
-     * Displays a horizontal list item.
+     * Displays the file's icon and name horizontally.
      */
-    LIST
+    HORIZONTAL
 }

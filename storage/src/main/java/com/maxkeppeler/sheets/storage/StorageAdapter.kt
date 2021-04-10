@@ -25,12 +25,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetContent
-import com.maxkeppeler.sheets.storage.databinding.SheetsStorageFileGridItemBinding
-import com.maxkeppeler.sheets.storage.databinding.SheetsStorgeFileListItemBinding
-import com.maxkeppeler.sheets.storage.databinding.SheetsStorgeNavigationItemBinding
+import com.maxkeppeler.sheets.storage.databinding.*
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileFilter
@@ -39,7 +38,8 @@ import java.util.*
 internal class StorageAdapter(
     private val ctx: Context,
     private val selectionMode: StorageSelectionMode,
-    private val selectedInitialFile: File,
+    private val homeLocation: File,
+    currentLocation: File?,
     private val filter: FileFilter? = null,
     private val fileDisplayMode: FileDisplayMode,
     private val fileColumns: Int,
@@ -49,13 +49,17 @@ internal class StorageAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
+        private const val NAVIGATION_ITEM_INDEX = 0
         private const val SELECTOR_STATE_SELECTED_INDEX = 1
         private const val HOLDER_NAVIGATION_ITEM = 0
-        private const val HOLDER_FILE_GRID_ITEM = 2
-        private const val HOLDER_FILE_LIST_ITEM = 3
+        private const val HOLDER_FILE_VERTICAL_ITEM = 2
+        private const val HOLDER_FILE_HORIZONTAL_ITEM = 3
+        private const val HOLDER_EMPTY_ITEM = 4
+        private const val ITEM_INDENTATION_FILES = 16
+        private const val ITEM_INDENTATION_DEFAULT = 0
     }
 
-    private var currentFile = selectedInitialFile
+    private var currentFile = currentLocation ?: homeLocation
     private var files: MutableList<File> = mutableListOf()
     private var searchFilesJob: Job? = null
     private val selectedFiles = mutableMapOf<File, Pair<ImageView, SheetContent>>()
@@ -63,6 +67,10 @@ internal class StorageAdapter(
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
     private val highlightColor = getHighlightColor(ctx)
+
+    fun getCurrentFile(): File = currentFile
+
+    fun getCurrentFiles(): MutableList<File> = files
 
     init {
         openDirectory(currentFile)
@@ -77,70 +85,91 @@ internal class StorageAdapter(
             ?: getPrimaryColor(ctx)
 
     override fun getItemViewType(position: Int): Int = when {
-        currentFile.hasParent(filter) && position == 0 -> HOLDER_NAVIGATION_ITEM
-        fileDisplayMode == FileDisplayMode.GRID -> HOLDER_FILE_GRID_ITEM
-        else -> HOLDER_FILE_LIST_ITEM
+        currentFile.hasParent(homeLocation,
+            filter) && position == NAVIGATION_ITEM_INDEX -> HOLDER_NAVIGATION_ITEM
+        files.isEmpty() -> HOLDER_EMPTY_ITEM
+        fileDisplayMode == FileDisplayMode.VERTICAL -> HOLDER_FILE_VERTICAL_ITEM
+        else -> HOLDER_FILE_HORIZONTAL_ITEM
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            HOLDER_NAVIGATION_ITEM -> {
-                NavigationItem(
-                    SheetsStorgeNavigationItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+            HOLDER_NAVIGATION_ITEM -> NavigationItem(
+                SheetsStorgeNavigationItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
-            HOLDER_FILE_GRID_ITEM -> {
-                FileGridItem(
-                    SheetsStorageFileGridItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            }
+            )
 
-            else -> {
-                FileListItem(
-                    SheetsStorgeFileListItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+            HOLDER_FILE_VERTICAL_ITEM -> FileVerticalItem(
+                SheetsStorageFileVerticalItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
+            )
+
+            HOLDER_FILE_HORIZONTAL_ITEM -> FileHorizontalItem(
+                SheetsStorgeFileHorizontalItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+
+            else -> EmptyItem(
+                SheetsStorageEmptyBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, i: Int) {
         when (holder) {
             is NavigationItem -> holder.binding.buildNavigation()
-            is FileGridItem -> holder.binding.buildGridItem(i)
-            is FileListItem -> holder.binding.buildListItem(i)
+            is FileVerticalItem -> holder.binding.buildHorizontalItem(i)
+            is FileHorizontalItem -> holder.binding.buildVerticalItem(i)
+            is EmptyItem -> holder.binding.buildEmpty()
         }
+    }
+
+    private fun SheetsStorageEmptyBinding.buildEmpty() {
+        label.text = ctx.getString(R.string.folder_empty)
+        icon.setImageResource(R.drawable.sheets_ic_folder_empty)
     }
 
     private fun SheetsStorgeNavigationItemBinding.buildNavigation() {
-        val isRoot = currentFile == selectedInitialFile
-        label.text = if (isRoot) "Home" else "Go back"
-        container.changeRippleAndStateColor()
-        icon.setImageResource(if (isRoot) R.drawable.sheets_ic_nav_home else R.drawable.sheets_ic_nav_back)
-        container.setOnClickListener { browse(0) }
 
-        if (allowFolderCreation && currentFile.canWrite()) {
-            // TODO: Display button to create folder
-        }
+        val isRoot = currentFile == homeLocation
+        val textRes = if (isRoot) R.string.navigation_home else R.string.navigation_back
+        val iconRes = if (isRoot) R.drawable.sheets_ic_nav_home else R.drawable.sheets_ic_nav_back
+        label.text = ctx.getString(textRes)
+        path.text = currentFile.absolutePath
+        icon.setImageResource(iconRes)
+        container.changeRippleAndStateColor()
+
+        val browse = { browse(NAVIGATION_ITEM_INDEX) }
+        icon.setOnClickListener { browse() }
+        container.setOnClickListener { browse() }
+
+        val displayFolderCreationButton = allowFolderCreation && currentFile.canWrite()
+        val folderVisibility = if (displayFolderCreationButton) View.VISIBLE else View.GONE
+        val folderIcon = ContextCompat.getDrawable(ctx, R.drawable.sheets_ic_folder_add)
+        createFolderBtn.visibility = folderVisibility
+        createFolderBtn.setImageDrawable(folderIcon)
+        createFolderBtn.setOnClickListener { listener.createFolder(currentFile) }
     }
 
-    private fun SheetsStorgeFileListItemBinding.buildListItem(i: Int) {
+    private fun SheetsStorgeFileHorizontalItemBinding.buildVerticalItem(i: Int) {
         val actualIndex = actualIndex(i)
         val file = files[actualIndex]
         buildItem(i, file, root, container, icon, label)
     }
 
-    private fun SheetsStorageFileGridItemBinding.buildGridItem(i: Int) {
+    private fun SheetsStorageFileVerticalItemBinding.buildHorizontalItem(i: Int) {
         val actualIndex = actualIndex(i)
         val file = files[actualIndex]
         buildItem(i, file, root, container, icon, label)
@@ -156,27 +185,31 @@ internal class StorageAdapter(
     ) {
 
         (root.layoutParams as RecyclerView.LayoutParams).apply {
-            marginStart = if (fileColumns == 1) 16.toDp() else 0
+            marginStart =
+                if (fileColumns == 1) ITEM_INDENTATION_FILES.toDp() else ITEM_INDENTATION_DEFAULT
         }
 
         label.text = file.name
-
         container.changeRippleAndStateColor()
         icon.setImageResource(file.getExtensionDrawable())
 
         val selected = listener.isSelected(file)
-
         if (selected) showSelected(label, icon, container)
         else showDeselected(label, icon, container)
 
         icon.setOnClickListener {
-            selectOption(file, label, icon, container)
+            if (file.isFile && selectionMode == StorageSelectionMode.FILE) {
+                container.callOnClick()
+                return@setOnClickListener
+            }
+            if (file.isDirectory && selectionMode == StorageSelectionMode.FOLDER && multipleChoice) {
+                selectOption(file, label, icon, container)
+            } else browse(index)
         }
         container.setOnClickListener {
-            browse(index)
-            if (file.isDirectory && selectionMode == StorageSelectionMode.FOLDER
-                || file.isFile && selectionMode == StorageSelectionMode.FILE
-            ) selectOption(file, label, icon, container)
+            if (file.isFile && selectionMode == StorageSelectionMode.FILE) {
+                selectOption(file, label, icon, container)
+            } else browse(index)
         }
     }
 
@@ -231,6 +264,7 @@ internal class StorageAdapter(
         }
     }
 
+    /** Creates a folder with the specified name at the current location. */
     fun createFolder(name: String) {
         if (currentFile.canWrite()) {
             val newFile = File(currentFile.absolutePath.plus("/$name"))
@@ -240,9 +274,7 @@ internal class StorageAdapter(
     }
 
     private fun browse(index: Int) {
-
-        val parent = currentFile.getRealParent(filter)
-
+        val parent = currentFile.getRealParent(homeLocation, filter)
         if (parent != null && index == HOLDER_NAVIGATION_ITEM) {
             openDirectory(parent)
             return
@@ -250,7 +282,6 @@ internal class StorageAdapter(
 
         val actualIndex = actualIndex(index)
         val selected = files[actualIndex]
-
         if (selected.isDirectory) {
             openDirectory(selected)
         }
@@ -261,15 +292,15 @@ internal class StorageAdapter(
         searchFilesJob = GlobalScope.launch(Dispatchers.Main) {
             currentFile = directory
             val result = withContext(Dispatchers.IO) {
-                val rawContents = directory.listFiles() ?: arrayOf()
+                val listedFiles = directory.listFiles() ?: arrayOf()
                 when (selectionMode) {
                     StorageSelectionMode.FOLDER -> {
-                        rawContents
+                        listedFiles
                             .filter { it.isDirectory && (filter == null || filter.accept(it)) }
                             .sortedBy { it.name.toLowerCase(Locale.getDefault()) }
                     }
                     else -> {
-                        rawContents
+                        listedFiles
                             .sortedWith(compareBy({
                                 !it.isDirectory && (filter == null || filter.accept(it))
                             }, {
@@ -284,20 +315,28 @@ internal class StorageAdapter(
     }
 
     override fun getItemCount(): Int {
-        val count = files.size
-        return count.takeUnless { currentFile.hasParent(filter) } ?: count.plus(1)
+        var count = files.size
+        if (currentFile.hasParent(homeLocation, filter)) count += 1
+        if (files.isEmpty()) count += 1
+        return count
     }
 
-    private fun actualIndex(position: Int): Int =
-        position.takeUnless { currentFile.hasParent(filter) } ?: position.minus(1)
+    private fun actualIndex(position: Int): Int {
+        var index = position
+        if (currentFile.hasParent(homeLocation, filter)) index -= 1
+        if (files.isEmpty()) index -= 1
+        return index
+    }
 
     inner class NavigationItem(val binding: SheetsStorgeNavigationItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    inner class FileGridItem(val binding: SheetsStorageFileGridItemBinding) :
+    inner class FileVerticalItem(val binding: SheetsStorageFileVerticalItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    inner class FileListItem(val binding: SheetsStorgeFileListItemBinding) :
+    inner class FileHorizontalItem(val binding: SheetsStorgeFileHorizontalItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    inner class EmptyItem(val binding: SheetsStorageEmptyBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }
