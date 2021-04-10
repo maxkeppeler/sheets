@@ -18,7 +18,9 @@
 
 package com.maxkeppeler.sheets.storage
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
@@ -61,11 +63,13 @@ class StorageSheet : Sheet() {
     private var selectionMode = StorageSelectionMode.FILE
     private var emptyViewText: String? = null
     private var emptyViewImage: Image? = null
-    private var initialLocation: File? = null
+    private var homeLocation: File = Environment.getExternalStorageDirectory().absoluteFile
+    private var currentLocation: File? = null
     private var selectedFiles: MutableList<File> = mutableListOf()
     private var listener: SelectionListener? = null
+    private var deleteFiles: Boolean = false
     private var createFolderListener: CreateFolderListener? = null
-    private var displayMode: FileDisplayMode = FileDisplayMode.LIST
+    private var displayMode: FileDisplayMode = FileDisplayMode.HORIZONTAL
     private var fileColumns: Int = 2
     private var multipleChoices = false
     private var minChoices: Int? = null
@@ -120,16 +124,20 @@ class StorageSheet : Sheet() {
         this.selectedFiles.addAll(file)
     }
 
-    /** Set the initial location file. */
-    fun initialLocation(file: File) {
-        this.initialLocation = file
+    /** Set the home location file. */
+    fun homeLocation(file: File) {
+        this.homeLocation = file
+    }
+
+    /** Set the current location file. */
+    fun currentLocation(file: File) {
+        this.currentLocation = file
     }
 
     /** Set the file filter. */
     fun filter(filter: FileFilter) {
         this.filter = filter
     }
-
 
     /** Show buttons and require a positive button click. */
     fun multipleChoices(multipleChoices: Boolean = true) {
@@ -275,12 +283,6 @@ class StorageSheet : Sheet() {
         }
     }
 
-
-    private fun save() {
-        listener?.invoke(selectedFiles)
-        dismiss()
-    }
-
     override fun onCreateLayoutView(): View =
         SheetsStorageBinding.inflate(LayoutInflater.from(activity)).also { binding = it }.root
 
@@ -290,22 +292,20 @@ class StorageSheet : Sheet() {
         displayButtonsView(multipleChoices || displayButtons)
         setButtonPositiveListener(::save)
 
-        // TODO: Check setup, check permission
-
-        if (displayMode == FileDisplayMode.GRID && fileColumns == 1) fileColumns = 2
-
-        val initialLocation =
-            initialLocation ?: Environment.getExternalStorageDirectory().absoluteFile
-
+        if (displayMode == FileDisplayMode.VERTICAL && fileColumns == 1) fileColumns = 2
         with(binding.filesRecyclerView) {
 
             storageAdapter = StorageAdapter(
                 requireContext(),
                 selectionMode,
-                initialLocation,
+                homeLocation,
+                currentLocation,
                 filter,
-                displayMode, fileColumns,
-                true, multipleChoices, adapterListener
+                displayMode,
+                fileColumns,
+                createFolderListener != null,
+                multipleChoices,
+                adapterListener
             )
             adapter = storageAdapter
             layoutManager = CustomGridLayoutManager(requireContext(), fileColumns, true).apply {
@@ -359,7 +359,6 @@ class StorageSheet : Sheet() {
             updateMultipleChoicesInfo()
         }
     }
-
 
     private fun updateMultipleChoicesInfo() {
 
