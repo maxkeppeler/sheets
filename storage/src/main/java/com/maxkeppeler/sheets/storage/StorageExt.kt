@@ -24,13 +24,14 @@ import java.io.FileFilter
 import java.util.*
 
 /** Check if file has a parent. */
-internal fun File.hasParent(fileFilter: FileFilter?): Boolean = getRealParent(fileFilter) != null
+internal fun File.hasParent(homeLocation: File, fileFilter: FileFilter?): Boolean =
+    getRealParent(homeLocation, fileFilter) != null
 
 /** Get real parent file. */
-internal fun File.getRealParent(fileFilter: FileFilter?): File? {
+internal fun File.getRealParent(homeLocation: File, fileFilter: FileFilter?): File? {
 
     // External storage directory's is not readable, prevent to jump into parent folder
-    if (absolutePath == Environment.getExternalStorageDirectory().path) return this
+    if (absolutePath == Environment.getExternalStorageDirectory().path || absolutePath == homeLocation.path) return this
 
     parentFile?.let { file ->
         return if (file.canRead() && file.hasFiles(fileFilter)) {
