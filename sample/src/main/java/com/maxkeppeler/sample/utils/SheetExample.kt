@@ -20,18 +20,6 @@ import com.maxkeppeler.sample.R
 
 enum class SheetExample(val type: SheetType, @StringRes val textRes: Int) {
 
-    STORAGE_LIST(SheetType.STORAGE, R.string.storage_list),
-
-    STORAGE_LIST_FILTER(SheetType.STORAGE, R.string.storage_list_filter),
-
-    STORAGE_LIST_COLUMNS(SheetType.STORAGE, R.string.storage_list_columns),
-
-    STORAGE_GRID(SheetType.STORAGE, R.string.storage_grid_columns),
-
-    STORAGE_LIST_FOLDER(SheetType.STORAGE, R.string.storage_list_folder),
-
-    STORAGE_LIST_FOLDER_MULTI(SheetType.STORAGE, R.string.storage_list_folder_multiple),
-
     INFO(SheetType.INFO, R.string.info),
 
     INFO_COVER_IMAGE_1(SheetType.INFO, R.string.info_cover_image_1),
@@ -55,12 +43,6 @@ enum class SheetExample(val type: SheetType, @StringRes val textRes: Int) {
     OPTIONS_VERTICAL_MIDDLE(SheetType.OPTIONS, R.string.options_grid_vertical_middle),
 
     OPTIONS_VERTICAL_LARGE(SheetType.OPTIONS, R.string.options_grid_vertical_large),
-
-    COLOR(SheetType.COLOR, R.string.color_template_custom),
-
-    COLOR_TEMPLATE(SheetType.COLOR, R.string.color_template),
-
-    COLOR_CUSTOM(SheetType.COLOR, R.string.color_custom),
 
     CLOCK_TIME(SheetType.CLOCK_TIME, R.string.clock_time),
 
@@ -91,6 +73,24 @@ enum class SheetExample(val type: SheetType, @StringRes val textRes: Int) {
     INPUT_LONG(SheetType.INPUT, R.string.input_long),
 
     INPUT_PASSWORD(SheetType.INPUT, R.string.input_password),
+
+    STORAGE_LIST(SheetType.STORAGE, R.string.storage_list),
+
+    STORAGE_LIST_FILTER(SheetType.STORAGE, R.string.storage_list_filter),
+
+    STORAGE_LIST_COLUMNS(SheetType.STORAGE, R.string.storage_list_columns),
+
+    STORAGE_GRID(SheetType.STORAGE, R.string.storage_grid_columns),
+
+    STORAGE_LIST_FOLDER(SheetType.STORAGE, R.string.storage_list_folder),
+
+    STORAGE_LIST_FOLDER_MULTI(SheetType.STORAGE, R.string.storage_list_folder_multiple),
+
+    COLOR(SheetType.COLOR, R.string.color_template_custom),
+
+    COLOR_TEMPLATE(SheetType.COLOR, R.string.color_template),
+
+    COLOR_CUSTOM(SheetType.COLOR, R.string.color_custom),
 
     CUSTOM1(SheetType.CUSTOM, R.string.custom_sheet_example_1)
 
