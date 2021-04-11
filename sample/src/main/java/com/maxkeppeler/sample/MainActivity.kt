@@ -639,8 +639,6 @@ class MainActivity : AppCompatActivity() {
             minChoices(3)
             displayMultipleChoicesInfo(true)
             selectionMode(StorageSelectionMode.FILE)
-            emptyViewImage(Image(R.drawable.ic_help))
-            emptyViewText(R.string.app_name)
             onCreateFolder { file, listener -> showInputStorageFolderNameSheet(file, listener) }
             onPositive { files -> showToastLong("onPositive", "Files: $files") }
         }
@@ -676,8 +674,6 @@ class MainActivity : AppCompatActivity() {
             fileColumns(1)
             filter(fileFilter)
             selectionMode(StorageSelectionMode.FILE)
-            emptyViewImage(Image(R.drawable.ic_help))
-            emptyViewText(R.string.app_name)
             displayToolbar(false)
             onPositive { files -> showToastLong("onPositive", "Files: $files") }
         }
@@ -690,8 +686,6 @@ class MainActivity : AppCompatActivity() {
             fileDisplayMode(FileDisplayMode.HORIZONTAL)
             fileColumns(2)
             selectionMode(StorageSelectionMode.FILE)
-            emptyViewImage(Image(R.drawable.ic_help))
-            emptyViewText(R.string.app_name)
             displayToolbar(false)
             onPositive { files -> showToastLong("onPositive", "Files: $files") }
         }
@@ -704,8 +698,6 @@ class MainActivity : AppCompatActivity() {
             fileDisplayMode(FileDisplayMode.VERTICAL)
             fileColumns(3)
             selectionMode(StorageSelectionMode.FILE)
-            emptyViewImage(Image(R.drawable.ic_help))
-            emptyViewText(R.string.app_name)
             displayToolbar(false)
             onPositive { files -> showToastLong("onPositive", "Files: $files") }
         }

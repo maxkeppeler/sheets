@@ -61,8 +61,6 @@ class StorageSheet : Sheet() {
     private lateinit var storageAdapter: StorageAdapter
     private var filter: FileFilter? = null
     private var selectionMode = StorageSelectionMode.FILE
-    private var emptyViewText: String? = null
-    private var emptyViewImage: Image? = null
     private var homeLocation: File = Environment.getExternalStorageDirectory().absoluteFile
     private var currentLocation: File? = null
     private var selectedFiles: MutableList<File> = mutableListOf()
@@ -97,21 +95,6 @@ class StorageSheet : Sheet() {
     /** Set amount of columns for the grid to display files. */
     fun fileColumns(@IntRange(from = 1, to = 5) columns: Int) {
         this.fileColumns = columns
-    }
-
-    /** Set the text of the empty view. */
-    fun emptyViewText(emptyViewText: String) {
-        this.emptyViewText = emptyViewText
-    }
-
-    /** Set the text of the empty view. */
-    fun emptyViewText(@StringRes emptyViewTextRes: Int) {
-        this.emptyViewText = windowContext.getString(emptyViewTextRes)
-    }
-
-    /** Set the image of the empty view. */
-    fun emptyViewImage(image: Image) {
-        this.emptyViewImage = image
     }
 
     /** Set the selection mode. */
