@@ -1,14 +1,15 @@
 ext.module_group = "com.maxkeppeler.sheets"
-ext.module_name = "core"
+ext.module_name = "storage"
 
 apply from: rootProject.file("gradle/android_library_config.gradle")
 
 dependencies {
-    api deps.androidx.core
+    api project(':core')
     compileOnly deps.androidx.annotations
-    implementation deps.kotlin.stdlib8
     implementation deps.androidx.constraint
-    implementation deps.androidx.preference
+    implementation deps.kotlin.stdlib8
+    implementation deps.kotlin.coroutines.android
     implementation deps.google_material
     implementation deps.coil.image
+    implementation deps.coil.video
 }
