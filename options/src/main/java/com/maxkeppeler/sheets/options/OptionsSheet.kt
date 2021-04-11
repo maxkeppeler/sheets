@@ -435,8 +435,8 @@ class OptionsSheet : Sheet() {
         }
 
         if (minChoices != null && maxChoices != null) {
-            binding.range.minimumLabel.visibility = View.GONE
-            binding.range.selectionStatus.visibility = View.VISIBLE
+            binding.status.minimumLabel.visibility = View.GONE
+            binding.status.selectionLabel.visibility = View.VISIBLE
         }
 
         if (options.all { it.disabled })
@@ -464,36 +464,36 @@ class OptionsSheet : Sheet() {
     private fun updateMultipleChoicesInfo() {
 
         if (!displayMultipleChoicesInfo) {
-            binding.range.root.visibility = View.GONE
+            binding.status.root.visibility = View.GONE
             return
         }
 
-        binding.range.root.visibility = View.VISIBLE
+        binding.status.root.visibility = View.VISIBLE
 
         val selected = optionsSelected.size
 
         val isMinLabelShown = minChoices?.let { min ->
             val lessThanSelected = selected < min
             if (lessThanSelected) {
-                binding.range.minimumLabel.text = getString(R.string.select_at_least, min)
-                binding.range.minimumLabel.visibility = View.VISIBLE
+                binding.status.minimumLabel.text = getString(R.string.select_at_least, min)
+                binding.status.minimumLabel.visibility = View.VISIBLE
             } else {
-                binding.range.minimumLabel.visibility = View.GONE
+                binding.status.minimumLabel.visibility = View.GONE
             }
             lessThanSelected
         } ?: false
 
         maxChoices?.let { max ->
             if (!maxChoicesStrict && selected > max) {
-                binding.range.minimumLabel.text = getString(R.string.select_at_most, max)
-                binding.range.minimumLabel.visibility = View.VISIBLE
+                binding.status.minimumLabel.text = getString(R.string.select_at_most, max)
+                binding.status.minimumLabel.visibility = View.VISIBLE
             } else if (!isMinLabelShown) {
-                binding.range.minimumLabel.visibility = View.GONE
+                binding.status.minimumLabel.visibility = View.GONE
             }
         }
 
         val actualMaximum = maxChoices ?: options.filterNot { it.disabled && !it.selected }.size
-        binding.range.selectionStatus.setTextColor(colorActive)
+        binding.status.selectionLabel.setTextColor(colorActive)
         val textSizeSmall = resources.getDimensionPixelSize(R.dimen.textSizeBody)
         val textSpan =
             SpannableString(getString(R.string.current_of_total, selected, actualMaximum)).apply {
@@ -503,7 +503,7 @@ class OptionsSheet : Sheet() {
                 )
             }
 
-        binding.range.selectionStatus.text = textSpan
+        binding.status.selectionLabel.text = textSpan
     }
 
     /** Build [OptionsSheet] and show it later. */
