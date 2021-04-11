@@ -317,13 +317,6 @@ class StorageSheet : Sheet() {
             }
         }
 
-//        val uri = Uri.parse("package:${windowContext.packageName}")
-//        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri)
-//        val manager = requireContext().packageManager
-//        if (manager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
-//            startActivity(intent)
-//        }
-
         validate(true)
     }
 
@@ -382,10 +375,8 @@ class StorageSheet : Sheet() {
             lessThanSelected
         } ?: false
 
-        maxChoices?.let { max ->
-            if (!isMinLabelShown) {
-                binding.status.minimumLabel.visibility = View.GONE
-            }
+        if (!isMinLabelShown) {
+            binding.status.minimumLabel.visibility = View.GONE
         }
 
         val actualMaximum = maxChoices ?: Int.MAX_VALUE
