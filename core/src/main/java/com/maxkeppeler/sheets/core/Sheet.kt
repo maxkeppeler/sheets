@@ -73,7 +73,6 @@ abstract class Sheet : SheetFragment() {
 
     companion object {
         const val DEFAULT_DISPLAY_HANDLE = false
-        const val DEFAULT_DISPLAY_TOOLBAR = true
         const val DEFAULT_DISPLAY_CLOSE_BUTTON = true
         const val ICON_BUTTONS_AMOUNT_MAX = 3
     }
@@ -409,8 +408,8 @@ abstract class Sheet : SheetFragment() {
         val isHandleVisible =
             displayHandle ?: isDisplayHandle(requireContext(), DEFAULT_DISPLAY_HANDLE)
 
-        val isToolbarVisible =
-            displayToolbar ?: isDisplayToolbar(requireContext(), DEFAULT_DISPLAY_TOOLBAR)
+        val isToolbarSetup = titleText != null && iconButtons.isNotEmpty()
+        val isToolbarVisible = displayToolbar ?: isDisplayToolbar(requireContext(), isToolbarSetup)
 
         val isCloseButtonVisible = sheetStyle == SheetStyle.BOTTOM_SHEET &&
                 displayCloseButton ?: isDisplayCloseButton(
