@@ -55,15 +55,14 @@ internal class StorageAdapter(
         private const val HOLDER_FILE_VERTICAL_ITEM = 2
         private const val HOLDER_FILE_HORIZONTAL_ITEM = 3
         private const val HOLDER_EMPTY_ITEM = 4
-        private const val ITEM_INDENTATION_FILES = 16
-        private const val ITEM_INDENTATION_DEFAULT = 0
+        private const val INDENTATION_FILES = 16
+        private const val INDENTATION_DEFAULT = 0
     }
 
     private var currentFile = currentLocation ?: homeLocation
     private var files: MutableList<File> = mutableListOf()
     private var searchFilesJob: Job? = null
     private val selectedFiles = mutableMapOf<File, Pair<ImageView, SheetContent>>()
-
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
     private val highlightColor = getHighlightColor(ctx)
@@ -185,8 +184,7 @@ internal class StorageAdapter(
     ) {
 
         (root.layoutParams as RecyclerView.LayoutParams).apply {
-            marginStart =
-                if (fileColumns == 1) ITEM_INDENTATION_FILES.toDp() else ITEM_INDENTATION_DEFAULT
+            marginStart = if (fileColumns == 1) INDENTATION_FILES.toDp() else INDENTATION_DEFAULT
         }
 
         label.text = file.name
