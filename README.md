@@ -60,6 +60,7 @@ Read in [Deutsch](README.de_DE.md) or [简体中文](README.zh_CN.md).
   - [Time Sheet](#time)
   - [Input Sheet](#input)
   - [Calendar Sheet](#calendar)
+  - [Storage Sheet](#storage)
   - [Color Sheet](#color)
   - [Custom Sheet](#custom)
   - [Lottie](#lottie)
@@ -378,11 +379,11 @@ For the default time sheet use it as following:
       }
     }
 
-| Function      | Action                                          |
-| ------------- | ----------------------------------------------- |
+| Function      | Action                                         |
+| ------------- | ---------------------------------------------- |
 | format()      | Select the time format. (hh:mm:ss, mm:ss, ...) |
-| currentTime() | Set the current time in seconds.                |
-| minTime()     | Set the minimum time.                           |
+| currentTime() | Set the current time in seconds.               |
+| minTime()     | Set the minimum time.                          |
 | maxTime()`    | Set the maximum time.                          |
 
 ## Input
@@ -568,6 +569,59 @@ For the default time sheet use it as following:
 | rangeYears()      | Set the range of years into past and future.                     |
 | disable()         | Pass a `Calendar` object to disable various dates for selection. |
 | displayButtons()  | Show or hide the buttons view.                                   |
+
+## Storage
+
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/storage.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/storage)
+
+The `Storage` Sheet lets you pick one or more files or folders.
+
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="art/StorageSheet Dialog.png" width="80%" alt="Sheets StorageSheet Dialog">
+</details>
+</br>
+
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="art/StorageSheet BottomSheet.png" width="80%" alt="Sheets StorageSheet BottomSheet">
+</details>
+
+```gradle
+dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:storage:<latest-version>'
+}
+```
+
+### Usage
+
+For the default storage sheet use it as following:
+
+    StorageSheet().show(this) {
+      fileDisplayMode(FileDisplayMode.HORIZONTAL)
+      selectionMode(StorageSelectionMode.FILE)
+      onPositive { files -> /* Handle files or folders */ }
+    }
+
+| Function                     | Action                                                                                                                                       |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| fileDisplayMode()            | Display a file either horizontal or vertical.                                                                                                |
+| fileColumns()                | Specify the amount of colums in which the files are displayed.                                                                               |
+| selectionMode()              | Select either files or folders.                                                                                                              |
+| selected()                   | Define files that are by default selected.                                                                                                   |
+| homeLocation()               | Define the home location. User can not navigate higher than the home location.                                                               |
+| currentLocation()            | Define the current location when the sheet is opened.                                                                                        |
+| filter()                     | A `FileFilter` to ignore certain files.                                                                                                      |
+| multipleChoices()            | Allow multiple choices for files or folders.                                                                                                 |
+| displayMultipleChoicesInfo() | Display info of the multiple choices.                                                                                                        |
+| minChoices()                 | Set the minimum amount of choices.                                                                                                           |
+| maxChoices()                 | Set the maximum amount of choices.                                                                                                           |
+| onCreateFolder()             | Pass a listener that is invokes when the user is allowed and intends to create a folder. Return a fitting name through the callback variable. |
 
 ## Color
 
