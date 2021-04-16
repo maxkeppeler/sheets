@@ -20,32 +20,28 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.text.method.PasswordTransformationMethod
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.sheets.core.utils.getIconColor
-import com.maxkeppeler.sheets.core.utils.getPrimaryColor
-import com.maxkeppeler.sheets.core.utils.getTextColor
-import com.maxkeppeler.sheets.core.utils.toDp
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.elevation.ElevationOverlayProvider
+import com.google.android.material.internal.ViewUtils
+import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetContent
-import com.maxkeppeler.sheets.input.databinding.SheetsInputCheckBoxItemBinding
-import com.maxkeppeler.sheets.input.databinding.SheetsInputEditTextItemBinding
-import com.maxkeppeler.sheets.input.databinding.SheetsInputRadioButtonsItemBinding
-import com.maxkeppeler.sheets.input.databinding.SheetsInputSpinnerItemBinding
+import com.maxkeppeler.sheets.input.databinding.*
 import com.maxkeppeler.sheets.input.type.*
+
 
 internal typealias InputAdapterChangeListener = () -> Unit
 
 internal class InputAdapter(
     private val ctx: Context,
     private val input: MutableList<Input>,
-    private val listener: InputAdapterChangeListener
+    private val listener: InputAdapterChangeListener,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -53,77 +49,81 @@ internal class InputAdapter(
         private const val VIEW_TYPE_CHECK_BOX = 1
         private const val VIEW_TYPE_RADIO_BUTTONS = 2
         private const val VIEW_TYPE_SPINNER = 3
+        private const val VIEW_TYPE_SWITCH = 4
     }
 
     private val primaryColor = getPrimaryColor(ctx)
     private val iconsColor = getIconColor(ctx)
+    private val highlightColor = getHighlightColor(ctx)
     private val textColor = getTextColor(ctx)
 
     override fun getItemViewType(i: Int): Int = when (input[i]) {
         is InputEditText -> VIEW_TYPE_EDIT_TEXT
+        is InputSwitch -> VIEW_TYPE_SWITCH
         is InputCheckBox -> VIEW_TYPE_CHECK_BOX
         is InputRadioButtons -> VIEW_TYPE_RADIO_BUTTONS
         is InputSpinner -> VIEW_TYPE_SPINNER
         else -> throw IllegalStateException("No ViewType for this Input.")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, type: Int): RecyclerView.ViewHolder {
-        return when (type) {
-            VIEW_TYPE_EDIT_TEXT -> {
-                EditTextViewHolder(
-                    SheetsInputEditTextItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+    override fun onCreateViewHolder(parent: ViewGroup, type: Int): RecyclerView.ViewHolder =
+        when (type) {
+            VIEW_TYPE_EDIT_TEXT -> EditTextItem(
+                SheetsInputEditTextItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
-            VIEW_TYPE_CHECK_BOX -> {
-                CheckBoxViewHolder(
-                    SheetsInputCheckBoxItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+            )
+            VIEW_TYPE_CHECK_BOX -> CheckBoxItem(
+                SheetsInputCheckBoxItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
-            VIEW_TYPE_RADIO_BUTTONS -> {
-                RadioButtonsViewHolder(
-                   SheetsInputRadioButtonsItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+            )
+            VIEW_TYPE_SWITCH -> SwitchItem(
+                SheetsInputSwitchItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
-            VIEW_TYPE_SPINNER -> {
-                SpinnerViewHolder(
-                    SheetsInputSpinnerItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+            )
+            VIEW_TYPE_RADIO_BUTTONS -> RadioButtonsItem(
+                SheetsInputRadioButtonsItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
+            )
+            VIEW_TYPE_SPINNER -> SpinnerItem(
+                SheetsInputSpinnerItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
             else -> throw IllegalStateException("No ViewHolder for this ViewType.")
         }
-    }
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, i: Int) {
         val input = input[i]
         when {
-            holder is EditTextViewHolder && input is InputEditText -> {
-                holder.binding.buildEditText(input)
-            }
-            holder is CheckBoxViewHolder
+            holder is EditTextItem && input is InputEditText -> holder.binding.buildEditText(input)
+            holder is CheckBoxItem
                     && input is InputCheckBox -> {
                 holder.binding.buildCheckBox(input)
             }
-            holder is RadioButtonsViewHolder
+            holder is SwitchItem
+                    && input is InputSwitch -> {
+                holder.binding.buildSwitch(input)
+            }
+            holder is RadioButtonsItem
                     && input is InputRadioButtons -> {
                 holder.binding.buildRadioButtons(input)
             }
-            holder is SpinnerViewHolder
+            holder is SpinnerItem
                     && input is InputSpinner -> {
                 holder.binding.buildSpinner(input)
             }
@@ -180,6 +180,22 @@ internal class InputAdapter(
                 }
                 isErrorEnabled = !result.valid
             }
+        }
+    }
+
+    private fun SheetsInputSwitchItemBinding.buildSwitch(input: InputSwitch) {
+
+        setupGeneralInputInfo(input, label, icon)
+
+        switchButton.isChecked = input.value
+
+        val checkBoxText = input.textRes?.let { ctx.getString(it) } ?: input.text
+        switchButton.text = checkBoxText
+        switchButton.setTextColor(textColor)
+        switchButton.buttonTintList = ColorStateList.valueOf(primaryColor)
+        switchButton.setOnCheckedChangeListener { _, checked ->
+            input.value = checked
+            listener.invoke()
         }
     }
 
@@ -264,7 +280,7 @@ internal class InputAdapter(
     private fun setupGeneralInputInfo(
         input: Input,
         label: SheetContent? = null,
-        icon: ImageView? = null
+        icon: ImageView? = null,
     ) {
 
         label?.let {
@@ -286,15 +302,18 @@ internal class InputAdapter(
 
     override fun getItemCount(): Int = input.size
 
-    internal inner class EditTextViewHolder(val binding: SheetsInputEditTextItemBinding) :
+    internal inner class EditTextItem(val binding: SheetsInputEditTextItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    internal inner class CheckBoxViewHolder(val binding: SheetsInputCheckBoxItemBinding) :
+    internal inner class SwitchItem(val binding: SheetsInputSwitchItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    internal inner class RadioButtonsViewHolder(val binding: SheetsInputRadioButtonsItemBinding) :
+    internal inner class CheckBoxItem(val binding: SheetsInputCheckBoxItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    internal inner class SpinnerViewHolder(val binding: SheetsInputSpinnerItemBinding) :
+    internal inner class RadioButtonsItem(val binding: SheetsInputRadioButtonsItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    internal inner class SpinnerItem(val binding: SheetsInputSpinnerItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
