@@ -474,6 +474,7 @@ For the default input sheet use it as following:
 
 - `InputEditText`
 - `InputCheckBox`
+- `InputSwitch`
 - `InputRadioButtons`
 - `InputSpinner`
 
@@ -502,6 +503,13 @@ For the default input sheet use it as following:
 | validationListener() | Validate the text input with your own logic.      |
 
 **InputCheckBox** <br/>
+
+| Function       | Action             |
+| -------------- | ------------------ |
+| text()         | Set the text.      |
+| defaultValue() | Set default value. |
+
+**InputSwitch** <br/>
 
 | Function       | Action             |
 | -------------- | ------------------ |
