@@ -181,7 +181,8 @@ class InputSheet : Sheet() {
     }
 
     private fun save() {
-        listener?.invoke(getResult())
+        val result = getResult()
+        listener?.invoke(result)
         dismiss()
     }
 
