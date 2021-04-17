@@ -20,6 +20,7 @@ package com.maxkeppeler.sheets.core.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -115,6 +116,7 @@ class SheetButtonContainer
                     setTextColor(primaryColor)
                 }
                 ButtonStyle.NORMAL -> {
+                    icon.setColorFilter(currentTextColor, PorterDuff.Mode.SRC_ATOP)
                     setBackgroundColor(primaryColor)
                 }
             }
