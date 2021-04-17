@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,14 +24,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/optionContainer"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="4dp"
         android:layout_weight="1"
         android:background="@drawable/sheets_ripple_option_selector"
         android:clickable="true"
         android:focusable="true"
         android:minHeight="96dp"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="6dp"
         android:paddingVertical="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,28 +41,45 @@
         <ImageView
             android:id="@+id/icon"
             android:layout_width="24dp"
-            android:visibility="gone"
             android:layout_height="24dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <com.maxkeppeler.sheets.core.views.SheetContent
-            android:id="@+id/label"
+            android:id="@+id/title"
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            app:layout_goneMarginTop="0dp"
             android:ellipsize="end"
+            android:gravity="center"
             android:maxLines="1"
             android:textAlignment="center"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon" />
+            app:layout_constraintTop_toBottomOf="@+id/icon"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_goneMarginTop="0dp" />
+
+        <com.maxkeppeler.sheets.core.views.SheetContent
+            android:id="@+id/subtitle"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_goneMarginTop="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

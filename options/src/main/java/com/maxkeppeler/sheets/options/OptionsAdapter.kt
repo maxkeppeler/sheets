@@ -49,7 +49,7 @@ internal class OptionsAdapter(
         private const val SELECTOR_STATE_SELECTED_INDEX = 1
     }
 
-    private val selectedOptions = mutableMapOf<Int, Pair<ImageView, SheetContent>>()
+    private val selectedOptions = mutableMapOf<Int, Triple<ImageView, SheetContent, SheetContent>>()
 
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
@@ -108,7 +108,11 @@ internal class OptionsAdapter(
 
         val option = options[i]
 
-        label.text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
+        title.text = option.titleTextRes?.let { ctx.getString(it) } ?: option.titleText ?: ""
+
+        val subtitleText = option.subtitleTextRes?.let { ctx.getString(it) } ?: option.subtitleText
+        subtitle.visibility = if (subtitleText != null) View.VISIBLE else View.GONE
+        subtitle.text = subtitleText
 
         option.drawable?.let {
             icon.setImageDrawable(it)
@@ -125,16 +129,16 @@ internal class OptionsAdapter(
         val selected = option.selected || listener.isSelected(i)
 
         if (option.disabled && !selected) {
-            showDisabled(label, icon, optionContainer)
+            showDisabled(title, subtitle, icon, optionContainer)
         } else {
 
             if (option.disabled && selected) optionContainer.tag = TAG_DISABLED_SELECTED
             else optionContainer.setOnClickListener {
-                selectOption(i, label, icon, optionContainer)
+                selectOption(i, title, subtitle, icon, optionContainer)
             }
 
-            if (selected) selectOption(i, label, icon, optionContainer)
-            else showDeselected(label, icon, optionContainer)
+            if (selected) selectOption(i, title, subtitle, icon, optionContainer)
+            else showDeselected(i, title, subtitle, icon, optionContainer)
         }
     }
 
@@ -149,7 +153,11 @@ internal class OptionsAdapter(
             )
         }
 
-        label.text = option.textRes?.let { ctx.getString(it) } ?: option.text ?: ""
+        title.text = option.titleTextRes?.let { ctx.getString(it) } ?: option.titleText ?: ""
+
+        val subtitleText = option.subtitleTextRes?.let { ctx.getString(it) } ?: option.subtitleText
+        subtitle.visibility = if (subtitleText != null) View.VISIBLE else View.GONE
+        subtitle.text = subtitleText
 
         option.drawable?.let {
             icon.setImageDrawable(it)
@@ -166,21 +174,22 @@ internal class OptionsAdapter(
         val selected = option.selected || listener.isSelected(i)
 
         if (option.disabled && !selected) {
-            showDisabled(label, icon, optionContainer)
+            showDisabled(title, subtitle, icon, optionContainer)
         } else {
 
             if (option.disabled && selected) optionContainer.tag = TAG_DISABLED_SELECTED
             else optionContainer.setOnClickListener {
-                selectOption(i, label, icon, optionContainer)
+                selectOption(i, title, subtitle, icon, optionContainer)
             }
 
-            if (selected) selectOption(i, label, icon, optionContainer)
-            else showDeselected(label, icon, optionContainer)
+            if (selected) selectOption(i, title, subtitle, icon, optionContainer)
+            else showDeselected(i, title, subtitle, icon, optionContainer)
         }
     }
 
-    private fun showDisabled(label: SheetContent, icon: ImageView, root: View) {
-        label.setTextColor(disabledTextColor)
+    private fun showDisabled(title: SheetContent, subtitle: SheetContent, icon: ImageView, root: View) {
+        title.setTextColor(disabledTextColor)
+        subtitle.setTextColor(disabledTextColor)
         icon.setColorFilter(disabledIconsColor)
         root.changeRippleAndStateColor(
             Color.TRANSPARENT,
@@ -190,8 +199,15 @@ internal class OptionsAdapter(
         root.isActivated = true
     }
 
-    private fun showSelected(label: SheetContent, icon: ImageView, root: View) {
-        label.setTextColor(selectedTextColor)
+    private fun showSelected(
+        title: SheetContent,
+        subtitle: SheetContent,
+        icon: ImageView,
+        root: View,
+    ) {
+
+        title.setTextColor(selectedTextColor)
+        subtitle.setTextColor(selectedTextColor)
         icon.setColorFilter(selectedIconsColor)
 
         if (root.tag == TAG_DISABLED_SELECTED) {
@@ -203,9 +219,33 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun showDeselected(label: SheetContent, icon: ImageView, root: View) {
-        label.setTextColor(textColor)
-        icon.setColorFilter(iconsColor)
+    private fun showDeselected(
+        index: Int,
+        title: SheetContent,
+        subtitle: SheetContent,
+        icon: ImageView,
+        root: View,
+    ) {
+        val option = options[index]
+        with(option) {
+
+            val titleColor =
+                defaultTitleColor ?: defaultTitleColorRes?.let { ContextCompat.getColor(ctx, it) }
+                ?: textColor
+
+            val subtitleColor = defaultSubtitleColor ?: defaultSubtitleColorRes?.let {
+                ContextCompat.getColor(ctx,
+                    it)
+            } ?: textColor
+
+            val iconsColor =
+                defaultIconColor ?: defaultIconColorRes?.let { ContextCompat.getColor(ctx, it) }
+                ?: iconsColor
+
+            title.setTextColor(titleColor)
+            subtitle.setTextColor(subtitleColor)
+            icon.setColorFilter(iconsColor)
+        }
         if (multipleChoice) {
             root.isSelected = false
         }
@@ -229,23 +269,41 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun selectOption(index: Int, label: SheetContent, icon: ImageView, root: View) {
+    private fun selectOption(
+        index: Int,
+        title: SheetContent,
+        subtitle: SheetContent,
+        icon: ImageView,
+        root: View,
+    ) {
         if (multipleChoice) {
             if (!listener.isMultipleChoiceSelectionAllowed(index)) return
             if (selectedOptions.contains(index)) {
                 listener.deselectMultipleChoice(index)
-                selectedOptions[index]?.let { showDeselected(it.second, it.first, root) }
+                selectedOptions[index]?.let {
+                    showDeselected(index,
+                        it.second,
+                        it.third,
+                        it.first,
+                        root)
+                }
                 selectedOptions.remove(index)
             } else {
                 listener.selectMultipleChoice(index)
-                selectedOptions[index] = Pair(icon, label)
-                showSelected(label, icon, root)
+                selectedOptions[index] = Triple(icon, title, subtitle)
+                showSelected(title, subtitle, icon, root)
             }
         } else {
-            selectedOptions.forEach { showDeselected(it.value.second, it.value.first, root) }
+            selectedOptions.forEach {
+                showDeselected(index,
+                    it.value.second,
+                    it.value.third,
+                    it.value.first,
+                    root)
+            }
             selectedOptions.clear()
-            selectedOptions[index] = Pair(icon, label)
-            showSelected(label, icon, root)
+            selectedOptions[index] = Triple(icon, title, subtitle)
+            showSelected(title, subtitle, icon, root)
             listener.select(index)
         }
     }

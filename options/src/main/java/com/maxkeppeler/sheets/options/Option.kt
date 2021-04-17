@@ -19,6 +19,8 @@
 package com.maxkeppeler.sheets.options
 
 import android.graphics.drawable.Drawable
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
@@ -35,11 +37,42 @@ class Option internal constructor() {
     internal var drawableRes: Int? = null
         private set
 
-    internal var text: String? = null
+    internal var titleText: String? = null
         private set
 
     @StringRes
-    internal var textRes: Int? = null
+    internal var titleTextRes: Int? = null
+        private set
+
+    internal var subtitleText: String? = null
+        private set
+
+    @StringRes
+    internal var subtitleTextRes: Int? = null
+        private set
+
+    @ColorRes
+    internal var defaultIconColorRes: Int? = null
+        private set
+
+    @ColorInt
+    internal var defaultIconColor: Int? = null
+        private set
+
+    @ColorRes
+    internal var defaultTitleColorRes: Int? = null
+        private set
+
+    @ColorInt
+    internal var defaultTitleColor: Int? = null
+        private set
+
+    @ColorRes
+    internal var defaultSubtitleColorRes: Int? = null
+        private set
+
+    @ColorInt
+    internal var defaultSubtitleColor: Int? = null
         private set
 
     internal var selected: Boolean = false
@@ -48,32 +81,110 @@ class Option internal constructor() {
     internal var disabled: Boolean = false
         private set
 
+
     constructor(@StringRes textRes: Int) : this() {
-        this.textRes = textRes
+        this.titleTextRes = textRes
     }
 
     constructor(text: String) : this() {
-        this.text = text
+        this.titleText = text
     }
 
-    constructor(@DrawableRes drawableRes: Int, text: String) : this() {
+    constructor(@DrawableRes drawableRes: Int, titleText: String) : this() {
         this.drawableRes = drawableRes
-        this.text = text
+        this.titleText = titleText
     }
 
-    constructor(drawable: Drawable, @StringRes textRes: Int) : this() {
+    constructor(drawable: Drawable, @StringRes titleTextRes: Int) : this() {
         this.drawable = drawable
-        this.textRes = textRes
+        this.titleTextRes = titleTextRes
     }
 
-    constructor(drawable: Drawable, text: String) : this() {
+    constructor(drawable: Drawable, titleText: String) : this() {
         this.drawable = drawable
-        this.text = text
+        this.titleText = titleText
     }
 
-    constructor(@DrawableRes drawableRes: Int, @StringRes textRes: Int) : this() {
+    constructor(@DrawableRes drawableRes: Int, @StringRes titleTextRes: Int) : this() {
         this.drawableRes = drawableRes
-        this.textRes = textRes
+        this.titleTextRes = titleTextRes
+    }
+
+
+    constructor(
+        @DrawableRes drawableRes: Int,
+        titleText: String,
+        subtitleText: String? = null,
+    ) : this() {
+        this.drawableRes = drawableRes
+        this.titleText = titleText
+        this.subtitleText = subtitleText
+    }
+
+    constructor(
+        drawable: Drawable,
+        @StringRes titleTextRes: Int,
+        subtitleText: String? = null,
+    ) : this() {
+        this.drawable = drawable
+        this.titleTextRes = titleTextRes
+        this.subtitleText = subtitleText
+    }
+
+    constructor(drawable: Drawable, titleText: String, subtitleText: String? = null) : this() {
+        this.drawable = drawable
+        this.titleText = titleText
+        this.subtitleText = subtitleText
+    }
+
+    constructor(
+        @DrawableRes drawableRes: Int,
+        @StringRes titleTextRes: Int,
+        subtitleText: String? = null,
+    ) : this() {
+        this.drawableRes = drawableRes
+        this.titleTextRes = titleTextRes
+        this.subtitleText = subtitleText
+    }
+
+    constructor(
+        @DrawableRes drawableRes: Int,
+        titleText: String,
+        @StringRes subtitleTextRes: Int? = null,
+    ) : this() {
+        this.drawableRes = drawableRes
+        this.titleText = titleText
+        this.subtitleTextRes = subtitleTextRes
+    }
+
+    constructor(
+        drawable: Drawable,
+        @StringRes titleTextRes: Int,
+        @StringRes subtitleTextRes: Int? = null,
+    ) : this() {
+        this.drawable = drawable
+        this.titleTextRes = titleTextRes
+        this.subtitleTextRes = subtitleTextRes
+    }
+
+    constructor(
+        drawable: Drawable,
+        titleText: String,
+        @StringRes subtitleTextRes: Int? = null,
+    ) : this() {
+        this.drawable = drawable
+        this.titleText = titleText
+        this.subtitleTextRes = subtitleTextRes
+    }
+
+    constructor(
+        @DrawableRes drawableRes: Int,
+        @StringRes titleTextRes: Int,
+        @StringRes subtitleTextRes: Int? = null,
+    ) : this() {
+        this.drawableRes = drawableRes
+        this.titleTextRes = titleTextRes
+        this.subtitleTextRes = subtitleTextRes
     }
 
     /** Declare the option as already selected. */
@@ -99,4 +210,41 @@ class Option internal constructor() {
         this.disabled = disabled
         return this
     }
+
+    /** Set default icon color. */
+    fun defaultIconColor(@ColorInt color: Int): Option {
+        this.defaultIconColor = color
+        return this
+    }
+
+    /** Set default icon color. */
+    fun defaultIconColorRes(@ColorRes colorRes: Int): Option {
+        this.defaultIconColorRes = colorRes
+        return this
+    }
+
+    /** Set default title color. */
+    fun defaultTitleColor(@ColorInt color: Int): Option {
+        this.defaultTitleColor = color
+        return this
+    }
+
+    /** Set default title color. */
+    fun defaultTitleColorRes(@ColorRes colorRes: Int): Option {
+        this.defaultTitleColorRes = colorRes
+        return this
+    }
+
+    /** Set default subtitle color. */
+    fun defaultSubtitleColor(@ColorInt color: Int): Option {
+        this.defaultSubtitleColor = color
+        return this
+    }
+
+    /** Set default subtitle color. */
+    fun defaultSubtitleColorRes(@ColorRes colorRes: Int): Option {
+        this.defaultSubtitleColorRes = colorRes
+        return this
+    }
+
 }

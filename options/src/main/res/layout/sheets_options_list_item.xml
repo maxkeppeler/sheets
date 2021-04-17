@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,12 +19,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/optionContainer"
     android:layout_width="match_parent"
-    android:minHeight="56dp"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
     android:background="@drawable/sheets_ripple_option_selector"
     android:clickable="true"
-    android:layout_margin="4dp"
-    android:focusable="true">
+    android:focusable="true"
+    android:minHeight="56dp">
 
     <ImageView
         android:id="@+id/icon"
@@ -33,22 +32,36 @@
         android:layout_height="20dp"
         android:layout_marginStart="32dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/label"
+        app:layout_constraintBottom_toBottomOf="@+id/subtitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/label"
+        app:layout_constraintTop_toTopOf="@+id/title"
         tools:ignore="ContentDescription" />
 
     <com.maxkeppeler.sheets.core.views.SheetContent
-        android:id="@+id/label"
+        android:id="@+id/title"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        style="@style/TextAppearance.MaterialComponents.Subtitle2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="8dp"
         app:layout_goneMarginStart="48dp" />
+
+    <com.maxkeppeler.sheets.core.views.SheetContent
+        android:id="@+id/subtitle"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
