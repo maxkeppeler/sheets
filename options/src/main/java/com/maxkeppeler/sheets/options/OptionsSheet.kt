@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+@file:Suppress("unused")
+
 package com.maxkeppeler.sheets.options
 
 import android.content.Context
@@ -51,8 +53,9 @@ class OptionsSheet : Sheet() {
     override val dialogTag = "OptionsSheet"
 
     companion object {
+        private const val SMALL_GRID_ITEMS_MIN = 2
         private const val SMALL_GRID_ITEMS_MAX = 8
-        private const val GRID_COLUMNS_MAX = 4
+        private const val GRID_COLUMNS_MAX_DEFAULT = 4
     }
 
     private lateinit var binding: SheetsOptionsBinding
@@ -72,6 +75,7 @@ class OptionsSheet : Sheet() {
     private var maxChoices: Int? = null
     private var maxChoicesStrict = true
     private var displayButtons = false
+    private var gridColumns: Int? = null
 
     private val saveAllowed: Boolean
         get() {
@@ -82,6 +86,10 @@ class OptionsSheet : Sheet() {
             return validMultipleChoice || validSingleChoice
         }
 
+    /** Set the nax amount of columns in [DisplayMode.GRID_VERTICAL] and [DisplayMode.GRID_HORIZONTAL]. */
+    fun columns(@IntRange(from = 2, to = 8) columns: Int) {
+        this.gridColumns = columns
+    }
 
     /** Show buttons and require a positive button click. */
     fun multipleChoices(multipleChoices: Boolean = true) {
@@ -349,7 +357,8 @@ class OptionsSheet : Sheet() {
 
         with(binding.optionsRecyclerView) {
 
-            val columns = if (options.size < GRID_COLUMNS_MAX) options.size else GRID_COLUMNS_MAX
+            val columnsLimits = gridColumns ?: GRID_COLUMNS_MAX_DEFAULT
+            val columns = if (options.size < columnsLimits) options.size else columnsLimits
             val collapsedItems = when (mode) {
                 DisplayMode.GRID_HORIZONTAL -> options.size <= SMALL_GRID_ITEMS_MAX
                 DisplayMode.GRID_VERTICAL -> true
