@@ -25,6 +25,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 /**
+ * Listener that is invoked when an option view is long clicked.
+ * This could be used to initiate another action e. g. editing the option in another sheet.
+ */
+typealias OptionLongClickListener = () -> Unit
+
+/**
  * An option is represented with at least a text.
  * A drawable is optional but makes it easier to understand to the user.
  */
@@ -81,6 +87,8 @@ class Option internal constructor() {
     internal var disabled: Boolean = false
         private set
 
+    internal var longClickListener: OptionLongClickListener? = null
+        private set
 
     constructor(@StringRes textRes: Int) : this() {
         this.titleTextRes = textRes
@@ -110,81 +118,100 @@ class Option internal constructor() {
         this.titleTextRes = titleTextRes
     }
 
-
     constructor(
         @DrawableRes drawableRes: Int,
         titleText: String,
         subtitleText: String? = null,
+        longClickListener: OptionLongClickListener? = null
     ) : this() {
         this.drawableRes = drawableRes
         this.titleText = titleText
         this.subtitleText = subtitleText
+        this.longClickListener = longClickListener
     }
 
     constructor(
         drawable: Drawable,
         @StringRes titleTextRes: Int,
         subtitleText: String? = null,
+        longClickListener: OptionLongClickListener? = null
     ) : this() {
         this.drawable = drawable
         this.titleTextRes = titleTextRes
         this.subtitleText = subtitleText
+        this.longClickListener = longClickListener
     }
 
-    constructor(drawable: Drawable, titleText: String, subtitleText: String? = null) : this() {
+    constructor(
+        drawable: Drawable,
+        titleText: String,
+        subtitleText: String? = null,
+        longClickListener: OptionLongClickListener? = null
+    ) : this() {
         this.drawable = drawable
         this.titleText = titleText
         this.subtitleText = subtitleText
+        this.longClickListener = longClickListener
     }
 
     constructor(
         @DrawableRes drawableRes: Int,
         @StringRes titleTextRes: Int,
         subtitleText: String? = null,
+        longClickListener: OptionLongClickListener? = null
     ) : this() {
         this.drawableRes = drawableRes
         this.titleTextRes = titleTextRes
         this.subtitleText = subtitleText
+        this.longClickListener = longClickListener
     }
 
     constructor(
         @DrawableRes drawableRes: Int,
         titleText: String,
         @StringRes subtitleTextRes: Int? = null,
+        longClickListener: OptionLongClickListener? = null
     ) : this() {
         this.drawableRes = drawableRes
         this.titleText = titleText
         this.subtitleTextRes = subtitleTextRes
+        this.longClickListener = longClickListener
     }
 
     constructor(
         drawable: Drawable,
         @StringRes titleTextRes: Int,
         @StringRes subtitleTextRes: Int? = null,
+        longClickListener: OptionLongClickListener? = null
     ) : this() {
         this.drawable = drawable
         this.titleTextRes = titleTextRes
         this.subtitleTextRes = subtitleTextRes
+        this.longClickListener = longClickListener
     }
 
     constructor(
         drawable: Drawable,
         titleText: String,
         @StringRes subtitleTextRes: Int? = null,
+        longClickListener: OptionLongClickListener? = null
     ) : this() {
         this.drawable = drawable
         this.titleText = titleText
         this.subtitleTextRes = subtitleTextRes
+        this.longClickListener = longClickListener
     }
 
     constructor(
         @DrawableRes drawableRes: Int,
         @StringRes titleTextRes: Int,
         @StringRes subtitleTextRes: Int? = null,
+        longClickListener: OptionLongClickListener? = null
     ) : this() {
         this.drawableRes = drawableRes
         this.titleTextRes = titleTextRes
         this.subtitleTextRes = subtitleTextRes
+        this.longClickListener = longClickListener
     }
 
     /** Declare the option as already selected. */

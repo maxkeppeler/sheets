@@ -124,6 +124,7 @@ internal class OptionsAdapter(
             icon.visibility = View.VISIBLE
         }
 
+        optionContainer.setOnLongClickListener { option.longClickListener?.invoke(); true }
         optionContainer.changeRippleAndStateColor()
 
         val selected = option.selected || listener.isSelected(i)
@@ -169,6 +170,7 @@ internal class OptionsAdapter(
             icon.visibility = View.VISIBLE
         }
 
+        optionContainer.setOnLongClickListener { option.longClickListener?.invoke(); true }
         optionContainer.changeRippleAndStateColor()
 
         val selected = option.selected || listener.isSelected(i)
