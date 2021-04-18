@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/label"
-        app:layout_goneMarginTop="8dp">
+        app:layout_goneMarginTop="0dp">
 
         <com.maxkeppeler.sheets.core.views.SheetInputEditText
             android:id="@+id/textInput"
