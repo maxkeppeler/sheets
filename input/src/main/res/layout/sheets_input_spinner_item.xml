@@ -21,8 +21,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
-    android:paddingTop="12dp"
-    android:paddingBottom="8dp">
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
     <com.maxkeppeler.sheets.core.views.SheetContent
         android:id="@+id/label"
