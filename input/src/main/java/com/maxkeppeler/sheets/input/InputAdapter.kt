@@ -20,16 +20,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.text.method.PasswordTransformationMethod
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.color.MaterialColors
-import com.google.android.material.elevation.ElevationOverlayProvider
-import com.google.android.material.internal.ViewUtils
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetContent
 import com.maxkeppeler.sheets.input.databinding.*
@@ -50,6 +49,7 @@ internal class InputAdapter(
         private const val VIEW_TYPE_RADIO_BUTTONS = 2
         private const val VIEW_TYPE_SPINNER = 3
         private const val VIEW_TYPE_SWITCH = 4
+        private const val VIEW_TYPE_SEPARATOR = 5
     }
 
     private val primaryColor = getPrimaryColor(ctx)
@@ -63,6 +63,7 @@ internal class InputAdapter(
         is InputCheckBox -> VIEW_TYPE_CHECK_BOX
         is InputRadioButtons -> VIEW_TYPE_RADIO_BUTTONS
         is InputSpinner -> VIEW_TYPE_SPINNER
+        is InputSeparator -> VIEW_TYPE_SEPARATOR
         else -> throw IllegalStateException("No ViewType for this Input.")
     }
 
@@ -103,6 +104,13 @@ internal class InputAdapter(
                     false
                 )
             )
+            VIEW_TYPE_SEPARATOR -> SeparatorItem(
+                SheetsInputSeparatorItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
             else -> throw IllegalStateException("No ViewHolder for this ViewType.")
         }
 
@@ -110,7 +118,9 @@ internal class InputAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, i: Int) {
         val input = input[i]
         when {
-            holder is EditTextItem && input is InputEditText -> holder.binding.buildEditText(input)
+            holder is EditTextItem && input is InputEditText -> {
+                holder.binding.buildEditText(input)
+            }
             holder is CheckBoxItem
                     && input is InputCheckBox -> {
                 holder.binding.buildCheckBox(input)
@@ -126,6 +136,10 @@ internal class InputAdapter(
             holder is SpinnerItem
                     && input is InputSpinner -> {
                 holder.binding.buildSpinner(input)
+            }
+            holder is SeparatorItem
+                    && input is InputSeparator -> {
+                holder.binding.buildDivider(input)
             }
         }
     }
@@ -277,6 +291,11 @@ internal class InputAdapter(
         }
     }
 
+    private fun SheetsInputSeparatorItemBinding.buildDivider(input: InputSeparator) {
+
+        setupGeneralInputInfo(input, label, icon)
+    }
+
     private fun setupGeneralInputInfo(
         input: Input,
         label: SheetContent? = null,
@@ -315,5 +334,8 @@ internal class InputAdapter(
         RecyclerView.ViewHolder(binding.root)
 
     internal inner class SpinnerItem(val binding: SheetsInputSpinnerItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    internal inner class SeparatorItem(val binding: SheetsInputSeparatorItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
