@@ -133,7 +133,7 @@ internal class InputAdapter(
     @SuppressLint("ClickableViewAccessibility")
     private fun SheetsInputEditTextItemBinding.buildEditText(input: InputEditText) {
 
-        setupGeneralInputInfo(input, label, icon)
+        setupGeneralInputInfo(input, label, null)
 
         with(textInput) {
 
@@ -169,7 +169,7 @@ internal class InputAdapter(
 
             input.endIconMode?.let { endIconMode = it }
             input.isEndIconActivated?.let { setEndIconActivated(it) }
-            input.startIconDrawableRes?.let { setStartIconDrawable(it) }
+            (input.startIconDrawableRes ?: input.drawableRes)?.let { setStartIconDrawable(it) }
             input.errorIconDrawableRes?.let { setErrorIconDrawable(it) }
             input.isEndIconActivated?.let { setEndIconActivated(it) }
             setStartIconTintList(ColorStateList.valueOf(primaryColor))
