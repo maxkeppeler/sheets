@@ -477,6 +477,7 @@ For the default input sheet use it as following:
 - `InputSwitch`
 - `InputRadioButtons`
 - `InputSpinner`
+- `InputSeparator`
 
 **Input**<br/>
 
