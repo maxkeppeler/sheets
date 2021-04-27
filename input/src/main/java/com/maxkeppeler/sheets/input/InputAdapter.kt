@@ -50,6 +50,7 @@ internal class InputAdapter(
         private const val VIEW_TYPE_SPINNER = 3
         private const val VIEW_TYPE_SWITCH = 4
         private const val VIEW_TYPE_SEPARATOR = 5
+        private const val VIEW_TYPE_BUTTON_TOGGLE_GROUP = 6
     }
 
     private val primaryColor = getPrimaryColor(ctx)
@@ -64,6 +65,7 @@ internal class InputAdapter(
         is InputRadioButtons -> VIEW_TYPE_RADIO_BUTTONS
         is InputSpinner -> VIEW_TYPE_SPINNER
         is InputSeparator -> VIEW_TYPE_SEPARATOR
+        is InputButtonToggleGroup -> VIEW_TYPE_BUTTON_TOGGLE_GROUP
         else -> throw IllegalStateException("No ViewType for this Input.")
     }
 
@@ -111,6 +113,13 @@ internal class InputAdapter(
                     false
                 )
             )
+            VIEW_TYPE_BUTTON_TOGGLE_GROUP -> ButtonToggleGroupItem(
+                SheetsInputButtonToggleGroupItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
             else -> throw IllegalStateException("No ViewHolder for this ViewType.")
         }
 
@@ -136,6 +145,10 @@ internal class InputAdapter(
             holder is SpinnerItem
                     && input is InputSpinner -> {
                 holder.binding.buildSpinner(input)
+            }
+            holder is ButtonToggleGroupItem
+                    && input is InputButtonToggleGroup -> {
+                holder.binding.buildButtonToggleGroup(input)
             }
             holder is SeparatorItem
                     && input is InputSeparator -> {
@@ -256,6 +269,19 @@ internal class InputAdapter(
         }
     }
 
+    private fun SheetsInputButtonToggleGroupItemBinding.buildButtonToggleGroup(input: InputButtonToggleGroup) {
+
+        setupGeneralInputInfo(input, label, icon)
+
+        input.value?.let { buttonToggleGroup.selected(it) }
+
+        buttonToggleGroup.options(input.toggleButtonOptions?.toList() ?: listOf())
+        buttonToggleGroup.listener { index ->
+            input.value = index
+            listener.invoke()
+        }
+    }
+
     private fun SheetsInputSpinnerItemBinding.buildSpinner(input: InputSpinner) {
 
         setupGeneralInputInfo(input, label, icon)
@@ -334,6 +360,9 @@ internal class InputAdapter(
         RecyclerView.ViewHolder(binding.root)
 
     internal inner class SpinnerItem(val binding: SheetsInputSpinnerItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    internal inner class ButtonToggleGroupItem(val binding: SheetsInputButtonToggleGroupItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     internal inner class SeparatorItem(val binding: SheetsInputSeparatorItemBinding) :
