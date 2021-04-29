@@ -109,14 +109,14 @@ dependencies {
 | titleColor()          | 设置标题文本颜色 |
 | titleColorRes()       | 通过一个 `Resource` 来设置标题文本颜色 |
 | withCoverImage()      | 添加一个封面图片|
-| topStyle()            | 指定封面图片和 topBar 的样式 |
-| positiveButtonStyle() | Define the style of the positive button (Text, Filled, Outlined).                |
-| negativeButtonStyle() | Define the style of the negative button (Text, Filled, Outlined).                |
-| withIconButton()      | Add up to 3 icon buttons to the top bar.                                         |
-| closeIconButton()     | Set a custom close icon button.                                                  |
-| displayHandle()       | Display the handle.                                                              |
-| displayCloseButton()  | Display close icon button.                                                       |
-| displayToolbar()      | Display toolbar. (Close icon button, title, divider and icon buttons)            |
+| topStyle()            | 指定封面图片和 `topBar` 的样式 |
+| positiveButtonStyle() | 定义确认按钮的样式（文本、填充、轮廓) |
+| negativeButtonStyle() | 定义否定按钮的样式（文本、填充、轮廓）|
+| withIconButton()      | 在 `topBar` 中最多添加3个图标按钮 |
+| closeIconButton()     | 设置一个自定义的 `closeIconButton` |
+| displayHandle()       | 显示可调节窗口大小的控件（位于右下角） |
+| displayCloseButton()  | 显示 `closeIconButton` |
+| displayToolbar()      | 显示工具栏 (closeIconButton, title, divider and icon buttons) |
 | peekHeight()          | Set the peek height. (Only bottom-sheet)                                         |
 | cornerRadius()        | Set corner radius.                                                               |
 | cornerFamily()        | Set corner family. (Cut or rounded)                                              |
