@@ -6,7 +6,7 @@
 
   <p>
 
-我不知道，对不起。工作正在进行中。 
+流畅的对话框和底部表单，可在你的应用程序中快速使用，选择一个可用的表或在现有功能的基础上建立自定义表
 
    <a href="https://search.maven.org/search?q=g:%22com.maxkeppeler.sheets%22">
      <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central">
@@ -47,12 +47,12 @@
   </p>
 </p>
 
-读入用 [English](README.md) 或 [简体中文](README.zh_CN.md).
+[English](README.md) 或 [简体中文](README.zh_CN.md).
 
 
 <img src="art/showcase.png" alt="sheets Library">
 
-## Table of Contents
+## 目录
 
 - [Get started](#get-started)
   - [Info Sheet](#info)
@@ -71,7 +71,7 @@
   - [Credits](#credits)
   - [License](#license)
 
-# Get started
+# 开始
 
 A sheet can dynamically be displayed as either a dialog or as a bottom-sheet.
 Check out the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
