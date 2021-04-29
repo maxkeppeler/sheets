@@ -116,7 +116,7 @@ dependencies {
 | closeIconButton()     | 设置一个自定义的 `closeIconButton` |
 | displayHandle()       | 显示可调节窗口大小的控件（位于右下角） |
 | displayCloseButton()  | 显示 `closeIconButton` |
-| displayToolbar()      | 显示工具栏 (closeIconButton, title, divider and icon buttons) |
+| displayToolbar()      | 显示工具栏 (`closeIconButton`, `title`, `divider` and `icon` `buttons`) |
 | peekHeight()          | Set the peek height. (Only bottom-sheet)                                         |
 | cornerRadius()        | Set corner radius.                                                               |
 | cornerFamily()        | Set corner family. (Cut or rounded)                                              |
