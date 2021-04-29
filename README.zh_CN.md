@@ -102,14 +102,14 @@ dependencies {
 **基础功能** <br/>
 以下函数可以从任何类型的表中调用.
 
-| 方法             | 功能                                                                           |
-| --------------------- | -------------------------------------------------------------------------------- |
-| style()               | 显示为对话框或者底层表单。                                                         |
-| title()               | 设置标题文本。                                                                     |
-| titleColor()          | 设置标题文本颜色。                                                         |
-| titleColorRes()       | Set the title text color by a resource.                                          |
-| withCoverImage()      | Add a cover image.                                                               |
-| topStyle()            | Specify the style of the cover image and top bar.                                |
+| 方法                   | 功能                                                                             |
+|-----------------------|----------------------------------------------------------------------------------|
+| style()               | 显示为对话框或者底层表单 |
+| title()               | 设置标题文本 |
+| titleColor()          | 设置标题文本颜色 |
+| titleColorRes()       | 通过一个 `Resource` 来设置标题文本颜色 |
+| withCoverImage()      | 添加一个封面图片|
+| topStyle()            | 指定封面图片和 topBar 的样式 |
 | positiveButtonStyle() | Define the style of the positive button (Text, Filled, Outlined).                |
 | negativeButtonStyle() | Define the style of the negative button (Text, Filled, Outlined).                |
 | withIconButton()      | Add up to 3 icon buttons to the top bar.                                         |
