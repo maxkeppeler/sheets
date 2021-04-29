@@ -77,9 +77,9 @@
 
 [例子](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
 
-You have to use the `core` module as it is the foundation of any sheet.
+你必须使用 `core` 模块，因为它是任何工作表的基础
 
-In your top-level `build.gradle` file:
+在 `build.gradle` 中:
 
 ```gradle
 repositories {
@@ -88,7 +88,7 @@ repositories {
 }
 ```
 
-In your app `build.gradle` file:
+在 app `build.gradle` file 中:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
@@ -99,12 +99,12 @@ dependencies {
 }
 ```
 
-**Base functions** <br/>
-Following functions can be called from any type of sheet.
+**基础功能** <br/>
+以下函数可以从任何类型的表中调用.
 
-| Function              | Action                                                                           |
+| 方法             | 功能                                                                           |
 | --------------------- | -------------------------------------------------------------------------------- |
-| style()               | Display as dialog or bottom-sheet.                                               |
+| style()               | 显示为对话框或者底层表单.                                               |
 | title()               | Set the title text.                                                              |
 | titleColor()          | Set the title text color.                                                        |
 | titleColorRes()       | Set the title text color by a resource.                                          |
@@ -130,9 +130,9 @@ Following functions can be called from any type of sheet.
 | onClose()             | Set a listener that is invoked when the sheet is closed.                         |
 | show()                | show the sheet.                                                                  |
 
-Each sheet has an extension function called `build` and `show`.<br/>
+每个工作表都有一个扩展功能，叫做 `build `和 `show`。<br/>
 
-Use `build` to build a sheet and display it later.
+使用 `build` 来构建一个 sheet 并在之后显示出来。
 
     val sheet = InfoSheet().build(context) {
       // build sheet
@@ -140,7 +140,7 @@ Use `build` to build a sheet and display it later.
 
     sheet.show() // Show sheet when ready
 
-Use `show` if you want to build and then immediately display it.
+如果你想构建它，并且立刻显示出来，请使用 `show`
 
     InfoSheet().show(context) {
       // build sheet
