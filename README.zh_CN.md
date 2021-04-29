@@ -47,7 +47,7 @@
   </p>
 </p>
 
-[English](README.md) 或 [简体中文](README.zh_CN.md).
+[English](README.md) [简体中文](README.zh_CN.md).
 
 
 <img src="art/showcase.png" alt="sheets Library">
@@ -88,7 +88,7 @@ repositories {
 }
 ```
 
-在 app `build.gradle` file 中:
+在 app `build.gradle` 中:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
@@ -104,9 +104,9 @@ dependencies {
 
 | 方法             | 功能                                                                           |
 | --------------------- | -------------------------------------------------------------------------------- |
-| style()               | 显示为对话框或者底层表单.                                               |
-| title()               | Set the title text.                                                              |
-| titleColor()          | Set the title text color.                                                        |
+| style()               | 显示为对话框或者底层表单。                                                         |
+| title()               | 设置标题文本。                                                                     |
+| titleColor()          | 设置标题文本颜色。                                                         |
 | titleColorRes()       | Set the title text color by a resource.                                          |
 | withCoverImage()      | Add a cover image.                                                               |
 | topStyle()            | Specify the style of the cover image and top bar.                                |
