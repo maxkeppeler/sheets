@@ -6,7 +6,7 @@
 
   <p>
 
-我不知道，对不起。工作正在进行中。 
+流畅的对话框和底部表单，可在你的应用程序中快速使用，选择一个可用的表或在现有功能的基础上建立自定义表
 
    <a href="https://search.maven.org/search?q=g:%22com.maxkeppeler.sheets%22">
      <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central">
@@ -47,12 +47,12 @@
   </p>
 </p>
 
-读入用 [English](README.md) 或 [简体中文](README.zh_CN.md).
+[English](README.md) [简体中文](README.zh_CN.md).
 
 
 <img src="art/showcase.png" alt="sheets Library">
 
-## Table of Contents
+## 目录
 
 - [Get started](#get-started)
   - [Info Sheet](#info)
@@ -71,14 +71,15 @@
   - [Credits](#credits)
   - [License](#license)
 
-# Get started
+# 开始
 
-A sheet can dynamically be displayed as either a dialog or as a bottom-sheet.
-Check out the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
+一个 `sheet` 可以动态地显示为一个对话框或一个底部表单
 
-You have to use the `core` module as it is the foundation of any sheet.
+[例子](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
 
-In your top-level `build.gradle` file:
+你必须使用 `core` 模块，因为它是任何工作表的基础
+
+在 `build.gradle` 中:
 
 ```gradle
 repositories {
@@ -87,7 +88,7 @@ repositories {
 }
 ```
 
-In your app `build.gradle` file:
+在 app `build.gradle` 中:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
@@ -98,24 +99,24 @@ dependencies {
 }
 ```
 
-**Base functions** <br/>
-Following functions can be called from any type of sheet.
+**基础功能** <br/>
+以下函数可以从任何类型的表中调用.
 
-| Function              | Action                                                                           |
-| --------------------- | -------------------------------------------------------------------------------- |
-| style()               | Display as dialog or bottom-sheet.                                               |
-| title()               | Set the title text.                                                              |
-| titleColor()          | Set the title text color.                                                        |
-| titleColorRes()       | Set the title text color by a resource.                                          |
-| withCoverImage()      | Add a cover image.                                                               |
-| topStyle()            | Specify the style of the cover image and top bar.                                |
-| positiveButtonStyle() | Define the style of the positive button (Text, Filled, Outlined).                |
-| negativeButtonStyle() | Define the style of the negative button (Text, Filled, Outlined).                |
-| withIconButton()      | Add up to 3 icon buttons to the top bar.                                         |
-| closeIconButton()     | Set a custom close icon button.                                                  |
-| displayHandle()       | Display the handle.                                                              |
-| displayCloseButton()  | Display close icon button.                                                       |
-| displayToolbar()      | Display toolbar. (Close icon button, title, divider and icon buttons)            |
+| 方法                   | 功能                                                                             |
+|-----------------------|----------------------------------------------------------------------------------|
+| style()               | 显示为对话框或者底层表单 |
+| title()               | 设置标题文本 |
+| titleColor()          | 设置标题文本颜色 |
+| titleColorRes()       | 通过一个 `Resource` 来设置标题文本颜色 |
+| withCoverImage()      | 添加一个封面图片|
+| topStyle()            | 指定封面图片和 `topBar` 的样式 |
+| positiveButtonStyle() | 定义确认按钮的样式（文本、填充、轮廓) |
+| negativeButtonStyle() | 定义否定按钮的样式（文本、填充、轮廓）|
+| withIconButton()      | 在 `topBar` 中最多添加3个图标按钮 |
+| closeIconButton()     | 设置一个自定义的 `closeIconButton` |
+| displayHandle()       | 显示可调节窗口大小的控件（位于右下角） |
+| displayCloseButton()  | 显示 `closeIconButton` |
+| displayToolbar()      | 显示工具栏 (`closeIconButton`, `title`, `divider` and `icon` `buttons`) |
 | peekHeight()          | Set the peek height. (Only bottom-sheet)                                         |
 | cornerRadius()        | Set corner radius.                                                               |
 | cornerFamily()        | Set corner family. (Cut or rounded)                                              |
@@ -129,9 +130,9 @@ Following functions can be called from any type of sheet.
 | onClose()             | Set a listener that is invoked when the sheet is closed.                         |
 | show()                | show the sheet.                                                                  |
 
-Each sheet has an extension function called `build` and `show`.<br/>
+每个工作表都有一个扩展功能，叫做 `build `和 `show`。<br/>
 
-Use `build` to build a sheet and display it later.
+使用 `build` 来构建一个 sheet 并在之后显示出来。
 
     val sheet = InfoSheet().build(context) {
       // build sheet
@@ -139,7 +140,7 @@ Use `build` to build a sheet and display it later.
 
     sheet.show() // Show sheet when ready
 
-Use `show` if you want to build and then immediately display it.
+如果你想构建它，并且立刻显示出来，请使用 `show`
 
     InfoSheet().show(context) {
       // build sheet
