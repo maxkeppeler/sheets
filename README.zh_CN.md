@@ -73,8 +73,9 @@
 
 # 开始
 
-A sheet can dynamically be displayed as either a dialog or as a bottom-sheet.
-Check out the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
+一个 `sheet` 可以动态地显示为一个对话框或一个底部表单
+
+[例子](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
 
 You have to use the `core` module as it is the foundation of any sheet.
 
