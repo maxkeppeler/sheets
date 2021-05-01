@@ -118,11 +118,11 @@ dependencies {
 | displayCloseButton()  | 显示 `closeIconButton` |
 | displayToolbar()      | 显示工具栏 (`closeIconButton`, `title`, `divider` and `icon` `buttons`) |
 | peekHeight()          | Set the peek height. (Only bottom-sheet)                                         |
-| cornerRadius()        | Set corner radius.                                                               |
+| cornerRadius()        | 设置转角半径 |
 | cornerFamily()        | Set corner family. (Cut or rounded)                                              |
-| borderWidth()         | Set the border width.                                                            |
-| borderColor()         | Set the border color.                                                            |
-| cancelableOutside()   | Make sheet cancelable outside of the dialog view.                                |
+| borderWidth()         | 设置边框宽度 |
+| borderColor()         | 设置边框颜色 |
+| cancelableOutside()   | 使 `sheet` 可以在对话框视图之外取消 |
 | onNegative()          | Set the negative button text and listener.                                       |
 | onPositive()          | Set the positive button text and listener.                                       |
 | onDismiss()           | Set a listener that is invoked when the sheet is dismissed.                      |
