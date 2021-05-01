@@ -150,12 +150,12 @@ dependencies {
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/info.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
-The `Info` Sheet lets you display information or warning.
+`Info sheet` 可以让你显示信息或警告
 
 <details open>
 <br/>
 <br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
 <img src="art/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
@@ -166,7 +166,7 @@ The `Info` Sheet lets you display information or warning.
 </br>
 
 <details>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <br/>
 <br/>
@@ -183,9 +183,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default info sheet use it as following:
+对于默认的 `info sheet`，使用方法如下：
 
     InfoSheet().show(context) {
       title("Do you want to install Awake?")
@@ -198,9 +198,9 @@ For the default info sheet use it as following:
       }
     }
 
-| Function        | Action              |
+| 方法       | 行为           |
 | --------------- | ------------------- |
-| content()       | Set content text.   |
+| content()       | 设置内容文本   |
 | drawable()      | Set drawable.       |
 | drawableColor() | Set drawable color. |
 
@@ -208,11 +208,11 @@ For the default info sheet use it as following:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/options.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/options)
 
-The `Options` Sheet lets you display a grid or list of options.
+`Options sheet` 可以让你显示一个网格或选项列表.
 
 <details open>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
@@ -220,7 +220,7 @@ The `Options` Sheet lets you display a grid or list of options.
 
 <details>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <img src="art/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
@@ -305,7 +305,7 @@ The `Clock Time` Sheet lets you quickly pick a time.
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
@@ -313,7 +313,7 @@ The `Clock Time` Sheet lets you quickly pick a time.
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <img src="art/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
@@ -349,7 +349,7 @@ The `Time` Sheet lets you pick a duration time in a specific format.
 
 <details open>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
 </details>
@@ -357,7 +357,7 @@ The `Time` Sheet lets you pick a duration time in a specific format.
 
 <details>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <img src="art/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
 </details>
@@ -395,7 +395,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
 </details>
@@ -403,7 +403,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <img src="art/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
 </details>
@@ -532,7 +532,7 @@ The `Calendar` Sheet lets you pick a date or date range. This type was build usi
 
 <details open>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
 </details>
@@ -540,7 +540,7 @@ The `Calendar` Sheet lets you pick a date or date range. This type was build usi
 
 <details>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <img src="art/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
 </details>
@@ -579,7 +579,7 @@ The `Color` Sheet lets you pick a color. Display the default material colors or 
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
 <img src="art/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
@@ -589,7 +589,7 @@ The `Color` Sheet lets you pick a color. Display the default material colors or 
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <img src="art/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
 <img src="art/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
@@ -628,7 +628,7 @@ With just the 'core' module you are able to create your own sheet based on this 
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
 </details>
@@ -636,7 +636,7 @@ With just the 'core' module you are able to create your own sheet based on this 
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <img src="art/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
 </details>
@@ -687,14 +687,14 @@ The `Lottie` modules gives you the ability to use a [Lottie animations](https://
 <details open>
 <br/>
 <br/>
-<summary>Showcase as Dialog</summary>
+<summary>作为 Dialog 的演示</summary>
 
 <img src="art/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
 </details>
 </br>
 
 <details>
-<summary>Showcase as BottomSheet</summary>
+<summary>作为 BottomSheet 的演示</summary>
 
 <br/>
 <br/>
