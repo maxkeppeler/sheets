@@ -261,9 +261,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default options sheet use it as following:
+对于默认的 `options sheet`，按以下方式使用：
 
     OptionsSheet().show(context) {
       title("Text message")
@@ -279,29 +279,29 @@ For the default options sheet use it as following:
 
 | Function                     | Action                                                                                 |
 | ---------------------------- | -------------------------------------------------------------------------------------- |
-| multipleChoices()            | Allow multiple choices content.                                                        |
-| displayMultipleChoicesInfo() | Display info of the multiple choices.                                                  |
+| multipleChoices()            | 允许多选内容|
+| displayMultipleChoicesInfo() | 显示多项选择的信息|
 | maxChoicesStrictLimit()      | Specify that the max choices is strict and more choices can't be selected temporarily. |
-| minChoices()                 | Set the minimum amount of choices.                                                     |
-| maxChoices()                 | Set the maximum amount of choices.                                                     |
-| onPositiveMultiple()         | Set listener for multiple choices.                                                     |
-| displayButtons()             | Display buttons and require a positive button click for selection.                     |
-| displayMode()                | Display options in a list or a vertical/ horizontal growing scrollable grid.           |
+| minChoices()                 | 设置选择的最小数量|
+| maxChoices()                 | 设置最大的选择数量|
+| onPositiveMultiple()         | 设置多重选择的监听器|
+| displayButtons()             | 显示按钮，并且需要一个确认按钮点击进行选择
+| displayMode()                | 以 list/vertical/horizontal 的可滚动网格显示选项|
 
-**Option**
+**可选的**
 
-| Function   | Action               |
+| 方法   | 行为 |
 | ---------- | -------------------- |
-| selected() | Preselect an option. |
-| disable()  | Disable an option.   |
+| selected() | 预先选择一个选项|
+| disable()  | 禁用一个选项|
 
-**Note**: Preselected options automatically increase the current selection while disabled options decrease the maximum amount of choices.
+**注意**。预选的选项会自动增加当前的选择，而禁用的选项会减少最大的选择数量。
 
 ## Clock Time
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time-clock.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time-clock)
 
-The `Clock Time` Sheet lets you quickly pick a time.
+`Clock Time` sheet 可以让你快速的选择时间
 
 <details>
 <br/><br/>
@@ -391,7 +391,7 @@ For the default time sheet use it as following:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/input.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/input)
 
-The `Input` Sheet lets you display a form consisting of various inputs.
+`input sheet` 可以让你显示一个由各种 input 组成的表单:
 
 <details>
 <br/><br/>
@@ -432,9 +432,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default input sheet use it as following:
+对于默认的 `input sheet`，按以下方式使用：
 
     InputSheet()).show(context) {
         title("Short survey")
@@ -443,9 +443,9 @@ For the default input sheet use it as following:
         required())
         label("Your favorite TV-Show")
         hint("The Mandalorian, ...")
-        validationListener { value -> } // Add custom validation logic
-        changeListener { value -> } // Input value changed
-        resultListener { value -> } // Input value changed when form finished
+        validationListener { value -> } // 添加自定义验证逻辑
+        changeListener { value -> } // 输入的值被改变时
+        resultListener { value -> } // 当表单完成后输入的值被改变时
       })
       with(InputCheckBox("binge_watching") { // Read value later by index or custom key from bundle
         label("Binge Watching")
