@@ -117,18 +117,18 @@ dependencies {
 | displayHandle()       | 显示可调节窗口大小的控件（位于右下角） |
 | displayCloseButton()  | 显示 `closeIconButton` |
 | displayToolbar()      | 显示工具栏 (`closeIconButton`, `title`, `divider` and `icon` `buttons`) |
-| peekHeight()          | Set the peek height. (Only bottom-sheet)                                         |
+| peekHeight()          | Set the peek height. (Only bottom-sheet)|
 | cornerRadius()        | 设置转角半径 |
-| cornerFamily()        | Set corner family. (Cut or rounded)                                              |
+| cornerFamily()        | 设置转角的样式 （裁剪或圆角）|
 | borderWidth()         | 设置边框宽度 |
 | borderColor()         | 设置边框颜色 |
 | cancelableOutside()   | 使 `sheet` 可以在对话框视图之外取消 |
-| onNegative()          | Set the negative button text and listener.                                       |
-| onPositive()          | Set the positive button text and listener.                                       |
-| onDismiss()           | Set a listener that is invoked when the sheet is dismissed.                      |
-| onCancel()            | Set a listener that is invoked when the sheet is cancelled (only if cancelable). |
-| onClose()             | Set a listener that is invoked when the sheet is closed.                         |
-| show()                | show the sheet.                                                                  |
+| onNegative()          | 设置否定按钮的文本和监听|
+| onPositive()          | 设置确认按钮的文本和监听|
+| onDismiss()           | 设置一个监听器，当 `sheet` 被撤消时被调用|
+| onCancel()            | 设置一个监听器，当 `sheet` 被取消时被调用（仅当可取消时）|
+| onClose()             | 设置一个监听器，当 `sheet` 关闭时被调用|
+| show()                | show the sheet|
 
 每个工作表都有一个扩展功能，叫做 `build `和 `show`。<br/>
 
