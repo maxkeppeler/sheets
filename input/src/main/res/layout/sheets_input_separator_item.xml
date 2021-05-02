@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="14dp"
+        android:lineSpacingMultiplier="1.2"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
@@ -50,13 +51,36 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
         android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
-        android:visibility="gone"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="@+id/label"
         tools:ignore="ContentDescription" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label,icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.maxkeppeler.sheets.core.views.SheetContent
+        android:id="@+id/content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="12dp"
+        android:lineSpacingMultiplier="1.2"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrier" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

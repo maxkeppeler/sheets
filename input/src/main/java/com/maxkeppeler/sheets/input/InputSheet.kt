@@ -43,40 +43,10 @@ class InputSheet : Sheet() {
     private lateinit var binding: SheetsInputBinding
 
     private var listener: InputListener? = null
-    private var contentText: String? = null
     private var input = mutableListOf<Input>()
 
     private val saveAllowed: Boolean
         get() = input.filter { it.required }.all { it.valid() }
-
-    /**
-     * Set the content of the sheet.
-     *
-     * @param content The text for the content.
-     */
-    fun content(content: String) {
-        this.contentText = content
-    }
-
-    /**
-     * Set the content of the sheet.
-     *
-     * @param contentRes The String resource id for the content.
-     */
-    fun content(@StringRes contentRes: Int) {
-        this.contentText = windowContext.getString(contentRes)
-    }
-
-    /**
-     * Set the content of the sheet.
-     *
-     * @param contentRes Resource id for the format string
-     * @param formatArgs The format arguments that will be used for
-     *                   substitution.
-     */
-    fun content(@StringRes contentRes: Int, vararg formatArgs: Any?) {
-        this.contentText = windowContext.getString(contentRes, *formatArgs)
-    }
 
     /**
      * Set the [InputListener].
@@ -169,7 +139,6 @@ class InputSheet : Sheet() {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
         validate(true)
-        contentText?.let { binding.content.text = it; binding.content.visibility = View.VISIBLE }
         with(binding.inputRecyclerView) {
             layoutManager = CustomLinearLayoutManager(requireContext(), true)
             adapter = InputAdapter(requireContext(), input, ::validate)

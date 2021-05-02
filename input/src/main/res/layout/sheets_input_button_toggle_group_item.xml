@@ -36,6 +36,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.maxkeppeler.sheets.core.views.SheetContent
+        android:id="@+id/content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="4dp"
+        android:lineSpacingMultiplier="1.2"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:barrierMargin="12dp"
+        app:constraint_referenced_ids="label,content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
@@ -60,7 +83,7 @@
         android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
-        app:layout_constraintTop_toBottomOf="@+id/label"
+        app:layout_constraintTop_toBottomOf="@+id/barrier"
         app:layout_goneMarginTop="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,10 +28,18 @@ class InputSeparator(key: String? = null, func: InputSeparator.() -> Unit) : Inp
     init {
         func()
     }
+    
+    internal var displayDivider: Boolean? = null
+        private set
 
     override fun invokeResultListener() = Unit
 
     override fun valid(): Boolean = true
 
     override fun putValue(bundle: Bundle, index: Int) = Unit
+
+    /** Display divider. */
+    fun displayDivider(displayDivider: Boolean) {
+        this.displayDivider = displayDivider
+    }
 }

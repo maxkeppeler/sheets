@@ -152,7 +152,8 @@ internal class InputAdapter(
             }
             holder is SeparatorItem
                     && input is InputSeparator -> {
-                holder.binding.buildDivider(input)
+                val isHeader = i == 0
+                holder.binding.buildSeparator(isHeader, input)
             }
         }
     }
@@ -160,7 +161,7 @@ internal class InputAdapter(
     @SuppressLint("ClickableViewAccessibility")
     private fun SheetsInputEditTextItemBinding.buildEditText(input: InputEditText) {
 
-        setupGeneralInputInfo(input, label, null)
+        setupGeneralInputInfo(input, label, content, null)
 
         with(textInput) {
 
@@ -212,7 +213,7 @@ internal class InputAdapter(
 
     private fun SheetsInputSwitchItemBinding.buildSwitch(input: InputSwitch) {
 
-        setupGeneralInputInfo(input, label, icon)
+        setupGeneralInputInfo(input, label, content, icon)
 
         switchButton.isChecked = input.value
 
@@ -228,7 +229,7 @@ internal class InputAdapter(
 
     private fun SheetsInputCheckBoxItemBinding.buildCheckBox(input: InputCheckBox) {
 
-        setupGeneralInputInfo(input, label, icon)
+        setupGeneralInputInfo(input, label, content, icon)
 
         checkBox.isChecked = input.value
 
@@ -244,7 +245,7 @@ internal class InputAdapter(
 
     private fun SheetsInputRadioButtonsItemBinding.buildRadioButtons(input: InputRadioButtons) {
 
-        setupGeneralInputInfo(input, label)
+        setupGeneralInputInfo(input, label, content)
 
         input.radioButtonOptions?.forEachIndexed { index, radioButtonText ->
             val button = AppCompatRadioButton(ctx).apply {
@@ -271,7 +272,7 @@ internal class InputAdapter(
 
     private fun SheetsInputButtonToggleGroupItemBinding.buildButtonToggleGroup(input: InputButtonToggleGroup) {
 
-        setupGeneralInputInfo(input, label, icon)
+        setupGeneralInputInfo(input, label, content, icon)
 
         input.value?.let { buttonToggleGroup.selected(it) }
 
@@ -284,7 +285,7 @@ internal class InputAdapter(
 
     private fun SheetsInputSpinnerItemBinding.buildSpinner(input: InputSpinner) {
 
-        setupGeneralInputInfo(input, label, icon)
+        setupGeneralInputInfo(input, label, content, icon)
 
         val spinnerOptions = input.spinnerOptions
 
@@ -317,23 +318,42 @@ internal class InputAdapter(
         }
     }
 
-    private fun SheetsInputSeparatorItemBinding.buildDivider(input: InputSeparator) {
+    private fun SheetsInputSeparatorItemBinding.buildSeparator(
+        header: Boolean,
+        input: InputSeparator,
+    ) {
 
-        setupGeneralInputInfo(input, label, icon)
+        setupGeneralInputInfo(input, label, content, icon)
+
+        val paddingTop = if (header) 0.toDp() else 16.toDp()
+        root.setPadding(root.paddingLeft, paddingTop, root.paddingRight, root.paddingBottom)
+
+        if (header) {
+            divider.visibility = View.GONE
+        }
+
+        input.displayDivider?.let { displayDivider ->
+            divider.visibility = if (displayDivider) View.VISIBLE else View.GONE
+        }
     }
 
     private fun setupGeneralInputInfo(
         input: Input,
-        label: SheetContent? = null,
+        label: SheetContent,
+        content: SheetContent,
         icon: ImageView? = null,
     ) {
 
-        label?.let {
-            val labelText = input.labelRes?.let { ctx.getString(it) } ?: input.label
-            labelText?.let {
-                label.text = it.takeUnless { input.required } ?: it.plus(" *")
-                label.visibility = View.VISIBLE
-            }
+        val labelText = input.labelRes?.let { ctx.getString(it) } ?: input.label
+        labelText?.let {
+            label.text = it.takeUnless { input.required } ?: it.plus(" *")
+            label.visibility = View.VISIBLE
+        }
+
+        val contentText = input.contentRes?.let { ctx.getString(it) } ?: input.content
+        contentText?.let {
+            content.text = it
+            content.visibility = View.VISIBLE
         }
 
         icon?.let {

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,6 +35,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.maxkeppeler.sheets.core.views.SheetContent
+        android:id="@+id/content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="4dp"
+        android:lineSpacingMultiplier="1.2"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="label,content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="0dp"
@@ -46,7 +67,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label"
+        app:layout_constraintTop_toBottomOf="@+id/barrier"
         app:layout_goneMarginStart="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
