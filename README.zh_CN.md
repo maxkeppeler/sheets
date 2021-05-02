@@ -117,18 +117,18 @@ dependencies {
 | displayHandle()       | 显示可调节窗口大小的控件（位于右下角） |
 | displayCloseButton()  | 显示 `closeIconButton` |
 | displayToolbar()      | 显示工具栏 (`closeIconButton`, `title`, `divider` and `icon` `buttons`) |
-| peekHeight()          | Set the peek height. (Only bottom-sheet)                                         |
-| cornerRadius()        | Set corner radius.                                                               |
-| cornerFamily()        | Set corner family. (Cut or rounded)                                              |
-| borderWidth()         | Set the border width.                                                            |
-| borderColor()         | Set the border color.                                                            |
-| cancelableOutside()   | Make sheet cancelable outside of the dialog view.                                |
-| onNegative()          | Set the negative button text and listener.                                       |
-| onPositive()          | Set the positive button text and listener.                                       |
-| onDismiss()           | Set a listener that is invoked when the sheet is dismissed.                      |
-| onCancel()            | Set a listener that is invoked when the sheet is cancelled (only if cancelable). |
-| onClose()             | Set a listener that is invoked when the sheet is closed.                         |
-| show()                | show the sheet.                                                                  |
+| peekHeight()          | Set the peek height. (Only bottom-sheet)|
+| cornerRadius()        | 设置转角半径 |
+| cornerFamily()        | 设置转角的样式 （裁剪或圆角）|
+| borderWidth()         | 设置边框宽度 |
+| borderColor()         | 设置边框颜色 |
+| cancelableOutside()   | 使 `sheet` 可以在对话框视图之外取消 |
+| onNegative()          | 设置否定按钮的文本和监听|
+| onPositive()          | 设置确认按钮的文本和监听|
+| onDismiss()           | 设置一个监听器，当 `sheet` 被撤消时被调用|
+| onCancel()            | 设置一个监听器，当 `sheet` 被取消时被调用（仅当可取消时）|
+| onClose()             | 设置一个监听器，当 `sheet` 关闭时被调用|
+| show()                | show the sheet|
 
 每个工作表都有一个扩展功能，叫做 `build `和 `show`。<br/>
 
@@ -150,12 +150,12 @@ dependencies {
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/info.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
-The `Info` Sheet lets you display information or warning.
+`Info sheet` 可以让你显示信息或警告
 
 <details open>
 <br/>
 <br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
 <img src="art/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
@@ -166,7 +166,7 @@ The `Info` Sheet lets you display information or warning.
 </br>
 
 <details>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <br/>
 <br/>
@@ -183,9 +183,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default info sheet use it as following:
+对于默认的 `info sheet`，使用方法如下：
 
     InfoSheet().show(context) {
       title("Do you want to install Awake?")
@@ -198,9 +198,9 @@ For the default info sheet use it as following:
       }
     }
 
-| Function        | Action              |
+| 方法       | 行为           |
 | --------------- | ------------------- |
-| content()       | Set content text.   |
+| content()       | 设置内容文本   |
 | drawable()      | Set drawable.       |
 | drawableColor() | Set drawable color. |
 
@@ -208,11 +208,11 @@ For the default info sheet use it as following:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/options.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/options)
 
-The `Options` Sheet lets you display a grid or list of options.
+`Options sheet` 可以让你显示一个网格或选项列表.
 
 <details open>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
@@ -220,7 +220,7 @@ The `Options` Sheet lets you display a grid or list of options.
 
 <details>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <img src="art/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
@@ -261,9 +261,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default options sheet use it as following:
+对于默认的 `options sheet`，按以下方式使用：
 
     OptionsSheet().show(context) {
       title("Text message")
@@ -279,33 +279,33 @@ For the default options sheet use it as following:
 
 | Function                     | Action                                                                                 |
 | ---------------------------- | -------------------------------------------------------------------------------------- |
-| multipleChoices()            | Allow multiple choices content.                                                        |
-| displayMultipleChoicesInfo() | Display info of the multiple choices.                                                  |
+| multipleChoices()            | 允许多选内容|
+| displayMultipleChoicesInfo() | 显示多项选择的信息|
 | maxChoicesStrictLimit()      | Specify that the max choices is strict and more choices can't be selected temporarily. |
-| minChoices()                 | Set the minimum amount of choices.                                                     |
-| maxChoices()                 | Set the maximum amount of choices.                                                     |
-| onPositiveMultiple()         | Set listener for multiple choices.                                                     |
-| displayButtons()             | Display buttons and require a positive button click for selection.                     |
-| displayMode()                | Display options in a list or a vertical/ horizontal growing scrollable grid.           |
+| minChoices()                 | 设置选择的最小数量|
+| maxChoices()                 | 设置最大的选择数量|
+| onPositiveMultiple()         | 设置多重选择的监听器|
+| displayButtons()             | 显示按钮，并且需要一个确认按钮点击进行选择
+| displayMode()                | 以 list/vertical/horizontal 的可滚动网格显示选项|
 
-**Option**
+**可选的**
 
-| Function   | Action               |
+| 方法   | 行为 |
 | ---------- | -------------------- |
-| selected() | Preselect an option. |
-| disable()  | Disable an option.   |
+| selected() | 预先选择一个选项|
+| disable()  | 禁用一个选项|
 
-**Note**: Preselected options automatically increase the current selection while disabled options decrease the maximum amount of choices.
+**注意**。预选的选项会自动增加当前的选择，而禁用的选项会减少最大的选择数量。
 
 ## Clock Time
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time-clock.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time-clock)
 
-The `Clock Time` Sheet lets you quickly pick a time.
+`Clock Time` sheet 可以让你快速的选择时间
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
@@ -313,7 +313,7 @@ The `Clock Time` Sheet lets you quickly pick a time.
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <img src="art/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
@@ -349,7 +349,7 @@ The `Time` Sheet lets you pick a duration time in a specific format.
 
 <details open>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
 </details>
@@ -357,7 +357,7 @@ The `Time` Sheet lets you pick a duration time in a specific format.
 
 <details>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <img src="art/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
 </details>
@@ -391,11 +391,11 @@ For the default time sheet use it as following:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/input.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/input)
 
-The `Input` Sheet lets you display a form consisting of various inputs.
+`input sheet` 可以让你显示一个由各种 input 组成的表单:
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
 </details>
@@ -403,7 +403,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <img src="art/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
 </details>
@@ -411,7 +411,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/>
 <details>
 <br/><br/>
-<summary>Showcase some variants as Dialogs</summary>
+<summary>一些关于 `Dialogs` 的其他形式</summary>
 
 <img src="art/InputSheet Dialog Long.png" width="80%" alt="Sheets InputSheet Dialog"><br/>
 
@@ -420,7 +420,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 
 <details>
 <br/><br/>
-<summary>Showcase some variants as BottomSheets</summary>
+<summary>一些关于 `BottomSheet` 的其他形式</summary>
 
 <img src="art/InputSheet BottomSheet Long.png" width="80%" alt="Sheets InputSheet BottomSheet">
 </details>
@@ -432,9 +432,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default input sheet use it as following:
+对于默认的 `input sheet`，按以下方式使用：
 
     InputSheet()).show(context) {
         title("Short survey")
@@ -443,9 +443,9 @@ For the default input sheet use it as following:
         required())
         label("Your favorite TV-Show")
         hint("The Mandalorian, ...")
-        validationListener { value -> } // Add custom validation logic
-        changeListener { value -> } // Input value changed
-        resultListener { value -> } // Input value changed when form finished
+        validationListener { value -> } // 添加自定义验证逻辑
+        changeListener { value -> } // 输入的值被改变时
+        resultListener { value -> } // 当表单完成后输入的值被改变时
       })
       with(InputCheckBox("binge_watching") { // Read value later by index or custom key from bundle
         label("Binge Watching")
@@ -532,7 +532,7 @@ The `Calendar` Sheet lets you pick a date or date range. This type was build usi
 
 <details open>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
 </details>
@@ -540,7 +540,7 @@ The `Calendar` Sheet lets you pick a date or date range. This type was build usi
 
 <details>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <img src="art/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
 </details>
@@ -579,7 +579,7 @@ The `Color` Sheet lets you pick a color. Display the default material colors or 
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
 <img src="art/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
@@ -589,7 +589,7 @@ The `Color` Sheet lets you pick a color. Display the default material colors or 
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <img src="art/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
 <img src="art/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
@@ -628,7 +628,7 @@ With just the 'core' module you are able to create your own sheet based on this 
 
 <details>
 <br/><br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
 </details>
@@ -636,7 +636,7 @@ With just the 'core' module you are able to create your own sheet based on this 
 
 <details open>
 <br/><br/>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <img src="art/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
 </details>
@@ -687,14 +687,14 @@ The `Lottie` modules gives you the ability to use a [Lottie animations](https://
 <details open>
 <br/>
 <br/>
-<summary>Showcase as Dialog</summary>
+<summary>Dialog 的演示</summary>
 
 <img src="art/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
 </details>
 </br>
 
 <details>
-<summary>Showcase as BottomSheet</summary>
+<summary>BottomSheet 的演示</summary>
 
 <br/>
 <br/>
