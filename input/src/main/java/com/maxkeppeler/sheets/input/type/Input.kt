@@ -36,6 +36,12 @@ abstract class Input(private val key: String? = null) {
     internal var labelRes: Int? = null
         private set
 
+    internal var content: String? = null
+        private set
+
+    internal var contentRes: Int? = null
+        private set
+
     internal var drawableRes: Int? = null
         private set
 
@@ -57,6 +63,16 @@ abstract class Input(private val key: String? = null) {
     /** Set the label text. */
     fun label(label: String) {
         this.label = label
+    }
+
+    /** Set the content text. */
+    fun content(@StringRes contentRes: Int) {
+        this.contentRes = contentRes
+    }
+
+    /** Set the content text. */
+    fun content(content: String) {
+        this.content = content
     }
 
     /** Check if the input value is valid. */
