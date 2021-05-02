@@ -325,6 +325,9 @@ internal class InputAdapter(
         setupGeneralInputInfo(input, label, content, icon)
 
         setupGeneralInputInfo(input, label, icon)
+        input.displayDivider?.let { displayDivider ->
+            divider.visibility = if (displayDivider) View.VISIBLE else View.GONE
+        }
     }
 
     private fun setupGeneralInputInfo(
