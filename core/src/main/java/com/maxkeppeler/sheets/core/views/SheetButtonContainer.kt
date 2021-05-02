@@ -116,7 +116,7 @@ class SheetButtonContainer
                     setTextColor(primaryColor)
                 }
                 ButtonStyle.NORMAL -> {
-                    icon.setColorFilter(currentTextColor, PorterDuff.Mode.SRC_ATOP)
+                    icon?.setColorFilter(currentTextColor, PorterDuff.Mode.SRC_ATOP)
                     setBackgroundColor(primaryColor)
                 }
             }
