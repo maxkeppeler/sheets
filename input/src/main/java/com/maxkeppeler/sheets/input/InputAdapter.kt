@@ -152,7 +152,8 @@ internal class InputAdapter(
             }
             holder is SeparatorItem
                     && input is InputSeparator -> {
-                holder.binding.buildDivider(input)
+                val isHeader = i == 0
+                holder.binding.buildSeparator(isHeader, input)
             }
         }
     }
@@ -324,7 +325,13 @@ internal class InputAdapter(
 
         setupGeneralInputInfo(input, label, content, icon)
 
-        setupGeneralInputInfo(input, label, icon)
+        val paddingTop = if (header) 0.toDp() else 16.toDp()
+        root.setPadding(root.paddingLeft, paddingTop, root.paddingRight, root.paddingBottom)
+
+        if (header) {
+            divider.visibility = View.GONE
+        }
+
         input.displayDivider?.let { displayDivider ->
             divider.visibility = if (displayDivider) View.VISIBLE else View.GONE
         }
