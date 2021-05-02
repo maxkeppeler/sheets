@@ -45,11 +45,34 @@
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/checkBox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/checkBox"
         tools:ignore="ContentDescription" />
+
+    <com.maxkeppeler.sheets.core.views.SheetContent
+        android:id="@+id/content"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="4dp"
+        android:lineSpacingMultiplier="1.2"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:barrierMargin="12dp"
+        app:constraint_referenced_ids="label,content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkBox"
@@ -62,7 +85,7 @@
         android:paddingLeft="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon"
-        app:layout_constraintTop_toBottomOf="@+id/label"
+        app:layout_constraintTop_toBottomOf="@+id/barrier"
         app:layout_goneMarginStart="20dp"
         app:layout_goneMarginTop="0dp" />
 
