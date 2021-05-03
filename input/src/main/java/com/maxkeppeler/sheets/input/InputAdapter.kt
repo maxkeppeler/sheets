@@ -369,6 +369,14 @@ internal class InputAdapter(
             } ?: kotlin.run { icon.visibility = View.GONE }
         }
     }
+    
+    fun displayInput(key: String, visible: Boolean) {
+        val view = inputViews[key] ?: return
+        (view.layoutParams as RecyclerView.LayoutParams).apply {
+            height = if (visible) RecyclerView.LayoutParams.WRAP_CONTENT else 0
+            view.requestLayout()
+        }
+    }
 
     override fun getItemCount(): Int = input.size
 
