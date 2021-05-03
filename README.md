@@ -437,7 +437,6 @@ For the default input sheet use it as following:
 
     InputSheet()).show(context) {
         title("Short survey")
-        content("We would like to ask you some questions reading your streaming platform usage.")
       with(InputEditText {
         required())
         label("Your favorite TV-Show")
@@ -465,10 +464,10 @@ For the default input sheet use it as following:
       }
     }
 
-| Function  | Action                                        |
-| --------- | --------------------------------------------- |
-| with()    | Add an input. (see input options)             |
-| content() | Set content text. (e. g. to explain a survey) |
+| Function       | Action                              |
+| -------------- | ----------------------------------- |
+| with()         | Add an input. (see input options)   |
+| displayInput() | Set visibility of a specific input. |
 
 **Input options:**
 
@@ -481,13 +480,15 @@ For the default input sheet use it as following:
 
 **Input**<br/>
 
-| Function         | Action                           |
-| ---------------- | -------------------------------- |
-| label()          | Set the label text.              |
-| drawable()       | Set the drawable.                |
-| required()       | Mark input as required.          |
-| changeListener() | Set listener to observe changes. |
-| resultListener() | Set listener for final value.    |
+| Function         | Action                                        |
+| ---------------- | --------------------------------------------- |
+| label()          | Set the label text.                           |
+| content()        | Set content text. (e. g. to explain a survey) |
+| drawable()       | Set the drawable.                             |
+| required()       | Mark input as required.                       |
+| visible()        | Set initial visibility.                       |
+| changeListener() | Set listener to observe changes.              |
+| resultListener() | Set listener for final value.                 |
 
 **InputEditText**<br/>
 
@@ -617,19 +618,19 @@ For the default storage sheet use it as following:
       onPositive { files -> /* Handle files or folders */ }
     }
 
-| Function                     | Action                                                                                                                                       |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| fileDisplayMode()            | Display a file either horizontal or vertical.                                                                                                |
-| fileColumns()                | Specify the amount of colums in which the files are displayed.                                                                               |
-| selectionMode()              | Select either files or folders.                                                                                                              |
-| selected()                   | Define files that are by default selected.                                                                                                   |
-| homeLocation()               | Define the home location. User can not navigate higher than the home location.                                                               |
-| currentLocation()            | Define the current location when the sheet is opened.                                                                                        |
-| filter()                     | A `FileFilter` to ignore certain files.                                                                                                      |
-| multipleChoices()            | Allow multiple choices for files or folders.                                                                                                 |
-| displayMultipleChoicesInfo() | Display info of the multiple choices.                                                                                                        |
-| minChoices()                 | Set the minimum amount of choices.                                                                                                           |
-| maxChoices()                 | Set the maximum amount of choices.                                                                                                           |
+| Function                     | Action                                                                                                                                        |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| fileDisplayMode()            | Display a file either horizontal or vertical.                                                                                                 |
+| fileColumns()                | Specify the amount of colums in which the files are displayed.                                                                                |
+| selectionMode()              | Select either files or folders.                                                                                                               |
+| selected()                   | Define files that are by default selected.                                                                                                    |
+| homeLocation()               | Define the home location. User can not navigate higher than the home location.                                                                |
+| currentLocation()            | Define the current location when the sheet is opened.                                                                                         |
+| filter()                     | A `FileFilter` to ignore certain files.                                                                                                       |
+| multipleChoices()            | Allow multiple choices for files or folders.                                                                                                  |
+| displayMultipleChoicesInfo() | Display info of the multiple choices.                                                                                                         |
+| minChoices()                 | Set the minimum amount of choices.                                                                                                            |
+| maxChoices()                 | Set the maximum amount of choices.                                                                                                            |
 | onCreateFolder()             | Pass a listener that is invokes when the user is allowed and intends to create a folder. Return a fitting name through the callback variable. |
 
 ## Color
