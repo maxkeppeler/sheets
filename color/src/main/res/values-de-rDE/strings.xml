@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sheets_color_picker_alpha">Alpha</string>
+    <string name="sheets_color_picker_red">Rot</string>
+    <string name="sheets_color_picker_green">Grün</string>
+    <string name="sheets_color_picker_blue">Blau</string>
+    <string name="sheets_argb">ARGB</string>
+    <string name="sheets_clipboard_paste_invalid_color_code">Füge gültigen aRGB-Code ein.</string>
+    <string name="sheets_clipboard_paste_invalid_empty">Nichts zum kopieren.</string>
+</resources>

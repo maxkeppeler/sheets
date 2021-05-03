@@ -4,8 +4,8 @@
     <string name="sheets_ok">Ok</string>
     <string name="sheets_am">vm.</string>
     <string name="sheets_pm">nm.</string>
-    <string name="sheets_at_least_placeholder">Mindesten</string>
-    <string name="sheets_at_most_placeholder">Höchstens %1$s</string>
+    <string name="sheets_at_least_placeholder">Wähle mind. %1$s</string>
+    <string name="sheets_at_most_placeholder">Wähle max. %1$s</string>
     <string name="sheets_hour_code">h</string>
     <string name="sheets_minute_code">m</string>
     <string name="sheets_second_code">s</string>

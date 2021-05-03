@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sheets_select_at_least_files">Wähle mindestens %d Dateien aus.</string>
+    <string name="sheets_current_of_total">%1$d von %2$d</string>
+    <string name="sheets_create_folder">Erstelle Ordner</string>
+    <string name="sheets_folder_empty">Ordner ist leer</string>
+    <string name="sheets_navigation_back">Zurück</string>
+    <string name="sheets_navigation_home">Start</string>
+</resources>

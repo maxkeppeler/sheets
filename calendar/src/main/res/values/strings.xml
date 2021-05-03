@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="sheets_date_range_from">From</string>
-    <string name="sheets_date_range_to">To</string>
-    <string name="sheets_date_range">%s - %s</string>
+    <string name="sheets_date_range_from" translatable="true">From</string>
+    <string name="sheets_date_range_to" translatable="true">To</string>
+    <string name="sheets_date_range" translatable="true">%s - %s</string>
 </resources>

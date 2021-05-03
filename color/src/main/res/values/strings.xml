@@ -20,7 +20,7 @@
     <string name="sheets_color_picker_red" translatable="true">Red</string>
     <string name="sheets_color_picker_green" translatable="true">Green</string>
     <string name="sheets_color_picker_blue" translatable="true">Blue</string>
-    <string name="sheets_argb">ARGB</string>
+    <string name="sheets_argb" translatable="true">ARGB</string>
     <string name="sheets_clipboard_paste_invalid_color_code" translatable="true">Paste valid aRGB-Code.</string>
     <string name="sheets_clipboard_paste_invalid_empty" translatable="true">Nothing to paste</string>
 

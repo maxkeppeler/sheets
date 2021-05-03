@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sheets_current_of_total">%1$d von %2$d</string>
+    <string name="sheets_select_at_most">Wähle max. %d.</string>
+    <string name="sheets_select_at_least">Wähle mind. %d.</string>
+</resources>

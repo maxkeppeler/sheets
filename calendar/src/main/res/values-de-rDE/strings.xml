@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sheets_date_range_from">Von</string>
+    <string name="sheets_date_range_to">bis</string>
+    <string name="sheets_date_range">%s - %s</string>
+</resources>
