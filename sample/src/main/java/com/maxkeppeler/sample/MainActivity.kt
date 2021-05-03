@@ -458,7 +458,6 @@ class MainActivity : AppCompatActivity() {
         InputSheet().show(this) {
             style(getSheetStyle())
             title("Survey about this library.")
-            content("We would like to ask you some questions about this library. We put a lot of effort into it and hope to make it easy to use.")
             with(InputRadioButtons("") {
                 required()
                 drawable(R.drawable.ic_telegram)
@@ -490,7 +489,6 @@ class MainActivity : AppCompatActivity() {
         InputSheet().show(this) {
             style(getSheetStyle())
             title("Short survey")
-            content("We would like to ask you some questions reading your streaming platform usage.")
             with(InputEditText {
                 required()
                 startIconDrawable(R.drawable.ic_mail)
@@ -558,7 +556,6 @@ class MainActivity : AppCompatActivity() {
         InputSheet().show(this) {
             style(getSheetStyle())
             title("Choose a password")
-            content("Make sure the password is safe enough and is not used for any other account.")
             withIconButton(IconButton(R.drawable.ic_help)) {
                 showToast(
                     "IconButton",
@@ -622,7 +619,7 @@ class MainActivity : AppCompatActivity() {
             positiveButtonStyle(ButtonStyle.NORMAL)
             negativeButtonStyle(ButtonStyle.OUTLINED)
             drawable(R.drawable.ic_github)
-            drawableColor(R.color.md_red_500)
+            drawableColor(R.color.sheets_md_red_500)
         }
     }
 
