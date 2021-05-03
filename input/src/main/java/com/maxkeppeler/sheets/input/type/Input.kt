@@ -30,6 +30,9 @@ abstract class Input(private val key: String? = null) {
 
     internal var required: Boolean = false
 
+    internal var visible: Boolean = true
+        private set
+
     internal var label: String? = null
         private set
 
@@ -44,6 +47,11 @@ abstract class Input(private val key: String? = null) {
 
     internal var drawableRes: Int? = null
         private set
+
+    /** Set the initial visibility of the input. */
+    fun visible(visible: Boolean = true) {
+        this.visible = visible
+    }
 
     /** Require a value before the user can click the positive button. */
     fun required(required: Boolean = true) {
