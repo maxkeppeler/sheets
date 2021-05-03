@@ -291,12 +291,12 @@ internal class InputAdapter(
 
         setupGeneralInputInfo(input, label, content, icon)
 
-        val spinnerOptions = input.spinnerOptions
+        val spinnerOptions = mutableListOf<String>().apply { input.spinnerOptions?.let { addAll(it) } }
 
         if (input.value == null) {
             val spinnerNoSelectionText =
                 input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
-            spinnerOptions?.add(spinnerNoSelectionText ?: ctx.getString(R.string.select))
+            spinnerOptions.add(spinnerNoSelectionText ?: ctx.getString(R.string.select))
         }
 
         val adapter: ArrayAdapter<String> = object : ArrayAdapter<String>(
@@ -304,11 +304,11 @@ internal class InputAdapter(
             android.R.layout.simple_spinner_dropdown_item, spinnerOptions ?: mutableListOf()
         ) {
             override fun getCount(): Int =
-                super.getCount().takeIf { it > 0 }?.minus(1) ?: super.getCount()
+                super.getCount().takeIf { spinnerOptions.size != input.spinnerOptions?.size }?.minus(1) ?: super.getCount()
         }
         icon.setColorFilter(primaryColor)
         spinner.adapter = adapter
-        val selectionIndex = input.value ?: spinnerOptions?.lastIndex ?: 0
+        val selectionIndex = input.value ?: spinnerOptions.lastIndex
         spinner.setSelection(selectionIndex)
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(aV: AdapterView<*>?, v: View, i: Int, id: Long) {
