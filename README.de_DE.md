@@ -49,7 +49,7 @@ Elegante Dialoge und BottomSheets zur schnellen Verwendung in deiner App. Wähle
 
 Lese in [English](README.md) oder [简体中文](README.zh_CN.md).
 
-<img src="art/showcase.png" alt="sheets Library">
+<img src="art/showcase.png" alt="sheetss Library">
 
 ## Übersicht
 
@@ -756,135 +756,135 @@ Standardmäßig wird das `colorPrimary` der Aktivität verwendet. Die Standard-`
 Du möchtest verschiedene Hintergrundformen verwenden?
 Dann überschreiben Sie einfach die Eckfamilie und den Radius.
 
-    <item name="sheetCornerRadius">12dp</item>
-    <item name="sheetCornerFamily">cut</item>
+    <item name="sheetsCornerRadius">12dp</item>
+    <item name="sheetsCornerFamily">cut</item>
 
 Überschreiben einfach die Grundfarben, wenn due ein anderes Aussehen erzielen möchten.
 
-    <item name="sheetPrimaryColor">@color/customPrimaryColor</item>
-    <item name="sheetHighlightColor">@color/customHighlightColor</item>
-    <item name="sheetBackgroundColor">@color/customBackgroundColor</item>
-    <item name="sheetDividerColor">@color/customDividerColor</item>
-    <item name="sheetIconsColor">@color/customIconsColor</item>
+    <item name="sheetsPrimaryColor">@color/customPrimaryColor</item>
+    <item name="sheetsHighlightColor">@color/customHighlightColor</item>
+    <item name="sheetsBackgroundColor">@color/customBackgroundColor</item>
+    <item name="sheetsDividerColor">@color/customDividerColor</item>
+    <item name="sheetsIconsColor">@color/customIconsColor</item>
 
 Du kannst den den Ansichtsstil eines Blattes überschreiben.
 Anstatt die Symbolleiste anzuzeigen, kannst du sie einfach ausblenden und den typische Griff anzeigen.
 
-    <item name="sheetDisplayHandle">true</item>
-    <item name="sheetDisplayToolbar">false</item>
-    <item name="sheetDisplayCloseButton">false</item>
+    <item name="sheetsDisplayHandle">true</item>
+    <item name="sheetsDisplayToolbar">false</item>
+    <item name="sheetsDisplayCloseButton">false</item>
 
 Ändere das Erscheinungsbild des Titels.
 
-    <item name="sheetTitleColor">@color/customTitleTextColor</item>
-    <item name="sheetTitleFont">@font/font</item>
-    <item name="sheetTitleLineHeight">@dimen/dimen</item>
-    <item name="sheetTitleLetterSpacing">value</item>
+    <item name="sheetsTitleColor">@color/customTitleTextColor</item>
+    <item name="sheetsTitleFont">@font/font</item>
+    <item name="sheetsTitleLineHeight">@dimen/dimen</item>
+    <item name="sheetsTitleLetterSpacing">value</item>
 
 Ändere das Erscheinungsbild des Inhaltstextes.
 
-    <item name="sheetContentColor">@color/customContentTextColor</item>
-    <item name="sheetContentInverseColor">@color/customContentTextInverseColor</item>
-    <item name="sheetContentFont">@font/font</item>
-    <item name="sheetContentLineHeight">@dimen/dimen</item>
-    <item name="sheetContentLetterSpacing">value</item>
+    <item name="sheetsContentColor">@color/customContentTextColor</item>
+    <item name="sheetsContentInverseColor">@color/customContentTextInverseColor</item>
+    <item name="sheetsContentFont">@font/font</item>
+    <item name="sheetsContentLineHeight">@dimen/dimen</item>
+    <item name="sheetsContentLetterSpacing">value</item>
 
 Ändere das Erscheinungsbild der Wertetexte.
 
-    <item name="sheetValueTextActiveColor">@color/customValueTextColor</item>
-    <item name="sheetValueFont">@font/font</item>
-    <item name="sheetValueLineHeight">@dimen/dimen</item>
-    <item name="sheetValueLetterSpacing">value</item>
+    <item name="sheetsValueTextActiveColor">@color/customValueTextColor</item>
+    <item name="sheetsValueFont">@font/font</item>
+    <item name="sheetsValueLineHeight">@dimen/dimen</item>
+    <item name="sheetsValueLetterSpacing">value</item>
 
 Ändere das Erscheinungsbild der Zifferntasten.
 
-    <item name="sheetDigitColor">@color/customDigitTextColor</item>
-    <item name="sheetDigitFont">@font/font</item>
-    <item name="sheetDigitLineHeight">@dimen/dimen</item>
-    <item name="sheetDigitLetterSpacing">value</item>
+    <item name="sheetsDigitColor">@color/customDigitTextColor</item>
+    <item name="sheetsDigitFont">@font/font</item>
+    <item name="sheetsDigitLineHeight">@dimen/dimen</item>
+    <item name="sheetsDigitLetterSpacing">value</item>
 
 ### Buttons
 
 Überschreibe Erscheinungsbild des Textes eines Buttons.
 
-    <item name="sheetButtonTextFont">@font/font</item>
-    <item name="sheetButtonTextLetterSpacing">value</item>
+    <item name="sheetsButtonTextFont">@font/font</item>
+    <item name="sheetsButtonTextLetterSpacing">value</item>
 
 Überschreibe das gesamte Erscheinungsbild der Buttons (negativer und positiver Button).
 
-    <item name="sheetButtonColor">@color/customButtonColor<item>
-    <item name="sheetButtonTextFont">@font/font<item>
-    <item name="sheetButtonTextLetterSpacing">value<item>
-    <item name="sheetButtonCornerRadius">12dp<item>
-    <item name="sheetButtonCornerFamily">cut<item>
-    <item name="sheetButtonWidth">match_content/wrap_content<item>
+    <item name="sheetsButtonColor">@color/customButtonColor<item>
+    <item name="sheetsButtonTextFont">@font/font<item>
+    <item name="sheetsButtonTextLetterSpacing">value<item>
+    <item name="sheetsButtonCornerRadius">12dp<item>
+    <item name="sheetsButtonCornerFamily">cut<item>
+    <item name="sheetsButtonWidth">match_content/wrap_content<item>
 
 Überschreibe das Erscheinungsbild des negativen Buttons.
 
-    <item name="sheetNegativeButtonType">text_button/outlined_button/button<item>
-    <item name="sheetNegativeButtonCornerRadius">12dp<item>
-    <item name="sheetNegativeButtonCornerFamily">cut<item>
+    <item name="sheetsNegativeButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsNegativeButtonCornerRadius">12dp<item>
+    <item name="sheetsNegativeButtonCornerFamily">cut<item>
 
 Überschreibe das Erscheinungsbild des positiven Buttons.
 
-    <item name="sheetPositiveButtonType">text_button/outlined_button/button<item>
-    <item name="sheetPositiveButtonCornerRadius">12dp<item>
-    <item name="sheetPositiveButtonCornerFamily">cut<item>
+    <item name="sheetsPositiveButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsPositiveButtonCornerRadius">12dp<item>
+    <item name="sheetsPositiveButtonCornerFamily">cut<item>
 
 Überschreibe das Erscheinungsbild des Rahmens beim Button mit einem Rand.
 
-    <item name="sheetButtonOutlinedButtonBorderColor">@color/borderColor<item>
-    <item name="sheetButtonOutlinedButtonBorderWidth">1dp<item>
+    <item name="sheetsButtonOutlinedButtonBorderColor">@color/borderColor<item>
+    <item name="sheetsButtonOutlinedButtonBorderWidth">1dp<item>
 
 Die Familie und der Radius wird für jeden Button übernommen.
 
 **Spezifsche Anpassungen**
 Du kannst sogar die Eckenfamilie und den Radius der negativen und positiven Schaltfläche für jede Ecke definieren.
 
-    <item name="sheetNegativeButtonBottomLeftCornerRadius">4dp<item>
-    <item name="sheetNegativeButtonBottomLeftCornerFamily">cut<item>
+    <item name="sheetsNegativeButtonBottomLeftCornerRadius">4dp<item>
+    <item name="sheetsNegativeButtonBottomLeftCornerFamily">cut<item>
     ...
-    <item name="sheetPositiveButtonBottomRightCornerRadius">8dp<item>
-    <item name="sheetPositiveButtonBottomRightCornerFamily">rounded<item>
+    <item name="sheetsPositiveButtonBottomRightCornerRadius">8dp<item>
+    <item name="sheetsPositiveButtonBottomRightCornerFamily">rounded<item>
 
 ### Griff
 
 Die Größe und das Aussehen des Griffs können folgendermaßen geändert werden:
 
-    <item name="sheetHandleCornerRadius">8dp</item>
-    <item name="sheetHandleCornerFamily">rounded</item>
-    <item name="sheetHandleFillColor">?sheetPrimaryColor</item>
-    <item name="sheetHandleBorderColor">?sheetPrimaryColor</item>
-    <item name="sheetHandleBorderWidth">1dp</item>
-    <item name="sheetHandleWidth">42dp</item>
-    <item name="sheetHandleHeight">4dp</item>
+    <item name="sheetsHandleCornerRadius">8dp</item>
+    <item name="sheetsHandleCornerFamily">rounded</item>
+    <item name="sheetsHandleFillColor">?sheetPrimaryColor</item>
+    <item name="sheetsHandleBorderColor">?sheetPrimaryColor</item>
+    <item name="sheetsHandleBorderWidth">1dp</item>
+    <item name="sheetsHandleWidth">42dp</item>
+    <item name="sheetsHandleHeight">4dp</item>
 
 ### OptionsSheet
 
 Überschreibe das Erscheinungsbild von ausgewählten Optionen.
 
-    <item name="sheetOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
-    <item name="sheetOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
+    <item name="sheetsOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
+    <item name="sheetsOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
 
 Überschreibe das Erscheinungsbild von deaktivierten Optionen.
 
-    <item name="sheetOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>s
-    <item name="sheetOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
-    <item name="sheetOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
+    <item name="sheetsOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>s
+    <item name="sheetsOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
+    <item name="sheetsOptionDisabledBackgroundColor">@color/customDisabledOptionBackgColor</item>
 
 ### InputSheet
 
 Überschreibe das Erscheinungsbild des TextInputLayout (wird für den InputEditText verwendet).
 
-    <item name="sheetTextInputLayoutCornerRadius">12dp</item>
-    <item name="sheetTextInputLayoutBottomLeftCornerRadius">12dp</item>
+    <item name="sheetsTextInputLayoutCornerRadius">12dp</item>
+    <item name="sheetsTextInputLayoutBottomLeftCornerRadius">12dp</item>
     ... and for all other corners
-    <item name="sheetTextInputLayoutEndIconColor">@color/customEndIconColor</item>
-    <item name="sheetTextInputLayoutHelperTextColor">@color/customHelperTextColor</item>
-    <item name="sheetTextInputLayoutBoxStrokeColor">@color/customBoxStrokeColor</item>
-    <item name="sheetTextInputLayoutHintTextColor">@color/customHintTextColor</item>
-    <item name="sheetTextInputLayoutBoxStrokeErrorColor">@color/customBoxStrokeErrorColor</item>
-    <item name="sheetTextInputLayoutErrorTextColor">@color/customErrorTextColor</item>
+    <item name="sheetsTextInputLayoutEndIconColor">@color/customEndIconColor</item>
+    <item name="sheetsTextInputLayoutHelperTextColor">@color/customHelperTextColor</item>
+    <item name="sheetsTextInputLayoutBoxStrokeColor">@color/customBoxStrokeColor</item>
+    <item name="sheetsTextInputLayoutHintTextColor">@color/customHintTextColor</item>
+    <item name="sheetsTextInputLayoutBoxStrokeErrorColor">@color/customBoxStrokeErrorColor</item>
+    <item name="sheetsTextInputLayoutErrorTextColor">@color/customErrorTextColor</item>
 
 # Sonstiges
 
