@@ -35,7 +35,6 @@ import androidx.annotation.IntRange
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import com.maxkeppeler.sheets.core.Image
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.sheets.core.utils.getPrimaryColor
@@ -350,7 +349,7 @@ class StorageSheet : Sheet() {
         val isMinLabelShown = minChoices?.let { min ->
             val lessThanSelected = selected < min
             if (lessThanSelected) {
-                binding.status.minimumLabel.text = getString(R.string.select_at_least_files, min)
+                binding.status.minimumLabel.text = getString(R.string.sheets_select_at_least_files, min)
                 binding.status.minimumLabel.visibility = View.VISIBLE
             } else {
                 binding.status.minimumLabel.visibility = View.GONE
@@ -364,9 +363,9 @@ class StorageSheet : Sheet() {
 
         val actualMaximum = maxChoices ?: Int.MAX_VALUE
         binding.status.selectionLabel.setTextColor(colorActive)
-        val textSizeSmall = resources.getDimensionPixelSize(R.dimen.textSizeBody)
+        val textSizeSmall = resources.getDimensionPixelSize(R.dimen.sheetsTextSizeBody)
         val textSpan =
-            SpannableString(getString(R.string.current_of_total, selected, actualMaximum)).apply {
+            SpannableString(getString(R.string.sheets_current_of_total, selected, actualMaximum)).apply {
                 setSpan(
                     AbsoluteSizeSpan(textSizeSmall), selected.toString().length, this.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE

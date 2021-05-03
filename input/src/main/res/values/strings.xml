@@ -15,5 +15,5 @@
   -->
 
 <resources>
-    <string name="select" translatable="true">Select</string>
+    <string name="sheets_select" translatable="true">Select</string>
 </resources>

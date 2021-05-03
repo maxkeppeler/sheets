@@ -16,8 +16,8 @@
 
 <resources>
 
-    <dimen name="textSizeTitle">20sp</dimen>
-    <dimen name="textSizeSubheading">16sp</dimen>
-    <dimen name="textSizeBody">14sp</dimen>
+    <dimen name="sheetsTextSizeTitle">20sp</dimen>
+    <dimen name="sheetsTextSizeSubheading">16sp</dimen>
+    <dimen name="sheetsTextSizeBody">14sp</dimen>
 
 </resources>

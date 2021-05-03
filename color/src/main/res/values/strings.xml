@@ -16,12 +16,12 @@
 
 <resources>
 
-    <string name="color_picker_alpha" translatable="true">Alpha</string>
-    <string name="color_picker_red" translatable="true">Red</string>
-    <string name="color_picker_green" translatable="true">Green</string>
-    <string name="color_picker_blue" translatable="true">Blue</string>
-    <string name="argb">ARGB</string>
-    <string name="clipboard_paste_invalid_color_code" translatable="true">Paste valid aRGB-Code.</string>
-    <string name="clipboard_paste_invalid_empty" translatable="true">Nothing to paste</string>
+    <string name="sheets_color_picker_alpha" translatable="true">Alpha</string>
+    <string name="sheets_color_picker_red" translatable="true">Red</string>
+    <string name="sheets_color_picker_green" translatable="true">Green</string>
+    <string name="sheets_color_picker_blue" translatable="true">Blue</string>
+    <string name="sheets_argb">ARGB</string>
+    <string name="sheets_clipboard_paste_invalid_color_code" translatable="true">Paste valid aRGB-Code.</string>
+    <string name="sheets_clipboard_paste_invalid_empty" translatable="true">Nothing to paste</string>
 
 </resources>

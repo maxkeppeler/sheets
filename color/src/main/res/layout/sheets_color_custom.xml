@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/argb"
+        android:text="@string/sheets_argb"
         android:textAllCaps="true"
         app:layout_constraintBottom_toTopOf="@+id/hexValue"
         app:layout_constraintEnd_toStartOf="@+id/btnCopy"

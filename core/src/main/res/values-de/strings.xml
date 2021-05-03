@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cancel">Abbrechen</string>
-    <string name="ok">Ok</string>
-    <string name="am">vm.</string>
-    <string name="pm">nm.</string>
-    <string name="at_least_placeholder">Mindesten</string>
-    <string name="at_most_placeholder">Höchstens %1$s</string>
-    <string name="hour_code">h</string>
-    <string name="minute_code">m</string>
-    <string name="second_code">s</string>
-    <string name="day_code">T</string>
+    <string name="sheets_cancel">Abbrechen</string>
+    <string name="sheets_ok">Ok</string>
+    <string name="sheets_am">vm.</string>
+    <string name="sheets_pm">nm.</string>
+    <string name="sheets_at_least_placeholder">Mindesten</string>
+    <string name="sheets_at_most_placeholder">Höchstens %1$s</string>
+    <string name="sheets_hour_code">h</string>
+    <string name="sheets_minute_code">m</string>
+    <string name="sheets_second_code">s</string>
+    <string name="sheets_day_code">T</string>
 </resources>

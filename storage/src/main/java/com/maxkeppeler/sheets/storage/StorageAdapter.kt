@@ -136,14 +136,14 @@ internal class StorageAdapter(
     }
 
     private fun SheetsStorageEmptyBinding.buildEmpty() {
-        label.text = ctx.getString(R.string.folder_empty)
+        label.text = ctx.getString(R.string.sheets_folder_empty)
         icon.setImageResource(R.drawable.sheets_ic_folder_empty)
     }
 
     private fun SheetsStorgeNavigationItemBinding.buildNavigation() {
 
         val isRoot = currentFile == homeLocation
-        val textRes = if (isRoot) R.string.navigation_home else R.string.navigation_back
+        val textRes = if (isRoot) R.string.sheets_navigation_home else R.string.sheets_navigation_back
         val iconRes = if (isRoot) R.drawable.sheets_ic_nav_home else R.drawable.sheets_ic_nav_back
         label.text = ctx.getString(textRes)
         path.text = currentFile.absolutePath

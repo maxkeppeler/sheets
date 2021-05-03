@@ -296,7 +296,7 @@ internal class InputAdapter(
         if (input.value == null) {
             val spinnerNoSelectionText =
                 input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
-            spinnerOptions.add(spinnerNoSelectionText ?: ctx.getString(R.string.select))
+            spinnerOptions.add(spinnerNoSelectionText ?: ctx.getString(R.string.sheets_select))
         }
 
         val adapter: ArrayAdapter<String> = object : ArrayAdapter<String>(

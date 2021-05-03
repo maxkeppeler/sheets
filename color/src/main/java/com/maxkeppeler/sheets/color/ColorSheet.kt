@@ -298,10 +298,10 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
             }
 
             argbLabelTexts.apply {
-                add(getString(R.string.color_picker_alpha))
-                add(getString(R.string.color_picker_red))
-                add(getString(R.string.color_picker_green))
-                add(getString(R.string.color_picker_blue))
+                add(getString(R.string.sheets_color_picker_alpha))
+                add(getString(R.string.sheets_color_picker_red))
+                add(getString(R.string.sheets_color_picker_green))
+                add(getString(R.string.sheets_color_picker_blue))
             }
 
             argbSeekBars.forEach { seekBar ->
@@ -348,7 +348,7 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
             } catch (e: Exception) {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.clipboard_paste_invalid_color_code),
+                    getString(R.string.sheets_clipboard_paste_invalid_color_code),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -356,7 +356,7 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
             // Nothing to paste from clipboard.
             Toast.makeText(
                 requireContext(),
-                getString(R.string.clipboard_paste_invalid_empty),
+                getString(R.string.sheets_clipboard_paste_invalid_empty),
                 Toast.LENGTH_LONG
             ).show()
         }

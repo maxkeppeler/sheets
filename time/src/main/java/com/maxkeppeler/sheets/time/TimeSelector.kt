@@ -87,7 +87,7 @@ internal class TimeSelector(
                     binding.hintLabel.visibility = View.VISIBLE
                     binding.hintLabel.text =
                         ctx.getString(
-                            R.string.at_least_placeholder,
+                            R.string.sheets_at_least_placeholder,
                             getFormattedHintTime(minTime * 1000)
                         )
                     validationListener?.invoke(false)
@@ -95,7 +95,7 @@ internal class TimeSelector(
                 timeInSeconds > maxTime -> {
                     binding.hintLabel.visibility = View.VISIBLE
                     binding.hintLabel.text = ctx.getString(
-                        R.string.at_most_placeholder,
+                        R.string.sheets_at_most_placeholder,
                         getFormattedHintTime(maxTime * 1000)
                     )
                     validationListener?.invoke(false)
@@ -158,7 +158,7 @@ internal class TimeSelector(
 
     private fun getFormattedTime(): SpannableStringBuilder {
 
-        val smallTextSize = ctx.resources.getDimensionPixelSize(R.dimen.textSizeSubheading)
+        val smallTextSize = ctx.resources.getDimensionPixelSize(R.dimen.sheetsTextSizeSubheading)
 
         val formattedTime = SpannableStringBuilder(SpannableString(time))
         repeat(format.length.minus(time.length)) { formattedTime.insert(0, "0") }
@@ -170,11 +170,11 @@ internal class TimeSelector(
             val space = if (formatArray.lastIndex != i) " " else ""
             val span = when {
                 formatTimeUnit.contains("H", ignoreCase = true) ->
-                    SpannableString(ctx.getString(R.string.hour_code).plus(space))
+                    SpannableString(ctx.getString(R.string.sheets_hour_code).plus(space))
                 formatTimeUnit.contains("M", ignoreCase = true) ->
-                    SpannableString(ctx.getString(R.string.minute_code).plus(space))
+                    SpannableString(ctx.getString(R.string.sheets_minute_code).plus(space))
                 formatTimeUnit.contains("S", ignoreCase = true) ->
-                    SpannableString(ctx.getString(R.string.second_code).plus(space))
+                    SpannableString(ctx.getString(R.string.sheets_second_code).plus(space))
                 else -> SpannableString("")
             }
             span.setSpan(
@@ -223,13 +223,13 @@ internal class TimeSelector(
             val seconds = TimeUnit.MILLISECONDS.toSeconds(millis).toInt()
 
             val small16dp =
-                ctx.resources.getDimensionPixelSize(R.dimen.textSizeSubheading)
-            val big20dp = ctx.resources.getDimensionPixelSize(R.dimen.textSizeTitle)
+                ctx.resources.getDimensionPixelSize(R.dimen.sheetsTextSizeSubheading)
+            val big20dp = ctx.resources.getDimensionPixelSize(R.dimen.sheetsTextSizeTitle)
 
             if (days > 0) {
                 formattedTime.append(days.toString(), AbsoluteSizeSpan(big20dp))
                 formattedTime.append(
-                    ctx.getString(R.string.day_code),
+                    ctx.getString(R.string.sheets_day_code),
                     AbsoluteSizeSpan(small16dp)
                 )
                 formattedTime.append("  ")
@@ -237,7 +237,7 @@ internal class TimeSelector(
 
             if (hours > 0) {
                 formattedTime.append(hours.toString(), AbsoluteSizeSpan(big20dp))
-                formattedTime.append(ctx.getString(R.string.hour_code), AbsoluteSizeSpan(small16dp))
+                formattedTime.append(ctx.getString(R.string.sheets_hour_code), AbsoluteSizeSpan(small16dp))
                 formattedTime.append(" ")
             }
 
@@ -245,7 +245,7 @@ internal class TimeSelector(
                 if (seconds > 0) minutes = minutes.plus(1)
                 formattedTime.append(minutes.toString(), AbsoluteSizeSpan(big20dp))
                 formattedTime.append(
-                    ctx.getString(R.string.minute_code),
+                    ctx.getString(R.string.sheets_minute_code),
                     AbsoluteSizeSpan(small16dp)
                 )
                 formattedTime.append(" ")

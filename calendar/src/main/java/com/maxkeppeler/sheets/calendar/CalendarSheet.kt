@@ -704,10 +704,10 @@ class CalendarSheet : Sheet() {
             val sameMonth = dateStart?.monthValue == dateEnd?.monthValue
             val rangeStartText = dateStart?.let {
                 if (sameMonth) dateRangeStartNoMonth.format(it) else dateRangeStart.format(it)
-            } ?: getString(R.string.date_range_from)
+            } ?: getString(R.string.sheets_date_range_from)
             val rangeEndText =
-                dateEnd?.let { dateRangeStart.format(it) } ?: getString(R.string.date_range_to)
-            dateSelected.text = getString(R.string.date_range, rangeStartText, rangeEndText)
+                dateEnd?.let { dateRangeStart.format(it) } ?: getString(R.string.sheets_date_range_to)
+            dateSelected.text = getString(R.string.sheets_date_range, rangeStartText, rangeEndText)
         }
     }
 

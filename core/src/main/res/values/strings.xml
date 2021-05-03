@@ -16,18 +16,18 @@
 
 <resources>
 
-    <string name="ok" translatable="true">OK</string>
-    <string name="cancel" translatable="true">Cancel</string>
+    <string name="sheets_ok" translatable="true">OK</string>
+    <string name="sheets_cancel" translatable="true">Cancel</string>
 
-    <string name="at_least_placeholder" translatable="true">At least %1$s</string>
-    <string name="at_most_placeholder" translatable="true">At most %1$s</string>
+    <string name="sheets_at_least_placeholder" translatable="true">At least %1$s</string>
+    <string name="sheets_at_most_placeholder" translatable="true">At most %1$s</string>
 
-    <string name="hour_code" translatable="true">h</string>
-    <string name="minute_code" translatable="true">m</string>
-    <string name="second_code" translatable="true">s</string>
-    <string name="day_code" translatable="true">D</string>
+    <string name="sheets_hour_code" translatable="true">h</string>
+    <string name="sheets_minute_code" translatable="true">m</string>
+    <string name="sheets_second_code" translatable="true">s</string>
+    <string name="sheets_day_code" translatable="true">D</string>
 
-    <string name="am" translatable="true">am</string>
-    <string name="pm" translatable="true">pm</string>
+    <string name="sheets_am" translatable="true">am</string>
+    <string name="sheets_pm" translatable="true">pm</string>
 
 </resources>

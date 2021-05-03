@@ -624,13 +624,13 @@ abstract class Sheet : SheetFragment() {
 
         base.buttons.btnNegativeContainer.setupNegativeButton(
             buttonStyle = negativeButtonStyle,
-            btnText = negativeText ?: getString(R.string.cancel),
+            btnText = negativeText ?: getString(R.string.sheets_cancel),
             btnDrawable = negativeButtonDrawableRes
         ) { negativeListener?.invoke(); dismiss() }
 
         base.buttons.btnPositiveContainer.setupPositiveButton(
             buttonStyle = positiveButtonStyle,
-            btnText = positiveText ?: getString(R.string.ok),
+            btnText = positiveText ?: getString(R.string.sheets_ok),
             btnDrawable = positiveButtonDrawableRes
         ) { positiveListener?.invoke(); dismiss() }
     }

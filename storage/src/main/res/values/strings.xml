@@ -16,10 +16,10 @@
   -->
 
 <resources>
-    <string name="select_at_least_files" translatable="true">Select at least %d files.</string>
-    <string name="current_of_total" translatable="true">%1$d of %2$d</string>
-    <string name="create_folder" translatable="true">Create folder</string>
-    <string name="folder_empty" translatable="true">Folder is empty</string>
-    <string name="navigation_back" translatable="true">Back</string>
-    <string name="navigation_home" translatable="true">Home</string>
+    <string name="sheets_select_at_least_files" translatable="true">Select at least %d files.</string>
+    <string name="sheets_current_of_total" translatable="true">%1$d of %2$d</string>
+    <string name="sheets_create_folder" translatable="true">Create folder</string>
+    <string name="sheets_folder_empty" translatable="true">Folder is empty</string>
+    <string name="sheets_navigation_back" translatable="true">Back</string>
+    <string name="sheets_navigation_home" translatable="true">Home</string>
 </resources>

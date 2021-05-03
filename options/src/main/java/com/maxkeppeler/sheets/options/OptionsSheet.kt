@@ -484,7 +484,7 @@ class OptionsSheet : Sheet() {
         val isMinLabelShown = minChoices?.let { min ->
             val lessThanSelected = selected < min
             if (lessThanSelected) {
-                binding.status.minimumLabel.text = getString(R.string.select_at_least, min)
+                binding.status.minimumLabel.text = getString(R.string.sheets_select_at_least, min)
                 binding.status.minimumLabel.visibility = View.VISIBLE
             } else {
                 binding.status.minimumLabel.visibility = View.GONE
@@ -494,7 +494,7 @@ class OptionsSheet : Sheet() {
 
         maxChoices?.let { max ->
             if (!maxChoicesStrict && selected > max) {
-                binding.status.minimumLabel.text = getString(R.string.select_at_most, max)
+                binding.status.minimumLabel.text = getString(R.string.sheets_select_at_most, max)
                 binding.status.minimumLabel.visibility = View.VISIBLE
             } else if (!isMinLabelShown) {
                 binding.status.minimumLabel.visibility = View.GONE
@@ -503,9 +503,9 @@ class OptionsSheet : Sheet() {
 
         val actualMaximum = maxChoices ?: options.filterNot { it.disabled && !it.selected }.size
         binding.status.selectionLabel.setTextColor(colorActive)
-        val textSizeSmall = resources.getDimensionPixelSize(R.dimen.textSizeBody)
+        val textSizeSmall = resources.getDimensionPixelSize(R.dimen.sheetsTextSizeBody)
         val textSpan =
-            SpannableString(getString(R.string.current_of_total, selected, actualMaximum)).apply {
+            SpannableString(getString(R.string.sheets_current_of_total, selected, actualMaximum)).apply {
                 setSpan(
                     AbsoluteSizeSpan(textSizeSmall), selected.toString().length, this.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
