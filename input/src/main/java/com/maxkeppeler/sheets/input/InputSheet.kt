@@ -42,6 +42,7 @@ class InputSheet : Sheet() {
 
     private lateinit var binding: SheetsInputBinding
 
+    private lateinit var inputAdapter: InputAdapter
     private var listener: InputListener? = null
     private var input = mutableListOf<Input>()
 
@@ -139,9 +140,11 @@ class InputSheet : Sheet() {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
         validate(true)
+        inputAdapter = InputAdapter(requireContext(), input, ::validate)
         with(binding.inputRecyclerView) {
             layoutManager = CustomLinearLayoutManager(requireContext(), true)
-            adapter = InputAdapter(requireContext(), input, ::validate)
+            adapter = inputAdapter
+            setHasFixedSize(false)
         }
     }
 
@@ -162,6 +165,17 @@ class InputSheet : Sheet() {
             input.putValue(bundle, i)
         }
         return bundle
+    }
+
+    /** Display input. */
+    fun displayInput(key: String, visible: Boolean) {
+        if (this::inputAdapter.isInitialized) inputAdapter.displayInput(key, visible)
+        else {
+            input.forEachIndexed { i, comp ->
+                if (comp.getKeyOrIndex(i) == key)
+                    input[i].visible(visible)
+            }
+        }
     }
 
     /** Build [InputSheet] and show it later. */
