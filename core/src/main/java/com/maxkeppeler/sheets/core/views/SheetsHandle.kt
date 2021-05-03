@@ -32,7 +32,7 @@ import com.maxkeppeler.sheets.R
 import com.maxkeppeler.sheets.core.utils.*
 
 /** Container with a handle drawable. */
-internal class SheetHandle
+internal class SheetsHandle
 @JvmOverloads constructor(
     val ctx: Context,
     attrs: AttributeSet? = null

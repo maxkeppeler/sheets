@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:minHeight="56dp">
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/month"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="wrap_content"

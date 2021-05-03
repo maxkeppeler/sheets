@@ -24,7 +24,7 @@
     android:paddingTop="4dp"
     android:paddingBottom="4dp">
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/label"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="@+id/textInputLayout"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/content"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.maxkeppeler.sheets.core.views.SheetTextInputLayout
+    <com.maxkeppeler.sheets.core.views.SheetsTextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/barrier"
         app:layout_goneMarginTop="0dp">
 
-        <com.maxkeppeler.sheets.core.views.SheetInputEditText
+        <com.maxkeppeler.sheets.core.views.SheetsInputEditText
             android:id="@+id/textInput"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
@@ -104,6 +104,6 @@
             android:scrollbars="vertical"
             android:singleLine="true" />
 
-    </com.maxkeppeler.sheets.core.views.SheetTextInputLayout>
+    </com.maxkeppeler.sheets.core.views.SheetsTextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

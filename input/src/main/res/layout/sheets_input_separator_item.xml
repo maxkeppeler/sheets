@@ -24,7 +24,7 @@
     android:paddingTop="16dp"
     android:paddingBottom="12dp">
 
-    <com.maxkeppeler.sheets.core.views.SheetDivider
+    <com.maxkeppeler.sheets.core.views.SheetsDivider
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/label"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/content"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"

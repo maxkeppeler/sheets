@@ -57,7 +57,7 @@ class SheetNumericalInput
     private val primaryColor = getPrimaryColor(ctx)
     private val highlightColor = getHighlightColor(ctx)
 
-    private val digits = mutableListOf<SheetDigit>()
+    private val digits = mutableListOf<SheetsDigit>()
     private lateinit var leftImage: ImageView
     private lateinit var rightImage: ImageView
     private var digitListener: DigitClickListener? = null
@@ -124,9 +124,9 @@ class SheetNumericalInput
         return Pair(view, imageView)
     }
 
-    private fun getDigitView(digitValue: Int): SheetDigit {
+    private fun getDigitView(digitValue: Int): SheetsDigit {
 
-        val view = SheetDigit(ctx).apply {
+        val view = SheetsDigit(ctx).apply {
             minimumHeight = 42.toDp()
             layoutParams = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
             background = ContextCompat.getDrawable(ctx, R.drawable.sheets_ripple_bg_rounded)

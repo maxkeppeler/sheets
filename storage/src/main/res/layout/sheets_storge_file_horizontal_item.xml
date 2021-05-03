@@ -26,7 +26,7 @@
     android:focusable="true"
     android:minHeight="32dp">
 
-    <com.maxkeppeler.sheets.core.views.SheetIcon
+    <com.maxkeppeler.sheets.core.views.SheetsIcon
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@+id/label"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/label"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"

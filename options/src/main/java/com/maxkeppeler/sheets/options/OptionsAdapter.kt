@@ -30,7 +30,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.core.utils.*
-import com.maxkeppeler.sheets.core.views.SheetContent
+import com.maxkeppeler.sheets.core.views.SheetsContent
 import com.maxkeppeler.sheets.options.databinding.SheetsOptionsGridItemBinding
 import com.maxkeppeler.sheets.options.databinding.SheetsOptionsListItemBinding
 
@@ -49,7 +49,7 @@ internal class OptionsAdapter(
         private const val SELECTOR_STATE_SELECTED_INDEX = 1
     }
 
-    private val selectedOptions = mutableMapOf<Int, Triple<ImageView, SheetContent, SheetContent>>()
+    private val selectedOptions = mutableMapOf<Int, Triple<ImageView, SheetsContent, SheetsContent>>()
 
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
@@ -189,7 +189,7 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun showDisabled(title: SheetContent, subtitle: SheetContent, icon: ImageView, root: View) {
+    private fun showDisabled(title: SheetsContent, subtitle: SheetsContent, icon: ImageView, root: View) {
         title.setTextColor(disabledTextColor)
         subtitle.setTextColor(disabledTextColor)
         icon.setColorFilter(disabledIconsColor)
@@ -202,8 +202,8 @@ internal class OptionsAdapter(
     }
 
     private fun showSelected(
-        title: SheetContent,
-        subtitle: SheetContent,
+        title: SheetsContent,
+        subtitle: SheetsContent,
         icon: ImageView,
         root: View,
     ) {
@@ -223,8 +223,8 @@ internal class OptionsAdapter(
 
     private fun showDeselected(
         index: Int,
-        title: SheetContent,
-        subtitle: SheetContent,
+        title: SheetsContent,
+        subtitle: SheetsContent,
         icon: ImageView,
         root: View,
     ) {
@@ -273,8 +273,8 @@ internal class OptionsAdapter(
 
     private fun selectOption(
         index: Int,
-        title: SheetContent,
-        subtitle: SheetContent,
+        title: SheetsContent,
+        subtitle: SheetsContent,
         icon: ImageView,
         root: View,
     ) {

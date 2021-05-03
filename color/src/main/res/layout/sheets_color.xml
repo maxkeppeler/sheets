@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.sheets.core.views.SheetRecyclerView
+    <com.maxkeppeler.sheets.core.views.SheetsRecyclerView
         android:id="@+id/colorTemplatesView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

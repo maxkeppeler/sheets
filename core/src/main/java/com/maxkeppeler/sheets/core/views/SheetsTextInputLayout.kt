@@ -28,7 +28,7 @@ import com.maxkeppeler.sheets.core.utils.toDp
 
 
 /** Custom TextInputLayout. */
-class SheetTextInputLayout
+class SheetsTextInputLayout
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,

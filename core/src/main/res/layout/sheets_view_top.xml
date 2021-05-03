@@ -23,7 +23,7 @@
     android:minHeight="56dp"
     android:visibility="visible">
 
-    <com.maxkeppeler.sheets.core.views.SheetDivider
+    <com.maxkeppeler.sheets.core.views.SheetsDivider
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -51,7 +51,7 @@
 
     </LinearLayout>
 
-    <com.maxkeppeler.sheets.core.views.SheetTitle
+    <com.maxkeppeler.sheets.core.views.SheetsTitle
         android:id="@+id/title"
         style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="0dp"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginStart="16dp" />
 
-    <com.maxkeppeler.sheets.core.views.SheetIcon
+    <com.maxkeppeler.sheets.core.views.SheetsIcon
         android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetIcon
+    <com.maxkeppeler.sheets.core.views.SheetsIcon
         android:id="@+id/btnExtra3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toTopOf="@+id/btnExtra2"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetIcon
+    <com.maxkeppeler.sheets.core.views.SheetsIcon
         android:id="@+id/btnExtra2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
         app:layout_constraintTop_toTopOf="@+id/btnExtra1"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetIcon
+    <com.maxkeppeler.sheets.core.views.SheetsIcon
         android:id="@+id/btnExtra1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
         app:layout_constraintTop_toTopOf="@+id/btnType"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetIcon
+    <com.maxkeppeler.sheets.core.views.SheetsIcon
         android:id="@+id/btnType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

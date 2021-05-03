@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.maxkeppeler.sheets.core.views.SheetValue
+    <com.maxkeppeler.sheets.core.views.SheetsValue
         android:id="@+id/hoursInput"
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toStartOf="@+id/separatorInput"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/separatorInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="@+id/hoursInput"
         tools:ignore="HardcodedText" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/minutesInput"
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
         app:layout_constraintStart_toEndOf="@+id/separatorInput"
         app:layout_constraintTop_toTopOf="@id/hoursInput" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/pmLabel"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="@+id/separatorInput"
         tools:ignore="HardcodedText" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/amLabel"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toTopOf="@+id/separatorInput"
         tools:ignore="HardcodedText" />
 
-    <com.maxkeppeler.sheets.core.views.SheetDivider
+    <com.maxkeppeler.sheets.core.views.SheetsDivider
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"

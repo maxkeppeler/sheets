@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="@+id/title"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/title"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="0dp"
@@ -52,7 +52,7 @@
         app:layout_goneMarginBottom="8dp"
         app:layout_goneMarginStart="48dp" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/subtitle"
         style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="0dp"

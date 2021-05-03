@@ -28,7 +28,7 @@ import com.maxkeppeler.sheets.R
 import com.maxkeppeler.sheets.core.utils.getPrimaryColor
 
 /** Custom switch button used for the InputSheet. */
-class SheetSwitch
+class SheetsSwitch
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,

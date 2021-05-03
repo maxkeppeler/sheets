@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/content"
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"

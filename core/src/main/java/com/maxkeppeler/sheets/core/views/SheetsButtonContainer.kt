@@ -95,7 +95,7 @@ class SheetButtonContainer
             R.attr.sheetsButtonOutlinedButtonBorderColor
         )
 
-        addView(SheetButton(ctx, null, buttonStyle.styleRes).apply {
+        addView(SheetsButton(ctx, null, buttonStyle.styleRes).apply {
 
             layoutParams =
                 ViewGroup.LayoutParams(btnWidthLayoutParam, ViewGroup.LayoutParams.WRAP_CONTENT)

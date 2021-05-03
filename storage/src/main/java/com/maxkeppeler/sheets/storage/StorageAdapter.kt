@@ -28,7 +28,7 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.core.utils.*
-import com.maxkeppeler.sheets.core.views.SheetContent
+import com.maxkeppeler.sheets.core.views.SheetsContent
 import com.maxkeppeler.sheets.storage.databinding.*
 import kotlinx.coroutines.*
 import java.io.File
@@ -62,7 +62,7 @@ internal class StorageAdapter(
     private var currentFile = currentLocation ?: homeLocation
     private var files: MutableList<File> = mutableListOf()
     private var searchFilesJob: Job? = null
-    private val selectedFiles = mutableMapOf<File, Pair<ImageView, SheetContent>>()
+    private val selectedFiles = mutableMapOf<File, Pair<ImageView, SheetsContent>>()
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
     private val highlightColor = getHighlightColor(ctx)
@@ -180,7 +180,7 @@ internal class StorageAdapter(
         root: View,
         container: View,
         icon: ImageView,
-        label: SheetContent,
+        label: SheetsContent,
     ) {
 
         (root.layoutParams as RecyclerView.LayoutParams).apply {
@@ -211,13 +211,13 @@ internal class StorageAdapter(
         }
     }
 
-    private fun showSelected(label: SheetContent, icon: ImageView, root: View) {
+    private fun showSelected(label: SheetsContent, icon: ImageView, root: View) {
         label.setTextColor(selectedTextColor)
         icon.setColorFilter(selectedIconsColor)
         if (multipleChoice) root.isSelected = true
     }
 
-    private fun showDeselected(label: SheetContent, icon: ImageView, root: View) {
+    private fun showDeselected(label: SheetsContent, icon: ImageView, root: View) {
         label.setTextColor(textColor)
         icon.setColorFilter(iconsColor)
         if (multipleChoice) root.isSelected = false
@@ -241,7 +241,7 @@ internal class StorageAdapter(
         }
     }
 
-    private fun selectOption(file: File, label: SheetContent, icon: ImageView, root: View) {
+    private fun selectOption(file: File, label: SheetsContent, icon: ImageView, root: View) {
         if (multipleChoice) {
             if (!listener.isMultipleChoiceSelectionAllowed(file)) return
             if (selectedFiles.keys.contains(file)) {

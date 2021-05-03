@@ -30,7 +30,7 @@ import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.core.utils.*
-import com.maxkeppeler.sheets.core.views.SheetContent
+import com.maxkeppeler.sheets.core.views.SheetsContent
 import com.maxkeppeler.sheets.input.databinding.*
 import com.maxkeppeler.sheets.input.type.*
 
@@ -343,8 +343,8 @@ internal class InputAdapter(
 
     private fun setupGeneralInputInfo(
         input: Input,
-        label: SheetContent,
-        content: SheetContent,
+        label: SheetsContent,
+        content: SheetsContent,
         icon: ImageView? = null,
     ) {
 

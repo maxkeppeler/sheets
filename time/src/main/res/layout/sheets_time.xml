@@ -19,7 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.maxkeppeler.sheets.core.views.SheetValue
+    <com.maxkeppeler.sheets.core.views.SheetsValue
         android:id="@+id/timeValue"
         style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.maxkeppeler.sheets.core.views.SheetContent
+    <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/hintLabel"
         style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="@+id/timeValue"
         app:layout_constraintTop_toBottomOf="@+id/timeValue" />
 
-    <com.maxkeppeler.sheets.core.views.SheetDivider
+    <com.maxkeppeler.sheets.core.views.SheetsDivider
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"

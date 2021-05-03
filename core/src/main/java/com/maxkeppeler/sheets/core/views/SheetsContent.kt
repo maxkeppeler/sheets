@@ -24,7 +24,7 @@ import com.maxkeppeler.sheets.R
 import com.maxkeppeler.sheets.core.utils.colorOfAttr
 
 /** Custom TextView used for most of the text on the sheets. */
-class SheetContent
+class SheetsContent
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,

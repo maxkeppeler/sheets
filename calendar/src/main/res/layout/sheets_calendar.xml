@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.maxkeppeler.sheets.core.views.SheetValue
+        <com.maxkeppeler.sheets.core.views.SheetsValue
             android:id="@+id/dateSelected"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             app:layout_constraintEnd_toStartOf="@+id/yearContainer"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.maxkeppeler.sheets.core.views.SheetContent
+            <com.maxkeppeler.sheets.core.views.SheetsContent
                 android:id="@+id/valueSpinnerMonth"
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.maxkeppeler.sheets.core.views.SheetContent
+            <com.maxkeppeler.sheets.core.views.SheetsContent
                 android:id="@+id/valueSpinnerYear"
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="wrap_content"
@@ -119,7 +119,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.maxkeppeler.sheets.core.views.SheetDivider
+        <com.maxkeppeler.sheets.core.views.SheetsDivider
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
@@ -147,7 +147,7 @@
         app:layout_constraintTop_toBottomOf="@+id/infoContainer"
         app:layout_goneMarginBottom="16dp" />
 
-    <com.maxkeppeler.sheets.core.views.SheetRecyclerView
+    <com.maxkeppeler.sheets.core.views.SheetsRecyclerView
         android:id="@+id/yearsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -160,7 +160,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/calendarView" />
 
-    <com.maxkeppeler.sheets.core.views.SheetRecyclerView
+    <com.maxkeppeler.sheets.core.views.SheetsRecyclerView
         android:id="@+id/monthsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"

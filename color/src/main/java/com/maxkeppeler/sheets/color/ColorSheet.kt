@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.color.databinding.SheetsColorBinding
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.sheets.core.utils.*
-import com.maxkeppeler.sheets.core.views.SheetContent
+import com.maxkeppeler.sheets.core.views.SheetsContent
 
 
 /** Listener to be invoked when color is selected. */
@@ -58,8 +58,8 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
 
     private val argbSeekBars = mutableListOf<SeekBar>()
     private val argbLabelTexts = mutableListOf<String>()
-    private val argbLabels = mutableListOf<SheetContent>()
-    private val argbValues = mutableListOf<SheetContent>()
+    private val argbLabels = mutableListOf<SheetsContent>()
+    private val argbValues = mutableListOf<SheetsContent>()
 
     private var colorAdapter: ColorAdapter? = null
 

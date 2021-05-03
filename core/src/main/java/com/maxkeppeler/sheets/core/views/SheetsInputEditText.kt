@@ -18,35 +18,33 @@ package com.maxkeppeler.sheets.core.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.textfield.TextInputEditText
 import com.maxkeppeler.sheets.R
-import com.maxkeppeler.sheets.core.utils.colorOfAttrs
+import com.maxkeppeler.sheets.core.utils.colorOfAttr
 
-/** Custom TextView used for the digits of the [SheetNumericalInput]. */
-class SheetDigit
+/** Custom EditTextView used for text input. */
+class SheetsInputEditText
 @JvmOverloads constructor(
     ctx: Context,
-    attrs: AttributeSet? = null,
-    styleAttr: Int = android.R.attr.textViewStyle
-) : AppCompatTextView(ctx, attrs, styleAttr) {
+    attrs: AttributeSet? = null
+) : TextInputEditText(ctx, attrs) {
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsDigit, styleAttr, 0)
+        // Ignore that this custom view uses the same styleable as SheetContent, as it is supposed to look the same
 
-        val height = a.getDimensionPixelSize(R.styleable.SheetsDigit_sheetsDigitLineHeight, 0)
-        height.takeIf { it != 0 }?.let { lineHeight = height }
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsContent, 0, 0)
 
-        val colorDefault = colorOfAttrs(ctx, R.attr.sheetsContentColor, android.R.attr.textColorPrimary)
-        val color = a.getColor(R.styleable.SheetsDigit_sheetsDigitColor, colorDefault)
+        val colorDefault = colorOfAttr(ctx, android.R.attr.textColorPrimary)
+        val color = a.getColor(R.styleable.SheetsContent_sheetsContentColor, colorDefault)
         setTextColor(color)
 
-        val fontResId = a.getResourceId(R.styleable.SheetsDigit_sheetsDigitFont, 0)
+        val fontResId = a.getResourceId(R.styleable.SheetsContent_sheetsContentFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.SheetsDigit_sheetsDigitLetterSpacing, 0f)
+            a.getFloat(R.styleable.SheetsContent_sheetsContentLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()

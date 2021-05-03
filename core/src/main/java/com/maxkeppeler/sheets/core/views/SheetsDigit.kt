@@ -21,9 +21,10 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.utils.colorOfAttrs
 
-/** Custom TextView used for the value of some sheets. */
-class SheetValue
+/** Custom TextView used for the digits of the [SheetNumericalInput]. */
+class SheetsDigit
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,
@@ -32,17 +33,20 @@ class SheetValue
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsValue, styleAttr, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsDigit, styleAttr, 0)
 
-        val height =
-            a.getDimensionPixelSize(R.styleable.SheetsValue_sheetsValueLineHeight, 0)
+        val height = a.getDimensionPixelSize(R.styleable.SheetsDigit_sheetsDigitLineHeight, 0)
         height.takeIf { it != 0 }?.let { lineHeight = height }
 
-        val fontResId = a.getResourceId(R.styleable.SheetsValue_sheetsValueFont, 0)
+        val colorDefault = colorOfAttrs(ctx, R.attr.sheetsContentColor, android.R.attr.textColorPrimary)
+        val color = a.getColor(R.styleable.SheetsDigit_sheetsDigitColor, colorDefault)
+        setTextColor(color)
+
+        val fontResId = a.getResourceId(R.styleable.SheetsDigit_sheetsDigitFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.SheetsValue_sheetsValueLetterSpacing, 0f)
+            a.getFloat(R.styleable.SheetsDigit_sheetsDigitLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()

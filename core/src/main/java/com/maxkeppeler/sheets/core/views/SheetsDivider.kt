@@ -18,29 +18,23 @@ package com.maxkeppeler.sheets.core.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.content.res.ResourcesCompat
-import com.google.android.material.button.MaterialButton
+import android.view.View
 import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.utils.colorOf
+import com.maxkeppeler.sheets.core.utils.colorOfAttr
 
-/** Custom text button used for the bottom buttons view. */
-class SheetButton
+/** Custom Divider. */
+class SheetsDivider
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,
-    styleAttrs: Int = android.R.attr.buttonStyle
-) : MaterialButton(ctx, attrs, styleAttrs) {
+    styleAttrs: Int = 0,
+    styleRes: Int = 0
+) : View(ctx, attrs, styleAttrs, styleRes) {
 
     init {
-
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsButton, styleAttrs, 0)
-
-        val fontResId = a.getResourceId(R.styleable.SheetsButton_sheetsButtonTextFont, 0)
-        fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
-
-        val spacing =
-            a.getFloat(R.styleable.SheetsButton_sheetsButtonTextLetterSpacing, 0f)
-        spacing.takeIf { it != 0f }?.let { letterSpacing = it }
-
-        a.recycle()
+        val dividerColorDefault = colorOf(ctx, R.color.sheetsDividerColor)
+        val dividerColor = colorOfAttr(ctx, R.attr.sheetsDividerColor)
+        setBackgroundColor(dividerColor.takeIf { it != 0 } ?: dividerColorDefault)
     }
 }

@@ -28,7 +28,7 @@ import com.maxkeppeler.sheets.core.utils.getDp
 import com.maxkeppeler.sheets.core.utils.getHighlightColor
 
 /** Custom ImageView used for icon buttons on the sheets. */
-class SheetIcon
+class SheetsIcon
 @JvmOverloads constructor(
     ctx: Context,
     attrs: AttributeSet? = null,
