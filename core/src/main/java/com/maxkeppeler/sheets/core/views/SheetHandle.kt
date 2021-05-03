@@ -58,11 +58,11 @@ internal class SheetHandle
         ) ?: DEFAULT_CORNER_RADIUS.toDp()
 
         val fillColor = colorOfAttr(ctx, R.attr.sheetsHandleFillColor).takeUnlessNotResolved()
-                ?: ContextCompat.getColor(ctx, R.color.sheetDividerColor)
+                ?: ContextCompat.getColor(ctx, R.color.sheetsDividerColor)
 
         val borderColor =
             colorOfAttr(ctx, R.attr.sheetsHandleBorderColor).takeUnlessNotResolved()
-                ?: ContextCompat.getColor(ctx, R.color.sheetDividerColor)
+                ?: ContextCompat.getColor(ctx, R.color.sheetsDividerColor)
 
         val borderWidth = dimensionOfAttrs(ctx, R.attr.sheetsHandleBorderWidth)
 

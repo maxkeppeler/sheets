@@ -41,30 +41,30 @@ class SheetTextInputLayout
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetTextInputLayout, 0, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsTextInputLayout, 0, 0)
 
         val cornerRadius = a.getDimension(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutCornerRadius,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutCornerRadius,
             DEFAULT_CORNER_RADIUS.toDp()
         )
 
         val topLeftCornerRadius = a.getDimension(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutTopLeftCornerRadius,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutTopLeftCornerRadius,
             cornerRadius
         )
 
         val topRightCornerRadius = a.getDimension(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutTopRightCornerRadius,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutTopRightCornerRadius,
             cornerRadius
         )
 
         val bottomLeftRadius = a.getDimension(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutBottomLeftCornerRadius,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutBottomLeftCornerRadius,
             cornerRadius
         )
 
         val bottomRightRadius = a.getDimension(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutBottomRightCornerRadius,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutBottomRightCornerRadius,
             cornerRadius
         )
 
@@ -78,19 +78,19 @@ class SheetTextInputLayout
         val primaryColor = getPrimaryColor(ctx)
 
         val endIconColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutEndIconColor,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutEndIconColor,
             0
         )
         endIconColor.takeIf { it != 0 }?.let { setEndIconTintList(ColorStateList.valueOf(it)) }
 
         val helperTextColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutHelperTextColor,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutHelperTextColor,
             primaryColor
         )
         setHelperTextColor(ColorStateList.valueOf(helperTextColor))
 
         val boxFocusedStrokeColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutBoxStrokeColor,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutBoxStrokeColor,
             primaryColor
         )
 
@@ -99,19 +99,19 @@ class SheetTextInputLayout
         setBoxStrokeColorStateList(ColorStateList(states, colors))
 
         val hintColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutHintTextColor,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutHintTextColor,
             primaryColor
         )
         defaultHintTextColor = ColorStateList.valueOf(hintColor)
 
         val boxStrokeErrorColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutBoxStrokeErrorColor,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutBoxStrokeErrorColor,
             0
         )
         boxStrokeErrorColor.takeIf { it != 0 }?.let { setBoxStrokeErrorColor(ColorStateList.valueOf(it)) }
 
         val errorTextColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutErrorTextColor,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutErrorTextColor,
             0
         )
         errorTextColor.takeIf { it != 0 }?.let {
@@ -119,7 +119,7 @@ class SheetTextInputLayout
         }
 
         val errorDrawableColor = a.getColor(
-            R.styleable.SheetTextInputLayout_sheetTextInputLayoutErrorDrawableColor,
+            R.styleable.SheetsTextInputLayout_sheetsTextInputLayoutErrorDrawableColor,
             0
         )
         errorDrawableColor.takeIf { it != 0 }?.let {

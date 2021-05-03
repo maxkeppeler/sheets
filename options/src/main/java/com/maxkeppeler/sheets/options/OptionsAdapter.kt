@@ -73,7 +73,7 @@ internal class OptionsAdapter(
 
     private val disabledBackgroundColor =
         colorOfAttr(ctx, R.attr.sheetsOptionDisabledBackgroundColor).takeUnlessNotResolved()
-            ?: colorOf(ctx, R.color.sheetOptionDisabledColor)
+            ?: colorOf(ctx, R.color.sheetsOptionDisabledColor)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (type) {

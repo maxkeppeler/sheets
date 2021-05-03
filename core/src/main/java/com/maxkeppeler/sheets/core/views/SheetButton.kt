@@ -32,13 +32,13 @@ class SheetButton
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetButton, styleAttrs, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsButton, styleAttrs, 0)
 
-        val fontResId = a.getResourceId(R.styleable.SheetButton_sheetButtonTextFont, 0)
+        val fontResId = a.getResourceId(R.styleable.SheetsButton_sheetsButtonTextFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.SheetButton_sheetButtonTextLetterSpacing, 0f)
+            a.getFloat(R.styleable.SheetsButton_sheetsButtonTextLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()

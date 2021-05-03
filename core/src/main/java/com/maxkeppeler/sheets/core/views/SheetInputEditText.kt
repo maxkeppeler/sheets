@@ -34,17 +34,17 @@ class SheetInputEditText
 
         // Ignore that this custom view uses the same styleable as SheetContent, as it is supposed to look the same
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetContent, 0, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsContent, 0, 0)
 
         val colorDefault = colorOfAttr(ctx, android.R.attr.textColorPrimary)
-        val color = a.getColor(R.styleable.SheetContent_sheetContentColor, colorDefault)
+        val color = a.getColor(R.styleable.SheetsContent_sheetsContentColor, colorDefault)
         setTextColor(color)
 
-        val fontResId = a.getResourceId(R.styleable.SheetContent_sheetContentFont, 0)
+        val fontResId = a.getResourceId(R.styleable.SheetsContent_sheetsContentFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.SheetContent_sheetContentLetterSpacing, 0f)
+            a.getFloat(R.styleable.SheetsContent_sheetsContentLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()

@@ -33,20 +33,20 @@ class SheetDigit
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetDigit, styleAttr, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsDigit, styleAttr, 0)
 
-        val height = a.getDimensionPixelSize(R.styleable.SheetDigit_sheetDigitLineHeight, 0)
+        val height = a.getDimensionPixelSize(R.styleable.SheetsDigit_sheetsDigitLineHeight, 0)
         height.takeIf { it != 0 }?.let { lineHeight = height }
 
         val colorDefault = colorOfAttrs(ctx, R.attr.sheetsContentColor, android.R.attr.textColorPrimary)
-        val color = a.getColor(R.styleable.SheetDigit_sheetDigitColor, colorDefault)
+        val color = a.getColor(R.styleable.SheetsDigit_sheetsDigitColor, colorDefault)
         setTextColor(color)
 
-        val fontResId = a.getResourceId(R.styleable.SheetDigit_sheetDigitFont, 0)
+        val fontResId = a.getResourceId(R.styleable.SheetsDigit_sheetsDigitFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.SheetDigit_sheetDigitLetterSpacing, 0f)
+            a.getFloat(R.styleable.SheetsDigit_sheetsDigitLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()

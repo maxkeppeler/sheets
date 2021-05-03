@@ -33,20 +33,20 @@ class SheetTitle
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetTitle, styleAttr, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsTitle, styleAttr, 0)
 
         val colorDefault = colorOfAttrs(ctx, R.attr.sheetsPrimaryColor, R.attr.colorPrimary)
-        val color = a.getColor(R.styleable.SheetTitle_sheetTitleColor, colorDefault)
+        val color = a.getColor( R.styleable.SheetsTitle_sheetsTitleColor, colorDefault)
         setTextColor(color)
 
-        val height = a.getDimensionPixelSize(R.styleable.SheetTitle_sheetTitleLineHeight, 0)
+        val height = a.getDimensionPixelSize( R.styleable.SheetsTitle_sheetsTitleLineHeight, 0)
         height.takeIf { it != 0 }?.let { lineHeight = height }
 
-        val fontResId = a.getResourceId(R.styleable.SheetTitle_sheetTitleFont, 0)
+        val fontResId = a.getResourceId( R.styleable.SheetsTitle_sheetsTitleFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.SheetTitle_sheetTitleLetterSpacing, 0f)
+            a.getFloat( R.styleable.SheetsTitle_sheetsTitleLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()

@@ -18,19 +18,18 @@
 <resources>
 
     <color name="colorPrimary">#2b92e9</color>
-    <color name="sheetColorPrimary">#2b92e9</color>
     <color name="colorPrimaryDark">#2172c9</color>
     <color name="colorAccent">#2b92e9</color>
 
-    <color name="sheetDayBackground">#fff</color>
-    <color name="sheetNightBackground">#202020</color>
+    <color name="sheetColorPrimary">#2b92e9</color>
+    <color name="sheetsDayBackground">#fff</color>
+    <color name="sheetsNightBackground">#202020</color>
+    <color name="sheetsDividerColor">#1F000000</color>
 
-    <color name="sheetDividerColor">#1F000000</color>
-
-    <color name="sheetOptionDisabledColor">#0F000000</color>
-    <color name="sheetOptionActiveImageColor">#2b92e9</color>
-    <color name="sheetOptionActiveTextColor">#2b92e9</color>
-    <color name="sheetOptionImageColor">#202020</color>
-    <color name="sheetOptionTextColor">#202020</color>
+    <color name="sheetsOptionDisabledColor">#0F000000</color>
+    <color name="sheetsOptionActiveImageColor">#2b92e9</color>
+    <color name="sheetsOptionActiveTextColor">#2b92e9</color>
+    <color name="sheetsOptionImageColor">#202020</color>
+    <color name="sheetsOptionTextColor">#202020</color>
 
 </resources>

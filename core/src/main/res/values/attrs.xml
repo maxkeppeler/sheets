@@ -47,7 +47,7 @@
     <attr name="sheetsDisplayToolbar" format="boolean" />
 
     <!-- Style for an option in OptionsSheet.  -->
-    <declare-styleable name="sheetsOption">
+    <declare-styleable name="SheetsOption">
 
         <!-- Override icon color of an active option. Default: sheetPrimaryColor -->
         <attr name="sheetsOptionSelectedImageColor" format="color" />
@@ -68,7 +68,7 @@
 
 
     <!--  Style for the title.  -->
-    <declare-styleable name="sheetsTitle">
+    <declare-styleable name="SheetsTitle">
 
         <!-- Override title color. Default: sheetPrimaryColor -->
         <attr name="sheetsTitleColor" format="color" />
@@ -84,7 +84,7 @@
 
 
     <!--  Style for the content text.  -->
-    <declare-styleable name="sheetsContent">
+    <declare-styleable name="SheetsContent">
 
         <!-- Override content text color. Default: textColorPrimary -->
         <attr name="sheetsContentColor" format="color" />
@@ -105,7 +105,7 @@
 
 
     <!--  Style for value text. (Selected date, selected time, ...)  -->
-    <declare-styleable name="sheetsValue">
+    <declare-styleable name="SheetsValue">
 
         <!-- Override value text color. Default: sheetPrimaryColor -->
         <attr name="sheetsValueTextActiveColor" format="color" />
@@ -123,7 +123,7 @@
 
 
     <!--  Style for the digit keys of the numerical input.  -->
-    <declare-styleable name="sheetsDigit">
+    <declare-styleable name="SheetsDigit">
 
         <!-- Override digit key color. Default: textColorPrimary -->
         <attr name="sheetsDigitColor" format="color" />
@@ -141,7 +141,7 @@
 
 
     <!--  Style for the buttons.  -->
-    <declare-styleable name="sheetsButton">
+    <declare-styleable name="SheetsButton">
 
         <!-- Override button color. Default: sheetPrimaryColor -->
         <attr name="sheetsButtonColor" format="reference" />
@@ -177,7 +177,7 @@
     </declare-styleable>
 
     <!--  Style for the buttons.  -->
-    <declare-styleable name="sheetsNegativeButton">
+    <declare-styleable name="SheetsNegativeButton">
 
         <attr name="sheetsNegativeButtonType" format="enum">
             <enum name="text_button" value="0" />
@@ -239,7 +239,7 @@
     </declare-styleable>
 
     <!--  Style for the buttons.  -->
-    <declare-styleable name="sheetsPositiveButton">
+    <declare-styleable name="SheetsPositiveButton">
 
         <attr name="sheetsPositiveButtonType" format="enum">
             <enum name="text_button" value="0" />
@@ -301,7 +301,7 @@
     </declare-styleable>
 
     <!--  Style for the handle.  -->
-    <declare-styleable name="sheetsHandle">
+    <declare-styleable name="SheetsHandle">
 
         <!-- Override handle width.  -->
         <attr name="sheetsHandleWidth" format="dimension" />
@@ -330,7 +330,7 @@
     </declare-styleable>
 
     <!--  Style for the handle.  -->
-    <declare-styleable name="sheetsTextInputLayout">
+    <declare-styleable name="SheetsTextInputLayout">
 
         <!-- Override handle corner radius.  -->
         <attr name="sheetsTextInputLayoutCornerRadius" format="dimension" />

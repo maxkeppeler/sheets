@@ -32,17 +32,17 @@ class SheetValue
 
     init {
 
-        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetValue, styleAttr, 0)
+        val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetsValue, styleAttr, 0)
 
         val height =
-            a.getDimensionPixelSize(R.styleable.SheetValue_sheetValueLineHeight, 0)
+            a.getDimensionPixelSize(R.styleable.SheetsValue_sheetsValueLineHeight, 0)
         height.takeIf { it != 0 }?.let { lineHeight = height }
 
-        val fontResId = a.getResourceId(R.styleable.SheetValue_sheetValueFont, 0)
+        val fontResId = a.getResourceId(R.styleable.SheetsValue_sheetsValueFont, 0)
         fontResId.takeIf { it != 0 }?.let { typeface = ResourcesCompat.getFont(ctx, it) }
 
         val spacing =
-            a.getFloat(R.styleable.SheetValue_sheetValueLetterSpacing, 0f)
+            a.getFloat(R.styleable.SheetsValue_sheetsValueLetterSpacing, 0f)
         spacing.takeIf { it != 0f }?.let { letterSpacing = it }
 
         a.recycle()
