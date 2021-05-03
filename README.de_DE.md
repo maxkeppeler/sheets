@@ -682,15 +682,15 @@ Darüber hinaus kannst du nun dieses Sheet mit einer eigenen Logik und eigenem V
 
 Du kannst auch die gleichen Kompomenenten verwenden, welche die Bibliothek verwendet.
 
-- `SheetTitle`
-- `SheetContent`
-- `SheetDigit`
-- `SheetNumericalInput`
-- `SheetDivider`
-- `SheetButton`
-- `SheetEdit`
-- `SheetRecyclerView`
-- `SheetValue`
+- `SheetsTitle`
+- `SheetsContent`
+- `SheetsDigit`
+- `SheetsNumericalInput`
+- `SheetsDivider`
+- `SheetsButton`
+- `SheetsEdit`
+- `SheetsRecyclerView`
+- `SheetsValue`
 
 ## Lottie
 
