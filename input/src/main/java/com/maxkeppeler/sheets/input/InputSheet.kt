@@ -167,6 +167,17 @@ class InputSheet : Sheet() {
         return bundle
     }
 
+    /** Display input. */
+    fun displayInput(key: String, visible: Boolean) {
+        if (this::inputAdapter.isInitialized) inputAdapter.displayInput(key, visible)
+        else {
+            input.forEachIndexed { i, comp ->
+                if (comp.getKeyOrIndex(i) == key)
+                    input[i].visible(visible)
+            }
+        }
+    }
+
     /** Build [InputSheet] and show it later. */
     fun build(ctx: Context, width: Int? = null, func: InputSheet.() -> Unit): InputSheet {
         this.windowContext = ctx
