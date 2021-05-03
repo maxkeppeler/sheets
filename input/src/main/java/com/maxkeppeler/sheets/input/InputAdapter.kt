@@ -56,7 +56,6 @@ internal class InputAdapter(
     private val inputViews = mutableMapOf<String, View>()
     private val primaryColor = getPrimaryColor(ctx)
     private val iconsColor = getIconColor(ctx)
-    private val highlightColor = getHighlightColor(ctx)
     private val textColor = getTextColor(ctx)
 
     override fun getItemViewType(i: Int): Int = when (input[i]) {
@@ -369,7 +368,7 @@ internal class InputAdapter(
             } ?: kotlin.run { icon.visibility = View.GONE }
         }
     }
-    
+
     fun displayInput(key: String, visible: Boolean) {
         val view = inputViews[key] ?: return
         (view.layoutParams as RecyclerView.LayoutParams).apply {
