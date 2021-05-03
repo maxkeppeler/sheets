@@ -730,15 +730,15 @@ All of the base functionality can be used and on top of that you can extend the 
 
 You are free to use the components this library uses for it's sheet types.
 
-- `SheetTitle`
-- `SheetContent`
-- `SheetDigit`
-- `SheetNumericalInput`
-- `SheetDivider`
-- `SheetButton`
-- `SheetEdit`
-- `SheetRecyclerView`
-- `SheetValue`
+- `SheetsTitle`
+- `SheetsContent`
+- `SheetsDigit`
+- `SheetsNumericalInput`
+- `SheetsDivider`
+- `SheetsButton`
+- `SheetsEdit`
+- `SheetsRecyclerView`
+- `SheetsValue`
 
 ## Lottie
 
