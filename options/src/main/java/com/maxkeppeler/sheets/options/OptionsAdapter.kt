@@ -56,23 +56,23 @@ internal class OptionsAdapter(
     private val highlightColor = getHighlightColor(ctx)
 
     private val selectedTextColor =
-        colorOfAttr(ctx, R.attr.sheetOptionSelectedTextColor).takeUnlessNotResolved()
+        colorOfAttr(ctx, R.attr.sheetsOptionSelectedTextColor).takeUnlessNotResolved()
             ?: getPrimaryColor(ctx)
 
     private val selectedIconsColor =
-        colorOfAttr(ctx, R.attr.sheetOptionSelectedImageColor).takeUnlessNotResolved()
+        colorOfAttr(ctx, R.attr.sheetsOptionSelectedImageColor).takeUnlessNotResolved()
             ?: getPrimaryColor(ctx)
 
     private val disabledTextColor =
-        colorOfAttr(ctx, R.attr.sheetOptionDisabledTextColor).takeUnlessNotResolved()
+        colorOfAttr(ctx, R.attr.sheetsOptionDisabledTextColor).takeUnlessNotResolved()
             ?: getTextColor(ctx)
 
     private val disabledIconsColor =
-        colorOfAttr(ctx, R.attr.sheetOptionDisabledImageColor).takeUnlessNotResolved()
+        colorOfAttr(ctx, R.attr.sheetsOptionDisabledImageColor).takeUnlessNotResolved()
             ?: getIconColor(ctx)
 
     private val disabledBackgroundColor =
-        colorOfAttr(ctx, R.attr.sheetOptionDisabledBackgroundColor).takeUnlessNotResolved()
+        colorOfAttr(ctx, R.attr.sheetsOptionDisabledBackgroundColor).takeUnlessNotResolved()
             ?: colorOf(ctx, R.color.sheetOptionDisabledColor)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =

@@ -41,7 +41,7 @@ internal class ClockTimeSelector(
     private val colorTextInactive = getTextColor(ctx)
     private val primaryColor = getPrimaryColor(ctx)
     private val textActiveColor =
-        colorOfAttrs(ctx, R.attr.sheetValueTextActiveColor).takeUnlessNotResolved()
+        colorOfAttrs(ctx, R.attr.sheetsValueTextActiveColor).takeUnlessNotResolved()
             ?: primaryColor
     private val highlightColor = getHighlightColor(ctx)
 

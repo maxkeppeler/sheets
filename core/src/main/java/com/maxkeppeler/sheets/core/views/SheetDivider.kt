@@ -34,7 +34,7 @@ class SheetDivider
 
     init {
         val dividerColorDefault = colorOf(ctx, R.color.sheetDividerColor)
-        val dividerColor = colorOfAttr(ctx, R.attr.sheetDividerColor)
+        val dividerColor = colorOfAttr(ctx, R.attr.sheetsDividerColor)
         setBackgroundColor(dividerColor.takeIf { it != 0 } ?: dividerColorDefault)
     }
 }

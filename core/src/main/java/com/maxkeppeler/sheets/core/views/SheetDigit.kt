@@ -38,7 +38,7 @@ class SheetDigit
         val height = a.getDimensionPixelSize(R.styleable.SheetDigit_sheetDigitLineHeight, 0)
         height.takeIf { it != 0 }?.let { lineHeight = height }
 
-        val colorDefault = colorOfAttrs(ctx, R.attr.sheetContentColor, android.R.attr.textColorPrimary)
+        val colorDefault = colorOfAttrs(ctx, R.attr.sheetsContentColor, android.R.attr.textColorPrimary)
         val color = a.getColor(R.styleable.SheetDigit_sheetDigitColor, colorDefault)
         setTextColor(color)
 

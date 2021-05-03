@@ -76,11 +76,11 @@ internal class StorageAdapter(
     }
 
     private val selectedTextColor =
-        colorOfAttr(ctx, R.attr.sheetOptionSelectedTextColor).takeUnlessNotResolved()
+        colorOfAttr(ctx, R.attr.sheetsOptionSelectedTextColor).takeUnlessNotResolved()
             ?: getPrimaryColor(ctx)
 
     private val selectedIconsColor =
-        colorOfAttr(ctx, R.attr.sheetOptionSelectedImageColor).takeUnlessNotResolved()
+        colorOfAttr(ctx, R.attr.sheetsOptionSelectedImageColor).takeUnlessNotResolved()
             ?: getPrimaryColor(ctx)
 
     override fun getItemViewType(position: Int): Int = when {

@@ -66,33 +66,33 @@ class SheetButtonContainer
         shapeModel: ShapeAppearanceModel.Builder,
     ) {
 
-        val buttonStyleAttr = if (negative) R.attr.sheetNegativeButtonType
-        else R.attr.sheetPositiveButtonType
+        val buttonStyleAttr = if (negative) R.attr.sheetsNegativeButtonType
+        else R.attr.sheetsPositiveButtonType
 
         val buttonStyleValue = intOfAttrs(ctx, buttonStyleAttr) ?: ButtonStyle.TEXT.ordinal
         val buttonStyle = style ?: ButtonStyle.values()[buttonStyleValue]
 
         val primaryColor = colorOfAttrs(
             ctx,
-            R.attr.sheetButtonColor,
-            R.attr.sheetPrimaryColor,
+            R.attr.sheetsButtonColor,
+            R.attr.sheetsPrimaryColor,
             R.attr.colorPrimary
         )
         val rippleColor = getHighlightOfColor(primaryColor)
 
         val btnWidthLayoutParam =
-            intOfAttrs(ctx, R.attr.sheetButtonWidth) ?: ViewGroup.LayoutParams.WRAP_CONTENT
+            intOfAttrs(ctx, R.attr.sheetsButtonWidth) ?: ViewGroup.LayoutParams.WRAP_CONTENT
 
         gravity = Gravity.CENTER
 
         val outlinedButtonBorderWidth = dimensionOfAttrs(ctx,
-            if (negative) R.attr.sheetNegativeButtonOutlinedButtonBorderWidth else R.attr.sheetPositiveButtonOutlinedButtonBorderWidth,
-            R.attr.sheetButtonOutlinedButtonBorderWidth
+            if (negative) R.attr.sheetsNegativeButtonOutlinedButtonBorderWidth else R.attr.sheetsPositiveButtonOutlinedButtonBorderWidth,
+            R.attr.sheetsButtonOutlinedButtonBorderWidth
         )
 
         val outlinedButtonBorderColor = colorOfAttrs(ctx,
-            if (negative) R.attr.sheetNegativeButtonOutlinedButtonBorderColor else R.attr.sheetPositiveButtonOutlinedButtonBorderColor,
-            R.attr.sheetButtonOutlinedButtonBorderColor
+            if (negative) R.attr.sheetsNegativeButtonOutlinedButtonBorderColor else R.attr.sheetsPositiveButtonOutlinedButtonBorderColor,
+            R.attr.sheetsButtonOutlinedButtonBorderColor
         )
 
         addView(SheetButton(ctx, null, buttonStyle.styleRes).apply {
@@ -148,64 +148,64 @@ class SheetButtonContainer
         btnListener: ButtonClickListener,
     ) {
 
-        val parentFamily = R.attr.sheetButtonCornerFamily
-        val parentRadius = R.attr.sheetButtonCornerRadius
+        val parentFamily = R.attr.sheetsButtonCornerFamily
+        val parentRadius = R.attr.sheetsButtonCornerRadius
 
-        val negParentFamily = R.attr.sheetNegativeButtonCornerFamily
-        val negParentRadius = R.attr.sheetNegativeButtonCornerRadius
+        val negParentFamily = R.attr.sheetsNegativeButtonCornerFamily
+        val negParentRadius = R.attr.sheetsNegativeButtonCornerRadius
 
         val negBtnBottomLeftFamily = intOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonBottomLeftCornerFamily,
+            R.attr.sheetsNegativeButtonBottomLeftCornerFamily,
             negParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val negBtnBottomRightFamily = intOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonBottomRightCornerFamily,
+            R.attr.sheetsNegativeButtonBottomRightCornerFamily,
             negParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val negBtnTopLeftFamily = intOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonTopLeftCornerFamily,
+            R.attr.sheetsNegativeButtonTopLeftCornerFamily,
             negParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val negBtnTopRightFamily = intOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonTopRightCornerFamily,
+            R.attr.sheetsNegativeButtonTopRightCornerFamily,
             negParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val negBtnBottomLeftRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonBottomLeftCornerRadius,
+            R.attr.sheetsNegativeButtonBottomLeftCornerRadius,
             negParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS
 
         val negBtnBottomRightRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonBottomRightCornerRadius,
+            R.attr.sheetsNegativeButtonBottomRightCornerRadius,
             negParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS
 
         val negBtnTopLeftRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonTopLeftCornerRadius,
+            R.attr.sheetsNegativeButtonTopLeftCornerRadius,
             negParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS
 
         val negBtnTopRightRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetNegativeButtonTopRightCornerRadius,
+            R.attr.sheetsNegativeButtonTopRightCornerRadius,
             negParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS
@@ -228,64 +228,64 @@ class SheetButtonContainer
         btnListener: ButtonClickListener,
     ) {
 
-        val parentFamily = R.attr.sheetButtonCornerFamily
-        val parentRadius = R.attr.sheetButtonCornerRadius
+        val parentFamily = R.attr.sheetsButtonCornerFamily
+        val parentRadius = R.attr.sheetsButtonCornerRadius
 
-        val posParentFamily = R.attr.sheetPositiveButtonCornerFamily
-        val posParentRadius = R.attr.sheetPositiveButtonCornerRadius
+        val posParentFamily = R.attr.sheetsPositiveButtonCornerFamily
+        val posParentRadius = R.attr.sheetsPositiveButtonCornerRadius
 
         val posBtnBottomLeftFamily = intOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonBottomLeftCornerFamily,
+            R.attr.sheetsPositiveButtonBottomLeftCornerFamily,
             posParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val posBtnBottomRightFamily = intOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonBottomRightCornerFamily,
+            R.attr.sheetsPositiveButtonBottomRightCornerFamily,
             posParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val posBtnTopLeftFamily = intOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonTopLeftCornerFamily,
+            R.attr.sheetsPositiveButtonTopLeftCornerFamily,
             posParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val posBtnTopRightFamily = intOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonTopRightCornerFamily,
+            R.attr.sheetsPositiveButtonTopRightCornerFamily,
             posParentFamily,
             parentFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val posBtnBottomLeftRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonBottomLeftCornerRadius,
+            R.attr.sheetsPositiveButtonBottomLeftCornerRadius,
             posParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS
 
         val posBtnBottomRightRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonBottomRightCornerRadius,
+            R.attr.sheetsPositiveButtonBottomRightCornerRadius,
             posParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS
 
         val posBtnTopLeftRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonTopLeftCornerRadius,
+            R.attr.sheetsPositiveButtonTopLeftCornerRadius,
             posParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS
 
         val posBtnTopRightRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetPositiveButtonTopRightCornerRadius,
+            R.attr.sheetsPositiveButtonTopRightCornerRadius,
             posParentRadius,
             parentRadius
         ) ?: DEFAULT_CORNER_RADIUS

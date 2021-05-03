@@ -105,7 +105,7 @@ fun Float.takeUnlessNotResolved(): Float? {
 fun getIconColor(ctx: Context): Int = colorOfAttrs(
     ctx,
     // 1. Try to resolve custom attr color.
-    R.attr.sheetIconsColor,
+    R.attr.sheetsIconsColor,
     // 2. Get default theme attr used for icons.
     R.attr.colorOnSurface
 )
@@ -116,7 +116,7 @@ fun getIconColor(ctx: Context): Int = colorOfAttrs(
 fun getPrimaryColor(ctx: Context): Int = colorOfAttrs(
     ctx,
     // 1. Try to resolve custom primary attr color.
-    R.attr.sheetPrimaryColor,
+    R.attr.sheetsPrimaryColor,
     // 2. Resolve default attr for primary color.
     R.attr.colorPrimary
 )
@@ -128,7 +128,7 @@ fun getHighlightColor(ctx: Context): Int {
     return colorOfAttrs(
         ctx,
         // 1. Try to resolve custom highlight color attr.
-        R.attr.sheetHighlightColor
+        R.attr.sheetsHighlightColor
     ).takeUnlessNotResolved() ?:
     /* Create custom highlight color based on primary color. */
     getPrimaryColor(ctx).withAlpha(HIGHLIGHT_ALPHA)
@@ -144,7 +144,7 @@ fun getHighlightOfColor(@ColorInt color: Int): Int
 fun getTextColor(ctx: Context): Int = colorOfAttrs(
     ctx,
     // 1. Try to resolve primary text color attr.
-    R.attr.sheetContentColor,
+    R.attr.sheetsContentColor,
     // 2. Resolve default primary text color attr.
     android.R.attr.textColorPrimary
 )
@@ -155,7 +155,7 @@ fun getTextColor(ctx: Context): Int = colorOfAttrs(
 fun getTextInverseColor(ctx: Context): Int = colorOfAttrs(
     ctx,
     // 1. Try to resolve primary text inverse color attr.
-    R.attr.sheetContentInverseColor,
+    R.attr.sheetsContentInverseColor,
     // 2. Resolve default primary text inverse color attr.
     android.R.attr.textColorPrimaryInverse
 )
@@ -164,7 +164,7 @@ fun getTextInverseColor(ctx: Context): Int = colorOfAttrs(
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 @ColorInt
 fun getBottomSheetBackgroundColor(ctx: Context, @StyleRes styleRes: Int): Int {
-    val attr = R.attr.sheetBackgroundColor
+    val attr = R.attr.sheetsBackgroundColor
     return colorOfAttrs(ctx, attr).takeUnlessNotResolved()
         ?: colorOfAttrOfTheme(ctx, attr, styleRes)
 }
@@ -172,35 +172,35 @@ fun getBottomSheetBackgroundColor(ctx: Context, @StyleRes styleRes: Int): Int {
 /** Get visibility status of the toolbar. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun isDisplayToolbar(ctx: Context, defaultValue: Boolean): Boolean {
-    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetDisplayToolbar))
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetsDisplayToolbar))
     return a.getBoolean(0, defaultValue)
 }
 
 /** Get visibility status of the close button. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun isDisplayCloseButton(ctx: Context, defaultValue: Boolean): Boolean {
-    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetDisplayCloseButton))
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetsDisplayCloseButton))
     return a.getBoolean(0, defaultValue)
 }
 
 /** Get visibility status of the handle view. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun isDisplayHandle(ctx: Context, defaultValue: Boolean): Boolean {
-    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetDisplayHandle))
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetsDisplayHandle))
     return a.getBoolean(0, defaultValue)
 }
 
 /** Get corner radius. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun getCornerRadius(ctx: Context): Float? {
-    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetCornerRadius))
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetsCornerRadius))
     return a.getDimension(0, 0f).takeUnlessNotResolved()
 }
 
 /** Get corner family. */
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun getCornerFamily(ctx: Context): Int? {
-    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetCornerFamily))
+    val a = ctx.theme.obtainStyledAttributes(intArrayOf(R.attr.sheetsCornerFamily))
     return a.getInt(0, 0).takeUnlessNotResolved()
 }
 

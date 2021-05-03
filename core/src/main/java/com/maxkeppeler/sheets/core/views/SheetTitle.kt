@@ -35,7 +35,7 @@ class SheetTitle
 
         val a = ctx.obtainStyledAttributes(attrs, R.styleable.SheetTitle, styleAttr, 0)
 
-        val colorDefault = colorOfAttrs(ctx, R.attr.sheetPrimaryColor, R.attr.colorPrimary)
+        val colorDefault = colorOfAttrs(ctx, R.attr.sheetsPrimaryColor, R.attr.colorPrimary)
         val color = a.getColor(R.styleable.SheetTitle_sheetTitleColor, colorDefault)
         setTextColor(color)
 

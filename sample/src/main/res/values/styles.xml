@@ -62,11 +62,11 @@
     </style>
 
     <style name="BottomSheetSignNightTheme">
-        <item name="sheetHighlightColor">@color/signThemeHighlightColor</item>
-        <item name="sheetPrimaryColor">@color/signThemeColorPrimary</item>-->
-        <item name="sheetContentColor">@color/lightText</item>
-        <item name="sheetIconsColor">@color/lightText</item>
-        <item name="sheetBackgroundColor">@color/signNightThemeBackground</item>
+        <item name="sheetsHighlightColor">@color/signThemeHighlightColor</item>
+        <item name="sheetsPrimaryColor">@color/signThemeColorPrimary</item>-->
+        <item name="sheetsContentColor">@color/lightText</item>
+        <item name="sheetsIconsColor">@color/lightText</item>
+        <item name="sheetsBackgroundColor">@color/signNightThemeBackground</item>
         <!--        <item name="sheetTitleColor">?sheetPrimaryColor</item>-->
 <!--        <item name="sheetValueTextActiveColor">?sheetPrimaryColor</item>-->
 <!--        <item name="sheetButtonColor">?sheetPrimaryColor</item>-->

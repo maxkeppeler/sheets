@@ -49,22 +49,22 @@ internal class SheetHandle
 
         val cornerFamily = intOfAttrs(
             ctx,
-            R.attr.sheetHandleCornerFamily
+            R.attr.sheetsHandleCornerFamily
         ) ?: DEFAULT_CORNER_FAMILY
 
         val cornerRadius = dimensionOfAttrs(
             ctx,
-            R.attr.sheetHandleCornerRadius
+            R.attr.sheetsHandleCornerRadius
         ) ?: DEFAULT_CORNER_RADIUS.toDp()
 
-        val fillColor = colorOfAttr(ctx, R.attr.sheetHandleFillColor).takeUnlessNotResolved()
+        val fillColor = colorOfAttr(ctx, R.attr.sheetsHandleFillColor).takeUnlessNotResolved()
                 ?: ContextCompat.getColor(ctx, R.color.sheetDividerColor)
 
         val borderColor =
-            colorOfAttr(ctx, R.attr.sheetHandleBorderColor).takeUnlessNotResolved()
+            colorOfAttr(ctx, R.attr.sheetsHandleBorderColor).takeUnlessNotResolved()
                 ?: ContextCompat.getColor(ctx, R.color.sheetDividerColor)
 
-        val borderWidth = dimensionOfAttrs(ctx, R.attr.sheetHandleBorderWidth)
+        val borderWidth = dimensionOfAttrs(ctx, R.attr.sheetsHandleBorderWidth)
 
         val shapeModel = ShapeAppearanceModel().toBuilder().apply {
             setAllCorners(cornerFamily, cornerRadius)
@@ -75,8 +75,8 @@ internal class SheetHandle
             borderWidth?.let { setStroke(it, borderColor) }
         }
 
-        val handleWidth = dimensionOfAttrs(ctx, R.attr.sheetHandleWidth) ?: 28.getDp()
-        val handleHeight = dimensionOfAttrs(ctx, R.attr.sheetHandleHeight) ?: 4.getDp()
+        val handleWidth = dimensionOfAttrs(ctx, R.attr.sheetsHandleWidth) ?: 28.getDp()
+        val handleHeight = dimensionOfAttrs(ctx, R.attr.sheetsHandleHeight) ?: 4.getDp()
 
         addView(ImageView(ctx).apply {
             layoutParams = LayoutParams(
