@@ -53,6 +53,7 @@ internal class InputAdapter(
         private const val VIEW_TYPE_BUTTON_TOGGLE_GROUP = 6
     }
 
+    private val inputViews = mutableMapOf<String, View>()
     private val primaryColor = getPrimaryColor(ctx)
     private val iconsColor = getIconColor(ctx)
     private val highlightColor = getHighlightColor(ctx)
@@ -126,6 +127,10 @@ internal class InputAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, i: Int) {
         val input = input[i]
+        val key = input.getKeyOrIndex(i)
+        inputViews[key] = holder.itemView
+        displayInput(key, input.visible)
+
         when {
             holder is EditTextItem && input is InputEditText -> {
                 holder.binding.buildEditText(input)
