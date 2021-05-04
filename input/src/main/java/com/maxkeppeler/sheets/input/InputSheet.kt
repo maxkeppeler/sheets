@@ -153,7 +153,12 @@ class InputSheet : Sheet() {
         validate(true)
         inputAdapter = InputAdapter(requireContext(), input, ::validate)
         with(binding.inputRecyclerView) {
-            layoutManager = CustomLinearLayoutManager(requireContext(), true)
+            layoutManager = CustomGridLayoutManager(requireContext(), columnsMax, true).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int =
+                        input[position].columns?.takeUnless { it > columnsMax } ?: columnsMax
+                }
+            }
             adapter = inputAdapter
             setHasFixedSize(false)
         }
