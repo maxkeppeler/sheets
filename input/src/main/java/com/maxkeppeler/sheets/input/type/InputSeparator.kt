@@ -23,12 +23,12 @@ import android.os.Bundle
 /**
  * Represents a separator view that can be used to create the visual effect that following inputs belong to a specific section.
  */
-class InputSeparator(key: String? = null, func: InputSeparator.() -> Unit) : Input(key) {
+class InputSeparator(key: String? = null, func: (InputSeparator.() -> Unit)? = null) : Input(key) {
 
     init {
-        func()
+        func?.invoke(this)
     }
-    
+
     internal var displayDivider: Boolean? = null
         private set
 
