@@ -23,9 +23,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.annotation.IntRange
 import androidx.annotation.StringRes
+import androidx.recyclerview.widget.GridLayoutManager
 import com.maxkeppeler.sheets.core.Sheet
-import com.maxkeppeler.sheets.core.layoutmanagers.CustomLinearLayoutManager
+import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.sheets.input.databinding.SheetsInputBinding
 import com.maxkeppeler.sheets.input.type.Input
 import com.maxkeppeler.sheets.input.type.InputRadioButtons
@@ -40,14 +42,23 @@ class InputSheet : Sheet() {
 
     override val dialogTag = "InputSheet"
 
-    private lateinit var binding: SheetsInputBinding
+    companion object {
+        const val COLUMNS_MAX_DEFAULT = 1
+    }
 
+    private lateinit var binding: SheetsInputBinding
     private lateinit var inputAdapter: InputAdapter
     private var listener: InputListener? = null
     private var input = mutableListOf<Input>()
+    private var columnsMax: Int = COLUMNS_MAX_DEFAULT
 
     private val saveAllowed: Boolean
         get() = input.filter { it.required }.all { it.valid() }
+
+    /** Set the max amount of columns inputs can span. */
+    fun columnsMax(@IntRange(from = 1) columns: Int) {
+        this.columnsMax = columns
+    }
 
     /**
      * Set the [InputListener].
@@ -142,7 +153,12 @@ class InputSheet : Sheet() {
         validate(true)
         inputAdapter = InputAdapter(requireContext(), input, ::validate)
         with(binding.inputRecyclerView) {
-            layoutManager = CustomLinearLayoutManager(requireContext(), true)
+            layoutManager = CustomGridLayoutManager(requireContext(), columnsMax, true).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int =
+                        input[position].columns?.takeUnless { it > columnsMax } ?: columnsMax
+                }
+            }
             adapter = inputAdapter
             setHasFixedSize(false)
         }
