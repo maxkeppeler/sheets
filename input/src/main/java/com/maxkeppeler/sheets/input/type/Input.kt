@@ -48,9 +48,17 @@ abstract class Input(private val key: String? = null) {
     internal var drawableRes: Int? = null
         private set
 
+    internal var columns: Int? = null
+        private set
+
     /** Set the initial visibility of the input. */
     fun visible(visible: Boolean = true) {
         this.visible = visible
+    }
+
+    /** Set the amount of columns this input will span. */
+    fun columns(columns: Int) {
+        this.columns = columns
     }
 
     /** Require a value before the user can click the positive button. */
