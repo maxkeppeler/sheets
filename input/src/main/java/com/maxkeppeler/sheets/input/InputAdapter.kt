@@ -48,14 +48,14 @@ internal class InputAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
-        private const val VIEW_TYPE_EDIT_TEXT = 0
-        private const val VIEW_TYPE_CHECK_BOX = 1
-        private const val VIEW_TYPE_RADIO_BUTTONS = 2
-        private const val VIEW_TYPE_SPINNER = 3
-        private const val VIEW_TYPE_SWITCH = 4
-        private const val VIEW_TYPE_SEPARATOR = 5
-        private const val VIEW_TYPE_BUTTON_TOGGLE_GROUP = 6
-        private const val VIEW_TYPE_CUSTOM_VIEW = 7
+        private const val VIEW_TYPE_EDIT_TEXT = 10
+        private const val VIEW_TYPE_CHECK_BOX = 11
+        private const val VIEW_TYPE_SWITCH = 12
+        private const val VIEW_TYPE_SPINNER = 13
+        private const val VIEW_TYPE_RADIO_BUTTONS = 14
+        private const val VIEW_TYPE_BUTTON_TOGGLE_GROUP = 15
+        private const val VIEW_TYPE_CUSTOM = 40
+        private const val VIEW_TYPE_SEPARATOR = 50
     }
 
     private val inputViews = mutableMapOf<String, View>()
@@ -65,18 +65,18 @@ internal class InputAdapter(
 
     override fun getItemViewType(i: Int): Int = when (input[i]) {
         is InputEditText -> VIEW_TYPE_EDIT_TEXT
-        is InputSwitch -> VIEW_TYPE_SWITCH
         is InputCheckBox -> VIEW_TYPE_CHECK_BOX
-        is InputRadioButtons -> VIEW_TYPE_RADIO_BUTTONS
+        is InputSwitch -> VIEW_TYPE_SWITCH
         is InputSpinner -> VIEW_TYPE_SPINNER
-        is InputSeparator -> VIEW_TYPE_SEPARATOR
+        is InputRadioButtons -> VIEW_TYPE_RADIO_BUTTONS
         is InputButtonToggleGroup -> VIEW_TYPE_BUTTON_TOGGLE_GROUP
-        is InputCustom -> VIEW_TYPE_CUSTOM_VIEW
+        is InputCustom -> VIEW_TYPE_CUSTOM
+        is InputSeparator -> VIEW_TYPE_SEPARATOR
         else -> throw IllegalStateException("No ViewType for this Input.")
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, type: Int): RecyclerView.ViewHolder =
-        when (type) {
+    override fun onCreateViewHolder(parent: ViewGroup, type: Int): RecyclerView.ViewHolder {
+        return when (type) {
             VIEW_TYPE_EDIT_TEXT -> EditTextItem(
                 SheetsInputEditTextItemBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -98,13 +98,6 @@ internal class InputAdapter(
                     false
                 )
             )
-            VIEW_TYPE_RADIO_BUTTONS -> RadioButtonsItem(
-                SheetsInputRadioButtonsItemBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            )
             VIEW_TYPE_SPINNER -> SpinnerItem(
                 SheetsInputSpinnerItemBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -112,8 +105,8 @@ internal class InputAdapter(
                     false
                 )
             )
-            VIEW_TYPE_SEPARATOR -> SeparatorItem(
-                SheetsInputSeparatorItemBinding.inflate(
+            VIEW_TYPE_RADIO_BUTTONS -> RadioButtonsItem(
+                SheetsInputRadioButtonsItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -126,8 +119,15 @@ internal class InputAdapter(
                     false
                 )
             )
-            VIEW_TYPE_CUSTOM_VIEW -> CustomItem(
+            VIEW_TYPE_CUSTOM -> CustomItem(
                 SheetsInputCustomItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+            VIEW_TYPE_SEPARATOR -> SeparatorItem(
+                SheetsInputSeparatorItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -135,6 +135,7 @@ internal class InputAdapter(
             )
             else -> throw IllegalStateException("No ViewHolder for this ViewType.")
         }
+    }
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, i: Int) {
@@ -155,13 +156,13 @@ internal class InputAdapter(
                     && input is InputSwitch -> {
                 holder.binding.buildSwitch(input)
             }
-            holder is RadioButtonsItem
-                    && input is InputRadioButtons -> {
-                holder.binding.buildRadioButtons(input)
-            }
             holder is SpinnerItem
                     && input is InputSpinner -> {
                 holder.binding.buildSpinner(input)
+            }
+            holder is RadioButtonsItem
+                    && input is InputRadioButtons -> {
+                holder.binding.buildRadioButtons(input)
             }
             holder is ButtonToggleGroupItem
                     && input is InputButtonToggleGroup -> {
@@ -177,26 +178,6 @@ internal class InputAdapter(
                 holder.binding.buildSeparator(isHeader, input)
             }
         }
-    }
-
-    private fun SheetsInputCustomItemBinding.buildCustom(input: InputCustom) {
-
-        if (!input.fullView) {
-            setupGeneralInputInfo(input, label, content, icon)
-        } else {
-            (container.layoutParams as ConstraintLayout.LayoutParams).apply {
-                setMargins(0, 0, 0, 0)
-                goneStartMargin = 0
-            }
-        }
-
-        val resolvedView = input.viewRes?.let { LayoutInflater.from(ctx).inflate(it, null, false) }
-        val view = input.view ?: resolvedView
-        view?.let {
-            container.addView(it)
-            input.viewListener?.invoke(it)
-        }
-        input.dataChangeListener = { listener.invoke() }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -252,6 +233,22 @@ internal class InputAdapter(
         }
     }
 
+    private fun SheetsInputCheckBoxItemBinding.buildCheckBox(input: InputCheckBox) {
+
+        setupGeneralInputInfo(input, label, content, icon)
+
+        checkBox.isChecked = input.value
+
+        val checkBoxText = input.textRes?.let { ctx.getString(it) } ?: input.text
+        checkBox.text = checkBoxText
+        checkBox.setTextColor(textColor)
+        checkBox.buttonTintList = ColorStateList.valueOf(primaryColor)
+        checkBox.setOnCheckedChangeListener { _, checked ->
+            input.value = checked
+            listener.invoke()
+        }
+    }
+
     private fun SheetsInputSwitchItemBinding.buildSwitch(input: InputSwitch) {
 
         setupGeneralInputInfo(input, label, content, icon)
@@ -268,19 +265,40 @@ internal class InputAdapter(
         }
     }
 
-    private fun SheetsInputCheckBoxItemBinding.buildCheckBox(input: InputCheckBox) {
+    private fun SheetsInputSpinnerItemBinding.buildSpinner(input: InputSpinner) {
 
         setupGeneralInputInfo(input, label, content, icon)
 
-        checkBox.isChecked = input.value
+        val spinnerOptions =
+            mutableListOf<String>().apply { input.spinnerOptions?.let { addAll(it) } }
 
-        val checkBoxText = input.textRes?.let { ctx.getString(it) } ?: input.text
-        checkBox.text = checkBoxText
-        checkBox.setTextColor(textColor)
-        checkBox.buttonTintList = ColorStateList.valueOf(primaryColor)
-        checkBox.setOnCheckedChangeListener { _, checked ->
-            input.value = checked
-            listener.invoke()
+        if (input.value == null) {
+            val spinnerNoSelectionText =
+                input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
+            spinnerOptions.add(spinnerNoSelectionText ?: ctx.getString(R.string.sheets_select))
+        }
+
+        val adapter: ArrayAdapter<String> = object : ArrayAdapter<String>(
+            ctx,
+            android.R.layout.simple_spinner_dropdown_item, spinnerOptions
+        ) {
+            override fun getCount(): Int =
+                super.getCount().takeIf { spinnerOptions.size != input.spinnerOptions?.size }
+                    ?.minus(1) ?: super.getCount()
+        }
+        icon.setColorFilter(primaryColor)
+        spinner.adapter = adapter
+        val selectionIndex = input.value ?: spinnerOptions.lastIndex
+        spinner.setSelection(selectionIndex)
+        spinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(aV: AdapterView<*>?, v: View, i: Int, id: Long) {
+                (aV?.getChildAt(0) as TextView).setTextColor(textColor)
+                if (i == selectionIndex) return
+                input.value = i
+                listener.invoke()
+            }
+
+            override fun onNothingSelected(arg0: AdapterView<*>?) = Unit
         }
     }
 
@@ -324,41 +342,24 @@ internal class InputAdapter(
         }
     }
 
-    private fun SheetsInputSpinnerItemBinding.buildSpinner(input: InputSpinner) {
+    private fun SheetsInputCustomItemBinding.buildCustom(input: InputCustom) {
 
-        setupGeneralInputInfo(input, label, content, icon)
-
-        val spinnerOptions =
-            mutableListOf<String>().apply { input.spinnerOptions?.let { addAll(it) } }
-
-        if (input.value == null) {
-            val spinnerNoSelectionText =
-                input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
-            spinnerOptions.add(spinnerNoSelectionText ?: ctx.getString(R.string.sheets_select))
-        }
-
-        val adapter: ArrayAdapter<String> = object : ArrayAdapter<String>(
-            ctx,
-            android.R.layout.simple_spinner_dropdown_item, spinnerOptions ?: mutableListOf()
-        ) {
-            override fun getCount(): Int =
-                super.getCount().takeIf { spinnerOptions.size != input.spinnerOptions?.size }
-                    ?.minus(1) ?: super.getCount()
-        }
-        icon.setColorFilter(primaryColor)
-        spinner.adapter = adapter
-        val selectionIndex = input.value ?: spinnerOptions.lastIndex
-        spinner.setSelection(selectionIndex)
-        spinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(aV: AdapterView<*>?, v: View, i: Int, id: Long) {
-                (aV?.getChildAt(0) as TextView).setTextColor(textColor)
-                if (i == selectionIndex) return
-                input.value = i
-                listener.invoke()
+        if (!input.fullView) {
+            setupGeneralInputInfo(input, label, content, icon)
+        } else {
+            (container.layoutParams as ConstraintLayout.LayoutParams).apply {
+                setMargins(0, 0, 0, 0)
+                goneStartMargin = 0
             }
-
-            override fun onNothingSelected(arg0: AdapterView<*>?) = Unit
         }
+
+        val resolvedView = input.viewRes?.let { LayoutInflater.from(ctx).inflate(it, null, false) }
+        val view = input.view ?: resolvedView
+        view?.let {
+            container.addView(it)
+            input.viewListener?.invoke(it)
+        }
+        input.dataChangeListener = { listener.invoke() }
     }
 
     private fun SheetsInputSeparatorItemBinding.buildSeparator(
