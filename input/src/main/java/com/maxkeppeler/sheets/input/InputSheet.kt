@@ -49,11 +49,11 @@ class InputSheet : Sheet() {
     private lateinit var binding: SheetsInputBinding
     private lateinit var inputAdapter: InputAdapter
     private var listener: InputListener? = null
-    private var input = mutableListOf<Input>()
+    private var inputs = mutableListOf<Input>()
     private var columnsMax: Int = COLUMNS_MAX_DEFAULT
 
     private val saveAllowed: Boolean
-        get() = input.filter { it.required }.all { it.valid() }
+        get() = inputs.filter { it.required }.all { it.valid() }
 
     /** Set the max amount of columns inputs can span. */
     fun columnsMax(@IntRange(from = 1) columns: Int) {
@@ -132,7 +132,7 @@ class InputSheet : Sheet() {
      * @param input The [InputRadioButtons] arguments to be added.
      */
     fun with(vararg input: Input) {
-        this.input.addAll(input.toMutableList())
+        this.inputs.addAll(input.toMutableList())
     }
 
     /**
@@ -141,7 +141,7 @@ class InputSheet : Sheet() {
      * @param input Instance of [InputRadioButtons].
      */
     fun with(input: Input) {
-        this.input.add(input)
+        this.inputs.add(input)
     }
 
     override fun onCreateLayoutView(): View =
@@ -151,12 +151,12 @@ class InputSheet : Sheet() {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
         validate(true)
-        inputAdapter = InputAdapter(requireContext(), input, ::validate)
+        inputAdapter = InputAdapter(requireContext(), inputs, ::validate)
         with(binding.inputRecyclerView) {
             layoutManager = CustomGridLayoutManager(requireContext(), columnsMax, true).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int =
-                        input[position].columns?.takeUnless { it > columnsMax } ?: columnsMax
+                        inputs[position].columns?.takeUnless { it > columnsMax } ?: columnsMax
                 }
             }
             adapter = inputAdapter
@@ -176,7 +176,7 @@ class InputSheet : Sheet() {
 
     private fun getResult(): Bundle {
         val bundle = Bundle()
-        input.forEachIndexed { i, input ->
+        inputs.forEachIndexed { i, input ->
             input.invokeResultListener()
             input.putValue(bundle, i)
         }
@@ -187,9 +187,9 @@ class InputSheet : Sheet() {
     fun displayInput(key: String, visible: Boolean) {
         if (this::inputAdapter.isInitialized) inputAdapter.displayInput(key, visible)
         else {
-            input.forEachIndexed { i, comp ->
+            inputs.forEachIndexed { i, comp ->
                 if (comp.getKeyOrIndex(i) == key)
-                    input[i].visible(visible)
+                    inputs[i].visible(visible)
             }
         }
     }
