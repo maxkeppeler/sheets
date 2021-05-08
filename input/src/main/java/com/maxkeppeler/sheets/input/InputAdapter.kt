@@ -27,9 +27,13 @@ import android.view.ViewGroup
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.maxkeppeler.sheets.core.utils.*
+import com.maxkeppeler.sheets.core.utils.getIconColor
+import com.maxkeppeler.sheets.core.utils.getPrimaryColor
+import com.maxkeppeler.sheets.core.utils.getTextColor
+import com.maxkeppeler.sheets.core.utils.toDp
 import com.maxkeppeler.sheets.core.views.SheetsContent
 import com.maxkeppeler.sheets.input.databinding.*
 import com.maxkeppeler.sheets.input.type.*
@@ -51,6 +55,7 @@ internal class InputAdapter(
         private const val VIEW_TYPE_SWITCH = 4
         private const val VIEW_TYPE_SEPARATOR = 5
         private const val VIEW_TYPE_BUTTON_TOGGLE_GROUP = 6
+        private const val VIEW_TYPE_CUSTOM_VIEW = 7
     }
 
     private val inputViews = mutableMapOf<String, View>()
@@ -66,6 +71,7 @@ internal class InputAdapter(
         is InputSpinner -> VIEW_TYPE_SPINNER
         is InputSeparator -> VIEW_TYPE_SEPARATOR
         is InputButtonToggleGroup -> VIEW_TYPE_BUTTON_TOGGLE_GROUP
+        is InputCustom -> VIEW_TYPE_CUSTOM_VIEW
         else -> throw IllegalStateException("No ViewType for this Input.")
     }
 
@@ -120,6 +126,13 @@ internal class InputAdapter(
                     false
                 )
             )
+            VIEW_TYPE_CUSTOM_VIEW -> CustomItem(
+                SheetsInputCustomItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
             else -> throw IllegalStateException("No ViewHolder for this ViewType.")
         }
 
@@ -154,12 +167,36 @@ internal class InputAdapter(
                     && input is InputButtonToggleGroup -> {
                 holder.binding.buildButtonToggleGroup(input)
             }
+            holder is CustomItem
+                    && input is InputCustom -> {
+                holder.binding.buildCustom(input)
+            }
             holder is SeparatorItem
                     && input is InputSeparator -> {
                 val isHeader = i == 0
                 holder.binding.buildSeparator(isHeader, input)
             }
         }
+    }
+
+    private fun SheetsInputCustomItemBinding.buildCustom(input: InputCustom) {
+
+        if (!input.fullView) {
+            setupGeneralInputInfo(input, label, content, icon)
+        } else {
+            (container.layoutParams as ConstraintLayout.LayoutParams).apply {
+                setMargins(0, 0, 0, 0)
+                goneStartMargin = 0
+            }
+        }
+
+        val resolvedView = input.viewRes?.let { LayoutInflater.from(ctx).inflate(it, null, false) }
+        val view = input.view ?: resolvedView
+        view?.let {
+            container.addView(it)
+            input.viewListener?.invoke(it)
+        }
+        input.dataChangeListener = { listener.invoke() }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -291,7 +328,8 @@ internal class InputAdapter(
 
         setupGeneralInputInfo(input, label, content, icon)
 
-        val spinnerOptions = mutableListOf<String>().apply { input.spinnerOptions?.let { addAll(it) } }
+        val spinnerOptions =
+            mutableListOf<String>().apply { input.spinnerOptions?.let { addAll(it) } }
 
         if (input.value == null) {
             val spinnerNoSelectionText =
@@ -304,7 +342,8 @@ internal class InputAdapter(
             android.R.layout.simple_spinner_dropdown_item, spinnerOptions ?: mutableListOf()
         ) {
             override fun getCount(): Int =
-                super.getCount().takeIf { spinnerOptions.size != input.spinnerOptions?.size }?.minus(1) ?: super.getCount()
+                super.getCount().takeIf { spinnerOptions.size != input.spinnerOptions?.size }
+                    ?.minus(1) ?: super.getCount()
         }
         icon.setColorFilter(primaryColor)
         spinner.adapter = adapter
@@ -395,6 +434,9 @@ internal class InputAdapter(
         RecyclerView.ViewHolder(binding.root)
 
     internal inner class ButtonToggleGroupItem(val binding: SheetsInputButtonToggleGroupItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    internal inner class CustomItem(val binding: SheetsInputCustomItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     internal inner class SeparatorItem(val binding: SheetsInputSeparatorItemBinding) :
