@@ -66,9 +66,10 @@ Read in [Deutsch](README.de_DE.md) or [简体中文](README.zh_CN.md).
   - [Lottie](#lottie)
   - [Appearance](#appearance)
 - [Misc](#misc)
-  - [Showcase](#showcase)
   - [Support this project](#support-this-project)
-  - [Credits](#credits)
+  - [Contribute](#contribute)
+  - [Donate](#donate)
+  - [Showcase](#showcase)
   - [License](#license)
 
 # Get started
@@ -933,35 +934,46 @@ Override the appearance of the TextInputLayout (used for the InputEditText).
 
 # Misc
 
+## Support this project
+- Leave a star and tell others about it
+- Watch for updates and improvements.
+- [Open an issue](https://github.com/MaxKeppeler/sheets/issues/) if you see or got any error.
+- Leave your thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and showcase your implementation.
+- Donate me a coffee.
+
+## Contribute
+1. Open an issue to discuss what you would like to change.
+2. Fork the Project
+3. Create your feature branch (feature-[some-name])
+4. Commit your changes
+5. Push to the branch (origin feature-[some-name])
+6. Open a pull request
+
+## Donate
+
+Show your appreciation by donating me a coffee. Thank you very much!
+
+<a href="https://ko-fi.com/maxkeppeler" target='_blank'>
+ <img width="180" src='https://cdn.ko-fi.com/cdn/kofi2.png?v=2' alt='Buy Me a Coffee at ko-fi.com' />
+</a>
+
+<a href="https://www.buymeacoffee.com/maxkeppeler" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160">
+</a>
+
+<a href="https://www.paypal.me/maximiliankeppeler" target="_blank">
+    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate on PaPal" width="160">
+</a>
+
 ## Showcase
 
-Check out some real apps which use this library.<br/>
-Feel free to hit me up to include your app here.
+Check out some apps which are using this library.<br/>
 
-- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist and control widgets for Spotify on your home screen. (Uses: `Info`, `Options`, `Input`, `Color`)
+- [Aquafy](https://play.google.com/store/apps/details?id=com.mk.water) - Beautiful hydration tracker and reminder. (`Info`, `Options`, `Input`, `Color`, `ClockTime`)
 
-- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - A collaborative project to create a Free and Open Source Buddha Quotes app for Android with a focus on privacy. (Uses: `Options`, `Input`, `Color`, `Time`)
+- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist and control widgets for Spotify content. (`Info`, `Options`, `Input`, `Color`)
 
-## Support this project
-
-- Leave a **Star** and tell other devs about it.
-
-- **Watch** for updates and improvements.
-
-- **[Open an issue](https://github.com/MaxKeppeler/sheets/issues/)** if you see or got any error.
-
-- Leave your thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and showcase your implementation.
-
-## Motivation
-
-I created several sheets for my apps [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) and [Awake](https://play.google.com/store/apps/details?id=com.mk.awake) in the recent months.
-I especially wanted to have a 'writable' clock time and duration time picker in form of a sheet
-This is my first library - I'm happy about any feedback, tips etc. I hope you like it and can make use of it. :)
-
-## Credits
-
-- Thanks to [Sasikanth](https://github.com/msasikanth) for inspiration regarding the the appearance of the sheets through [Color Sheet](https://github.com/msasikanth/ColorSheet) and [Memoire](https://play.google.com/store/apps/details?id=com.primudesigns.stories).
-- Thanks to [Aidan Follestad](https://github.com/afollestad) and his [material-dialogs](https://github.com/afollestad/material-dialogs) library for the inspiration to make this library modular.
+- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - Open Source Buddha Quotes. (`Options`, `Input`, `Color`, `Time`)
 
 ## License
 
