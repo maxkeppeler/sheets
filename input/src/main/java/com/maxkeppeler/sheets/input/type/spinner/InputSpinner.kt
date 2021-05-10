@@ -16,10 +16,27 @@
 
 @file:Suppress("unused")
 
-package com.maxkeppeler.sheets.input.type
+package com.maxkeppeler.sheets.input.type.spinner
 
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import com.maxkeppeler.sheets.input.type.Input
+
+/**
+ * Data class to hold the spinner options
+ */
+data class SpinnerOption (
+    val displayText: String,
+    @DrawableRes val drawableRes: Int? = null
+) {
+    fun getDrawable(context: Context): Drawable? =
+        if (drawableRes != null) ContextCompat.getDrawable(context, drawableRes) else null
+}
 
 /** Listener which returns the new index. */
 typealias InputSpinnerListener = (index: Int) -> Unit
@@ -36,7 +53,7 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     private var changeListener: InputSpinnerListener? = null
     private var resultListener: InputSpinnerListener? = null
 
-    internal var spinnerOptions: MutableList<String>? = null
+    internal var spinnerOptions: MutableList<SpinnerOption>? = null
         private set
 
     internal var noSelectionText: String? = null
@@ -56,8 +73,20 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
         this.value = selectedIndex
     }
 
-    /** Set the options to tbe displays within the Spinner. */
+    /**
+     * Set the options to to be displays within the Spinner using strings.
+     * Legacy option to set spinner options, no drawable will be shown on
+     * the spinner item
+     */
+    @JvmName("optionsLegacy")
     fun options(options: MutableList<String>) {
+        this.spinnerOptions = options.map {
+            SpinnerOption(it)
+        }.toMutableList()
+    }
+
+    /** Set the options to to be displays within the Spinner. */
+    fun options(options: MutableList<SpinnerOption>) {
         this.spinnerOptions = options
     }
 
