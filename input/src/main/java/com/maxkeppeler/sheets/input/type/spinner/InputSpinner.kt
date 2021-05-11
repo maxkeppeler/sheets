@@ -37,7 +37,7 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     private var changeListener: InputSpinnerListener? = null
     private var resultListener: InputSpinnerListener? = null
 
-    internal var spinnerOptions: MutableList<SpinnerOption>? = null
+    internal var spinnerOptions: List<SpinnerOption>? = null
         private set
 
     internal var noSelectionText: String? = null
@@ -57,20 +57,20 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
         this.value = selectedIndex
     }
 
-    /**
-     * Set the options to to be displays within the Spinner using strings.
-     * Legacy option to set spinner options, no drawable will be shown on
-     * the spinner item
-     */
-    @JvmName("optionsLegacy")
-    fun options(options: MutableList<String>) {
-        this.spinnerOptions = options.map {
-            SpinnerOption(it)
-        }.toMutableList()
+    /** Set the options with a list of Strings. */
+    @JvmName("optionsStrings")
+    fun options(options: List<String>) {
+        this.spinnerOptions = options.map { SpinnerOption(it) }
     }
 
-    /** Set the options to to be displays within the Spinner. */
-    fun options(options: MutableList<SpinnerOption>) {
+    /** Set the options with a list of StringRes. */
+    @JvmName("optionsStringRes")
+    fun options(options: List<Int>) {
+        this.spinnerOptions = options.map { SpinnerOption(it) }
+    }
+
+    /** Set the [SpinnerOption]'s to to be displayed. */
+    fun options(options: List<SpinnerOption>) {
         this.spinnerOptions = options
     }
 
