@@ -28,7 +28,7 @@ import com.maxkeppeler.sheets.input.databinding.SheetsSpinnerItemBinding
 
 internal open class SpinnerAdapter(
     private val ctx: Context,
-    private var options: MutableList<SpinnerOption> = mutableListOf(),
+    private var options: List<SpinnerOption> = listOf(),
 ) : BaseAdapter() {
 
     override fun getCount(): Int = options.size
