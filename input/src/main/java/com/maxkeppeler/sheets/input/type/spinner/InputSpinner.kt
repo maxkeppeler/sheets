@@ -18,25 +18,9 @@
 
 package com.maxkeppeler.sheets.input.type.spinner
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.maxkeppeler.sheets.input.type.Input
-
-/**
- * Data class to hold the spinner options
- */
-data class SpinnerOption (
-    val displayText: String,
-    @DrawableRes val drawableRes: Int? = null
-) {
-    fun getDrawable(context: Context): Drawable? =
-        if (drawableRes != null) ContextCompat.getDrawable(context, drawableRes) else null
-}
 
 /** Listener which returns the new index. */
 typealias InputSpinnerListener = (index: Int) -> Unit
