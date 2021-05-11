@@ -70,6 +70,7 @@
     <string name="info_cover_image_3">Overlapping cover image, hidden buttons, additional icon button.</string>
     <string name="input_short">A small survey form</string>
     <string name="input_long">A long survey form</string>
+    <string name="input_spinner_icon">Spinner icons</string>
     <string name="custom_sheet_example_1">Text with a switch</string>
     <string name="input_password">Password with custom validation</string>
     <string name="info_lottie">InfoSheet with Lottie Animation</string>

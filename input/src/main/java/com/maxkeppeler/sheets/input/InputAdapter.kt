@@ -24,8 +24,11 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ImageView
+import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -37,7 +40,9 @@ import com.maxkeppeler.sheets.core.utils.toDp
 import com.maxkeppeler.sheets.core.views.SheetsContent
 import com.maxkeppeler.sheets.input.databinding.*
 import com.maxkeppeler.sheets.input.type.*
-
+import com.maxkeppeler.sheets.input.type.spinner.InputSpinner
+import com.maxkeppeler.sheets.input.type.spinner.SpinnerAdapter
+import com.maxkeppeler.sheets.input.type.spinner.SpinnerOption
 
 internal typealias InputAdapterChangeListener = () -> Unit
 
@@ -269,19 +274,17 @@ internal class InputAdapter(
 
         setupGeneralInputInfo(input, label, content, icon)
 
-        val spinnerOptions =
-            mutableListOf<String>().apply { input.spinnerOptions?.let { addAll(it) } }
+        val spinnerOptions = mutableListOf<SpinnerOption>().apply { input.spinnerOptions?.let { addAll(it) } }
 
         if (input.value == null) {
-            val spinnerNoSelectionText =
-                input.textRes?.let { ctx.getString(it) } ?: input.noSelectionText
-            spinnerOptions.add(spinnerNoSelectionText ?: ctx.getString(R.string.sheets_select))
+            val noSelectionOption =
+                input.textRes?.let { SpinnerOption(it) }
+                    ?: input.noSelectionText?.let { SpinnerOption(it) }
+                    ?: SpinnerOption(R.string.sheets_select)
+            spinnerOptions.add(noSelectionOption)
         }
 
-        val adapter: ArrayAdapter<String> = object : ArrayAdapter<String>(
-            ctx,
-            android.R.layout.simple_spinner_dropdown_item, spinnerOptions
-        ) {
+        val adapter: SpinnerAdapter = object : SpinnerAdapter(ctx, spinnerOptions) {
             override fun getCount(): Int =
                 super.getCount().takeIf { spinnerOptions.size != input.spinnerOptions?.size }
                     ?.minus(1) ?: super.getCount()
@@ -292,7 +295,9 @@ internal class InputAdapter(
         spinner.setSelection(selectionIndex)
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(aV: AdapterView<*>?, v: View, i: Int, id: Long) {
-                (aV?.getChildAt(0) as TextView).setTextColor(textColor)
+                ((aV?.getChildAt(0) as ConstraintLayout).getViewById(R.id.text) as TextView).setTextColor(
+                    textColor
+                )
                 if (i == selectionIndex) return
                 input.value = i
                 listener.invoke()

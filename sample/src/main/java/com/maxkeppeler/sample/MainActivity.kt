@@ -57,7 +57,8 @@ import com.maxkeppeler.sheets.input.Validation
 import com.maxkeppeler.sheets.input.type.InputCheckBox
 import com.maxkeppeler.sheets.input.type.InputEditText
 import com.maxkeppeler.sheets.input.type.InputRadioButtons
-import com.maxkeppeler.sheets.input.type.InputSpinner
+import com.maxkeppeler.sheets.input.type.spinner.InputSpinner
+import com.maxkeppeler.sheets.input.type.spinner.SpinnerOption
 import com.maxkeppeler.sheets.lottie.LottieAnimation
 import com.maxkeppeler.sheets.lottie.cancelCoverAnimation
 import com.maxkeppeler.sheets.lottie.withCoverLottieAnimation
@@ -125,6 +126,7 @@ class MainActivity : AppCompatActivity() {
             SheetExample.INFO_LOTTIE -> showInfoSheetLottie()
             SheetExample.INPUT_SHORT -> showInputSheetShort()
             SheetExample.INPUT_LONG -> showInputSheetLong()
+            SheetExample.INPUT_SPINNER_ICON -> showInputSheetSpinnerIcons()
             SheetExample.INPUT_PASSWORD -> showInputSheetPassword()
             SheetExample.CUSTOM1 -> showCustomSheet()
             SheetExample.STORAGE_LIST -> withStoragePermissions { showStorageSheetList() }
@@ -440,8 +442,10 @@ class MainActivity : AppCompatActivity() {
             style(getSheetStyle())
             title("Snooze time")
             format(timeFormat)
-            currentTime(TimeUnit.HOURS.toSeconds(0)
-                .plus(TimeUnit.MINUTES.toSeconds(50).plus(TimeUnit.SECONDS.toSeconds(12))))
+            currentTime(
+                TimeUnit.HOURS.toSeconds(0)
+                    .plus(TimeUnit.MINUTES.toSeconds(50).plus(TimeUnit.SECONDS.toSeconds(12)))
+            )
 //            currentTime(0) // Set current time in seconds
 //            minTime(1) // Set minimum time in seconds
 //            maxTime(600) // Set maximum time in seconds
@@ -545,6 +549,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showInputSheetSpinnerIcons() {
+
+        InputSheet().show(this) {
+            style(getSheetStyle())
+            title("Spinner Icons")
+            with(InputSpinner {
+                required()
+                label("Favorite Fruit")
+                noSelectionText("Select Fruit")
+                options(
+                    mutableListOf(
+                        SpinnerOption("Apple", R.drawable.ic_apple),
+                        SpinnerOption("Cherries", R.drawable.ic_fruit_cherries),
+                        SpinnerOption("Grapes", R.drawable.ic_fruit_grapes),
+                        SpinnerOption("Pineapple", R.drawable.ic_fruit_pineapple),
+                        SpinnerOption("Watermelon", R.drawable.ic_fruit_watermelon)
+                    )
+                )
+                changeListener { value -> showToast("Spinner change", value.toString()) }
+                resultListener { value -> showToast("Spinner result", value.toString()) }
+            })
+
+            onNegative { showToast("InputSheet cancelled", "No result") }
+            onPositive { result ->
+                showToastLong("InputSheet result", result.toString())
+            }
+        }
+    }
+
     private fun showInputSheetPassword() {
 
         var password1: String? = "1"
@@ -602,7 +635,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showInfoSheet() {
 
-        InfoSheet().show(this, width = null /* Use custom view width (e.g. for landscape mode or tablet). */ ) {
+        InfoSheet().show(
+            this,
+            width = null /* Use custom view width (e.g. for landscape mode or tablet). */
+        ) {
             style(getSheetStyle())
             withIconButton(IconButton(R.drawable.ic_github)) { /* e. g. open website. */ }
             title("Did you read the README?")
@@ -858,11 +894,13 @@ class MainActivity : AppCompatActivity() {
             CustomStaggeredGridLayoutManager(2, RecyclerView.VERTICAL, false)
         binding.exampleRecyclerView.adapter = BottomSheetExampleAdapter(this, ::showBottomSheet)
 
-        binding.sheetStyleButtonGroup.check(when (sheetStyle) {
-            SheetStyle.BOTTOM_SHEET -> R.id.bottomSheet
-            SheetStyle.DIALOG -> R.id.dialog
-            null -> R.id.random
-        })
+        binding.sheetStyleButtonGroup.check(
+            when (sheetStyle) {
+                SheetStyle.BOTTOM_SHEET -> R.id.bottomSheet
+                SheetStyle.DIALOG -> R.id.dialog
+                null -> R.id.random
+            }
+        )
 
         binding.sheetStyleButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {
@@ -875,11 +913,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.themeButtonGroup.check(when (themeMode) {
-            ThemeMode.NIGHT_MODE -> R.id.nightMode
-            ThemeMode.DAY_MODE -> R.id.dayMode
-            else -> R.id.auto
-        })
+        binding.themeButtonGroup.check(
+            when (themeMode) {
+                ThemeMode.NIGHT_MODE -> R.id.nightMode
+                ThemeMode.DAY_MODE -> R.id.dayMode
+                else -> R.id.auto
+            }
+        )
 
         binding.themeButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {
@@ -896,13 +936,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun withStoragePermissions(withPermissionListener: () -> Unit) {
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
 
-            ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE), 10)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ), 10
+            )
 
         } else withPermissionListener.invoke()
     }
@@ -928,8 +974,10 @@ class MainActivity : AppCompatActivity() {
     private fun share() {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT,
-                "Check out this library! https://github.com/maxkeppeler/sheets")
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "Check out this library! https://github.com/maxkeppeler/sheets"
+            )
             type = "text/plain"
         }
         val shareIntent = Intent.createChooser(sendIntent, null)

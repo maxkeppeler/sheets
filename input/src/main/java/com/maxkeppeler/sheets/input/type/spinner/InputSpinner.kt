@@ -16,10 +16,11 @@
 
 @file:Suppress("unused")
 
-package com.maxkeppeler.sheets.input.type
+package com.maxkeppeler.sheets.input.type.spinner
 
 import android.os.Bundle
 import androidx.annotation.StringRes
+import com.maxkeppeler.sheets.input.type.Input
 
 /** Listener which returns the new index. */
 typealias InputSpinnerListener = (index: Int) -> Unit
@@ -36,7 +37,7 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     private var changeListener: InputSpinnerListener? = null
     private var resultListener: InputSpinnerListener? = null
 
-    internal var spinnerOptions: MutableList<String>? = null
+    internal var spinnerOptions: List<SpinnerOption>? = null
         private set
 
     internal var noSelectionText: String? = null
@@ -56,8 +57,20 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
         this.value = selectedIndex
     }
 
-    /** Set the options to tbe displays within the Spinner. */
-    fun options(options: MutableList<String>) {
+    /** Set the options with a list of Strings. */
+    @JvmName("optionsStrings")
+    fun options(options: List<String>) {
+        this.spinnerOptions = options.map { SpinnerOption(it) }
+    }
+
+    /** Set the options with a list of StringRes. */
+    @JvmName("optionsStringRes")
+    fun options(options: List<Int>) {
+        this.spinnerOptions = options.map { SpinnerOption(it) }
+    }
+
+    /** Set the [SpinnerOption]'s to to be displayed. */
+    fun options(options: List<SpinnerOption>) {
         this.spinnerOptions = options
     }
 

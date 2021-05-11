@@ -72,6 +72,8 @@ enum class SheetExample(val type: SheetType, @StringRes val textRes: Int) {
 
     INPUT_LONG(SheetType.INPUT, R.string.input_long),
 
+    INPUT_SPINNER_ICON(SheetType.INPUT, R.string.input_spinner_icon),
+
     INPUT_PASSWORD(SheetType.INPUT, R.string.input_password),
 
     STORAGE_LIST(SheetType.STORAGE, R.string.storage_list),

@@ -528,11 +528,13 @@ For the default input sheet use it as following:
 
 **InputSpinner** <br/>
 
-| Function          | Action                                                    |
-| ----------------- | --------------------------------------------------------- |
-| noSelectionText() | Set the text that is displayed, when nothing is selected. |
-| options()         | Set a list of options.                                    |
-| selected()        | Set a selected index.                                     |
+| Function                              | Action                                                    |
+| ------------------------------------- | --------------------------------------------------------- |
+| noSelectionText()                     | Set the text that is displayed, when nothing is selected. |
+| options(MutableList of String)        | Set a list of options.                                    |
+| options(MutableList of SpinnerOption) | Set a list of options with optional icon for each option. |
+| selected()                            | Set a selected index.                                     |
+
 
 ## Calendar
 
