@@ -47,6 +47,7 @@ import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetsContent
+import java.lang.IllegalStateException
 import java.time.*
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -97,7 +98,7 @@ class CalendarSheet : Sheet() {
 
     private var drawableAnimator: ValueAnimator? = null
 
-    private val today = LocalDate.now()
+    private var today = LocalDate.now()
     private var calendarViewActive: Boolean = true
 
     private var selectionMode: SelectionMode = SelectionMode.RANGE
@@ -122,6 +123,19 @@ class CalendarSheet : Sheet() {
     private var selectedDateStart: LocalDate? = null
     private var selectedDateEnd: LocalDate? = null
     private var displayButtons = true
+
+    /**
+     * Set the currently selected date
+     * Throws [IllegalStateException] is selection model is not [SelectionMode.DATE]
+     */
+    fun setSelectedDate(date: Date) {
+        val calendar = Calendar.getInstance().apply { time = date }
+        if (selectionMode != SelectionMode.DATE) {
+            throw IllegalStateException("Only available for SelectionMode.DATE")
+        } else {
+            today = (calendar as GregorianCalendar).toZonedDateTime().toLocalDate()
+        }
+    }
 
     /** Disable timeline into past or future. */
     fun disableTimeline(timeLine: TimeLine) {
