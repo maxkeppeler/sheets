@@ -220,7 +220,7 @@ internal class InputAdapter(
         with(textInputLayout) {
 
             val hintText = input.hintRes?.let { ctx.getString(it) } ?: input.hint
-            hintText?.let { hint = it }
+            hintText?.let { hint = it.takeUnless { input.required && input.label == null } ?: it.plus(" *") }
 
             input.endIconMode?.let { endIconMode = it }
             input.isEndIconActivated?.let { setEndIconActivated(it) }
