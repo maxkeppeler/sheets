@@ -30,7 +30,7 @@
         android:id="@+id/icon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/subtitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginBottom="8dp"
-        app:layout_goneMarginStart="48dp" />
+        app:layout_goneMarginStart="24dp" />
 
     <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/subtitle"
