@@ -51,6 +51,7 @@ class InputSheet : Sheet() {
     private var listener: InputListener? = null
     private var inputs = mutableListOf<Input>()
     private var columnsMax: Int = COLUMNS_MAX_DEFAULT
+    private var displayButtons = true
 
     private val saveAllowed: Boolean
         get() = inputs.filter { it.required }.all { it.valid() }
@@ -58,6 +59,11 @@ class InputSheet : Sheet() {
     /** Set the max amount of columns inputs can span. */
     fun columnsMax(@IntRange(from = 1) columns: Int) {
         this.columnsMax = columns
+    }
+
+    /** Display buttons and require a positive button click. */
+    fun displayButtons(displayButtons: Boolean = true) {
+        this.displayButtons = displayButtons
     }
 
     /**
@@ -150,6 +156,7 @@ class InputSheet : Sheet() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setButtonPositiveListener(::save)
+        displayButtonsView(displayButtons)
         validate(true)
         inputAdapter = InputAdapter(requireContext(), inputs, ::validate)
         with(binding.inputRecyclerView) {
@@ -166,6 +173,7 @@ class InputSheet : Sheet() {
 
     private fun validate(init: Boolean = false) {
         displayButtonPositive(saveAllowed, !init)
+        if (!init && !displayButtons && saveAllowed) save()
     }
 
     private fun save() {
