@@ -214,6 +214,27 @@ class Option internal constructor() {
         this.longClickListener = longClickListener
     }
 
+    constructor(
+        @StringRes titleTextRes: Int,
+        @StringRes subtitleTextRes: Int? = null,
+        longClickListener: OptionLongClickListener? = null
+    ) : this() {
+        this.titleTextRes = titleTextRes
+        this.subtitleTextRes = subtitleTextRes
+        this.longClickListener = longClickListener
+    }
+
+    constructor(
+        titleText: String,
+        subtitleText: String,
+        longClickListener: OptionLongClickListener? = null
+    ) : this() {
+        this.titleText = titleText
+        this.subtitleText = subtitleText
+        this.longClickListener = longClickListener
+    }
+
+
     /** Declare the option as already selected. */
     fun select(): Option {
         this.selected = true
