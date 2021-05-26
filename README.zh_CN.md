@@ -325,9 +325,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default clock time sheet, in 24-hours format, use it as following:
+对于默认的 `Clock time` sheet，以 `24` 小时的格式，使用方法如下：
 
     ClockTimeSheet().show(context) {
       title("Wake-up time")
@@ -338,14 +338,14 @@ For the default clock time sheet, in 24-hours format, use it as following:
 
 | Function        | Action                                |
 | --------------- | ------------------------------------- |
-| format24Hours() | Use 24-hours or 12-hours format.      |
-| currentTime()   | Set the current time in milliseconds. |
+| format24Hours() | 使用 24 小时格式或者 12 小时格式。     |
+| currentTime()   | 以毫秒为单位设置当前时间。 |
 
 ## Time
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time)
 
-The `Time` Sheet lets you pick a duration time in a specific format.
+`Time` sheet 可以让你以特定的格式选择一个持续时间。
 
 <details open>
 <br/><br/>
@@ -369,9 +369,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default time sheet use it as following:
+对于默认的 `Time` sheet，按以下方式使用。
 
     TimeSheet().show(context) {
       title("Snooze time")
@@ -382,10 +382,10 @@ For the default time sheet use it as following:
 
 | Function      | Action                                          |
 | ------------- | ----------------------------------------------- |
-| format()      | Select the time format. (hh:mm:ss, mm:ss, ...) |
-| currentTime() | Set the current time in seconds.                |
-| minTime()     | Set the minimum time.                           |
-| maxTime()`    | Set the maximum time.                          |
+| format()      | 选择时间格式。(hh:mm:ss, mm:ss, ...) |
+| currentTime() | 设置当前时间，以秒为单位。                |
+| minTime()     | 设置最短的时间。                           |
+| maxTime()`    | 设置最长时间。                          |
 
 ## Input
 
@@ -466,10 +466,10 @@ dependencies {
       }
     }
 
-| Function  | Action                                        |
+| 函数  | 功能                                       |
 | --------- | --------------------------------------------- |
-| with()    | Add an input. (see input options)             |
-| content() | Set content text. (e. g. to explain a survey) |
+| with()    | 添加一个 input。(见输入选项)             |
+| content() | 设置内容文本。(例如，解释一项调查 |
 
 **Input options:**
 
@@ -480,55 +480,55 @@ dependencies {
 
 **Input**<br/>
 
-| Function         | Action                           |
+| 函数         | 功能                           |
 | ---------------- | -------------------------------- |
-| label()          | Set the label text.              |
+| label()          | 设置标签文本           |
 | drawable()       | Set the drawable.                |
 | required()       | Mark input as required.          |
-| changeListener() | Set listener to observe changes. |
-| resultListener() | Set listener for final value.    |
+| changeListener() | 设置监听器来观察变化。 |
+| resultListener() | 为最终值设置监听器。   |
 
 **InputEditText**<br/>
 
-| Function             | Action                                            |
+| 函数             | 功能                                            |
 | -------------------- | ------------------------------------------------- |
-| hint()               | Set the hint text.                                |
-| defaultValue()       | Set default text.                                 |
-| inputType()          | Set the `android.text.InputType`'s.               |
+| hint()               | 设置 hint 文本。                                |
+| defaultValue()       | 设置默认文本。                                 |
+| inputType()          | Set the `android.text.InputType`'s。               |
 | inputFilter()        | Set the `android.text.inputFilter`                |
-| maxLines()           | Set the max amount of lines.                      |
-| endIconMode()        | Set TextInputLayout.EndIconMode.                  |
-| endIconActivated()   | Set the EndIcon activated.                        |
-| passwordVisible()    | Make the password initially visible or invisible. |
-| validationListener() | Validate the text input with your own logic.      |
+| maxLines()           | 设置最大行数。                      |
+| endIconMode()        | Set TextInputLayout.EndIconMode。                  |
+| endIconActivated()   | Set the EndIcon activated。                        |
+| passwordVisible()    | 使密码最初可见或不可见。 |
+| validationListener() | 用你自己的逻辑验证文本输入。      |
 
 **InputCheckBox** <br/>
 
-| Function       | Action             |
+| 函数       | 功能             |
 | -------------- | ------------------ |
-| text()         | Set the text.      |
-| defaultValue() | Set default value. |
+| text()         | 设置文本。     |
+| defaultValue() | 设置默认的值。 |
 
 **InputRadioButtons** <br/>
 
-| Function   | Action                             |
+| 函数   | 功能                             |
 | ---------- | ---------------------------------- |
-| options()  | Set a list of RadioButton options. |
-| selected() | Set a selected index.              |
+| options()  | 设置一个RadioButton的选项列表。 |
+| selected() | 设置一个选定的索引。              |
 
 **InputSpinner** <br/>
 
-| Function          | Action                                                    |
+| 函数          | 功能                                                   |
 | ----------------- | --------------------------------------------------------- |
-| noSelectionText() | Set the text that is displayed, when nothing is selected. |
-| options()         | Set a list of options.                                    |
-| selected()        | Set a selected index.                                     |
+| noSelectionText() | 设置在没有选择时显示的文本。 |
+| options()         | 设置一个选项列表。                                    |
+| selected()        | 设置一个选定的索引。                                     |
 
 ## Calendar
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/calendar.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.calendar/core)
 
-The `Calendar` Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
+`Calendar` 表可以让你选择一个日期或日期范围。这种类型是使用 [CalendarView](https://github.com/kizitonwose/CalendarView) 库
 
 <details open>
 <br/><br/>
