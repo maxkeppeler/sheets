@@ -895,7 +895,7 @@ The size and the appearance of the handle can be changed like this:
 
 最近几个月，我为我的应用程序 [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) 和 [Awake](https://play.google.com/store/apps/details?id=com.mk.awake) 创建了几个 Sheet.
 
-我特别想有一个 `Writable` 的时钟时间和持续时间选择器，以 sheet 的形式。
+我特别想有一个以 sheet 的形式的 `Writable` 的时钟时间和持续时间选择器。
 这是我的第一个库-- 我很高兴得到任何反馈和提示等。我希望你喜欢它并且能够使用它。)
 
 ## Credits
