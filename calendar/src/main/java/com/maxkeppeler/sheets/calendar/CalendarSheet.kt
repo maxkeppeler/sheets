@@ -133,7 +133,24 @@ class CalendarSheet : Sheet() {
         if (selectionMode != SelectionMode.DATE) {
             throw IllegalStateException("Only available for SelectionMode.DATE")
         } else {
-            today = (calendar as GregorianCalendar).toZonedDateTime().toLocalDate()
+            selectedDate = (calendar as GregorianCalendar).toZonedDateTime().toLocalDate()
+        }
+    }
+
+    /**
+     * Set the currently selected range date
+     * Throws [IllegalStateException] is selection model is not [SelectionMode.RANGE]
+     */
+    fun setSelectedDateRange(start: Date, end: Date) {
+        if (selectionMode != SelectionMode.RANGE) {
+            throw IllegalStateException("Only available for SelectionMode.DATE")
+        } else {
+            Calendar.getInstance().let {
+                it.time = start
+                selectedDateStart = (it as GregorianCalendar).toZonedDateTime().toLocalDate()
+                it.time = end
+                selectedDateEnd = it.toZonedDateTime().toLocalDate()
+            }
         }
     }
 
@@ -395,6 +412,8 @@ class CalendarSheet : Sheet() {
         calendarView.scrollMode = ScrollMode.PAGED
         calendarView.setup(start, end, firstDayOfWeek)
         calendarView.scrollToDate(today)
+        selectedDate?.let { calendarView.scrollToDate(it) }
+        selectedDateStart?.let { calendarView.scrollToDate(it) }
         updateSpinnerValues()
 
         setupDayBinding()
