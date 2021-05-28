@@ -228,7 +228,7 @@ dependencies {
 <br/>
 <details>
 <br/><br/>
-<summary>Showcase some variants as Dialogs</summary>
+<summary>以对话框的方式展示一些不同的风格</summary>
 
 <img src="art/OptionsSheet Dialog List.png" width="80%" alt="Sheets OptionsSheet Dialog"><br/>
 <img src="art/OptionsSheet Dialog Grid Small.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
@@ -239,7 +239,7 @@ dependencies {
 
 <details>
 <br/><br/>
-<summary>Showcase some variants as BottomSheets</summary>
+<summary>以 `BottomSheet` 的方式展示一些不同的风格</summary>
 
 <img src="art/OptionsSheet BottomSheet List.png" width="80%" alt="Sheets OptionsSheet BottomSheet"><br/>
 <img src="art/OptionsSheet BottomSheet Grid Small.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
@@ -325,9 +325,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default clock time sheet, in 24-hours format, use it as following:
+对于默认的 `Clock time` sheet，以 `24` 小时的格式，使用方法如下：
 
     ClockTimeSheet().show(context) {
       title("Wake-up time")
@@ -338,14 +338,14 @@ For the default clock time sheet, in 24-hours format, use it as following:
 
 | Function        | Action                                |
 | --------------- | ------------------------------------- |
-| format24Hours() | Use 24-hours or 12-hours format.      |
-| currentTime()   | Set the current time in milliseconds. |
+| format24Hours() | 使用 24 小时格式或者 12 小时格式。     |
+| currentTime()   | 以毫秒为单位设置当前时间。 |
 
 ## Time
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time)
 
-The `Time` Sheet lets you pick a duration time in a specific format.
+`Time` sheet 可以让你以特定的格式选择一个持续时间。
 
 <details open>
 <br/><br/>
@@ -369,9 +369,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default time sheet use it as following:
+对于默认的 `Time` sheet，按以下方式使用。
 
     TimeSheet().show(context) {
       title("Snooze time")
@@ -382,10 +382,10 @@ For the default time sheet use it as following:
 
 | Function      | Action                                          |
 | ------------- | ----------------------------------------------- |
-| format()      | Select the time format. (hh:mm:ss, mm:ss, ...) |
-| currentTime() | Set the current time in seconds.                |
-| minTime()     | Set the minimum time.                           |
-| maxTime()`    | Set the maximum time.                          |
+| format()      | 选择时间格式。(hh:mm:ss, mm:ss, ...) |
+| currentTime() | 设置当前时间，以秒为单位。                |
+| minTime()     | 设置最短的时间。                           |
+| maxTime()`    | 设置最长时间。                          |
 
 ## Input
 
@@ -466,10 +466,10 @@ dependencies {
       }
     }
 
-| Function  | Action                                        |
+| 函数  | 功能                                       |
 | --------- | --------------------------------------------- |
-| with()    | Add an input. (see input options)             |
-| content() | Set content text. (e. g. to explain a survey) |
+| with()    | 添加一个 input。(见输入选项)             |
+| content() | 设置内容文本。(例如，解释一项调查 |
 
 **Input options:**
 
@@ -480,55 +480,55 @@ dependencies {
 
 **Input**<br/>
 
-| Function         | Action                           |
+| 函数         | 功能                           |
 | ---------------- | -------------------------------- |
-| label()          | Set the label text.              |
+| label()          | 设置标签文本           |
 | drawable()       | Set the drawable.                |
 | required()       | Mark input as required.          |
-| changeListener() | Set listener to observe changes. |
-| resultListener() | Set listener for final value.    |
+| changeListener() | 设置监听器来观察变化。 |
+| resultListener() | 为最终值设置监听器。   |
 
 **InputEditText**<br/>
 
-| Function             | Action                                            |
+| 函数             | 功能                                            |
 | -------------------- | ------------------------------------------------- |
-| hint()               | Set the hint text.                                |
-| defaultValue()       | Set default text.                                 |
-| inputType()          | Set the `android.text.InputType`'s.               |
+| hint()               | 设置 hint 文本。                                |
+| defaultValue()       | 设置默认文本。                                 |
+| inputType()          | Set the `android.text.InputType`'s。               |
 | inputFilter()        | Set the `android.text.inputFilter`                |
-| maxLines()           | Set the max amount of lines.                      |
-| endIconMode()        | Set TextInputLayout.EndIconMode.                  |
-| endIconActivated()   | Set the EndIcon activated.                        |
-| passwordVisible()    | Make the password initially visible or invisible. |
-| validationListener() | Validate the text input with your own logic.      |
+| maxLines()           | 设置最大行数。                      |
+| endIconMode()        | Set TextInputLayout.EndIconMode。                  |
+| endIconActivated()   | Set the EndIcon activated。                        |
+| passwordVisible()    | 使密码最初可见或不可见。 |
+| validationListener() | 用你自己的逻辑验证文本输入。      |
 
 **InputCheckBox** <br/>
 
-| Function       | Action             |
+| 函数       | 功能             |
 | -------------- | ------------------ |
-| text()         | Set the text.      |
-| defaultValue() | Set default value. |
+| text()         | 设置文本。     |
+| defaultValue() | 设置默认的值。 |
 
 **InputRadioButtons** <br/>
 
-| Function   | Action                             |
+| 函数   | 功能                             |
 | ---------- | ---------------------------------- |
-| options()  | Set a list of RadioButton options. |
-| selected() | Set a selected index.              |
+| options()  | 设置一个RadioButton的选项列表。 |
+| selected() | 设置一个选定的索引。              |
 
 **InputSpinner** <br/>
 
-| Function          | Action                                                    |
+| 函数          | 功能                                                   |
 | ----------------- | --------------------------------------------------------- |
-| noSelectionText() | Set the text that is displayed, when nothing is selected. |
-| options()         | Set a list of options.                                    |
-| selected()        | Set a selected index.                                     |
+| noSelectionText() | 设置在没有选择时显示的文本。 |
+| options()         | 设置一个选项列表。                                    |
+| selected()        | 设置一个选定的索引。                                     |
 
 ## Calendar
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/calendar.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.calendar/core)
 
-The `Calendar` Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
+`Calendar` 表可以让你选择一个日期或日期范围。这种类型是使用 [CalendarView](https://github.com/kizitonwose/CalendarView) 库
 
 <details open>
 <br/><br/>
@@ -552,9 +552,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default time sheet use it as following:
+对于默认的 `time` sheet，按以下方式使用。
 
     CalendarSheet().show(this) { // Build and show
       title("What's your date of birth?") // Set the title of the sheet
@@ -562,20 +562,20 @@ For the default time sheet use it as following:
         // Handle date or range
       }
 
-| Function          | Action                                                           |
+| 函数         | 功能                                                           |
 | ----------------- | ---------------------------------------------------------------- |
-| selectionMode()   | Choose the selection mode (date or range).                       |
-| calendarMode()    | Choose the calendar mode (week with various rows or month-view). |
-| disableTimeline() |  Disable either past or future dates.                            |
-| rangeYears()      | Set the range of years into past and future.                     |
-| disable()         | Pass a `Calendar` object to disable various dates for selection. |
-| displayButtons()  | Show or hide the buttons view.                                   |
+| selectionMode()   | 选择选择模式（日期或范围）。                      |
+| calendarMode()    | 选择日历模式（有许多行的星期或者是月视图）。 |
+| disableTimeline() | 禁用过去或未来的日期。                            |
+| rangeYears()      | 将年份范围设定为过去和未来。                    |
+| disable()         | 传递一个 `Calendar` 对象，使各种日期不能被选择。 |
+| displayButtons()  | 显示或隐藏按钮视图。                                   |
 
 ## Color
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/color.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/color)
 
-The `Color` Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
+`Color` sheet 可以让你挑选颜色。显示默认的 `Material Colors` 或指定可以选择的颜色。你也可以允许选择一个自定义的颜色。
 
 <details>
 <br/><br/>
@@ -603,9 +603,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-For the default color sheet use it as following:
+对于默认的 `Color` sheet，按以下方式使用。
 
     ColorSheet().show(context) {
       title("Background color")
@@ -614,17 +614,17 @@ For the default color sheet use it as following:
       }
     }
 
-| Function                 | Action                                                           |
+| 函数                 | 功能                                                          |
 | ------------------------ | ---------------------------------------------------------------- |
-| defaultView()            | Select the default color view (Colors from templates or custom). |
-| disableSwitchColorView() | Disable to switch between color views.                           |
-| defaultColor()           | Set default selected color.                                      |
-| colors()                 | Pass all colors to be displayed in the color templates view.     |
-| disableAlpha()           | Disable alpha colors for custom colors.                          |
+| defaultView()            | 选择默认的颜色视图（来自模板或自定义的颜色）。 |
+| disableSwitchColorView() | 禁用以在颜色视图之间切换。                           |
+| defaultColor()           | 设置默认的选定颜色。                                      |
+| colors()                 | 传递要在颜色模板视图中显示的所有颜色     |
+| disableAlpha()           | 禁用自定义颜色的 alpha 颜色。                         |
 
-## Custom
+## 自定义
 
-With just the 'core' module you are able to create your own sheet based on this library. You can use some components and styles within your own custom sheet automatically. By default the buttons and toolbar view with logic is ready to be used by your own implementation.
+只需使用 `Core` 模块，你就能在这个库的基础上创建自己的 sheet。你可以在你自己的自定义表单中自动使用一些组件和样式。默认情况下，带有逻辑的按钮和工具栏视图可随时由您自己的实现使用。
 
 <details>
 <br/><br/>
@@ -648,25 +648,25 @@ dependencies {
 }
 ```
 
-### Get started
+### 开始
 
-You can find a custom sheet implementation in the sample module.
+你可以在样本模块中找到一个自定义表的实现。
 
-1.  Step: Create a class and extend from the class `Sheet`.
+1.  创建一个类，并从 `Sheet` 类中扩展。
 
     class CustomSheet : Sheet() {
 
-2.  Step: Implement the method: `onCreateLayoutView` and pass your custom layout.
+2.  重写 `onCreateLayoutView` 方法并传递你的自定义布局。
 
     override fun onCreateLayoutView(): View {
     return LayoutInflater.from(activity).inflate(R.layout.sheets_custom, null)
     }
 
-All of the base functionality can be used and on top of that you can extend the logic and behavior as you wish.
+所有的基本功能都可以使用，在此基础上，你可以按照自己的意愿扩展逻辑和行为。
 
-### Components
+### 组件
 
-You are free to use the components this library uses for it's sheet types.
+你可以自由地使用这个库的表单类型所使用的组件。
 
 - `SheetsTitle`
 - `SheetsContent`
@@ -680,9 +680,9 @@ You are free to use the components this library uses for it's sheet types.
 
 ## Lottie
 
-[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/lottie.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/lottie)
+[![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/lottie.svg?label=Maven%20Central)](https://search.maven.org/artifact/com.maxkeppeler.sheets/lottie)
 
-The `Lottie` modules gives you the ability to use a [Lottie animations](https://airbnb.design/lottie/) as cover view.
+`Lottie`模块让你有能力使用 [Lottie 动画](https://airbnb.design/lottie/) 作为封面视图。
 
 <details open>
 <br/>
@@ -708,9 +708,9 @@ dependencies {
 }
 ```
 
-### Usage
+### 使用方法
 
-You can use the Lottie animation as a cover for any type of sheet.
+你可以用 `Lottie 动画` 作为任何 `sheet` 类型的封面。
 
     InfoSheet().show(this) {
       title("Team Collaboration")
@@ -723,27 +723,27 @@ You can use the Lottie animation as a cover for any type of sheet.
       ...
     }
 
-| Function               | Action                |
+| 函数              | 功能                |
 | ---------------------- | --------------------- |
-| playCoverAnimation()   | Play the animation.   |
-| resumeCoverAnimation() | Resume the animation. |
-| pauseCoverAnimation()  | Pause the animation.  |
-| cancelCoverAnimation() | Cancel the animation. |
+| playCoverAnimation()   | 播放动画。   |
+| resumeCoverAnimation() | 恢复动画。 |
+| pauseCoverAnimation()  | 暂停动画。  |
+| cancelCoverAnimation() | 取消动画。 |
 
-## Appearance
+## 外观
 
-By default, the library switches to either day or night mode depending on the attr `textColorPrimary`.
-By default it uses the activity's colorPrimary. The default `highlightColor` is generated based on the color `sheetPrimaryColor`, or if not available `colorPrimary`.
+默认情况下，该库会根据 attr `textColorPrimary` 切换到白天或夜晚模式。
+默认情况下，它使用 `activity` 的 `colorPrimary`。默认的 `highlightColor` 是根据 `sheetPrimaryColor` 的颜色生成的，如果没有 `colorPrimary`，则使用 `colorPrimary`。
 
 ### Base
 
-You want a different sheet background shape?
-Then just override the corner family and radius.
+你想要一个不同的背景形状？
+那么只要覆盖 `Corner family` 和 `radius` 就可以了。
 
     <item name="sheetsCornerRadius">12dp</item>
     <item name="sheetsCornerFamily">cut</item>
 
-Just overwrite the base colors, if you want to achieve a different look of the sheets than your app.
+如果你想实现与你的应用程序不同的 `sheets` 外观，只需要重写基础颜色。
 
     <item name="sheetsPrimaryColor">@color/customPrimaryColor</item>
     <item name="sheetsHighlightColor">@color/customHighlightColor</item>
@@ -751,20 +751,20 @@ Just overwrite the base colors, if you want to achieve a different look of the s
     <item name="sheetsDividerColor">@color/customDividerColor</item>
     <item name="sheetsIconsColor">@color/customIconsColor</item>
 
-You can override the basic style of a sheet. Instead of displaying the toolbar, you can just hide it and display the typical handle.
+你可以重写一个 `sheet` 的基本风格。你可以不显示 `Toolbar`，而是直接隐藏它，显示 `typical handle`
 
     <item name="sheetsDisplayHandle">true</item>
     <item name="sheetsDisplayToolbar">false</item>
     <item name="sheetsDisplayCloseButton">false</item>
 
-Change the appearance of the title.
+改变标题的外观。
 
     <item name="sheetsTitleColor">@color/customTitleTextColor</item>
     <item name="sheetsTitleFont">@font/font</item>
     <item name="sheetsTitleLineHeight">@dimen/dimen</item>
     <item name="sheetsTitleLetterSpacing">value</item>
 
-Change the appearance of the content text.
+改变内容文本的外观。
 
     <item name="sheetsContentColor">@color/customContentTextColor</item>
     <item name="sheetsContentInverseColor">@color/customContentTextInverseColor</item>
@@ -772,28 +772,28 @@ Change the appearance of the content text.
     <item name="sheetsContentLineHeight">@dimen/dimen</item>
     <item name="sheetsContentLetterSpacing">value</item>
 
-Change the appearance of the value texts. (e.g. the time in the TimeSheet & ClockTimeSheet or the selected date & period in the Calendarsheet.)
+改变 `Text` 值的外观。例如，在 `TimeSheet` 和 `ClockTimeSheet` 中的时间或 `Calendarsheet` 中的选定日期和时期）。
 
     <item name="sheetsValueTextActiveColor">@color/customValueTextColor</item>
     <item name="sheetsValueFont">@font/font</item>
     <item name="sheetsValueLineHeight">@dimen/dimen</item>
     <item name="sheetsValueLetterSpacing">value</item>
 
-Change the appearance of the digit keys on the numerical input.
+改变数字输入的数字键的外观。
 
     <item name="sheetsDigitColor">@color/customDigitTextColor</item>
     <item name="sheetsDigitFont">@font/font</item>
     <item name="sheetsDigitLineHeight">@dimen/dimen</item>
     <item name="sheetsDigitLetterSpacing">value</item>
 
-### Buttons
+### 按钮
 
-Override the appearance of the button text.
+重写按钮文本的外观。
 
     <item name="sheetsButtonTextFont">@font/font</item>
     <item name="sheetsButtonTextLetterSpacing">value</item>
 
-Override the general appearance of the buttons (negative and positive button).
+重写按钮的一般外观（取消和确认按钮）。
 
     <item name="sheetsButtonColor">@color/customButtonColor<item>
     <item name="sheetsButtonTextFont">@font/font<item>
@@ -802,27 +802,28 @@ Override the general appearance of the buttons (negative and positive button).
     <item name="sheetsButtonCornerFamily">cut<item>
     <item name="sheetsButtonWidth">match_content/wrap_content<item>
 
-Override the appearance of the negative button.
+重写取消按钮的外观。
 
     <item name="sheetsNegativeButtonType">text_button/outlined_button/button<item>
     <item name="sheetsNegativeButtonCornerRadius">12dp<item>
     <item name="sheetsNegativeButtonCornerFamily">cut<item>
 
-Override the appearance of the positive button.
+重写确认按钮的外观。
 
     <item name="sheetsPositiveButtonType">text_button/outlined_button/button<item>
     <item name="sheetsPositiveButtonCornerRadius">12dp<item>
     <item name="sheetsPositiveButtonCornerFamily">cut<item>
 
-Override the border appearance of the outlined button.
+重写 `Outlined` 按钮的边界外观。
 
     <item name="sheetsButtonOutlinedButtonBorderColor">@color/borderColor<item>
     <item name="sheetsButtonOutlinedButtonBorderWidth">1dp<item>
 
-The corner family and radius is applied to the button shape or in the case of a outlined or text button, to the ripple background shape.
+`Corner family` 和 `radius` 会被应用到按钮的形状上，如果是 `Outlined` 或文本按钮，则应用到波纹背景形状上。
 
-**Fine control**
-You can even define the corner family and radius of the negative and positive button for each corner.
+**精准控制**
+
+您甚至可以为每个角定义 `Corner family` 以及取消和确认按钮的 `radius`。
 
     <item name="sheetsNegativeButtonBottomLeftCornerRadius">4dp<item>
     <item name="sheetsNegativeButtonBottomLeftCornerFamily">cut<item>
@@ -842,14 +843,14 @@ The size and the appearance of the handle can be changed like this:
     <item name="sheetsHandleWidth">42dp</item>
     <item name="sheetsHandleHeight">4dp</item>
 
-### OptionsSheet
+### 可选 sheet
 
-Override appearance of selected options.
+重写所选选项的外观。
 
     <item name="sheetsOptionSelectedImageColor">@color/customSelectedOptionImageColor</item>
     <item name="sheetsOptionSelectedTextColor">@color/customSelectedOptionTextColor</item>
 
-Override appearance of disabled options.
+重写禁用选项的外观。
 
     <item name="sheetsOptionDisabledImageColor">@color/customDisabledOptionImageColor</item>s
     <item name="sheetsOptionDisabledTextColor">@color/customDisabledOptionImageColor</item>
@@ -857,7 +858,7 @@ Override appearance of disabled options.
 
 ### InputSheet
 
-Override the appearance of the TextInputLayout (used for the InputEditText).
+重写 TextInputLayout（用于 InputEditText ）的外观。
 
     <item name="sheetsTextInputLayoutCornerRadius">12dp</item>
     <item name="sheetsTextInputLayoutBottomLeftCornerRadius">12dp</item>
@@ -869,37 +870,38 @@ Override the appearance of the TextInputLayout (used for the InputEditText).
     <item name="sheetsTextInputLayoutBoxStrokeErrorColor">@color/customBoxStrokeErrorColor</item>
     <item name="sheetsTextInputLayoutErrorTextColor">@color/customErrorTextColor</item>
 
-# Misc
+# 杂项
 
-## Showcase
+## 展示
 
-Check out some real apps which use this library.<br/>
-Feel free to hit me up to include your app here.
+请看一些已经使用这个库的 app。<br/>
+请随时联系我，把你的应用程序放在这里。
 
-- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist and control widgets for Spotify on your home screen. (Uses: `Info`, `Options`, `Input`, `Color`)
+- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - `Spotify` 的播放列表和控制部件在你的主屏幕上。(使用了: `Info`, `Options`, `Input`, `Color`)
 
-- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - A collaborative project to create a Free and Open Source Buddha Quotes app for Android with a focus on privacy. (Uses: `Options`, `Input`, `Color`, `Time`)
+- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - 一个合作的项目，旨在为 `Android` 创建一个免费和开源的 `Buddha Quotes` 应用程序，重点关注隐私。(使用了: `Options`, `Input`, `Color`, `Time`)
 
-## Support this project
+## 支持本项目
 
-- Leave a **Star** and tell other devs about it.
+- 点一颗 **Star** 并且告诉其他的开发者
 
-- **Watch** for updates and improvements.
+- **Watch** 进行更新和改进。
 
-- **[Open an issue](https://github.com/MaxKeppeler/sheets/issues/)** if you see or got any error.
+- **[Open an issue](https://github.com/MaxKeppeler/sheets/issues/)** 如果你看到或者发现任何的错误。
 
-- Leave your thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and showcase your implementation.
+- 在[此处](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell)表示感谢，并展示您的实现。
 
-## Motivation
+## 激励
 
-I created several sheets for my apps [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) and [Awake](https://play.google.com/store/apps/details?id=com.mk.awake) in the recent months.
-I especially wanted to have a 'writable' clock time and duration time picker in form of a sheet
-This is my first library - I'm happy about any feedback, tips etc. I hope you like it and can make use of it. :)
+最近几个月，我为我的应用程序 [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) 和 [Awake](https://play.google.com/store/apps/details?id=com.mk.awake) 创建了几个 Sheet.
+
+我特别想有一个以 sheet 的形式的 `Writable` 的时钟时间和持续时间选择器。
+这是我的第一个库-- 我很高兴得到任何反馈和提示等。我希望你喜欢它并且能够使用它。)
 
 ## Credits
 
-- Thanks to [Sasikanth](https://github.com/msasikanth) for inspiration regarding the the appearance of the sheets through [Color Sheet](https://github.com/msasikanth/ColorSheet) and [Memoire](https://play.google.com/store/apps/details?id=com.primudesigns.stories).
-- Thanks to [Aidan Follestad](https://github.com/afollestad) and his [material-dialogs](https://github.com/afollestad/material-dialogs) library for the inspiration to make this library modular.
+- 感谢 [Sasikanth](https://github.com/msasikanth) 通过 [Color Sheet](https://github.com/msasikanth/ColorSheet) 和 [Memoire](https://play.google.com/store/apps/details?id=com.primudesigns.stories) 提供的关于 sheet 外观的灵感
+- 感谢 [Aidan Follestad](https://github.com/afollestad) 和他的 [material-dialogs](https://github.com/afollestad/material-dialogs) 库，让这个库模块化。
 
 ## License
 
