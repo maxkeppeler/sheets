@@ -835,10 +835,6 @@ class CalendarSheet : Sheet() {
         dismiss()
     }
 
-    private fun LocalDate.toCalendar(): Calendar = Calendar.getInstance().apply {
-        set(year, month.ordinal, dayOfMonth)
-    }
-
     /** Build [CalendarSheet] and show it later. */
     fun build(ctx: Context, width: Int? = null, func: CalendarSheet.() -> Unit): CalendarSheet {
         this.windowContext = ctx
