@@ -42,12 +42,13 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.utils.yearMonth
 import com.maxkeppeler.sheets.calendar.databinding.SheetsCalendarBinding
+import com.maxkeppeler.sheets.calendar.utils.toCalendar
+import com.maxkeppeler.sheets.calendar.utils.toLocalDate
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomLinearLayoutManager
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetsContent
-import java.lang.IllegalStateException
 import java.time.*
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -125,32 +126,60 @@ class CalendarSheet : Sheet() {
     private var displayButtons = true
 
     /**
-     * Set the currently selected date
-     * Throws [IllegalStateException] is selection model is not [SelectionMode.DATE]
+     * Set the date that should be marked as today. By default this is the current day.
      */
-    fun setSelectedDate(date: Date) {
-        val calendar = Calendar.getInstance().apply { time = date }
-        if (selectionMode != SelectionMode.DATE) {
-            throw IllegalStateException("Only available for SelectionMode.DATE")
+    fun setTodayDate(date: Calendar) {
+       this.today = date.toLocalDate()
+    }
+
+    /**
+     * Set the date that should be marked as today. By default this is the current day.
+     */
+    fun setTodayDate(date: LocalDate) {
+        this.today = date
+    }
+
+    /**
+     * Set the selected date.
+     * @throws IllegalStateException if selection is not [SelectionMode.DATE]
+     */
+    fun setSelectedDate(date: Calendar) {
+        if (this.selectionMode != SelectionMode.DATE) throw IllegalStateException("Only available for SelectionMode.DATE")
+        else this.selectedDate = date.toLocalDate()
+    }
+
+    /**
+     * Set the selected date.
+     * @throws IllegalStateException if selection is not [SelectionMode.DATE]
+     */
+    fun setSelectedDate(date: LocalDate) {
+        if (this.selectionMode != SelectionMode.DATE) throw IllegalStateException("Only available for SelectionMode.DATE")
+        else this.selectedDate = date
+    }
+
+    /**
+     * Set the selected date range.
+     * @throws IllegalStateException if selection is not [SelectionMode.RANGE]
+     */
+    fun setSelectedDateRange(start: Calendar, end: Calendar) {
+        if (this.selectionMode != SelectionMode.RANGE) {
+            throw IllegalStateException("Only available for SelectionMode.RANGE")
         } else {
-            selectedDate = (calendar as GregorianCalendar).toZonedDateTime().toLocalDate()
+            this.selectedDateStart = start.toLocalDate()
+            this.selectedDateEnd = end.toLocalDate()
         }
     }
 
     /**
-     * Set the currently selected range date
-     * Throws [IllegalStateException] is selection model is not [SelectionMode.RANGE]
+     * Set the selected date range.
+     * @throws IllegalStateException if selection is not [SelectionMode.RANGE]
      */
-    fun setSelectedDateRange(start: Date, end: Date) {
-        if (selectionMode != SelectionMode.RANGE) {
-            throw IllegalStateException("Only available for SelectionMode.DATE")
+    fun setSelectedDateRange(start: LocalDate, end: LocalDate) {
+        if (this.selectionMode != SelectionMode.RANGE) {
+            throw IllegalStateException("Only available for SelectionMode.RANGE")
         } else {
-            Calendar.getInstance().let {
-                it.time = start
-                selectedDateStart = (it as GregorianCalendar).toZonedDateTime().toLocalDate()
-                it.time = end
-                selectedDateEnd = it.toZonedDateTime().toLocalDate()
-            }
+            this.selectedDateStart = start
+            this.selectedDateEnd = end
         }
     }
 
