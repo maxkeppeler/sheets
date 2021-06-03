@@ -411,9 +411,7 @@ class CalendarSheet : Sheet() {
 
         calendarView.scrollMode = ScrollMode.PAGED
         calendarView.setup(start, end, firstDayOfWeek)
-        calendarView.scrollToDate(today)
-        selectedDate?.let { calendarView.scrollToDate(it) }
-        selectedDateStart?.let { calendarView.scrollToDate(it) }
+        calendarView.scrollToDate(selectedDate ?: selectedDateStart ?: today)
         updateSpinnerValues()
 
         setupDayBinding()
