@@ -106,7 +106,7 @@ class CalendarSheet : Sheet() {
 
     private var maxRange: Int = 7
 
-    private var disabledDates: MutableList<Calendar> = mutableListOf()
+    private var disabledDates: MutableList<LocalDate> = mutableListOf()
     private var listener: CalendarDateListener? = null
 
     private var disableTimeLine: TimeLine? = null
@@ -185,7 +185,7 @@ class CalendarSheet : Sheet() {
      * @param disabledDates Instances of [Calendar].
      */
     fun disable(vararg disabledDates: Calendar) {
-        this.disabledDates.addAll(disabledDates.toMutableList())
+        this.disabledDates.addAll(disabledDates.mapTo(mutableListOf(), { it.toLocalDate() }))
     }
 
     /**
@@ -194,6 +194,24 @@ class CalendarSheet : Sheet() {
      * @param disabledDate Instance of [Calendar].
      */
     fun disable(disabledDate: Calendar) {
+        this.disabledDates.add(disabledDate.toLocalDate())
+    }
+
+    /**
+     * Add disabled dates which are not selectable as a date or within a range.
+     *
+     * @param disabledDates Instances of [Calendar].
+     */
+    fun disable(vararg disabledDates: LocalDate) {
+        this.disabledDates.addAll(disabledDates)
+    }
+
+    /**
+     * Add a disabled date which is not selectable as a date or within a range.
+     *
+     * @param disabledDate Instance of [Calendar].
+     */
+    fun disable(disabledDate: LocalDate) {
         this.disabledDates.add(disabledDate)
     }
 
@@ -589,22 +607,22 @@ class CalendarSheet : Sheet() {
     private fun containsSelectionDisabledDays(dateStart: LocalDate, dateEnd: LocalDate): Boolean =
         disabledDates.any { disabledDate ->
 
-            val afterStart = dateStart.dayOfMonth <= disabledDate[Calendar.DAY_OF_MONTH]
-                    && dateStart.year <= disabledDate[Calendar.YEAR]
-                    && dateStart.month.ordinal <= disabledDate[Calendar.MONTH]
+            val afterStart = dateStart.dayOfMonth <= disabledDate.dayOfMonth
+                    && dateStart.year <= disabledDate.year
+                    && dateStart.month.ordinal <= disabledDate.month.ordinal
 
-            val afterEnd = dateEnd.dayOfMonth >= disabledDate[Calendar.DAY_OF_MONTH]
-                    && dateEnd.year >= disabledDate[Calendar.YEAR]
-                    && dateEnd.month.ordinal >= disabledDate[Calendar.MONTH]
+            val afterEnd = dateEnd.dayOfMonth >= disabledDate.dayOfMonth
+                    && dateEnd.year >= disabledDate.year
+                    && dateEnd.month.ordinal >= disabledDate.month.ordinal
 
             afterStart && afterEnd
         }
 
     private fun isDateDisabled(day: CalendarDay): Boolean {
         return (disabledDates.any {
-            day.date.dayOfMonth == it[Calendar.DAY_OF_MONTH]
-                    && day.date.year == it[Calendar.YEAR]
-                    && day.date.month.ordinal == it[Calendar.MONTH]
+            day.date.dayOfMonth == it.dayOfMonth
+                    && day.date.year == it.year
+                    && day.date.month.ordinal == it.month.ordinal
         } || disablePast && day.date.isBefore(today) || disableFuture && day.date.isAfter(today))
     }
 
@@ -737,7 +755,8 @@ class CalendarSheet : Sheet() {
                 if (sameMonth) dateRangeStartNoMonth.format(it) else dateRangeStart.format(it)
             } ?: getString(R.string.sheets_date_range_from)
             val rangeEndText =
-                dateEnd?.let { dateRangeStart.format(it) } ?: getString(R.string.sheets_date_range_to)
+                dateEnd?.let { dateRangeStart.format(it) }
+                    ?: getString(R.string.sheets_date_range_to)
             dateSelected.text = getString(R.string.sheets_date_range, rangeStartText, rangeEndText)
         }
     }
