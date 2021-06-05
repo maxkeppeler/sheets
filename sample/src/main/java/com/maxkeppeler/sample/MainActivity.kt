@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
                 set(Calendar.YEAR, 1997)
                 set(Calendar.MONTH, Calendar.DECEMBER)
                 set(Calendar.DAY_OF_MONTH, 22)
-            }.time
+            }
             setSelectedDate(date)
             onPositive { dateStart, dateEnd -> // dateEnd is only not null if the selection is a range
                 dateEnd?.let {
