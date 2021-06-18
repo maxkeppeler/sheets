@@ -57,6 +57,7 @@ abstract class SheetFragment : DialogFragment() {
 
     protected var sheetStyle: SheetStyle = SheetStyle.BOTTOM_SHEET
     private var sheetTheme = Theme.BOTTOM_SHEET_DAY
+    private var draggable = true
     private var behavior = BottomSheetBehavior.STATE_EXPANDED
     private var peekHeight = 0
     protected var width: Int? = null
@@ -74,6 +75,11 @@ abstract class SheetFragment : DialogFragment() {
     override fun setStyle(style: Int, theme: Int) {
         sheetTheme = Theme.inferTheme(requireContext(), sheetStyle)
         super.setStyle(style, sheetTheme.styleRes)
+    }
+
+    /** Set if bottom-sheet is draggable. Only works with [SheetStyle.BOTTOM_SHEET]. */
+    fun draggable(draggable: Boolean) {
+        this.draggable = draggable
     }
 
     /** Set the [BottomSheetBehavior] state. */
@@ -154,6 +160,7 @@ abstract class SheetFragment : DialogFragment() {
                 val dialog = dialog as? BottomSheetDialog? ?: return
                 val dialogBehavior = dialog.behavior
                 dialogBehavior.state = behavior
+                dialogBehavior.isDraggable = draggable
                 dialogBehavior.peekHeight = peekHeight
                 dialogBehavior.addBottomSheetCallback(object :
                     BottomSheetBehavior.BottomSheetCallback() {
