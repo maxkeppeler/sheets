@@ -77,6 +77,11 @@ abstract class SheetFragment : DialogFragment() {
         super.setStyle(style, sheetTheme.styleRes)
     }
 
+    /** Set if sheet is cancelable outside. */
+    fun cancelableOutside(cancelable: Boolean) {
+        this.isCancelable = cancelable
+    }
+
     /** Set if bottom-sheet is draggable. Only works with [SheetStyle.BOTTOM_SHEET]. */
     fun draggable(draggable: Boolean) {
         this.draggable = draggable

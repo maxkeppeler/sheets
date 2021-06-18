@@ -139,11 +139,6 @@ abstract class Sheet : SheetFragment() {
         this.useCover = true
     }
 
-    /** Set if sheet is cancelable outside. */
-    fun cancelableOutside(cancelable: Boolean) {
-        this.isCancelable = cancelable
-    }
-
     /** Set the Close Button Drawable. */
     fun closeIconButton(iconButton: IconButton) {
         this.closeIconButton = iconButton
