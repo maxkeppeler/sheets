@@ -660,6 +660,8 @@ class MainActivity : AppCompatActivity() {
             }
             positiveButtonStyle(ButtonStyle.NORMAL)
             negativeButtonStyle(ButtonStyle.OUTLINED)
+            displayNegativeButton(true)
+            displayPositiveButton(true)
             drawable(R.drawable.ic_github)
             drawableColor(R.color.sheets_md_red_500)
         }
