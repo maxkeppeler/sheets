@@ -16,7 +16,7 @@ android {
 
   defaultConfig {
     minSdkVersion versions.min_sdk
-    targetSdkVersion versions.compile_sdk
+    targetSdkVersion versions.target_sdk
     versionCode versions.release_version_code
     versionName versions.release_version
   }
