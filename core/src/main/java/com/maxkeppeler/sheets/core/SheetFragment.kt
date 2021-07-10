@@ -271,6 +271,22 @@ abstract class SheetFragment : DialogFragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        fixDecoderViewPadding()
+    }
+
+    /*
+        On Android 11 the horizontal padding is zero, therefore we add a default 16dp horizontal padding.
+        https://github.com/maxkeppeler/sheets/issues/77
+     */
+    private fun fixDecoderViewPadding() {
+        dialog?.window?.decorView?.apply {
+            val padding = paddingStart
+            if (padding == 0) setPadding(16.toDp(), 0, 16.toDp(), 0)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         if (sheetStyle == SheetStyle.DIALOG) {
