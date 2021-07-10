@@ -281,9 +281,11 @@ abstract class SheetFragment : DialogFragment() {
         https://github.com/maxkeppeler/sheets/issues/77
      */
     private fun fixDecoderViewPadding() {
-        dialog?.window?.decorView?.apply {
-            val padding = paddingStart
-            if (padding == 0) setPadding(16.toDp(), 0, 16.toDp(), 0)
+        if (sheetStyle == SheetStyle.DIALOG) {
+            dialog?.window?.decorView?.apply {
+                val padding = paddingStart
+                if (padding == 0) setPadding(16.toDp(), 0, 16.toDp(), 0)
+            }
         }
     }
 
