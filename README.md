@@ -971,11 +971,11 @@ Show your appreciation by donating me a coffee. Thank you very much!
 
 Check out some apps which are using this library.<br/>
 
-- [Aquafy](https://play.google.com/store/apps/details?id=com.mk.water) - Beautiful hydration tracker and reminder. (`Info`, `Options`, `Input`, `Color`, `ClockTime`)
+- [Aquafy](http://aquafy-mk.com) - Beautiful hydration tracker and reminder.
+- [Awake](http://awake-mk.com) - Intelligent alarms and wake-up challenges and sleep tracking to improve your daily sleep and day-time quality.
+- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist and control widgets for Spotify content.
 
-- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist and control widgets for Spotify content. (`Info`, `Options`, `Input`, `Color`)
-
-- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - Open Source Buddha Quotes. (`Options`, `Input`, `Color`, `Time`)
+- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - Open Source Buddha Quotes.
 
 ## License
 
