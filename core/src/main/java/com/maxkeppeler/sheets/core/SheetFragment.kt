@@ -312,7 +312,7 @@ abstract class SheetFragment : DialogFragment() {
                 is AppCompatActivity -> show(ctx.supportFragmentManager, dialogTag)
                 is Fragment -> show(ctx.childFragmentManager, dialogTag)
                 is PreferenceFragmentCompat -> show(ctx.childFragmentManager, dialogTag)
-                else -> throw IllegalStateException("Context has no window attached.")
+                else -> throw IllegalStateException("Context ($windowContext) has no window attached.")
             }
         }
     }
