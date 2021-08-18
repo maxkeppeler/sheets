@@ -281,15 +281,9 @@ internal class ClockTimeSelector(
 
         val formatHours = if (is24HoursView) "HH" else "hh"
         val formatMinutes = "mm"
-        val timeZoneUTC = TimeZone.getTimeZone("etc/UTC")
 
-        val hours = SimpleDateFormat(formatHours).apply {
-            timeZone = timeZoneUTC
-        }.format(timeInMillis)
-
-        val minutes = SimpleDateFormat(formatMinutes).apply {
-            timeZone = timeZoneUTC
-        }.format(timeInMillis)
+        val hours = SimpleDateFormat(formatHours).format(timeInMillis)
+        val minutes = SimpleDateFormat(formatMinutes).format(timeInMillis)
 
         if (isAmTime(timeInMillis)) setAmActive()
         else setPmActive()
