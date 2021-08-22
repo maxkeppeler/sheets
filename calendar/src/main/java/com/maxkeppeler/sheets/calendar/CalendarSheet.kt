@@ -189,7 +189,7 @@ class CalendarSheet : Sheet() {
     }
 
     /** Set the max duration of the date range. */
-    fun maxRange(@IntRange(from = 2, to = 56) maxRange: Int) {
+    fun maxRange(@IntRange(from = 2) maxRange: Int) {
         this.maxRange = maxRange
     }
 
