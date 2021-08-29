@@ -76,6 +76,7 @@ class OptionsSheet : Sheet() {
     private var maxChoicesStrict = true
     private var displayButtons = false
     private var gridColumns: Int? = null
+    private var preventIconTint: Boolean? = null
 
     private val saveAllowed: Boolean
         get() {
@@ -132,6 +133,15 @@ class OptionsSheet : Sheet() {
     /** Set display mode. */
     fun displayMode(displayMode: DisplayMode) {
         this.mode = displayMode
+    }
+
+    /**
+     * Sheets applies by default a one-colored tint on the various option drawables.
+     * You can prevent this behavior in order to keep the original colors of the drawables.
+     * You can override this global settings on per-option basis through the [Option] class.
+     */
+    fun preventIconTint(preventIconTint: Boolean) {
+        this.preventIconTint = preventIconTint
     }
 
     /**
@@ -369,6 +379,7 @@ class OptionsSheet : Sheet() {
                 OptionsAdapter(
                     requireActivity(),
                     options,
+                    preventIconTint,
                     mode,
                     multipleChoices,
                     collapsedItems,

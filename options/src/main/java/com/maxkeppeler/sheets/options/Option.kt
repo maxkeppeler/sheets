@@ -90,6 +90,9 @@ class Option internal constructor() {
     internal var longClickListener: OptionLongClickListener? = null
         private set
 
+    internal var preventIconTint: Boolean? = null
+        private set
+
     constructor(@StringRes textRes: Int) : this() {
         this.titleTextRes = textRes
     }
@@ -256,6 +259,15 @@ class Option internal constructor() {
     /** Declare the option as disabled. Disabled options are not selectable anymore. */
     fun disabled(disabled: Boolean): Option {
         this.disabled = disabled
+        return this
+    }
+
+    /**
+     * Sheets applies by default a one-colored tint on the drawable representing an option.
+     * You can prevent this behavior in order to keep the original colors of the drawable.
+     */
+    fun preventIconTint(preventIconTint: Boolean): Option {
+        this.preventIconTint = preventIconTint
         return this
     }
 

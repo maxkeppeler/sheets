@@ -22,6 +22,7 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,10 +38,11 @@ import com.maxkeppeler.sheets.options.databinding.SheetsOptionsListItemBinding
 internal class OptionsAdapter(
     private val ctx: Context,
     private val options: MutableList<Option>,
+    private val globalPreventIconTint: Boolean?,
     private val type: DisplayMode,
     private val multipleChoice: Boolean,
     private val collapsedItems: Boolean,
-    private val listener: OptionsSelectionListener
+    private val listener: OptionsSelectionListener,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -49,7 +51,8 @@ internal class OptionsAdapter(
         private const val SELECTOR_STATE_SELECTED_INDEX = 1
     }
 
-    private val selectedOptions = mutableMapOf<Int, Triple<ImageView, SheetsContent, SheetsContent>>()
+    private val selectedOptions =
+        mutableMapOf<Int, Triple<ImageView, SheetsContent, SheetsContent>>()
 
     private val iconsColor = getIconColor(ctx)
     private val textColor = getTextColor(ctx)
@@ -189,7 +192,12 @@ internal class OptionsAdapter(
         }
     }
 
-    private fun showDisabled(title: SheetsContent, subtitle: SheetsContent, icon: ImageView, root: View) {
+    private fun showDisabled(
+        title: SheetsContent,
+        subtitle: SheetsContent,
+        icon: ImageView,
+        root: View,
+    ) {
         title.setTextColor(disabledTextColor)
         subtitle.setTextColor(disabledTextColor)
         icon.setColorFilter(disabledIconsColor)
@@ -240,13 +248,18 @@ internal class OptionsAdapter(
                     it)
             } ?: textColor
 
-            val iconsColor =
-                defaultIconColor ?: defaultIconColorRes?.let { ContextCompat.getColor(ctx, it) }
-                ?: iconsColor
+            val preventIconTint = option.preventIconTint ?: globalPreventIconTint
+            val iconsColor = defaultIconColor
+                ?: defaultIconColorRes?.let { ContextCompat.getColor(ctx, it) }
+                ?: takeUnless { preventIconTint == true }?.let { iconsColor }
 
             title.setTextColor(titleColor)
             subtitle.setTextColor(subtitleColor)
-            icon.setColorFilter(iconsColor)
+            iconsColor?.let { color ->
+                icon.setColorFilter(color)
+            } ?: run {
+                icon.clearColorFilter()
+            }
         }
         if (multipleChoice) {
             root.isSelected = false
@@ -256,7 +269,7 @@ internal class OptionsAdapter(
     private fun View.changeRippleAndStateColor(
         rippleColor: Int = highlightColor,
         stateIndex: Int = SELECTOR_STATE_SELECTED_INDEX,
-        stateBackgroundColor: Int = highlightColor
+        stateBackgroundColor: Int = highlightColor,
     ) {
         // Ripple drawable
         (background as RippleDrawable).apply {
@@ -264,8 +277,10 @@ internal class OptionsAdapter(
             // Selector drawable
             (getDrawable(1) as StateListDrawable).apply {
                 // Selected state drawable
-                (getStateDrawable(stateIndex) as GradientDrawable).apply {
-                    color = ColorStateList.valueOf(stateBackgroundColor)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    (getStateDrawable(stateIndex) as GradientDrawable).apply {
+                        color = ColorStateList.valueOf(stateBackgroundColor)
+                    }
                 }
             }
         }
@@ -296,11 +311,11 @@ internal class OptionsAdapter(
                 showSelected(title, subtitle, icon, root)
             }
         } else {
-            selectedOptions.forEach {
-                showDeselected(index,
-                    it.value.second,
-                    it.value.third,
-                    it.value.first,
+            selectedOptions.forEach { option ->
+                showDeselected(option.key,
+                    option.value.second,
+                    option.value.third,
+                    option.value.first,
                     root)
             }
             selectedOptions.clear()
