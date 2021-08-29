@@ -19,25 +19,20 @@
 package com.maxkeppeler.sheets.info
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import android.view.ViewGroup
+import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import com.maxkeppeler.sheets.core.PositiveListener
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.utils.getIconColor
-import com.maxkeppeler.sheets.core.utils.toBitmap
 import com.maxkeppeler.sheets.info.databinding.SheetsInfoBinding
-import java.io.ByteArrayOutputStream
 
+/** Listener that is invoked when the view is ready. */
+typealias CustomViewListener = (view: View) -> Unit
 
 /**
  * The [InfoSheet] lets you display an information or warning.
@@ -50,7 +45,9 @@ class InfoSheet : Sheet() {
 
     private var contentText: String? = null
     private var displayButtons = true
-
+    private var customViewRes: Int? = null
+    private var customView: View? = null
+    private var customViewListener: CustomViewListener? = null
     private var drawable: Drawable? = null
 
     @DrawableRes
@@ -103,6 +100,20 @@ class InfoSheet : Sheet() {
     /** Set the color of the drawable. */
     fun drawableColor(@ColorRes colorRes: Int) {
         this.drawableColor = ContextCompat.getColor(windowContext, colorRes)
+    }
+
+    /** Set a custom view. */
+    fun customView(@LayoutRes layout: Int, listener: CustomViewListener? = null) {
+        this.customViewRes = layout
+        this.customViewListener = listener
+        this.customView = null
+    }
+
+    /** Set a custom view. */
+    fun customView(view: View, listener: CustomViewListener? = null) {
+        this.customView = view
+        this.customViewListener = listener
+        this.customViewRes = null
     }
 
     /**
@@ -182,16 +193,28 @@ class InfoSheet : Sheet() {
         super.onViewCreated(view, savedInstanceState)
         displayButtonsView(displayButtons)
         with(binding) {
-            contentText?.let { content.text = it }
-            if (drawableRes != null || drawable != null) {
-                val infoIconDrawable = drawable ?: drawableRes?.let {
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        it)
+
+            val customView = customView ?: customViewRes?.let { res ->
+                LayoutInflater.from(requireContext()).inflate(res, null, false)
+            }
+
+            customView?.let {
+                binding.root.removeAllViews()
+                binding.root.addView(customView,
+                    ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT))
+            } ?: run {
+                contentText?.let { content.text = it }
+                if (drawableRes != null || drawable != null) {
+                    val infoIconDrawable = drawable ?: drawableRes?.let {
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            it)
+                    }
+                    icon.setImageDrawable(infoIconDrawable)
+                    icon.setColorFilter(drawableColor ?: getIconColor(requireContext()))
+                    icon.visibility = View.VISIBLE
                 }
-                icon.setImageDrawable(infoIconDrawable)
-                icon.setColorFilter(drawableColor ?: getIconColor(requireContext()))
-                icon.visibility = View.VISIBLE
             }
         }
     }
