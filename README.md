@@ -288,6 +288,7 @@ For the default options sheet use it as following:
 | onPositiveMultiple()         | Set listener for multiple choices.                                                     |
 | displayButtons()             | Display buttons and require a positive button click for selection.                     |
 | displayMode()                | Display options in a list or a vertical/ horizontal growing scrollable grid.           |
+| preventIconTint()                | (Global) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
 
 **Option**
 
@@ -295,6 +296,7 @@ For the default options sheet use it as following:
 | ---------- | -------------------- |
 | selected() | Preselect an option. |
 | disable()  | Disable an option.   |
+| preventIconTint()                | (Local) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
 
 **Note**: Preselected options automatically increase the current selection while disabled options decrease the maximum amount of choices.
 

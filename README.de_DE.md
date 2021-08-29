@@ -292,6 +292,7 @@ OptionsSheet().show(context) {
 | onPositiveMultiple()         | Setze einen Listener für mehrere Auswahlmöglichkeiten.                                      |
 | displayButtons()             | Stelle die Buttons dar und erzwinge einen Button-Klick um die Auswahl zu bestätigen.        |
 | displayMode()                | Stelle die Optionen als Liste oder in einem vertikalen oder horizontalen Gitter dar.        |
+| preventIconTint()                | (Global) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
 
 **Option**
 
@@ -299,6 +300,7 @@ OptionsSheet().show(context) {
 | ---------- | ----------------------------------- |
 | selected() | Markiere die Option als ausgewählt. |
 | disable()  | Markie die Option als deaktiviert.  |
+| preventIconTint()                | (Local) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
 
 **Wichtig**: Vorausgewählte Optionen erhöhen automatisch die aktuelle Auswahl, während deaktivierte Optionen die maximale Auswahl verringern.
 

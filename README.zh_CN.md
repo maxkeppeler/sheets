@@ -288,6 +288,7 @@ dependencies {
 | onPositiveMultiple()         | 设置多重选择的监听器|
 | displayButtons()             | 显示按钮，并且需要一个确认按钮点击进行选择
 | displayMode()                | 以 list/vertical/horizontal 的可滚动网格显示选项|
+| preventIconTint()                | (Global) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
 
 **可选的**
 
@@ -295,6 +296,7 @@ dependencies {
 | ---------- | -------------------- |
 | selected() | 预先选择一个选项|
 | disable()  | 禁用一个选项|
+| preventIconTint()                | (Local) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
 
 **注意**。预选的选项会自动增加当前的选择，而禁用的选项会减少最大的选择数量。
 
