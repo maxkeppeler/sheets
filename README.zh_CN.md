@@ -203,6 +203,7 @@ dependencies {
 | content()       | 设置内容文本   |
 | drawable()      | Set drawable.       |
 | drawableColor() | Set drawable color. |
+| customView() | Use a custom view. |
 
 ## Options
 

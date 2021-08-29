@@ -205,6 +205,7 @@ InfoSheet().show(context) {
 | content()       | Setze den Text für den Inhalt.     |
 | drawable()      | Setze ein Symbol links vom Inhalt. |
 | drawableColor() | Setze die Farbe für das Symbol.    |
+| customView() | Verwende eine eigene View. |
 
 ## Options
 

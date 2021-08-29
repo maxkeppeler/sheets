@@ -203,6 +203,7 @@ For the default info sheet use it as following:
 | content()       | Set content text.   |
 | drawable()      | Set drawable.       |
 | drawableColor() | Set drawable color. |
+| customView() | Use a custom view. |
 
 ## Options
 
