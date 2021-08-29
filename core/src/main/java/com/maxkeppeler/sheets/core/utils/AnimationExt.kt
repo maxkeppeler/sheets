@@ -18,10 +18,14 @@ package com.maxkeppeler.sheets.core.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.annotation.RestrictTo
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
@@ -38,7 +42,7 @@ const val ANIM_DURATION_300 = 300L
 fun View.fadeIn(
     alpha: Float = ANIM_ALPHA_MAX,
     duration: Long = ANIM_DURATION_300,
-    listener: (() -> Unit)? = null
+    listener: (() -> Unit)? = null,
 ) {
 
     animate().alpha(alpha)
@@ -46,29 +50,6 @@ fun View.fadeIn(
         .setInterpolator(AccelerateDecelerateInterpolator())
         .withEndAction { listener?.invoke() }
         .start()
-}
-
-/** Fade in a view. */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-fun animValues(
-    valueStart: Float = ANIM_ALPHA_MIN,
-    valueEnd: Float = ANIM_ALPHA_MAX,
-    duration: Long = ANIM_DURATION_300,
-    listener: (Float) -> Unit,
-    listenerFinished: () -> Unit
-): ValueAnimator {
-
-    return ValueAnimator.ofFloat(valueStart, valueEnd).apply {
-        setDuration(duration)
-        interpolator = AccelerateDecelerateInterpolator()
-        addUpdateListener { animation -> listener.invoke(animation.animatedValue as Float) }
-        addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                listenerFinished.invoke()
-            }
-        })
-        start()
-    }
 }
 
 /** Fade out a view. */
@@ -76,7 +57,7 @@ fun animValues(
 fun View.fadeOut(
     alpha: Float = ANIM_ALPHA_MIN,
     duration: Long = ANIM_DURATION_300,
-    listener: (() -> Unit)? = null
+    listener: (() -> Unit)? = null,
 ) {
 
     animate().alpha(alpha)
@@ -84,4 +65,61 @@ fun View.fadeOut(
         .setInterpolator(AccelerateDecelerateInterpolator())
         .withEndAction { listener?.invoke() }
         .start()
+}
+
+/**
+ * Lifecycle aware ValueAnimator wrapper.
+ */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+class ValueAnimationListener(
+    private val lifecycle: Lifecycle,
+    private val valueStart: Float = ANIM_ALPHA_MIN,
+    private val valueEnd: Float = ANIM_ALPHA_MAX,
+    private val duration: Long = ANIM_DURATION_300,
+    private val interpolator: TimeInterpolator = AccelerateDecelerateInterpolator(),
+    private val updateListener: (Float) -> Unit,
+    private val endListener: () -> Unit,
+) : LifecycleObserver {
+
+    private var valueAnimator: ValueAnimator? = null
+
+    private val animatorUpdateListener = ValueAnimator.AnimatorUpdateListener { animation ->
+        if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED))
+            updateListener.invoke(animation.animatedValue as Float)
+    }
+
+    private val animatorEndListener = object : AnimatorListenerAdapter() {
+        override fun onAnimationEnd(animation: Animator) {
+            if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED))
+                endListener.invoke()
+        }
+    }
+
+    init {
+        start()
+    }
+
+    private fun start() {
+        valueAnimator = ValueAnimator.ofFloat(valueStart, valueEnd)
+        valueAnimator?.addUpdateListener(animatorUpdateListener)
+        valueAnimator?.addListener(animatorEndListener)
+        valueAnimator?.interpolator = interpolator
+        valueAnimator?.duration = duration
+        valueAnimator?.start()
+    }
+
+    fun cancel() {
+        valueAnimator?.removeListener(animatorEndListener)
+        valueAnimator?.removeUpdateListener(animatorUpdateListener)
+        valueAnimator?.cancel()
+        valueAnimator = null
+    }
+
+    @Suppress("unused")
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onStart() = Unit
+
+    @Suppress("unused")
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    private fun onStop() = cancel()
 }

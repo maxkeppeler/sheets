@@ -17,7 +17,6 @@
 
 package com.maxkeppeler.sheets.calendar
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.InsetDrawable
@@ -97,7 +96,7 @@ class CalendarSheet : Sheet() {
     private lateinit var dayTodayDrawable: InsetDrawable
     private lateinit var disabledDayDrawable: InsetDrawable
 
-    private var drawableAnimator: ValueAnimator? = null
+    private var drawableAnimator: ValueAnimationListener? = null
 
     private var today = LocalDate.now()
     private var calendarViewActive: Boolean = true
@@ -129,7 +128,7 @@ class CalendarSheet : Sheet() {
      * Set the date that should be marked as today. By default this is the current day.
      */
     fun setTodayDate(date: Calendar) {
-       this.today = date.toLocalDate()
+        this.today = date.toLocalDate()
     }
 
     /**
@@ -287,7 +286,11 @@ class CalendarSheet : Sheet() {
      * @param drawableRes The drawable resource for the button icon.
      * @param positiveListener Listener that is invoked when the positive button is clicked.
      */
-    fun onPositive(@StringRes positiveRes: Int, @DrawableRes drawableRes: Int, positiveListener: CalendarDateListener? = null) {
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        @DrawableRes drawableRes: Int,
+        positiveListener: CalendarDateListener? = null,
+    ) {
         this.positiveText = windowContext.getString(positiveRes)
         this.positiveButtonDrawableRes = drawableRes
         this.listener = positiveListener
@@ -300,7 +303,11 @@ class CalendarSheet : Sheet() {
      * @param drawableRes The drawable resource for the button icon.
      * @param positiveListener Listener that is invoked when the positive button is clicked.
      */
-    fun onPositive(positiveText: String, @DrawableRes drawableRes: Int, positiveListener: CalendarDateListener? = null) {
+    fun onPositive(
+        positiveText: String,
+        @DrawableRes drawableRes: Int,
+        positiveListener: CalendarDateListener? = null,
+    ) {
         this.positiveText = positiveText
         this.positiveButtonDrawableRes = drawableRes
         this.listener = positiveListener
@@ -573,17 +580,18 @@ class CalendarSheet : Sheet() {
 
             // Range start with bg transition day view
             day.date == selectedDateStart -> {
-                drawableAnimator = animValues(0f, 255f, 300, {
-                    container.binding.shape.background =
-                        getSelectionShapeStartTransitionDrawable(it)
-                }, {
-                    container.binding.shape.fadeIn()
-                    container.binding.day.setTextAppearance(
-                        requireContext(),
-                        R.style.TextAppearance_MaterialComponents_Subtitle2
-                    )
-                    container.binding.day.setTextColor(colorTextInverse)
-                })
+                drawableAnimator = ValueAnimationListener(lifecycle, 0f, 255f, 300,
+                    updateListener = {
+                        container.binding.shape.background =
+                            getSelectionShapeStartTransitionDrawable(it)
+                    }, endListener = {
+                        container.binding.shape.fadeIn()
+                        container.binding.day.setTextAppearance(
+                            requireContext(),
+                            R.style.TextAppearance_MaterialComponents_Subtitle2
+                        )
+                        container.binding.day.setTextColor(colorTextInverse)
+                    })
             }
 
             // Range middle day view
