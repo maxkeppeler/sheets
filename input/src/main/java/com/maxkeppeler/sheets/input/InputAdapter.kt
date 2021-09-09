@@ -293,14 +293,18 @@ internal class InputAdapter(
         spinner.adapter = adapter
         val selectionIndex = input.value ?: spinnerOptions.lastIndex
         spinner.setSelection(selectionIndex)
+        spinner.tag = true // signal init setup selection
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(aV: AdapterView<*>?, v: View, i: Int, id: Long) {
                 ((aV?.getChildAt(0) as ConstraintLayout).getViewById(R.id.text) as TextView).setTextColor(
                     textColor
                 )
-                if (i == selectionIndex) return
-                input.value = i
-                listener.invoke()
+                if (spinner.tag == true) {
+                    spinner.tag = false
+                } else {
+                    input.value = i
+                    listener.invoke()
+                }
             }
 
             override fun onNothingSelected(arg0: AdapterView<*>?) = Unit
