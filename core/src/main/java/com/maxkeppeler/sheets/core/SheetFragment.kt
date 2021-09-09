@@ -22,11 +22,15 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -65,6 +69,7 @@ abstract class SheetFragment : DialogFragment() {
     protected var cornerRadiusDp: Float? = null
     private var borderStrokeWidthDp: Float? = null
     private var borderStrokeColor: Int? = null
+    private var navigationBarColor: Int? = null
 
     /** Set sheet style. */
     fun style(style: SheetStyle) {
@@ -82,6 +87,16 @@ abstract class SheetFragment : DialogFragment() {
         this.isCancelable = cancelable
     }
 
+    /** Set the color of the navigation bar. */
+    fun navigationBarColor(@ColorInt color: Int) {
+        this.navigationBarColor = color
+    }
+
+    /** Set the color of the navigation bar. */
+    fun navigationBarColorRes(@ColorRes colorRes: Int) {
+        this.navigationBarColor = ContextCompat.getColor(windowContext, colorRes)
+    }
+    
     /** Set if bottom-sheet is draggable. Only works with [SheetStyle.BOTTOM_SHEET]. */
     fun draggable(draggable: Boolean) {
         this.draggable = draggable
@@ -148,6 +163,7 @@ abstract class SheetFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSheetBehavior(view)
+        setupWindow(view)
         setupSheetBackground(view)
     }
 
@@ -181,6 +197,10 @@ abstract class SheetFragment : DialogFragment() {
                 })
             }
         })
+    }
+
+    private fun setupWindow(view: View) {
+        navigationBarColor?.let { dialog?.window?.navigationBarColor = it }
     }
 
     @CornerFamily
