@@ -43,7 +43,7 @@ class InfoSheet : Sheet() {
 
     private lateinit var binding: SheetsInfoBinding
 
-    private var contentText: String? = null
+    private var contentText: CharSequence? = null
     private var displayButtons = true
     private var customViewRes: Int? = null
     private var customView: View? = null
@@ -61,7 +61,7 @@ class InfoSheet : Sheet() {
      *
      * @param content The text for the content.
      */
-    fun content(content: String) {
+    fun content(content: CharSequence) {
         this.contentText = content
     }
 
