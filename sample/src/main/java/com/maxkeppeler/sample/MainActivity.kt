@@ -115,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             SheetExample.TIME_SS -> showTimeSheet(TimeFormat.SS)
             SheetExample.TIME_MM -> showTimeSheet(TimeFormat.MM)
             SheetExample.TIME_HH -> showTimeSheet(TimeFormat.HH)
+            SheetExample.CALENDAR_MULTIPLE_DATES -> showMultipleCalendarView()
             SheetExample.CALENDAR_RANGE_MONTH -> showCalendarSheet()
             SheetExample.CALENDAR_WEEK1 -> showCalendarSheetWeek1()
             SheetExample.CALENDAR_RANGE_WEEK2 -> showCalendarSheetWeek2()
@@ -246,6 +247,22 @@ class MainActivity : AppCompatActivity() {
                         dateStart.timeInMillis.toFormattedDate()
                     )
                 }
+            }
+        }
+    }
+
+    private fun showMultipleCalendarView() {
+        CalendarSheet().show(this) { // Build and show
+            style(getSheetStyle())
+            title("When do you want to take holidays?") // Set the title of the sheet
+            rangeYears(50)
+            selectionMode(SelectionMode.MULTIPLE)
+            calendarMode(CalendarMode.MONTH)
+            onMultiplePositive {
+                showToastLong(
+                    "CalendarSheet result range",
+                    "Num Selected: ${it.size}"
+                )
             }
         }
     }

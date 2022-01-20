@@ -28,5 +28,10 @@ enum class SelectionMode {
     /**
      * Select a start and end date for receiving a date range.
      */
-    RANGE
+    RANGE,
+
+    /**
+     * Selects multiple dates
+     */
+    MULTIPLE,
 }
