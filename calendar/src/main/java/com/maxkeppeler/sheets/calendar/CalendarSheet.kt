@@ -108,6 +108,8 @@ class CalendarSheet : Sheet() {
     private var calendarMode: CalendarMode = CalendarMode.MONTH
 
     private var maxRange: Int = 7
+    private var maxSelections: Int = -1
+    private var minSelections: Int = 1
 
     private var disabledDates: MutableList<LocalDate> = mutableListOf()
     private var listener: CalendarDateListener? = null
@@ -128,6 +130,14 @@ class CalendarSheet : Sheet() {
     private var selectedDateEnd: LocalDate? = null
     private var selectedDates: ArrayList<LocalDate> = arrayListOf()
     private var displayButtons = true
+
+    fun setMaxSelection(maxSelection: Int) {
+        this.maxSelections = maxSelection
+    }
+
+    fun setMinSelection(minSelection: Int) {
+        this.minSelections = minSelection
+    }
 
     /**
      * Set the date that should be marked as today. By default this is the current day.
@@ -161,8 +171,12 @@ class CalendarSheet : Sheet() {
         else this.selectedDate = date
     }
 
+    /**
+     * Set the selected dates
+     * @throws IllegalStateException if selection is not [SelectionMode.MULTIPLE]
+     */
     fun setSelectedDates(dates: List<LocalDate>) {
-        if (this.selectionMode != SelectionMode.MULTIPLE) throw IllegalStateException("Only available for SelectionMode.DATE")
+        if (this.selectionMode != SelectionMode.MULTIPLE) throw IllegalStateException("Only available for SelectionMode.MULTIPLE")
         else this.selectedDates = arrayListOf<LocalDate>().apply { addAll(dates) }
     }
 
@@ -961,8 +975,11 @@ class CalendarSheet : Sheet() {
                 selectedDateStart!!.atStartOfDay().toEpochSecond(ZoneOffset.UTC)
             ) < maxRangeLengthDays
 
+        val selectionQuantity = selectionMode == SelectionMode.MULTIPLE
+                && selectedDates.size >= minSelections
+                && (maxSelections != -1 || selectedDates.size <= maxSelections)
         val selectionValid = selectionMode == SelectionMode.RANGE && selectionInRange
-                || selectionMode == SelectionMode.DATE && selectedDate != null || selectionMode == SelectionMode.MULTIPLE && selectedDates.isNotEmpty()
+                || selectionMode == SelectionMode.DATE && selectedDate != null || selectionQuantity
 
         if (!displayButtons && selectionValid) {
             Handler(Looper.getMainLooper()).postDelayed({
