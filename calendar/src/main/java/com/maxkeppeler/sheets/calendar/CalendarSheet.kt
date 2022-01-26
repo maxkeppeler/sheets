@@ -131,10 +131,18 @@ class CalendarSheet : Sheet() {
     private var selectedDates: ArrayList<LocalDate> = arrayListOf()
     private var displayButtons = true
 
+    /**
+     * Sets the maximum number of dates an user is able to pick (inclusive)
+     * Only for [SelectionMode.MULTIPLE]
+     */
     fun setMaxSelection(maxSelection: Int) {
         this.maxSelections = maxSelection
     }
 
+    /**
+     * Sets the minimum number of dates an user is able to pick (inclusive)
+     * Only for [SelectionMode.MULTIPLE]
+     */
     fun setMinSelection(minSelection: Int) {
         this.minSelections = minSelection
     }
