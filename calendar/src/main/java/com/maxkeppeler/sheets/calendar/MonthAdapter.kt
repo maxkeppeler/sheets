@@ -117,7 +117,7 @@ internal class MonthAdapter(
         notifyDataSetChanged()
     }
 
-    private fun updateSelectedMonth(month: Month) {
+    fun updateSelectedMonth(month: Month) {
         selectedMonth = month
         notifyDataSetChanged()
     }

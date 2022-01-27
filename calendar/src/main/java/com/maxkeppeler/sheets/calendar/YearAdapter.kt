@@ -84,7 +84,7 @@ internal class YearAdapter(
         }
     }
 
-    private fun updateSelectedYear(year: Year) {
+    fun updateSelectedYear(year: Year) {
         selectedYear = year
         notifyDataSetChanged()
     }
