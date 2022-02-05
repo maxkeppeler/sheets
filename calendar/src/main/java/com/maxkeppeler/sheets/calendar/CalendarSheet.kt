@@ -128,7 +128,7 @@ class CalendarSheet : Sheet() {
     private var selectedDate: LocalDate? = null
     private var selectedDateStart: LocalDate? = null
     private var selectedDateEnd: LocalDate? = null
-    private var selectedDates: ArrayList<LocalDate> = arrayListOf()
+    private var selectedDates: MutableList<LocalDate> = mutableListOf()
     private var displayButtons = true
 
     /**
@@ -643,8 +643,12 @@ class CalendarSheet : Sheet() {
             }
             SelectionMode.DATE_MULTIPLE -> {
                 if (!isDateDisabled(day)) {
-                    selectedDates.add(day.date)
-                    selectedViewDate = day.date
+                    if (selectedDates.contains(day.date)) {
+                        selectedDates.remove(day.date)
+                    } else {
+                        selectedDates.add(day.date)
+                        selectedViewDate = day.date
+                    }
                 }
             }
         }
