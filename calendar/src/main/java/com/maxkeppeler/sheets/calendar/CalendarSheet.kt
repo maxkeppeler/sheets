@@ -133,7 +133,7 @@ class CalendarSheet : Sheet() {
 
     /**
      * Sets the maximum number of dates an user is able to pick (inclusive)
-     * Only for [SelectionMode.MULTIPLE]
+     * Only for [SelectionMode.DATE_MULTIPLE]
      */
     fun setMaxSelection(maxSelection: Int) {
         this.maxSelections = maxSelection
@@ -141,7 +141,7 @@ class CalendarSheet : Sheet() {
 
     /**
      * Sets the minimum number of dates an user is able to pick (inclusive)
-     * Only for [SelectionMode.MULTIPLE]
+     * Only for [SelectionMode.DATE_MULTIPLE]
      */
     fun setMinSelection(minSelection: Int) {
         this.minSelections = minSelection
@@ -181,10 +181,10 @@ class CalendarSheet : Sheet() {
 
     /**
      * Set the selected dates
-     * @throws IllegalStateException if selection is not [SelectionMode.MULTIPLE]
+     * @throws IllegalStateException if selection is not [SelectionMode.DATE_MULTIPLE]
      */
     fun setSelectedDates(dates: List<LocalDate>) {
-        if (this.selectionMode != SelectionMode.MULTIPLE) throw IllegalStateException("Only available for SelectionMode.MULTIPLE")
+        if (this.selectionMode != SelectionMode.DATE_MULTIPLE) throw IllegalStateException("Only available for SelectionMode.MULTIPLE")
         else this.selectedDates = arrayListOf<LocalDate>().apply { addAll(dates) }
     }
 
@@ -538,7 +538,7 @@ class CalendarSheet : Sheet() {
         when (selectionMode) {
             SelectionMode.DATE -> setCurrentDateText(selectedDate)
             SelectionMode.RANGE -> setCurrentDateRangeText(selectedDateStart, selectedDateEnd)
-            SelectionMode.MULTIPLE -> setCurrentDates()
+            SelectionMode.DATE_MULTIPLE -> setCurrentDates()
         }
 
         when (calendarMode) {
@@ -641,7 +641,7 @@ class CalendarSheet : Sheet() {
                     setCurrentDateRangeText(selectedDateStart, selectedDateEnd)
                 }
             }
-            SelectionMode.MULTIPLE -> {
+            SelectionMode.DATE_MULTIPLE -> {
                 if (!isDateDisabled(day)) {
                     selectedDates.add(day.date)
                     selectedViewDate = day.date
@@ -983,7 +983,7 @@ class CalendarSheet : Sheet() {
                 selectedDateStart!!.atStartOfDay().toEpochSecond(ZoneOffset.UTC)
             ) < maxRangeLengthDays
 
-        val selectionQuantity = selectionMode == SelectionMode.MULTIPLE
+        val selectionQuantity = selectionMode == SelectionMode.DATE_MULTIPLE
                 && selectedDates.size >= minSelections
                 && (maxSelections != -1 || selectedDates.size <= maxSelections)
         val selectionValid = selectionMode == SelectionMode.RANGE && selectionInRange
@@ -997,7 +997,7 @@ class CalendarSheet : Sheet() {
     }
 
     private fun save() {
-        if (selectionMode == SelectionMode.MULTIPLE) {
+        if (selectionMode == SelectionMode.DATE_MULTIPLE) {
             multipleListener?.invoke(selectedDates.map { it.toCalendar() }.toList())
         } else {
             val selectedDateCalendar = selectedDate?.toCalendar()

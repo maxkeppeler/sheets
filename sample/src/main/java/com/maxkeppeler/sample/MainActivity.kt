@@ -50,7 +50,6 @@ import com.maxkeppeler.sheets.color.ColorSheet
 import com.maxkeppeler.sheets.color.ColorView
 import com.maxkeppeler.sheets.core.*
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomStaggeredGridLayoutManager
-import com.maxkeppeler.sheets.core.utils.toDp
 import com.maxkeppeler.sheets.info.InfoSheet
 import com.maxkeppeler.sheets.input.InputSheet
 import com.maxkeppeler.sheets.input.Validation
@@ -256,7 +255,7 @@ class MainActivity : AppCompatActivity() {
             style(getSheetStyle())
             title("When do you want to take holidays?") // Set the title of the sheet
             rangeYears(50)
-            selectionMode(SelectionMode.MULTIPLE)
+            selectionMode(SelectionMode.DATE_MULTIPLE)
             calendarMode(CalendarMode.MONTH)
             onMultiplePositive {
                 showToastLong(
