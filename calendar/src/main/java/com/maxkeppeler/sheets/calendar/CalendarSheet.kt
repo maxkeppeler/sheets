@@ -980,24 +980,32 @@ class CalendarSheet : Sheet() {
 
     private fun validate(init: Boolean = false) {
 
-        val maxRangeLengthDays = TimeUnit.DAYS.toSeconds(maxRange.toLong())
+        when (selectionMode) {
+            SelectionMode.DATE,
+            SelectionMode.RANGE -> {
+                val maxRangeLengthDays = TimeUnit.DAYS.toSeconds(maxRange.toLong())
+                val selectionInRange = selectedDateEnd != null && selectedDateEnd!!.atStartOfDay()
+                    .toEpochSecond(ZoneOffset.UTC).minus(
+                        selectedDateStart!!.atStartOfDay().toEpochSecond(ZoneOffset.UTC)
+                    ) < maxRangeLengthDays
 
-        val selectionInRange = selectedDateEnd != null && selectedDateEnd!!.atStartOfDay()
-            .toEpochSecond(ZoneOffset.UTC).minus(
-                selectedDateStart!!.atStartOfDay().toEpochSecond(ZoneOffset.UTC)
-            ) < maxRangeLengthDays
+                val selectionQuantity = selectionMode == SelectionMode.DATE_MULTIPLE
+                        && selectedDates.size >= minSelections
+                        && (maxSelections != -1 || selectedDates.size <= maxSelections)
+                val selectionValid = selectionMode == SelectionMode.RANGE && selectionInRange
+                        || selectionMode == SelectionMode.DATE && selectedDate != null || selectionQuantity
 
-        val selectionQuantity = selectionMode == SelectionMode.DATE_MULTIPLE
-                && selectedDates.size >= minSelections
-                && (maxSelections != -1 || selectedDates.size <= maxSelections)
-        val selectionValid = selectionMode == SelectionMode.RANGE && selectionInRange
-                || selectionMode == SelectionMode.DATE && selectedDate != null || selectionQuantity
-
-        if (!displayButtons && selectionValid) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                save()
-            }, 600)
-        } else displayButtonPositive(selectionValid, !init)
+                if (!displayButtons && selectionValid) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        save()
+                    }, 600)
+                } else displayButtonPositive(selectionValid, !init)
+            }
+            SelectionMode.DATE_MULTIPLE -> {
+                val selectionValid = selectedDates.isNotEmpty()
+                displayButtonPositive(selectionValid, !init)
+            }
+        }
     }
 
     private fun save() {
