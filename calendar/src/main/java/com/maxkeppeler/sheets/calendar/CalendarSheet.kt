@@ -480,6 +480,10 @@ class CalendarSheet : Sheet() {
             val day = month.weekDays.first().first { it.owner == DayOwner.THIS_MONTH }
             selectedViewDate = day.date
             monthAdapter.updateCurrentYearMonth(day.date.yearMonth)
+
+            monthAdapter.updateSelectedMonth(day.date.yearMonth.month)
+            yearAdapter.updateSelectedYear(Year.of(day.date.yearMonth.year))
+
             updateSpinnerValues()
         }
     }
