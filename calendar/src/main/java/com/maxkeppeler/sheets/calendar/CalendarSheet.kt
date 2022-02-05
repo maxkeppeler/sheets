@@ -58,6 +58,9 @@ import java.util.concurrent.TimeUnit
 /** Listener which returns the selected date or selected start to end date. */
 typealias CalendarDateListener = (dateStart: Calendar, dateEnd: Calendar?) -> Unit
 
+/** Listener which return the multiple selected dates */
+typealias CalendarMultipleDatesListener = (date: List<Calendar>) -> Unit
+
 /**
  * The [CalendarSheet] lets you pick a date or date range.
  */
@@ -105,9 +108,12 @@ class CalendarSheet : Sheet() {
     private var calendarMode: CalendarMode = CalendarMode.MONTH
 
     private var maxRange: Int = 7
+    private var maxSelections: Int = -1
+    private var minSelections: Int = 1
 
     private var disabledDates: MutableList<LocalDate> = mutableListOf()
     private var listener: CalendarDateListener? = null
+    private var multipleListener: CalendarMultipleDatesListener? = null
 
     private var disableTimeLine: TimeLine? = null
 
@@ -122,7 +128,24 @@ class CalendarSheet : Sheet() {
     private var selectedDate: LocalDate? = null
     private var selectedDateStart: LocalDate? = null
     private var selectedDateEnd: LocalDate? = null
+    private var selectedDates: MutableList<LocalDate> = mutableListOf()
     private var displayButtons = true
+
+    /**
+     * Sets the maximum number of dates an user is able to pick (inclusive)
+     * Only for [SelectionMode.DATE_MULTIPLE]
+     */
+    fun setMaxSelection(maxSelection: Int) {
+        this.maxSelections = maxSelection
+    }
+
+    /**
+     * Sets the minimum number of dates an user is able to pick (inclusive)
+     * Only for [SelectionMode.DATE_MULTIPLE]
+     */
+    fun setMinSelection(minSelection: Int) {
+        this.minSelections = minSelection
+    }
 
     /**
      * Set the date that should be marked as today. By default this is the current day.
@@ -154,6 +177,15 @@ class CalendarSheet : Sheet() {
     fun setSelectedDate(date: LocalDate) {
         if (this.selectionMode != SelectionMode.DATE) throw IllegalStateException("Only available for SelectionMode.DATE")
         else this.selectedDate = date
+    }
+
+    /**
+     * Set the selected dates
+     * @throws IllegalStateException if selection is not [SelectionMode.DATE_MULTIPLE]
+     */
+    fun setSelectedDates(dates: List<LocalDate>) {
+        if (this.selectionMode != SelectionMode.DATE_MULTIPLE) throw IllegalStateException("Only available for SelectionMode.MULTIPLE")
+        else this.selectedDates = arrayListOf<LocalDate>().apply { addAll(dates) }
     }
 
     /**
@@ -213,7 +245,7 @@ class CalendarSheet : Sheet() {
      * @param disabledDates Instances of [Calendar].
      */
     fun disable(vararg disabledDates: Calendar) {
-        this.disabledDates.addAll(disabledDates.mapTo(mutableListOf(), { it.toLocalDate() }))
+        this.disabledDates.addAll(disabledDates.mapTo(mutableListOf()) { it.toLocalDate() })
     }
 
     /**
@@ -311,6 +343,76 @@ class CalendarSheet : Sheet() {
         this.positiveText = positiveText
         this.positiveButtonDrawableRes = drawableRes
         this.listener = positiveListener
+    }
+
+    /**
+     * Set a listener.
+     * (Multiple dates selection mode)
+     *
+     * @param multipleListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onMultiplePositive(multipleListener: CalendarMultipleDatesListener) {
+        this.multipleListener = multipleListener
+    }
+
+    /**
+     * Set the text of the positive button and optionally a listener.
+     * (Multiple dates selection mode)
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param multipleListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onMultiplePositive(@StringRes positiveRes: Int, multipleListener: CalendarMultipleDatesListener? = null) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.multipleListener = multipleListener
+    }
+
+    /**
+     * Set the text of the positive button and optionally a listener.
+     * (Multiple dates selection mode)
+     *
+     * @param positiveText The text for the positive button.
+     * @param multipleListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onMultiplePositive(positiveText: String, multipleListener: CalendarMultipleDatesListener? = null) {
+        this.positiveText = positiveText
+        this.multipleListener = multipleListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     * (Multiple dates selection mode)
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param multipleListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onMultiplePositive(
+        @StringRes positiveRes: Int,
+        @DrawableRes drawableRes: Int,
+        multipleListener: CalendarMultipleDatesListener? = null,
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawableRes = drawableRes
+        this.multipleListener = multipleListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     * (Multiple dates selection mode)
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawableRes The drawable resource for the button icon.
+     * @param multipleListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onMultiplePositive(
+        positiveText: String,
+        @DrawableRes drawableRes: Int,
+        multipleListener: CalendarMultipleDatesListener? = null,
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawableRes = drawableRes
+        this.multipleListener = multipleListener
     }
 
     override fun onCreateLayoutView(): View =
@@ -436,6 +538,7 @@ class CalendarSheet : Sheet() {
         when (selectionMode) {
             SelectionMode.DATE -> setCurrentDateText(selectedDate)
             SelectionMode.RANGE -> setCurrentDateRangeText(selectedDateStart, selectedDateEnd)
+            SelectionMode.DATE_MULTIPLE -> setCurrentDates()
         }
 
         when (calendarMode) {
@@ -465,7 +568,9 @@ class CalendarSheet : Sheet() {
 
         calendarView.scrollMode = ScrollMode.PAGED
         calendarView.setup(start, end, firstDayOfWeek)
-        calendarView.scrollToDate(selectedDate ?: selectedDateStart ?: today)
+        calendarView.scrollToDate(
+            selectedDate ?: selectedDateStart ?: selectedDates.firstOrNull() ?: today
+        )
         updateSpinnerValues()
 
         setupDayBinding()
@@ -540,6 +645,16 @@ class CalendarSheet : Sheet() {
                     setCurrentDateRangeText(selectedDateStart, selectedDateEnd)
                 }
             }
+            SelectionMode.DATE_MULTIPLE -> {
+                if (!isDateDisabled(day)) {
+                    if (selectedDates.contains(day.date)) {
+                        selectedDates.remove(day.date)
+                    } else {
+                        selectedDates.add(day.date)
+                        selectedViewDate = day.date
+                    }
+                }
+            }
         }
 
         updateSpinnerValues()
@@ -568,7 +683,9 @@ class CalendarSheet : Sheet() {
         when {
 
             // Single date or range start day view
-            selectedDate == day.date || selectedDateStart == day.date && selectedDateEnd == null -> {
+            selectedDate == day.date || selectedDateStart == day.date && selectedDateEnd == null || selectedDates.contains(
+                day.date
+            ) -> {
                 if (container.binding.shape.background != selectionShapeStart) {
                     container.binding.shape.alpha = 0f
                     container.binding.shape.background =
@@ -789,6 +906,12 @@ class CalendarSheet : Sheet() {
         }
     }
 
+    private fun setCurrentDates() {
+        with(binding) {
+            dateSelected.text = root.context.getString(R.string.sheets_multiple_dates_selected)
+        }
+    }
+
     private fun setCurrentDateRangeText(dateStart: LocalDate?, dateEnd: LocalDate?) {
         with(binding) {
             val sameMonth = dateStart?.monthValue == dateEnd?.monthValue
@@ -861,33 +984,47 @@ class CalendarSheet : Sheet() {
 
     private fun validate(init: Boolean = false) {
 
-        val maxRangeLengthDays = TimeUnit.DAYS.toSeconds(maxRange.toLong())
+        when (selectionMode) {
+            SelectionMode.DATE,
+            SelectionMode.RANGE -> {
+                val maxRangeLengthDays = TimeUnit.DAYS.toSeconds(maxRange.toLong())
+                val selectionInRange = selectedDateEnd != null && selectedDateEnd!!.atStartOfDay()
+                    .toEpochSecond(ZoneOffset.UTC).minus(
+                        selectedDateStart!!.atStartOfDay().toEpochSecond(ZoneOffset.UTC)
+                    ) < maxRangeLengthDays
 
-        val selectionInRange = selectedDateEnd != null && selectedDateEnd!!.atStartOfDay()
-            .toEpochSecond(ZoneOffset.UTC).minus(
-                selectedDateStart!!.atStartOfDay().toEpochSecond(ZoneOffset.UTC)
-            ) < maxRangeLengthDays
+                val selectionQuantity = selectionMode == SelectionMode.DATE_MULTIPLE
+                        && selectedDates.size >= minSelections
+                        && (maxSelections != -1 || selectedDates.size <= maxSelections)
+                val selectionValid = selectionMode == SelectionMode.RANGE && selectionInRange
+                        || selectionMode == SelectionMode.DATE && selectedDate != null || selectionQuantity
 
-        val selectionValid = selectionMode == SelectionMode.RANGE && selectionInRange
-                || selectionMode == SelectionMode.DATE && selectedDate != null
-
-        if (!displayButtons && selectionValid) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                save()
-            }, 600)
-        } else displayButtonPositive(selectionValid, !init)
+                if (!displayButtons && selectionValid) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        save()
+                    }, 600)
+                } else displayButtonPositive(selectionValid, !init)
+            }
+            SelectionMode.DATE_MULTIPLE -> {
+                val selectionValid = selectedDates.isNotEmpty()
+                displayButtonPositive(selectionValid, !init)
+            }
+        }
     }
 
     private fun save() {
+        if (selectionMode == SelectionMode.DATE_MULTIPLE) {
+            multipleListener?.invoke(selectedDates.map { it.toCalendar() }.toList())
+        } else {
+            val selectedDateCalendar = selectedDate?.toCalendar()
+            val selectedDateRangeStartCalendar = selectedDateStart?.toCalendar()
+            val selectedDateRangeEndCalendar = selectedDateEnd?.toCalendar()
 
-        val selectedDateCalendar = selectedDate?.toCalendar()
-        val selectedDateRangeStartCalendar = selectedDateStart?.toCalendar()
-        val selectedDateRangeEndCalendar = selectedDateEnd?.toCalendar()
-
-        listener?.invoke(
-            selectedDateCalendar ?: selectedDateRangeStartCalendar!!,
-            selectedDateRangeEndCalendar
-        )
+            listener?.invoke(
+                selectedDateCalendar ?: selectedDateRangeStartCalendar!!,
+                selectedDateRangeEndCalendar
+            )
+        }
 
         drawableAnimator?.cancel()
         dismiss()

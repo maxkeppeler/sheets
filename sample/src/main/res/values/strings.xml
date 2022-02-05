@@ -64,6 +64,7 @@
     <string name="calendar_week1">Calendar date picker in 1-week view</string>
     <string name="calendar_week2">Calendar date range picker in 2-week view</string>
     <string name="calendar_week3">Calendar date range picker in 3-week view</string>
+    <string name="calendar_multiple_date">Calendar Multiples Dates</string>
     <string name="info">Any text info or warning</string>
     <string name="info_cover_image_1">Cover image below the toolbar bar.</string>
     <string name="info_cover_image_2">Cover image at the top, hidden close button, additional icon button.</string>

@@ -3,4 +3,5 @@
     <string name="sheets_date_range_from" translatable="true">From</string>
     <string name="sheets_date_range_to" translatable="true">To</string>
     <string name="sheets_date_range" translatable="true">%s - %s</string>
+    <string name="sheets_multiple_dates_selected" translatable="true">Multiple Dates</string>
 </resources>

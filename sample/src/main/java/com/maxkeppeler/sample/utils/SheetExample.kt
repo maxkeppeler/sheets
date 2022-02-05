@@ -68,6 +68,8 @@ enum class SheetExample(val type: SheetType, @StringRes val textRes: Int) {
 
     CALENDAR_RANGE_WEEK3(SheetType.CALENDAR, R.string.calendar_week3),
 
+    CALENDAR_MULTIPLE_DATES(SheetType.CALENDAR, R.string.calendar_multiple_date),
+
     INPUT_SHORT(SheetType.INPUT, R.string.input_short),
 
     INPUT_LONG(SheetType.INPUT, R.string.input_long),

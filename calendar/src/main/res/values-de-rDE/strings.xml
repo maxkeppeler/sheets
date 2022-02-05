@@ -3,4 +3,5 @@
     <string name="sheets_date_range_from">Von</string>
     <string name="sheets_date_range_to">bis</string>
     <string name="sheets_date_range">%s - %s</string>
+    <string name="sheets_multiple_dates_selected">Meerdere data</string>
 </resources>
