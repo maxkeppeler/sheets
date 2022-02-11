@@ -54,10 +54,12 @@ internal class ColorAdapter(
                 callback.invoke(color)
             }
 
-            if (color == selectedColor)
+            if (color == selectedColor) {
                 colorActive.visibility = View.VISIBLE
-            else
+                colorActive.setColorFilter(getContrastColor(color))
+            } else {
                 colorActive.visibility = View.GONE
+            }
         }
     }
 

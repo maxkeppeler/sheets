@@ -49,7 +49,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:visibility="gone"
-            android:background="@drawable/sheets_ic_color_selected"
+            android:src="@drawable/sheets_ic_color_selected"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
