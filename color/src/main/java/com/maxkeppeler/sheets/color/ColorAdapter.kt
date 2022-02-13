@@ -21,7 +21,6 @@ import android.graphics.drawable.RippleDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.color.databinding.SheetsColorTemplatesItemBinding
@@ -30,11 +29,9 @@ internal class ColorAdapter(
     @ColorInt
     private val colors: MutableList<Int>,
     @ColorInt
-    private val selectedColor: Int,
+    private var selectedColor: Int,
     private val callback: ColorListener
 ) : RecyclerView.Adapter<ColorAdapter.ColorItem>() {
-
-    private var selectedItem: ImageView? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorItem =
         ColorItem(
@@ -53,25 +50,28 @@ internal class ColorAdapter(
             (background.getDrawable(1) as GradientDrawable).setColor(color)
 
             root.setOnClickListener {
-                select(colorActive)
+                select(color)
                 callback.invoke(color)
             }
 
-            if (selectedColor == color)
-                root.callOnClick()
+            if (color == selectedColor) {
+                colorActive.visibility = View.VISIBLE
+                colorActive.setColorFilter(getContrastColor(color))
+            } else {
+                colorActive.visibility = View.GONE
+            }
         }
     }
 
-    private fun select(image: ImageView) {
-        selectedItem?.visibility = View.GONE
-        selectedItem = image
-        selectedItem?.visibility = View.VISIBLE
+    private fun select(color: Int) {
+        notifyItemChanged(colors.indexOf(selectedColor))
+        notifyItemChanged(colors.indexOf(color))
+        selectedColor = color
     }
 
     fun removeSelection() {
-        selectedItem?.visibility = View.GONE
-        selectedItem = null
-        notifyDataSetChanged()
+        notifyItemChanged(colors.indexOf(selectedColor))
+        selectedColor = RecyclerView.NO_POSITION
     }
 
     override fun getItemCount(): Int = colors.size

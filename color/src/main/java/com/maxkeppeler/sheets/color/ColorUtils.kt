@@ -16,8 +16,17 @@
 
 package com.maxkeppeler.sheets.color
 
+import android.graphics.Color
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.RestrictTo
+import androidx.core.graphics.ColorUtils
+
+
+//method to determine colors luminance
+@ColorInt
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+internal fun getContrastColor(color: Int): Int = if (ColorUtils.calculateLuminance(color) < 0.35) Color.WHITE else Color.DKGRAY
 
 @ColorRes
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
