@@ -112,6 +112,10 @@ dependencies {
 | topStyle()            | 指定封面图片和 `topBar` 的样式 |
 | positiveButtonStyle() | 定义确认按钮的样式（文本、填充、轮廓) |
 | negativeButtonStyle() | 定义否定按钮的样式（文本、填充、轮廓）|
+| positiveButtonColor() | Set the positive button's main color.                                            |
+| positiveButtonColorRes() | Set the positive button's main color.                                         |
+| negativeButtonColor() | Set the negative button's main color.                                            |
+| negativeButtonColorRes() | Set the negative button's main color.                                         |
 | withIconButton()      | 在 `topBar` 中最多添加3个图标按钮 |
 | closeIconButton()     | 设置一个自定义的 `closeIconButton` |
 | displayHandle()       | 显示可调节窗口大小的控件（位于右下角） |
@@ -808,12 +812,14 @@ dependencies {
 重写取消按钮的外观。
 
     <item name="sheetsNegativeButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsNegativeButtonColor">color<item>
     <item name="sheetsNegativeButtonCornerRadius">12dp<item>
     <item name="sheetsNegativeButtonCornerFamily">cut<item>
 
 重写确认按钮的外观。
 
     <item name="sheetsPositiveButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsPositiveButtonColor">color<item>
     <item name="sheetsPositiveButtonCornerRadius">12dp<item>
     <item name="sheetsPositiveButtonCornerFamily">cut<item>
 

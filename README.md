@@ -6,7 +6,8 @@
 
   <p>
 
-Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the available sheets or build custom sheets on top of the existing functionality.
+Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the available sheets or
+build custom sheets on top of the existing functionality.
 
    <a href="https://search.maven.org/search?q=g:%22com.maxkeppeler.sheets%22">
      <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central">
@@ -54,28 +55,28 @@ Read in [Deutsch](README.de_DE.md) or [简体中文](README.zh_CN.md).
 ## Table of Contents
 
 - [Get started](#get-started)
-  - [Info Sheet](#info)
-  - [Options Sheet](#options)
-  - [Clock Time Sheet](#clock-time)
-  - [Time Sheet](#time)
-  - [Input Sheet](#input)
-  - [Calendar Sheet](#calendar)
-  - [Storage Sheet](#storage)
-  - [Color Sheet](#color)
-  - [Custom Sheet](#custom)
-  - [Lottie](#lottie)
-  - [Appearance](#appearance)
+    - [Info Sheet](#info)
+    - [Options Sheet](#options)
+    - [Clock Time Sheet](#clock-time)
+    - [Time Sheet](#time)
+    - [Input Sheet](#input)
+    - [Calendar Sheet](#calendar)
+    - [Storage Sheet](#storage)
+    - [Color Sheet](#color)
+    - [Custom Sheet](#custom)
+    - [Lottie](#lottie)
+    - [Appearance](#appearance)
 - [Misc](#misc)
-  - [Support this project](#support-this-project)
-  - [Contribute](#contribute)
-  - [Donate](#donate)
-  - [Showcase](#showcase)
-  - [License](#license)
+    - [Support this project](#support-this-project)
+    - [Contribute](#contribute)
+    - [Donate](#donate)
+    - [Showcase](#showcase)
+    - [License](#license)
 
 # Get started
 
-A sheet can dynamically be displayed as either a dialog or as a bottom-sheet.
-Check out the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
+A sheet can dynamically be displayed as either a dialog or as a bottom-sheet. Check out
+the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
 
 You have to use the `core` module as it is the foundation of any sheet.
 
@@ -111,7 +112,11 @@ Following functions can be called from any type of sheet.
 | withCoverImage()      | Add a cover image.                                                               |
 | topStyle()            | Specify the style of the cover image and top bar.                                |
 | positiveButtonStyle() | Define the style of the positive button (Text, Filled, Outlined).                |
+| positiveButtonColor() | Set the positive button's main color.                                            |
+| positiveButtonColorRes() | Set the positive button's main color.                                         |
 | negativeButtonStyle() | Define the style of the negative button (Text, Filled, Outlined).                |
+| negativeButtonColor() | Set the negative button's main color.                                            |
+| negativeButtonColorRes() | Set the negative button's main color.                                         |
 | withIconButton()      | Add up to 3 icon buttons to the top bar.                                         |
 | closeIconButton()     | Set a custom close icon button.                                                  |
 | displayHandle()       | Display the handle.                                                              |
@@ -298,7 +303,8 @@ For the default options sheet use it as following:
 | disable()  | Disable an option.   |
 | preventIconTint()                | (Local) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
 
-**Note**: Preselected options automatically increase the current selection while disabled options decrease the maximum amount of choices.
+**Note**: Preselected options automatically increase the current selection while disabled options
+decrease the maximum amount of choices.
 
 ## Clock Time
 
@@ -538,12 +544,12 @@ For the default input sheet use it as following:
 | options(MutableList of SpinnerOption) | Set a list of options with optional icon for each option. |
 | selected()                            | Set a selected index.                                     |
 
-
 ## Calendar
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/calendar.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.calendar/core)
 
-The `Calendar` Sheet lets you pick a date or date range. This type was build using the library [CalendarView](https://github.com/kizitonwose/CalendarView).
+The `Calendar` Sheet lets you pick a date or date range. This type was build using the
+library [CalendarView](https://github.com/kizitonwose/CalendarView).
 
 <details open>
 <br/><br/>
@@ -643,7 +649,8 @@ For the default storage sheet use it as following:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/color.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/color)
 
-The `Color` Sheet lets you pick a color. Display the default material colors or specify which colors can be choosen from. You can allow to chose a custom color as well.
+The `Color` Sheet lets you pick a color. Display the default material colors or specify which colors
+can be choosen from. You can allow to chose a custom color as well.
 
 <details>
 <br/><br/>
@@ -692,7 +699,9 @@ For the default color sheet use it as following:
 
 ## Custom
 
-With just the 'core' module you are able to create your own sheet based on this library. You can use some components and styles within your own custom sheet automatically. By default the buttons and toolbar view with logic is ready to be used by your own implementation.
+With just the 'core' module you are able to create your own sheet based on this library. You can use
+some components and styles within your own custom sheet automatically. By default the buttons and
+toolbar view with logic is ready to be used by your own implementation.
 
 <details>
 <br/><br/>
@@ -720,17 +729,18 @@ dependencies {
 
 You can find a custom sheet implementation in the sample module.
 
-1.  Step: Create a class and extend from the class `Sheet`.
+1. Step: Create a class and extend from the class `Sheet`.
 
-    class CustomSheet : Sheet() {
+   class CustomSheet : Sheet() {
 
-2.  Step: Implement the method: `onCreateLayoutView` and pass your custom layout.
+2. Step: Implement the method: `onCreateLayoutView` and pass your custom layout.
 
-    override fun onCreateLayoutView(): View {
-    return LayoutInflater.from(activity).inflate(R.layout.sheets_custom, null)
-    }
+   override fun onCreateLayoutView(): View { return LayoutInflater.from(activity).inflate(
+   R.layout.sheets_custom, null)
+   }
 
-All of the base functionality can be used and on top of that you can extend the logic and behavior as you wish.
+All of the base functionality can be used and on top of that you can extend the logic and behavior
+as you wish.
 
 ### Components
 
@@ -750,7 +760,8 @@ You are free to use the components this library uses for it's sheet types.
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/lottie.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/lottie)
 
-The `Lottie` modules gives you the ability to use a [Lottie animations](https://airbnb.design/lottie/) as cover view.
+The `Lottie` modules gives you the ability to use
+a [Lottie animations](https://airbnb.design/lottie/) as cover view.
 
 <details open>
 <br/>
@@ -800,13 +811,14 @@ You can use the Lottie animation as a cover for any type of sheet.
 
 ## Appearance
 
-By default, the library switches to either day or night mode depending on the attr `textColorPrimary`.
-By default it uses the activity's colorPrimary. The default `highlightColor` is generated based on the color `sheetsPrimaryColor`, or if not available `colorPrimary`.
+By default, the library switches to either day or night mode depending on the
+attr `textColorPrimary`. By default it uses the activity's colorPrimary. The
+default `highlightColor` is generated based on the color `sheetsPrimaryColor`, or if not
+available `colorPrimary`.
 
 ### Base
 
-You want a different sheet background shape?
-Then just override the corner family and radius.
+You want a different sheet background shape? Then just override the corner family and radius.
 
     <item name="sheetsCornerRadius">12dp</item>
     <item name="sheetsCornerFamily">cut</item>
@@ -819,7 +831,8 @@ Just overwrite the base colors, if you want to achieve a different look of the s
     <item name="sheetsDividerColor">@color/customDividerColor</item>
     <item name="sheetsIconsColor">@color/customIconsColor</item>
 
-You can override the basic style of a sheet. Instead of displaying the toolbar, you can just hide it and display the typical handle.
+You can override the basic style of a sheet. Instead of displaying the toolbar, you can just hide it
+and display the typical handle.
 
     <item name="sheetsDisplayHandle">true</item>
     <item name="sheetsDisplayToolbar">false</item>
@@ -840,7 +853,8 @@ Change the appearance of the content text.
     <item name="sheetsContentLineHeight">@dimen/dimen</item>
     <item name="sheetsContentLetterSpacing">value</item>
 
-Change the appearance of the value texts. (e.g. the time in the TimeSheet & ClockTimeSheet or the selected date & period in the Calendarsheet.)
+Change the appearance of the value texts. (e.g. the time in the TimeSheet & ClockTimeSheet or the
+selected date & period in the Calendarsheet.)
 
     <item name="sheetsValueTextActiveColor">@color/customValueTextColor</item>
     <item name="sheetsValueFont">@font/font</item>
@@ -873,12 +887,14 @@ Override the general appearance of the buttons (negative and positive button).
 Override the appearance of the negative button.
 
     <item name="sheetsNegativeButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsNegativeButtonColor">color<item>
     <item name="sheetsNegativeButtonCornerRadius">12dp<item>
     <item name="sheetsNegativeButtonCornerFamily">cut<item>
 
 Override the appearance of the positive button.
 
     <item name="sheetsPositiveButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsPositiveButtonColor">color<item>
     <item name="sheetsPositiveButtonCornerRadius">12dp<item>
     <item name="sheetsPositiveButtonCornerFamily">cut<item>
 
@@ -887,10 +903,12 @@ Override the border appearance of the outlined button.
     <item name="sheetsButtonOutlinedButtonBorderColor">@color/borderColor<item>
     <item name="sheetsButtonOutlinedButtonBorderWidth">1dp<item>
 
-The corner family and radius is applied to the button shape or in the case of a outlined or text button, to the ripple background shape.
+The corner family and radius is applied to the button shape or in the case of a outlined or text
+button, to the ripple background shape.
 
 **Fine control**
-You can even define the corner family and radius of the negative and positive button for each corner.
+You can even define the corner family and radius of the negative and positive button for each
+corner.
 
     <item name="sheetsNegativeButtonBottomLeftCornerRadius">4dp<item>
     <item name="sheetsNegativeButtonBottomLeftCornerFamily">cut<item>
@@ -940,13 +958,17 @@ Override the appearance of the TextInputLayout (used for the InputEditText).
 # Misc
 
 ## Support this project
+
 - Leave a star and tell others about it
 - Watch for updates and improvements.
 - [Open an issue](https://github.com/MaxKeppeler/sheets/issues/) if you see or got any error.
-- Leave your thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and showcase your implementation.
+- Leave your
+  thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and
+  showcase your implementation.
 - Donate me a coffee.
 
 ## Contribute
+
 1. Open an issue to discuss what you would like to change.
 2. Fork the Project
 3. Create your feature branch (feature-[some-name])
@@ -975,10 +997,13 @@ Show your appreciation by donating me a coffee. Thank you very much!
 Check out some apps which are using this library.<br/>
 
 - [Aquafy](http://aquafy-mk.com) - Beautiful hydration tracker and reminder.
-- [Awake](http://awake-mk.com) - Intelligent alarms and wake-up challenges and sleep tracking to improve your daily sleep and day-time quality.
-- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist and control widgets for Spotify content.
+- [Awake](http://awake-mk.com) - Intelligent alarms and wake-up challenges and sleep tracking to
+  improve your daily sleep and day-time quality.
+- [Sign for Spotify](https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2) - Playlist
+  and control widgets for Spotify content.
 
-- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - Open Source Buddha Quotes.
+- [Buddha Quotes](https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes) - Open
+  Source Buddha Quotes.
 
 ## License
 

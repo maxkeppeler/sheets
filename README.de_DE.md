@@ -108,6 +108,10 @@ Folgenden Funktionen können von jeder Art von Sheet aufgerufen werden.
 | topStyle()            | Setze den Stil für das Titelbild und der Leiste.                                        |
 | positiveButtonStyle() | Setze den Stil für den positiven Button (Text, Filled, Outlined).                       |
 | negativeButtonStyle() | Setze den Stil für den negativen Button (Text, Filled, Outlined).                       |
+| positiveButtonColor() | Set the positive button's main color.                                            |
+| positiveButtonColorRes() | Set the positive button's main color.                                         |
+| negativeButtonColor() | Set the negative button's main color.                                            |
+| negativeButtonColorRes() | Set the negative button's main color.                                         |
 | withIconButton()      | Füge bis zu 3 Icon-Buttons zur oberen Leiste hinzu.                                     |
 | closeIconButton()     | Setze eine eigenen Schließen-Icon-Button.                                               |
 | displayHandle()       | Stelle einen Griff, typisch für BottomSheets, dar.                                      |
@@ -825,12 +829,14 @@ Anstatt die Symbolleiste anzuzeigen, kannst du sie einfach ausblenden und den ty
 Überschreibe das Erscheinungsbild des negativen Buttons.
 
     <item name="sheetsNegativeButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsNegativeButtonColor">color<item>
     <item name="sheetsNegativeButtonCornerRadius">12dp<item>
     <item name="sheetsNegativeButtonCornerFamily">cut<item>
 
 Überschreibe das Erscheinungsbild des positiven Buttons.
 
     <item name="sheetsPositiveButtonType">text_button/outlined_button/button<item>
+    <item name="sheetsPositiveButtonColor">color<item>
     <item name="sheetsPositiveButtonCornerRadius">12dp<item>
     <item name="sheetsPositiveButtonCornerFamily">cut<item>
 
