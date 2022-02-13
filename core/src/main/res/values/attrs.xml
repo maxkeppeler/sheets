@@ -147,7 +147,7 @@
     <declare-styleable name="SheetsButton">
 
         <!-- Override button color. Default: sheetPrimaryColor -->
-        <attr name="sheetsButtonColor" format="reference" />
+        <attr name="sheetsButtonColor" format="color" />
 
         <!-- Override button text font. -->
         <attr name="sheetsButtonTextFont" format="reference" />
@@ -172,7 +172,7 @@
 
 
         <!-- Override outlined button border color. -->
-        <attr name="sheetsButtonOutlinedButtonBorderColor" format="reference" />
+        <attr name="sheetsButtonOutlinedButtonBorderColor" format="color" />
 
         <!-- Override outlined button border width.  -->
         <attr name="sheetsButtonOutlinedButtonBorderWidth" format="dimension" />
@@ -188,8 +188,11 @@
             <enum name="button" value="2" />
         </attr>
 
+        <!-- Override main button color. -->
+        <attr name="sheetsNegativeButtonColor" format="color" />
+
         <!-- Override outlined button border color. -->
-        <attr name="sheetsNegativeButtonOutlinedButtonBorderColor" format="reference" />
+        <attr name="sheetsNegativeButtonOutlinedButtonBorderColor" format="color" />
 
         <!-- Override outlined button border width.  -->
         <attr name="sheetsNegativeButtonOutlinedButtonBorderWidth" format="dimension" />
@@ -250,8 +253,11 @@
             <enum name="button" value="2" />
         </attr>
 
+        <!-- Override main button color. -->
+        <attr name="sheetsPositiveButtonColor" format="color" />
+
         <!-- Override outlined button border color. -->
-        <attr name="sheetsPositiveButtonOutlinedButtonBorderColor" format="reference" />
+        <attr name="sheetsPositiveButtonOutlinedButtonBorderColor" format="color" />
 
         <!-- Override outlined button border width.  -->
         <attr name="sheetsPositiveButtonOutlinedButtonBorderWidth" format="dimension" />
@@ -313,10 +319,10 @@
         <attr name="sheetsHandleHeight" format="dimension" />
 
         <!-- Override handle fill color. -->
-        <attr name="sheetsHandleFillColor" format="reference|color" />
+        <attr name="sheetsHandleFillColor" format="color" />
 
         <!-- Override handle border color. -->
-        <attr name="sheetsHandleBorderColor" format="reference" />
+        <attr name="sheetsHandleBorderColor" format="color" />
 
         <!-- Override handle border width.  -->
         <attr name="sheetsHandleBorderWidth" format="dimension" />
