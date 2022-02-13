@@ -8,7 +8,6 @@ apply from: rootProject.file("dependencies.gradle")
 android {
 
   compileSdkVersion versions.compile_sdk
-  buildToolsVersion versions.build_tools
 
   buildFeatures {
     viewBinding true
