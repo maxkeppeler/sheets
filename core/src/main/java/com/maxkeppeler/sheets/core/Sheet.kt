@@ -93,6 +93,12 @@ abstract class Sheet : SheetFragment() {
     private var negativeButtonStyle: ButtonStyle? = null
     private var positiveButtonStyle: ButtonStyle? = null
 
+    @ColorInt
+    private var negativeButtonColor: Int? = null
+
+    @ColorInt
+    private var positiveButtonColor: Int? = null
+
     private var useCover: Boolean = false
     private var coverImage: Image? = null
     private var coverAnimationView: Any? = null
@@ -133,6 +139,26 @@ abstract class Sheet : SheetFragment() {
     /** Set the positive button style. */
     fun positiveButtonStyle(positiveButtonStyle: ButtonStyle) {
         this.positiveButtonStyle = positiveButtonStyle
+    }
+
+    /** Set the negative button color. */
+    fun negativeButtonColorRes(@ColorRes negativeButtonColor: Int) {
+        this.negativeButtonColor = ContextCompat.getColor(windowContext, negativeButtonColor)
+    }
+
+    /** Set the positive button color. */
+    fun positiveButtonColorRes(@ColorRes positiveButtonColor: Int) {
+        this.positiveButtonColor = ContextCompat.getColor(windowContext, positiveButtonColor)
+    }
+
+    /** Set the negative button color. */
+    fun negativeButtonColor(@ColorInt negativeButtonColor: Int) {
+        this.negativeButtonColor = negativeButtonColor
+    }
+
+    /** Set the positive button color. */
+    fun positiveButtonColor(@ColorInt positiveButtonColor: Int) {
+        this.positiveButtonColor = positiveButtonColor
     }
 
     /** Set a cover image. */
@@ -632,6 +658,7 @@ abstract class Sheet : SheetFragment() {
         if (displayNegativeButton) {
             base.buttons.btnNegativeContainer.setupNegativeButton(
                 buttonStyle = negativeButtonStyle,
+                buttonColor = negativeButtonColor,
                 btnText = negativeText ?: getString(R.string.sheets_cancel),
                 btnDrawable = negativeButtonDrawableRes
             ) { negativeListener?.invoke(); dismiss() }
@@ -640,6 +667,7 @@ abstract class Sheet : SheetFragment() {
         if (displayPositiveButton) {
             base.buttons.btnPositiveContainer.setupPositiveButton(
                 buttonStyle = positiveButtonStyle,
+                buttonColor = positiveButtonColor,
                 btnText = positiveText ?: getString(R.string.sheets_ok),
                 btnDrawable = positiveButtonDrawableRes
             ) { positiveListener?.invoke(); dismiss() }
