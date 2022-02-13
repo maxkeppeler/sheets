@@ -25,6 +25,9 @@
     <!-- Override background color. -->
     <attr name="sheetsBackgroundColor" format="color" />
 
+    <!-- Override navigation bar color. -->
+    <attr name="sheetsNavigationBarColor" format="color" />
+
     <!-- Override the divider color. -->
     <attr name="sheetsDividerColor" format="color" />
 

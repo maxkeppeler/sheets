@@ -25,6 +25,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.activity.ComponentActivity
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
@@ -40,6 +41,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.maxkeppeler.sheets.R
 import com.maxkeppeler.sheets.core.utils.*
 
 
@@ -200,7 +202,8 @@ abstract class SheetFragment : DialogFragment() {
     }
 
     private fun setupWindow(view: View) {
-        navigationBarColor?.let { dialog?.window?.navigationBarColor = it }
+        val navBarColor = navigationBarColor ?: getSheetNavigationBarColor(windowContext)
+        navBarColor?.let { dialog?.window?.navigationBarColor = it }
     }
 
     @CornerFamily

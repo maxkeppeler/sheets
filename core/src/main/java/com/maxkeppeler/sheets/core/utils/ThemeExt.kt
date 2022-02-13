@@ -40,6 +40,13 @@ fun colorOfAttr(ctx: Context, @AttrRes attr: Int): Int {
 }
 
 /** Get a color by a theme attribute. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun colorOfAttrOrNull(ctx: Context, @AttrRes attr: Int): Int? {
+    return colorOfAttr(ctx, attr).takeUnless { it == 0 }
+}
+
+/** Get a color by a theme attribute. */
 @SuppressLint("ResourceType")
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 @ColorInt
@@ -50,6 +57,14 @@ fun colorOfAttrs(ctx: Context, @AttrRes vararg attrs: Int): Int {
         if (color != 0) return color
     }
     return 0
+}
+
+/** Get a color by a theme attribute. */
+@SuppressLint("ResourceType")
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun colorOfAttrsOrNull(ctx: Context, @AttrRes vararg attrs: Int): Int? {
+    return colorOfAttrs(ctx, *attrs).takeUnless { it == 0 }
 }
 
 /** Get a color by a theme attribute of a specific style. */
@@ -158,6 +173,15 @@ fun getTextInverseColor(ctx: Context): Int = colorOfAttrs(
     R.attr.sheetsContentInverseColor,
     // 2. Resolve default primary text inverse color attr.
     android.R.attr.textColorPrimaryInverse
+)
+
+/** Get navigation bar color. */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+@ColorInt
+fun getSheetNavigationBarColor(ctx: Context): Int? = colorOfAttrsOrNull(
+    ctx,
+    R.attr.sheetsNavigationBarColor,
+    R.attr.sheetsBackgroundColor
 )
 
 /** Get background color. */
