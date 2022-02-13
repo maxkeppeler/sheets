@@ -59,6 +59,7 @@ class SheetButtonContainer
 
     private fun createButton(
         style: ButtonStyle? = null,
+        buttonColor: Int? = null,
         btnText: String,
         @DrawableRes btnDrawable: Int?,
         btnListener: ButtonClickListener,
@@ -78,22 +79,31 @@ class SheetButtonContainer
             R.attr.sheetsPrimaryColor,
             R.attr.colorPrimary
         )
-        val rippleColor = getHighlightOfColor(primaryColor)
 
         val btnWidthLayoutParam =
             intOfAttrs(ctx, R.attr.sheetsButtonWidth) ?: ViewGroup.LayoutParams.WRAP_CONTENT
 
         gravity = Gravity.CENTER
 
-        val outlinedButtonBorderWidth = dimensionOfAttrs(ctx,
+        val outlinedButtonBorderWidth = dimensionOfAttrs(
+            ctx,
             if (negative) R.attr.sheetsNegativeButtonOutlinedButtonBorderWidth else R.attr.sheetsPositiveButtonOutlinedButtonBorderWidth,
             R.attr.sheetsButtonOutlinedButtonBorderWidth
         )
 
-        val outlinedButtonBorderColor = colorOfAttrs(ctx,
+        val outlinedButtonBorderColor = colorOfAttrs(
+            ctx,
             if (negative) R.attr.sheetsNegativeButtonOutlinedButtonBorderColor else R.attr.sheetsPositiveButtonOutlinedButtonBorderColor,
             R.attr.sheetsButtonOutlinedButtonBorderColor
         )
+
+        val mainButtonColor = buttonColor ?: colorOfAttrsOrNull(
+            ctx,
+            if (negative) R.attr.sheetsNegativeButtonColor else R.attr.sheetsPositiveButtonColor,
+            R.attr.sheetsButtonColor
+        ) ?: primaryColor
+
+        val rippleColor = getHighlightOfColor(mainButtonColor)
 
         addView(SheetsButton(ctx, null, buttonStyle.styleRes).apply {
 
@@ -104,7 +114,7 @@ class SheetButtonContainer
             btnDrawable?.let { icon = ContextCompat.getDrawable(context, it) }
             iconGravity = MaterialButton.ICON_GRAVITY_TEXT_START
             iconPadding = BUTTON_ICON_PADDING.toDp()
-            iconTint = ColorStateList.valueOf(primaryColor)
+            iconTint = ColorStateList.valueOf(mainButtonColor)
             minWidth = BUTTON_MIN_WIDTH.toDp()
             minimumWidth = BUTTON_MIN_WIDTH.toDp()
 
@@ -113,11 +123,11 @@ class SheetButtonContainer
             when (buttonStyle) {
                 ButtonStyle.TEXT, ButtonStyle.OUTLINED -> {
                     setRippleColor(ColorStateList.valueOf(rippleColor))
-                    setTextColor(primaryColor)
+                    setTextColor(mainButtonColor)
                 }
                 ButtonStyle.NORMAL -> {
                     icon?.setColorFilter(currentTextColor, PorterDuff.Mode.SRC_ATOP)
-                    setBackgroundColor(primaryColor)
+                    setBackgroundColor(mainButtonColor)
                 }
             }
 
@@ -143,6 +153,7 @@ class SheetButtonContainer
     /** Setup a negative button. */
     fun setupNegativeButton(
         buttonStyle: ButtonStyle?,
+        buttonColor: Int?,
         btnText: String,
         @DrawableRes btnDrawable: Int?,
         btnListener: ButtonClickListener,
@@ -217,12 +228,13 @@ class SheetButtonContainer
             setTopRightCorner(negBtnTopRightFamily, negBtnTopRightRadius.toDp())
         }
 
-        createButton(buttonStyle, btnText, btnDrawable, btnListener, true, shapeModel)
+        createButton(buttonStyle, buttonColor, btnText, btnDrawable, btnListener, true, shapeModel)
     }
 
     /** Setup a positive button. */
     fun setupPositiveButton(
         buttonStyle: ButtonStyle?,
+        buttonColor: Int?,
         btnText: String,
         @DrawableRes btnDrawable: Int?,
         btnListener: ButtonClickListener,
@@ -297,7 +309,7 @@ class SheetButtonContainer
             setTopRightCorner(posBtnTopRightFamily, posBtnTopRightRadius.toDp())
         }
 
-        createButton(buttonStyle, btnText, btnDrawable, btnListener, false, shapeModel)
+        createButton(buttonStyle, buttonColor, btnText, btnDrawable, btnListener, false, shapeModel)
     }
 
     /** Make positive button clickable. */
