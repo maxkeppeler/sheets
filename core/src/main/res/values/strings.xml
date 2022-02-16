@@ -16,9 +16,6 @@
 
 <resources>
 
-    <string name="sheets_ok" translatable="true">OK</string>
-    <string name="sheets_cancel" translatable="true">Cancel</string>
-
     <string name="sheets_at_least_placeholder" translatable="true">At least %1$s</string>
     <string name="sheets_at_most_placeholder" translatable="true">At most %1$s</string>
 

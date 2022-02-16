@@ -659,7 +659,7 @@ abstract class Sheet : SheetFragment() {
             base.buttons.btnNegativeContainer.setupNegativeButton(
                 buttonStyle = negativeButtonStyle,
                 buttonColor = negativeButtonColor,
-                btnText = negativeText ?: getString(R.string.sheets_cancel),
+                btnText = negativeText ?: getString(android.R.string.cancel),
                 btnDrawable = negativeButtonDrawableRes
             ) { negativeListener?.invoke(); dismiss() }
         }
@@ -668,7 +668,7 @@ abstract class Sheet : SheetFragment() {
             base.buttons.btnPositiveContainer.setupPositiveButton(
                 buttonStyle = positiveButtonStyle,
                 buttonColor = positiveButtonColor,
-                btnText = positiveText ?: getString(R.string.sheets_ok),
+                btnText = positiveText ?: getString(android.R.string.ok),
                 btnDrawable = positiveButtonDrawableRes
             ) { positiveListener?.invoke(); dismiss() }
         }

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="sheets_cancel">Abbrechen</string>
-    <string name="sheets_ok">Ok</string>
     <string name="sheets_am">vm.</string>
     <string name="sheets_pm">nm.</string>
     <string name="sheets_at_least_placeholder">Wähle mind. %1$s</string>
