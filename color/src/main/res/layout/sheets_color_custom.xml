@@ -104,6 +104,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/labelBarrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="alphaLabel,redLabel,greenLabel,blueLabel" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/valueBarrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="alphaValue,redValue,greenValue,blueValue" />
+
     <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/alphaLabel"
         style="@style/TextAppearance.MaterialComponents.Body2"
@@ -120,16 +134,16 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/alphaLabel"
-        app:layout_constraintEnd_toStartOf="@+id/alphaValue"
-        app:layout_constraintStart_toEndOf="@+id/alphaLabel"
+        app:layout_constraintEnd_toStartOf="@+id/valueBarrier"
+        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
         app:layout_constraintTop_toTopOf="@+id/alphaLabel" />
 
     <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/alphaValue"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        style="@style/TextAppearance.MaterialComponents.Subtitle2"
         app:layout_constraintBottom_toBottomOf="@+id/alphaLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/alphaLabel" />
@@ -151,8 +165,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/redLabel"
-        app:layout_constraintEnd_toStartOf="@+id/redValue"
-        app:layout_constraintStart_toEndOf="@+id/redLabel"
+        app:layout_constraintEnd_toStartOf="@+id/valueBarrier"
+        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
         app:layout_constraintTop_toTopOf="@+id/redLabel" />
 
     <com.maxkeppeler.sheets.core.views.SheetsContent
@@ -180,8 +194,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/greenLabel"
-        app:layout_constraintEnd_toStartOf="@+id/greenValue"
-        app:layout_constraintStart_toEndOf="@+id/greenLabel"
+        app:layout_constraintEnd_toStartOf="@+id/valueBarrier"
+        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
         app:layout_constraintTop_toTopOf="@+id/greenLabel" />
 
     <com.maxkeppeler.sheets.core.views.SheetsContent
@@ -211,8 +225,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/blueLabel"
-        app:layout_constraintEnd_toStartOf="@+id/blueValue"
-        app:layout_constraintStart_toEndOf="@+id/blueLabel"
+        app:layout_constraintEnd_toStartOf="@+id/valueBarrier"
+        app:layout_constraintStart_toEndOf="@+id/labelBarrier"
         app:layout_constraintTop_toTopOf="@+id/blueLabel" />
 
     <com.maxkeppeler.sheets.core.views.SheetsContent

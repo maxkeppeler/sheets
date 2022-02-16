@@ -321,10 +321,7 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
                 argbValues.first().visibility = View.GONE
             }
 
-            val maxLength: Int = argbLabelTexts.minByOrNull { it.length }!!.length
-            argbLabels.forEach { it.widthByLength(maxLength) }
             argbLabelTexts.forEachIndexed { i, s -> argbLabels[i].text = s }
-
             hexValue.text = getHex(defaultColor ?: selectedColor)
             updateColor()
 
