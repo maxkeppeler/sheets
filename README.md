@@ -445,10 +445,10 @@ dependencies {
 
 For the default input sheet use it as following:
 
-    InputSheet()).show(context) {
+    InputSheet().show(context) {
         title("Short survey")
       with(InputEditText {
-        required())
+        required()
         label("Your favorite TV-Show")
         hint("The Mandalorian, ...")
         validationListener { value -> } // Add custom validation logic
