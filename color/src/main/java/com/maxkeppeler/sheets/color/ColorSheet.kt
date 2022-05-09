@@ -21,6 +21,7 @@ package com.maxkeppeler.sheets.color
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
@@ -192,7 +193,7 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
         listener: ColorListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = listener
     }
 
@@ -209,7 +210,41 @@ class ColorSheet : Sheet(), SeekBar.OnSeekBarChangeListener {
         listener: ColorListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = listener
+    }
+
+    /**
+     * Set the text of the positive button and set the [ColorListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the selected color when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        drawable: Drawable,
+        listener: ColorListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = drawable
+        this.listener = listener
+    }
+
+    /**
+     *  Set the text of the positive button and set the [ColorListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the selected color when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        drawable: Drawable,
+        listener: ColorListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = drawable
         this.listener = listener
     }
 

@@ -21,6 +21,7 @@ package com.maxkeppeler.sheets.core.views
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -61,7 +62,7 @@ class SheetButtonContainer
         style: ButtonStyle? = null,
         buttonColor: Int? = null,
         btnText: String,
-        @DrawableRes btnDrawable: Int?,
+        btnDrawable: Drawable?,
         btnListener: ButtonClickListener,
         negative: Boolean,
         shapeModel: ShapeAppearanceModel.Builder,
@@ -111,7 +112,7 @@ class SheetButtonContainer
                 ViewGroup.LayoutParams(btnWidthLayoutParam, ViewGroup.LayoutParams.WRAP_CONTENT)
 
             text = btnText
-            btnDrawable?.let { icon = ContextCompat.getDrawable(context, it) }
+            btnDrawable?.let { icon = btnDrawable }
             iconGravity = MaterialButton.ICON_GRAVITY_TEXT_START
             iconPadding = BUTTON_ICON_PADDING.toDp()
             iconTint = ColorStateList.valueOf(mainButtonColor)
@@ -155,7 +156,7 @@ class SheetButtonContainer
         buttonStyle: ButtonStyle?,
         buttonColor: Int?,
         btnText: String,
-        @DrawableRes btnDrawable: Int?,
+        btnDrawable: Drawable?,
         btnListener: ButtonClickListener,
     ) {
 
@@ -236,7 +237,7 @@ class SheetButtonContainer
         buttonStyle: ButtonStyle?,
         buttonColor: Int?,
         btnText: String,
-        @DrawableRes btnDrawable: Int?,
+        btnDrawable: Drawable?,
         btnListener: ButtonClickListener,
     ) {
 

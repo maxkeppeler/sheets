@@ -19,6 +19,7 @@
 package com.maxkeppeler.sheets.options
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -28,8 +29,10 @@ import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
-import androidx.annotation.*
+import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.core.Sheet
@@ -195,7 +198,7 @@ class OptionsSheet : Sheet() {
         listener: OptionListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = listener
     }
 
@@ -212,9 +215,45 @@ class OptionsSheet : Sheet() {
         listener: OptionListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = listener
     }
+
+
+    /**
+     * Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        drawable: Drawable,
+        listener: OptionListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = drawable
+        this.listener = listener
+    }
+
+    /**
+     *  Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        drawable: Drawable,
+        listener: OptionListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = drawable
+        this.listener = listener
+    }
+
 
     /**
      * Set the [OptionListener].
@@ -260,7 +299,7 @@ class OptionsSheet : Sheet() {
         listener: OptionsListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listenerMultiple = listener
     }
 
@@ -277,7 +316,41 @@ class OptionsSheet : Sheet() {
         listener: OptionsListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listenerMultiple = listener
+    }
+
+    /**
+     * Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositiveMultiple(
+        @StringRes positiveRes: Int,
+        drawable: Drawable,
+        listener: OptionsListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = drawable
+        this.listenerMultiple = listener
+    }
+
+    /**
+     *  Set the text and icon of the positive button and set the [OptionListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the selected options when the positive button is clicked.
+     */
+    fun onPositiveMultiple(
+        positiveText: String,
+        drawable: Drawable,
+        listener: OptionsListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = drawable
         this.listenerMultiple = listener
     }
 

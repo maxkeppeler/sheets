@@ -160,7 +160,7 @@ class InfoSheet : Sheet() {
         positiveListener: PositiveListener? = null,
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.positiveListener = positiveListener
     }
 
@@ -177,7 +177,41 @@ class InfoSheet : Sheet() {
         positiveListener: PositiveListener? = null,
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.positiveListener = positiveListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param positiveListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        drawable: Drawable,
+        positiveListener: PositiveListener? = null,
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = drawable
+        this.positiveListener = positiveListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param positiveListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        drawable: Drawable,
+        positiveListener: PositiveListener? = null,
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = drawable
         this.positiveListener = positiveListener
     }
 

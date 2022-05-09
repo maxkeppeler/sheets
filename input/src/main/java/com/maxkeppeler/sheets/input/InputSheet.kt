@@ -19,12 +19,14 @@
 package com.maxkeppeler.sheets.input
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
@@ -110,8 +112,7 @@ class InputSheet : Sheet() {
         listener: InputListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
-
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = listener
     }
 
@@ -128,7 +129,42 @@ class InputSheet : Sheet() {
         listener: InputListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = listener
+    }
+
+
+    /**
+     * Set the text and icon of the positive button and set the [InputListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the new input data when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        drawable: Drawable,
+        listener: InputListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = drawable
+        this.listener = listener
+    }
+
+    /**
+     *  Set the text and icon of the positive button and set the [InputListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the new input data when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        drawable: Drawable,
+        listener: InputListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = drawable
         this.listener = listener
     }
 

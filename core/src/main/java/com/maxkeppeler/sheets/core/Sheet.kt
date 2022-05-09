@@ -31,7 +31,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import coil.loadAny
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.maxkeppeler.sheets.R
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.databinding.SheetsBaseBinding
 
@@ -118,11 +117,8 @@ abstract class Sheet : SheetFragment() {
     protected var positiveText: String? = null
     private var negativeText: String? = null
 
-    @DrawableRes
-    protected var positiveButtonDrawableRes: Int? = null
-
-    @DrawableRes
-    private var negativeButtonDrawableRes: Int? = null
+    protected var positiveButtonDrawable: Drawable? = null
+    private var negativeButtonDrawable: Drawable? = null
 
     private var customLayoutHeight: Int? = null
 
@@ -298,7 +294,7 @@ abstract class Sheet : SheetFragment() {
         negativeListener: NegativeListener? = null
     ) {
         this.negativeText = windowContext.getString(negativeRes)
-        this.negativeButtonDrawableRes = drawableRes
+        this.negativeButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.negativeListener = negativeListener
     }
 
@@ -315,7 +311,7 @@ abstract class Sheet : SheetFragment() {
         negativeListener: NegativeListener? = null
     ) {
         this.negativeText = negativeText
-        this.negativeButtonDrawableRes = drawableRes
+        this.negativeButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.negativeListener = negativeListener
     }
 
@@ -660,7 +656,7 @@ abstract class Sheet : SheetFragment() {
                 buttonStyle = negativeButtonStyle,
                 buttonColor = negativeButtonColor,
                 btnText = negativeText ?: getString(android.R.string.cancel),
-                btnDrawable = negativeButtonDrawableRes
+                btnDrawable = negativeButtonDrawable
             ) { negativeListener?.invoke(); dismiss() }
         }
 
@@ -669,7 +665,7 @@ abstract class Sheet : SheetFragment() {
                 buttonStyle = positiveButtonStyle,
                 buttonColor = positiveButtonColor,
                 btnText = positiveText ?: getString(android.R.string.ok),
-                btnDrawable = positiveButtonDrawableRes
+                btnDrawable = positiveButtonDrawable
             ) { positiveListener?.invoke(); dismiss() }
         }
     }

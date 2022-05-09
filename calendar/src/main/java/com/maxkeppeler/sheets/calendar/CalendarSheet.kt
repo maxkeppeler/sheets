@@ -19,6 +19,7 @@ package com.maxkeppeler.sheets.calendar
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.InsetDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -32,6 +33,7 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntRange
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -324,7 +326,7 @@ class CalendarSheet : Sheet() {
         positiveListener: CalendarDateListener? = null,
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = positiveListener
     }
 
@@ -341,7 +343,7 @@ class CalendarSheet : Sheet() {
         positiveListener: CalendarDateListener? = null,
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = positiveListener
     }
 
@@ -362,7 +364,10 @@ class CalendarSheet : Sheet() {
      * @param positiveRes The String resource id for the positive button.
      * @param multipleListener Listener that is invoked when the positive button is clicked.
      */
-    fun onMultiplePositive(@StringRes positiveRes: Int, multipleListener: CalendarMultipleDatesListener? = null) {
+    fun onMultiplePositive(
+        @StringRes positiveRes: Int,
+        multipleListener: CalendarMultipleDatesListener? = null
+    ) {
         this.positiveText = windowContext.getString(positiveRes)
         this.multipleListener = multipleListener
     }
@@ -374,7 +379,10 @@ class CalendarSheet : Sheet() {
      * @param positiveText The text for the positive button.
      * @param multipleListener Listener that is invoked when the positive button is clicked.
      */
-    fun onMultiplePositive(positiveText: String, multipleListener: CalendarMultipleDatesListener? = null) {
+    fun onMultiplePositive(
+        positiveText: String,
+        multipleListener: CalendarMultipleDatesListener? = null
+    ) {
         this.positiveText = positiveText
         this.multipleListener = multipleListener
     }
@@ -393,7 +401,7 @@ class CalendarSheet : Sheet() {
         multipleListener: CalendarMultipleDatesListener? = null,
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.multipleListener = multipleListener
     }
 
@@ -411,7 +419,44 @@ class CalendarSheet : Sheet() {
         multipleListener: CalendarMultipleDatesListener? = null,
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.multipleListener = multipleListener
+    }
+
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     * (Multiple dates selection mode)
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param multipleListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onMultiplePositive(
+        @StringRes positiveRes: Int,
+        drawable: Drawable,
+        multipleListener: CalendarMultipleDatesListener? = null,
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = drawable
+        this.multipleListener = multipleListener
+    }
+
+    /**
+     * Set the text and icon of the positive button and optionally a listener.
+     * (Multiple dates selection mode)
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param multipleListener Listener that is invoked when the positive button is clicked.
+     */
+    fun onMultiplePositive(
+        positiveText: String,
+        drawable: Drawable,
+        multipleListener: CalendarMultipleDatesListener? = null,
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = drawable
         this.multipleListener = multipleListener
     }
 

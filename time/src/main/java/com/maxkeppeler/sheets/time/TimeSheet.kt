@@ -19,11 +19,13 @@
 package com.maxkeppeler.sheets.time
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.time.databinding.SheetsTimeBinding
 
@@ -111,7 +113,7 @@ class TimeSheet : Sheet() {
         listener: DurationTimeListener? = null
     ) {
         this.positiveText = windowContext.getString(positiveRes)
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
         this.listener = listener
     }
 
@@ -128,7 +130,42 @@ class TimeSheet : Sheet() {
         listener: DurationTimeListener? = null
     ) {
         this.positiveText = positiveText
-        this.positiveButtonDrawableRes = drawableRes
+        this.positiveButtonDrawable = ContextCompat.getDrawable(windowContext, drawableRes)
+        this.listener = listener
+    }
+
+
+    /**
+     * Set the text and icon of the positive button and set the [DurationTimeListener].
+     *
+     * @param positiveRes The String resource id for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the duration time when the positive button is clicked.
+     */
+    fun onPositive(
+        @StringRes positiveRes: Int,
+        drawable: Drawable,
+        listener: DurationTimeListener? = null
+    ) {
+        this.positiveText = windowContext.getString(positiveRes)
+        this.positiveButtonDrawable = drawable
+        this.listener = listener
+    }
+
+    /**
+     *  Set the text and icon of the positive button and set the [DurationTimeListener].
+     *
+     * @param positiveText The text for the positive button.
+     * @param drawable The drawable for the button icon.
+     * @param listener Listener that is invoked with the duration time when the positive button is clicked.
+     */
+    fun onPositive(
+        positiveText: String,
+        drawable: Drawable,
+        listener: DurationTimeListener? = null
+    ) {
+        this.positiveText = positiveText
+        this.positiveButtonDrawable = drawable
         this.listener = listener
     }
 
