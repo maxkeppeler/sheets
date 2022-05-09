@@ -33,10 +33,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.core.utils.*
 import com.maxkeppeler.sheets.core.views.SheetsContent
 import com.maxkeppeler.sheets.options.databinding.SheetsOptionsGridItemBinding
+import com.maxkeppeler.sheets.options.databinding.SheetsOptionsInfoItemBinding
 import com.maxkeppeler.sheets.options.databinding.SheetsOptionsListItemBinding
 
 internal class OptionsAdapter(
     private val ctx: Context,
+    private val info: Info?,
     private val options: MutableList<Option>,
     private val globalPreventIconTint: Boolean?,
     private val type: DisplayMode,
@@ -49,6 +51,8 @@ internal class OptionsAdapter(
         private const val TAG_DISABLED_SELECTED = "tag_disabled_selected"
         private const val SELECTOR_STATE_DISABLED_INDEX = 0
         private const val SELECTOR_STATE_SELECTED_INDEX = 1
+        private const val VIEW_TYPE_HEADER_INFO = 0
+        private const val VIEW_TYPE_AUTO = 1
     }
 
     private val selectedOptions =
@@ -78,9 +82,21 @@ internal class OptionsAdapter(
         colorOfAttr(ctx, R.attr.sheetsOptionDisabledBackgroundColor).takeUnlessNotResolved()
             ?: colorOf(ctx, R.color.sheetsOptionDisabledColor)
 
+    override fun getItemViewType(position: Int): Int =
+        if (position == 0 && info != null) VIEW_TYPE_HEADER_INFO else VIEW_TYPE_AUTO
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        when (type) {
-            DisplayMode.GRID_HORIZONTAL, DisplayMode.GRID_VERTICAL -> {
+        if (viewType == VIEW_TYPE_HEADER_INFO) {
+            InfoItem(
+                SheetsOptionsInfoItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        } else when (type) {
+            DisplayMode.GRID_HORIZONTAL,
+            DisplayMode.GRID_VERTICAL -> {
                 GridItem(
                     SheetsOptionsGridItemBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -101,9 +117,23 @@ internal class OptionsAdapter(
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, i: Int) {
+        val actualIndex = i.takeUnless { info != null } ?: i - 1
         when (holder) {
-            is GridItem -> holder.binding.buildGridItem(i)
-            is ListItem -> holder.binding.buildListItem(i)
+            is InfoItem -> holder.binding.buildHeaderItem()
+            is GridItem -> holder.binding.buildGridItem(actualIndex)
+            is ListItem -> holder.binding.buildListItem(actualIndex)
+        }
+    }
+
+    private fun SheetsOptionsInfoItemBinding.buildHeaderItem() {
+        info?.contentText?.let { content.text = it }
+        if (info?.drawableRes != null || info?.drawable != null) {
+            val infoIconDrawable = info.drawable ?: info.drawableRes?.let {
+                ContextCompat.getDrawable(ctx, it)
+            }
+            icon.setImageDrawable(infoIconDrawable)
+            icon.setColorFilter(info.drawableColor ?: getIconColor(ctx))
+            icon.visibility = View.VISIBLE
         }
     }
 
@@ -244,8 +274,10 @@ internal class OptionsAdapter(
                 ?: textColor
 
             val subtitleColor = defaultSubtitleColor ?: defaultSubtitleColorRes?.let {
-                ContextCompat.getColor(ctx,
-                    it)
+                ContextCompat.getColor(
+                    ctx,
+                    it
+                )
             } ?: textColor
 
             val preventIconTint = option.preventIconTint ?: globalPreventIconTint
@@ -298,11 +330,13 @@ internal class OptionsAdapter(
             if (selectedOptions.contains(index)) {
                 listener.deselectMultipleChoice(index)
                 selectedOptions[index]?.let {
-                    showDeselected(index,
+                    showDeselected(
+                        index,
                         it.second,
                         it.third,
                         it.first,
-                        root)
+                        root
+                    )
                 }
                 selectedOptions.remove(index)
             } else {
@@ -312,11 +346,13 @@ internal class OptionsAdapter(
             }
         } else {
             selectedOptions.forEach { option ->
-                showDeselected(option.key,
+                showDeselected(
+                    option.key,
                     option.value.second,
                     option.value.third,
                     option.value.first,
-                    root)
+                    root
+                )
             }
             selectedOptions.clear()
             selectedOptions[index] = Triple(icon, title, subtitle)
@@ -325,7 +361,10 @@ internal class OptionsAdapter(
         }
     }
 
-    override fun getItemCount(): Int = options.size
+    override fun getItemCount(): Int = options.size.plus(if (info != null) 1 else 0)
+
+    inner class InfoItem(val binding: SheetsOptionsInfoItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     inner class GridItem(val binding: SheetsOptionsGridItemBinding) :
         RecyclerView.ViewHolder(binding.root)

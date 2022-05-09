@@ -28,9 +28,9 @@ import android.text.style.AbsoluteSizeSpan
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
-import androidx.annotation.DrawableRes
+import androidx.annotation.*
 import androidx.annotation.IntRange
-import androidx.annotation.StringRes
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maxkeppeler.sheets.core.Sheet
 import com.maxkeppeler.sheets.core.layoutmanagers.CustomGridLayoutManager
@@ -56,6 +56,7 @@ class OptionsSheet : Sheet() {
         private const val SMALL_GRID_ITEMS_MIN = 2
         private const val SMALL_GRID_ITEMS_MAX = 8
         private const val GRID_COLUMNS_MAX_DEFAULT = 4
+        private const val DEFAULT_COLUMN_SPAN = 1
     }
 
     private lateinit var binding: SheetsOptionsBinding
@@ -69,6 +70,7 @@ class OptionsSheet : Sheet() {
     private var optionsSelected = mutableListOf<Int>()
 
     private var mode = DisplayMode.GRID_HORIZONTAL
+    private var info: Info? = null
     private var multipleChoices = false
     private var displayMultipleChoicesInfo = false
     private var minChoices: Int? = null
@@ -86,6 +88,11 @@ class OptionsSheet : Sheet() {
             val validSingleChoice = !multipleChoices && optionsSelected.isNotEmpty()
             return validMultipleChoice || validSingleChoice
         }
+
+    /** Set an info section above the options. */
+    fun withInfo(info: Info) {
+        this.info = info
+    }
 
     /** Set the nax amount of columns in [DisplayMode.GRID_VERTICAL] and [DisplayMode.GRID_HORIZONTAL]. */
     fun columns(@IntRange(from = 2, to = 8) columns: Int) {
@@ -362,7 +369,6 @@ class OptionsSheet : Sheet() {
         checkSetup()
         displayButtonsView(multipleChoices || displayButtons)
         setButtonPositiveListener(::save)
-
         colorActive = getPrimaryColor(requireContext())
 
         with(binding.optionsRecyclerView) {
@@ -377,7 +383,8 @@ class OptionsSheet : Sheet() {
 
             optionsAdapter =
                 OptionsAdapter(
-                    requireActivity(),
+                    requireContext(),
+                    info,
                     options,
                     preventIconTint,
                     mode,
@@ -389,21 +396,23 @@ class OptionsSheet : Sheet() {
 
             setItemViewCacheSize(options.size)
 
+            val spanLookUp = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (position == 0 && info != null) columns else DEFAULT_COLUMN_SPAN
+                }
+            }
             layoutManager = when (mode) {
-
                 DisplayMode.GRID_HORIZONTAL -> if (collapsedItems) CustomGridLayoutManager(
                     requireContext(),
                     columns,
                     false
-                )
+                ).apply { this.spanSizeLookup = spanLookUp }
                 else CustomLinearLayoutManager(requireContext(), true, RecyclerView.HORIZONTAL)
-
                 DisplayMode.GRID_VERTICAL -> CustomGridLayoutManager(
                     requireContext(),
                     columns,
                     true
-                )
-
+                ).apply { this.spanSizeLookup = spanLookUp }
                 DisplayMode.LIST -> CustomLinearLayoutManager(requireContext(), true)
             }
         }
@@ -516,7 +525,13 @@ class OptionsSheet : Sheet() {
         binding.status.selectionLabel.setTextColor(colorActive)
         val textSizeSmall = resources.getDimensionPixelSize(R.dimen.sheetsTextSizeBody)
         val textSpan =
-            SpannableString(getString(R.string.sheets_current_of_total, selected, actualMaximum)).apply {
+            SpannableString(
+                getString(
+                    R.string.sheets_current_of_total,
+                    selected,
+                    actualMaximum
+                )
+            ).apply {
                 setSpan(
                     AbsoluteSizeSpan(textSizeSmall), selected.toString().length, this.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
