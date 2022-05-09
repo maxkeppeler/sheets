@@ -17,10 +17,6 @@
 
 <resources>
 
-    <color name="colorPrimary">#2b92e9</color>
-    <color name="colorPrimaryDark">#2172c9</color>
-    <color name="colorAccent">#2b92e9</color>
-
     <color name="sheetColorPrimary">#2b92e9</color>
     <color name="sheetsDayBackground">#fff</color>
     <color name="sheetsNightBackground">#202020</color>
