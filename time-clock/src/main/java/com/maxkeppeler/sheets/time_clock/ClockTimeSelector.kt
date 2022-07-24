@@ -264,7 +264,7 @@ internal class ClockTimeSelector(
 
         if (!is24HoursView) {
             if (isAm && hh >= 12 && mm > 0) hh -= 12
-            else if (!isAm && hh < 12 && mm >= 0) hh += 12
+            else if (!isAm && ((hh < 12 && mm >= 0) || (hh == 12 && mm == 0))) hh += 12
         }
 
         val hhMillis = TimeUnit.HOURS.toMillis(hh.toLong())
