@@ -32,10 +32,9 @@
         android:layout_height="20dp"
         android:layout_marginStart="24dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/subtitle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.maxkeppeler.sheets.core.views.SheetsContent
         android:id="@+id/title"
