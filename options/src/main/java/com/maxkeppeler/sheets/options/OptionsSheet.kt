@@ -391,7 +391,11 @@ class OptionsSheet : Sheet() {
         var i = 0
         while (i < menu.size()) {
             val menuItem = menu.getItem(i)
-            menuItemOptions.add(Option(menuItem.icon, menuItem.title.toString()))
+            menuItem.title?.toString()?.let { title ->
+                val option = menuItem.icon?.let { Option(it, title) } ?: Option(title)
+                menuItemOptions.add(option)
+            }
+
             i++
         }
         this.options.addAll(menuItemOptions)
