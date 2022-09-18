@@ -19,6 +19,7 @@
 package com.maxkeppeler.sheets.input.type.spinner
 
 import android.graphics.drawable.Drawable
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
@@ -39,6 +40,10 @@ class SpinnerOption internal constructor() {
 
     @StringRes
     internal var textRes: Int? = null
+        private set
+
+    @ColorRes
+    internal var drawableTintRes: Int? = null
         private set
 
     constructor(text: String) : this() {
@@ -69,5 +74,10 @@ class SpinnerOption internal constructor() {
     constructor(@StringRes textRes: Int, @DrawableRes drawableRes: Int) : this() {
         this.drawableRes = drawableRes
         this.textRes = textRes
+    }
+
+    fun drawableTintRes(@ColorRes drawableTintRes: Int): SpinnerOption {
+        this.drawableTintRes = drawableTintRes
+        return this
     }
 }

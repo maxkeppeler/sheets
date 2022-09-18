@@ -79,6 +79,13 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     internal var isEndIconActivated: Boolean? = null
         private set
 
+    internal var suffix: String? = null
+        private set
+
+    @StringRes
+    internal var suffixRes: Int? = null
+        private set
+
     var value: String? = null
         internal set(value) {
             invokeListeners(value)
@@ -152,6 +159,16 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     /** Set the initial visibility of the password. This overrides the transformationMethod for the EditText. */
     fun passwordVisible(isPasswordVisible: Boolean) {
         this.isPasswordVisible = isPasswordVisible
+    }
+
+    /** Set suffix of edittext. */
+    fun suffix(suffix: String) {
+        this.suffix = suffix
+    }
+
+    /** Set suffix res of edittext. */
+    fun suffixRes(suffixRes: Int) {
+        this.suffixRes = suffixRes
     }
 
     /** Set a listener that is invoked when the value needs to be validated. */
