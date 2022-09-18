@@ -76,6 +76,7 @@ class SpinnerOption internal constructor() {
         this.textRes = textRes
     }
 
+    /** Set tint of drawable. */
     fun drawableTintRes(@ColorRes drawableTintRes: Int): SpinnerOption {
         this.drawableTintRes = drawableTintRes
         return this
