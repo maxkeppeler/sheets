@@ -222,6 +222,9 @@ internal class InputAdapter(
             val hintText = input.hintRes?.let { ctx.getString(it) } ?: input.hint
             hintText?.let { hint = it.takeUnless { input.required && input.label == null } ?: it.plus(" *") }
 
+            val suffix = input.suffixRes?.let { ctx.getString(it) } ?: input.suffix
+            suffix?.let { suffixText = suffix }
+
             input.endIconMode?.let { endIconMode = it }
             input.isEndIconActivated?.let { setEndIconActivated(it) }
             (input.startIconDrawableRes ?: input.drawableRes)?.let { setStartIconDrawable(it) }

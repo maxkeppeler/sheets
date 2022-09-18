@@ -19,6 +19,7 @@
 package com.maxkeppeler.sheets.input.type.spinner
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,9 @@ internal open class SpinnerAdapter(
 
         binding.text.text = text
         binding.icon.setImageDrawable(drawable)
+        option.drawableTintRes?.let {
+            binding.icon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(ctx, it))
+        }
         binding.icon.visibility = if (drawable != null) View.VISIBLE else View.GONE
 
         return binding.root

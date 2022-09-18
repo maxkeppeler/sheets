@@ -11,8 +11,7 @@
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/text"
-        app:tint="?colorOnSurface" />
+        app:layout_constraintTop_toTopOf="@+id/text" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text"
