@@ -41,7 +41,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.maxkeppeler.sheets.R
 import com.maxkeppeler.sheets.core.utils.*
 
 

@@ -16,14 +16,14 @@
 
 <resources>
     <string name="app_name">Sheets</string>
-    <string name="options_sheet">OptionsSheet</string>
+    <string name="options_sheet">OptionSheet</string>
     <string name="options_sheet_desc">Show a grid or list of options, select only one or allow multiple-choices.</string>
     <string name="color_sheet">ColorSheet</string>
     <string name="color_sheet_desc">Show colors to choose from or let the user create and select a custom color.</string>
-    <string name="clock_time_sheet">ClockTimeSheet</string>
-    <string name="clock_time_sheet_desc">Show a quick to use text-styled clock time selector.</string>
-    <string name="time_sheet">TimeSheet</string>
-    <string name="time_sheet_desc">Show a quick to use text-styled time selector.</string>
+    <string name="clock_sheet">ClockSheet</string>
+    <string name="clock_sheet_desc">Show a quick to use text-styled clock time selector.</string>
+    <string name="duration_sheet">DurationSheet</string>
+    <string name="duration_sheet_desc">Show a quick to use text-styled time selector.</string>
     <string name="calendar_sheet">CalendarSheet</string>
     <string name="calendar_sheet_desc">Show a dynamic sized calendar view and select either dates or a time period.</string>
     <string name="info_sheet">InfoSheet</string>

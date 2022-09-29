@@ -31,8 +31,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import coil.loadAny
 import com.google.android.material.shape.ShapeAppearanceModel
+import com.maxkeppeler.sheets.core.databinding.SheetsBaseBinding
 import com.maxkeppeler.sheets.core.utils.*
-import com.maxkeppeler.sheets.databinding.SheetsBaseBinding
 
 /** Listener that is invoked when the positive button is clicked. */
 typealias PositiveListener = () -> Unit

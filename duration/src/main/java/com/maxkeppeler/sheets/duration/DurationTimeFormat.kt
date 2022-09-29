@@ -14,27 +14,33 @@
  *  limitations under the License.
  */
 
-package com.maxkeppeler.sheets.core
-
-import androidx.annotation.AttrRes
+package com.maxkeppeler.sheets.duration
 
 /**
- * Available button styles.
+ * Time formats that can be used.
  */
-enum class ButtonStyle(@AttrRes val styleRes: Int) {
+enum class DurationTimeFormat {
 
-    /**
-     * Uses the style Widget.MaterialComponents.Button.TextButton.
-     */
-    TEXT(R.attr.materialButtonOutlinedStyle),
+    /** HH:mm:ss (e. g. 12h 10m 30s) */
+    HH_MM_SS,
 
-    /**
-     * Uses the style Widget.MaterialComponents.Button.OutlinedButton.
-     */
-    OUTLINED(R.attr.materialButtonOutlinedStyle),
+    /** HH:mm (e.g. 20h 30m) */
+    HH_MM,
 
-    /**
-     * Uses the style Widget.MaterialComponents.Button.
-     */
-    NORMAL(R.attr.materialButtonStyle),
+    /** mm:ss (e.g. 12 30m) */
+    MM_SS,
+
+    /** m:ss (e.g. 6m 0m) */
+    M_SS,
+
+    /** HH (e.g. 8h) */
+    HH,
+
+    /** MM (e.g. 12m) */
+    MM,
+
+    /** ss (e.g. 45s) */
+    SS;
+
+    val length = this.name.filterNot { it == '_' }.length
 }

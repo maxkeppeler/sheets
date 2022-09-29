@@ -61,15 +61,14 @@ import com.maxkeppeler.sheets.input.type.spinner.SpinnerOption
 import com.maxkeppeler.sheets.lottie.LottieAnimation
 import com.maxkeppeler.sheets.lottie.cancelCoverAnimation
 import com.maxkeppeler.sheets.lottie.withCoverLottieAnimation
-import com.maxkeppeler.sheets.options.DisplayMode
-import com.maxkeppeler.sheets.options.Option
-import com.maxkeppeler.sheets.options.OptionsSheet
+import com.maxkeppeler.sheets.option.DisplayMode
+import com.maxkeppeler.sheets.option.Option
+import com.maxkeppeler.sheets.option.OptionSheet
 import com.maxkeppeler.sheets.storage.FileDisplayMode
 import com.maxkeppeler.sheets.storage.StorageSelectionMode
 import com.maxkeppeler.sheets.storage.StorageSheet
-import com.maxkeppeler.sheets.time.TimeFormat
-import com.maxkeppeler.sheets.time.TimeSheet
-import com.maxkeppeler.sheets.time_clock.ClockTimeSheet
+import com.maxkeppeler.sheets.duration.DurationTimeFormat
+import com.maxkeppeler.sheets.duration.DurationSheet
 import java.io.File
 import java.io.FileFilter
 import java.util.*
@@ -107,13 +106,13 @@ class MainActivity : AppCompatActivity() {
             SheetExample.COLOR_TEMPLATE -> showColorSheetTemplate()
             SheetExample.COLOR_CUSTOM -> showColorSheetCustom()
             SheetExample.CLOCK_TIME -> showClockTimeSheet()
-            SheetExample.TIME_HH_MM_SS -> showTimeSheet(TimeFormat.HH_MM_SS)
-            SheetExample.TIME_HH_MM -> showTimeSheet(TimeFormat.HH_MM)
-            SheetExample.TIME_MM_SS -> showTimeSheet(TimeFormat.MM_SS)
-            SheetExample.TIME_M_SS -> showTimeSheet(TimeFormat.M_SS)
-            SheetExample.TIME_SS -> showTimeSheet(TimeFormat.SS)
-            SheetExample.TIME_MM -> showTimeSheet(TimeFormat.MM)
-            SheetExample.TIME_HH -> showTimeSheet(TimeFormat.HH)
+            SheetExample.TIME_HH_MM_SS -> showTimeSheet(DurationTimeFormat.HH_MM_SS)
+            SheetExample.TIME_HH_MM -> showTimeSheet(DurationTimeFormat.HH_MM)
+            SheetExample.TIME_MM_SS -> showTimeSheet(DurationTimeFormat.MM_SS)
+            SheetExample.TIME_M_SS -> showTimeSheet(DurationTimeFormat.M_SS)
+            SheetExample.TIME_SS -> showTimeSheet(DurationTimeFormat.SS)
+            SheetExample.TIME_MM -> showTimeSheet(DurationTimeFormat.MM)
+            SheetExample.TIME_HH -> showTimeSheet(DurationTimeFormat.HH)
             SheetExample.CALENDAR_MULTIPLE_DATES -> showMultipleCalendarView()
             SheetExample.CALENDAR_RANGE_MONTH -> showCalendarSheet()
             SheetExample.CALENDAR_WEEK1 -> showCalendarSheetWeek1()
@@ -268,7 +267,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showOptionsSheetList() {
 
-        val sheet = OptionsSheet().build(this) { // Build and show
+        val sheet = OptionSheet().build(this) { // Build and show
             style(getSheetStyle())
             displayMode(DisplayMode.LIST)
             cornerFamily(CornerFamily.CUT)
@@ -296,7 +295,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showOptionsSheetGridSmall(displayMode: DisplayMode) {
 
-        val sheet = OptionsSheet().build(this) { // Build only
+        val sheet = OptionSheet().build(this) { // Build only
             style(getSheetStyle())
             displayMode(displayMode) // Display mode for list/grid + scroll into height or width
             title("What's your favorite fruit?")
@@ -316,7 +315,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showOptionsSheetGridMiddle(displayMode: DisplayMode) {
 
-        OptionsSheet().show(this) { // Build and show
+        OptionSheet().show(this) { // Build and show
             style(getSheetStyle())
             displayMode(displayMode) // Display mode for list/grid + scroll into height or width
             title("What would you like to eat daily?")
@@ -349,7 +348,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showOptionsSheetGridLarge(displayMode: DisplayMode) {
 
-        OptionsSheet().show(this) { // Build and show
+        OptionSheet().show(this) { // Build and show
             style(getSheetStyle())
             displayMode(displayMode) // Display mode for list/grid + scroll into height or width
             title("What would you like to eat daily?")
@@ -380,7 +379,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showOptionsSheetGridVertical() {
 
-        OptionsSheet().show(this) { // Build and show
+        OptionSheet().show(this) { // Build and show
             style(getSheetStyle())
             title("Alarm at 5 am")
             displayMode(DisplayMode.GRID_VERTICAL) // Display mode for list/grid + scroll into height or width
@@ -444,23 +443,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun showClockTimeSheet() {
 
-        ClockTimeSheet().show(this) {
-            style(getSheetStyle())
-            title("Wake-up time")
-            format24Hours(Random.nextBoolean()) // By default 24-hours format is enabled
-            currentTime(
-                TimeUnit.HOURS.toMillis(5).plus(TimeUnit.MINUTES.toMillis(30))
-            ) // Set current time
-            onPositive { milliseconds, hours, minutes ->
-                // Use selected clock time in millis
-                showToastLong("Clock time", "$hours - $minutes ($milliseconds)")
-            }
-        }
+//        ClockTimeSheet().show(this) {
+//            style(getSheetStyle())
+//            title("Wake-up time")
+//            format24Hours(Random.nextBoolean()) // By default 24-hours format is enabled
+//            currentTime(
+//                TimeUnit.HOURS.toMillis(5).plus(TimeUnit.MINUTES.toMillis(30))
+//            ) // Set current time
+//            onPositive { milliseconds, hours, minutes ->
+//                // Use selected clock time in millis
+//                showToastLong("Clock time", "$hours - $minutes ($milliseconds)")
+//            }
+//        }
     }
 
-    private fun showTimeSheet(timeFormat: TimeFormat) {
+    private fun showTimeSheet(timeFormat: DurationTimeFormat) {
 
-        TimeSheet().show(this) {
+        DurationSheet().show(this) {
             style(getSheetStyle())
             title("Snooze time")
             format(timeFormat)

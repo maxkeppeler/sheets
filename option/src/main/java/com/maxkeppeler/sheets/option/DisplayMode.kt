@@ -14,27 +14,31 @@
  *  limitations under the License.
  */
 
-package com.maxkeppeler.sheets.core
-
-import androidx.annotation.AttrRes
+package com.maxkeppeler.sheets.option
 
 /**
- * Available button styles.
+ *  The display modes that can be used.
+ *  [LIST], [GRID_HORIZONTAL]
  */
-enum class ButtonStyle(@AttrRes val styleRes: Int) {
+enum class DisplayMode {
 
     /**
-     * Uses the style Widget.MaterialComponents.Button.TextButton.
+     * Depending on the amount of [Option]s,
+     * the options are be displayed in one to two rows with at most 4 options per row.
+     * With more than 8 options, the options are displayed in a one row horizontal scrollable view.
      */
-    TEXT(R.attr.materialButtonOutlinedStyle),
+    GRID_HORIZONTAL,
 
     /**
-     * Uses the style Widget.MaterialComponents.Button.OutlinedButton.
+     * Depending on the amount of [Option]s,
+     * the options are be displayed in one to two rows with at most 4 options per row.
+     * With more than 8 options, the options are displayed in a vertical scrollable view.
      */
-    OUTLINED(R.attr.materialButtonOutlinedStyle),
+    GRID_VERTICAL,
+
 
     /**
-     * Uses the style Widget.MaterialComponents.Button.
+     * Displays the options in a vertical list.
      */
-    NORMAL(R.attr.materialButtonStyle),
+    LIST
 }

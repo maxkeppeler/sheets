@@ -31,7 +31,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.core.ButtonStyle
 import com.maxkeppeler.sheets.core.utils.*
 

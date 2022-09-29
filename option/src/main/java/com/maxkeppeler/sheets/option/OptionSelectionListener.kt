@@ -14,27 +14,12 @@
  *  limitations under the License.
  */
 
-package com.maxkeppeler.sheets.core
+package com.maxkeppeler.sheets.option
 
-import androidx.annotation.AttrRes
-
-/**
- * Available button styles.
- */
-enum class ButtonStyle(@AttrRes val styleRes: Int) {
-
-    /**
-     * Uses the style Widget.MaterialComponents.Button.TextButton.
-     */
-    TEXT(R.attr.materialButtonOutlinedStyle),
-
-    /**
-     * Uses the style Widget.MaterialComponents.Button.OutlinedButton.
-     */
-    OUTLINED(R.attr.materialButtonOutlinedStyle),
-
-    /**
-     * Uses the style Widget.MaterialComponents.Button.
-     */
-    NORMAL(R.attr.materialButtonStyle),
+internal interface OptionSelectionListener {
+    fun select(index: Int)
+    fun selectMultipleChoice(index: Int)
+    fun deselectMultipleChoice(index: Int)
+    fun isSelected(index: Int): Boolean
+    fun isMultipleChoiceSelectionAllowed(index: Int): Boolean
 }

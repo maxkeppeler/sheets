@@ -48,17 +48,15 @@ build custom sheets on top of the existing functionality.
   </p>
 </p>
 
-Read in [Deutsch](README.de_DE.md) or [简体中文](README.zh_CN.md).
-
-<img src="art/showcase.png" alt="sheetss Library">
+<img src="art/showcase.png" alt="Sheets Library">
 
 ## Table of Contents
 
 - [Get started](#get-started)
     - [Info Sheet](#info)
-    - [Options Sheet](#options)
-    - [Clock Time Sheet](#clock-time)
-    - [Time Sheet](#time)
+    - [Option Sheet](#option)
+    - [Clock Sheet](#clock)
+    - [Duration Sheet](#duration)
     - [Input Sheet](#input)
     - [Calendar Sheet](#calendar)
     - [Storage Sheet](#storage)
@@ -214,7 +212,7 @@ For the default info sheet use it as following:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/options.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/options)
 
-The `Options` Sheet lets you display a grid or list of options.
+The `Option` Sheet lets you display a grid or list of options.
 
 <details open>
 <br/><br/>
@@ -306,11 +304,11 @@ For the default options sheet use it as following:
 **Note**: Preselected options automatically increase the current selection while disabled options
 decrease the maximum amount of choices.
 
-## Clock Time
+## Clock
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time-clock.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time-clock)
 
-The `Clock Time` Sheet lets you quickly pick a time.
+The `Clock` Sheet lets you quickly pick a time.
 
 <details>
 <br/><br/>
@@ -338,7 +336,7 @@ dependencies {
 
 For the default clock time sheet, in 24-hours format, use it as following:
 
-    ClockTimeSheet().show(context) {
+    ClockSheet().show(context) {
       title("Wake-up time")
       onPositive { clockTimeInMillis: Long ->
         // Handle selected time
@@ -354,7 +352,7 @@ For the default clock time sheet, in 24-hours format, use it as following:
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time)
 
-The `Time` Sheet lets you pick a duration time in a specific format.
+The `Duration` Sheet lets you pick a duration time in a specific format.
 
 <details open>
 <br/><br/>
@@ -382,7 +380,7 @@ dependencies {
 
 For the default time sheet use it as following:
 
-    TimeSheet().show(context) {
+    DurationSheet().show(context) {
       title("Snooze time")
       onPositive { durationTimeInMillis: Long ->
         // Handle selected time
@@ -853,7 +851,7 @@ Change the appearance of the content text.
     <item name="sheetsContentLineHeight">@dimen/dimen</item>
     <item name="sheetsContentLetterSpacing">value</item>
 
-Change the appearance of the value texts. (e.g. the time in the TimeSheet & ClockTimeSheet or the
+Change the appearance of the value texts. (e.g. the time in the TimeSheet & ClockSheet or the
 selected date & period in the Calendarsheet.)
 
     <item name="sheetsValueTextActiveColor">@color/customValueTextColor</item>
