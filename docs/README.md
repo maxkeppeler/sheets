@@ -96,9 +96,6 @@ Use `show` if you want to build and then immediately display it.
 📖 Get a better insight into the API\
 [Sheets API Documentation](https://maxkeppeler.github.io/sheets/api/)
 
-Each sheet has an extension function called `build` and `show`.<br/>
-
-
 # Info
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/info.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
