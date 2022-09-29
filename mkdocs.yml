@@ -1,16 +1,16 @@
-site_name: 'Sheets-Dialogs'
+site_name: 'Sheets'
 site_description: 'An Android library that offers dialogs & views for various use cases - build with Jetpack Compose for Compose projects. All of the dialogs & views are easy and quick to implement.'
 site_author: 'Maximilian Keppeler'
-site_url: 'https://maxkeppeler.github.io/sheets-compose-dialogs/'
+site_url: 'https://maxkeppeler.github.io/sheets'
 remote_branch: gh-pages
 
 docs_dir: docs
 
-repo_name: 'Sheets-Dialogs'
+repo_name: 'Sheets'
 repo_url: 'https://github.com/maxkeppeler/sheets'
 
 nav:
-  - 'Home': index.md
+  - 'Home': README.md
   - 'Core API': api/core/index.html
   - 'Info API': api/info/index.html
   - 'Color API': api/color/index.html
