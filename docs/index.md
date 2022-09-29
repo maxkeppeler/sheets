@@ -2,7 +2,7 @@
 
 <p>
 
-  <img src="docs/res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
+  <img src="res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
 
   <p>
 
@@ -48,7 +48,7 @@ build custom sheets on top of the existing functionality.
   </p>
 </p>
 
-<img src="docs/res/showcase.png" alt="Sheets Library">
+<img src="res/showcase.png" alt="Sheets Library">
 
 # Get started
 
@@ -110,10 +110,10 @@ The `Info` Sheet lets you display information or warning.
 <br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="docs/res/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="docs/res/InfoSheet Dialog Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="docs/res/InfoSheet Dialog Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="res/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="res/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="res/InfoSheet Dialog Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="res/InfoSheet Dialog Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
 
 </details>
 </br>
@@ -123,10 +123,10 @@ The `Info` Sheet lets you display information or warning.
 
 <br/>
 <br/>
-<img src="docs/res/InfoSheet BottomSheet.png" width="80%" alt="Sheets InfoSheet"><br/>
-<img src="docs/res/InfoSheet BottomSheet Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
-<img src="docs/res/InfoSheet BottomSheet Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
-<img src="docs/res/InfoSheet BottomSheet Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="res/InfoSheet BottomSheet.png" width="80%" alt="Sheets InfoSheet"><br/>
+<img src="res/InfoSheet BottomSheet Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="res/InfoSheet BottomSheet Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="res/InfoSheet BottomSheet Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
 </details>
 
 ```gradle
@@ -161,7 +161,7 @@ The `Option` Sheet lets you display a grid or list of options.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
+<img src="res/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
 </br>
 
@@ -169,7 +169,7 @@ The `Option` Sheet lets you display a grid or list of options.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+<img src="res/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
 
 <br/>
@@ -177,9 +177,9 @@ The `Option` Sheet lets you display a grid or list of options.
 <br/><br/>
 <summary>Showcase some variants as Dialogs</summary>
 
-<img src="docs/res/OptionsSheet Dialog List.png" width="80%" alt="Sheets OptionsSheet Dialog"><br/>
-<img src="docs/res/OptionsSheet Dialog Grid Small.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
-<img src="docs/res/OptionsSheet Dialog Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+<img src="res/OptionsSheet Dialog List.png" width="80%" alt="Sheets OptionsSheet Dialog"><br/>
+<img src="res/OptionsSheet Dialog Grid Small.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+<img src="res/OptionsSheet Dialog Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
 
 </details>
 </br>
@@ -188,9 +188,9 @@ The `Option` Sheet lets you display a grid or list of options.
 <br/><br/>
 <summary>Showcase some variants as BottomSheets</summary>
 
-<img src="docs/res/OptionsSheet BottomSheet List.png" width="80%" alt="Sheets OptionsSheet BottomSheet"><br/>
-<img src="docs/res/OptionsSheet BottomSheet Grid Small.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
-<img src="docs/res/OptionsSheet BottomSheet Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+<img src="res/OptionsSheet BottomSheet List.png" width="80%" alt="Sheets OptionsSheet BottomSheet"><br/>
+<img src="res/OptionsSheet BottomSheet Grid Small.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+<img src="res/OptionsSheet BottomSheet Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
 
 </details>
 
@@ -234,7 +234,7 @@ The `Clock` Sheet lets you quickly pick a time.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
+<img src="res/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
 </br>
 
@@ -242,7 +242,7 @@ The `Clock` Sheet lets you quickly pick a time.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+<img src="res/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
 
 ```gradle
@@ -273,7 +273,7 @@ The `Duration` Sheet lets you pick a duration time in a specific format.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
+<img src="res/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
 </details>
 </br>
 
@@ -281,7 +281,7 @@ The `Duration` Sheet lets you pick a duration time in a specific format.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
+<img src="res/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
 </details>
 
 ```gradle
@@ -312,7 +312,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
+<img src="res/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
 </details>
 </br>
 
@@ -320,7 +320,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
+<img src="res/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
 </details>
 
 <br/>
@@ -328,7 +328,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase some variants as Dialogs</summary>
 
-<img src="docs/res/InputSheet Dialog Long.png" width="80%" alt="Sheets InputSheet Dialog"><br/>
+<img src="res/InputSheet Dialog Long.png" width="80%" alt="Sheets InputSheet Dialog"><br/>
 
 </details>
 </br>
@@ -337,7 +337,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase some variants as BottomSheets</summary>
 
-<img src="docs/res/InputSheet BottomSheet Long.png" width="80%" alt="Sheets InputSheet BottomSheet">
+<img src="res/InputSheet BottomSheet Long.png" width="80%" alt="Sheets InputSheet BottomSheet">
 </details>
 
 ```gradle
@@ -391,7 +391,7 @@ library [CalendarView](https://github.com/kizitonwose/CalendarView).
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
+<img src="res/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
 </details>
 </br>
 
@@ -399,7 +399,7 @@ library [CalendarView](https://github.com/kizitonwose/CalendarView).
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
+<img src="res/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
 </details>
 
 ```gradle
@@ -429,7 +429,7 @@ The `Storage` Sheet lets you pick one or more files or folders.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/StorageSheet Dialog.png" width="80%" alt="Sheets StorageSheet Dialog">
+<img src="res/StorageSheet Dialog.png" width="80%" alt="Sheets StorageSheet Dialog">
 </details>
 </br>
 
@@ -437,7 +437,7 @@ The `Storage` Sheet lets you pick one or more files or folders.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/StorageSheet BottomSheet.png" width="80%" alt="Sheets StorageSheet BottomSheet">
+<img src="res/StorageSheet BottomSheet.png" width="80%" alt="Sheets StorageSheet BottomSheet">
 </details>
 
 ```gradle
@@ -468,8 +468,8 @@ can be choosen from. You can allow to chose a custom color as well.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
-<img src="docs/res/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
+<img src="res/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
+<img src="res/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
 
 </details>
 </br>
@@ -478,8 +478,8 @@ can be choosen from. You can allow to chose a custom color as well.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
-<img src="docs/res/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
+<img src="res/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
+<img src="res/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
 
 </details>
 
@@ -511,7 +511,7 @@ toolbar view with logic is ready to be used by your own implementation.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
+<img src="res/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
 </details>
 </br>
 
@@ -519,7 +519,7 @@ toolbar view with logic is ready to be used by your own implementation.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="docs/res/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
+<img src="res/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
 </details>
 
 ```gradle
@@ -572,7 +572,7 @@ a [Lottie animations](https://airbnb.design/lottie/) as cover view.
 <br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="docs/res/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+<img src="res/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
 </details>
 </br>
 
@@ -581,7 +581,7 @@ a [Lottie animations](https://airbnb.design/lottie/) as cover view.
 
 <br/>
 <br/>
-<img src="docs/res/InfoSheet BottomSheet Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+<img src="res/InfoSheet BottomSheet Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
 </details>
 
 ```gradle
