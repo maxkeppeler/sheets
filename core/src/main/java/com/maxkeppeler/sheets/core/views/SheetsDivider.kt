@@ -19,7 +19,7 @@ package com.maxkeppeler.sheets.core.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.core.utils.colorOf
 import com.maxkeppeler.sheets.core.utils.colorOfAttr
 

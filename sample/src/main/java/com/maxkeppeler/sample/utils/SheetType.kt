@@ -24,9 +24,9 @@ enum class SheetType(@StringRes val titleRes: Int, @StringRes val descRes: Int) 
 
     COLOR(R.string.color_sheet, R.string.color_sheet_desc),
 
-    CLOCK_TIME(R.string.clock_time_sheet, R.string.clock_time_sheet_desc),
+    CLOCK_TIME(R.string.clock_sheet, R.string.clock_sheet_desc),
 
-    TIME(R.string.time_sheet, R.string.time_sheet_desc),
+    TIME(R.string.duration_sheet, R.string.duration_sheet_desc),
 
     CALENDAR(R.string.calendar_sheet, R.string.calendar_sheet_desc),
 

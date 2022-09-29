@@ -24,7 +24,7 @@ import androidx.core.view.ViewCompat
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.elevation.ElevationOverlayProvider
 import com.google.android.material.switchmaterial.SwitchMaterial
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.core.utils.getPrimaryColor
 
 /** Custom switch button used for the InputSheet. */

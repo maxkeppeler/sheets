@@ -20,7 +20,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 
 /** Custom TextView used for the value of some sheets. */
 class SheetsValue

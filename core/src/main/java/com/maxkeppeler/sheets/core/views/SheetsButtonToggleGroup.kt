@@ -11,7 +11,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.core.utils.*
 
 /** Listener that returns the index of the selected button. */

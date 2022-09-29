@@ -2,7 +2,7 @@
 
 <p>
 
-  <img src="art/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
+  <img src="docs/res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
 
   <p>
 
@@ -48,30 +48,7 @@ build custom sheets on top of the existing functionality.
   </p>
 </p>
 
-Read in [Deutsch](README.de_DE.md) or [简体中文](README.zh_CN.md).
-
-<img src="art/showcase.png" alt="sheetss Library">
-
-## Table of Contents
-
-- [Get started](#get-started)
-    - [Info Sheet](#info)
-    - [Options Sheet](#options)
-    - [Clock Time Sheet](#clock-time)
-    - [Time Sheet](#time)
-    - [Input Sheet](#input)
-    - [Calendar Sheet](#calendar)
-    - [Storage Sheet](#storage)
-    - [Color Sheet](#color)
-    - [Custom Sheet](#custom)
-    - [Lottie](#lottie)
-    - [Appearance](#appearance)
-- [Misc](#misc)
-    - [Support this project](#support-this-project)
-    - [Contribute](#contribute)
-    - [Donate](#donate)
-    - [Showcase](#showcase)
-    - [License](#license)
+<img src="docs/res/showcase.png" alt="Sheets Library">
 
 # Get started
 
@@ -100,43 +77,6 @@ dependencies {
 }
 ```
 
-**Base functions** <br/>
-Following functions can be called from any type of sheet.
-
-| Function              | Action                                                                           |
-| --------------------- | -------------------------------------------------------------------------------- |
-| style()               | Display as dialog or bottom-sheet.                                               |
-| title()               | Set the title text.                                                              |
-| titleColor()          | Set the title text color.                                                        |
-| titleColorRes()       | Set the title text color by a resource.                                          |
-| withCoverImage()      | Add a cover image.                                                               |
-| topStyle()            | Specify the style of the cover image and top bar.                                |
-| positiveButtonStyle() | Define the style of the positive button (Text, Filled, Outlined).                |
-| positiveButtonColor() | Set the positive button's main color.                                            |
-| positiveButtonColorRes() | Set the positive button's main color.                                         |
-| negativeButtonStyle() | Define the style of the negative button (Text, Filled, Outlined).                |
-| negativeButtonColor() | Set the negative button's main color.                                            |
-| negativeButtonColorRes() | Set the negative button's main color.                                         |
-| withIconButton()      | Add up to 3 icon buttons to the top bar.                                         |
-| closeIconButton()     | Set a custom close icon button.                                                  |
-| displayHandle()       | Display the handle.                                                              |
-| displayCloseButton()  | Display close icon button.                                                       |
-| displayToolbar()      | Display toolbar. (Close icon button, title, divider and icon buttons)            |
-| peekHeight()          | Set the peek height. (Only bottom-sheet)                                         |
-| cornerRadius()        | Set corner radius.                                                               |
-| cornerFamily()        | Set corner family. (Cut or rounded)                                              |
-| borderWidth()         | Set the border width.                                                            |
-| borderColor()         | Set the border color.                                                            |
-| cancelableOutside()   | Make sheet cancelable outside of the dialog view.                                |
-| onNegative()          | Set the negative button text and listener.                                       |
-| onPositive()          | Set the positive button text and listener.                                       |
-| onDismiss()           | Set a listener that is invoked when the sheet is dismissed.                      |
-| onCancel()            | Set a listener that is invoked when the sheet is cancelled (only if cancelable). |
-| onClose()             | Set a listener that is invoked when the sheet is closed.                         |
-| show()                | show the sheet.                                                                  |
-
-Each sheet has an extension function called `build` and `show`.<br/>
-
 Use `build` to build a sheet and display it later.
 
     val sheet = InfoSheet().build(context) {
@@ -151,7 +91,15 @@ Use `show` if you want to build and then immediately display it.
       // build sheet
     } // Show sheet
 
-## Info
+# Resources 
+
+📖 Get a better insight into the API\
+[Sheets API Documentation](https://maxkeppeler.github.io/sheets/api/)
+
+Each sheet has an extension function called `build` and `show`.<br/>
+
+
+# Info
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/info.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
 
@@ -162,10 +110,10 @@ The `Info` Sheet lets you display information or warning.
 <br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="art/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="art/InfoSheet Dialog Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
-<img src="art/InfoSheet Dialog Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="docs/res/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="docs/res/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="docs/res/InfoSheet Dialog Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="docs/res/InfoSheet Dialog Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
 
 </details>
 </br>
@@ -175,10 +123,10 @@ The `Info` Sheet lets you display information or warning.
 
 <br/>
 <br/>
-<img src="art/InfoSheet BottomSheet.png" width="80%" alt="Sheets InfoSheet"><br/>
-<img src="art/InfoSheet BottomSheet Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
-<img src="art/InfoSheet BottomSheet Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
-<img src="art/InfoSheet BottomSheet Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="docs/res/InfoSheet BottomSheet.png" width="80%" alt="Sheets InfoSheet"><br/>
+<img src="docs/res/InfoSheet BottomSheet Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="docs/res/InfoSheet BottomSheet Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="docs/res/InfoSheet BottomSheet Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
 </details>
 
 ```gradle
@@ -203,24 +151,17 @@ For the default info sheet use it as following:
       }
     }
 
-| Function        | Action              |
-| --------------- | ------------------- |
-| content()       | Set content text.   |
-| drawable()      | Set drawable.       |
-| drawableColor() | Set drawable color. |
-| customView() | Use a custom view. |
+# Option
 
-## Options
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/option.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/option)
 
-[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/options.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/options)
-
-The `Options` Sheet lets you display a grid or list of options.
+The `Option` Sheet lets you display a grid or list of options.
 
 <details open>
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
+<img src="docs/res/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
 </br>
 
@@ -228,7 +169,7 @@ The `Options` Sheet lets you display a grid or list of options.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+<img src="docs/res/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
 
 <br/>
@@ -236,9 +177,9 @@ The `Options` Sheet lets you display a grid or list of options.
 <br/><br/>
 <summary>Showcase some variants as Dialogs</summary>
 
-<img src="art/OptionsSheet Dialog List.png" width="80%" alt="Sheets OptionsSheet Dialog"><br/>
-<img src="art/OptionsSheet Dialog Grid Small.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
-<img src="art/OptionsSheet Dialog Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+<img src="docs/res/OptionsSheet Dialog List.png" width="80%" alt="Sheets OptionsSheet Dialog"><br/>
+<img src="docs/res/OptionsSheet Dialog Grid Small.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+<img src="docs/res/OptionsSheet Dialog Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
 
 </details>
 </br>
@@ -247,9 +188,9 @@ The `Options` Sheet lets you display a grid or list of options.
 <br/><br/>
 <summary>Showcase some variants as BottomSheets</summary>
 
-<img src="art/OptionsSheet BottomSheet List.png" width="80%" alt="Sheets OptionsSheet BottomSheet"><br/>
-<img src="art/OptionsSheet BottomSheet Grid Small.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
-<img src="art/OptionsSheet BottomSheet Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+<img src="docs/res/OptionsSheet BottomSheet List.png" width="80%" alt="Sheets OptionsSheet BottomSheet"><br/>
+<img src="docs/res/OptionsSheet BottomSheet Grid Small.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+<img src="docs/res/OptionsSheet BottomSheet Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
 
 </details>
 
@@ -263,7 +204,7 @@ dependencies {
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.sheets:options:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:option:<latest-version>'
 }
 ```
 
@@ -283,40 +224,17 @@ For the default options sheet use it as following:
       }
     }
 
-| Function                     | Action                                                                                 |
-| ---------------------------- | -------------------------------------------------------------------------------------- |
-| multipleChoices()            | Allow multiple choices content.                                                        |
-| displayMultipleChoicesInfo() | Display info of the multiple choices.                                                  |
-| maxChoicesStrictLimit()      | Specify that the max choices is strict and more choices can't be selected temporarily. |
-| minChoices()                 | Set the minimum amount of choices.                                                     |
-| maxChoices()                 | Set the maximum amount of choices.                                                     |
-| onPositiveMultiple()         | Set listener for multiple choices.                                                     |
-| displayButtons()             | Display buttons and require a positive button click for selection.                     |
-| displayMode()                | Display options in a list or a vertical/ horizontal growing scrollable grid.           |
-| preventIconTint()                | (Global) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
+# Clock
 
-**Option**
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/clock.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/clock)
 
-| Function   | Action               |
-| ---------- | -------------------- |
-| selected() | Preselect an option. |
-| disable()  | Disable an option.   |
-| preventIconTint()                | (Local) Prevents the lib to use a tint for the icons. Keeps the default colors of a drawable.           |
-
-**Note**: Preselected options automatically increase the current selection while disabled options
-decrease the maximum amount of choices.
-
-## Clock Time
-
-[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time-clock.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time-clock)
-
-The `Clock Time` Sheet lets you quickly pick a time.
+The `Clock` Sheet lets you quickly pick a time.
 
 <details>
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
+<img src="docs/res/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
 </details>
 </br>
 
@@ -324,13 +242,13 @@ The `Clock Time` Sheet lets you quickly pick a time.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+<img src="docs/res/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
 </details>
 
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.sheets:time-clock:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:clock:<latest-version>'
 }
 ```
 
@@ -338,29 +256,24 @@ dependencies {
 
 For the default clock time sheet, in 24-hours format, use it as following:
 
-    ClockTimeSheet().show(context) {
+    ClockSheet().show(context) {
       title("Wake-up time")
       onPositive { clockTimeInMillis: Long ->
         // Handle selected time
       }
     }
 
-| Function        | Action                                |
-| --------------- | ------------------------------------- |
-| format24Hours() | Use 24-hours or 12-hours format.      |
-| currentTime()   | Set the current time in milliseconds. |
-
 ## Time
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/time)
 
-The `Time` Sheet lets you pick a duration time in a specific format.
+The `Duration` Sheet lets you pick a duration time in a specific format.
 
 <details open>
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
+<img src="docs/res/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
 </details>
 </br>
 
@@ -368,7 +281,7 @@ The `Time` Sheet lets you pick a duration time in a specific format.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
+<img src="docs/res/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
 </details>
 
 ```gradle
@@ -382,19 +295,12 @@ dependencies {
 
 For the default time sheet use it as following:
 
-    TimeSheet().show(context) {
+    DurationSheet().show(context) {
       title("Snooze time")
       onPositive { durationTimeInMillis: Long ->
         // Handle selected time
       }
     }
-
-| Function      | Action                                         |
-| ------------- | ---------------------------------------------- |
-| format()      | Select the time format. (hh:mm:ss, mm:ss, ...) |
-| currentTime() | Set the current time in seconds.               |
-| minTime()     | Set the minimum time.                          |
-| maxTime()`    | Set the maximum time.                          |
 
 ## Input
 
@@ -406,7 +312,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
+<img src="docs/res/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
 </details>
 </br>
 
@@ -414,7 +320,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
+<img src="docs/res/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
 </details>
 
 <br/>
@@ -422,7 +328,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase some variants as Dialogs</summary>
 
-<img src="art/InputSheet Dialog Long.png" width="80%" alt="Sheets InputSheet Dialog"><br/>
+<img src="docs/res/InputSheet Dialog Long.png" width="80%" alt="Sheets InputSheet Dialog"><br/>
 
 </details>
 </br>
@@ -431,7 +337,7 @@ The `Input` Sheet lets you display a form consisting of various inputs.
 <br/><br/>
 <summary>Showcase some variants as BottomSheets</summary>
 
-<img src="art/InputSheet BottomSheet Long.png" width="80%" alt="Sheets InputSheet BottomSheet">
+<img src="docs/res/InputSheet BottomSheet Long.png" width="80%" alt="Sheets InputSheet BottomSheet">
 </details>
 
 ```gradle
@@ -472,77 +378,7 @@ For the default input sheet use it as following:
           val text = result.getString("0") // Read value of inputs by index
           val check = result.getBoolean("binge_watching") // Read value by passed key
       }
-    }
-
-| Function       | Action                              |
-| -------------- | ----------------------------------- |
-| with()         | Add an input. (see input options)   |
-| displayInput() | Set visibility of a specific input. |
-
-**Input options:**
-
-- `InputEditText`
-- `InputCheckBox`
-- `InputSwitch`
-- `InputRadioButtons`
-- `InputSpinner`
-- `InputSeparator`
-
-**Input**<br/>
-
-| Function         | Action                                        |
-| ---------------- | --------------------------------------------- |
-| label()          | Set the label text.                           |
-| content()        | Set content text. (e. g. to explain a survey) |
-| drawable()       | Set the drawable.                             |
-| required()       | Mark input as required.                       |
-| visible()        | Set initial visibility.                       |
-| changeListener() | Set listener to observe changes.              |
-| resultListener() | Set listener for final value.                 |
-
-**InputEditText**<br/>
-
-| Function             | Action                                            |
-| -------------------- | ------------------------------------------------- |
-| hint()               | Set the hint text.                                |
-| defaultValue()       | Set default text.                                 |
-| inputType()          | Set the `android.text.InputType`'s.               |
-| inputFilter()        | Set the `android.text.inputFilter`                |
-| maxLines()           | Set the max amount of lines.                      |
-| endIconMode()        | Set TextInputLayout.EndIconMode.                  |
-| endIconActivated()   | Set the EndIcon activated.                        |
-| passwordVisible()    | Make the password initially visible or invisible. |
-| validationListener() | Validate the text input with your own logic.      |
-
-**InputCheckBox** <br/>
-
-| Function       | Action             |
-| -------------- | ------------------ |
-| text()         | Set the text.      |
-| defaultValue() | Set default value. |
-
-**InputSwitch** <br/>
-
-| Function       | Action             |
-| -------------- | ------------------ |
-| text()         | Set the text.      |
-| defaultValue() | Set default value. |
-
-**InputRadioButtons** <br/>
-
-| Function   | Action                             |
-| ---------- | ---------------------------------- |
-| options()  | Set a list of RadioButton options. |
-| selected() | Set a selected index.              |
-
-**InputSpinner** <br/>
-
-| Function                              | Action                                                    |
-| ------------------------------------- | --------------------------------------------------------- |
-| noSelectionText()                     | Set the text that is displayed, when nothing is selected. |
-| options(MutableList of String)        | Set a list of options.                                    |
-| options(MutableList of SpinnerOption) | Set a list of options with optional icon for each option. |
-| selected()                            | Set a selected index.                                     |
+    }                                  |
 
 ## Calendar
 
@@ -555,7 +391,7 @@ library [CalendarView](https://github.com/kizitonwose/CalendarView).
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
+<img src="docs/res/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
 </details>
 </br>
 
@@ -563,7 +399,7 @@ library [CalendarView](https://github.com/kizitonwose/CalendarView).
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
+<img src="docs/res/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
 </details>
 
 ```gradle
@@ -581,16 +417,7 @@ For the default time sheet use it as following:
       title("What's your date of birth?") // Set the title of the sheet
       onPositive { dateStart, dateEnd ->
         // Handle date or range
-      }
-
-| Function          | Action                                                           |
-| ----------------- | ---------------------------------------------------------------- |
-| selectionMode()   | Choose the selection mode (date or range).                       |
-| calendarMode()    | Choose the calendar mode (week with various rows or month-view). |
-| disableTimeline() |  Disable either past or future dates.                            |
-| rangeYears()      | Set the range of years into past and future.                     |
-| disable()         | Pass a `Calendar` object to disable various dates for selection. |
-| displayButtons()  | Show or hide the buttons view.                                   |
+      }                        |
 
 ## Storage
 
@@ -602,7 +429,7 @@ The `Storage` Sheet lets you pick one or more files or folders.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/StorageSheet Dialog.png" width="80%" alt="Sheets StorageSheet Dialog">
+<img src="docs/res/StorageSheet Dialog.png" width="80%" alt="Sheets StorageSheet Dialog">
 </details>
 </br>
 
@@ -610,7 +437,7 @@ The `Storage` Sheet lets you pick one or more files or folders.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/StorageSheet BottomSheet.png" width="80%" alt="Sheets StorageSheet BottomSheet">
+<img src="docs/res/StorageSheet BottomSheet.png" width="80%" alt="Sheets StorageSheet BottomSheet">
 </details>
 
 ```gradle
@@ -630,21 +457,6 @@ For the default storage sheet use it as following:
       onPositive { files -> /* Handle files or folders */ }
     }
 
-| Function                     | Action                                                                                                                                        |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| fileDisplayMode()            | Display a file either horizontal or vertical.                                                                                                 |
-| fileColumns()                | Specify the amount of colums in which the files are displayed.                                                                                |
-| selectionMode()              | Select either files or folders.                                                                                                               |
-| selected()                   | Define files that are by default selected.                                                                                                    |
-| homeLocation()               | Define the home location. User can not navigate higher than the home location.                                                                |
-| currentLocation()            | Define the current location when the sheet is opened.                                                                                         |
-| filter()                     | A `FileFilter` to ignore certain files.                                                                                                       |
-| multipleChoices()            | Allow multiple choices for files or folders.                                                                                                  |
-| displayMultipleChoicesInfo() | Display info of the multiple choices.                                                                                                         |
-| minChoices()                 | Set the minimum amount of choices.                                                                                                            |
-| maxChoices()                 | Set the maximum amount of choices.                                                                                                            |
-| onCreateFolder()             | Pass a listener that is invokes when the user is allowed and intends to create a folder. Return a fitting name through the callback variable. |
-
 ## Color
 
 [ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/color.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/color)
@@ -656,8 +468,8 @@ can be choosen from. You can allow to chose a custom color as well.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
-<img src="art/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
+<img src="docs/res/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
+<img src="docs/res/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
 
 </details>
 </br>
@@ -666,8 +478,8 @@ can be choosen from. You can allow to chose a custom color as well.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
-<img src="art/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
+<img src="docs/res/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
+<img src="docs/res/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
 
 </details>
 
@@ -689,14 +501,6 @@ For the default color sheet use it as following:
       }
     }
 
-| Function                 | Action                                                           |
-| ------------------------ | ---------------------------------------------------------------- |
-| defaultView()            | Select the default color view (Colors from templates or custom). |
-| disableSwitchColorView() | Disable to switch between color views.                           |
-| defaultColor()           | Set default selected color.                                      |
-| colors()                 | Pass all colors to be displayed in the color templates view.     |
-| disableAlpha()           | Disable alpha colors for custom colors.                          |
-
 ## Custom
 
 With just the 'core' module you are able to create your own sheet based on this library. You can use
@@ -707,7 +511,7 @@ toolbar view with logic is ready to be used by your own implementation.
 <br/><br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
+<img src="docs/res/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
 </details>
 </br>
 
@@ -715,7 +519,7 @@ toolbar view with logic is ready to be used by your own implementation.
 <br/><br/>
 <summary>Showcase as BottomSheet</summary>
 
-<img src="art/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
+<img src="docs/res/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
 </details>
 
 ```gradle
@@ -768,7 +572,7 @@ a [Lottie animations](https://airbnb.design/lottie/) as cover view.
 <br/>
 <summary>Showcase as Dialog</summary>
 
-<img src="art/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+<img src="docs/res/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
 </details>
 </br>
 
@@ -777,7 +581,7 @@ a [Lottie animations](https://airbnb.design/lottie/) as cover view.
 
 <br/>
 <br/>
-<img src="art/InfoSheet BottomSheet Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+<img src="docs/res/InfoSheet BottomSheet Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
 </details>
 
 ```gradle
@@ -801,13 +605,6 @@ You can use the Lottie animation as a cover for any type of sheet.
       })
       ...
     }
-
-| Function               | Action                |
-| ---------------------- | --------------------- |
-| playCoverAnimation()   | Play the animation.   |
-| resumeCoverAnimation() | Resume the animation. |
-| pauseCoverAnimation()  | Pause the animation.  |
-| cancelCoverAnimation() | Cancel the animation. |
 
 ## Appearance
 
@@ -853,7 +650,7 @@ Change the appearance of the content text.
     <item name="sheetsContentLineHeight">@dimen/dimen</item>
     <item name="sheetsContentLetterSpacing">value</item>
 
-Change the appearance of the value texts. (e.g. the time in the TimeSheet & ClockTimeSheet or the
+Change the appearance of the value texts. (e.g. the time in the TimeSheet & ClockSheet or the
 selected date & period in the Calendarsheet.)
 
     <item name="sheetsValueTextActiveColor">@color/customValueTextColor</item>

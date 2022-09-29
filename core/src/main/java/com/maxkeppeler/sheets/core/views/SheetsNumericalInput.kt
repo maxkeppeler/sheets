@@ -29,7 +29,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.core.utils.getHighlightColor
 import com.maxkeppeler.sheets.core.utils.getPrimaryColor
 import com.maxkeppeler.sheets.core.utils.toDp

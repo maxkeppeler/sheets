@@ -17,7 +17,6 @@
 package com.maxkeppeler.sheets.core
 
 import androidx.annotation.AttrRes
-import com.maxkeppeler.sheets.R
 
 /**
  * Available button styles.

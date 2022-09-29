@@ -19,7 +19,7 @@ package com.maxkeppeler.sheets.core.utils
 import android.content.Context
 import androidx.annotation.RestrictTo
 import androidx.annotation.StyleRes
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.core.SheetStyle
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)

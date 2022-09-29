@@ -22,7 +22,7 @@ import android.graphics.Color
 import android.util.TypedValue
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
-import com.maxkeppeler.sheets.R
+import com.maxkeppeler.sheets.core.R
 
 
 /** Get a color. */

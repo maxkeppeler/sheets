@@ -18,11 +18,9 @@ package com.maxkeppeler.sheets.core.views
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.util.AttributeSet
 import com.google.android.material.textfield.TextInputLayout
-import com.maxkeppeler.sheets.R
-import com.maxkeppeler.sheets.core.utils.colorOfAttrs
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.core.utils.getPrimaryColor
 import com.maxkeppeler.sheets.core.utils.toDp
 

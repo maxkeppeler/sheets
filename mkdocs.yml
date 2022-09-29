@@ -1,0 +1,42 @@
+site_name: 'Sheets-Dialogs'
+site_description: 'An Android library that offers dialogs & views for various use cases - build with Jetpack Compose for Compose projects. All of the dialogs & views are easy and quick to implement.'
+site_author: 'Maximilian Keppeler'
+site_url: 'https://maxkeppeler.github.io/sheets-compose-dialogs/'
+remote_branch: gh-pages
+
+docs_dir: docs
+
+repo_name: 'Sheets-Dialogs'
+repo_url: 'https://github.com/maxkeppeler/sheets'
+
+nav:
+  - 'Home': index.md
+  - 'Core API': api/core/index.html
+  - 'Info API': api/info/index.html
+  - 'Color API': api/color/index.html
+  - 'Calendar API': api/calendar/index.html
+  - 'Clock API': api/clock/index.html
+  - 'Duration API': api/duration/index.html
+  - 'Input API': api/input/index.html
+  - 'Option API': api/option/index.html
+  - 'Storage API': api/storage/index.html
+  - 'Lottie API': api/lottie/index.html
+
+theme:
+  name: material
+  palette:
+    - deep purple: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: red
+      accent: blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      accent: blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
