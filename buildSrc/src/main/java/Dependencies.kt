@@ -1,16 +1,16 @@
 object Dependencies {
 
     object Google {
-        const val MATERIAL= "com.google.android.material:material:1.5.0"
+        const val MATERIAL= "com.google.android.material:material:1.6.1"
     }
 
     object AndroidX {
 
-        const val CORE_KTX = "androidx.core:core-ktx:1.8.0"
+        const val CORE_KTX = "androidx.core:core-ktx:1.9.0"
         const val LIFECYCLE_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-        const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.3"
-        const val ANNOTATIONS = "androidx.annotation:annotation:1.3.0"
-        const val APP_COMPAT = "androidx.appcompat:appcompat:1.4.1"
+        const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:2.1.4"
+        const val ANNOTATIONS = "androidx.annotation:annotation:1.5.0"
+        const val APP_COMPAT = "androidx.appcompat:appcompat:1.4.2"
         const val PREFERENCE = "androidx.preference:preference-ktx:1.2.0"
         const val RECYCLER_VIEW = "androidx.recyclerview:recyclerview:1.2.1"
     }
@@ -21,12 +21,12 @@ object Dependencies {
     }
 
     object AirBnb {
-        const val LOTTIE = "com.airbnb.android:lottie:4.2.1"
+        const val LOTTIE = "com.airbnb.android:lottie:5.2.0"
     }
 
     object Kotlin {
         const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"
-        const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
+        const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20"
     }
 
     object Gradle {
