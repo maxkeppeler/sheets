@@ -284,7 +284,7 @@ The `Duration` Sheet lets you pick a duration time in a specific format.
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.sheets:time:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:clock:<latest-version>'
 }
 ```
 
