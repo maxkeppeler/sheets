@@ -32,4 +32,5 @@ dependencies {
 
 mavenPublishing {
     publishToMavenCentral()
+    signAllPublications()
 }

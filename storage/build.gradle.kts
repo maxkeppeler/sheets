@@ -28,4 +28,5 @@ dependencies {
 
 mavenPublishing {
     publishToMavenCentral()
+    signAllPublications()
 }

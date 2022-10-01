@@ -23,4 +23,5 @@ android {
 
 mavenPublishing {
     publishToMavenCentral()
+    signAllPublications()
 }
