@@ -37,5 +37,5 @@ object Dependencies {
     const val DOKKA = "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0"
     const val DESUGAR = "com.android.tools:desugar_jdk_libs:1.1.5"
 
-    const val MAVEN_PUBLISH = "com.vanniktech:gradle-maven-publish-plugin:0.21.0"
+    const val MAVEN_PUBLISH = "com.vanniktech:gradle-maven-publish-plugin:0.22.0"
 }
