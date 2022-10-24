@@ -52,6 +52,8 @@ build custom sheets on top of the existing functionality.
 
 # Get started
 
+The library is available for compose as well. Check out [Sheets-Compose-Dialogs](https://github.com/maxkeppeler/sheets-compose-dialogs).
+
 A sheet can dynamically be displayed as either a dialog or as a bottom-sheet. Check out
 the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
 
