@@ -27,10 +27,10 @@ import com.google.android.material.textfield.TextInputLayout
 import com.maxkeppeler.sheets.input.ValidationResult
 
 /** Listener that returns the new value. */
-typealias EditTextInputListener = (value: String?) -> Unit
+typealias EditTextInputListener = (value: CharSequence?) -> Unit
 
 /** Listener that is invoked when the value changes and to which a custom validation logic can be executed. */
-typealias EditTextInputValidationListener = (value: String /* Non-nullable, text entered can not be null. */) -> ValidationResult
+typealias EditTextInputValidationListener = (value: CharSequence /* Non-nullable, text entered can not be null. */) -> ValidationResult
 
 /** Listener that is invoked after a custom validation. */
 internal typealias EditTextInputValidationResultListener = (validationResult: ValidationResult) -> Unit
@@ -86,13 +86,13 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     internal var suffixRes: Int? = null
         private set
 
-    var value: String? = null
+    var value: CharSequence? = null
         internal set(value) {
             invokeListeners(value)
             field = value
         }
 
-    private fun invokeListeners(value: String?) {
+    private fun invokeListeners(value: CharSequence?) {
         changeListener?.invoke(value)
         value?.let { textValue ->
             validationListener?.invoke(textValue)?.let { result ->
@@ -107,7 +107,7 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
     }
 
     /** Set the default value. */
-    fun defaultValue(defaultText: String) {
+    fun defaultValue(defaultText: CharSequence) {
         this.value = defaultText
     }
 
@@ -201,6 +201,6 @@ class InputEditText(key: String? = null, func: InputEditText.() -> Unit) : Input
         resultListener?.invoke(value)
 
     override fun putValue(bundle: Bundle, index: Int) {
-        bundle.putString(getKeyOrIndex(index), value)
+        bundle.putCharSequence(getKeyOrIndex(index), value)
     }
 }
