@@ -35,6 +35,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.textfield.TextInputLayout
@@ -516,12 +518,18 @@ class MainActivity : AppCompatActivity() {
             title("Short survey")
             with(InputEditText {
                 required()
+                defaultValue(buildSpannedString {
+                    append("The ")
+                    bold{
+                        append("Office")
+                    }
+                })
                 startIconDrawable(R.drawable.ic_mail)
                 label("Your favorite TV-Show")
                 hint("The Mandalorian, ...")
                 inputType(InputType.TYPE_CLASS_TEXT)
-                changeListener { value -> showToast("Text change", value) }
-                resultListener { value -> showToast("Text result", value) }
+                changeListener { value -> showToast("Text change", value.toString()) }
+                resultListener { value -> showToast("Text result", value.toString()) }
             })
             with(InputCheckBox("binge_watching") { // Read value later by index or custom key from bundle
                 label("Binge Watching")
@@ -623,15 +631,15 @@ class MainActivity : AppCompatActivity() {
                 endIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
                 passwordVisible(false /* Don't display password in clear text. */)
                 validationListener { value ->
-                    password1 = value
+                    password1 = value.toString()
                     val pattern = Pattern.compile(regex)
                     val matcher = pattern.matcher(value)
                     val valid = matcher.find()
                     if (valid) Validation.success()
                     else Validation.failed(errorText)
                 }
-                changeListener { value -> showToast("Text change", value) }
-                resultListener { value -> showToast("Text result", value) }
+                changeListener { value -> showToast("Text change", value.toString()) }
+                resultListener { value -> showToast("Text result", value.toString()) }
             })
             with(InputEditText {
                 required()
@@ -640,12 +648,12 @@ class MainActivity : AppCompatActivity() {
                 endIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE)
                 passwordVisible(false)
                 validationListener { value ->
-                    password2 = value
+                    password2 = value.toString()
                     if (password1 != password2) {
                         Validation.failed("Passwords don't match.")
                     } else Validation.success()
                 }
-                resultListener { value -> showToast("Text result", value) }
+                resultListener { value -> showToast("Text result", value.toString()) }
             })
             onNegative("cancel") { showToast("InputSheet cancelled", "No result") }
             onPositive("register") {
