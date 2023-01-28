@@ -67,7 +67,7 @@ class InputRadioButtons(key: String? = null, func: InputRadioButtons.() -> Unit)
     override fun invokeResultListener() =
         resultListener?.invoke(value ?: -1)
 
-    override fun valid(): Boolean = value != -1
+    override fun valid(): Boolean = value != -1 && value != null
 
     override fun putValue(bundle: Bundle, index: Int) {
         value?.let { bundle.putInt(getKeyOrIndex(index), it) }

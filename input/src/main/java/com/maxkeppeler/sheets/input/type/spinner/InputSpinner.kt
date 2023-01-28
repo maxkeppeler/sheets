@@ -97,7 +97,7 @@ class InputSpinner(key: String? = null, func: InputSpinner.() -> Unit) : Input(k
     override fun invokeResultListener() =
         value?.let { resultListener?.invoke(it) }
 
-    override fun valid(): Boolean = value != -1
+    override fun valid(): Boolean = value != -1 && value != null
 
     override fun putValue(bundle: Bundle, index: Int) {
         value?.let { bundle.putInt(getKeyOrIndex(index), it) }
