@@ -126,6 +126,8 @@ class CalendarSheet : Sheet() {
         get() = disableTimeLine == TimeLine.FUTURE
 
     private var rangeYears: Int = 100
+    private var minYear: Int = 0
+    private var maxYear: Int = 0
     private var selectedViewDate: LocalDate = LocalDate.now()
     private var selectedDate: LocalDate? = null
     private var selectedDateStart: LocalDate? = null
@@ -239,6 +241,14 @@ class CalendarSheet : Sheet() {
     /** Set the range of years into the past and future. */
     fun rangeYears(@IntRange(from = 1, to = 200) rangeYears: Int) {
         this.rangeYears = rangeYears
+    }
+
+    fun minYear(@IntRange(from = 1900, to = 2100) minYear: Int) {
+        this.minYear = minYear
+    }
+
+    fun maxYear(@IntRange(from = 1900, to = 2100) maxYear: Int) {
+        this.maxYear = maxYear
     }
 
     /**
@@ -1016,13 +1026,20 @@ class CalendarSheet : Sheet() {
 
         val years = mutableListOf<Year>()
 
-        val rangePast = if (!disablePast) -rangeYears..-1L else null
-        val rangeFuture = if (!disableFuture) 1L..rangeYears else null
+        if (minYear == 0 && maxYear == 0) {
 
-        val now = Year.now()
-        rangePast?.forEach { years.add(now.plusYears(it)) }
-        years.add(now)
-        rangeFuture?.forEach { years.add(now.plusYears(it)) }
+            val rangePast = if (!disablePast) -rangeYears..-1L else null
+            val rangeFuture = if (!disableFuture) 1L..rangeYears else null
+
+            val now = Year.now()
+            rangePast?.forEach { years.add(now.plusYears(it)) }
+            years.add(now)
+            rangeFuture?.forEach { years.add(now.plusYears(it)) }
+        } else {
+            for (i in minYear..maxYear) {
+                years.add(Year.of(i))
+            }
+        }
 
         return years
     }
