@@ -243,10 +243,12 @@ class CalendarSheet : Sheet() {
         this.rangeYears = rangeYears
     }
 
+    /** Set the min year to select. */
     fun minYear(@IntRange(from = 1900, to = 2100) minYear: Int) {
         this.minYear = minYear
     }
 
+    /** Set the max year to select. */
     fun maxYear(@IntRange(from = 1900, to = 2100) maxYear: Int) {
         this.maxYear = maxYear
     }
@@ -1026,7 +1028,7 @@ class CalendarSheet : Sheet() {
 
         val years = mutableListOf<Year>()
 
-        if (minYear == 0 && maxYear == 0) {
+        if (minYear == 0 && maxYear == 0) { // if not set min&max year, use rangeYears
 
             val rangePast = if (!disablePast) -rangeYears..-1L else null
             val rangeFuture = if (!disableFuture) 1L..rangeYears else null
@@ -1035,10 +1037,13 @@ class CalendarSheet : Sheet() {
             rangePast?.forEach { years.add(now.plusYears(it)) }
             years.add(now)
             rangeFuture?.forEach { years.add(now.plusYears(it)) }
-        } else {
+
+        } else { // if set min&max year, use it
+
             for (i in minYear..maxYear) {
                 years.add(Year.of(i))
             }
+
         }
 
         return years
