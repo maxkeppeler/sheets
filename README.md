@@ -211,7 +211,7 @@ dependencies {
 
 For the default options sheet use it as following:
 
-    OptionsSheet().show(context) {
+    OptionSheet().show(context) {
       title("Text message")
       with(
         Option(R.drawable.ic_copy, "Copy"),
@@ -286,7 +286,7 @@ The `Duration` Sheet lets you pick a duration time in a specific format.
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.sheets:clock:<latest-version>'
+  implementation 'com.maxkeppeler.sheets:duration:<latest-version>'
 }
 ```
 
@@ -724,7 +724,7 @@ The size and the appearance of the handle can be changed like this:
     <item name="sheetsHandleWidth">42dp</item>
     <item name="sheetsHandleHeight">4dp</item>
 
-### OptionsSheet
+### OptionSheet
 
 Override appearance of selected options.
 
