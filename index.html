@@ -1,0 +1,1186 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="An Android library that offers dialogs & views for various use cases - build with Jetpack Compose for Compose projects. All of the dialogs & views are easy and quick to implement.">
+      
+      
+        <meta name="author" content="Maximilian Keppeler">
+      
+      
+        <link rel="canonical" href="https://maxkeppeler.github.io/sheets/">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+    
+    
+      
+        <title>Sheets</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sheets" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Sheets" class="md-header__button md-logo" aria-label="Sheets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sheets
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/maxkeppeler/sheets" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Sheets
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Sheets" class="md-nav__button md-logo" aria-label="Sheets" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Sheets
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/maxkeppeler/sheets" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Sheets
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/core/" class="md-nav__link">
+        Core API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/info/" class="md-nav__link">
+        Info API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/color/" class="md-nav__link">
+        Color API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/calendar/" class="md-nav__link">
+        Calendar API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/clock/" class="md-nav__link">
+        Clock API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/duration/" class="md-nav__link">
+        Duration API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/input/" class="md-nav__link">
+        Input API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/option/" class="md-nav__link">
+        Option API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/storage/" class="md-nav__link">
+        Storage API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/lottie/" class="md-nav__link">
+        Lottie API
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/maxkeppeler/sheets/edit/master/docs/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="sheets">Sheets</h1>
+<p>
+
+  <img src="res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
+
+  <p>
+
+Sleek dialogs and bottom-sheets for quick use in your app. Choose one of the available sheets or
+build custom sheets on top of the existing functionality.
+
+   <a href="https://search.maven.org/search?q=g:%22com.maxkeppeler.sheets%22">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central">
+   </a>
+
+   <a href="https://github.com/maxkeppeler/sheets">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://img.shields.io/codacy/grade/9a3b68b152e149fd82f0873e2fed78d5?label=Code%20Quality">
+   </a>
+
+   <a href="https://www.apache.org/licenses/LICENSE-2.0">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="GitHub" src="https://img.shields.io/github/license/maxkeppeler/sheets?color=%23007EC6&label=">
+   </a>
+
+<a href="https://github.com/maxkeppeler/sheets">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Give this library a star" src="https://img.shields.io/github/stars/maxkeppeler/sheets?style=social">
+</a>
+
+<a href="https://github.com/maxkeppeler/sheets/fork">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Fork this library" src="https://img.shields.io/github/forks/maxkeppeler/sheets?style=social">
+</a>
+
+<a href="https://github.com/maxkeppeler/sheets">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Watch this library" src="https://img.shields.io/github/watchers/maxkeppeler/sheets.svg?style=social&amp;label=Watch">
+</a>
+
+<a href="https://github.com/maxkeppeler/">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow me on GitHub" src="https://img.shields.io/github/followers/maxkeppeler?style=social&label=Follow">
+</a>
+
+<a href="https://twitter.com/intent/tweet?text=Checkout%20this%20beautiful%20library!%20%23android%20%23androiddev%20%23library%20%40max_keppeler%20%0A%0Ahttps%3A%2F%2Fgithub.com%2Fmaxkeppeler%2Fsheets">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Share this library on Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmaxkeppeler%2Fsheets&label=Share">
+</a>
+
+<a href="https://twitter.com/max_keppeler">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/max_keppeler?label=Follow&style=social">
+</a>
+
+  </p>
+</p>
+
+<p><img src="res/showcase.png" alt="Sheets Library"></p>
+<h1 id="get-started">Get started</h1>
+<p>A sheet can dynamically be displayed as either a dialog or as a bottom-sheet. Check out
+the <a href="https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk">sample</a>.</p>
+<p>You have to use the <code>core</code> module as it is the foundation of any sheet.</p>
+<p>In your top-level <code>build.gradle</code> file:</p>
+<pre><code class="language-gradle">repositories {
+  ...
+  mavenCentral()
+}
+</code></pre>
+<p>In your app <code>build.gradle</code> file:</p>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/core"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/core.svg?label=Maven%20Central" /> </a></p>
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:core:&lt;latest-version&gt;'
+}
+</code></pre>
+<p>Use <code>build</code> to build a sheet and display it later.</p>
+<pre><code>val sheet = InfoSheet().build(context) {
+  // build sheet
+}
+
+sheet.show() // Show sheet when ready
+</code></pre>
+<p>Use <code>show</code> if you want to build and then immediately display it.</p>
+<pre><code>InfoSheet().show(context) {
+  // build sheet
+} // Show sheet
+</code></pre>
+<h1 id="resources">Resources</h1>
+<p>📖 Get a better insight into the API\
+<a href="https://maxkeppeler.github.io/sheets/api/">Sheets API Documentation</a></p>
+<h1 id="info">Info</h1>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/core"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/info.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Info</code> Sheet lets you display information or warning.</p>
+<details open>
+<br/>
+<br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/InfoSheet Dialog.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="res/InfoSheet Dialog Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="res/InfoSheet Dialog Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+<img src="res/InfoSheet Dialog Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet Dialog"><br/>
+
+</details>
+<p></br></p>
+<details>
+<summary>Showcase as BottomSheet</summary>
+
+<br/>
+<br/>
+<img src="res/InfoSheet BottomSheet.png" width="80%" alt="Sheets InfoSheet"><br/>
+<img src="res/InfoSheet BottomSheet Cover TopStyle Top.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="res/InfoSheet BottomSheet Cover TopStyle Bottom.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+<img src="res/InfoSheet BottomSheet Cover TopStyle Mixed.png" width="80%" alt="Sheets InfoSheet BottomSheet"><br/>
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:info:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage">Usage</h3>
+<p>For the default info sheet use it as following:</p>
+<pre><code>InfoSheet().show(context) {
+  title("Do you want to install Awake?")
+  content("Awake is a beautiful alarm app with morning challenges, advanced alarm management and more.")
+  onNegative("No") {
+    // Handle event
+  }
+  onPositive("Install") {
+    // Handle event
+  }
+}
+</code></pre>
+<h1 id="option">Option</h1>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/option"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/option.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Option</code> Sheet lets you display a grid or list of options.</p>
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/OptionsSheet Dialog Grid Middle.png" width="80%" alt="Sheets OptionsSheet Dialog">
+</details>
+<p></br></p>
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/OptionsSheet BottomSheet Grid Middle.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+</details>
+
+<p><br/></p>
+<details>
+<br/><br/>
+<summary>Showcase some variants as Dialogs</summary>
+
+<img src="res/OptionsSheet Dialog List.png" width="80%" alt="Sheets OptionsSheet Dialog"><br/>
+<img src="res/OptionsSheet Dialog Grid Small.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+<img src="res/OptionsSheet Dialog Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" Dialog><br/>
+
+</details>
+<p></br></p>
+<details>
+<br/><br/>
+<summary>Showcase some variants as BottomSheets</summary>
+
+<img src="res/OptionsSheet BottomSheet List.png" width="80%" alt="Sheets OptionsSheet BottomSheet"><br/>
+<img src="res/OptionsSheet BottomSheet Grid Small.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+<img src="res/OptionsSheet BottomSheet Grid Large Horizontal.png" width="80%" alt="Sheets OptionsSheet" BottomSheet><br/>
+
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:info:&lt;latest-version&gt;'
+}
+</code></pre>
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:option:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_1">Usage</h3>
+<p>For the default options sheet use it as following:</p>
+<pre><code>OptionsSheet().show(context) {
+  title("Text message")
+  with(
+    Option(R.drawable.ic_copy, "Copy"),
+    Option(R.drawable.ic_translate, "Translate"),
+    Option(R.drawable.ic_paste, "Paste")
+  )
+  onPositive { index: Int, option: Option -&gt;
+    // Handle selected option
+  }
+}
+</code></pre>
+<h1 id="clock">Clock</h1>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/clock"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/clock.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Clock</code> Sheet lets you quickly pick a time.</p>
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/ClockTimeSheet Dialog.png" width="80%" alt="Sheets OptionsSheet Dialog">
+</details>
+<p></br></p>
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/ClockTimeSheet BottomSheet.png" width="80%" alt="Sheets OptionsSheet BottomSheet">
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:clock:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_2">Usage</h3>
+<p>For the default clock time sheet, in 24-hours format, use it as following:</p>
+<pre><code>ClockSheet().show(context) {
+  title("Wake-up time")
+  onPositive { clockTimeInMillis: Long -&gt;
+    // Handle selected time
+  }
+}
+</code></pre>
+<h2 id="time">Time</h2>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/time"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/time.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Duration</code> Sheet lets you pick a duration time in a specific format.</p>
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/TimeSheet Dialog.png" width="80%" alt="Sheets TimeSheet Dialog">
+</details>
+<p></br></p>
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/TimeSheet BottomSheet.png" width="80%" alt="Sheets TimeSheet BottomSheet">
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:clock:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_3">Usage</h3>
+<p>For the default time sheet use it as following:</p>
+<pre><code>DurationSheet().show(context) {
+  title("Snooze time")
+  onPositive { durationTimeInMillis: Long -&gt;
+    // Handle selected time
+  }
+}
+</code></pre>
+<h2 id="input">Input</h2>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/input"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/input.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Input</code> Sheet lets you display a form consisting of various inputs.</p>
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/InputSheet Dialog Short.png" width="80%" alt="Sheets InputSheet Dialog">
+</details>
+<p></br></p>
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/InputSheet BottomSheet Short.png" width="80%" alt="Sheets InputSheet BottomSheet">
+</details>
+
+<p><br/></p>
+<details>
+<br/><br/>
+<summary>Showcase some variants as Dialogs</summary>
+
+<img src="res/InputSheet Dialog Long.png" width="80%" alt="Sheets InputSheet Dialog"><br/>
+
+</details>
+<p></br></p>
+<details>
+<br/><br/>
+<summary>Showcase some variants as BottomSheets</summary>
+
+<img src="res/InputSheet BottomSheet Long.png" width="80%" alt="Sheets InputSheet BottomSheet">
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:input:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_4">Usage</h3>
+<p>For the default input sheet use it as following:</p>
+<pre><code>InputSheet().show(context) {
+    title("Short survey")
+  with(InputEditText {
+    required()
+    label("Your favorite TV-Show")
+    hint("The Mandalorian, ...")
+    validationListener { value -&gt; } // Add custom validation logic
+    changeListener { value -&gt; } // Input value changed
+    resultListener { value -&gt; } // Input value changed when form finished
+  })
+  with(InputCheckBox("binge_watching") { // Read value later by index or custom key from bundle
+    label("Binge Watching")
+    text("I'm regularly binge watching shows on Netflix.")
+    // ... more options
+  })
+  with(InputRadioButtons() {
+    required()
+    label("Streaming service of your choice")
+    options(mutableListOf("Netflix", "Amazon", "Other"))
+  })
+  // ... more input options
+  onNegative { showToast("InputSheet cancelled", "No result") }
+  onPositive { result -&gt;
+      showToastLong("InputSheet result", result.toString())
+      val text = result.getString("0") // Read value of inputs by index
+      val check = result.getBoolean("binge_watching") // Read value by passed key
+  }
+}                                  |
+</code></pre>
+<h2 id="calendar">Calendar</h2>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.calendar/core"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/calendar.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Calendar</code> Sheet lets you pick a date or date range. This type was build using the
+library <a href="https://github.com/kizitonwose/CalendarView">CalendarView</a>.</p>
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/CalendarSheet Dialog Period.png" width="80%" alt="Sheets CalendarSheet Dialog">
+</details>
+<p></br></p>
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/CalendarSheet BottomSheet Period.png" width="80%" alt="Sheets CalendarSheet BottomSheet">
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:calendar:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_5">Usage</h3>
+<p>For the default time sheet use it as following:</p>
+<pre><code>CalendarSheet().show(this) { // Build and show
+  title("What's your date of birth?") // Set the title of the sheet
+  onPositive { dateStart, dateEnd -&gt;
+    // Handle date or range
+  }                        |
+</code></pre>
+<h2 id="storage">Storage</h2>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/storage"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/storage.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Storage</code> Sheet lets you pick one or more files or folders.</p>
+<details open>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/StorageSheet Dialog.png" width="80%" alt="Sheets StorageSheet Dialog">
+</details>
+<p></br></p>
+<details>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/StorageSheet BottomSheet.png" width="80%" alt="Sheets StorageSheet BottomSheet">
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:storage:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_6">Usage</h3>
+<p>For the default storage sheet use it as following:</p>
+<pre><code>StorageSheet().show(this) {
+  fileDisplayMode(FileDisplayMode.HORIZONTAL)
+  selectionMode(StorageSelectionMode.FILE)
+  onPositive { files -&gt; /* Handle files or folders */ }
+}
+</code></pre>
+<h2 id="color">Color</h2>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/color"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/color.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Color</code> Sheet lets you pick a color. Display the default material colors or specify which colors
+can be choosen from. You can allow to chose a custom color as well.</p>
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/ColorSheet Dialog Templates.png" width="80%" alt="Sheets ColorSheet Dialog"><br/>
+<img src="res/ColorSheet Dialog Custom.png" width="80%" alt="Sheets ColorSheet Dialog">
+
+</details>
+<p></br></p>
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/ColorSheet BottomSheet Templates.png" width="80%" alt="Sheets ColorSheet BottomSheet"><br/>
+<img src="res/ColorSheet BottomSheet Custom.png" width="80%" alt="Sheets ColorSheet BottomSheet">
+
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:color:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_7">Usage</h3>
+<p>For the default color sheet use it as following:</p>
+<pre><code>ColorSheet().show(context) {
+  title("Background color")
+  onPositive { color -&gt;
+    // Use color
+  }
+}
+</code></pre>
+<h2 id="custom">Custom</h2>
+<p>With just the 'core' module you are able to create your own sheet based on this library. You can use
+some components and styles within your own custom sheet automatically. By default the buttons and
+toolbar view with logic is ready to be used by your own implementation.</p>
+<details>
+<br/><br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/Custom Sheet Dialog.png" width="80%" alt="Sheets Custom Dialog">
+</details>
+<p></br></p>
+<details open>
+<br/><br/>
+<summary>Showcase as BottomSheet</summary>
+
+<img src="res/Custom Sheet BottomSheet.png" width="80%" alt="Sheets Custom BottomSheet">
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:core:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="get-started_1">Get started</h3>
+<p>You can find a custom sheet implementation in the sample module.</p>
+<ol>
+<li>Step: Create a class and extend from the class <code>Sheet</code>.</li>
+</ol>
+<p>class CustomSheet : Sheet() {</p>
+<ol>
+<li>Step: Implement the method: <code>onCreateLayoutView</code> and pass your custom layout.</li>
+</ol>
+<p>override fun onCreateLayoutView(): View { return LayoutInflater.from(activity).inflate(
+   R.layout.sheets_custom, null)
+   }</p>
+<p>All of the base functionality can be used and on top of that you can extend the logic and behavior
+as you wish.</p>
+<h3 id="components">Components</h3>
+<p>You are free to use the components this library uses for it's sheet types.</p>
+<ul>
+<li><code>SheetsTitle</code></li>
+<li><code>SheetsContent</code></li>
+<li><code>SheetsDigit</code></li>
+<li><code>SheetsNumericalInput</code></li>
+<li><code>SheetsDivider</code></li>
+<li><code>SheetsButton</code></li>
+<li><code>SheetsEdit</code></li>
+<li><code>SheetsRecyclerView</code></li>
+<li><code>SheetsValue</code></li>
+</ul>
+<h2 id="lottie">Lottie</h2>
+<p><a href="https://search.maven.org/artifact/com.maxkeppeler.sheets/lottie"> <img alt="Download" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets/lottie.svg?label=Maven%20Central" /> </a></p>
+<p>The <code>Lottie</code> modules gives you the ability to use
+a <a href="https://airbnb.design/lottie/">Lottie animations</a> as cover view.</p>
+<details open>
+<br/>
+<br/>
+<summary>Showcase as Dialog</summary>
+
+<img src="res/InfoSheet Dialog Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+</details>
+<p></br></p>
+<details>
+<summary>Showcase as BottomSheet</summary>
+
+<br/>
+<br/>
+<img src="res/InfoSheet BottomSheet Cover Lottie Animation.png" width="80%" alt="Sheets InfoSheet">
+</details>
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets:lottie:&lt;latest-version&gt;'
+}
+</code></pre>
+<h3 id="usage_8">Usage</h3>
+<p>You can use the Lottie animation as a cover for any type of sheet.</p>
+<pre><code>InfoSheet().show(this) {
+  title("Team Collaboration")
+  content("In the world of software projects, it is inevitable...")
+  ...
+  withCoverLottieAnimation(LottieAnimation {
+    setAnimation(R.raw.anim_lottie_business_team)
+    ... Setup Lottie animation
+  })
+  ...
+}
+</code></pre>
+<h2 id="appearance">Appearance</h2>
+<p>By default, the library switches to either day or night mode depending on the
+attr <code>textColorPrimary</code>. By default it uses the activity's colorPrimary. The
+default <code>highlightColor</code> is generated based on the color <code>sheetsPrimaryColor</code>, or if not
+available <code>colorPrimary</code>.</p>
+<h3 id="base">Base</h3>
+<p>You want a different sheet background shape? Then just override the corner family and radius.</p>
+<pre><code>&lt;item name="sheetsCornerRadius"&gt;12dp&lt;/item&gt;
+&lt;item name="sheetsCornerFamily"&gt;cut&lt;/item&gt;
+</code></pre>
+<p>Just overwrite the base colors, if you want to achieve a different look of the sheets than your app.</p>
+<pre><code>&lt;item name="sheetsPrimaryColor"&gt;@color/customPrimaryColor&lt;/item&gt;
+&lt;item name="sheetsHighlightColor"&gt;@color/customHighlightColor&lt;/item&gt;
+&lt;item name="sheetsBackgroundColor"&gt;@color/customBackgroundColor&lt;/item&gt;
+&lt;item name="sheetsDividerColor"&gt;@color/customDividerColor&lt;/item&gt;
+&lt;item name="sheetsIconsColor"&gt;@color/customIconsColor&lt;/item&gt;
+</code></pre>
+<p>You can override the basic style of a sheet. Instead of displaying the toolbar, you can just hide it
+and display the typical handle.</p>
+<pre><code>&lt;item name="sheetsDisplayHandle"&gt;true&lt;/item&gt;
+&lt;item name="sheetsDisplayToolbar"&gt;false&lt;/item&gt;
+&lt;item name="sheetsDisplayCloseButton"&gt;false&lt;/item&gt;
+</code></pre>
+<p>Change the appearance of the title.</p>
+<pre><code>&lt;item name="sheetsTitleColor"&gt;@color/customTitleTextColor&lt;/item&gt;
+&lt;item name="sheetsTitleFont"&gt;@font/font&lt;/item&gt;
+&lt;item name="sheetsTitleLineHeight"&gt;@dimen/dimen&lt;/item&gt;
+&lt;item name="sheetsTitleLetterSpacing"&gt;value&lt;/item&gt;
+</code></pre>
+<p>Change the appearance of the content text.</p>
+<pre><code>&lt;item name="sheetsContentColor"&gt;@color/customContentTextColor&lt;/item&gt;
+&lt;item name="sheetsContentInverseColor"&gt;@color/customContentTextInverseColor&lt;/item&gt;
+&lt;item name="sheetsContentFont"&gt;@font/font&lt;/item&gt;
+&lt;item name="sheetsContentLineHeight"&gt;@dimen/dimen&lt;/item&gt;
+&lt;item name="sheetsContentLetterSpacing"&gt;value&lt;/item&gt;
+</code></pre>
+<p>Change the appearance of the value texts. (e.g. the time in the TimeSheet &amp; ClockSheet or the
+selected date &amp; period in the Calendarsheet.)</p>
+<pre><code>&lt;item name="sheetsValueTextActiveColor"&gt;@color/customValueTextColor&lt;/item&gt;
+&lt;item name="sheetsValueFont"&gt;@font/font&lt;/item&gt;
+&lt;item name="sheetsValueLineHeight"&gt;@dimen/dimen&lt;/item&gt;
+&lt;item name="sheetsValueLetterSpacing"&gt;value&lt;/item&gt;
+</code></pre>
+<p>Change the appearance of the digit keys on the numerical input.</p>
+<pre><code>&lt;item name="sheetsDigitColor"&gt;@color/customDigitTextColor&lt;/item&gt;
+&lt;item name="sheetsDigitFont"&gt;@font/font&lt;/item&gt;
+&lt;item name="sheetsDigitLineHeight"&gt;@dimen/dimen&lt;/item&gt;
+&lt;item name="sheetsDigitLetterSpacing"&gt;value&lt;/item&gt;
+</code></pre>
+<h3 id="buttons">Buttons</h3>
+<p>Override the appearance of the button text.</p>
+<pre><code>&lt;item name="sheetsButtonTextFont"&gt;@font/font&lt;/item&gt;
+&lt;item name="sheetsButtonTextLetterSpacing"&gt;value&lt;/item&gt;
+</code></pre>
+<p>Override the general appearance of the buttons (negative and positive button).</p>
+<pre><code>&lt;item name="sheetsButtonColor"&gt;@color/customButtonColor&lt;item&gt;
+&lt;item name="sheetsButtonTextFont"&gt;@font/font&lt;item&gt;
+&lt;item name="sheetsButtonTextLetterSpacing"&gt;value&lt;item&gt;
+&lt;item name="sheetsButtonCornerRadius"&gt;12dp&lt;item&gt;
+&lt;item name="sheetsButtonCornerFamily"&gt;cut&lt;item&gt;
+&lt;item name="sheetsButtonWidth"&gt;match_content/wrap_content&lt;item&gt;
+</code></pre>
+<p>Override the appearance of the negative button.</p>
+<pre><code>&lt;item name="sheetsNegativeButtonType"&gt;text_button/outlined_button/button&lt;item&gt;
+&lt;item name="sheetsNegativeButtonColor"&gt;color&lt;item&gt;
+&lt;item name="sheetsNegativeButtonCornerRadius"&gt;12dp&lt;item&gt;
+&lt;item name="sheetsNegativeButtonCornerFamily"&gt;cut&lt;item&gt;
+</code></pre>
+<p>Override the appearance of the positive button.</p>
+<pre><code>&lt;item name="sheetsPositiveButtonType"&gt;text_button/outlined_button/button&lt;item&gt;
+&lt;item name="sheetsPositiveButtonColor"&gt;color&lt;item&gt;
+&lt;item name="sheetsPositiveButtonCornerRadius"&gt;12dp&lt;item&gt;
+&lt;item name="sheetsPositiveButtonCornerFamily"&gt;cut&lt;item&gt;
+</code></pre>
+<p>Override the border appearance of the outlined button.</p>
+<pre><code>&lt;item name="sheetsButtonOutlinedButtonBorderColor"&gt;@color/borderColor&lt;item&gt;
+&lt;item name="sheetsButtonOutlinedButtonBorderWidth"&gt;1dp&lt;item&gt;
+</code></pre>
+<p>The corner family and radius is applied to the button shape or in the case of a outlined or text
+button, to the ripple background shape.</p>
+<p><strong>Fine control</strong>
+You can even define the corner family and radius of the negative and positive button for each
+corner.</p>
+<pre><code>&lt;item name="sheetsNegativeButtonBottomLeftCornerRadius"&gt;4dp&lt;item&gt;
+&lt;item name="sheetsNegativeButtonBottomLeftCornerFamily"&gt;cut&lt;item&gt;
+...
+&lt;item name="sheetsPositiveButtonBottomRightCornerRadius"&gt;8dp&lt;item&gt;
+&lt;item name="sheetsPositiveButtonBottomRightCornerFamily"&gt;rounded&lt;item&gt;
+</code></pre>
+<h3 id="handle">Handle</h3>
+<p>The size and the appearance of the handle can be changed like this:</p>
+<pre><code>&lt;item name="sheetsHandleCornerRadius"&gt;8dp&lt;/item&gt;
+&lt;item name="sheetsHandleCornerFamily"&gt;rounded&lt;/item&gt;
+&lt;item name="sheetsHandleFillColor"&gt;?sheetPrimaryColor&lt;/item&gt;
+&lt;item name="sheetsHandleBorderColor"&gt;?sheetPrimaryColor&lt;/item&gt;
+&lt;item name="sheetsHandleBorderWidth"&gt;1dp&lt;/item&gt;
+&lt;item name="sheetsHandleWidth"&gt;42dp&lt;/item&gt;
+&lt;item name="sheetsHandleHeight"&gt;4dp&lt;/item&gt;
+</code></pre>
+<h3 id="optionssheet">OptionsSheet</h3>
+<p>Override appearance of selected options.</p>
+<pre><code>&lt;item name="sheetsOptionSelectedImageColor"&gt;@color/customSelectedOptionImageColor&lt;/item&gt;
+&lt;item name="sheetsOptionSelectedTextColor"&gt;@color/customSelectedOptionTextColor&lt;/item&gt;
+</code></pre>
+<p>Override appearance of disabled options.</p>
+<pre><code>&lt;item name="sheetsOptionDisabledImageColor"&gt;@color/customDisabledOptionImageColor&lt;/item&gt;s
+&lt;item name="sheetsOptionDisabledTextColor"&gt;@color/customDisabledOptionImageColor&lt;/item&gt;
+&lt;item name="sheetsOptionDisabledBackgroundColor"&gt;@color/customDisabledOptionBackgColor&lt;/item&gt;
+</code></pre>
+<h3 id="inputsheet">InputSheet</h3>
+<p>Override the appearance of the TextInputLayout (used for the InputEditText).</p>
+<pre><code>&lt;item name="sheetsTextInputLayoutCornerRadius"&gt;12dp&lt;/item&gt;
+&lt;item name="sheetsTextInputLayoutBottomLeftCornerRadius"&gt;12dp&lt;/item&gt;
+... and for all other corners
+&lt;item name="sheetsTextInputLayoutEndIconColor"&gt;@color/customEndIconColor&lt;/item&gt;
+&lt;item name="sheetsTextInputLayoutHelperTextColor"&gt;@color/customHelperTextColor&lt;/item&gt;
+&lt;item name="sheetsTextInputLayoutBoxStrokeColor"&gt;@color/customBoxStrokeColor&lt;/item&gt;
+&lt;item name="sheetsTextInputLayoutHintTextColor"&gt;@color/customHintTextColor&lt;/item&gt;
+&lt;item name="sheetsTextInputLayoutBoxStrokeErrorColor"&gt;@color/customBoxStrokeErrorColor&lt;/item&gt;
+&lt;item name="sheetsTextInputLayoutErrorTextColor"&gt;@color/customErrorTextColor&lt;/item&gt;
+</code></pre>
+<h1 id="misc">Misc</h1>
+<h2 id="support-this-project">Support this project</h2>
+<ul>
+<li>Leave a star and tell others about it</li>
+<li>Watch for updates and improvements.</li>
+<li><a href="https://github.com/MaxKeppeler/sheets/issues/">Open an issue</a> if you see or got any error.</li>
+<li>Leave your
+  thanks <a href="https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell">here</a> and
+  showcase your implementation.</li>
+<li>Donate me a coffee.</li>
+</ul>
+<h2 id="contribute">Contribute</h2>
+<ol>
+<li>Open an issue to discuss what you would like to change.</li>
+<li>Fork the Project</li>
+<li>Create your feature branch (feature-[some-name])</li>
+<li>Commit your changes</li>
+<li>Push to the branch (origin feature-[some-name])</li>
+<li>Open a pull request</li>
+</ol>
+<h2 id="donate">Donate</h2>
+<p>Show your appreciation by donating me a coffee. Thank you very much!</p>
+<p><a href="https://ko-fi.com/maxkeppeler" target='_blank'>
+ <img width="180" src='https://cdn.ko-fi.com/cdn/kofi2.png?v=2' alt='Buy Me a Coffee at ko-fi.com' />
+</a></p>
+<p><a href="https://www.buymeacoffee.com/maxkeppeler" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160">
+</a></p>
+<p><a href="https://www.paypal.me/maximiliankeppeler" target="_blank">
+    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate on PaPal" width="160">
+</a></p>
+<h2 id="showcase">Showcase</h2>
+<p>Check out some apps which are using this library.<br/></p>
+<ul>
+<li><a href="http://aquafy-mk.com">Aquafy</a> - Beautiful hydration tracker and reminder.</li>
+<li><a href="http://awake-mk.com">Awake</a> - Intelligent alarms and wake-up challenges and sleep tracking to
+  improve your daily sleep and day-time quality.</li>
+<li>
+<p><a href="https://play.google.com/store/apps/details?id=com.mk.sign.spotifyv2">Sign for Spotify</a> - Playlist
+  and control widgets for Spotify content.</p>
+</li>
+<li>
+<p><a href="https://play.google.com/store/apps/details?id=org.bandev.buddhaquotes">Buddha Quotes</a> - Open
+  Source Buddha Quotes.</p>
+</li>
+</ul>
+<h2 id="license">License</h2>
+<pre><code>Copyright 2020 Maximilian Keppeler https://maxkeppeler.com
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+      
+        
+        <a href="api/core/" class="md-footer__link md-footer__link--next" aria-label="Next: Core API" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Core API
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.0238f547.min.js"></script>
+      
+    
+  </body>
+</html>
